@@ -7,7 +7,7 @@ int main() {
     cin >> num;
     n = num/2;
 
-    // upper part
+    // upper part of butterfly
     for(row=0; row<n; row++) {
         // left half
         for(col=0; col<(row+1); col++) {
@@ -24,7 +24,7 @@ int main() {
         cout << endl;
     }
 
-    // lower part
+    // lower part of butterfly
     for(row=0; row<n; row++) {
         // left part
         for(col=0; col<(n-row); col++) {
