@@ -1,3 +1,5 @@
+// gfg: Set kth bit
+
 #include<iostream>
 using namespace std;
 
