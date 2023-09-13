@@ -1,4 +1,4 @@
-// Leetcode: 136. Single Number
+// leetcode: 136. Single Number
 
 #include<iostream>
 #include<vector>
