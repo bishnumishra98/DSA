@@ -27,9 +27,18 @@ int main() {
     cout << endl << endl;
 
     // Transpose of matrix
+    int brr[4][3];
     for(int i=0; i<col; i++) {
         for(int j=0; j<row; j++) {
-            cout << arr[j][i] << " ";
+            brr[i][j] = arr[j][i];
+        }
+    }
+
+    // Printing brr(Transpose of A)
+    int new_row = 4, new_col = 3;
+    for(int i=0; i<new_row; i++) {
+        for(int j=0; j<new_col; j++) {
+            cout << brr[i][j] << " ";
         }
         cout << endl;
     }
