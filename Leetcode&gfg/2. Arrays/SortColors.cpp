@@ -71,8 +71,8 @@ void sortColors(vector<int>& nums) {
 
 int main() {
     vector <int> v = {2, 0, 2, 1, 1, 0};
-    sortColors_bruteForce(v);
-    //sortColors(v);
+    //sortColors_bruteForce(v);
+    sortColors(v);
     printVector(v);
     return 0;
 }
