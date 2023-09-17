@@ -4,6 +4,8 @@
 #include <vector>
 using namespace std;
 
+// T.C: O(n2)
+// S.C: O(n2)
 vector<vector<int>> transpose(vector<vector<int>>& matrix) {
     int row = matrix.size();   // no.of rows
     int col = matrix[0].size();   // no.of of elements in each row, i.e, no.of columns

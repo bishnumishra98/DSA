@@ -4,6 +4,8 @@
 #include <vector>
 using namespace std;
 
+// T.C: O(n)
+// S.C: O(1)
 int diagonalSum(vector<vector<int>>& mat) {
     int n = mat.size();
     int p_diag_sum = 0;
