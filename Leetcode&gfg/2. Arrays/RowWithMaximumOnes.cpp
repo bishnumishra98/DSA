@@ -5,8 +5,6 @@
 using namespace std;
 
 void printVector(vector<int>& v) {
-    int n = v.size();
-
     for (const auto& element : v) {
         cout << element << " ";
     }
@@ -41,7 +39,7 @@ vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
 }
 
 int main() {
-    vector<vector<int>> v = {{0, 0, 0}, {0, 1, 1}};
+    vector <vector<int>> v = {{0, 0, 0}, {0, 1, 1}};
     vector <int> ans;
 
     ans = rowAndMaximumOnes(v);

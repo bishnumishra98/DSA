@@ -5,8 +5,6 @@
 using namespace std;
 
 void printVector(vector<int>& v) {
-    int n = v.size();
-
     for (const auto& element : v) {
         cout << element << " ";
     }
