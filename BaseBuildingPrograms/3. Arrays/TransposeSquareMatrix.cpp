@@ -29,7 +29,7 @@ void transpose_bruteForce(vector<vector<int>>& matrix) {
 }
 
 // Optimal solution (brute force)
-// T.C: O(n1.5)
+// T.C: O(n2)
 // S.C: O(1)
 void transpose(vector<vector<int>>& matrix) {
     int n = matrix.size();

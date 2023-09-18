@@ -31,7 +31,7 @@ void rotate_bruteForce(vector<vector<int>>& matrix) {
 }
 
 // Optimal solution: Rotate an array by 90° clockwise = (Transpose the array + reverse each row)
-// T.C: O(n1.5)
+// T.C: O(n2)
 // S.C: O(1)
 void rotate(vector<vector<int>>& matrix) {
     int n = matrix.size();
