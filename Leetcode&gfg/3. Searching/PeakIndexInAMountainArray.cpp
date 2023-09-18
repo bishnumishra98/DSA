@@ -12,8 +12,11 @@ int peakIndexInMountainArray(vector<int>& arr) {
     int end = arr.size() - 1;
     int mid = start + (end - start)/2;
 
-    while(start < end) {   // We haven't written (start <= end) in order to avoid infinite
-                          // loop when only 1 element is left, i.e. start == end == mid.
+    while(start < end) {   // (start <= end) would cause the condition
+    // 'arr[mid] < arr[mid+1]' to be false everytime, when the last element left
+   // is the peak element itself. Thus, it will result in continuous execution of
+  // else block, leading to end becoming equal to mid in every iteration; and mid becoming
+ // equal to value of end and start in every iteration, resulting in an infinite loop.
         if(arr[mid] < arr[mid+1]) {
             // We are in the ascending part of the mountain (Line A). In this case,
            // peak may be presnt on 'mid+1' itself or on further right of it. Thus,
