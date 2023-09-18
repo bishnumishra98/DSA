@@ -6,6 +6,7 @@ using namespace std;
 
 // T.C: O(logn)
 // S.C: O(1)
+// This code uses binary serch approach
 int findMissingElement(int arr[], int n) {
     int start = 0;
     int end = n - 1;
