@@ -4,22 +4,24 @@ using namespace std;
 // Brute force
 // T.C: O(n)
 // S.C: O(1)
-bool linearSearch(int arr[], int n, int target) {
+int linearSearch(int arr[], int n, int target) {
     for(int i=0; i<n; i++) {
         if(arr[i] == target) {
-            return true;
+            return i;
         }
     }
-    return false;
+    return -1;
 }
 
 int main() {
     int arr[] = {10, 20, -25, 30, -32, 71, 56};
     int n = 7;
-    int target = 31;
+    int target = -32;
 
-    if(linearSearch(arr, n, target)) {
-        cout << "Element found";
+    int result = linearSearch(arr, n, target);
+
+    if(result != -1) {
+        cout << "Element found at index: " << result;
     } else {
         cout << "Element not found";
     }
