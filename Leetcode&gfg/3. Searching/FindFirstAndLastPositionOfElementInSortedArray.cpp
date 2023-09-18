@@ -75,12 +75,15 @@ vector<int> searchRange(vector<int>& nums, int target) {
 }
 
 int main() {
-    vector <int> v = {5, 7, 7, 8, 8, 10};
-    int target = 8;
+    vector <int> v = {5, 7, 7, 7, 8, 8, 10};
+    int target = 7;
 
     vector <int> ans = searchRange(v, target);
 
     printVector(ans);
+
+    // Additional info
+    cout << "\nTotal no.of occurrences of target: " << (ans.back() - ans.front() + 1);
 
 
     return 0;
