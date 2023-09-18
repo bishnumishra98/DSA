@@ -11,13 +11,13 @@ int binarySearch(int arr[], int n, int target) {
     int end = n - 1;
     int mid = start + (end - start)/2;   // same as (start + end)/2
 
-    while(start <= end) {   // start == end is the case, when only one element is left in array
+    while(start <= end) {   // start == end is the case, when only 1 element is left in array
         if(target == arr[mid]) {
             return mid;
         } else if(target > arr[mid]) {
             start = mid + 1;   // go in right part
-        } else {
-            end = mid - 1;   // go in left part as target < arr[mid]
+        } else {   // if(target < arr[mid])
+            end = mid - 1;   // go in left part
         }
 
         mid = start + (end - start)/2;   //updating mid
