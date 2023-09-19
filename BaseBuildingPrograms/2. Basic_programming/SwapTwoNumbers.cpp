@@ -3,6 +3,8 @@
 #include <iostream>
 using namespace std;
 
+// T.C: O(1)
+// S.C: O(1)
 void swapByTemp(int a, int b) {
     cout << "Swap by Temp:\n";
 
@@ -14,6 +16,8 @@ void swapByTemp(int a, int b) {
     cout << endl << endl;
 }
 
+// T.C: O(1)
+// S.C: O(1)
 void swapByArithmetic_operation(int a, int b) {
     cout << "Swap by Arithmetic_operation:\n";
 
@@ -25,6 +29,8 @@ void swapByArithmetic_operation(int a, int b) {
     cout << endl << endl;
 }
 
+// T.C: O(1)
+// S.C: O(1)
 void swapByXOR(int a, int b) {
     cout << "Swap by XOR:\n";
 
@@ -40,7 +46,8 @@ int main() {
     int a = 2, b = 3;
     swapByTemp(a, b);
     swapByArithmetic_operation(a, b);
-    swapByXOR(a, b);
+    swapByXOR(a, b);   // This is fastest method to swap, because BITWISE operations are
+                      // often implemented at the hardware level and are highly efficient.
 
     return 0;
 }
