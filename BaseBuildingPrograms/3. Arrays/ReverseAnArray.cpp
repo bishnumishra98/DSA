@@ -28,7 +28,8 @@ void reverseArray_bruteForce(int arr[], int n) {
 // T.C: O(n)
 // S.C: O(1)
 void reverseArray_STL(int arr[], int n) {
-    reverse(arr, arr + n);
+    reverse(arr, arr + n);   // arr denotes base index of arr[], i.e 0th index.
+    // Above line means reversing from element at '0th' index to element at '(n-1)th' index.
 }
 
 // T.C: O(n)
