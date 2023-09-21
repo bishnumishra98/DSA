@@ -1,6 +1,9 @@
 // Leetcode: 74. Search a 2D Matrix   ---> Given an integer target, return true if
 // target is in matrix or false otherwise.
 
+// 2D -> 1D formula: c*i+j
+// 1D -> 2D formula: i = index/c,  j = index%c
+
 // This problem is an implementation of binary search.
 
 #include<iostream>
