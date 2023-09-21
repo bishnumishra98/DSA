@@ -61,6 +61,7 @@ int findTargetIndexByBinarySearch(vector<int>& arr, int start, int end, int targ
 }
 
 
+// Leetcode given function
 // T.C: O(logn)
 // S.C: O(1)
 int search(vector<int>& nums, int target) {
