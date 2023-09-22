@@ -3,7 +3,7 @@
 // i/p: 64, o/p: 8
 // i/p: 68, o/p: 8
 
-// This problem is an implementation of binary search.
+// This problem is an implementation of binary search, and search space concept.
 
 #include<iostream>
 using namespace std;
@@ -21,7 +21,7 @@ int mySqrt(int x) {
             return mid;
         } else if((mid*mid) < x) {   // store ans and go to right
             // if '(mid*mid) < x', then 'mid' may be a potential answer for square root of x.
-           // That's why we are storing it, before going to further step. If 'x' was a perfect
+           // That's why we are storing its value before going to further step. If 'x' was a perfect
           // square, then storing 'mid' was not necessary. Dry run for better understanding.
             ans = mid;
             start = mid + 1;
