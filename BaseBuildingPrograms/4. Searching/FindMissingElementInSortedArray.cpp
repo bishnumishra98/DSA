@@ -1,12 +1,13 @@
 // In the range of 1 to n integers in a sorted array, any one integer is missing.
 // Find the missing one.
 
+// This problem is an implementation of binary search.
+
 #include <iostream>
 using namespace std;
 
 // T.C: O(logn)
 // S.C: O(1)
-// This code uses a binary search approach
 int findMissingElement(int arr[], int n) {
     int start = 0;
     int end = n - 1;
