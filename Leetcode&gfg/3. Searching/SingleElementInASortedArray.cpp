@@ -1,28 +1,26 @@
-// Given an array where all elements occur in pairs and no element can occur more than twice
-// back to back. Only one element exists odd number of times. Find the odd element.
-// i/p: [10, 10, 2, 2, 5, 5, 2, 5, 5, 20, 20, 11, 11, 10, 10], o/p: 2
-// Find odd occurring element within O(logn) time complexity.
+// Leetcode: 540. Single Element in a Sorted Array
 
 // This problem is an implementation of binary search.
 
+// You are given a sorted array consisting of only +ve integers where every element appears exactly
+// twice, except for one element which appears exactly once. Find that element within O(logn).
+//   i/p: [1, 1, 2, 3, 3, 4, 4, 8, 8], o/p: 2
+// Index:  0  1  2  3  4  5  6  7  8
+
+// Fact: This question is exactly same as 'BaseBuildingPrograms\Searching\FindOddOccurringElement.cpp'
+
+// Approach ---> Our single element will always be found at even index as numbers are in pairs.
+// Case 1: if mid is at even index, we have 3 cases: we may be in left, ans, or right.
+// Case 2: if mid is at odd index, we have 2 cases: Either we are in left or right
+
 #include <iostream>
+#include <vector>
 using namespace std;
-
-// T.C: O(n)
-// S.C: O(1)
-int findOddOccurringElement_XOR(int arr[], int n) {
-    int ans = 0;
-
-    for(int i=0; i<n; i++) {
-        ans ^= arr[i];
-    }
-
-    return ans;
-}
 
 // T.C: O(logn)
 // S.C: O(1)
-int findOddOccurringElement(int nums[], int n) {
+int singleNonDuplicate(vector<int>& nums) {
+    int n = nums.size();
     int start = 0;
     int end = n - 1;
     int mid = start + (end - start)/2;
@@ -44,12 +42,12 @@ int findOddOccurringElement(int nums[], int n) {
                 end = mid - 1;
             }
         } else {   // 'mid' is at even index. We have 3 possible cases here.
-            if((mid-1 >= 0) && nums[mid] == nums[mid-1]) {
+            if(((mid-1 >= 0)) && (nums[mid] == nums[mid-1])) {
                 // 'mid' is at right of 'ans'. In this case, we move to left.
                // 'mid-1' is already checked, so there's no point of unnecessarily
               // bringing 'end' to 'mid-1'
                 end = mid - 2;
-            } else if((mid+1 < n) && nums[mid] == nums[mid+1]) {
+            } else if((mid+1 < n) && (nums[mid] == nums[mid+1])) {
                 // 'mid' is at left of 'ans'. In this case, we move to right.
                // 'mid+1' is already checked, so there's no point of unnecessarily
               // bringing 'start' to 'mid+1'
@@ -69,12 +67,9 @@ int findOddOccurringElement(int nums[], int n) {
 
 
 int main() {
-    int arr[] = {10, 10, 2, 2, 5, 5, 2, 5, 5, 20, 20, 11, 11, 10, 10};
-    int n = 15;
+    vector <int> v = {3,3,7,7,10,11,11};
 
-    // cout << findOddOccurringElement_XOR(arr, n);
-
-    cout << findOddOccurringElement(arr, n);
+    cout << singleNonDuplicate(v);
 
     return 0;
 }

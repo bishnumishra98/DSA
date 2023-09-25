@@ -1,0 +1,7 @@
+Binary search questions can be of 3 types:-
+
+1) Classical: Simple Bs
+
+2) Search space & predicate function
+
+3) Logic on index
