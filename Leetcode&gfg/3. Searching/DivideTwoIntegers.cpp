@@ -18,7 +18,7 @@ int correctSign(int dividend, int divisor) {
 }
 
 // Leetcode given function
-// T.C: O(logn)
+// T.C: O(log(dividend))
 // S.C: O(1)
 int divide(int dividend, int divisor) {
     // If we convert the negative value '-2147483648' to its absolute value,

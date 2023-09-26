@@ -62,7 +62,8 @@ int divide(int dividend, int divisor) {
     return ans*sign;   // returning the answer with correct sign
 }
 
-
+// T.C: O(precision*log(dividend))
+// S.C: O(1)
 double divide_Decimal(int dividend, int divisor, int precision) {
     double quot = divide(dividend, divisor);   // getting the nearest integer quotient in 'quot'
     
