@@ -1,6 +1,11 @@
-// Leetcode: 29. Divide Two Integers ---> Given two integers dividend and divisor,
-// divide two integers without using multiplication, division, and mod operator.
-// Return the integral part of quotient after dividing dividend by divisor.
+// Divide Two Integers ---> Given two integers
+// dividend and divisor, divide two integers without using multiplication, division, and
+// mod operator. Return the quotient rounded down to the user defined no.of decimal point.
+// Ex:- i/p: 100, 30, 3,    o/p: 3.333
+
+// This problem is an extension of Leetcode: 29. Divide Two Integers ---> Given two integers
+// dividend and divisor, divide two integers without using multiplication, division, and
+// mod operator. Return the integral part of quotient after dividing dividend by divisor.
 
 // Constraints -> -2^31 <= dividend, divisor <= 2^31 - 1, divisor != 0
 
@@ -17,9 +22,7 @@ int correctSign(int dividend, int divisor) {
     return 1;
 }
 
-// Leetcode given function
-// T.C: O(logn)
-// S.C: O(1)
+// integer quotient function
 int divide(int dividend, int divisor) {
     // If we convert the negative value '-2147483648' to its absolute value,
    // its value will become outside the range of a 32-bit signed integer '2147483647'. 
@@ -60,9 +63,28 @@ int divide(int dividend, int divisor) {
 }
 
 
+double divide_Decimal(int dividend, int divisor, int precision) {
+    double quot = divide(dividend, divisor);   // getting the nearest integer quotient in 'quot'
+    
+    double step = 1;
+
+    for(int i=0; i<precision; i++) {
+        step = step / 10;
+        double j = quot;
+
+        while(j*divisor <= dividend) {
+            quot = j;
+            j += step;
+        }
+    }
+
+    return quot;
+}
+
+
 int main() {
-    int dividend = 2147483647, divisor = 2;
-    cout << divide(dividend, divisor);
+    int dividend = 100, divisor = 30, precision = 3;
+    cout << divide_Decimal(dividend, divisor, precision);
 
     return 0;
 }

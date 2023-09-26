@@ -1,5 +1,5 @@
 // Given a non-negative integer x, return the square root of x rounded down to the user defined 
-// no.of nearest decimal point. Ex:-
+// no.of decimal point. Ex:-
 // i/p: 64, 0,  o/p: 8
 // i/p: 68, 3,  o/p: 8.246
 
@@ -10,7 +10,7 @@
 
 // This problem is an implementation of binary search, and search space concept.
 
-// integer answer function
+// integer square-root function
 int mySqrt(int x) {
     int start = 0;
     int end = x;   // Our search space is going to be from start, i.e. 0 to end, i.e. x.
@@ -41,21 +41,21 @@ using namespace std;
 // T.C: O(precision*logn)
 // S.C: O(1)
 double mySqrt_Decimal(int n, int precision) {
-    double ans = mySqrt(n);   // getting the integer answer in 'ans'
+    double sqrt = mySqrt(n);   // getting the nearest integer square-root in 'sqrt'
     
     double step = 1;
 
     for(int i=0; i<precision; i++) {
         step = step / 10;
-        double j = ans;
+        double j = sqrt;
 
         while(j*j <= n) {
-            ans = j;
+            sqrt = j;
             j += step;
         }
     }
 
-    return ans;
+    return sqrt;
 }
 
 
