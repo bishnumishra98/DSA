@@ -5,12 +5,13 @@
 // i/p: " ",    o/p: true
 // i/p: "race a horse",   o/p: false
 
-// T.C:
-// S.C:
+
 #include <iostream>
 #include <algorithm>   // for reverse()
 using namespace std;
 
+// T.C: O(n);   where n is length of string
+// S.C: O(n);   where n is length of string
 string removeNonAlphaNumericCharacters(string s) {
     string str = "";
 
@@ -24,6 +25,9 @@ string removeNonAlphaNumericCharacters(string s) {
     return str;
 }
 
+// leetcode given function
+// T.C: O(n);   where n is length of string
+// S.C: O(n);   where n is length of string
 bool isPalindrome(string s) {
     string str = removeNonAlphaNumericCharacters(s);
 

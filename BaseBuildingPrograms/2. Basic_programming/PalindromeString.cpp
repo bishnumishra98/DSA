@@ -4,22 +4,24 @@ using namespace std;
 // T.C: O(n)
 // S.C: O(1)
 bool checkPalindromeString(string str) {
-    int len = str.length();
-    int i = 0, j = len - 1;
+    int i = 0;
+    int j = str.length() - 1;
 
     // palindrome string logic
     while(i<j) {
-        if(str[i] != str[j]) {
+        if(str[i] == str[j]) {
+            i++;
+            j--;
+        } else {
             return false;
         }
-        i++;
-        j--;
+        
     }
     return true;
 }
 
 int main() {
-    string str = "obboa";
+    string str = "obkbo";
 
     if(checkPalindromeString(str)) {
         cout << "Palindrome";
