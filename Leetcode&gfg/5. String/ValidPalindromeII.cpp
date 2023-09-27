@@ -1,5 +1,5 @@
-// Leetcode: 680. Valid Palindrome II  --->   Given a string s, return true if the s can be palindrome after
-// deleting at most one character from it. Ex:-
+// Leetcode: 680. Valid Palindrome II  --->   Given a string s, return true if the s can be
+// palindrome after deleting at most one character from it. Ex:-
 // i/p: "aba",   o/p: true
 // i/p: "abca",    o/p: true
 // i/p: "abc",   o/p: false
@@ -36,8 +36,8 @@ bool validPalindrome(string s) {
             i++;
             j--;
         } else {
-            bool str1 = checkPalindrome(s, i+1, j);
-            bool str2 = checkPalindrome(s, i, j-1);
+            bool str1 = checkPalindrome(s, i+1, j);   // removing ith character and checking palindrome
+            bool str2 = checkPalindrome(s, i, j-1);   // removing jth character and checking palindrome
 
             return str1 || str2;   // if any of the substring is palindrome, we will return true
         }
