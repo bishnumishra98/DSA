@@ -4,7 +4,6 @@ using namespace std;
 
 int findLength(char ch[], int size) {
 
-  
   int index = 0;
   while(ch[index] != '\0') {
     index++;

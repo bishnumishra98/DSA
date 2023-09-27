@@ -6,8 +6,8 @@
 #include <iostream>
 using namespace std;
 
-// T.C: O(n)
-// S.C: O(n) 
+// T.C: O(k*s*p); where k = no.of occurrences of 'part' in 's', s = length of 's', p = length of 'part'
+// S.C: O(s); where s = length of 's'
 string removeOccurrences(string s, string part) {
     while(s.find(part) != string::npos) {   // jbtk 'part' exists in 's'
         s.erase(s.find(part), part.size());   // s.find(part) returns index of first character of 'part' in 's'
