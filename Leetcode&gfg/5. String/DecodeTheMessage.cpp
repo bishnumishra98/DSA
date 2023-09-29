@@ -9,6 +9,11 @@
 // Explanation: The diagram above shows the substitution table.
 // It is obtained by taking the first appearance of each letter in "the quick brown fox jumps over the lazy dog".
 
+// Approach:-
+// 1) Store elements a, b, c, d, etc mapped to indexes t, h, e, q, etc, in a mapping array;
+//    where t, h, e, q, etc are elements of keys.
+// 2) Store elements from mapping array in a string 'ans' corresponding to indexes of v, k, b, s, etc,
+//    where v, k, b, s, etc are elements of message. Then return the 'ans'.
 
 #include <iostream>
 using namespace std;
@@ -20,7 +25,7 @@ string decodeMessage(string key, string message) {
     char start = 'a';
     char mapping[300] = {0};   // Initializing all elements of array with 0, i.e '\0' null character.
     // Later, elements of this array will be a, b, c, d, etc. And indexes of this array
-    // will be the letters of 'message'. It will be used to map 'message' and 'abcd'.
+    // will be the letters of 'key'. It will be used to map indexes 'key' to elements 'abcd'.
 
     // for(int i=0; i<key.size(); i++) {
     //     char ch = key[i];
