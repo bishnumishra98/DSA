@@ -29,6 +29,7 @@
 
 // Thus, to sort a strictly unsorted array of 5 elements, outer loop should run 4 times, i.e. (n-1) times,
 // i.e. i goes from 0 to 3; and inner loop runs (n-i-1) times. Inner loop will be represented by j.
+// j is nothing, but indexes of elements in array. Dry run for better understanding.
 
 #include <iostream>
 #include <vector>
