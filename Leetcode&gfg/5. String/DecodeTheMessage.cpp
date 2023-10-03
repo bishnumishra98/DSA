@@ -38,10 +38,10 @@ string decodeMessage(string key, string message) {
 
     for(auto ch: key) {
         if(ch != ' ' && mapping[ch] == 0) {   // ch != ' ' ensures no spaces
-        // are put inside mapping array. 'mapping[ch] == 0' ensures once an
-        // element is given a key, no same key should get a chance to
-        // become an index in mapping array. That's why element should be 0 in
-        // mapping[ch] to become eligible to get an index.
+            // are put inside mapping array. 'mapping[ch] == 0' ensures once an
+            // element is given a key, no same key should get a chance to
+            // become an index in mapping array. That's why element should be 0 in
+            // mapping[ch] to become eligible to get an index.
             mapping[ch] = start;
             start++;
         }
