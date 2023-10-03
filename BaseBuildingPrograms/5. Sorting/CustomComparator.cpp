@@ -15,8 +15,8 @@ void print2Dvector(vector <vector<int>>& v) {
     }
 }
 
-// comparator function returns a boolean value
-// comparator functions instructs the sort() function how to sort an array or 2d array
+// Comparator function accepts two parameters and returns a boolean value.
+// Comparator functions is sent as 3rd paramter in sort() function to sort an array in customised way.
 
 // this function sorts array in descending order
 bool myComp1D(int a, int b) {

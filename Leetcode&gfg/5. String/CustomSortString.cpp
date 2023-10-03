@@ -11,16 +11,28 @@
 // Output: "cbad"
 
 #include <iostream>
+#include <algorithm>   // for sort()
 using namespace std;
 
-// T.C:
-// S.C: 
+string str;   // global declaration of 'str'
+
+bool customComparator(char c1, char c2) {
+    return (str.find(c1) < str.find(c2));
+}
+
+// leetcode given function
+// T.C: O(nlogn);   because T.C of sort() in C++ is O(nlogn)
+// S.C: O(m);   where m = order.size()
 string customSortString(string order, string s) {
-        
+    str = order;
+    sort(s.begin(), s.end(), customComparator);
+    return s;
 }
 
 int main() {
-    
+    string order = "cbafg", s = "abcd";
 
+    cout << customSortString(order, s);
+    
     return 0;
 }
