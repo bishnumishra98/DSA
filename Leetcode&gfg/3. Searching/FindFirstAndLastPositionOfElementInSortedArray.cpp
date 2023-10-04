@@ -12,7 +12,7 @@ void printVector(vector<int>& v) {
     }
 }
 
-// T.C: O(n)
+// T.C: O(logn)
 // S.C: O(1)
 int findFirstPosition(vector<int>& nums, int target) {
     int start = 0;
@@ -36,7 +36,7 @@ int findFirstPosition(vector<int>& nums, int target) {
     return ans;
 }
 
-// T.C: O(n)
+// T.C: O(logn)
 // S.C: O(1)
 int findLastPosition(vector<int>& nums, int target) {
     int start = 0;
