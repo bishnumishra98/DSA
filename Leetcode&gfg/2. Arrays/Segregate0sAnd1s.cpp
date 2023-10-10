@@ -61,6 +61,7 @@ int main() {
     }
 
     //segregate0and1_bruteForce(arr, n);
+    
     segregate0and1(arr, n);
 
     // printing sorted array
