@@ -6,7 +6,7 @@
 using namespace std;
 
 // T.C: O(n)
-// S.C: O(n) 
+// S.C: O(n)
 string removeDuplicates(string s) {
     string ans = "";
     int index = 0;
