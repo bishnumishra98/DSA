@@ -94,7 +94,7 @@ int countPrimes(int n) {
             }
         }
     }
-    // Note that: If we were asked to find count till 'n', then for and while loop
+    // Note: If we were asked to find count till 'n', then for and while loop
     // would have have conditions as 'i<=n' and 'j<=n' respectively.
 
     return count;
