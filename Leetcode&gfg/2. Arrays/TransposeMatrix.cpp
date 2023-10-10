@@ -16,7 +16,7 @@ void print2DVector(const vector<vector<int>>& v) {
 // Brute force 
 // T.C: O(n2)
 // S.C: O(n2)
-vector<vector<int>> transpose_bruteForce(vector<vector<int>>& matrix) {
+vector<vector<int>> transpose(vector<vector<int>>& matrix) {
     int n = matrix.size();   // no.of rows
     int col = matrix[0].size();   // no.of of elements in each row, i.e, no.of columns
     vector<vector<int>> t_matrix(col, vector<int>(n));   // creates a new 2D vector t_matrix with the dimensions swapped
@@ -36,7 +36,7 @@ int main() {
         {4, 5, 6}
     };
 
-    print2DVector(transpose_bruteForce(matrix));
+    print2DVector(transpose(matrix));
     
     return 0;
 }
