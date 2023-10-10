@@ -1,4 +1,4 @@
-// Leetcode: 169. Majority Element II   --->   Given an integer array of size n, find all elements
+// Leetcode: 229. Majority Element II   --->   Given an integer array of size n, find all elements
 // that appear more than [n/3] times.
 // Example 1:
 // Input: nums = [3,2,3]
