@@ -28,7 +28,7 @@ void rotate_modulusMethod(vector<int>& nums, int k) {
 // Reversal method: (0, n-1) -> (0, k-1) -> (k, n-1)
 // T.C: O(n)
 // S.C: O(1)
-void rotate_reversalMethod(vector<int>& nums, int k) {
+void rotate(vector<int>& nums, int k) {
     k = k % nums.size();   // to handle the case when 'k > no.of elements in vector'
 
     // reverse from (0, n-1)
@@ -48,7 +48,7 @@ int main() {
 
     // rotate_modulusMethod(v, k);
 
-    rotate_reversalMethod(v, k);
+    rotate(v, k);
 
     printVector(v);
 

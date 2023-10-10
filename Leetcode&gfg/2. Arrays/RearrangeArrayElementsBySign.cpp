@@ -39,7 +39,7 @@ vector<int> rearrangeArray_bruteForce(vector<int>& nums) {
 // Two pointer approach
 // T.C: O(n)
 // S.C: O(n)
-vector<int> rearrangeArray_twoPointer(vector<int>& nums) {
+vector<int> rearrangeArray(vector<int>& nums) {
     vector <int> ans(nums.size(), -1);
 
     int even = 0, odd = 1;
@@ -63,9 +63,9 @@ int main() {
 
     // v = rearrangeArray_bruteForce(v);
 
-    v = rearrangeArray_twoPointer(v);   // This approach is better in terms of space efficiency
-                                       // and is equally efficient in terms of time complexity,
-                                      // from the above function 'rearrangeArray_bruteForce()'.
+    v = rearrangeArray(v);   // This approach is better in terms of space efficiency
+                            // and is equally efficient in terms of time complexity,
+                           // from the above function 'rearrangeArray_bruteForce()'.
 
     printVector(v);
 
