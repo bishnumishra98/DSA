@@ -60,6 +60,7 @@ int findLastPosition(vector<int>& nums, int target) {
     return ans;
 }
 
+// leetcode given function
 // T.C: O(logn) + O(logn) = O(logn)
 // S.C: O(1) + O(1) = O(1)
 vector<int> searchRange(vector<int>& nums, int target) {
