@@ -22,7 +22,7 @@ int missingNumber_bruteForce(vector<int>& nums) {
 // XOR approach
 // T.C: O(n)
 // S.C: O(1)
-int missingNumber_XOR(vector<int>& nums) {
+int missingNumber(vector<int>& nums) {
     int missingNumber = 0;
 
     // XOR all numbers from 0 to n
@@ -46,7 +46,7 @@ int main() {
 
     // cout << missingNumber_bruteForce(v);
 
-    cout << missingNumber_XOR(v);   // This is better approach
+    cout << missingNumber(v);   // This is better approach
 
     return 0;
 }
