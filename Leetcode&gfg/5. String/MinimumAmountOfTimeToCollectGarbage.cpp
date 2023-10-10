@@ -22,7 +22,7 @@
 #include <vector>
 using namespace std;
 
-// T.C: o(n);   where n is garbage.size()
+// T.C: O(n);   where n is garbage.size()
 // S.C: O(1)
 int garbageCollection(vector<string>& garbage, vector<int>& travel) {
     int pickM = 0;
