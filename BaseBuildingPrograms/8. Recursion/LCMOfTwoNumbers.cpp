@@ -1,5 +1,3 @@
-// gfg: GCD of two numbers
-
 #include <iostream>
 using namespace std;
 
@@ -24,8 +22,15 @@ int gcd(int A, int B) {
     gcd(A, B);   // recursive call
 }
 
+// T.C: O(min(A, B));   due to gcd()
+// S.C: O(min(A, B));   due to gcd()
+int lcm(int A, int B) {
+    // lcm of 2 no.s = product of two numbers / hcf of 2 no.s
+    return (A*B) / gcd(A, B);
+}
+
 int main() {
-    cout << gcd(72, 120);
+    cout << lcm(26, 40);
 
     return 0;
 }
