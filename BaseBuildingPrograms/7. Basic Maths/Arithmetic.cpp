@@ -27,6 +27,14 @@ using namespace std;
             return ans;
         }
 
+        // Fast exponentiation method:
+        // Ex: 2^11;    here a=2, b=11
+        // Initialize ans with 1.
+        // Start with b=10 and keep doing b=b/2 till b>0
+        // If b is odd, ans=ans*a; a=a*a;
+        // If b is even, a=a*a;
+        // In short: 2^11 -> (2^5).2 -> 2^2 -> 2^1
+
         // T.C: O(logb)
         // S.C: O(1)
         int Exponentiation_fastMethod(int a, int b) {
@@ -36,14 +44,14 @@ using namespace std;
                     ans = ans * a;
                 }
                 a = a * a;
-                b = b >> 1;
+                b = b >> 1;   // b = b/2
             }
             return ans;
         }
 
 
         int main() {
-            int a = 2, b = 5;
+            int a = 2, b = 11;
             cout << Exponentiation_fastMethod(a, b);
             return 0;
         }

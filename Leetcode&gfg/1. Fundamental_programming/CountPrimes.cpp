@@ -89,7 +89,7 @@ int countPrimes(int n) {
 
             int j = 2 * i;   // here j = second multiple of i
             while(j<n) {
-                prime[j] = false;   // marking all multiples of j s composite, i.e false
+                prime[j] = false;   // marking all multiples of j as composite, i.e false
                 j += i;   // here j = 3rd, 4th, ... last multiple of i uptil 'n-1'
             }
         }
