@@ -27,7 +27,7 @@ using namespace std;
             return ans;
         }
 
-        // T.C: O(logb);
+        // T.C: O(logb)
         // S.C: O(1)
         int Exponentiation_fastMethod(int a, int b) {
             int ans = 1;
