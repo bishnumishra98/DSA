@@ -1,3 +1,6 @@
+#include <iostream>
+using namespace std;
+
 /*
 1. MODULO ARITHMETIC
 
@@ -22,6 +25,27 @@
                 ans = ans * a;
             }
             return ans;
+        }
+
+        // T.C: O(logb);
+        // S.C: O(1)
+        int Exponentiation_fastMethod(int a, int b) {
+            int ans = 1;
+            while(b > 0) {
+                if(b & 1) {   // if b is odd
+                    ans = ans * a;
+                }
+                a = a * a;
+                b = b >> 1;
+            }
+            return ans;
+        }
+
+
+        int main() {
+            int a = 2, b = 5;
+            cout << Exponentiation_fastMethod(a, b);
+            return 0;
         }
         
 
