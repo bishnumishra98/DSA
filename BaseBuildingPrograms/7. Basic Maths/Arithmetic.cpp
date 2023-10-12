@@ -1,17 +1,17 @@
 #include <iostream>
 using namespace std;
 
-/*
-1. MODULO ARITHMETIC
 
-    I.   Answer of a modulo operation 'a % m' can range from '0' to 'm-1'.
+//  1. MODULO ARITHMETIC
 
-    II.  Generally, to avoid overflow, we have some properties for modulo opeartions:
-            i.   (a + b) % m = a % m + b % m
-            ii.  a % m - b % m = (a - b) % m
-            iii. (a * b) % m = a % m * b % m
-            iv.  ((a % m) % m) % m = a % m
-*/
+//      I.   Answer of a modulo operation 'a % m' can range from '0' to 'm-1'.
+
+//      II.  Generally, to avoid overflow, we have some properties for modulo opeartions:
+//              i.   (a + b) % m = a % m + b % m
+//              ii.  a % m - b % m = (a - b) % m
+//              iii. (a * b) % m = a % m * b % m
+//              iv.  ((a % m) % m) % m = a % m
+
 
 
 //  2. EXPONENTIATION (a^b, i.e. a raised to the power of b)
