@@ -29,6 +29,7 @@ vector<bool> createSieveArray(int n) {
     for(int i=2; i*i<=n; i++) {
     
         if(sieve[i] == true) {   // sieve[2] will be true only, so we will enter the loop
+        cout << "i=" << i << "  " << endl;
             // Optimization 1:  // we will start marking numbers as composite from i*i because numbers
             // less than i*i will already be marked by numbers less than i. For ex:- 2 will mark
             // 2, 4, 6, etc. as composite. So there is no need to mark 6 explicitly as composite from 3.
@@ -36,7 +37,7 @@ vector<bool> createSieveArray(int n) {
             
             while(j<=n) {
                 sieve[j] = false;   // marking multiples of i as composite, i.e false
-                j = j + i;   // here j = 3rd, 4th, ... last multiple of i uptil n
+                j = j + i;
             }
         }
     }

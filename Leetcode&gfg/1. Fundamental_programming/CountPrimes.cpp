@@ -15,48 +15,9 @@
 // Constraints: 0 <= n <= 5 * 10^6
 
 #include <iostream>
-#include <math.h>   // for sqrt()
 #include <vector>
 using namespace std;
 
-// sqrt approach
-// T.C: O(sqrt(n))
-// S.C: O(1)
-bool isPrime(int n) {
-    if(n<=1) {
-        return false;
-    }
-
-    // a non prime number will always have a factor >=2 and <= sqrt(n)
-    for(int i=2; i<=sqrt(n); i++) {
-        if(n%i==0) {   // found a factor
-            return false;
-        }
-    }
-    
-    return true;
-}
-
-// leetcode given function
-// T.C: O(n*sqrt(n))
-// S.C: O(1)
-int countPrimes_(int n) {
-    if(n<=1) return 0;
-
-    int count = 0;
-
-    for(int i=2; i<n; i++) {
-        if(isPrime(i)) {
-            count++;
-        }
-    }
-
-    return count;
-}
-
-// The above approach is good, but not the best. It will fail for leetcode big test cases as
-// range of integer is -2^31 to 2^31-1, i.e. 2,147,483,648 to 2,147,483,647.
-// In order to further optimize it, we need to understand The Sieve of Eratosthenes Algorithm.
 // The Sieve of Eratosthenes is an algorithm for finding all prime numbers up to a given limit.
 // It is a very efficient algorithm, and it is still widely used today. Let's say given input is n.
 
@@ -66,7 +27,6 @@ int countPrimes_(int n) {
 // 3) Repeat step 2 till n, only for numbers that are marked prime.
 // 4) In the end of the loop, elements still marked as prime are the prime numbers in the range 2 to n. So,
 //    keep a count of those numbers, and return the count.
-
 
 // leetcode given function
 // T.C: O(n*log(logn))
