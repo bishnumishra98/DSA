@@ -16,14 +16,16 @@ using namespace std;
 // Here, a sieve array is known as an array containing 'n+1' elements indexed from 0 to n,
 // all marked as false, except the ones present at prime indexes. Ex:- Elements at 0th, 1st,
 // 4th, etc indexes contain false, while elements at 2nd, 3rd, 5th, etc indexes contain true.
+// T.C: O(nlog(logn))
+// S.C: O(n)
 vector<bool> createSieveArray(int n) {
     vector<bool> sieve(n+1, true);   // all elements of sieve array contains true in the beginning
 
     // sieve[0] and sieve[1] will be treated as 0 and 1 respectively. So marking them false, i.e composite.
     sieve[0] = sieve[1] = false;
 
-    // optimization 2: inner loop will never run more than √n times due to optimization 1,
-    // so there is no need of running the outer loop from 2 to n unnecessarily
+    // Optimization 2: inner loop will never run more than √n times due to optimization 1,
+    // so there is no need of running the outer loop from 2 to n unnecessarily.
     for(int i=2; i*i<=n; i++) {
     
         if(sieve[i] == true) {   // sieve[2] will be true only, so we will enter the loop

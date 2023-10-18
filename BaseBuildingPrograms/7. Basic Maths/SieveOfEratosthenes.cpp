@@ -15,6 +15,8 @@ using namespace std;
 // Here, a sieve array is known as an array containing 'n+1' elements indexed from 0 to n,
 // all marked as false, except the ones present at prime indexes. Ex:- Elements at 0th, 1st,
 // 4th, etc indexes contain false, while elements at 2nd, 3rd, 5th, etc indexes contain true.
+// T.C: O(nlog(logn))
+// S.C: O(n)
 vector<bool> createSieveArray(int n) {
     vector<bool> sieve(n+1, true);   // all elements of sieve array contains true in the beginning
 
