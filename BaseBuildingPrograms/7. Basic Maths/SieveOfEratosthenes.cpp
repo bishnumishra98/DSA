@@ -16,7 +16,7 @@ using namespace std;
 // all marked as false, except the ones present at prime indexes. Ex:- Elements at 0th, 1st,
 // 4th, etc indexes contain false, while elements at 2nd, 3rd, 5th, etc indexes contain true.
 // T.C: O(nlog(logn))
-// S.C: O(n)
+// S.C: O(n);   as the function creates a vector of size 'n+1'
 vector<bool> createSieveArray(int n) {
     vector<bool> sieve(n+1, true);   // all elements of sieve array contains true in the beginning
 

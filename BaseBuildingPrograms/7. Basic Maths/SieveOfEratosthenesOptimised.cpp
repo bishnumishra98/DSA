@@ -17,7 +17,7 @@ using namespace std;
 // all marked as false, except the ones present at prime indexes. Ex:- Elements at 0th, 1st,
 // 4th, etc indexes contain false, while elements at 2nd, 3rd, 5th, etc indexes contain true.
 // T.C: O(nlog(logn))
-// S.C: O(n)
+// S.C: O(n);   as the function creates a vector of size 'n+1'
 vector<bool> createSieveArray(int n) {
     vector<bool> sieve(n+1, true);   // all elements of sieve array contains true in the beginning
 
@@ -35,7 +35,7 @@ vector<bool> createSieveArray(int n) {
             // 2, 4, 6, etc. as composite. So there is no need to mark 6 explicitly as composite from 3.
             int j = i * i;
             
-            while(j<=n) {
+            while(j<=n) {   // this loop runs max √n times due to optimization 1
                 sieve[j] = false;   // marking multiples of i as composite, i.e false
                 j = j + i;
             }
