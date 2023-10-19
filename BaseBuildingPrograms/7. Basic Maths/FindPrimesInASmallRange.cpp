@@ -39,10 +39,15 @@ int main() {
 
     vector<bool> sieve = createSieveArray_smallRange(left, right);
 
+    int count = 0;
+
     for(int i=0; i<sieve.size(); i++) {
         if(sieve[i]) {   // sieve[i] contains true if i is prime number
-            cout << i << " ";
+            count++;
         }
     }
+
+    cout << count;
+
     return 0;
 }
