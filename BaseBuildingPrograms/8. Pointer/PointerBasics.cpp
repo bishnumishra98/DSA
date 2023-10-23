@@ -13,7 +13,7 @@ int main() {
         // int x = 10; 
         // int* ptr = &x;
         
-//  4) '*' is called dereferencing variable, and '&' is called referencing varible.
+//  4) '*' is called dereferencing variable, and '&' is called referencing variable.
         // int x = 10;
         // int* ptr = &x;
         // cout << "Value inside x: " << x << endl;   // o/p: 10
@@ -54,15 +54,59 @@ int main() {
         // int* p = NULL;   // This method assigns the NULL macro to the pointer variable p.
         // int* p = nullptr;   // This method assigns the nullptr keyword to the pointer variable p. nullptr is a C++11 keyword that was added to provide a more explicit way to create a null pointer.
 
+//  7) Accessing varible via pointer:
+        // int a = 100;
+        // int* ptr = &a;
 
-    
-   
+        // *ptr = *ptr + 1;   // *ptr = 100 + 1 = 101
+        // cout << "*ptr = " << *ptr << endl;   // 101
 
-    // arr, &arr, &arr[0] all point to base address of an array named 'arr'
+//  8) POINTER ARITHMETIC: We can do only addition and subtraction with pointer.
+//     Note that address of variables are in hexadecimal values.
+//     But for ease, it is being illustrated in simple decimal values.
+        // int a = 100;
+        // int* ptr = &a;
 
-    // arr[i] and i[arr] mean the same in C/C++, as they both are internally converted
-    // like this: *(arr + i) and *(i + arr) respectively, where arr = base address of array
+        // cout << "ptr = " << ptr << endl;   // 1008 (suppose), this is address of 'a' stored inside 'ptr'
+        // cout << "ptr - 1 = " << ptr - 1 << endl;   // 1008 - 4(size of int) = 1004
 
+        // double d = 200;
+        // double* ptr2 = &d;
+
+        // cout << "ptr2 = " << ptr2 << endl;   // 1100 (suppose), this is address of 'd' stored inside 'ptr2'
+        // cout << "ptr2 + 3 = " << ptr2 + 3 << endl;   // 1100 + 3*8(size of double) = 1100 + 24 = 1124
+
+//  9) Predict the output - level 1:
+        // int a = 100;
+        // int* ptr = &a;
+
+        // cout << "a = " << a << endl;   // 100
+        // // cout << "*a = " << *a << endl;   // error, as we cannot dereference any variable other than pointers
+        // cout << "&a = " << &a << endl;   // 1008 (suppose)
+        // cout << "&a + 1 = " << &a + 1 << endl;   // 1008+4 = 1012
+        // cout << "ptr = " << ptr << endl;   // 1008
+        // cout << "ptr + 1 = " << ptr + 1 << endl;   // 1008+4 = 1012
+        // cout << "*ptr = " << *ptr << endl;   // 100
+        // cout << "&ptr = " << &ptr << endl;   // 2008 (suppose)
+        // cout << "&ptr + 1 = " << &ptr + 1 << endl;   // 2008+4 = 2012
+        // cout << "(*ptr)++ = " << (*ptr)++ << endl;   // 100, as it is post increment. So first print, then increment.
+        // cout << "++(*ptr) = " << ++(*ptr) << endl;   // 101+1 = 102, as it is pre increment. So first increment, then print.
+        // cout << "(*ptr)/2 = " << (*ptr)/2 << endl;   // 102/2 = 51
+        // cout << "*ptr - 2 = " << *ptr - 2 << endl;   // 102-2 = 100
+
+//  10) Predict the output - level 2:
+        // int a = 5;
+        // int* p = &a;   // 'p' stores address of 'a'
+        // int* q = p;   // 'q' stores copy of 'p'
+
+        // cout << "a = " << a << endl;   // 5
+        // cout << "&a = " << &a << endl;   // 1008 (suppose), it is address of 'a'
+        // cout << "p = " << p << endl;   // 1008
+        // cout << "&p = " << &p << endl;   // 2008 (suppose), it is address of 'p'
+        // cout << "*p = " << *p << endl;   // 5, as 'p' points to 'a' directly
+        // cout << "q = " << q << endl;   // 1008
+        // cout << "&q = " << &q << endl;   // 3008 (suppose), itis address of 'q'
+        // cout << "*q = " << *q << endl;   // 5, as 'q' contains content of 'p' and '*q' means value stored at address stored in 'q'. Thus, it also points to 'a'
 
     return 0;
 }
