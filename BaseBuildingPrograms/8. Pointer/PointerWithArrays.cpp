@@ -71,20 +71,18 @@ int main() {
         // cout << "*ptr = " << *ptr << endl;   // o/p: d, *ptr = *(ptr + 0) = ptr[0]; thus it prints value at first index of array
 
 //  7) Pointer to base address of an array VS pointer to an array
-        int arr[5] = {10, 20, 30, 40, 50};
-        int* ptr = arr;   // pointer to base address of array
-        int* ptr2 = &arr[0];   // pointer to base address of array
-        int(* ptr3)[5] = &arr;   // pointer to an array of 5 integers, initialized with the address of the array arr
+        // int arr[5] = {10, 20, 30, 40, 50};
+        // int* ptr = arr;   // pointer to base address of array
+        // int* ptr2 = &arr[0];   // pointer to base address of array
+        // int(* ptr3)[5] = &arr;   // pointer to an array of 5 integers, initialized with the address of the array arr
 
-        cout << "ptr = " << ptr << endl;   // 104 (suppose)
-        cout << "*ptr = " << *ptr << endl;   // 10
-        cout << "ptr2 = " << ptr2 << endl;   // 104 (suppose)
-        cout << "*ptr2 = " << *ptr2 << endl;   // 10
-        cout << "ptr3 = " << ptr3 << endl;   // 104 (suppose)
-        cout << "*ptr3 = " << *ptr3 << endl;   // 104 (suppose)
-        cout << "*ptr3[0] = " << *ptr3[0] << endl;   // 10
-
-
+        // cout << "ptr = " << ptr << endl;   // 104 (suppose)
+        // cout << "*ptr = " << *ptr << endl;   // 10
+        // cout << "ptr2 = " << ptr2 << endl;   // 104 (suppose)
+        // cout << "*ptr2 = " << *ptr2 << endl;   // 10
+        // cout << "ptr3 = " << ptr3 << endl;   // 104 (suppose)
+        // cout << "*ptr3 = " << *ptr3 << endl;   // 104 (suppose)
+        // cout << "*ptr3[0] = " << *ptr3[0] << endl;   // 10
 
     return 0;
 }
