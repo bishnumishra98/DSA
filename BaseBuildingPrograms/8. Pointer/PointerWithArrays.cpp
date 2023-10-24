@@ -78,10 +78,10 @@ int main() {
 
         // cout << "ptr = " << ptr << endl;   // 104 (suppose)
         // cout << "*ptr = " << *ptr << endl;   // 10
-        // cout << "ptr2 = " << ptr2 << endl;   // 104 (suppose)
+        // cout << "ptr2 = " << ptr2 << endl;   // 104
         // cout << "*ptr2 = " << *ptr2 << endl;   // 10
-        // cout << "ptr3 = " << ptr3 << endl;   // 104 (suppose)
-        // cout << "*ptr3 = " << *ptr3 << endl;   // 104 (suppose)
+        // cout << "ptr3 = " << ptr3 << endl;   // 104
+        // cout << "*ptr3 = " << *ptr3 << endl;   // 104
         // cout << "*ptr3[0] = " << *ptr3[0] << endl;   // 10
 
     return 0;

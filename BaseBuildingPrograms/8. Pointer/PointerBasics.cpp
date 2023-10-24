@@ -105,7 +105,7 @@ int main() {
         // cout << "&p = " << &p << endl;   // 2008 (suppose), it is address of 'p'
         // cout << "*p = " << *p << endl;   // 5, as 'p' points to 'a' directly
         // cout << "q = " << q << endl;   // 1008
-        // cout << "&q = " << &q << endl;   // 3008 (suppose), itis address of 'q'
+        // cout << "&q = " << &q << endl;   // 3008 (suppose), it is address of 'q'
         // cout << "*q = " << *q << endl;   // 5, as 'q' contains content of 'p' and '*q' means value stored at address stored in 'q'. Thus, it also points to 'a'
 
     return 0;
