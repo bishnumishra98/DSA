@@ -59,16 +59,32 @@ int main() {
         // cout << "p_ch = " << p_ch;   // o/p: disha, prints whole array
 
 //  6) Predict the output - level 3:
-        char ch[50] = "disha";
-        char* ptr = ch;
+        // char ch[50] = "disha";
+        // char* ptr = ch;
 
-        cout << "ch = " << ch << endl;   // o/p: disha, prints whole array
-        cout << "&ch = " << &ch << endl;   // o/p: 104 (suppose), prints base address
-        cout << "ch[0] = " << ch[0] << endl;   // o/p: d, prints value at first index of array
-        cout << "ptr = " << ptr << endl;   // o/p: disha, prints whole array 
-        cout << "&ptr = " << &ptr << endl;   // o/p: 204 (suppose), prints address of 'ptr' pointer
-        cout << "ptr[0] = " << ptr[0] << endl;   // o/p: d, prints value at first index of array
-        cout << "*ptr = " << *ptr << endl;   // o/p: d, *ptr = *(ptr + 0) = ptr[0]; thus it prints value at first index of array
+        // cout << "ch = " << ch << endl;   // o/p: disha, prints whole array
+        // cout << "&ch = " << &ch << endl;   // o/p: 104 (suppose), prints base address
+        // cout << "ch[0] = " << ch[0] << endl;   // o/p: d, prints value at first index of array
+        // cout << "ptr = " << ptr << endl;   // o/p: disha, prints whole array 
+        // cout << "&ptr = " << &ptr << endl;   // o/p: 204 (suppose), prints address of 'ptr' pointer
+        // cout << "ptr[0] = " << ptr[0] << endl;   // o/p: d, prints value at first index of array
+        // cout << "*ptr = " << *ptr << endl;   // o/p: d, *ptr = *(ptr + 0) = ptr[0]; thus it prints value at first index of array
+
+//  7) Pointer to base address of an array VS pointer to an array
+        int arr[5] = {10, 20, 30, 40, 50};
+        int* ptr = arr;   // pointer to base address of array
+        int* ptr2 = &arr[0];   // pointer to base address of array
+        int(* ptr3)[5] = &arr;   // pointer to an array of 5 integers, initialized with the address of the array arr
+
+        cout << "ptr = " << ptr << endl;   // 104 (suppose)
+        cout << "*ptr = " << *ptr << endl;   // 10
+        cout << "ptr2 = " << ptr2 << endl;   // 104 (suppose)
+        cout << "*ptr2 = " << *ptr2 << endl;   // 10
+        cout << "ptr3 = " << ptr3 << endl;   // 104 (suppose)
+        cout << "*ptr3 = " << *ptr3 << endl;   // 104 (suppose)
+        cout << "*ptr3[0] = " << *ptr3[0] << endl;   // 10
+
+
 
     return 0;
 }
