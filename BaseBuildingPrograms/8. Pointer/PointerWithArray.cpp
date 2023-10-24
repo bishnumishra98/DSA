@@ -38,9 +38,37 @@ int main() {
         // // like this: *(arr + i) and *(i + arr) respectively, where arr = base address of array
 
 //  4) POINTER ARITHMETIC in arrays
-        int arr[5] = {10, 20, 30, 40, 50};
+        // int arr[5] = {10, 20, 30, 40, 50};
 
-        // arr = arr + 1;   // compilation error
+        // // arr = arr + 1;   // compilation error because we are trying to modify a constant pointer. This
+        // // is because the pointer 'arr' is pointing to memory location of the first element of the array,
+        // // and we cannot change this address. However, we can make a copy of 'arr' and move forward.
+
+        // int* ptr = arr;   // 'ptr' is copy of 'arr', i.e. 'ptr' is pointer to first element of array
+        // ptr++;   // pointer now points to the second element of the array
+        // cout << "*ptr = " << *ptr << endl;   // o/p: 20
+
+//  5) Implementation of integer and character arrays with pointers
+        // int arr[5] = {10, 20, 30, 40, 50};
+        // char ch[5] = {'d', 'i', 's', 'h', 'a'};   // or we can write char ch[5] = "disha";
+
+        // int* p_int = arr;
+        // char* p_ch = ch;
+
+        // cout << "p_int = " << p_int << endl;   // o/p: 0x61fef8, prints base address
+        // cout << "p_ch = " << p_ch;   // o/p: disha, prints whole array
+
+//  6) Predict the output - level 3:
+        char ch[50] = "disha";
+        char* ptr = ch;
+
+        cout << "ch = " << ch << endl;   // o/p: disha, prints whole array
+        cout << "&ch = " << &ch << endl;   // o/p: 104 (suppose), prints base address
+        cout << "ch[0] = " << ch[0] << endl;   // o/p: d, prints value at first index of array
+        cout << "ptr = " << ptr << endl;   // o/p: disha, prints whole array 
+        cout << "&ptr = " << &ptr << endl;   // o/p: 204 (suppose), prints address of 'ptr' pointer
+        cout << "ptr[0] = " << ptr[0] << endl;   // o/p: d, prints value at first index of array
+        cout << "*ptr = " << *ptr << endl;   // o/p: d, *ptr = *(ptr + 0) = ptr[0]; thus it prints value at first index of array
 
     return 0;
 }
