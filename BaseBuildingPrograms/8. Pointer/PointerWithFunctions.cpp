@@ -46,3 +46,72 @@ using namespace std;
 
         //     return 0;
         // }
+
+//  4) Predict the output - level 3:
+        // void solve(int* p) {
+        //     *p = *p + 1;
+        // }
+
+        // int main() {
+        //     int a = 5;
+        //     int* p = &a;   // 'p' stores address of 'a'
+
+        //     cout << "p = " << p << endl;   // 1004 (suppose)
+        //     cout << "&p = " << &p << endl;   // 2004 (suppose)
+        //     cout << "*p = " << *p << endl;   // 5
+
+        //     solve(p);
+
+        //     cout << "p = " << p << endl;   // 1004
+        //     cout << "&p = " << &p << endl;   // 2004
+        //     cout << "*p = " << *p << endl;   // 6
+
+        //     return 0;
+        // }
+
+//  5) Predict the output - level 4:
+        // void solve(int* p) {
+        //     // pass by value
+        //     p = p + 1;
+        // }
+
+        // int main() {
+        //     int a = 5;
+        //     int* p = &a;   // 'p' stores address of 'a'
+
+        //     cout << "p = " << p << endl;   // 1004 (suppose)
+        //     cout << "&p = " << &p << endl;   // 2004 (suppose)
+        //     cout << "*p = " << *p << endl;   // 5
+
+        //     solve(p);
+
+        //     cout << "p = " << p << endl;   // 1004
+        //     cout << "&p = " << &p << endl;   // 2004
+        //     cout << "*p = " << *p << endl;   // 5
+
+        //     return 0;
+        // }
+
+//  6) Predict the output - level 4:
+        // void solve(int* &p) {
+        //     // pass by reference
+        //     p = p + 1;
+        // }
+
+        // int main() {
+        //     int a = 5;
+        //     int* p = &a;   // 'p' stores address of 'a'
+
+        //     cout << "p = " << p << endl;   // 1004 (suppose)
+        //     cout << "&p = " << &p << endl;   // 2004 (suppose)
+        //     cout << "*p = " << *p << endl;   // 5
+
+        //     solve(p);
+
+        //     cout << "p = " << p << endl;   // 1004
+        //     cout << "&p = " << &p << endl;   // 2004
+        //     cout << "*p = " << *p << endl;   // prints a garbage value present at address next to 1004,
+        //     // i.e. 1004 + sizeof(int) = 1004 + 4 = 1008.
+
+        //     return 0;
+        // }
