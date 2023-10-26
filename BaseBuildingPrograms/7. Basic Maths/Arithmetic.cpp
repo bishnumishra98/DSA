@@ -7,10 +7,10 @@ using namespace std;
 //      I.   Answer of a modulo operation 'a % m' can range from '0' to 'm-1'.
 
 //      II.  Generally, to avoid overflow, we have some properties for modulo opeartions:
-//              i.   (a + b) % m = a % m + b % m
-//              ii.  a % m - b % m = (a - b) % m
-//              iii. (a * b) % m = a % m * b % m
-//              iv.  ((a % m) % m) % m = a % m
+//              i.   (a + b) % M = a % M + b % M
+//              ii.  a % M - b % M = (a - b) % M
+//              iii. (a % M * b % M) % M = (a * b) % M
+//              iv.  ((a % M) % M) % M = a % M
 
 
 
