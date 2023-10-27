@@ -1,9 +1,11 @@
 #include <iostream>
 using namespace std;
 
+// T.C: O(size)
+// S.C: O(size)
 int linearSearch(int *arr, int size, int index, int target) {
     //base case
-    if (index == size) {
+    if (index >= size) {
         return -1;   // element not found if index becomes equal to size of array
     }
 
