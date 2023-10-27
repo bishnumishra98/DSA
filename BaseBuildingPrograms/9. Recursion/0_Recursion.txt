@@ -22,3 +22,5 @@ Go through recursion in the following sequence:-
 
 6) LCMOfTwoNumbers
 
+7) PrintingElementsOfAnArray
+
