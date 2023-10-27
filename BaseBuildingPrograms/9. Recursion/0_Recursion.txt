@@ -24,3 +24,5 @@ Go through recursion in the following sequence:-
 
 7) PrintingElementsOfAnArray
 
+8) LinearSearchInAnArray
+
