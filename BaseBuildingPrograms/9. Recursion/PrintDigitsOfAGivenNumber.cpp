@@ -1,9 +1,10 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 // T.C: O(log(base10)n)
 // S.C: O(log(base10)n)
-void printDigits(int num) {
+void printDigits(int num, vector<int> &v) {
     // base case
     if(num == 0) {
         return;
@@ -14,16 +15,21 @@ void printDigits(int num) {
     num = num / 10;
 
     // recursive call
-    printDigits(num);
+    printDigits(num, v);
 
     // processing
-    cout << digit << " ";
+    v.push_back(digit);
 }
 
 int main() {
     int n = 4215;
+    vector <int> v;
 
-    printDigits(n);
+    printDigits(n, v);
+
+    for(auto element: v) {
+        cout << element << " ";
+    }
 
     return 0;
 }
