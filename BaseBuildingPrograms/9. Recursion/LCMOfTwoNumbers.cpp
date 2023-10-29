@@ -10,16 +10,19 @@ int gcd(int A, int B) {
     // Note: You can even use '%' instead of '-' in above algorithm.
     // But '%' is computationally more expensive than '-', so we use '-'.
 
-    if(A == 0) return B;   // base condition
-    if(B == 0) return A;   // base condition
+    // base case
+    if(A == 0) return B;
+    if(B == 0) return A;
     
+    // processing
     if(A > B) {
         A = A - B;
     } else {   // if(B >=A)
         B = B - A;
     }
     
-    gcd(A, B);   // recursive call
+    // recursive relation
+    gcd(A, B);
 }
 
 // T.C: O(min(A, B));   due to gcd()

@@ -26,3 +26,5 @@ Go through recursion in the following sequence:-
 
 8) LinearSearchInAnArray
 
+9) FindMinimumElementInArray
+
