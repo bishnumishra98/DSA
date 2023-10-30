@@ -34,4 +34,7 @@ Practice recursion in the following sequence:-
 
 12) PrintDigitsOfAGivenNumber
 
+13) CheckIfArrayIsSorted
+
+14) BinarySearchInArray
 
