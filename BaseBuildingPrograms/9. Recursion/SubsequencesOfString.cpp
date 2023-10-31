@@ -19,16 +19,16 @@ void findSubSequences(string str, string output, int index, vector<string>& ans)
     // processing
     char ch = str[index];
 
-    // Case 1: Excluding the character in 'output' building
+    // Case 1: Excluding the character 'ch' in 'output' building
     findSubSequences(str, output, index+1, ans);   // recursive relation
 
-    // Case 2: Including the character in 'output' building
+    // Case 2: Including the character 'ch' in 'output' building
     output.push_back(ch);
     findSubSequences(str, output, index+1, ans);   // recursive relation
 }
 
 int main() {
-    string str = "ab";
+    string str = "abc";
     string output = "";
     int index = 0;
     vector <string> ans;
