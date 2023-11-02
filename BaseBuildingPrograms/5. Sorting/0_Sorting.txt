@@ -1,0 +1,13 @@
+Practice sorting in the following sequence :-
+
+1) BubbleSort
+
+2) SelectionSort
+
+3) InsertionSort
+
+4) CustomComparator
+
+5) MergeSort
+
+6) 

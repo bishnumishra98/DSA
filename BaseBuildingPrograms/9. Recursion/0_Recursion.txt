@@ -48,5 +48,3 @@ Question 16, 17, 18 follow a pattern called "exploring all possible ways" :-
 
 18) HouseRobber
 
-19) 
-
