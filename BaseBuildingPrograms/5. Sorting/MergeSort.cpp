@@ -39,10 +39,12 @@ void merge(int *arr, int start,int end) {
     // Mother array is divided in two halves and copied into 'left_array' and 'right_array'. Now we will
     // just merge the two parts in ascending order. Note that 'left_array' and 'right_array' are already
     // sorted. We just need to merge two sorted arrays into one using two pointer approach. The one
-    // array we get here is not any new array, but we will insert elements in mother array itself.
+    // array we get here is not any new array. We actually manipulate the mother array itself.
 
     // Question: How are 'left_array' and 'right_array' are already sorted ?
-    // Answer: When the merge() function is called 1st time, the mother array contains 2 elements,
+    // Answer: For easy understanding, consider a case where array to be mergeSort contains 32 elements,
+    // so that it can broken down into two exactly equal halves.
+    // When the merge() function is called 1st time, the mother array contains 2 elements,
     // and the 'left_array' and 'right_array' each contains 1 elements. Then they are merged to form
     // one sorted array. Then, this sorted array becomes 'left' part of a mother array.
     // The 2nd time the merge() function is called, again the mother array contains 2 elements,
@@ -54,7 +56,10 @@ void merge(int *arr, int start,int end) {
     // The 4th time the merge() function is called, this time the mother array contains 4 elements,
     // and the 'left_array' and 'right_array' each contains 2 elements in sorted order. Then they are
     // merged to form one sorted array. Then, this sorted array becomes 'right' part of a mother array.
-    // And this process continues until the whole array gets sorted.
+    // And this process continues until the last the time merge() function is called.
+    // For the last time, merge() function is called and it receives an array as reference containing
+    // 32 elements, and again it is broken into 'left_array' and 'right_array' containing 16 elements
+    // each in sorted order. Then they are merged to form the desired final sorted array.
     int leftIndex = 0;
     int rightIndex = 0;
     int mainArrayIndex = start;
