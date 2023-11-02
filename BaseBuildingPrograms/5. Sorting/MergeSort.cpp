@@ -13,6 +13,7 @@
 #include <iostream>
 using namespace std;
 
+// merge() gets an array, it divides the array into two halves and then joins them in sorted order
 void merge(int *arr, int start,int end) {
     int mid = start + (end - start) / 2;   // or, (start+end)/2
 
@@ -39,6 +40,21 @@ void merge(int *arr, int start,int end) {
     // just merge the two parts in ascending order. Note that 'left_array' and 'right_array' are already
     // sorted. We just need to merge two sorted arrays into one using two pointer approach. The one
     // array we get here is not any new array, but we will insert elements in mother array itself.
+
+    // Question: How are 'left_array' and 'right_array' are already sorted ?
+    // Answer: When the merge() function is called 1st time, the mother array contains 2 elements,
+    // and the 'left_array' and 'right_array' each contains 1 elements. Then they are merged to form
+    // one sorted array. Then, this sorted array becomes 'left' part of a mother array.
+    // The 2nd time the merge() function is called, again the mother array contains 2 elements,
+    // and the 'left_array' and 'right_array' each contains 1 elements. Then they are merged to form
+    // one sorted array. Then, this sorted array becomes 'right' part of a mother array.
+    // The 3rd time the merge() function is called, this time the mother array contains 4 elements,
+    // and the 'left_array' and 'right_array' each contains 2 elements in sorted order. Then they are
+    // merged to form one sorted array. Then, this sorted array becomes 'left' part of a mother array.
+    // The 4th time the merge() function is called, this time the mother array contains 4 elements,
+    // and the 'left_array' and 'right_array' each contains 2 elements in sorted order. Then they are
+    // merged to form one sorted array. Then, this sorted array becomes 'right' part of a mother array.
+    // And this process continues until the whole array gets sorted.
     int leftIndex = 0;
     int rightIndex = 0;
     int mainArrayIndex = start;
