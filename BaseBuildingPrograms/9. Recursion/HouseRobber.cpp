@@ -17,7 +17,7 @@
 // Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
 // Total amount you can rob = 2 + 9 + 1 = 12.
 
-// Note: This problem is being solved with recursive for now just to understand recursion better.
+// Note: This problem is being solved with recursion for now, just to understand recursion better.
 // But optimal approach will be solved by dynamic programming.
 
 #include <iostream>

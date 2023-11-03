@@ -40,11 +40,13 @@ Practice recursion in the following sequence :-
 
 15) SubsequencesOfString
 
+16) ClimbingStairs
+
 Question 16, 17, 18 follow a pattern called "exploring all possible ways" :-
 
-16) MaximizeTheCutSequence
+17) MaximizeTheCutSequence
 
-17) CoinChange
+18) CoinChange
 
-18) HouseRobber
+19) HouseRobber
 

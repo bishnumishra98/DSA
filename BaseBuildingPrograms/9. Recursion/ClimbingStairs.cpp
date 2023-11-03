@@ -16,6 +16,9 @@
 // 2. 1 step + 2 steps
 // 3. 2 steps + 1 step
 
+// Note: This problem is being solved with recursion for now, just to understand recursion better.
+// But optimal approach will be solved by dynamic programming.
+
 #include <iostream>
 using namespace std;
 

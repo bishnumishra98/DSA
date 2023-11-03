@@ -19,7 +19,7 @@
 // Explanation: Here total length is 5, and the cut lengths are 5, 3 and 2. We can make two
 // segments of lengths 3 and 2.
 
-// Note: This problem is being solved with recursive for now just to understand recursion better.
+// Note: This problem is being solved with recursion for now, just to understand recursion better.
 // But optimal approach will be solved by dynamic programming.
 
 #include <iostream>
