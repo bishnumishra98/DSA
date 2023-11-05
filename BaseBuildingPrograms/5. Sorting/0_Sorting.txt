@@ -10,4 +10,4 @@ Practice sorting in the following sequence :-
 
 5) MergeSort
 
-6) 
+6) QuickSort
