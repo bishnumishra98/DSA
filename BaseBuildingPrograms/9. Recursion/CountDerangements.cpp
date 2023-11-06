@@ -50,6 +50,7 @@ int countDerangements(int n) {
     int ans2 = (n-1)*countDerangements(n-1);
 
     return ans1 + ans2;
+    // or, we can write: return ((n-1)*countDerangements(n-2)) + ((n-1)*countDerangements(n-1));
 }
 
 int main() {

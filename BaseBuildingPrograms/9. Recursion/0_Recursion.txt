@@ -40,9 +40,9 @@ Practice recursion in the following sequence :-
 
 15) SubsequencesOfString
 
-16) ClimbingStairs
-
 Question 16, 17, 18 follow a pattern called "exploring all possible ways" :-
+
+16) ClimbingStairs
 
 17) MaximizeTheCutSequence
 
@@ -52,7 +52,11 @@ Question 16, 17, 18 follow a pattern called "exploring all possible ways" :-
 
 20) HouseRobberII
 
+Question 21, 22, requires understanding of Permutations that we learnt in school mathematics :-
+
 21) CountDerangements
 
-22) 
+22) PaintingFence (hard)
+
+23) 
 
