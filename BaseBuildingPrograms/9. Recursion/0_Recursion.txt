@@ -60,5 +60,5 @@ Question 21, 22, requires understanding of Permutations that we learnt in school
 
 23) EditDistance
 
-24) 
+24) MaximalSquare
 

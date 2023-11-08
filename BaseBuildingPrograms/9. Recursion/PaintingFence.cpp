@@ -1,4 +1,4 @@
-// Given a fence with n posts and k colors, find out the number of ways of painting the fence such
+// gfg articke: Given a fence with n posts and k colors, find out the number of ways of painting the fence such
 // that at most 2 adjacent posts have the same color.
 
 // Example 1:
@@ -25,7 +25,10 @@
 // Explanation: We have 4 colors and 2 posts. Ways when both last 2 posts have same color = 4 
 // Ways when last 2 posts have diff color = 12. Total = 4 + 12 = 16
 
-// Please go through PaintingFence.jpg pic for understanding the recursive relation
+// Please go through PaintingFence.jpg pic for understanding the recursive relation.
+
+// Note: This problem is being solved with recursion for now, just to understand recursion better.
+// But optimal approach will be solved by dynamic programming.
 
 #include <iostream>
 using namespace std;

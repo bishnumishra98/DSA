@@ -68,7 +68,6 @@ int solve(string& str1, string& str2, int i, int j) {
 int minDistance(string word1, string word2) {
     int i = 0;
     int j = 0;
-
     int ans = solve(word1, word2, i, j);
     return ans;
 }

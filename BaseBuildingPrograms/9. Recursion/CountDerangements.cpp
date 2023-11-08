@@ -1,4 +1,4 @@
-// A Derangement is a permutation of n elements, such that no element appears in its original
+// gfg article: A Derangement is a permutation of n elements, such that no element appears in its original
 // position. Given a number n, find the total number of Derangements of a set of n elements. 
 
 // Example 1:
@@ -19,6 +19,8 @@
 // {1, 2, 3, 0}, {1, 3, 0, 2}, {2, 3, 0, 1}, {2, 0, 3, 1}, {2, 3, 1, 0}, {3, 0, 1, 2}, {3, 2, 0, 1}
 // and {3, 2, 1, 0}.
 
+// Note: This problem is being solved with recursion for now, just to understand recursion better.
+// But optimal approach will be solved by dynamic programming.
 
 #include <iostream>
 using namespace std;
