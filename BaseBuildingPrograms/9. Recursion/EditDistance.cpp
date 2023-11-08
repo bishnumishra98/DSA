@@ -28,7 +28,7 @@
 #include <iostream>
 using namespace std;
 
-int solve(string str1, string str2, int i, int j) {
+int solve(string& str1, string& str2, int i, int j) {
     // base case
     if(i >= str1.length()) {   // 'str1' exhausted, but there are still characters left in 'str2'.
         // In this case, we just need to insert those chracters at the end of 'str1', in order to
@@ -63,9 +63,8 @@ int solve(string str1, string str2, int i, int j) {
     return no_of_operations;
 }
 
-
-// T.C:
-// S.C:
+// T.C: O(3^(n+m));   where n = length of word1, m = length of word2
+// S.C: O(n+m)
 int minDistance(string word1, string word2) {
     int i = 0;
     int j = 0;
