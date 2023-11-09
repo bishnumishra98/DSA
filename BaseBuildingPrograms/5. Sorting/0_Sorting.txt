@@ -1,13 +1,13 @@
 Practice sorting in the following sequence :-
 
-1) BubbleSort
+1) BubbleSort -> O(n^2)
 
-2) SelectionSort
+2) SelectionSort -> O(n^2)
 
-3) InsertionSort
+3) InsertionSort -> O(n^2)
 
 4) CustomComparator
 
-5) MergeSort
+5) MergeSort -> O(nlogn)
 
-6) QuickSort
+6) QuickSort -> O(n^2)
