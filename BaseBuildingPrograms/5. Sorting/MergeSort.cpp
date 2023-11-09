@@ -43,7 +43,7 @@ void merge(int *arr, int start, int end) {
 
     // Question: How are 'left_array' and 'right_array' are already sorted ?
     // Answer: For easy understanding, consider a case where array to be mergeSort contains 32 elements,
-    // so that it can broken down into two exactly equal halves.
+    // so that it can broken be down into two exactly equal halves.
     // When the merge() function is called 1st time, the mother array contains 2 elements,
     // and the 'left_array' and 'right_array' each contains 1 elements. Then they are merged to form
     // one sorted array. Then, this sorted array becomes 'left' part of a mother array.
