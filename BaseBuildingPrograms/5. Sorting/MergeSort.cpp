@@ -14,7 +14,7 @@
 using namespace std;
 
 // merge() gets an array, it divides the array into two halves and then joins them in sorted order
-void merge(int *arr, int start,int end) {
+void merge(int *arr, int start, int end) {
     int mid = start + (end - start) / 2;   // or, (start+end)/2
 
     int len_left = mid - start + 1;   // length of left sub-rray
