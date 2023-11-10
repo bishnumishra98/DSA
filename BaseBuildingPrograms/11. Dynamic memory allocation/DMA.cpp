@@ -67,5 +67,11 @@ int main() {
             free(z);   // freeing the dynamically allocated memory
 
 
+        // PRO TIP: Instead of assigning numerical size to malloc() or calloc() function, use
+        // sizeof() function to auto calculate data type's size. Example:
+        // int *y = (int*) malloc(sizeof(int));
+        // int *z = (int*) malloc(10, sizeof(int));
+
+
     return 0;
 }
