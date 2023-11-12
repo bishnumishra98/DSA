@@ -18,7 +18,7 @@ int main() {
             int *ptr = new int[10];   // allocating an int type array of size 10,
                                      // whose base address is pointed by 'ptr'
 
-            populateData(ptr, 10);   // populating values {0, 1, 4, 9, ..., 81} inside the array
+            populateData(ptr, 10);   // populating values {0, 2, 4, 6, ..., 18} inside the array
 
             print(ptr, 10);   // printing values inside the array
             cout << endl << endl;
