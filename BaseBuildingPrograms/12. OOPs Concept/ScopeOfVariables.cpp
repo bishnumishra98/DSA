@@ -9,29 +9,21 @@ int main() {
 
     {
         int x = 30;
-        cout << "x = " << x << endl;
+        cout << "x = " << x << endl;   // o/p: 30
     }
 
-    cout << "x = " << x << endl;
+    cout << "x = " << x << endl;   // o/p: 20
 
-    cout << "global x = " << ::x << endl;   // global variables are distinguised using
+    cout << "global x = " << ::x << endl;   // o/p: 10   // global variables are distinguised using
                                            // scope resolution operator(::)
-    cout << "y = " << y << endl;   // no distinction required as 'y' doesn't conflict with
+    cout << "y = " << y << endl;   // o/p: 100   // no distinction required as 'y' doesn't conflict with
                                   // any other variable name. So here, 'y' means global variable.
 
-    x = 25;
-    ::x = 15;   
+    x = x + 5;
+    ::x = ::x + 5;   
 
-    cout << "x = " << x << endl;
-    cout << "global x = " << ::x << endl;
+    cout << "x = " << x << endl;   // o/p: 25
+    cout << "global x = " << ::x << endl;   // o/p: 15
 
     return 0;
 }
-
-// Ouput of the above program:
-// x = 30
-// x = 20
-// global x = 10
-// y = 100
-// x = 25
-// global x = 15
