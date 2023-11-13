@@ -1,3 +1,10 @@
+// What is a class ?
+// A class is a blueprint, template, or a prototype that
+// defines the structure and behavior of objects.
+
+// What is an object ?
+// Object is an instance of a class.
+
 #include <iostream>
 using namespace std;
 
