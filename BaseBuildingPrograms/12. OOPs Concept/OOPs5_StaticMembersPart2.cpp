@@ -64,3 +64,6 @@ int main() {
 
     return 0;
 }
+
+// Note: Value of static variable or class variable can be changed via both static and non-static
+// function. In next class, we will see how to manipulate static variable via a static function.
