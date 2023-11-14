@@ -57,7 +57,6 @@ int main() {
     s1.setAge(25);
     s1.showStudentInfo();
 
-
     s2.setName("Jeet");
     s2.setAge(24);
     s2.showStudentInfo();
