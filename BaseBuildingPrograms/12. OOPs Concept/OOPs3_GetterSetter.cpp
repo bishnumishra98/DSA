@@ -2,8 +2,11 @@
 using namespace std;
 
 class Student {
-    string name;
-    int age;
+    string name;   // instance member variable
+    int age;   // instance member variable
+    // They called so because their existence depends only when an object of this class is made.
+    // i.e. instance member variable is associated with each object (instance) of the class.
+
     // private variables of a class can only be accessed via public methods
     public:
         // Getter methods (getName and getAge) return the values of private member variables name and age.
