@@ -1,4 +1,4 @@
-// There are 3 types static members in C+ :
+// There are 3 types static members in C++:
 // 1) static local/global variables
 // 2) static member variables
 // 3) static member functions
@@ -15,7 +15,8 @@ int main() {
 
 // 2) Declared inside class body, and defined outside body of class.
 
-// 3) they do not belong
+// 3) They do not belong to any object unlike other instance members of class, i.e. they can be used
+//    by any object. They are also called class variables.
 
     return 0;
 }

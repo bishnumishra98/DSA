@@ -1,7 +1,7 @@
-// There are 3 types static members in C+ :
-// 1) static local/global variables
-// 2) static member variables
-// 3) static member functions
+// There are 3 types static members in C++:
+// 1) Static local/global variables (used in both procedural and object-oriented programming)
+// 2) Static member variables (specific to only object-oriented programming)
+// 3) Static member functions (specific to only object-oriented programming)
 
 // Below is the illustration for static local/global variables:
 
