@@ -44,15 +44,42 @@ class StudentsOfClass12 {
         }
 };
 
-int main() {
-    StudentsOfClass12 s1;   // even if we don't pass values for this object, it will be initialized with an
-    // initial state of {12, 18, 60}. That's one of the big advantages of defining a constructor in class.
-    StudentsOfClass12 s2(18, 55);
-    StudentsOfClass12 s3(17, 65);
+// int main() {
+//     // allocating objects in stack
+//     StudentsOfClass12 s1;   // even if we don't pass values for this object, it will be initialized with an
+//     // initial state of {12, 18, 60}. That's one of the big advantages of defining a constructor in class.
+//     StudentsOfClass12 s2(18, 55);
+//     StudentsOfClass12 s3(17, 65);
 
-    s1.showStudentInfo();
-    s2.showStudentInfo();
-    s3.showStudentInfo();
+//     s1.showStudentInfo();
+//     s2.showStudentInfo();
+//     s3.showStudentInfo();
+
+//     return 0;
+// }
+
+int main() {
+    // allocating objects in heap
+    // Analogy: int *temp = new int;
+    StudentsOfClass12 *s1 = new StudentsOfClass12;
+
+    // Analogy: int *temp = new int(5);
+    StudentsOfClass12 *s2 = new StudentsOfClass12(18, 55);
+    StudentsOfClass12 *s3 = new StudentsOfClass12(18, 65);
+
+    // s1, s2, s3 are pointers to the each object made on heap. However, pointers are made on stack. So to
+    // access the members or methods of the objects through the pointer, we need to use the arrow operator(->).
+    s1->showStudentInfo();
+    s2->showStudentInfo();
+    // To use the dot operator(.), we need to dereference the pointer.
+    (*s3).showStudentInfo();
+
+    // dealloacting objects from heap memory.
+    // We cannot delete all objects in 1 line like this: 'delete s1, s2, s3;'. Delete them individually.
+    delete s1;
+    delete s2;
+    delete s3;
+
 
     return 0;
 }
