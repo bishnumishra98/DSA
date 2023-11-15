@@ -45,8 +45,8 @@ class StudentsOfClass12 {
 };
 
 int main() {
-    StudentsOfClass12 s1;   // even if we don't pass values for this object, it will be initialized with
-    // an initial state of {12, 18, 60}. That's one of the big advantages using a constructor.
+    StudentsOfClass12 s1;   // even if we don't pass values for this object, it will be initialized with an
+    // initial state of {12, 18, 60}. That's one of the big advantages of defining a constructor in class.
     StudentsOfClass12 s2(18, 55);
     StudentsOfClass12 s3(17, 65);
 
