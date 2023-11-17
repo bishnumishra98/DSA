@@ -42,8 +42,8 @@ class Student {
         }
 };
 
-void printStudentInfo(const Student &s) {   // as 's' passed to this function is a 'const',
-// it can call only const methods from class. Thus, getAge() and getWeight() should also be made 'const'.
+void printStudentInfo(const Student &s) {   // as object passed to this function is a 'const', it can
+// call only 'const' methods from class. Thus, getAge() and getWeight() should also be made 'const'.
     cout << "Standard: " << s.getStandard() << "\n"
          << "Roll no: " << s.getRoll() << "\n"
          << "Age: " << s.getAge() << "\n"
