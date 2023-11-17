@@ -1,6 +1,8 @@
 // const keyword in C++ is used to declare constants and to specify that an identifier's value
 // cannot be modified throughout its scope.
 
+// In this module, we will see const with data and pointers.
+
 #include <iostream>
 using namespace std;
 
