@@ -31,16 +31,19 @@ class Student {
             return roll_no;
         }
 
-        int getAge() {
+        int getAge() const {   // this function should be made 'const' because object passed to
+        // printStudentInfo() is 'const'. And getAge() will be called by that object.
             return age;
         }
 
-        float getWeight() {
+        float getWeight() const {   // this function should also be made 'const' because object passed to
+        // printStudentInfo() is 'const'. And getWeight() will be called by that object.
             return *weight;
         }
 };
 
-void printStudentInfo(Student &s) {
+void printStudentInfo(const Student &s) {   // as 's' passed to this function is a 'const',
+// it can call only const methods from class. Thus, getAge() and getWeight() should also be made 'const'.
     cout << "Standard: " << s.getStandard() << "\n"
          << "Roll no: " << s.getRoll() << "\n"
          << "Age: " << s.getAge() << "\n"
