@@ -27,7 +27,6 @@ class Dummy {
             cout << "a = " << a << "\n"
                  << "b = " << b << "\n\n";
         }
-
 };
 
 int main() {
