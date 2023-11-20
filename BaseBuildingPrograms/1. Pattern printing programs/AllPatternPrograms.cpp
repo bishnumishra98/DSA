@@ -13,15 +13,15 @@ int main() {
     for(row=0; row<n; row++) {
         // left half
         for(col=0; col<(row+1); col++) {
-            cout << "*";
+            cout << "* ";
         }
         // mid part
         for(col=0; col<(2*n-2*row-2); col++) {
-            cout << " ";
+            cout << "  ";
         }
         // right half
         for(col=0; col<(row+1); col++) {
-            cout << "*";
+            cout << "* ";
         }
         cout << endl;
     }
@@ -30,15 +30,15 @@ int main() {
     for(row=0; row<n; row++) {
         // left part
         for(col=0; col<(n-row); col++) {
-            cout << "*";
+            cout << "* ";
         }
         // mid part
         for(col=0; col<(2*row); col++) {
-            cout << " ";
+            cout << "  ";
         }
         // right part
         for(col=0; col<(n-row); col++) {
-            cout << "*";
+            cout << "* ";
         }
         cout << endl;
     }
