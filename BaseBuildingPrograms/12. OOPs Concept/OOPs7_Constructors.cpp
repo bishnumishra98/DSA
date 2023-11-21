@@ -80,6 +80,5 @@ int main() {
     delete s2;
     delete s3;
 
-
     return 0;
 }
