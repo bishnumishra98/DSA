@@ -38,10 +38,14 @@ class Student {
             age = s.age;   // or, this->age = s.age;
             weight = s.weight;   // or, this->weight = s.weight;
         }
+        // Note: The above illustration is a shallow copy. Even if the programmer had not defined
+        // this copy constructor, the C++ compiler would have generated a default copy constructor,
+        // which would look exactly the same as above.
+        // The real use of copy constructor is shown in next module when we need to perform deep copy.
 
         // Alternate way of defining a copy constructor, using initializers list:
         // Student(const Student &s) : standard(12), age(s.age), weight(s.weight) {}
-        
+
 
         // -> Purpose of 'const' keyword and 'passing object by reference(&s)' in copy constructor:
 
