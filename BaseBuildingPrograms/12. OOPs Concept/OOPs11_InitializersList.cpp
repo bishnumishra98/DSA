@@ -13,24 +13,27 @@ class Dummy {
     private:
         const int a;   // non-static const data member
         int b;
+        int c;
     public:
-        // Dummy(int x) {
-        //     a = 0;   // constructor cannot initialize 'a' because 'a' is a 'const' data member.
+        // Dummy(int x, int c) {
+        //     a = 5;   // constructor cannot initialize 'a' because 'a' is a 'const' data member.
         //     b = x;
+        //     this->c = c;
         // }
 
         // Instead, we define a initializers list to initialize 'a':
-        Dummy(int x) : a(0), b(x) {}
+        Dummy(int x, int c) : a(5), b(x), c(c) {}   // this pointer is not required in initializer list
 
 
         void showDummy() {
             cout << "a = " << a << "\n"
-                 << "b = " << b << "\n\n";
+                 << "b = " << b << "\n"
+                 << "c = " << c << "\n\n";
         }
 };
 
 int main() {
-    Dummy d1(6);
+    Dummy d1(6, 7);
     d1.showDummy();
 
     return 0;

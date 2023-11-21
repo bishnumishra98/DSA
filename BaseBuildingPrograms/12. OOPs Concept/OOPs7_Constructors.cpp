@@ -4,11 +4,12 @@
 
 // Properties of constructors are:
 // 1) Constructor is an instance member function of class. It can never be static.
-// 2) The name of constructor must be same as class name.
+// 2) The name of constructor must be the same as the class name.
 // 3) It has no return type.
-// 4) Constructors must be placed in section of class.
+// 4) Constructors must be placed in public section of class.
 // 5) If we do not specify a constructor, C++ compiler generates a default constructor for object
-//    which expects no parameter and has an empty body.
+//    which expects no parameter and has an empty body. However, default constructor initializes
+//    instance variables with garbage values. Thus, it is recommended to explicitly define a constructor.   
 
 #include <iostream>
 using namespace std;
