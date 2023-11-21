@@ -28,7 +28,10 @@ class StudentsOfClass12 {
             weight = 60;
         }
         // Note: if the programmer does not explicitly define any constructor in the class, the C++ compiler
-        // generates a default constructor which looks the same as above, but with an empty body. 
+        // generates a default constructor which looks the same as above, but with an empty body.
+        // In this case, the instance variables will be automatically initialized by garbage values, which
+        // means the values they hold depend on whatever data happened to be in that memory location before,
+        // i.e. standard, age and weight would contain garbage values.
 
         // parameterized constructor: initializes the object with specified values.
         StudentsOfClass12(int age, float w) {
