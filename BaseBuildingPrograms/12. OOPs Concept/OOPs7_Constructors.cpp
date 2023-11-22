@@ -9,7 +9,7 @@
 // 4) Constructors must be placed in public section of class.
 // 5) If we do not specify a constructor, C++ compiler generates a default constructor for object
 //    which expects no parameter and has an empty body. However, default constructor initializes
-//    instance variables with garbage values. Thus, it is recommended to explicitly define a constructor.   
+//    instance variables with garbage values. Thus, it is recommended to explicitly define a constructor.
 
 #include <iostream>
 using namespace std;
