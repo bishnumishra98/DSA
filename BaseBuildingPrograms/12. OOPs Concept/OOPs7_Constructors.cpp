@@ -8,8 +8,32 @@
 // 3) It has no return type.
 // 4) Constructors must be placed in public section of class.
 // 5) If we do not specify a constructor, C++ compiler generates a default constructor for object
-//    which expects no parameter and has an empty body. However, default constructor initializes
-//    instance variables with garbage values. Thus, it is recommended to explicitly define a constructor.
+//    which expects no parameter and has an empty body. A default constructor initializes
+//    instance variables with garbage values.
+
+
+// Q) If compiler generates a default constructor automatically for each object, why the
+//    programmer should explicitly define constructors in class ?
+
+// A) While the C++ compiler does generate a default constructor automatically if none is defined,
+//    there are several reasons why a programmer might choose to explicitly define constructors:
+
+//    1) Initialization with Specific Values:
+//       When a programmer defines a constructor, they can provide specific initial values for the
+//       object's member variables. This allows for controlled and meaningful initialization.
+
+//    2) Custom Initialization Logic:
+//       Constructors allow the programmer to include custom logic for initializing the object,
+//       especially if the initialization process is more complex than simple assignments.
+
+//    3) Initialization of Dynamic Resources:
+//       If a class manages dynamic resources (memory, file handles, network connections, etc.),
+//       a custom constructor allows for the allocation and proper initialization of those resources.
+
+//    4) Overloading Constructors:
+//       Overloading constructors allows a class to have multiple ways of being instantiated,
+//       providing flexibility to the programmer when creating objects.
+
 
 #include <iostream>
 using namespace std;

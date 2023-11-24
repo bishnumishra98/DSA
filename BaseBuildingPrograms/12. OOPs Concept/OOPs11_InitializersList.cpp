@@ -2,9 +2,11 @@
 // and it is a feature of the constructor. The list of members to be initialized is indicated
 // with the constructor as a comma-separated list followed by a colon.
 
-// Why initializer lists over regular constructors?
-// Because constructors cannot directly initialize non-static const data members within the body
-// of the constructor. Instead, initializer lists are used for such initialization.
+
+// Q) Why initializer lists over regular constructors?
+
+// A) Because constructors cannot directly initialize non-static const data members within the body
+//    of the constructor. Instead, initializer lists are used for such initialization.
 
 #include <iostream>
 using namespace std;
