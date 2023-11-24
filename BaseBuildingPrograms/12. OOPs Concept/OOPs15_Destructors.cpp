@@ -10,8 +10,8 @@
 // 5) Destructors are called in the reverse order of the constructors. For example, if objects
 //    of classes A, B, and C are created, their destructors are called in the order C, B, A.
 // 6) If we do not specify a destructor, C++ compiler generates a default destructor that is called
-//    automatically(by main function), when an object goes out of scope or when delete is used to
-//    deallocate memory for a dynamically allocated object.
+//    automatically, when an object goes out of scope or when delete is used to deallocate memory
+//    for a dynamically allocated object.
 
 
 // Q) Why to create a destructor if compiler creates default one on its own ?
@@ -27,3 +27,36 @@
 //       The order in which destructors are called matters, especially in complex systems with
 //       multiple objects. If there is a specific order in which resources need to be released,
 //       a programmer can control this order by providing a custom destructor.
+
+
+#include <iostream>
+using namespace std;
+
+class MyClass {
+public:
+    // Constructor
+    MyClass() {
+        cout << "Constructor called" << endl;
+    }
+
+    // Destructor
+    ~MyClass() {
+        cout << "Destructor called" << endl;
+        // All cleanup codes to be written here
+    }
+};
+
+int main() {
+    // The objects goes out of scope at the end of each block &
+    // destructor is automatically called at this point.
+    {
+        MyClass obj1;
+        {
+            MyClass obj2;
+        }   // destructor called here
+    }   // destructor called here
+    MyClass obj3;
+
+    return 0;
+}   // destructor called here
+
