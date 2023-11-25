@@ -1,5 +1,5 @@
 // In C++, the 'friend' keyword is used to declare a class or a function as a friend of
-// another class. When a function or a class is declared as a friend, it is granted access
+// another class. When a class or a function is declared as a friend, it is granted access
 // to the private and protected members of the class that declares it as a friend.
 
 #include <iostream>
