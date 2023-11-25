@@ -21,7 +21,7 @@ class Complex {
             cout << "x=" << x << ", y=" << y << "\n";
         }
 
-        // Giving '+' operator another meaning. Now '+' operator can also add two complex numbers.
+        // Giving another meaning to '+' operator. Now '+' operator can also add two complex numbers.
         // This is a operator overload fuction.
         Complex operator + (const Complex &c) {
             Complex sum;
