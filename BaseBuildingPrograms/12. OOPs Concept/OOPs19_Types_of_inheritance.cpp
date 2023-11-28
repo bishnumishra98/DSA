@@ -105,3 +105,4 @@ using namespace std;
             class E: public B, public D {
                 // code
             };
+

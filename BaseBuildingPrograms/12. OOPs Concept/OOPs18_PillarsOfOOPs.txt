@@ -58,5 +58,3 @@ There are 4 pillars of OOPs:
    In C++, encapsulation is achieved through the use of access specifiers (private, protected, and
    public). Members declared as private are accessible only within the class, while protected members
    are accessible within the class and its subclasses. Public members are accessible from anywhere.
-
-
