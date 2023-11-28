@@ -59,7 +59,7 @@ int main() {
     // Solution 1) By using scope resolution:
     obj.Teacher::walk();   // this means to invoke walk() from Teacher class.
 
-    // Solution 2) By using virtual keyword.
+    // Solution 2) By using virtual classes.
     // Illustration for it is given in next module.
 
     return 0;
