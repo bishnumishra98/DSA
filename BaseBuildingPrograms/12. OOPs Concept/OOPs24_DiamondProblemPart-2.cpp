@@ -60,16 +60,16 @@ int main() {
     // obj.Teacher::walk();   // this means to explicitly invoke walk() from Teacher class.
 
     // Solution 2) By using virtual classes.
-    obj.walk();   // Here, obj.walk() means Person::walk() because the virtual keyword is used for both
-                 // Teacher and Researcher classes during inheritance from Person.
+    obj.walk();   // Here, obj.walk() means Person::walk() because the virtual keyword is used
+                 // for both Teacher and Researcher classes during inheritance from Person.
 
     // How virtual keyword works here?
-    // When there was no virtual keyword, the compiler made two separate copies of Person::walk(), one for
-    // Teacher and the other for Researcher at compile time (also called early binding).
-    // Now, by using virtual inheritance, the compiler ensures that there is only one shared instance of
-    // Person::walk() within the Engineer object at runtime. The virtual table (vtable) is used to resolve
-    // the function call dynamically (also called late binding), allowing Engineer obj to invoke walk() of
-    // the shared Person class directly.
+    // When there was no virtual keyword, the compiler made two separate copies of Person::walk(),
+    // one for Teacher and the other for Researcher at compile time (also called early binding).
+    // Now, by using virtual inheritance, the compiler ensures that there is only one shared
+    // instance of Person::walk() within the Engineer object at runtime. The virtual table (vtable)
+    // is used to resolve the function call dynamically (also called late binding), allowing
+    // Engineer obj to invoke walk() of the shared Person class directly.
 
 
     return 0;

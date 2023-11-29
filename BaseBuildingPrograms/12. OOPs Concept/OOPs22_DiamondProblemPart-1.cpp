@@ -57,8 +57,9 @@ int main() {
     // Diamond problem has two solutions:
 
     // Solution 1) By using scope resolution:
-    obj.Teacher::walk();   // this means to explicitly invoke walk() from Teacher class. We could have even
-                          // invoked walk() from Researcher class. It's totally upto programmer's choice.
+    obj.Teacher::walk();   // this means to explicitly invoke walk() from Teacher class. We could
+                          // have even invoked walk() from Researcher class. It's totally upto
+                         // programmer's choice.
 
     // Solution 2) By using virtual classes.
     // Illustration for it is given in next to next module.
