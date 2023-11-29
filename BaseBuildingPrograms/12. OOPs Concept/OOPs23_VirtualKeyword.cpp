@@ -19,9 +19,13 @@ using namespace std;
 
                          class Derived : public Base {
                          public:
-                            void myFunction() override {
+                            void myFunction() {
                                 // Derived class implementation
                             }
+                            // // (OR)
+                            // void myFunction() override {
+                            //     // Derived class implementation
+                            // }
                          };
 //                       The 'override' keyword is optional but is considered good practice to use
 //                       for clarity and to catch potential errors.
