@@ -6,7 +6,8 @@
 // 1) Constructor is an instance member function of class. It can never be static.
 // 2) The name of constructor must be the same as the class name.
 // 3) It has no return type.
-// 4) Constructors must be placed in public section of class.
+// 4) Constructors must be placed in public section of class. In special cases, constructors can
+//    be kept in private section of class about which we will learn later.
 // 5) If we do not specify a constructor, C++ compiler generates a default constructor for object
 //    which expects no parameter and has an empty body. A default constructor initializes
 //    instance variables with garbage values.
