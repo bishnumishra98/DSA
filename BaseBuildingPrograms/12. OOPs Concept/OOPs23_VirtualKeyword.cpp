@@ -2,9 +2,9 @@
 using namespace std;
 
 // What is virtual in C++ ?
-// In C++, the virtual keyword is used to declare a virtual function or to specify that a function
-// in a base class should be overridden in a derived class. The use of virtual is a key feature of
-// polymorphism in C++. Here are the main uses of virtual:
+// In C++, the virtual keyword is used to declare a virtual class or a function to specify that
+// a function in a base class should be overridden in a derived class. The use of virtual is a key
+// feature of runtime or dynamic polymorphism in C++. Here are the main uses of virtual:
 
 // 1. Virtual Functions: When you declare a member function in a base class as virtual, you indicate
 //                       that this function may be overridden in derived classes. This allows the
@@ -74,12 +74,3 @@ using namespace std;
 //                          The use of virtual is a fundamental aspect of C++ polymorphism,
 //                          allowing for runtime method resolution and enabling more flexible
 //                          and extensible code designs.
-
-
-
-
-
-int main() {
-
-    return 0;
-}

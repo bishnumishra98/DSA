@@ -62,7 +62,7 @@ int main() {
                          // programmer's choice.
 
     // Solution 2) By using virtual classes.
-    // Illustration for it is given in next to next module.
+    // Illustration for it is given in next module.
 
     return 0;
 }
