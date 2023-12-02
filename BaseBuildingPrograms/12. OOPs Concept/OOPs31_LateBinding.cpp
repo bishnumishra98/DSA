@@ -27,9 +27,6 @@ class SportsCar: public Car {
         void f2() {   // method override
             cout << "I am f2 of SportsCar." << endl;
         }
-        // Note: when you perform method overriding without using virtual keyword in base
-        // class function, the binding is resolved at compile-time, which is known as
-        // early binding or static binding.
         void f3() {
             cout << "I am f3 of Sportscar." << endl;
         }
@@ -51,6 +48,8 @@ int main() {
     // p->f3();
     // f3() is early bind with p. So by seeing type of pointer, the compiler tries of find f3()
     // in Car class. And when there is no f3() found, the compiler throws an error. 
+
+
 
 
 

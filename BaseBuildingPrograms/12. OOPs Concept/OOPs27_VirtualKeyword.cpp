@@ -1,6 +1,3 @@
-#include <iostream>
-using namespace std;
-
 // What is virtual in C++ ?
 // In C++, the virtual keyword is used to declare a virtual class or a function to specify that
 // a function in a base class should be overridden in a derived class. The use of virtual is a key
