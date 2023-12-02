@@ -17,7 +17,8 @@ class Car{
         void f1() {
             cout << "I am f1 of Car." << endl;
         }
-        void f2() {
+        virtual void f2() {   // decalred f2() as virtual function. This will enforce
+                             // late binding in method overriding.
             cout << "I am f2 of Car." << endl;
         }
 };
@@ -28,31 +29,32 @@ class SportsCar: public Car {
             cout << "I am f2 of SportsCar." << endl;
         }
         void f3() {
-            cout << "I am f3 of Sportscar." << endl;
+            cout << "I am f3 of SportsCar." << endl;
         }
 };
 
 int main() {
-    SportsCar obj;
     Car *p;   // p is called base class pointer. Base class pointers can point to objects of its
              // descendent classes. However, the viceversa is not true, i.e a descendent
             // class pointer cannot point to its parent.
+    SportsCar obj;
     p = &obj;
 
-    obj.f1();   // 
-    obj.f2();
-    obj.f3();
+    obj.f1();   // I am f1 of Car, as f1() from Car class is inherited in SportsCar class
 
-    p->f1();
-    p->f2();
-    // p->f3();
+    obj.f2();   // I am f2 of SportsCar, obvious because obj is instance of SportsCar class
+
+    obj.f3();   // I am f3 of Sportscar, obvious because obj is instance of SportsCar class
+
+    p->f1();   // I am f1 of Car, as f1() from Car class is inherited in SportsCar class
+
+    p->f2();   // I am f2 of Sportscar, calls f2() of SportsCar as the pointer 'p' contains address
+    // an object of type SportsCar. This happens due to late binding. Late binding is done by
+    // seeing content of pointer, i.e. type of object the pointer points to.
+
+    // p->f3();   // compile-time error
     // f3() is early bind with p. So by seeing type of pointer, the compiler tries of find f3()
-    // in Car class. And when there is no f3() found, the compiler throws an error. 
-
-
-
-
-
+    // in Car class. And when there is no f3() found, the compiler throws an error.
 
     return 0;
 }
