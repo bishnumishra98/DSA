@@ -1,3 +1,5 @@
+// Module: Virtual base classes
+
 // Diamond problem:
 
 //          Person

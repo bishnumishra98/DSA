@@ -1,3 +1,5 @@
+// Module: Virtual functions
+
 // What is early binding (also called Static Binding or Compile-Time Binding) ?
 // -> Early binding occurs at compile time. The compiler determines the appropriate function or
 //    be called during the compilation phase. Early binding is default behavior of compiler.

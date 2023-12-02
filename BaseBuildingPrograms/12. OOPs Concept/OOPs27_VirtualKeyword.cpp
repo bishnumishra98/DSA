@@ -27,28 +27,7 @@
 //                       The 'override' keyword is optional but is considered good practice to use
 //                       for clarity and to catch potential errors.
 
-// 2. Virtual Destructors: When working with polymorphism and dynamic memory allocation, it's
-//                         essential to have a virtual destructor in the base class. This ensures
-//                         that the correct destructor is called for an object when it's deleted
-//                         through a pointer to the base class.
-                            class Base {
-                            public:
-                                virtual ~Base() {
-                                    // Virtual destructor implementation
-                                }
-                            };
-
-                            class Derived : public Base {
-                            public:
-                                ~Derived() override {
-                                    // Derived class destructor implementation
-                                }
-                            };
-//                          Using a virtual destructor is crucial to ensure that the destructors
-//                          of both the base and derived classes are called when deleting an object
-//                          through a base class pointer.
-
-// 3. Virtual Base Classes: In cases where a class is inherited by multiple paths in a hierarchy,
+// 2. Virtual Base Classes: In cases where a class is inherited by multiple paths in a hierarchy,
 //                          using the virtual keyword for inheritance can help prevent issues
 //                          related to the "diamond problem." It ensures that only one instance
 //                          of the base class is present in the derived class.
@@ -71,3 +50,24 @@
 //                          The use of virtual is a fundamental aspect of C++ polymorphism,
 //                          allowing for runtime method resolution and enabling more flexible
 //                          and extensible code designs.
+
+// 3. Virtual Destructors: When working with polymorphism and dynamic memory allocation, it's
+//                         essential to have a virtual destructor in the base class. This ensures
+//                         that the correct destructor is called for an object when it's deleted
+//                         through a pointer to the base class.
+                            class Base {
+                            public:
+                                virtual ~Base() {
+                                    // Virtual destructor implementation
+                                }
+                            };
+
+                            class Derived : public Base {
+                            public:
+                                ~Derived() override {
+                                    // Derived class destructor implementation
+                                }
+                            };
+//                          Using a virtual destructor is crucial to ensure that the destructors
+//                          of both the base and derived classes are called when deleting an object
+//                          through a base class pointer.
