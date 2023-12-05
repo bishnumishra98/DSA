@@ -1,5 +1,6 @@
 // Module: Virtual destructor
 
+
 // Q) Are virtual constructors possible ?
 // Answer: No
 // Explanation:

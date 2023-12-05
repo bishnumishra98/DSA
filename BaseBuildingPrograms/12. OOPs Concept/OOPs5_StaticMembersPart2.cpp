@@ -3,8 +3,6 @@
 // 2) static member variables
 // 3) static member functions
 
-// Below is the illustration for static member variables:
-
 // Properties of static member variables:
 
 // 1) By default initialized to 0, and scope throughout the program.
@@ -19,6 +17,8 @@
 
 // 4) There is only one copy of the variable for the entire class. Therefore, changing the value
 //    of 'weight' for one instance (e.g., for Jeet) will affect all instances of the class.
+
+// Below is the illustration for static member variables:
 
 #include <iostream>
 using namespace std;

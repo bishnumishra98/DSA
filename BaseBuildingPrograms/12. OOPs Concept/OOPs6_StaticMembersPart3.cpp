@@ -3,15 +3,15 @@
 // 2) static member variables
 // 3) static member functions
 
-// Below is the illustration for static member variables:
-
-// Properties of static member variables:
+// Properties of static member function:
 
 // 1) Declared inside class body, and can or cannot be defined outside the class.
 
 // 2) Can be invoked with or without an object
 
 // 3) Static functions can access only static members(e.g., weight) of class.
+
+// Below is the illustration for static member function:
 
 #include <iostream>
 using namespace std;
@@ -32,6 +32,7 @@ class Student {
             this->age = age;
         }
 
+        // static member function
         static void setWeight(float w) {
             weight = w;
         }
