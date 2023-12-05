@@ -66,5 +66,3 @@ int main() {
 //    instance of the class. When a virtual function is declared in a class, it is meant to
 //    be overridden by derived classes. But static member functions do not participate in
 //    polymorphic behavior like virtual functions do. Therefore, they cannot be static.
-
-
