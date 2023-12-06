@@ -10,7 +10,7 @@
 // -> When a virtual function is called through a base class pointer or reference, the program
 //    uses the vptr to access the correct vtable associated with the actual object's type.
 // -> Based on the vtable, the correct function is invoked by referencing the array of
-//    function pointers present in the vtable.
+//    function pointers present in the vtable at runtime.
 
 
 #include <iostream>
