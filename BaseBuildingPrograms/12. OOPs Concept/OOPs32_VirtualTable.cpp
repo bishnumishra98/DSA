@@ -40,11 +40,11 @@ public:
 };
 
 int main() {
-    // memory allocation in stack
+    // Allocating memory for the object 'circle' in stack. It is pointed by 'shapePtr'.
     // Circle circle;
     // Shape* shapePtr = &circle;
 
-    // memory allocation in heap
+    // allocating memory for the object of type 'Circle class' in heap. It is pointed by 'shapePtr'.
     Shape* shapePtr = new Circle();
 
     // Late binding through virtual function
@@ -57,7 +57,12 @@ int main() {
     shapePtr->enlarge();   // o/p: Enlarge the shape.
 
     return 0;
+
+    // Note: When we have a pointer to a class instance, like Shape* shapePtr, we
+    //       use '->' to call member functions. Writing 'shapePtr->method()' is
+    //       equivalent to write '(*shapePtr).method()'.
 }
+
 
 // Q) Can virtual functions be static?
 // A) No, virtual functions cannot be static in C++. This is because virtual functions
