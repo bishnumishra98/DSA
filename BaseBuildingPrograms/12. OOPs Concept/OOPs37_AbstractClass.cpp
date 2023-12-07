@@ -69,3 +69,4 @@ int main() {
 // Answer: Abtract classes contains pure virtual functions that ensures that derived classes provide
 //         specific implementations for those functions, enforcing a common interface across all
 //         derived classes. This helps in achieving polymorphism(runtime) and code organization.
+
