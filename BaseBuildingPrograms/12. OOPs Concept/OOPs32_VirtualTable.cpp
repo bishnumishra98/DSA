@@ -4,7 +4,7 @@
 // -> The compiler generates a static array called vtable (virtual table) for each class,
 //    and this array consists of function pointers. It's important to note that the vtable is
 //    created per class, not per object. Objects of the same class points to the same vtable,
-//    using a hidden pointer member variable called *_vptr.
+//    using a hidden pointer member variable called *_vptr (virtul pointer).
 // -> Each object has its own vptr, which points to the vtable of the type of object, i.e.
 //    class of object.
 // -> When a virtual function is called through a base class pointer or reference, the program
