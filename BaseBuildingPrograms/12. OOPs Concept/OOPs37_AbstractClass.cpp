@@ -25,7 +25,7 @@ class Shape {
 };
 
 // Derived class Circle
-class Circle : public Shape {
+class Circle: public Shape {
     public:
         virtual void draw() override {
             cout << "Drawing a circle." << endl;
@@ -33,7 +33,7 @@ class Circle : public Shape {
 };
 
 // Derived class Square
-class Square : public Shape {
+class Square: public Shape {
     public:
         virtual void draw() override {
             cout << "Drawing a square." << endl;
@@ -69,4 +69,3 @@ int main() {
 // Answer: Abtract classes contains pure virtual functions that ensures that derived classes provide
 //         specific implementations for those functions, enforcing a common interface across all
 //         derived classes. This helps in achieving polymorphism(runtime) and code organization.
-
