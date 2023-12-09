@@ -21,7 +21,7 @@ void printLLDetails(Node* head) {
     Node* temp = head;
     while(temp != NULL) {
         cout << "Node_address: " << temp << "\n";
-        cout << "Data: " << temp->data << "\n";
+        cout << "Node_Data: " << temp->data << "\n";
         cout << "Next_Node_address: " << temp->next << "\n";
         cout << endl;
         temp = temp->next;
