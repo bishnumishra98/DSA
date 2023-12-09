@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
+// interface for singly linked list
 class Node {
-    private:
+    public:
         int data;
         Node* next;
-    public:
         Node() {
             this->next = NULL;
         }
@@ -24,7 +24,7 @@ int main() {
     Node* fifth = new Node(10);
 
     // creating linked list by joining all nodes
-    
+    first->next = second;
 
     return 0;
 }

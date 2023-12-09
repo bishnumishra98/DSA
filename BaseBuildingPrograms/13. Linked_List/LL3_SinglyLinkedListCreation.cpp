@@ -3,10 +3,10 @@ using namespace std;
 
 // interface or blueprint for singly linked list
 class Node {
-    private:
+    public:
         int data;    // this linked list will be able to store only integer values
         Node* next;   // 'next' pointer will point to next Node
-    public:
+        
         // default constructor
         Node() {
             cout << "I am inside default ctor." << endl;
