@@ -2,3 +2,12 @@
 // 1) Before head of linked list
 // 2) After tail of linked list
 // 3) In between the linked list
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    
+
+    return 0;
+}

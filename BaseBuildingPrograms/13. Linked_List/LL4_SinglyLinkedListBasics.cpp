@@ -18,6 +18,7 @@ class Node {
 // function for printing details of linked list
 void printLLDetails(Node* head) {
     // It a good practice to always make a copy of head before doing any operation with linked list
+    // where we will need to traverse head Node.
     Node* temp = head;
     while(temp != NULL) {
         cout << "Node_address: " << temp << "\n";
