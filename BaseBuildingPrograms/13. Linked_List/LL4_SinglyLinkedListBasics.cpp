@@ -22,10 +22,29 @@ void printLLDetails(Node* head) {
     while(temp != NULL) {
         cout << "Node_address: " << temp << "\n";
         cout << "Node_Data: " << temp->data << "\n";
-        cout << "Next_Node_address: " << temp->next << "\n";
-        cout << endl;
+        cout << "Next_Node_address: " << temp->next << "\n\n";
+        temp = temp->next;   // removing 'temp' from this Node and pointing to next Node
+    }
+}
+
+// function to print elements of linked list
+void printElements(Node* head) {
+    Node* temp = head;
+    while(temp != NULL) {
+        cout << temp->data << " ";
         temp = temp->next;
     }
+}
+
+// function to find length of linked list, i.e. no.of nodes
+int lengthLL(Node* head) {
+    Node* temp = head;
+    int len = 0;
+    while(temp != NULL) {
+        len++;
+        temp = temp->next;
+    }
+    return len;
 }
 
 int main() {
@@ -47,8 +66,16 @@ int main() {
 
     // printing the details of linked list
     Node* head = first;
-    cout << "Details of linked list are:\n\n";
+
+    cout << "Details of linked list are:\n";
     printLLDetails(head);
+
+    cout << "Elements of linked list are:\n";
+    printElements(head);
+    cout << "\n\n";
+
+    cout << "Length of linked list: " << lengthLL(head);
+    cout << "\n\n";
 
     return 0;
 }
