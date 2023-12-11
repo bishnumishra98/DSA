@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// interface for singly linked list
+// interface of Node for singly linked list
 class Node {
     public:
         int data;

@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// interface or blueprint for singly linked list
+// interface or blueprint of Node for singly linked list
 class Node {
     public:
         int data;    // this linked list will be able to store only integer values
