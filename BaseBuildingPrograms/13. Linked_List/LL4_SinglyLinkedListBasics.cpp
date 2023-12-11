@@ -80,3 +80,30 @@ int main() {
 
     return 0;
 }
+
+// o/p:
+// Details of linked list are:
+// Node_address: 0x11abf20      
+// Node_Data: 2
+// Next_Node_address: 0x11abf30 
+
+// Node_address: 0x11abf30      
+// Node_Data: 4
+// Next_Node_address: 0x11abf40 
+
+// Node_address: 0x11abf40      
+// Node_Data: 6
+// Next_Node_address: 0x11abf50 
+
+// Node_address: 0x11abf50      
+// Node_Data: 8
+// Next_Node_address: 0x11abf60 
+
+// Node_address: 0x11abf60      
+// Node_Data: 10
+// Next_Node_address: 0
+
+// Elements of linked list are: 
+// 2 4 6 8 10
+
+// Length of linked list: 5
