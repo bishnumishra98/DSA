@@ -138,3 +138,7 @@ int main() {
     return 0;
 }
 
+// o/p:
+// Destructor called for the Node: 6 
+// 2 4 8 10
+
