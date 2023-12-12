@@ -135,13 +135,5 @@ int main() {
 
     printElements(head);
 
-
-    // Free memory occupied by the nodes
-    delete first;
-    delete second;
-    delete third;
-    delete fourth;
-    delete fifth;
-
     return 0;
 }
