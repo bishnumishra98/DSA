@@ -58,7 +58,8 @@ int lengthLL(Node* head) {
 
 // function to find tail of linked list. This function returns address of tail Node of linked list.
 Node* findTail(Node* head) {
-    if(head == NULL) {   // if linked list is empty, i.e. there are no nodes
+    if(head == NULL) {   // if linked list is empty, i.e. there are no nodes, then tail will
+                        // also point to NULL.
         return NULL;
     }
     Node* temp = head;
