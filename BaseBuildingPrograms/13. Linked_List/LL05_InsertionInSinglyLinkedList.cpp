@@ -108,7 +108,7 @@ void insertAtTail(Node* &head, int data) {   // Note = Always pass head/tail by 
 void insertAtPosition(Node* &head, int data, int position) {
     if(position <= 1) {   // inserting at a position at or before head
         insertAtHead(head, data);
-    } else if(position >= lengthLL(head)+1) {   // inserting at a position beyond tail
+    } else if(position > lengthLL(head)) {   // inserting at a position beyond tail
         insertAtTail(head, data);
     } else {   // inserting at a position (head < position <= tail)
         // create a new node

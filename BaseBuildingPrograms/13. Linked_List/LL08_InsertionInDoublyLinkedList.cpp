@@ -73,13 +73,21 @@ void insertAtHead(Node* &head, int data) {
 
 // INSERTION OF NODE AT TAIL
 void insertAtTail(Node* &head, int data) {
-    Node* tail = findTail(head);
     if(head == NULL) {   // if linked list is empty
         Node* newNode = new Node(data);
         head = newNode;
     } else {   // if linked list is not empty
-        
+        Node* tail = findTail(head);
+        Node* newNode = new Node(data);
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
     }
+}
+
+// INSERTION OF NODE AT A PARTICULAR POSITION IN THE LINKED LIST (POSITION START FROM 1)
+void insertAtPosition(Node* &head, int data, int position) {
+    
 }
 
 
@@ -88,6 +96,7 @@ int main() {
 
     insertAtHead(head, 2);
     insertAtHead(head, 4);
+    insertAtTail(head, 6);
 
     printElements(head);
 
