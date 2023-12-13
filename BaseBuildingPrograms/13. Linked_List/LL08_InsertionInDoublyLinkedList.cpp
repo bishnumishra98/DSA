@@ -102,7 +102,20 @@ void insertAtPosition(Node* &head, int data, int position) {
     } else if(position > lengthLL(head)) {
         insertAtTail(head, data);
     } else {
+        Node* newNode = new Node(data);
+        Node* prev = NULL;
+        Node* curr = head;
 
+        int pos = position - 1;
+        while(pos--) {
+            prev = curr;
+            curr = curr->next;
+        }
+
+        prev->next = newNode;
+        newNode->prev = prev;
+        newNode->next = curr;
+        curr->prev = newNode;
     }
 }
 
@@ -113,8 +126,13 @@ int main() {
     insertAtHead(head, 2);
     insertAtHead(head, 4);
     insertAtTail(head, 6);
+    insertAtPosition(head, 8, 3);
 
     printElements(head);
 
     return 0;
 }
+
+// o/p:
+// 4 2 8 6
+
