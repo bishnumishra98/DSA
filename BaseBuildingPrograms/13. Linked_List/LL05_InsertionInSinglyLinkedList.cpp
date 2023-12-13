@@ -71,28 +71,30 @@ Node* findTail(Node* head) {
 
 // INSERTION OF NODE AT HEAD
 void insertAtHead(Node* &head, int data) {   // Note = Always pass head/tail by reference while insertion
-    // create new node
-    Node* newNode = new Node(data);
-    // attach new node to head node
-    newNode->next = head;
-    // Update head address
-    head = newNode;
+    if(head == NULL) {   // if linked list is empty, i.e. there are no nodes in linked list
+        // create new node
+        Node* newNode = new Node(data);
+        // Update head pointer
+        head = newNode;
+    } else {
+        // create new node
+        Node* newNode = new Node(data);
+        // attach new node to head node
+        newNode->next = head;
+        // Update head address
+        head = newNode;
+    }
 }
 
 // INSERTION OF NODE AT TAIL
 void insertAtTail(Node* &head, int data) {   // Note = Always pass head/tail by reference while insertion
-    Node* tail = findTail(head);   // This function returns address of tail Node of linked list.
-    // If linked list has no nodes, i.e. head points to NULL, then this function also returns NULL,
-    // and eventually tail also points to NULL.
-
-    if(tail == NULL) {   // if linked list is empty, i.e. there are no nodes in linked list
+    if(head == NULL) {   // if linked list is empty, i.e. there are no nodes in linked list
         // create new node
         Node* newNode = new Node(data);
-        // 1 new Node is created in in the above line. Thus, it is first node of linked list.
-        // Therefore, head should point to this first node, in order to let the above created node be
-        // the first node for this empty linked list.
+        // Update head pointer
         head = newNode;
     } else {   // non-empty linked list
+        Node* tail = findTail(head);
         // create new node
         Node* newNode = new Node(data);
         // attach tail to newNode
