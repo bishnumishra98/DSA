@@ -12,12 +12,12 @@
 // 3) In between the linked list, i.e. at a particular position(let positions start from 1):
 //      Step 1: Create a newNode
 //      Step 2: Initialize two nodes named 'currNode' and 'prevNode' with NULL and head respectively.
-//      Step 3: Move forward the 'currNode' and 'prevNode' pointers in such way that 'prevNode' node is
-//              just behind the 'currNode' node, uptil the 'currNode' node reaches the position where
-//              newNode is to be inserted. For example, if a newNode is to be inserted at
+//      Step 3: Move forward the 'currNode' and 'prevNode' pointers in such way that 'prevNode' node
+//              is just behind the 'currNode' node, uptil the 'currNode' node reaches the position
+//              where newNode is to be inserted. For example, if a newNode is to be inserted at
 //              position 3, then 'currNode' should be pointing at the 3rd node, while 'prevNode'
 //              should be pointing at the 2nd node of the linked list, respectively.
-//      Step 4: Attach prevNode node to newNode, i.e. prevNode->next = NewNode
+//      Step 4: Attach prevNode to newNode, i.e. prevNode->next = NewNode
 //      Step 5: Attach prev of newNode to prevNode, i.e. newNode->prev = prevNode
 //      Step 5: Attach newNode to currNode node, i.e. newNode->next = currNode
 //      Step 6: Attach prev of currNode to NewNode, i.e. currNode->prev = newNode 

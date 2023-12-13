@@ -11,16 +11,18 @@
 //      Step 3: Unlink prev of tail from prevNode of linked list, i.e tail->prev = NULL
 //      Step 4: Delete tail node, i.e. delete tail
 // 3) In between the linked list, i.e. at a particular position(let positions start from 1):
-//      Step 1: Initialize two nodes named 'prevNode' and 'currNode' with NULL and head respectively.
-//      Step 2: Move forward the 'prevNode' and 'currNode' pointers in such a way that 'prevNode' node
-//              is just behind the 'currNode' node, uptil the 'currNode' node reaches the position where
-//              deletion is to be performed. For example, if 3rd Node is to be deleted, then the
-//              'currNode' pointer should be pointing at the 3rd node, while 'prevNode' should be
-//              pointing at 2nd node of the linked list, respectively.
-//      Step 3: Attach prevNode to the node present just next of currNode,
-//              i.e. prevNode->next = currNode->next
-//      Step 4: Unlink currNode from linked list, i.e. currNode->next = NULL
-//      Step 5: Delete currNode node, i.e. delete currNode
+//      Step 1: Initialize a node named 'currNode' with head.
+//      Step 2: Move forward the 'currNode' pointer in such a way that the 'currNode' node reaches
+//              the position where deletion is to be performed. For example, if 3rd Node is to be
+//              deleted, then the 'currNode' pointer should be pointing at the 3rd node of the
+//              linked list.
+//      Step 3: Initialize a new node named 'prevNode' as prev of currNode,
+//              i.e. Node* prevNode = currNode->prev
+//              Similarly, Initialize one more new node named 'nextNode' as next of currNode,
+//              i.e. Node* nextNode = currNode->next
+//      Step 4: Repoint prevNode to nextNode, i.e. prevNode->next = nextNode,
+//              and point prev of nextNode to preNode, i.e. nextNode->prev = prevNode
+//      Step 5: Unlink currNode from linked list, i.e. currNode->prev = NULL, currNode->next = NULL
 
 #include <iostream>
 using namespace std;
@@ -104,15 +106,20 @@ void deleteAtPosition(Node* &head, int position) {
             delete tail;
         } else {
             // deletion in between the linked list
-            Node* prevNode = NULL;
             Node* currNode = head;
             int pos = position - 1;
             while(pos--) {
-                prevNode = currNode;
                 currNode = currNode->next;
             }
-            prevNode->next = currNode->next;
+            Node* prevNode = currNode->prev;
+            Node* nextNode = currNode->next;
+
+            prevNode->next = nextNode;   // or, prevNode->next = currNode->next;
+            nextNode->prev = prevNode;   // or, nextNode->prev = currNode->prev;
+            
+            currNode->prev = NULL;
             currNode->next = NULL;
+            
             delete currNode;
         }
     }
@@ -132,6 +139,11 @@ int main() {
     third->next = fourth;
     fourth->next = fifth;
 
+    second->prev = first;
+    third->prev = second;
+    fourth->prev = third;
+    fifth->prev = fourth;
+
     Node* head = first;
 
     deleteAtPosition(head, 3);
@@ -142,6 +154,5 @@ int main() {
 }
 
 // o/p:
-// Destructor called for the Node: 6 
+// Destructor called for the Node: 6
 // 2 4 8 10
-
