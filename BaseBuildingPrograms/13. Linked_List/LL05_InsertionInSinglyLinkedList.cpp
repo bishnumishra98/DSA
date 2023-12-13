@@ -13,9 +13,9 @@
 //      Step 2: Initialize two nodes named 'curr' and 'prev' with NULL and head respectively.
 //      Step 3: Move forward the 'curr' and 'prev' pointers in such way that 'prev' node is
 //              just behind the 'curr' node, uptil the 'curr' node reaches the position where
-//              newNode is to be inserted. For example, if a newNode is to be inserted at position 3,
-//              then 'curr' should be pointing at the 3rd node, while 'prev' should be pointing
-//              at the 2nd node of the linked list, respectively.
+//              newNode is to be inserted. For example, if a newNode is to be inserted at
+//              position 3, then 'curr' should be pointing at the 3rd node, while 'prev'
+//              should be pointing at the 2nd node of the linked list, respectively.
 //      Step 4: Attach 'prev' node to newNode, i.e. prev->next = newNode
 //      Step 5: Attach newNode to 'cuurent' node, i.e. newNode->next = curr
 

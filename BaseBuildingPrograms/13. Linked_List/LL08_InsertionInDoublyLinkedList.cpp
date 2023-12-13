@@ -10,7 +10,17 @@
 //      Step 3: Attach prev of newNode to tail, i.e. newNode->prev = tail
 //      Step 4: Update tail pointer, i.e. tail = newNode
 // 3) In between the linked list, i.e. at a particular position(let positions start from 1):
-//
+//      Step 1: Create a newNode
+//      Step 2: Initialize two nodes named 'curr' and 'prev' with NULL and head respectively.
+//      Step 3: Move forward the 'curr' and 'prev' pointers in such way that 'prev' node is
+//              just behind the 'curr' node, uptil the 'curr' node reaches the position where
+//              newNode is to be inserted. For example, if a newNode is to be inserted at
+//              position 3, then 'curr' should be pointing at the 3rd node, while 'prev'
+//              should be pointing at the 2nd node of the linked list, respectively.
+//      Step 4: Attach prev node to newNode, i.e. prev->next = NewNode
+//      Step 5: Attach prev of newNode to prev node, i.e. newNode->prev = prev
+//      Step 5: Attach newNode to curr node, i.e. newNode->next = curr
+//      Step 6: Attach prev of curr to NewNode, i.e. curr->prev = newNode 
 
 #include <iostream>
 using namespace std;
@@ -87,7 +97,13 @@ void insertAtTail(Node* &head, int data) {
 
 // INSERTION OF NODE AT A PARTICULAR POSITION IN THE LINKED LIST (POSITION START FROM 1)
 void insertAtPosition(Node* &head, int data, int position) {
-    
+    if(position <= 1) {
+        insertAtHead(head, data);
+    } else if(position > lengthLL(head)) {
+        insertAtTail(head, data);
+    } else {
+
+    }
 }
 
 
