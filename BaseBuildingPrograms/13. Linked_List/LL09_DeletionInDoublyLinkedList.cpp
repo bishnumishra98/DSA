@@ -2,40 +2,45 @@
 // 1) At head of linked list:
 //      Step 1: Create a temporary node, i.e. Node* temp = head
 //      Step 2: Make the node just next to head, as the new head node, i.e. head = head->next
-//      Step 3: Unlink temp node from linked list, i.e. temp->next = NULL
-//      Step 4: Delete temp node, i.e. delete temp
+//      Step 3: Unlink temp from linked list, i.e. temp->next = NULL
+//      Step 4: Unlink head from temp, i.e. head->prev = NULL
+//      Step 5: Delete temp node, i.e. delete temp
 // 2) At tail of linked list:
-//      Step 1: Initialize 'prevNode' node head
-//      Step 2: Traverse till 2nd last node and point it from 'prevNode' pointer
-//      Step 3: Unlink prevNode node from tail of linked list, i.e. prevNode->next = NULL
+//      Step 1: Find tail and mark its previous node by prevNode, i.e. Node* prevNode = tail->prev
+//      Step 2: Unlink prevNode from tail of linked list, i.e. prevNode->next = NULL
+//      Step 3: Unlink prev of tail from prevNode of linked list, i.e tail->prev = NULL
 //      Step 4: Delete tail node, i.e. delete tail
 // 3) In between the linked list, i.e. at a particular position(let positions start from 1):
-//      Step 1: Initialize two nodes named 'currNode' and 'prevNode' with NULL and head respectively.
-//      Step 2: Move forward the 'currNode' and 'prevNode' pointers in such way that 'prevNode' node is
-//              just behind the 'currNode' node, uptil the 'currNode' node reaches the position where
+//      Step 1: Initialize two nodes named 'prevNode' and 'currNode' with NULL and head respectively.
+//      Step 2: Move forward the 'prevNode' and 'currNode' pointers in such a way that 'prevNode' node
+//              is just behind the 'currNode' node, uptil the 'currNode' node reaches the position where
 //              deletion is to be performed. For example, if 3rd Node is to be deleted, then the
 //              'currNode' pointer should be pointing at the 3rd node, while 'prevNode' should be
 //              pointing at 2nd node of the linked list, respectively.
-//      Step 3: Attach prevNode to the node present just next of currNode, i.e. prevNode->next = currNode->next
+//      Step 3: Attach prevNode to the node present just next of currNode,
+//              i.e. prevNode->next = currNode->next
 //      Step 4: Unlink currNode from linked list, i.e. currNode->next = NULL
 //      Step 5: Delete currNode node, i.e. delete currNode
 
 #include <iostream>
 using namespace std;
 
-// interface of Node for singly linked list
+// interface of Node for doubly linked list
 class Node {
     public:
         int data;
+        Node* prev;
         Node* next;
         // Constructors
-        Node() : next(NULL) {}
-        Node(int data) : data(data), next(NULL) {}
+        Node() : prev(NULL), next(NULL) {}
+        Node(int data) : data(data), prev(NULL), next(NULL) {}
 
         // Destructor
         ~Node() {
             cout << "Destructor called for the Node: " << this->data << endl;
+            delete prev;   // releasing dynamically allocated memory
             delete next;   // releasing dynamically allocated memory
+            prev = NULL;   // setting prev to NULL to avoid potential issues
             next = NULL;   // setting next to NULL to avoid potential issues
         }
 };
@@ -88,16 +93,14 @@ void deleteAtPosition(Node* &head, int position) {
             Node* temp = head;
             head = head->next;
             temp->next = NULL;
+            head->prev = NULL;
             delete temp;
         } else if(position == lengthLL(head)) {
             // deletion at tail
             Node* tail = findTail(head);
-            Node* prevNode = head;
-            int pos = position - 2;
-            while(pos--) {
-                prevNode = prevNode->next;
-            }
+            Node* prevNode = tail->prev;
             prevNode->next = NULL;
+            tail->prev = NULL;
             delete tail;
         } else {
             // deletion in between the linked list

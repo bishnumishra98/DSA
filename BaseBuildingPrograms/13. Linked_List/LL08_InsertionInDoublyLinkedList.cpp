@@ -11,16 +11,16 @@
 //      Step 4: Update tail pointer, i.e. tail = newNode
 // 3) In between the linked list, i.e. at a particular position(let positions start from 1):
 //      Step 1: Create a newNode
-//      Step 2: Initialize two nodes named 'curr' and 'prev' with NULL and head respectively.
-//      Step 3: Move forward the 'curr' and 'prev' pointers in such way that 'prev' node is
-//              just behind the 'curr' node, uptil the 'curr' node reaches the position where
+//      Step 2: Initialize two nodes named 'currNode' and 'prevNode' with NULL and head respectively.
+//      Step 3: Move forward the 'currNode' and 'prevNode' pointers in such way that 'prevNode' node is
+//              just behind the 'currNode' node, uptil the 'currNode' node reaches the position where
 //              newNode is to be inserted. For example, if a newNode is to be inserted at
-//              position 3, then 'curr' should be pointing at the 3rd node, while 'prev'
+//              position 3, then 'currNode' should be pointing at the 3rd node, while 'prevNode'
 //              should be pointing at the 2nd node of the linked list, respectively.
-//      Step 4: Attach prev node to newNode, i.e. prev->next = NewNode
-//      Step 5: Attach prev of newNode to prev node, i.e. newNode->prev = prev
-//      Step 5: Attach newNode to curr node, i.e. newNode->next = curr
-//      Step 6: Attach prev of curr to NewNode, i.e. curr->prev = newNode 
+//      Step 4: Attach prevNode node to newNode, i.e. prevNode->next = NewNode
+//      Step 5: Attach prev of newNode to prevNode, i.e. newNode->prev = prevNode
+//      Step 5: Attach newNode to currNode node, i.e. newNode->next = currNode
+//      Step 6: Attach prev of currNode to NewNode, i.e. currNode->prev = newNode 
 
 #include <iostream>
 using namespace std;
@@ -103,22 +103,21 @@ void insertAtPosition(Node* &head, int data, int position) {
         insertAtTail(head, data);
     } else {
         Node* newNode = new Node(data);
-        Node* prev = NULL;
-        Node* curr = head;
+        Node* prevNode = NULL;
+        Node* currNode = head;
 
         int pos = position - 1;
         while(pos--) {
-            prev = curr;
-            curr = curr->next;
+            prevNode = currNode;
+            currNode = currNode->next;
         }
 
-        prev->next = newNode;
-        newNode->prev = prev;
-        newNode->next = curr;
-        curr->prev = newNode;
+        prevNode->next = newNode;
+        newNode->prev = prevNode;
+        newNode->next = currNode;
+        currNode->prev = newNode;
     }
 }
-
 
 int main() {
     Node* head = NULL;

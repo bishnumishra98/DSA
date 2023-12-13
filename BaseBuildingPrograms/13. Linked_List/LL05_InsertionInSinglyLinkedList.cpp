@@ -10,14 +10,14 @@
 //      Step 4: Update tail address i.e. tail = newNode
 // 3) In between the linked list, i.e. at a particular position(let positions start from 1):
 //      Step 1: Create a new node
-//      Step 2: Initialize two nodes named 'curr' and 'prev' with NULL and head respectively.
-//      Step 3: Move forward the 'curr' and 'prev' pointers in such way that 'prev' node is
-//              just behind the 'curr' node, uptil the 'curr' node reaches the position where
+//      Step 2: Initialize two nodes named 'prevNode' and 'currNode' with NULL and head respectively.
+//      Step 3: Move forward the 'prevNode' and 'currNode' pointers in such way that 'prevNode' node is
+//              just behind the 'currNode' node, uptil the 'currNode' node reaches the position where
 //              newNode is to be inserted. For example, if a newNode is to be inserted at
-//              position 3, then 'curr' should be pointing at the 3rd node, while 'prev'
+//              position 3, then 'currNode' should be pointing at the 3rd node, while 'prevNode'
 //              should be pointing at the 2nd node of the linked list, respectively.
-//      Step 4: Attach 'prev' node to newNode, i.e. prev->next = newNode
-//      Step 5: Attach newNode to 'cuurent' node, i.e. newNode->next = curr
+//      Step 4: Attach 'prevNode' node to newNode, i.e. prevNode->next = newNode
+//      Step 5: Attach newNode to 'cuurent' node, i.e. newNode->next = currNode
 
 #include <iostream>
 using namespace std;
@@ -114,20 +114,20 @@ void insertAtPosition(Node* &head, int data, int position) {
         // create a new node
         Node* newNode = new Node(data);
 
-        // create 2 nodes named 'prev' and 'curr'. The newNode will be inserted in between
-        // the 'prev' and 'curr' node.
-        Node* prev = NULL;
-        Node* curr = head;
+        // create 2 nodes named 'prevNode' and 'currNode'. The newNode will be inserted in between
+        // the 'prevNode' and 'currNode' node.
+        Node* prevNode = NULL;
+        Node* currNode = head;
 
         int pos = position - 1;   // we did 'pos = position-1', because if we didn't do this, the
         // newNode was getting insert at 'position+1' position in the linked list.
         while(pos--) {
-            prev = curr;
-            curr = curr->next;
+            prevNode = currNode;
+            currNode = currNode->next;
         }
 
-        prev->next = newNode;
-        newNode->next = curr;
+        prevNode->next = newNode;
+        newNode->next = currNode;
     }
 }
 
