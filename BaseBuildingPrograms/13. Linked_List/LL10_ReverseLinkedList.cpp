@@ -30,7 +30,10 @@ void printElements(Node* head) {
     }
 }
 
-void reverseLinkedList(Node* &head) {
+// Reverse linked list using iterative approach
+// T.C: O(n)
+// S.C: O(1)
+void reverseLinkedList_Iterative(Node* &head) {
     Node* prevNode = NULL;
     Node* currNode = head;
     
@@ -45,6 +48,31 @@ void reverseLinkedList(Node* &head) {
     // loop ends when currNode points to NULL. At that point, prevNode will point to last element of
     // linked list. Thus, we will repoint head pointer on that node, i.e. on prevNode.
     head = prevNode;
+}
+
+// recursive function
+Node* reverse_by_recursion(Node* &prevNode, Node* &currNode) {
+    if(currNode == NULL) {
+        return prevNode;   // We know head lies on prevNode of a reversed linked list.
+                          // Thus, returning prevNode.
+    }
+
+    Node* nextNode = currNode->next;
+    currNode->next = prevNode;
+    prevNode = currNode;
+    currNode = nextNode;
+
+    reverse_by_recursion(prevNode, currNode);
+}
+
+// Reverse linked list using recursive approach
+// T.C: O(n)
+// S.C: O(n)
+void reverseLinkedList_Recursive(Node* &head) {
+    Node* prevNode = NULL;
+    Node* currNode = head;
+
+    head = reverse_by_recursion(prevNode, currNode);
 }
 
 int main() {
@@ -63,11 +91,14 @@ int main() {
 
     Node* head = first;
 
+    cout << "Original linked list:\n";
     printElements(head);
-    cout << "\nReversed linked list is:\n";
-    reverseLinkedList(head);
+    cout << "\nReversed linked list:\n";
+    reverseLinkedList_Iterative(head);
+    printElements(head);
+    cout << "\nReversed linked list:\n";
+    reverseLinkedList_Recursive(head);
     printElements(head);
 
     return 0;
 }
-
