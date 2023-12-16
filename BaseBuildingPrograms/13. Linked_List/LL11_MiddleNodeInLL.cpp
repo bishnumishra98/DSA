@@ -43,6 +43,8 @@ int lengthLL(Node* head) {
 }
 
 // Brute force
+// T.C: O(n)
+// S.C: O(1)
 Node* findMid_bruteForce(Node* head) {
     int len = lengthLL(head);
 
@@ -59,6 +61,8 @@ Node* findMid_bruteForce(Node* head) {
 }
 
 // Slow & fast pointer approach(Slow pointer moves 1 step ahead, only if fast pointer moves 2 step ahead)
+// T.C: O(n/2)
+// S.C: O(1)
 Node* findMid_twoPointer(Node* head) {
     Node* slow = head;
     Node* fast = head;
