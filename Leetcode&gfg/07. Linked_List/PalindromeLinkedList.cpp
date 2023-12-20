@@ -1,3 +1,14 @@
+// Leetcode: 234. Palindrome Linked List   --->   Given the head of a singly linked list, return true
+// if it is a palindrome or false otherwise.
+
+// Example 1:
+// Input: head = [1,2,2,1]
+// Output: true
+
+// Example 2:
+// Input: head = [1,2]
+// Output: false
+
 #include <iostream>
 using namespace std;
 
@@ -29,7 +40,7 @@ public:
         return slow;
     }
 
-    void reverseList(ListNode* &head) {
+    ListNode* reverseList(ListNode* head) {
         ListNode* prevNode = NULL;
         ListNode* currNode = head;
 
@@ -40,6 +51,26 @@ public:
             currNode = nextNode;
         }
         head = prevNode;
+        return head;
+    }
+
+    bool compareLists(ListNode* head, ListNode* head2) {
+        while(head2 != NULL) {   // head2 will always be shorter than(odd length ll) or
+                                // equal(even length ll) to head, thus head2 will reach NULL before
+                               // or in the same iteration with head. Thus, comparing the two
+                              // linked lists with only 'head2 != NULL' in while condition is sufficient.
+            if(head->val != head2->val) {
+                // if values don't match, its not a palindrome. Thus, we return false.
+                return false;
+            } else {
+                // if values matches, move one step ahead.
+                head = head->next;
+                head2 = head2->next;
+            }
+        }
+        // we reach here only if while loop completed its lifecycle, which means all values of 
+        // the two linked lists were matching. Thus, its a palindrome and we return true.
+        return true;
     }
 
     // leetcode given function
@@ -50,15 +81,11 @@ public:
         midNode->next = NULL;
 
         // reversing the new linked list
-        reverseList(head2);
+        head2 = reverseList(head2);
 
-        while(head2 != NULL) {
-            if(head->val != head2->val) {
-                return false;
-            }
-        }
-
-        return true; 
+        // comparing both linked lists
+        bool ans = compareLists(head, head2);
+        return ans;
     }
 };
 
@@ -74,7 +101,8 @@ int main() {
     bool ans;
     ans = obj.isPalindrome(head);
 
-    cout << "Ans: " << ans << endl;
+    cout << ans << endl;
 
     return 0;
 }
+
