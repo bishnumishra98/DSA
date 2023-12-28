@@ -2,9 +2,10 @@
 
 // -> How to find starting node of cycle ?
 // -> There is an algorithm to find starting node of cycle in LL:
-//    1) Use tortoise and hare algorithm to find if a cycle exists in LL.
-//    2) Leave the fast pointer at the node where slow and head met, and repoint slow point on head of LL.
-//    3) Then move slow and fast pointer by one step, and they will meet on the starting node of LL.
+//    Step 1) Use tortoise and hare algorithm to find if a cycle exists in LL.
+//    Step 2) Repoint any one of the pointers to head of LL, for instance repoint slow pointer on head.
+//    Step 3) Then move slow and fast pointer by one step respectively until they meet. The point where
+//            they meet is the starting node of LL.
 //    The mathematical proof of this algorithm is illustrated in LL13b.
 
 #include <iostream>
@@ -25,35 +26,58 @@ class Node {
         }
 };
 
-// T.C:
-// S.C:
+// T.C: O(n)
+// S.C: O(1)
 Node* startingNodeOfCycle(Node* head) {
-    // tortoise and hare algorithm
+    // Step 1) tortoise and hare algorithm
     Node* fast = head;
     Node* slow = head;
 
-    
+    while(fast != NULL && fast->next != NULL) {
+        fast = fast->next->next;
+        slow = slow->next;
+        if(fast == slow) {   // if 'fast==slow', it means cycle exists in LL
+            break;
+        }
+    }
 
+    // Step 2) Now the repoint slow pointer on head
+    slow = head;
+
+    // Step 3) Moving slow and fast pointer by one step respectively until they meet
+    while(slow != fast) {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    return slow;
 }
 
 int main() {
-    // Create a sample linked list: 1 -> 2 -> 3 -> 4 -> 5
-    Node* head = new Node(1);
-    Node* node2 = new Node(2);
-    Node* node3 = new Node(3);
-    Node* node4 = new Node(2);
-    Node* node5 = new Node(3);
+    // Creating a sample linked list
+    Node* head = new Node(10);
+    Node* node2 = new Node(20);
+    Node* node3 = new Node(30);
+    Node* node4 = new Node(40);
+    Node* node5 = new Node(50);
+    Node* node6 = new Node(60);
+    Node* node7 = new Node(70);
+    Node* node8 = new Node(80);
 
     head->next = node2;
     node2->next = node3;
     node3->next = node4;
     node4->next = node5;
-    node5->next = node3;   // node5 points to node3, making a cycle
+    node5->next = node6;
+    node6->next = node7;
+    node7->next = node8;
+    node8->next = node3;
 
     Node* ans = startingNodeOfCycle(head);
-    cout << "Starting node: " << ans->data;
+    cout << "Starting node of cycle: " << ans->data;   // Starting node of cycle: 30
     
     return 0;
 }
+
 
 
