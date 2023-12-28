@@ -41,6 +41,8 @@ bool hasCycle_map(Node *head) {
 }
 
 // finding cycles using two pointers / tortoise and hare algorithm / Floyd's cycle-finding algorithm
+// T.C: O(n)
+// S.C: O(1)
 bool hasCycle_twoPointer(Node* head) {
     Node* slow = head;
     Node* fast = head;
