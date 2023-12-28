@@ -44,8 +44,8 @@ bool hasCycle_map(Node *head) {
 // T.C: O(n)
 // S.C: O(1)
 bool hasCycle_twoPointer(Node* head) {
-    Node* slow = head;
     Node* fast = head;
+    Node* slow = head;
     
     while(fast != NULL && fast->next != NULL) {
         fast = fast->next->next;

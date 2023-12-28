@@ -64,9 +64,9 @@ Node* findMid_bruteForce(Node* head) {
 // T.C: O(n/2)
 // S.C: O(1)
 Node* findMid_twoPointer(Node* head) {
-    Node* slow = head;
     Node* fast = head;
-
+    Node* slow = head;
+    
     while(fast != NULL && fast->next != NULL) {
         fast = fast->next->next;
         slow = slow->next;
