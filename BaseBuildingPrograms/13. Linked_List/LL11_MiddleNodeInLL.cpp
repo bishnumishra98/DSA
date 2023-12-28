@@ -67,14 +67,9 @@ Node* findMid_twoPointer(Node* head) {
     Node* slow = head;
     Node* fast = head;
 
-    while(fast != NULL) {
-        // fast = fast->next->next;   // never do this because fast->next will be NULL at a point.
-        // At that point, i.e. it would mean NULL->next, which is an error.
-        fast = fast->next;
-        if(fast != NULL) {
-            fast = fast->next;
-            slow = slow->next;
-        }
+    while(fast != NULL && fast->next != NULL) {
+        fast = fast->next->next;
+        slow = slow->next;
     }
 
     return slow;
