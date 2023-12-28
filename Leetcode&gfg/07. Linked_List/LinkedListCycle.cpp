@@ -34,21 +34,17 @@ class Solution {
 public:
     // leetcode given function
     bool hasCycle(ListNode *head) {
-        map<ListNode*, bool> table;   // by default bool value is initialized with false in a map
-
-        ListNode* temp = head;
-        while(temp != NULL) {
-            if(table[temp] == false) {   // if table[temp] is false, this Node is unvisited before.
-            // Thus we will mark this Node as visited, by marking true.
-                table[temp] = true;
-            } else {
-                // if table[temp] is true, this Node is visited before, which signifies a cycle.
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+        while(fast != NULL && fast->next != NULL) {
+            fast = fast->next->next;
+            slow = slow->next;
+            if(fast == slow) {
+                // if cycle is present in LL, fast and slow pointers will certainly meet at a certain point.
                 return true;
             }
-            temp = temp->next;
         }
-        // if loop ends, it means complete linked list was traversed without any cycles.
-        // Thus, we return false signifying that linked list contains no cycles.
         return false;
     }
 };
