@@ -59,7 +59,7 @@ bool hasCycle_twoPointer(Node* head) {
 }
 
 int main() {
-    // Create a sample linked list: 1 -> 2 -> 3 -> 4 -> 5
+    // Create a sample linked list: 1 -> 2 -> 3 -> 2 -> 3
     Node* head = new Node(1);
     Node* node2 = new Node(2);
     Node* node3 = new Node(3);

@@ -50,7 +50,7 @@ public:
 };
 
 int main() {
-    // Create a sample linked list: 1 -> 2 -> 3 -> 4 -> 5
+    // Create a sample linked list: 1 -> 2 -> 3 -> 2 -> 3
     ListNode* head = new ListNode(1);
     ListNode* node2 = new ListNode(2);
     ListNode* node3 = new ListNode(3);
