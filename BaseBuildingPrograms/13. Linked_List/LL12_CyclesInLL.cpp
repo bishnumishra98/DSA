@@ -70,8 +70,8 @@ int main() {
     node4->next = node5;
     node5->next = node3;   // node5 points to node3, making a cycle
 
+    // cout << hasCycle_map(head);
     cout << hasCycle_twoPointer(head);
     
-
     return 0;
 }
