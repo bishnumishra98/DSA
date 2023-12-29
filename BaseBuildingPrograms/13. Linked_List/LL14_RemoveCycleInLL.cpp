@@ -6,7 +6,6 @@
 //    Step 2) Repoint node present just before the starting node of cycle to NULL.
 
 #include <iostream>
-#include <map>
 using namespace std;
 
 // interface of Node for singly linked list

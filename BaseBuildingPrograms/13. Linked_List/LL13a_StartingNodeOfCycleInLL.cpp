@@ -9,7 +9,6 @@
 //    The mathematical proof of this algorithm is illustrated in LL13b.
 
 #include <iostream>
-#include <map>
 using namespace std;
 
 // interface of Node for singly linked list
