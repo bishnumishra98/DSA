@@ -33,12 +33,22 @@ Node* startingNodeOfCycle(Node* head) {
     Node* fast = head;
     Node* slow = head;
 
-    while(fast != NULL && fast->next != NULL) {
-        fast = fast->next->next;
-        slow = slow->next;
+    // Don't use while(fast != NULL && fast->next != NULL) here. Instead write this condition
+    // in two parts(while & if). This will help in returning something if LL had no cycles.
+    while(fast != NULL) {
+        fast = fast->next;
+        if(fast != NULL) {
+            fast = fast->next;
+            slow = slow->next;
+        }
         if(fast == slow) {   // if 'fast==slow', it means cycle exists in LL
             break;
         }
+    }
+
+    // Its an extra step we added for better program. If no cycle is present in LL, return NULL.
+    if(fast == NULL) {
+        return NULL;
     }
 
     // Step 2) Now the repoint slow pointer on head
