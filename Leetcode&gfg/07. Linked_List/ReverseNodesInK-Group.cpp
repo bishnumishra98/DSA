@@ -23,13 +23,59 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-// leetcode given function
-// T.C: 
-// S.C: 
 class Solution {
 public:
+    // function to reverse a LL
+    void reverseLL(ListNode* &head) {
+        ListNode* prevNode = NULL;
+        ListNode* currNode = head;
+
+        while(currNode != NULL) {
+            ListNode* nextNode = currNode->next;
+            currNode->next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
+        }
+        head = prevNode;
+    }
+
+    // function returns kth node(first index starts from 1), or NULL if nodes in LL are less than k 
+    ListNode* getKthNode(ListNode* temp, int k) {
+        k -= 1;
+        while(temp!=NULL && k>0) {
+            temp = temp->next;
+            k--;
+        }
+        return temp;
+    }
+    
+    // leetcode given function
+    // T.C: O(n)
+    // S.C: O(1)
     ListNode* reverseKGroup(ListNode* head, int k) {
-        
+        ListNode* temp = head;
+        ListNode* prevNode = NULL;
+        while(temp != NULL) {
+            ListNode* kThNode = getKthNode(temp, k);
+            if(kThNode == NULL) {
+                if(prevNode) {
+                    prevNode->next = temp;
+                    break;
+                }
+            }
+            ListNode* nextNode = kThNode->next;
+            kThNode->next = NULL;
+            reverseLL(temp);
+            if(temp == head) {
+                head = kThNode;
+            } else {
+                prevNode->next = kThNode;
+            }
+            prevNode = temp;
+            temp = nextNode;
+        }
+
+        return head;
     }
 };
 
@@ -50,12 +96,14 @@ int main() {
     head->next->next->next = new ListNode(4);
     head->next->next->next->next = new ListNode(5);
 
+    printLL(head);
+    cout << "\n";
+
     int k = 2;
     Solution obj;
     ListNode* ans = obj.reverseKGroup(head, k);
 
-    printLL(head);
+    printLL(ans);
 
     return 0;
 }
-

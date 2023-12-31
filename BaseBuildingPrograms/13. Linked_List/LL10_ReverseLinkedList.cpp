@@ -30,17 +30,15 @@ void printElements(Node* head) {
     }
 }
 
-// Reverse linked list using iterative approach
+// Reverse linked list in place using iterative approach
 // T.C: O(n)
 // S.C: O(1)
-void reverseLinkedList_Iterative(Node* &head) {
+void reverseLinkedList_Iterative_inPlace(Node* &head) {   // passing '&head' is mandatory
     Node* prevNode = NULL;
     Node* currNode = head;
     
     while(currNode != NULL) {
-        Node* nextNode = currNode->next;   // If we loose track of next node of currNode, we will
-        // not be able to move currNode pointer to next position in the linked list. Thus, next node
-        // of currNode is stored temporarily in nextNode pointer.
+        Node* nextNode = currNode->next;
         currNode->next = prevNode;
         prevNode = currNode;
         currNode = nextNode;
@@ -48,6 +46,22 @@ void reverseLinkedList_Iterative(Node* &head) {
     // loop ends when currNode points to NULL. At that point, prevNode will point to last element of
     // linked list. Thus, we will repoint head pointer on that node, i.e. on prevNode.
     head = prevNode;
+}
+
+// Return reversed linked list using iterative approach
+// T.C: O(n)
+// S.C: O(1)
+Node* reverseLinkedList_Iterative_returnLL(Node* head) {   // 'head' or '&head' doesn't matter
+    Node* prevNode = NULL;
+    Node* currNode = head;
+
+    while(currNode != NULL) {
+        Node* nextNode = currNode->next;
+        currNode->next = prevNode;
+        prevNode = currNode;
+        currNode = nextNode;
+    }
+    return prevNode;
 }
 
 // recursive function
@@ -65,10 +79,10 @@ Node* reverse_by_recursion(Node* &prevNode, Node* &currNode) {
     reverse_by_recursion(prevNode, currNode);
 }
 
-// Reverse linked list using recursive approach
+// Reverse linked list using recursive approach (in-place)
 // T.C: O(n)
 // S.C: O(n)
-void reverseLinkedList_Recursive(Node* &head) {
+void reverseLinkedList_Recursive(Node* &head) {   // passing '&head' is mandatory
     Node* prevNode = NULL;
     Node* currNode = head;
 
@@ -93,12 +107,18 @@ int main() {
 
     cout << "Original linked list:\n";
     printElements(head);
-    cout << "\nReversed linked list:\n";
-    reverseLinkedList_Iterative(head);
+
+    cout << "\nReversed LL by iteration(in-place):\n";
+    reverseLinkedList_Iterative_inPlace(head);
     printElements(head);
-    cout << "\nReversed linked list:\n";
+
+    cout << "\nReversed linked list by recursion(in-place):\n";
     reverseLinkedList_Recursive(head);
     printElements(head);
+
+    cout << "\nReturned reversed linked list by iteration:\n";
+    Node* ans = reverseLinkedList_Iterative_returnLL(head);    
+    printElements(ans);
 
     return 0;
 }
