@@ -26,7 +26,7 @@ struct ListNode {
 class Solution {
 public:
     // function to reverse a LL
-    void reverseLL(ListNode* &head) {
+    ListNode* reverseLL(ListNode* head) {
         ListNode* prevNode = NULL;
         ListNode* currNode = head;
 
@@ -36,7 +36,7 @@ public:
             prevNode = currNode;
             currNode = nextNode;
         }
-        head = prevNode;
+        return prevNode;
     }
 
     // function returns kth node(first index starts from 1), or NULL if nodes in LL are less than k 

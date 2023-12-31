@@ -55,8 +55,7 @@ Node* reverseLL(Node* head) {
         prevNode = currNode;
         currNode = nextNode;
     }
-    head = prevNode;
-    return head;
+    return prevNode;
 }
 
 // T.C: O(n)
