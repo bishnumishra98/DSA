@@ -25,12 +25,10 @@ struct ListNode {
 
 class Solution {
 public:
-    // function to reverse a LL
-    ListNode* reverseLL(ListNode* head) {
+    ListNode* reverseLL(ListNode* head, int k) {
         ListNode* prevNode = NULL;
         ListNode* currNode = head;
-
-        while(currNode != NULL) {
+        while(k--) {
             ListNode* nextNode = currNode->next;
             currNode->next = prevNode;
             prevNode = currNode;
@@ -39,43 +37,36 @@ public:
         return prevNode;
     }
 
-    // function returns kth node(first index starts from 1), or NULL if nodes in LL are less than k 
-    ListNode* getKthNode(ListNode* temp, int k) {
-        k -= 1;
-        while(temp!=NULL && k>0) {
-            temp = temp->next;
-            k--;
-        }
-        return temp;
-    }
-    
     // leetcode given function
     // T.C: O(n)
     // S.C: O(1)
+    // In each recursive call, a constant amount of space is used for variables such as pointers
+    // (prev, current, nextNode, reversedHead) and the function call stack. However, the maximum depth
+    // of the recursion is limited by the size of the linked list, and the space used at each level is
+    // constant. Therefore, the overall space complexity is O(1) despite the use of recursion.
     ListNode* reverseKGroup(ListNode* head, int k) {
+        int count = 0;   // By using the count variable, the code ensures that it only attempts
+        // to reverse a group of nodes when there are at least k nodes available.
         ListNode* temp = head;
-        ListNode* prevNode = NULL;
-        while(temp != NULL) {
-            ListNode* kThNode = getKthNode(temp, k);
-            if(kThNode == NULL) {
-                if(prevNode) {
-                    prevNode->next = temp;
-                    break;
-                }
-            }
-            ListNode* nextNode = kThNode->next;
-            kThNode->next = NULL;
-            reverseLL(temp);
-            if(temp == head) {
-                head = kThNode;
-            } else {
-                prevNode->next = kThNode;
-            }
-            prevNode = temp;
-            temp = nextNode;
+
+        // Count the number of nodes in the list
+        while(temp!=NULL && count<k) {
+            temp = temp->next;
+            count++;
         }
 
-        return head;
+        // Base case, i.e., if the number of nodes is less than k, no need to reverse
+        if(count < k) {
+            return head;
+        }
+
+        // Reverse the first k nodes
+        ListNode* reversedHead = reverseLL(head, k);
+
+        // Recursively reverse the rest of the nodes
+        head->next = reverseKGroup(temp, k);
+
+        return reversedHead;
     }
 };
 
