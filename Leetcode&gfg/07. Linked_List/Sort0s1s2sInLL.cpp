@@ -21,9 +21,51 @@ struct Node {
 
 class Solution {
     public:
+    // T.C: O(n)
+    // S.C: O(1)
     //Function to sort a linked list of 0s, 1s and 2s.
     Node* segregate(Node *head) {
+        // if no or only 1 node exists in LL, return head simply
+        if(head == NULL || head->next == NULL) {
+            return head;
+        }
+        Node* temp = head;
+        Node* dummy0 = new Node(-1);
+        Node* dummy1 = new Node(-1);
+        Node* dummy2 = new Node(-1);
 
+        Node* zero = dummy0;
+        Node* one = dummy1;
+        Node* two = dummy2;
+
+        // Traversing the original LL and segregate nodes based on their data value
+        while(temp != NULL) {
+            if(temp->data == 0) {
+                zero->next = temp;
+                zero = zero->next;   // or, zero = temp;
+            } else if(temp->data == 1) {
+                one->next = temp;
+                one = one->next;   // or, one = temp;
+            } else {
+                two->next = temp;
+                two = two->next;   // or, two = temp;
+            }
+            temp = temp->next;
+        }
+
+        // Connecting the three dummy nodes to form a LL
+        zero->next = dummy1->next ? dummy1->next : dummy2->next;
+        one->next = dummy2->next;
+        two->next = NULL;
+
+        Node* newHead = dummy0->next;
+
+        // Deleting the pointers to avoid memory leaks
+        delete dummy0;
+        delete dummy1;
+        delete dummy2;
+
+        return newHead;
     }
 };
 
@@ -37,12 +79,13 @@ void printLL(Node* head) {
 }
 
 int main() {
-    // Create a sample linked list: 1 -> 2 -> 3 -> 4 -> 5
+    // Create a sample linked list: 1 -> 2 -> 2 -> 0 -> 0 -> 1
     Node* head = new Node(1);
     head->next = new Node(2);
-    head->next->next = new Node(3);
-    head->next->next->next = new Node(4);
-    head->next->next->next->next = new Node(5);
+    head->next->next = new Node(2);
+    head->next->next->next = new Node(0);
+    head->next->next->next->next = new Node(0);
+    head->next->next->next->next->next = new Node(1);
 
     printLL(head);
     cout << "\n";
