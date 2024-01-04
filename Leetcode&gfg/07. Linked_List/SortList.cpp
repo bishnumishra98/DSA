@@ -22,8 +22,8 @@ struct ListNode {
 
 class Solution {
 public:
-    // T.C:
-    // S.C:
+    // T.C: 
+    // S.C: 
     ListNode* sortList(ListNode* head) {
         
     }

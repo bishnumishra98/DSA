@@ -1,3 +1,5 @@
+// Note: This problem was already solved in 'BaseBuildingPrograms\13. Linked_List\LL16a_Sort0s1s2sInLL.cpp'.
+
 // gfg: Given a linked list of 0s, 1s and 2s, sort it   --->   Given a linked list of N nodes where
 // nodes can contain values 0s, 1s, and 2s only. The task is to segregate 0s, 1s, and 2s linked list
 // such that all zeros segregate to head side, 2s at the end of the linked list, and 1s in the mid of
