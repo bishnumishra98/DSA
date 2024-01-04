@@ -23,7 +23,7 @@ struct ListNode {
 class Solution {
 public:
     // T.C:
-    // S.C: 
+    // S.C:
     ListNode* sortList(ListNode* head) {
         
     }

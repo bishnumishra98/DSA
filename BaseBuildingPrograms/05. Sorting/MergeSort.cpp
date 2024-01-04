@@ -74,10 +74,10 @@ void mergeSort(int *arr, int start, int end) {
     int mid = start + (end - start) / 2;   // or, (start+end)/2
 
     // Divide
-    // dividing left part of array until base case is reached, i.e. only 1 element is left in array
+    // dividing left part of array until base case is reached, i.e., only 1 element is left in array
     mergeSort(arr, start, mid);
 
-    // dividing right part of array until base case is reached, i.e. only 1 element is left in array
+    // dividing right part of array until base case is reached, i.e., only 1 element is left in array
     mergeSort(arr, mid+1, end);
 
     // Conquer
