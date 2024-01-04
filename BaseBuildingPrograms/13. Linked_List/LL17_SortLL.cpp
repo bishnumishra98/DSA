@@ -44,7 +44,7 @@ Node* sortList_naiveApproach(Node* head) {   // brute force approach is also cal
 // T.C: O(nlogn)
 // S.C: O(1)
 Node* sortList_bestApproach(Node* head) {
-    
+
 }
 
 // function to print elements of linked list

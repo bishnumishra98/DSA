@@ -1,18 +1,5 @@
-// Merge sort is a popular comparison-based sorting algorithm that follows the divide-and-conquer
-// paradigm to sort a list or array of elements. Here's how merge sort works on a high level:
-
-// 1) Break the array into two equal halves. Let the array from index 0 to 'mid' be called left array,
-//    and array from 'mid+1' to 'end' be called right array respectively.
-
-// 2) Apply recursion on each of the two parts of the array to break it further into the same two halves.
-//    This recursion will continue until we get an array of 1 element. This happens inside mergeSort() function.
-
-// 3) Merge the sorted sub-arrays to produce a single sorted array. This is done by comparing elements from
-//    the two sub-arrays and merging them in the correct order. This happens inside merge() function.
-
-// For better illustration how this algorithm works, check out 'MergeSort.jpg'
-
 #include <iostream>
+#include <vector>
 using namespace std;
 
 // merge() gets an array(which has two sorted subarrays), then it hypothetically divides that array
@@ -62,25 +49,16 @@ void merge(int *arr, int start, int mid, int end) {
 }
 
 // T.C: O(nlogn);   where n = size of 'arr'
-// S.C: O(n)
+// S.C: O(1)
 void mergeSort(int *arr, int start, int end) {
-    // base case
     if(start >= end) {   // if 'start>end', it means an invalid array, and if
                         // 'start==end', only 1 element is left in sub-array
         return;
     }
+    int mid = start + (end - start) / 2;
 
-    int mid = start + (end - start) / 2;   // or, (start+end)/2
-
-    // Divide
-    // dividing left part of array until base case is reached, i.e., only 1 element is left in array
     mergeSort(arr, start, mid);
-
-    // dividing right part of array until base case is reached, i.e., only 1 element is left in array
     mergeSort(arr, mid+1, end);
-
-    // Conquer
-    // merging 2 sorted arrays
     merge(arr, start, mid, end);
 }
 
