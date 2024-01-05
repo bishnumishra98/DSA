@@ -1,3 +1,5 @@
+// This problem is already solved in 'BaseBuildingPrograms\13. Linked_List\LL17a_SortLL.cpp'.
+
 // Leetcode: 148. Sort List   --->   Given the head of a linked list, return the list after sorting it.
 
 // Example 1:
@@ -22,8 +24,8 @@ struct ListNode {
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
+    // T.C: O(nlogn)
+    // S.C: O(1)
     ListNode* sortList(ListNode* head) {
         
     }
