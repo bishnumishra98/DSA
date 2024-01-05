@@ -24,10 +24,52 @@ struct ListNode {
 
 class Solution {
 public:
+    ListNode* findMid(ListNode* head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while(fast->next != NULL && fast->next->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+
+    ListNode* mergeSortedList(ListNode* p1, ListNode* p2) {
+        ListNode* ans = new ListNode(0);
+        ListNode* temp = ans;
+
+        while(p1 != NULL && p2 != NULL) {
+            if(p1->val < p2->val) {
+                temp->next = p1;
+                p1 = p1->next;
+            } else {
+                temp->next = p2;
+                p2 = p2->next;
+            }
+            temp = temp->next;
+        }
+
+        if(p1 != NULL || p2 != NULL) {
+            temp->next = (p1 != NULL) ? p1 : p2;
+        }
+
+        return ans->next;
+    }
+
     // T.C: O(nlogn)
     // S.C: O(1)
     ListNode* sortList(ListNode* head) {
-        
+        if(head == NULL || head->next == NULL) {
+            return head;
+        }
+        ListNode* mid = findMid(head);
+        ListNode* head2 = mid->next;
+        mid->next = NULL;
+
+        ListNode* left_half = sortList(head);
+        ListNode* right_half = sortList(head2);
+        return mergeSortedList(left_half, right_half);
     }
 };
 
@@ -41,12 +83,12 @@ void printLL(ListNode* head) {
 }
 
 int main() {
-    // Create a sample linked list: -1 -> 5 -> 3 -> 4 -> 0
-    ListNode* head = new ListNode(-1);
-    head->next = new ListNode(5);
-    head->next->next = new ListNode(3);
-    head->next->next->next = new ListNode(4);
-    head->next->next->next->next = new ListNode(0);
+    // Create a sample linked list
+    ListNode* head = new ListNode(4);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(1);
+    head->next->next->next = new ListNode(3);
+    //head->next->next->next->next = new ListNode(0);
 
     printLL(head);
     cout << "\n";
