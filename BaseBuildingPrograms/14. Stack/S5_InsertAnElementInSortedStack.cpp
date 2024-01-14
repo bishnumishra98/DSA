@@ -10,33 +10,25 @@ void printStack(stack<int> s) {
     cout << endl;
 }
 
-void solve(stack<int> &s, int X) {
-    // base case
-    if(s.top() < X) {
-        s.push(X);
-        return;
-    }
-
-    int temp = s.top();
-    s.pop();
-
-    // recursive call
-    solve(s, X);
-
-    // backtracking to reconstruct the original stack
-    s.push(temp);
-}
-
 // T.C: 
 // S.C: 
 void insertElementInSortedStack(stack<int> &s, int X) {
-    // If stack is empty, push the element directly into the stack
-    if(s.empty()) {
+    // Base case
+    // If stack is empty, push the element directly into the stack. Or if X is greater than
+    // the top element of stack, push X into stack.
+    if(s.empty() || X > s.top()) {
         s.push(X);
         return;
     }
     
-    solve(s, X);
+    int temp = s.top();
+    s.pop();
+
+    // recursive call
+    insertElementInSortedStack(s, X);
+
+    // backtracking to reconstruct the original stack
+    s.push(temp);
 }
 
 int main() {
