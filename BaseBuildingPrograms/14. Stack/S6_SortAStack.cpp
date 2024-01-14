@@ -10,8 +10,8 @@ void printStack(stack<int> s) {
     cout << endl;
 }
 
-// T.C: O(n)
-// S.C: O(n)
+// T.C: 
+// S.C: 
 void insertElementInSortedStack(stack<int> &s, int X) {
     // Base case
     // If stack is empty, push the element directly into the stack. Or if X is greater than
@@ -31,17 +31,21 @@ void insertElementInSortedStack(stack<int> &s, int X) {
     s.push(temp);
 }
 
+void sortStack(stack<int> s) {
+    
+}
+
 int main() {
     stack <int> s;
-    s.push(10);
-    s.push(20);
-    s.push(30);
-    s.push(40);
     s.push(50);
+    s.push(20);
+    s.push(40);
+    s.push(10);
+    s.push(30);
 
     printStack(s);
 
-    insertElementInSortedStack(s, 25);
+    sortStack(s, 25);
 
     printStack(s);
 
