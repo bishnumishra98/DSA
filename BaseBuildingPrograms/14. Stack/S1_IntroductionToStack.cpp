@@ -15,12 +15,13 @@ int main() {
     st.push(20);
     cout << "Size: " << st.size() << endl;   // 2
     cout << "Top element: " << st.top() << endl;   // 20
-    cout << "Stack empty status: " << st.empty() << endl;   // 0
+    cout << "Stack empty status: " << st.empty() << endl << endl;   // 0
+
     cout << "Popping 1 element from stack" << endl;
     st.pop();
     cout << "Size: " << st.size() << endl;   // 1
     cout << "Top element: " << st.top() << endl;   // 10
-    cout << "Stack empty status: " << st.empty() << endl;   // 0
+    cout << "Stack empty status: " << st.empty() << endl << endl;   // 0
 
     cout << "Popping 1 more element from stack" << endl;
     st.pop();
