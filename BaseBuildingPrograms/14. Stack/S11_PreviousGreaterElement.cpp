@@ -29,7 +29,7 @@ using namespace std;
 
 // T.C: O(n)
 // S.C: O(n)
-vector<int> nextLargerElement(int* arr, int size) {
+vector<int> nextGreaterElement(int* arr, int size) {
     vector <int> ans(size);
     stack <int> st;
     st.push(-1);
@@ -67,7 +67,7 @@ int main() {
     int arr[4] = {1, 3, 2, 4};
     int size = 4;
 
-    vector <int> ans = nextLargerElement(arr, size);
+    vector <int> ans = nextGreaterElement(arr, size);
 
     for(auto i: ans) {
         cout << i << " ";

@@ -1,5 +1,5 @@
 // There may be a variant of question asked for the problems(S8 - S11), that we just solved; and
-// that is you are asked to return special array but considering that original is circular.
+// that is you are asked to return special array, considering original array as circular.
 
 // Let us take for example the problem 'NextGreaterElement':
 
