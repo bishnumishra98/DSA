@@ -30,7 +30,7 @@ using namespace std;
 
 // T.C: O(n)
 // S.C: O(n)
-vector<int> nextLargerElement(int* arr, int size){
+vector<int> nextLargerElement(int* arr, int size) {
     vector <int> ans(size);
     stack <int> st;
     st.push(-1);
