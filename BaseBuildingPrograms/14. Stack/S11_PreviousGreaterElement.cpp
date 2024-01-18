@@ -34,7 +34,7 @@ vector<int> nextLargerElement(int* arr, int size){
     stack <int> st;
     st.push(-1);
 
-    // traversing array from right to left
+    // traversing array from left to right
     for(int i=0; i<size; i++) {   // *ONLY THIS LINE IS CHANGED, REST ALL CODE IS SAME*
         int currElement = arr[i];
 
