@@ -1,3 +1,5 @@
+// This problem is an extension of 'NextSmallerElement'.
+
 // Given an array of positive integers, return a special array of same size containing previous
 // smaller element.
 
