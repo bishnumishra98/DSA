@@ -31,6 +31,8 @@ using namespace std;
 
 class Solution {
 public:
+    // T.C:
+    // S.C: 
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         
     }

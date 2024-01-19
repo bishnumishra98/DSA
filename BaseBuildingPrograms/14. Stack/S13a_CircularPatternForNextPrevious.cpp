@@ -20,7 +20,8 @@
 // Indexes(i):      0  1  2  3  4
 
 // ImaginaryArray:  6  8  0  1  3  6  8  0  1  3
-// Indexes(i%n):    0  1  2  3  4  0  1  2  3  4
+// Indexes(i):      0  1  2  3  4  5  6  7  8  9
+// [i%n]:           0  1  2  4  4  0  1  2  4  4
 
 #include <iostream>
 #include <vector>
@@ -44,7 +45,8 @@ vector<int> nextGreaterElement_circularArray(int* arr, int n) {
         }
 
         // storing top element of stack in ans
-        if(i<n) {   // ADDITION 1
+        if(i<n) {   // ADDITION 1 (this condition is necessary as we want
+        // only elements from the original array to be an element of 'ans')
             if(!st.empty())
                 ans[i] = st.top();
             else
