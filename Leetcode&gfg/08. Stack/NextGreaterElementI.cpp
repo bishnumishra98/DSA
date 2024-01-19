@@ -31,8 +31,9 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C:
-    // S.C: 
+    // T.C: O(n2 + n1*n2);  note that time complexity is dominated by the nested loop in the
+    //                      second part of the code, and it can be optimized further using hashmap.
+    // S.C: O(n2 + n1)
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         int n2 = nums2.size();
         vector <int> ans(n2);
@@ -86,4 +87,41 @@ int main() {
     }
 
     return 0;
+}
+
+
+// More optimized solution using hashmap:
+#include <unordered_map>
+// T.C: O(n1 + n2)
+// S.C: O(n2)
+vector<int> nextGreaterElement_hashmap(vector<int>& nums1, vector<int>& nums2) {
+    int n2 = nums2.size();
+    vector<int> ans(n2);
+    stack<int> st;
+    unordered_map<int, int> nextGreater;
+
+    // Calculate next greater element for each element in nums2
+    for (int i = n2 - 1; i >= 0; i--) {
+        int currElement = nums2[i];
+
+        while (!st.empty() && currElement >= nums2[st.top()]) {
+            st.pop();
+        }
+
+        if (!st.empty()) {
+            nextGreater[nums2[i]] = nums2[st.top()];
+        } else {
+            nextGreater[nums2[i]] = -1;
+        }
+
+        st.push(i);
+    }
+
+    // Populate the result for nums1 using the hashmap
+    vector<int> result;
+    for (int num : nums1) {
+        result.push_back(nextGreater[num]);
+    }
+
+    return result;
 }
