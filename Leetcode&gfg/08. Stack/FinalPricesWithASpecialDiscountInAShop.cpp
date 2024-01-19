@@ -27,13 +27,56 @@
 // Input: prices = [10,1,1,6]
 // Output: [9,0,1,6]
 
+// This problem is story version of 'BaseBuildingPrograms\14. Stack\S8_NextSmallerElement.cpp'.
+
 #include <iostream>
+#include <vector>
 #include <stack>
 using namespace std;
 
+class Solution {
+public: 
+    // T.C: O(n)
+    // S.C: O(n)
+    vector<int> finalPrices(vector<int>& prices) {
+        int n = prices.size();
+        vector <int> ans(n);
+        stack <int> st;
+        st.push(-1);
 
+        for(int i=n-1; i>=0; i--) {
+            int currElement = prices[i];
+
+            while(currElement < st.top()) {   // CHANGE 1: Instead of '<=', use '<' because the
+            // problem expects next smaller or equal element to be taken as discount
+                st.pop();
+            }
+
+            ans[i] = st.top();
+
+            st.push(currElement);
+
+            // ADDITION 1 (final price = price of item - discount(next smaller or equal element))
+            if(ans[i] == -1) {
+                ans[i] = prices[i];
+            } else {
+                ans[i] = prices[i] - ans[i];
+            }
+        }
+
+        return ans;
+    }
+};
 
 int main() {
+    Solution obj;
+    vector <int> prices{10, 1, 1, 6};
+
+    vector <int> ans = obj.finalPrices(prices);
+
+    for(int i: ans) {
+        cout << i << " ";
+    }
 
     return 0;
 }
