@@ -22,7 +22,7 @@
 // - 4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.
 
 // This problem is already solved in 'BaseBuildingPrograms\14. Stack\S10_NextGreaterElement.cpp',
-// the only difference being here we have some extra drama of an extra array.
+// the only addition here is that we have an extra drama of an extra array.
 
 #include <iostream>
 #include <vector>
@@ -34,7 +34,43 @@ public:
     // T.C:
     // S.C: 
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        
+        int n2 = nums2.size();
+        vector <int> ans(n2);
+        stack <int> st;
+        st.push(-1);
+
+        for(int i=n2-1; i>=0; i--) {
+            int currElement = nums2[i];
+
+            while(!st.empty() && currElement >= st.top()) {
+                st.pop();
+            }
+
+            if(!st.empty()) {
+                ans[i] = st.top();
+            } else {
+                ans[i] = -1;
+            }
+
+            st.push(currElement);
+        }
+
+        // nextGreaterElement for the array nums2 have been created in 'ans'.
+        // Now the extra drama begins.
+        int n1 = nums1.size();
+        vector <int> v;
+
+        for(int i=0; i<n1; i++) {
+            for(int j=0; j<n2; j++) {
+                if(nums1[i] == nums2[j]) {
+                    // finding that nums1 element in nums2, and pushing
+                    // corresponding same 'j' indexed element from 'ans' into 'v'.
+                    v.push_back(ans[j]);
+                }     
+            }
+        }
+
+        return v;
     }
 };
 
