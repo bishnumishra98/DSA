@@ -101,14 +101,14 @@ vector<int> nextGreaterElement_hashmap(vector<int>& nums1, vector<int>& nums2) {
     unordered_map<int, int> nextGreater;
 
     // Calculate next greater element for each element in nums2
-    for (int i = n2 - 1; i >= 0; i--) {
+    for (int i= n2-1; i>=0; i--) {
         int currElement = nums2[i];
 
-        while (!st.empty() && currElement >= nums2[st.top()]) {
+        while(!st.empty() && currElement >= nums2[st.top()]) {
             st.pop();
         }
 
-        if (!st.empty()) {
+        if(!st.empty()) {
             nextGreater[nums2[i]] = nums2[st.top()];
         } else {
             nextGreater[nums2[i]] = -1;
