@@ -1,3 +1,5 @@
+// Stack works on LIFO(last in first out) principal
+
 #include <iostream>
 #include <stack>
 using namespace std;
