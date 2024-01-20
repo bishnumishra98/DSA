@@ -121,11 +121,10 @@ int largestRectangleArea(vector<int>& heights) {
     vector <int> ionse(n);
     ionse = indexOfNextSmallerElement(heights);
 
-    int area = 0;
     int maxArea = 0;
 
     for(int i=0; i<n; i++) {
-        area = (ionse[i] - iopse[i] - 1) * heights[i];   // area = width * height
+        int area = (ionse[i] - iopse[i] - 1) * heights[i];   // area = width * height
         maxArea = max(maxArea, area);
     }
 

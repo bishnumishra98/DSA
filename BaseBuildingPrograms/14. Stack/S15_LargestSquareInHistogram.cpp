@@ -3,7 +3,7 @@
 
 // Example 1:
 // Input: heights = [2,1,5,6,2,3]
-// Output: 9
+// Output: 4
 
 // Example 2:
 // Input: heights = [2,4]
@@ -89,11 +89,13 @@ int largestRectangleArea(vector<int>& heights) {
     vector <int> ionse(n);
     ionse = indexOfNextSmallerElement(heights);
 
-    int area = 0;
     int maxArea = 0;
 
     for(int i=0; i<n; i++) {
-        area = (ionse[i] - iopse[i] - 1) * heights[i];   // area = width * height
+        int width = ionse[i] - iopse[i] - 1;
+        // ONLY HERE WE HAVE LITTLE CHANGE FOR CALCULATING AREA
+        int side = min(heights[i], width);
+        int area = side * side;
         maxArea = max(maxArea, area);
     }
 
