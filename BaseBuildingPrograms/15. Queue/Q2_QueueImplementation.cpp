@@ -54,8 +54,8 @@ class Queue {
                 if(front == rear) {
                     // if only 1 element is present in queue
                     arr[front] = -1;   // mark that element as -1 to indicate its no more present
-                    front = -1;
-                    rear = -1;
+                    front = -1;   // reset front pointer to -1
+                    rear = -1;   // reset rear pointer to -1
                 } else {
                     // if more than 1 element is present in queue
                     arr[front] = -1;
@@ -102,6 +102,40 @@ class Queue {
         }   
 };
 
+int main() {
+    Queue q(5);
+    q.printQueue();   // Queue: 0 0 0 0 0
+    q.push(10);
+    q.push(20);
+    q.push(30);
+    q.printQueue();   // Queue: 10 20 30 0 0
+    q.pop();
+    q.pop();
+    // q.pop();
+    q.printQueue();   // Queue: -1 -1 30 0 0
+    q.push(40);
+    q.push(50);
+    q.push(60);   // Queue overflow.
+    // q.push(70);
+    // q.push(80);
+    q.printQueue();   // Queue: -1 -1 30 40 50
+    
+    // I had popped only 2 elements from stack, but still I am not able to push more than
+    // 2 elements in queue, i.e., when I am trying to push q.push(60) in queue, it is
+    // showing queue overflow. This is normal behavior of queue according to 'Queue Class-1'.
+
+    // But let's say if I had popped 3 elements from queue instead of 2. Then according to the
+    // implementation, front and rear pointers would come at same index of array, and thus they
+    // both will reset back to -1. And boom, here's the bug !. Now queue becomes entirely empty
+    // as it was in beginning, and I will be able to push 5 new elements in queue.
+
+    // How is this peculiar implementation of queue using arrays, justified ?
+
+    return 0;
+}
+
+
+/*
 int main() {
     Queue q(5);
     q.printQueue();   // Queue: 0 0 0 0 0
@@ -153,7 +187,7 @@ int main() {
     cout << endl;
 
     // At this point of time, whole queue has been popped out. But still we will be unable to
-    // push anything in queue, as the memory blocks of queue are deactiavted after an element
+    // push anything in queue, as the memory blocks of queue are deactivated after an element
     // gets popped out from queue. If we want ability to continuously push elements in queue,
     // we have to implement a circular queue.
 
@@ -167,3 +201,4 @@ int main() {
 
     return 0;
 }
+*/
