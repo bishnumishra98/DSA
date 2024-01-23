@@ -58,7 +58,6 @@ public:
 
         // Storing elements of queue into a vector and returning it
         vector <int> ans;
-        int i = 0;
         while(n--) {
             int temp = q.front();
             ans.push_back(temp);
