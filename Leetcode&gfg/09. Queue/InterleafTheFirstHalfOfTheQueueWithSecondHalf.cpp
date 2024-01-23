@@ -31,7 +31,7 @@ public:
     vector<int> rearrangeQueue(queue<int> &q){
         int n = q.size();
 
-        // Step 1: initialize a queue, and insert the first n/2 elements of queue in it.
+        // Step 1: Initialize a queue, and insert the first n/2 elements of original queue into it.
         queue <int> part;
 
         int x = n/2;
