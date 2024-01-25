@@ -171,7 +171,7 @@ int main() {
     // gets popped out from queue. If we want ability to continuously push elements in queue,
     // we have to implement a circular queue.
 
-    cout << "Pushing 70 in queue" << endl;
+    cout << "Pushing 70 in queue." << endl;
     q.push(70);
     q.printQueue();   // Queue: -1 -1 -1 -1 -1
     cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status: 1
