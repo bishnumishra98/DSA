@@ -33,50 +33,42 @@ class Queue {
                 cout << "Queue overflow." << endl;
                 return;
             } else {
-                // if array is empty, i.e., first element is being pushed in queue
-                if(front == -1 && rear == -1) {
-                    front++;
-                    rear++;
-                    arr[rear] = data;
-                } else {   // if second element or element after second element is pushed in queue
-                    rear++;
-                    arr[rear] = data;
+                // if rear pointer did not reached last index of array
+                rear++;
+                arr[rear] = data;
+
+                // make sure to bring front pointer to 0th index of array,
+                // when a push operation happened on queue for the 1st time.
+                if(front == -1) {
+                    front = 0;
                 }
             }
         }
 
         void pop() {
-            // if array is empty
-            if(front == -1 && rear == -1) {
+            // if queue is empty
+            if(front == -1 || front > rear) {
                 cout << "Queue underflow." << endl;
                 return;
             } else {
-                if(front == rear) {
-                    // if only 1 element is present in queue
-                    arr[front] = -1;   // mark that element as -1 to indicate its no more present
-                    front = -1;   // reset front pointer to -1
-                    rear = -1;   // reset rear pointer to -1
-                } else {
-                    // if more than 1 element is present in queue
-                    arr[front] = -1;
-                    front++;
-                }
+                // if array is not empty
+                arr[front] = -1;
+                front++;
             }
         }
 
         bool isEmpty() {
-            if(front == -1 && rear == -1) return true;
+            if(front == -1 || front > rear) return true;
             else return false;
         }
 
         int getSize() {
-            // if queue is empty, return 0 as size
-            if(front == -1 && rear == -1) return 0;
-            else return rear - front + 1;
+            if(front == -1 || front > rear) return 0;
+            else return (rear - front + 1);
         }
 
         int getFront() {
-            if(front == -1 && rear == -1) {
+            if(front == -1 || front > rear) {
                 cout << "No front element present." << endl;
                 return -1;
             } else {
@@ -85,7 +77,7 @@ class Queue {
         }
 
         int getRear() {
-            if(front == -1 && rear == -1) {
+            if(front == -1 || front > rear) {
                 cout << "No rear element present." << endl;
                 return -1;
             } else {
@@ -102,6 +94,7 @@ class Queue {
         }   
 };
 
+/*
 int main() {
     Queue q(5);
     q.printQueue();   // Queue: 0 0 0 0 0
@@ -111,31 +104,18 @@ int main() {
     q.printQueue();   // Queue: 10 20 30 0 0
     q.pop();
     q.pop();
-    // q.pop();
-    q.printQueue();   // Queue: -1 -1 30 0 0
+    q.pop();
+    q.printQueue();   // Queue: -1 -1 -1 0 0
     q.push(40);
     q.push(50);
     q.push(60);   // Queue overflow.
-    // q.push(70);
-    // q.push(80);
-    q.printQueue();   // Queue: -1 -1 30 40 50
-    
-    // I had popped only 2 elements from stack, but still I am not able to push more than
-    // 2 elements in queue, i.e., when I am trying to push q.push(60) in queue, it is
-    // showing queue overflow. This is normal behavior of queue according to 'Queue Class-1'.
-
-    // But let's say if I had popped 3 elements from queue instead of 2. Then according to the
-    // implementation, front and rear pointers would come at same index of array, and thus they
-    // both will reset back to -1. And boom, here's the bug !. Now queue becomes entirely empty
-    // as it was in beginning, and I will be able to push 5 new elements in queue.
-
-    // How is this peculiar implementation of queue using arrays, justified ?
+    q.printQueue();   // Queue: -1 -1 -1 40 50
 
     return 0;
 }
+*/
 
 
-/*
 int main() {
     Queue q(5);
     q.printQueue();   // Queue: 0 0 0 0 0
@@ -198,6 +178,25 @@ int main() {
     cout << "Front element: " << q.getFront() << endl;   // No front element present. Front element: -1
     cout << "Rear element: " << q.getRear() << endl;   // No rear element present. Rear element: -1
     cout << endl;
+
+    return 0;
+}
+
+
+/*
+int main() {
+    Queue q(5);
+    q.push(10);
+    q.printQueue();
+    q.pop();
+    q.printQueue();
+    q.push(20);
+    q.push(30);
+    q.push(40);
+    q.push(50);
+    q.push(60);
+    q.printQueue();
+
 
     return 0;
 }
