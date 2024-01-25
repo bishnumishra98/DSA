@@ -1,4 +1,5 @@
-// Queue works on FIFO(first in first out) principal
+// Queue works on FIFO(first in first out) principal. Pushing an element in queue is called an
+// 'enqueue' operation, while popping out an element from queue is called 'dequeue' operation.
 
 #include <iostream>
 #include <queue>
