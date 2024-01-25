@@ -16,7 +16,7 @@ class Queue {
         // constructor
         Queue(int size) {
             arr = new int[size];
-            memset(arr, 0, size * sizeof(int));  // initializes all elements of arr with 0s.
+            memset(arr, 0, size * sizeof(int));   // initializes all elements of arr with 0s.
             this->size = size;
             front = -1;
             rear = -1;
