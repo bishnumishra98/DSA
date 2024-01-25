@@ -51,7 +51,7 @@ class Queue {
                 cout << "Queue underflow." << endl;
                 return;
             } else {
-                // if array is not empty
+                // if queue is not empty
                 arr[front] = -1;
                 front++;
             }
