@@ -41,7 +41,7 @@ class CircularQueue {
 
         void push(int data) {
             // if rear pointer is just behind the front pointer, queue is full
-            if(rear + 1 == front) {
+            if((rear + 1) % size == front) {
                 cout << "Queue overflow." << endl;
                 return;
             } else {
@@ -55,32 +55,39 @@ class CircularQueue {
                     front = 0;
                 }
             }
+            cout << "Push front: " << front << ", push rear: " << rear << endl;
         }
 
         void pop() {
             // if queue is empty
-            if(front == -1 && rear == -1) {
+            if(front == -1) {
                 cout << "Queue underflow." << endl;
                 return;
+            } else if(front == rear) {
+                // only 1 element is remaining in queue, popping 1 more element will make queue empty
+                front = rear = -1;
             } else {
-                // if array is not empty
+                // if queue is not empty
                 arr[front] = -1;
-                front++;
+                front = (front + 1) % size;
             }
+
+            cout << "pop front: " << front << ", pop rear: " << rear << endl;
         }
 
         bool isEmpty() {
-            if(front == -1 && rear == -1) return true;
+            // cout << "front: " << front << ",   rear: " << rear << endl;
+            if(front == -1) return true;
             else return false;
         }
 
         int getSize() {
-            if(front == -1 && rear == -1) return 0;
+            if(front == -1) return 0;
             else return (rear - front + 1);
         }
 
         int getFront() {
-            if(front == -1 && rear == -1) {
+            if(front == -1) {
                 cout << "No front element present." << endl;
                 return -1;
             } else {
@@ -89,7 +96,7 @@ class CircularQueue {
         }
 
         int getRear() {
-            if(front == -1 && rear == -1) {
+            if(front == -1) {
                 cout << "No rear element present." << endl;
                 return -1;
             } else {
@@ -140,8 +147,8 @@ int main() {
     cout << "Pushing 40, 50, 60 in queue.\n";
     q.push(40);
     q.push(50);
-    q.push(60);   // Queue overflow.
-    q.printQueue();   // Queue: -1 20 30 40 50
+    q.push(60);
+    q.printQueue();   // Queue: 60 20 30 40 50
     cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status: 0
     cout << "Size of queue: " << q.getSize() << endl;   // Size of queue: 4
     cout << "Front element: " << q.getFront() << endl;   // Front element: 20
@@ -157,17 +164,13 @@ int main() {
     cout << "Rear element: " << q.getRear() << endl;   // No rear element present. Rear element: -1
     cout << endl;
 
-    // At this point of time, whole queue has been popped out. But still we will be unable to
-    // push anything in queue, as the memory blocks of queue are deactivated after an element
-    // gets popped out from queue. If we want ability to continuously push elements in queue,
-    // we have to implement a circular queue.
-
     cout << "Pushing 70 in queue" << endl;
-    q.printQueue();   // Queue: -1 -1 -1 -1 -1
-    cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status: 1
-    cout << "Size of queue: " << q.getSize() << endl;   // Size of queue: 0
-    cout << "Front element: " << q.getFront() << endl;   // No front element present. Front element: -1
-    cout << "Rear element: " << q.getRear() << endl;   // No rear element present. Rear element: -1
+    
+    q.printQueue();   // Queue: 
+    cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status:
+    cout << "Size of queue: " << q.getSize() << endl;   // Size of queue:
+    cout << "Front element: " << q.getFront() << endl;   // 
+    cout << "Rear element: " << q.getRear() << endl;   // 
     cout << endl;
 
     return 0;
