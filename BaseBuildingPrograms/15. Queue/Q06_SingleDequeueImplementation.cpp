@@ -9,7 +9,7 @@
 #include <cstring>   // for memset()
 using namespace std;
 
-class Dequeue {
+class Deque {
     public:
         int* arr;
         int size;
@@ -17,7 +17,7 @@ class Dequeue {
         int rear;
         
         // constructor
-        Dequeue(int size) {
+        Deque(int size) {
             arr = new int[size];
             memset(arr, 0, size * sizeof(int));   // initializes all elements of arr with 0s.
             this->size = size;
@@ -26,7 +26,7 @@ class Dequeue {
         }
 
         // destructor
-        ~Dequeue() {
+        ~Deque() {
             delete[] arr;
         }
 
@@ -156,7 +156,7 @@ class Dequeue {
 
 
 int main() {
-    Dequeue dq(5);
+    Deque dq(5);
 
     dq.printDeque();   // Deque: 0 0 0 0 0
     cout << "Queue empty status: " << dq.isEmpty() << endl;   // Queue empty status: 1
