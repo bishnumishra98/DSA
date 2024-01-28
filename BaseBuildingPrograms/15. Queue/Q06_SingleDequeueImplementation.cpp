@@ -31,7 +31,7 @@ class Deque {
         }
 
         void push_back(int data) {
-            // if rear pointer reached last index of array, no more elements can be pushed
+            // when deque, i.e., array is full
             if(rear == size-1 && front == 0) {
                 cout << "Dequeue overflow." << endl;
                 return;
@@ -62,7 +62,7 @@ class Deque {
         }
 
         void push_front(int data) {
-            // if rear pointer reached last index of array, no more elements can be pushed
+            // when deque, i.e., array is full
             if(rear == size-1 && front == 0) {
                 cout << "Dequeue overflow." << endl;
                 return;
