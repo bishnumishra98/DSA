@@ -75,6 +75,7 @@ class Queue1 {
                     s2.pop();
                 }
 
+                // Step 4: Return rearElement
                 return rearElement;
             }
         }
@@ -171,6 +172,7 @@ class Queue2 {
                     s1.pop();
                 }
 
+                // Step 4: Return rearElement
                 return rearElement;
             }
         }
