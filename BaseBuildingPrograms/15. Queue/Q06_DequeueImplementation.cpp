@@ -1,15 +1,11 @@
-// Dequeue stands for doubly ended queue. We can pop and push elements in a dequeue from both sides.
-// The 4 fundamental functionalities in a dequeue should be:
-// -> push_front(): Inserts an element at the front of the deque.
-// -> push_back(): Inserts an element at the rear of the deque.
-// -> pop_front(): Removes an element from the front of the deque.
-// -> pop_back(): Removes an element from the rear of the deque.
+// A circular deque is an extension of the deque with a circular arrangement of elements. In a
+// circular deque, the front and rear ends of the deque are connected, forming a loop or circle.
 
 #include <iostream>
 #include <cstring>   // for memset()
 using namespace std;
 
-class Deque {
+class CircularDeque {
     public:
         int* arr;
         int size;
@@ -17,7 +13,7 @@ class Deque {
         int rear;
         
         // constructor
-        Deque(int size) {
+        CircularDeque(int size) {
             arr = new int[size];
             memset(arr, 0, size * sizeof(int));   // initializes all elements of arr with 0s.
             this->size = size;
@@ -26,7 +22,7 @@ class Deque {
         }
 
         // destructor
-        ~Deque() {
+        ~CircularDeque() {
             delete[] arr;
         }
 
@@ -113,8 +109,7 @@ class Deque {
                 // if dequeue is not empty
                 arr[rear] = -1;
                 rear--;
-            }
-            
+            }  
         }
 
         bool isEmpty() {
@@ -156,7 +151,7 @@ class Deque {
 
 
 int main() {
-    Deque dq(5);
+    CircularDeque dq(5);
 
     dq.printDeque();   // Deque: 0 0 0 0 0
     cout << "Queue empty status: " << dq.isEmpty() << endl;   // Queue empty status: 1
@@ -217,6 +212,25 @@ int main() {
     cout << "Popping 1 element from rear:\n";
     dq.pop_back();   // Dequeue underflow.
     dq.printDeque();   // Deque: -1 -1 -1 -1 -1
-    
+    cout << endl;
+
+    cout << "Pushing 10 at rear:\n";
+    dq.push_back(10);
+    dq.printDeque();
+    cout << "Queue empty status: " << dq.isEmpty() << endl;   // Queue empty status: 0
+    cout << "Size of queue: " << dq.getSize() << endl;   // Size of queue: 1
+    cout << "Front element: " << dq.getFront() << endl;   // Front element: 10
+    cout << "Rear element: " << dq.getRear() << endl;   // Rear element: 10
+    cout << endl;
+
+    cout << "Pushing 20, 30 at front:\n";
+    dq.push_front(20); dq.push_front(30);
+    dq.printDeque();
+    cout << "Queue empty status: " << dq.isEmpty() << endl;   // Queue empty status: 1
+    cout << "Size of queue: " << dq.getSize() << endl;   // Size of queue: 0
+    cout << "Front element: " << dq.getFront() << endl;   // Front element: 30
+    cout << "Rear element: " << dq.getRear() << endl;   // Rear element: 10
+    cout << endl;
+
     return 0;
 }
