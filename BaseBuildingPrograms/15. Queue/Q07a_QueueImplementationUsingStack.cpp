@@ -48,7 +48,7 @@ class Queue1 {
 
         int getFront() {
             if(s1.empty()) {
-                cout << "No front element in stack.\n";
+                cout << "No front element in queue.\n";
                 return -1;
             } else {
                 return s1.top();
@@ -57,7 +57,7 @@ class Queue1 {
 
         int getRear() {
             if(s1.empty()) {
-                cout << "No rear element in stack.\n";
+                cout << "No rear element in queue.\n";
                 return -1;
             } else {
                 // Step 1: Tranfer all values from s1 to s2
@@ -134,7 +134,7 @@ class Queue2 {
 
         int getFront() {
             if(s1.empty() && s2.empty()) {
-                cout << "No front element in stack.\n";
+                cout << "No front element in queue.\n";
                 return -1;
             } else if(!s2.empty()) {
                 return s2.top();
@@ -152,7 +152,7 @@ class Queue2 {
 
         int getRear() {
             if(s1.empty() && s2.empty()) {
-                cout << "No rear element in stack.\n";
+                cout << "No rear element in queue.\n";
                 return -1;
             } else if(!s1.empty()) {
                 return s1.top();
