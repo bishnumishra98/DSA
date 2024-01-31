@@ -25,6 +25,10 @@
 //         the 'freq' array.
 //    iii. If the queue becomes empty during the popping process, store '#' in 'ans'.
 
+// Q) Why we used queue in this question ?
+// A) Because with the help of a queue data structure, we can iterate elements from L to R in
+//    a string/array. Further, queue will help us keep a track of unique characters of string.
+
 #include <iostream>
 #include <queue>
 using namespace std;
