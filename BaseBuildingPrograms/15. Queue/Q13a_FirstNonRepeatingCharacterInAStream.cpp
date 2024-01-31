@@ -33,6 +33,8 @@
 #include <queue>
 using namespace std;
 
+// T.C: O(n)
+// S.C: O(1)
 string firstNonRepeatingCharacter(string str) {
     int n = str.length();
     string ans(n, ' ');   // initialized a string of length 'n' with spaces
