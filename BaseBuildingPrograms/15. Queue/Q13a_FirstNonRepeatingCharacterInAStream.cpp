@@ -13,6 +13,18 @@
 // For 'abab', first non-repeating character is '#'.
 // For 'ababc', first non-repeating character is 'c'.
 
+// Algorithm:
+// 1) Take one character at a time from the string, increase its count in the 'freq' array,
+//    and push it into the queue.
+// 2) Process the queue:
+//    i.   While the queue is not empty, continuously check if the front character of the queue
+//         occurred only once in the string according to the 'freq' array. If it occurred only
+//         once, store it in the 'ans' string and break out of the loop.
+//    ii.  If the front character occurred more than once, pop it out from the queue until an
+//         element comes to the front of the queue, which occurred only once according to
+//         the 'freq' array.
+//    iii. If the queue becomes empty during the popping process, store '#' in 'ans'.
+
 #include <iostream>
 #include <queue>
 using namespace std;
@@ -21,7 +33,7 @@ string firstNonRepeatingCharacter(string str) {
     int n = str.length();
     string ans(n, ' ');   // initialized a string of length 'n' with spaces
     queue <char> q;
-    int freq[26] = {0};   // as there are only 26 alphabets in English
+    int freq[26] = {0};   // as there can be only 26 alphabets in English
     // int freq[n] = {x}; means initializing 1st element of array with 'x', and rest with '0'.
 
     for(int i=0; i<n; i++) {
@@ -32,18 +44,18 @@ string firstNonRepeatingCharacter(string str) {
         // Process the queue to find the first non-repeating character
         while(!q.empty()) {
             char frontChar = q.front();
-            if (freq[frontChar - 'a'] > 1) {
+            if(freq[frontChar - 'a'] > 1) {
                 // If frontChar occurred more than once, remove it from the queue
                 q.pop();
             } else {
                 // If frontChar occurred only once, i.e., 'freq[frontChar - 'a'] == 1',
-                // update the answer and break the loop
+                // update the 'ans' and break the loop
                 ans[i] = frontChar;
                 break;
             }
         }
 
-        // If the queue is empty, set the answer character to '#'
+        // If the queue is empty, set the ans[i] character to '#'
         if(q.empty()) {
             ans[i] = '#';
         }
