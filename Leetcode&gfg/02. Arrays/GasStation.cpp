@@ -30,16 +30,74 @@
 // You cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.
 // Therefore, you can't travel around the circuit once no matter where you start.
 
+
+// Algorithm:
+
+// 1) Initialize 3 variables: start = 0, totalFuelBalance = 0 and currentFuelBalance = 0.
+
+//    -> start: The starting index of the gas station. Every time we start from a new
+//              gas station, currentFuelBalance will reset back to 0.
+
+//    -> totalFuelBalance(tFb): Tracks the overall fuel balance throughout the entire trip.
+//       In simple terms, tFB = sum of all gas elements - sum of all cost elements. But we
+//       will be calculating cumulative tFB throughout each iteration, so our formula will be
+//       tFB = tFB + gas[i] - cost[i]. If tFB >= 0 at the end of the loop, then only the trip
+//       is possible for the given set of gas[] and cost[] arrays. Thus, tFB only tells
+//       whether trip is possible for the given input array sets or not. To find the index from
+//       where trip should start to get completed, we have to take help of 'cFB' and 'start'.
+
+//    -> currentFuelBalance(cFB): Tracks the fuel balance at the current station. The trip
+//       can only start if cFB is found positive for any station. If cFB < 0, for ith station,
+//       then we have to start from the next station, i.e., 'start' will point to
+//       (i+1)th station and 'cFB' shall be reset back to 0 for that station.
+//       Q) Why not we check 'start' of trip from each gas station, i.e., start = 0, 1, 2, ...
+//          Why 'start' directly jumps to 'i+1' if cFB is negative for ith station ?
+//       A) We have to agree that if we reach from an index(lets say i=0) to an
+//          index(lets say i=3), it means fuel was enough to reach from station i=0 to i=3,
+//          it means cFB for i=0,1,2 was definitely >= 0.
+//          Now lets say, we are still not able to reach station 4, it means total gas we have
+//          accumulated uptil station 3 is not enough for us to reach station 4. It can only
+//          happen if gas[3] - cost[3] is such a huge negative, that it made cFB for i=3 less
+//          less than 0.
+//          Thus the thing to observe here is, if sum of 3 +ve and 1 -ve number is not >= 0,
+//          how will the sum of 2 +ve and 1 -ve number be ever >= 0 ? Thus, without wasting
+//          time by checking from each station, we directly jump to i+1th station, reset back
+//          cFB to 0, and check if cFB is >=0 for this new station or not.
+
+// 2) At the end of loop that runs from i=0 to i=gas.size(), if tFB >= 0, return the index of
+//    gas station marked by 'start'; or else if trip was not possible, return -1.
+//    In this way, we go to a station only once and successfully find out the station from
+//    which the trip could be completed.
+
+
 #include <iostream>
 #include <vector>
 using namespace std;
 
 class Solution {
 public:
-    // T.C:
-    // S.C: 
+    // T.C: O(n)
+    // S.C: O(1)
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-        
+        int start = 0;   // Starting index of the gas station
+        int totalFuelBalance = 0;   // Track total fuel balance throughout the trip
+        int currentFuelBalance = 0;   // Track fuel balance at the current station
+
+        for(int i = 0; i < gas.size(); i++) {
+            totalFuelBalance += gas[i] - cost[i];   // Calculate total fuel balance
+
+            // If running out of fuel at the current station, reset the starting index to
+            // the next station, and currentFuelBalance to 0.
+            currentFuelBalance += gas[i] - cost[i];
+            if(currentFuelBalance < 0) {
+                start = i + 1;   // Move to the next station
+                currentFuelBalance = 0;
+            }
+        }
+
+        // If the total fuel balance is negative, it means the trip is not possible.
+        // Otherwise, return the starting index
+        return (totalFuelBalance >= 0) ? start : -1;
     }
 };
 
