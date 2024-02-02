@@ -79,3 +79,16 @@
 // -> Binary Search Tree (BST): A binary tree with the property that the value of each node in the
 //                              tree is greater than or equal to all values in its left subtree and
 //                              less than or equal to all values in its right subtree.
+
+
+#include <iostream>
+using namespace std;
+
+class Node {
+
+};
+
+int main() {
+
+    return 0;
+}
