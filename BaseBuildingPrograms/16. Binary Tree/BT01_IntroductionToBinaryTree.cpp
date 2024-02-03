@@ -85,14 +85,53 @@
 #include <iostream>
 using namespace std;
 
+// Node for building a Binary tree
 class Node {
     public:
         int data;
-        int* left;
-        int* right;
+        Node* left;
+        Node* right;
+
+        // default constructor
+        Node() {
+            this->left = NULL;
+            this->right = NULL;
+        }
+
+        // parametarized constructor
+        Node(int data) {
+            this->data = data;
+            this->left = NULL;
+            this->right = NULL;
+        }
+
+        // destructor
+        ~Node() {
+            delete left;
+            delete right;
+        }
 };
 
 int main() {
+    // Building a Binary Tree Preorder: {10, 20, 30, NULL, NULL, 40, NULL, NULL, 50, NULL, NULL}
+    Node* root = new Node(10);
+    root->left = new Node(20);
+    root->right = new Node(50);
+    root->left->left = new Node(30);
+    root->left->right = new Node(40);
+
+    /*
+    Creates a tree like this:
+
+                   ___ 10 ___
+                 /            \
+             _ 20 _            50
+           /        \        /    \
+          30         40    NULL   NULL
+         /  \       /  \
+      NULL NULL   NULL NULL
+
+    */
 
     return 0;
 }
