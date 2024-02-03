@@ -75,6 +75,7 @@
 //                          node in a strictly binary tree has a left child and a right child, and
 //                          no internal node has fewer or more than two children.
 //                          The degree of nodes of all internal nodes for a Strictly Binary Tree is 2.
+//                          It is also known as 'Extended 2-Tree' or 'Simple 2-Tree'.
 
 // -> Binary Search Tree (BST): A binary tree with the property that the value of each node in the
 //                              tree is greater than or equal to all values in its left subtree and
@@ -85,7 +86,10 @@
 using namespace std;
 
 class Node {
-
+    public:
+        int data;
+        int* left;
+        int* right;
 };
 
 int main() {
