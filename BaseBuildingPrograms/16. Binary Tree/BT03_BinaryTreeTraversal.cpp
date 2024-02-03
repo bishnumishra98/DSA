@@ -80,7 +80,7 @@ void postOrderTraversal(Node* root) {
 }
 
 // T.C: O(n); where n = no.of nodes
-// S.C: O(height);  height = n for a skew tree
+// S.C: O(width);  width = n for a skew tree
 void levelOrderTraversal(Node* root) {
     queue <Node*> q;
     // Step 1: Push the parent node in queue
@@ -98,7 +98,7 @@ void levelOrderTraversal(Node* root) {
 }
 
 // T.C: O(n); where n = no.of nodes
-// S.C: O(height);  height = n for a skew tree
+// S.C: O(width);  width = n for a skew tree
 void levelOrderTraversal_LevelByLevel(Node* root) {
     queue <Node*> q;
     q.push(root);
@@ -108,10 +108,13 @@ void levelOrderTraversal_LevelByLevel(Node* root) {
         Node* front = q.front();
         q.pop();
 
-        if(front == NULL) {
-            cout << endl;
+        if(front == NULL) {   // If 'front' is a NULL node
+            cout << endl;   // Line changed.
+            // If 'front' of queue is a NULL, it means the last parent node has been printed,
+            // popped out of queue, and its children have been pushed in queue already in the last
+            // iteration. Thus, we should again add NULL to queue, in order to mark line change.
             if(!q.empty()) q.push(NULL);
-        } else {
+        } else {   // If 'front' is a valid node
             cout << front->data << " ";
             if(front->left) q.push(front->left);
             if(front->right) q.push(front->right);
