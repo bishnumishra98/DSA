@@ -26,18 +26,6 @@ struct TreeNode {
     TreeNode(int data) : val(data), left(NULL), right(NULL) {}
 };
 
-// T.C:
-// S.C: 
-int diameterOfTree(TreeNode* root) {
-    if(root == NULL) return 0;
-
-    int dia_left = diameterOfTree(root->left);
-    int dia_right = diameterOfTree(root->right);
-
-    int dia_fromThisNode = heightOfBT(root->left) + heightOfBT(root->left);
-
-    return max(dia_left, dia_right, dia_fromThisNode);
-}
 
 int heightOfBT(TreeNode* root) {
     if(root == NULL) return 0;
@@ -48,6 +36,40 @@ int heightOfBT(TreeNode* root) {
     return max(left_height, right_height);
 }
 
+// T.C: O(n^2)
+// S.C: O(n)
+int diameterOfTree_bruteForce(TreeNode* root) {
+    if(root == NULL) return 0;
+
+    int dia_left = diameterOfTree_bruteForce(root->left);
+    int dia_right = diameterOfTree_bruteForce(root->right);
+
+    int dia_fromThisNode = heightOfBT(root->left) + heightOfBT(root->right);
+
+    return max(max(dia_left, dia_right), dia_fromThisNode);
+}
+
+//------------------------------------------------------------------------------------
+
+int ans = 0;
+int height(TreeNode* root) {
+    if(root == NULL) return 0;
+
+    int left_height = height(root->left);
+    int right_height = height(root->right);
+
+    ans = max(ans, left_height + right_height);
+
+    return max(left_height, right_height) + 1;
+}
+
+// T.C: O(n)
+// S.C: O(n)
+int diameterOfTree(TreeNode* root) {
+    height(root);
+    return ans;
+}
+
 int main() {
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
@@ -55,7 +77,8 @@ int main() {
     root->right->left = new TreeNode(4);
     root->right->right = new TreeNode(5);
 
-    cout << diameterOfTree(root);
+    cout << diameterOfTree_bruteForce(root) << endl;
+    cout << diameterOfTree(root) << endl;
 
     return 0;
 }
