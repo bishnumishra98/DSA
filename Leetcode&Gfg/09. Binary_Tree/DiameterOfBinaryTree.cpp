@@ -18,46 +18,4 @@
 // Input: root = [1,2]
 // Output: 1
 
-#include <iostream>
-using namespace std;
-
-// Definition for a binary tree node.
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-
-class Solution {
-public:
-    // T.C:
-    // S.C: 
-    int diameterOfBinaryTree(TreeNode* root) {
-        static int longestDiameter = 0;
-        // base case
-        if(root == NULL) return 0;
-
-        int leftSubTree_diamter = diameterOfBinaryTree(root->left);
-        int rightSubTree_diamter = diameterOfBinaryTree(root->right);
-        int diameter = leftSubTree_diamter + rightSubTree_diamter;
-        longestDiameter = max(longestDiameter, diameter);
-        return longestDiameter;
-    }
-};
-
-int main() {
-    Solution obj;
-
-    TreeNode* root = new TreeNode(1);
-    root->left = new TreeNode(2);
-    root->right = new TreeNode(3);
-    root->right->left = new TreeNode(4);
-    root->right->right = new TreeNode(5);
-
-    cout << obj.diameterOfBinaryTree(root);
-
-    return 0;
-}
+// Already done in 'BaseBuildingPrograms\16. Binary_Tree\BT05_DiameterOfBT.cpp'.
