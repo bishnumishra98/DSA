@@ -9,7 +9,7 @@ bool checkPrime(int n) {
         return false;
     }
 
-    // a non prime number will always have a factor >=2 and <= sqrt(n)
+    // a non-prime number will always have a factor >=2 and <= sqrt(n)
     for(int i=2; i<=sqrt(n); i++) {
         if(n%i==0) {
             return false;   // found a factor
