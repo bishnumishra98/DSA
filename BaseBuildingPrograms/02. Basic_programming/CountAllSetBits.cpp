@@ -8,7 +8,7 @@ int countSetBits1(int n) {
     int count = 0;
     // Iterate through each bit position from 0 to 31 (32 bits in an integer)
     for(int i=0; i<32; i++) {
-        // Check if the i-th bit from right-most side of n is 1.
+        // Check if the i-th bit from right-most side(LSB) of n is 1.
         if(n & (1 << i)) {
             count++;
         }
@@ -22,8 +22,8 @@ int countSetBits1(int n) {
 int countSetBits2(int n) {
     int count = 0;
     while(n) {
-	    n = n & (n-1);
-	    count++;
+	    n = n & (n-1);   // This line clears the least significant set bit of n
+	    count++;   // Increment the count for each cleared bit
 	}
     return count;
 }
