@@ -16,7 +16,7 @@ void printSquareArray(int arr[][3], int row, int col) {
     }
 }
 
-// T.C: O(n)
+// T.C: O(n2);   where n = no.of rows or columns
 // S.C: O(1)
 void transposeSquareArray(int arr[][3], int row, int col) {
     for(int i=0; i<row; i++) {
