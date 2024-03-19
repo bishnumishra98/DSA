@@ -20,7 +20,9 @@ void printSquareArray(int arr[][3], int row, int col) {
 // S.C: O(1)
 void transposeSquareArray(int arr[][3], int row, int col) {
     for(int i=0; i<row; i++) {
-        for(int j=i; j<col; j++) {
+        for(int j=i; j<col; j++) {   // if we start j from 0, then half of the elements(excluding diagonal) will be
+        // swapped twice resulting in no change in array. Thus, it is mandatory to start j from i, to swap upper half
+        // traingle from diagonal of matrix with lower half traingle only once. Dry run for better understanding.
             swap(arr[i][j], arr[j][i]);
         }
     }

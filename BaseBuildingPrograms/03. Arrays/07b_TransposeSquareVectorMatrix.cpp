@@ -1,3 +1,6 @@
+// Non-square matrices typically require additional space to transpose, but
+// square matrices can be transposed in-place, i,e., in constant space complexity.
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -21,7 +24,7 @@ void transposeSquareVector(vector<vector<int>>& matrix) {
     int col = matrix[0].size();
     
     for(int i=0; i<row; i++) {
-        for(int j=i; j<col; j++) {
+        for(int j=i; j<col; j++) {   //  Note to start j from i, not from 0. Reason is mentioned in 07a.
             swap(matrix[i][j], matrix[j][i]);
         }
     }
