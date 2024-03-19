@@ -4,7 +4,7 @@
 using namespace std;
 
 void shiftNegativeToLeft(int arr[], int n) {
-    // we are following a two approach here
+    // we are following two approach here
     int j = 0;   // This variable will be used to keep track of the position
                 // where the next negative number should be placed.
     for(int index=0; index<n; index++) {
@@ -17,7 +17,7 @@ void shiftNegativeToLeft(int arr[], int n) {
 }
 
 int main() {
-    int arr[] = {-2, 3, 5, -7, 9, -10, 11, -12};
+    int arr[] = {-2, 3, 5, -10, 9, -7, 11, -6};
     int n = 8;
 
     shiftNegativeToLeft(arr, n);

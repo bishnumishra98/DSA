@@ -28,15 +28,15 @@ void reverseArray_bruteForce(int arr[], int n) {
 // T.C: O(n)
 // S.C: O(1)
 void reverseArray_STL(int arr[], int n) {
-    reverse(arr, arr + n);   // arr denotes base index of arr[], i.e 0th index.
+    reverse(arr, arr + n);   // arr denotes base index of arr[], i.e., address of element at 0th index of array
     // Above line means reversing from element at '0th' index to element at '(n-1)th' index.
 }
 
 // T.C: O(n)
 // S.C: O(1)
 void reverseArray_twoPointer(int arr[], int n) {
-    int* start = arr;   // start = first index(0) of array
-    int* end = arr + n - 1;   // end = last index(n-1) of array
+    int* start = arr;   // arr refers to base address of array, i.e., address of element at 0th index of array
+    int* end = arr + n - 1;   // 'arr + n - 1' refers to address of last element, i.e., address of element at (n-1)th index of array
 
     while (start < end) {
         swap(*start, *end);   // Swap elements pointed by start and end.
