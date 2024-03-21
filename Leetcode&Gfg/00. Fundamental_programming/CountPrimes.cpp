@@ -14,49 +14,37 @@
 
 // Constraints: 0 <= n <= 5 * 10^6
 
+
 #include <iostream>
 #include <vector>
 using namespace std;
 
-// The Sieve of Eratosthenes is an algorithm for finding all prime numbers up to a given limit.
-// It is a very efficient algorithm, and it is still widely used today. Let's say given input is n.
+// Almost similar to 'BaseBuildingPrograms\07. Basic_Maths\SieveOfEratosthenesOptimised.cpp'.
 
-// The algorithm states that :-
-// 1) Create an array of size n, and mark all of them as prime, i.e true.
-// 2) Iterate starting from 2 to n, mark all the numbers that comes in table of 2 as composite, i.e false.
-// 3) Repeat step 2 till n, only for numbers that are marked prime.
-// 4) In the end of the loop, elements still marked as prime are the prime numbers in the range 2 to n. So,
-//    keep a count of those numbers, and return the count.
-
-// leetcode given function
-// T.C: O(n*log(logn))
+// T.C: O(nlog(logn))
 // S.C: O(n)
 int countPrimes(int n) {
-    if(n<=1) return 0;
+    if(n <= 2) return 0;   // as prime numbers should be strictly less than n
 
-    vector <bool> prime(n, true);   // initializing n length vector with all element's value as true;
-                                   // i.e all numbers are marked prime by default
+    vector <bool> sieve(n, true);   // by default all numbers are prime
 
-    // prime[0] and prime[1] will be treated as 0 and 1 respectively. So marking them false, i.e composite.
-    prime[0] = prime[1] = false;
+    sieve[0] = sieve[1] = false;   // mark sieve[0] and sieve[1] as false, i.e., marking 0 and 1 as composite
 
-    int count = 0;
-
-    // We have to find count of primes numbers strictly less than 'n'.
-    // So, we will iterate from 2 to 'n-1'.
-    for(int i=2; i<n; i++) {
-        if(prime[i]) {
-            count++;   // increase 'count', if prime number found at ith index, i.e., prime[i] = true
-
-            int j = 2 * i;   // storing 2nd multiple of i inside j. Note that 1st multiple of a number is the number itself.
-            while(j<n) {
-                prime[j] = false;   // marking multiples of i as composite, i.e false
-                j += i;   // here j = 3rd, 4th, ... last multiple of i uptil n-1
+    for(int i=2; i*i<n; i++) {
+        if(sieve[i]) {   // if its a prime number, mark its multiples as composite
+            int j = i * i;
+            while(j < n) {
+                sieve[j] = false;
+                j = j + i;   // j started from i*i, and going to next multiple of i
             }
         }
     }
-    // Note: If we were asked to find count till 'n', then prime would be of size 'n+1', and
-    // for and while loop would have have conditions as 'i<=n' and 'j<=n' respectively.
+
+    // The sieve of primes is ready. Thus, count how many are primes.
+    int count = 0;
+    for(int i=0; i<n; i++) {
+        if(sieve[i]) count++;
+    }
 
     return count;
 }
@@ -64,4 +52,6 @@ int countPrimes(int n) {
 int main() {
     int n = 23;
     cout << countPrimes(n);
+    
+    return 0;
 }
