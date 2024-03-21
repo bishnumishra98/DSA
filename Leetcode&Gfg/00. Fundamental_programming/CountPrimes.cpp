@@ -46,7 +46,7 @@ int countPrimes(int n) {
     // So, we will iterate from 2 to 'n-1'.
     for(int i=2; i<n; i++) {
         if(prime[i]) {
-            count++;   // increase 'count', if prime number found at ith index, i.e prime[i] = true
+            count++;   // increase 'count', if prime number found at ith index, i.e., prime[i] = true
 
             int j = 2 * i;   // storing 2nd multiple of i inside j. Note that 1st multiple of a number is the number itself.
             while(j<n) {
