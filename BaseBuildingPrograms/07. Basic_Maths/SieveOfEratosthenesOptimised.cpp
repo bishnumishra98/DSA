@@ -24,18 +24,19 @@ vector<bool> createSieveArray(int n) {
     // sieve[0] and sieve[1] will be treated as 0 and 1 respectively. So marking them false, i.e composite.
     sieve[0] = sieve[1] = false;
 
-    // Optimization 2: inner loop will never run more than √n times due to optimization 1,
-    // so there is no need of running the outer loop from 2 to n unnecessarily.
-    for(int i=2; i*i<=n; i++) {
+    // Optimization 2: inner loop will never run more than √n times due to optimization 1.
+    // Inshort, we are never going to check any value of i where i*i is greater than n. So,
+    // there is no need of running the outer loop from 2 to n unnecessarily.
+    for(int i=2; i*i<=n; i++) {   // or, for(int i=2; i<=sqrt(n); i++) {
     
         if(sieve[i] == true) {   // sieve[2] will be true only, so we will enter the loop
-        cout << "i=" << i << "  " << endl;
             // Optimization 1:  // we will start marking numbers as composite from i*i because numbers
             // less than i*i will already be marked by numbers less than i. For ex:- 2 will mark
             // 2, 4, 6, etc. as composite. So there is no need to mark 6 explicitly as composite from 3.
             int j = i * i;
             
-            while(j<=n) {   // this loop runs max √n times due to optimization 1
+            while(j<=n) {   // this loop runs max √n times due to optimization 1. For example, for n = 23,
+            // we will enter this loop only twice (for, j = 4, 9).
                 sieve[j] = false;   // marking multiples of i as composite, i.e false
                 j = j + i;
             }
@@ -46,7 +47,7 @@ vector<bool> createSieveArray(int n) {
 }
 
 int main() {
-    int n = 23;
+    int n = 60;
 
     vector<bool> sieve = createSieveArray(n);
 
