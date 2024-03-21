@@ -1,0 +1,13 @@
+1. Sieve of Eratosthenes optimised:
+    optimization 1: int j = i * i;
+    optimization 2: for(int = 2; i*i; i++)
+    
+    Note: If asked to count no.of primes, then always count primes from the sieve in a separate loop.
+    // T.C: O(nlog(logn)) - The total number of iterations across all primes is approximately
+    //                      n * (1/2 + 1/3 + 1/5 + ...), where the sum converges to the natural
+    //                      logarithm of logarithm of n, denoted as log(log(n)), according to the
+    //                      Prime Number Theorem. Therefore, the total number of iterations across
+    //                      all primes is approximately O(n * log(log(n))).
+    // S.C: O(n)
+
+2. 
