@@ -12,17 +12,17 @@
 
 // --------------------------------------------------------------------------------------------------
 // ---------------------------------------- UNARY TREE ----------------------------------------------
-// A tree k-ary tree with k = 1 is called a Unary Tree. In unary tree, every internal node has a
+// A k-ary tree with k = 1 is called a Unary Tree. In unary tree, every internal node has a
 // degree of 1. In other words, each internal node has exactly one child.
 
 // --------------------------------------------------------------------------------------------------
 // ---------------------------------------- BINARY TREE ---------------------------------------------
-// A tree k-ary tree with k = 2 is called a binary Tree. In binary tree, every internal node has
+// A k-ary tree with k = 2 is called a binary Tree. In binary tree, every internal node has
 // a degree of at most 2, i.e., a binary tree can have atmost 2 children from a node.
 
 // --------------------------------------------------------------------------------------------------
 // ---------------------------------------- TERNARY TREE --------------------------------------------
-// A tree k-ary tree with k = 2 is called a ternary Tree. In ternary tree, every internal node has
+// A k-ary tree with k = 2 is called a ternary Tree. In ternary tree, every internal node has
 // a degree of at most 3, i.e., a binary tree can have atmost 2 children from a node.
 
 // --------------------------------------------------------------------------------------------------
