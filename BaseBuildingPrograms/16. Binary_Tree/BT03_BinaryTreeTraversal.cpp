@@ -90,8 +90,8 @@ void levelOrderTraversal(Node* root) {
         // Step 2: Until the queue is empty, print its front element(parent node),
         //         pop the front element; and push its children(if exists) in queue.
         Node* front = q.front();
-        q.pop();
         cout << front->data << " ";
+        q.pop();
         if(front->left) q.push(front->left);
         if(front->right) q.push(front->right);
     }
