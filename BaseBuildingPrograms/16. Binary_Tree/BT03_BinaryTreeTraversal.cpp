@@ -49,8 +49,8 @@ Node* buildBinaryTree(int nodes[], int& i) {
     return newNode;
 }
 
-// T.C: O(n); where n = no.of nodes
-// S.C: O(height);  height = n for a skew tree
+// T.C: O(n);   where n = no.of nodes
+// S.C: O(height);   height = n for a skew tree
 void preOrderTraversal(Node* root) {
     if(root == NULL) return;   // base case
 
@@ -59,8 +59,8 @@ void preOrderTraversal(Node* root) {
     preOrderTraversal(root->right);   // R
 }
 
-// T.C: O(n); where n = no.of nodes
-// S.C: O(height);  height = n for a skew tree
+// T.C: O(n);   where n = no.of nodes
+// S.C: O(height);   height = n for a skew tree
 void inOrderTraversal(Node* root) {
     if(root == NULL) return;   // base case
 
@@ -69,8 +69,8 @@ void inOrderTraversal(Node* root) {
     inOrderTraversal(root->right);   // R
 }
 
-// T.C: O(n); where n = no.of nodes
-// S.C: O(height);  height = n for a skew tree
+// T.C: O(n);   where n = no.of nodes
+// S.C: O(height);   height = n for a skew tree
 void postOrderTraversal(Node* root) {
     if(root == NULL) return;   // base case
 
@@ -79,8 +79,8 @@ void postOrderTraversal(Node* root) {
     cout << root->data << " ";   // N
 }
 
-// T.C: O(n); where n = no.of nodes
-// S.C: O(width);  width = n for a skew tree
+// T.C: O(n);   where n = no.of nodes
+// S.C: O(width);   width = n for a skew tree
 void levelOrderTraversal(Node* root) {
     queue <Node*> q;
     // Step 1: Push the parent node in queue
