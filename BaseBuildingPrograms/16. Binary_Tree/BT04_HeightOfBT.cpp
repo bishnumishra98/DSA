@@ -36,10 +36,10 @@ int heightOfTree(TreeNode* root) {
     // base case
     if(root == NULL) return 0;
     
-    int leftSubTree_height = heightOfTree(root->left) + 1;
-    int rightSubTree_height = heightOfTree(root->right) + 1;
+    int leftSubTree_height = heightOfTree(root->left);
+    int rightSubTree_height = heightOfTree(root->right);
 
-    return max(leftSubTree_height, rightSubTree_height);
+    return max(leftSubTree_height, rightSubTree_height) + 1;
 }
 
 int main() {

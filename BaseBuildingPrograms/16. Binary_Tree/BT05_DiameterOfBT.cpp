@@ -30,10 +30,10 @@ struct TreeNode {
 int heightOfBT(TreeNode* root) {
     if(root == NULL) return 0;
 
-    int left_height = heightOfBT(root->left) + 1;
-    int right_height = heightOfBT(root->right) + 1;
+    int left_height = heightOfBT(root->left);
+    int right_height = heightOfBT(root->right);
 
-    return max(left_height, right_height);
+    return max(left_height, right_height) + 1;
 }
 
 // T.C: O(n^2)
