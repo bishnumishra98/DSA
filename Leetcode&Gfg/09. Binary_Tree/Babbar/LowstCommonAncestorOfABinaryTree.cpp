@@ -50,7 +50,7 @@ public:
     // T.C: O(n);   where n = no.of nodes
     // S.C: O(h);   where h = height of tree
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        // Base case: root is NULL or equal to p or q
+        // Base case: root is NULL or equal to p or q. '!root' is shorthand of writing 'root==NULL'
         if (!root || root == p || root == q) return root;
     
         TreeNode* left = lowestCommonAncestor(root->left, p, q);
