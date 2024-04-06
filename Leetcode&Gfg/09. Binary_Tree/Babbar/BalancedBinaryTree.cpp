@@ -53,7 +53,7 @@ public:
         int leftHeight = heightOfBT(root->left);
         int rightHeight = heightOfBT(root->right);
         
-        // Check if the difference in heights is more than 1
+        // If the difference in heights is less than equal to 1, difference is true, else false
         bool difference = (abs(leftHeight - rightHeight) <= 1);
 
         if(isLeftTreeBalanced && isRightTreeBalanced && difference) return true;
