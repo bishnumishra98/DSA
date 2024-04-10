@@ -1,25 +1,26 @@
 /*
 Consider the Binary Tree:
 
-           ____ 10 ____
-         /              \
-     __ 20 __            50 
-    /        \          /  \
-   30        40       NULL NULL
-  /  \      /  \
-NULL NULL NULL NULL
-
+            ______ 10 _______
+          /                   \
+     ___ 20 ___                30 
+    /          \                 \
+   40          50                60
+  /  \        /  \              /  \
+ 70  80      90  100          110  120
+                   \          /     /
+                   130      140    150
 */
 
 // There are 4 classical ways to traverse a Binary tree:
 // 1) Pre-order Traversal: Cheatcode = Node-Left-Right (NLR)
-//    Path: {10, 20, 30, 40, 50}
+//    Path: {10, 20, 40, 70, 80, 50, 90, 100, 130, 30, 60, 110, 140, 120, 150}
 // 2) In-order traversal: Cheatcode = Left-Node-Right (LNR)
-//    Path: {30, 20, 40, 10, 50}
+//    Path: {70, 40, 80, 20, 90, 50, 100, 130, 10, 30, 140, 110, 60, 150, 120}
 // 3) Post-order Traversal: Cheatcode = Left-Right-Node (LRN)
-//    Path: {30, 40, 20, 50, 10}
+//    Path: {70, 80, 40, 90, 130, 100, 50, 20, 140, 110, 150, 120, 60, 30, 10}
 // 4) Level-order Traversal(Breadth-First Traversal): Visit nodes level by level, from left to right.
-//    Path: {10, 20, 50, 30, 40}
+//    Path: {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150}
 
 #include <iostream>
 #include <queue>
