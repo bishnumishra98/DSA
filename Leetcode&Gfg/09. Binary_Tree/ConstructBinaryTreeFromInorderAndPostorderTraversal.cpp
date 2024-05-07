@@ -3,8 +3,9 @@
 // in postorder, we are going to traverse the postorder array from rightmost to leftmost, unlike we did in preorder.
 // In preorder(NLR), the leftmost element of preorder array used to represent the root of tree, and we were traversing from
 // 0th index to rightside. Thus, 1st index would represent a parent of left subtree. Hence, first left subtree was made.
-// But for a postorder(LRN) array of size n, 'n-1'th element of postorder array represents the root of tree, while the
-// 'n-2'th element of postorder array represents a parent of right subtree. Thus, first right subtree has to be made.
+// But for a postorder(LRN) array of size n, we are traversing from 'n-1'th element to leftside. 'n-1'th element of
+// postorder array represents the root of tree, while the 'n-2'th element of postorder array represents a parent of
+// right subtree. Thus, first right subtree has to be made in this case.
 
 // Leetcode: 106. Construct Binary Tree from Preorder and Postorder Traversal   --->   Given two integer arrays
 // inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder
@@ -104,7 +105,7 @@ public:
         // Once we know position of 'element' in the inorder array, construct rest of the tree recursively.
         // All elements on left of this element in the inorder array represents left subtree, while
         // all elements on right of this element in the inorder array represents right subtree.
-        // CHANGE 5: First call recursion for right subtree, then for left subtree.
+        // CHANGE 5: Just change the order of left and right subtree recursive calls.
         root->right = solve(inorder, postorder, postorderIndex, position+1, inorderEnd, size, inorderMap);
         root->left = solve(inorder, postorder, postorderIndex, inorderStart, position-1, size, inorderMap);
         
