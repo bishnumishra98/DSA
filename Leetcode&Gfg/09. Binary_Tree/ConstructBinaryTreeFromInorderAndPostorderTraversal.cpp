@@ -1,6 +1,14 @@
-// Leetcode: 105. Construct Binary Tree from Preorder and Inorder Traversal   --->   Given two integer arrays
-// preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal
-// of the same tree, construct and return the binary tree.
+// Before this problem, have a look at "Leetcode: 105. Construct Binary Tree from Preorder and Inorder Traversal".
+// The most important difference here will be that first right subtree will be made, then left one. This is because
+// in postorder, we are going to traverse the postorder array from rightmost to leftmost, unlike we did in preorder.
+// In preorder(NLR), the leftmost element of preorder array used to represent the root of tree, and we were traversing from
+// 0th index to rightside. Thus, 1st index would represent a parent of left subtree. Hence, first left subtree was made.
+// But for a postorder(LRN) array of size n, 'n-1'th element of postorder array represents the root of tree, while the
+// 'n-2'th element of postorder array represents a parent of right subtree. Thus, first right subtree has to be made.
+
+// Leetcode: 106. Construct Binary Tree from Preorder and Postorder Traversal   --->   Given two integer arrays
+// inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder
+// traversal of the same tree, construct and return the binary tree.
 
 // Example 1:
 //       3 
@@ -8,11 +16,11 @@
 //    9     20
 //         /  \
 //        15   7              
-// Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+// Input: inorder = [9,3,15,20,7], postorder = [9,15,7,20,3]
 // Output: [3,9,20,null,null,15,7]
 
 // Example 2:
-// Input: preorder = [-1], inorder = [-1]
+// Input: inorder = [-1], postorder = [-1]
 // Output: [-1]
 
 
@@ -71,19 +79,19 @@ public:
         }
     }
 
-    // IMPORTANT NOTE: Its mandatory to pass preorderIndex as reference, as we want to build subtree for
-    //                 every element of preorder vector. To do so, a new element(next element) of
-    //                 preorder vector must be traversed each time the solve() function is called.
-    TreeNode* solve(vector<int>& preorder, vector<int>& inorder, int &preorderIndex, int inorderStart, int inorderEnd, int size, map<int, int>& inorderMap) {
-        // Base case
-        if((preorderIndex >= size) || (inorderStart > inorderEnd)) return NULL;
+    // IMPORTANT NOTE: Its mandatory to pass postorderIndex as reference, as we want to build subtree for
+    //                 every element of postorder vector. To do so, a new element(next element leftside) of
+    //                 postorder vector must be traversed each time the solve() function is called.
+    TreeNode* solve(vector<int>& inorder, vector<int>& postorder, int &postorderIndex, int inorderStart, int inorderEnd, int size, map<int, int>& inorderMap) {
+        // Base case (CHANGE 2)
+        if((postorderIndex < 0) || (inorderStart > inorderEnd)) return NULL;
 
-        // The first element in the preorder array is the root of the tree. Extract this element from preorder array and
+        // The last element in the postorder array is the root of the tree. Extract this element from postorder array and
         // store it in a variable say 'element'. Then search this element in inorder array. All elements on left of this
         // element in the inorder array represents left subtree, while all elements on right of this element in the
-        // inorder array represents right subtree. Once the element is extracted, move on to next index of the preorder array.
-        int element = preorder[preorderIndex];
-        preorderIndex++;
+        // inorder array represents right subtree. Once the element is extracted, move on to next index of the postorder array.
+        int element = postorder[postorderIndex];   // CHANGE 3
+        postorderIndex--;   // CHANGE 4
 
         // Create a tree from this element
         TreeNode* root = new TreeNode(element);
@@ -96,13 +104,14 @@ public:
         // Once we know position of 'element' in the inorder array, construct rest of the tree recursively.
         // All elements on left of this element in the inorder array represents left subtree, while
         // all elements on right of this element in the inorder array represents right subtree.
-        root->left = solve(preorder, inorder, preorderIndex, inorderStart, position-1, size, inorderMap);
-        root->right = solve(preorder, inorder, preorderIndex, position+1, inorderEnd, size, inorderMap);
-
+        // CHANGE 5: First call recursion for right subtree, then for left subtree.
+        root->right = solve(inorder, postorder, postorderIndex, position+1, inorderEnd, size, inorderMap);
+        root->left = solve(inorder, postorder, postorderIndex, inorderStart, position-1, size, inorderMap);
+        
         return root;
     }
 
-    // T.C: O(n);   where n = no.of elements in preorder or inorder vector
+    // T.C: O(n);   where n = no.of elements in postorder or inorder vector
     // S.C: O(n)
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
         int size = inorder.size();
@@ -111,10 +120,10 @@ public:
         map <int, int> inorderMap;
         createMapping(inorder, size, inorderMap);
         
-        int preorderIndex = 0;
+        int postorderIndex = size - 1;   // CHANGE 1
         int inorderStart = 0;
         int inorderEnd = size - 1;
-        TreeNode* root = solve(inorder, postorder, preorderIndex, inorderStart, inorderEnd, size, inorderMap);
+        TreeNode* root = solve(inorder, postorder, postorderIndex, inorderStart, inorderEnd, size, inorderMap);
         return root;
     }
 };
