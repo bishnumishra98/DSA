@@ -9,7 +9,7 @@ Consider the Binary Tree:
   /  \        /  \              /  \
  70  80      90  100          110  120
                    \          /     /
-                   130      140    150
+                   130      140   150
 */
 
 // There are 4 classical ways to traverse a Binary tree:
