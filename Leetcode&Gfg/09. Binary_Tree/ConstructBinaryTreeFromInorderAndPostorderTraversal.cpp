@@ -104,7 +104,7 @@ public:
 
     // T.C: O(n);   where n = no.of elements in preorder or inorder vector
     // S.C: O(n)
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
         int size = inorder.size();
 
         // If you are not using map for searching, no need to write next two lines, neither need to pass 'inorderMap' in solve().
@@ -114,7 +114,7 @@ public:
         int preorderIndex = 0;
         int inorderStart = 0;
         int inorderEnd = size - 1;
-        TreeNode* root = solve(preorder, inorder, preorderIndex, inorderStart, inorderEnd, size, inorderMap);
+        TreeNode* root = solve(inorder, postorder, preorderIndex, inorderStart, inorderEnd, size, inorderMap);
         return root;
     }
 };
@@ -125,17 +125,17 @@ int main() {
     //     /   \
     //    9     20
     //         /  \
-    //        15   7
+    //        15   7 
     TreeNode* root = new TreeNode(3);
     root->left = new TreeNode(9);
     root->right = new TreeNode(20);
     root->right->left = new TreeNode(15);
     root->right->right = new TreeNode(7);
 
-    vector<int> preorder = {3,9,20,15,7};
     vector<int> inorder = {9,3,15,20,7};
-
-    TreeNode* ans = sol.buildTree(preorder, inorder);
+    vector<int> postorder = {9,15,7,20,3};
+    
+    TreeNode* ans = sol.buildTree(inorder, postorder);
 
     sol.levelOrderTraversal(ans);
 
