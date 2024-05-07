@@ -75,7 +75,7 @@ int solve(Node *root, int &k, int node) {
 }
 
 // T.C: O(n)
-// S.C: 
+// S.C: O(h)
 int kthAncestor(Node *root, int k, int node) {
     int ans = solve(root, k, node);
     // It is already given that k>=1. Thus, if node given is the root node itself and k is for sure >= 1,
