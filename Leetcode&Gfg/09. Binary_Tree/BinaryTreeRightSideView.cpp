@@ -1,3 +1,10 @@
+// This problem falls under views pattern of Binary Tree. Follow this sequence:
+// 1. "Leetcode&Gfg\09. Binary_Tree\LeftViewOfBinaryTree.cpp"
+// 2. "Leetcode&Gfg\09. Binary_Tree\BinaryTreeRightSideView.cpp"
+// 3. "Leetcode&Gfg\09. Binary_Tree\TopViewOfBinaryTree.cpp"
+// 4. "Leetcode&Gfg\09. Binary_Tree\BottomViewOfBinaryTree.cpp"
+
+
 // Exactly same as "Leetcode&Gfg\09. Binary_Tree\LeftViewOfBinaryTree.cpp". The only difference being here is that
 // first call recursion for right subtree, then for left subtree, as we have to store the right view of the binary tree.
 
