@@ -114,7 +114,8 @@ void levelOrderTraversal_LevelByLevel(Node* root) {
             // If 'front' of queue is a NULL, it means the last parent node has been printed,
             // popped out of queue, and its children have been pushed in queue already in the last
             // iteration. Thus, we should again add NULL to queue, in order to mark line change.
-            if(!q.empty()) q.push(NULL);
+            if(!q.empty()) q.push(NULL);   // 'if(!q.empty())' condition helps to stop pushing NULL in
+            // queue if queue is empty, as a result we will be able to exit this while() loop in the last iteration.
         } else {   // If 'front' is a valid node
             if(front->left) q.push(front->left);
             if(front->right) q.push(front->right);
