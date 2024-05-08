@@ -7,6 +7,17 @@
 // GFG: Given below is a binary tree. The task is to print the top view of binary tree. Top view of a binary tree
 // is the set of nodes visible when the tree is viewed from the top.
 
+//          1 
+//         / \
+//        2   3
+//       / \ / \
+//      4  5 6  7
+//       \
+//        8
+// Its top view will be 4 2 1 3 7
+
+// This problem will require 3 data structures to get solved: vector, queue and map.
+
 #include <bits/stdc++.h>
 using namespace std;
 

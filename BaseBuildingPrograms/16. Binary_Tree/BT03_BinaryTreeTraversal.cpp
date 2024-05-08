@@ -88,13 +88,13 @@ void levelOrderTraversal(Node* root) {
     q.push(root);
 
     while(!q.empty()) {
-        // Step 2: Until the queue is empty, print its front element(parent node),
-        //         pop the front element; and push its children(if exists) in queue.
+        // Step 2: Until the queue is not empty, push its children(if exists) in queue,
+        //         print its front element(parent node), and pop the front element.
         Node* front = q.front();
-        cout << front->data << " ";
-        q.pop();
         if(front->left) q.push(front->left);
         if(front->right) q.push(front->right);
+        cout << front->data << " ";
+        q.pop();
     }
 }
 
@@ -116,9 +116,9 @@ void levelOrderTraversal_LevelByLevel(Node* root) {
             // iteration. Thus, we should again add NULL to queue, in order to mark line change.
             if(!q.empty()) q.push(NULL);
         } else {   // If 'front' is a valid node
-            cout << front->data << " ";
             if(front->left) q.push(front->left);
             if(front->right) q.push(front->right);
+            cout << front->data << " ";
         }
     }
 }
