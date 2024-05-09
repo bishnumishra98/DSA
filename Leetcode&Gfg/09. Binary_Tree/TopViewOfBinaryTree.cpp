@@ -53,8 +53,7 @@ class Solution {
     public:
     // T.C: O(n)
     // S.C: O(n)
-    vector<int> topView(Node *root)
-    {   
+    vector<int> topView(Node *root) {   
         vector <int> topView;
         queue < pair<Node*, int> > q;
         map <int, int> hdToNodeMap;
