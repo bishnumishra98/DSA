@@ -82,8 +82,8 @@ public:
         ans.push_back(root->data);
     }
 
-    // T.C: 
-    // S.C: 
+    // T.C: O(n)
+    // S.C: O(n)
     vector <int> boundary(Node *root) {
         ans.push_back(root->data);   // pushing the root node in vector
 
