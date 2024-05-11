@@ -29,8 +29,8 @@ struct TreeNode {
 
 class Solution {
 public:
-    // T.C: O(n)
-    // S.C: O(n)
+    // T.C: O(logN) on average case(balanced tree), O(N) in the worst case(skew tree).
+    // S.C: O(N)
     TreeNode* searchBST(TreeNode* root, int val) {
         if(!root) return NULL;   // if root is NULL, return NULL
 
