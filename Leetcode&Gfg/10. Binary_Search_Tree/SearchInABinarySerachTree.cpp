@@ -36,10 +36,12 @@ public:
 
         if(val == root->val) return root;   // if 'val' matches the node's value, return that node
 
-        // Search the 'val' in left and right subtrees
-        TreeNode* left = searchBST(root->left, val);
-        TreeNode* right = searchBST(root->right, val);
+        TreeNode* left = NULL;
+        TreeNode* right = NULL;
 
+        if(val < root->val) left = searchBST(root->left, val);
+        else right = searchBST(root->right, val);
+       
         // If we got any node from left subtree, then return that node; else return right node.
         // Anyways, if we get NULL from both left and right, we will be returning NULL from right.
         if(left) return left;
