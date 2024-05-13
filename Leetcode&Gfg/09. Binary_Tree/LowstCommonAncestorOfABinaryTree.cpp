@@ -59,7 +59,7 @@ public:
         if (!left && !right) return NULL;    // 1st condition: If both left and right are NULL
         else if (left && !right) return left;   // 2nd condition: If either left or right is not NULL
         else if (!left && right) return right;
-        else return root;   // 3rd condition: If both left and right are not NULL
+        else return root;   // 3rd condition: If both left and right are not NULL, return the node, i.e., LCA
     }
 };
 
