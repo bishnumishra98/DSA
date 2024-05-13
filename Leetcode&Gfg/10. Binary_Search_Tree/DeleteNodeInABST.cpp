@@ -83,6 +83,7 @@ public:
                 delete root;
                 return rightSubTree;
             } else {   // case 4: The node to delete has both left and right child nodes
+                // Find max node of left subtree and replace it with root node, and then delete max node.
                 // Step 1: Bring max node of left subtree in variable say 'maxi'
                 TreeNode* maxi = maxNodeInBST(root->left);
                 // Step 2: Replace 'root->val' with the 'maxi->val'
