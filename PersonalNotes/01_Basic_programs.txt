@@ -12,3 +12,5 @@
 
 2. Set kth bit of a number n(n is given as a decimal number):
     return n | (1 << k);
+
+3. 
