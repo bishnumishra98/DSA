@@ -84,7 +84,7 @@ void convertBSTtoLL_bruteForce(TreeNode* root, Node* &head) {
 }
 
 // ----------------------------------------------------------------------------------------
-
+/*
 // Optimal algorithm:
 
 // T.C: 
@@ -105,7 +105,7 @@ void convertBSTtoLL(TreeNode* root, Node* &head) {
     // L
     convertBSTtoLL( root->left, head);
 }
-
+*/
 
 int main() {
 //          100 
