@@ -42,7 +42,7 @@ void printElementsOfLL(Node* head) {
     }
 }
 
-// --------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Brute force
 
@@ -83,17 +83,28 @@ void convertBSTtoLL_bruteForce(TreeNode* root, Node* &head) {
     createLL(v, head);
 }
 
-// --------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Optimal algorithm:
 
 // T.C: 
 // S.C: 
-void convertBSTtoLL_bruteForce(TreeNode* root, Node* &head) {
-    
+void convertBSTtoLL(TreeNode* root, Node* &head) {
+    if(!root) return;
+
+    // R
+    convertBSTtoLL( root->right, head);
+
+    // N
+    // attaching next pointer of current node to head of LL
+    root->right = head;
+    // attaching prev pointer of head of LL to current node
+    if(head != NULL) head->prev = root;
+    head = root;
+
+    // L
+    convertBSTtoLL( root->left, head);
 }
-
-
 
 
 int main() {
@@ -114,7 +125,8 @@ int main() {
     // Creating a blank doubly Linked List
     Node* head = new Node();
 
-    convertBSTtoLL_bruteForce(root, head);
+    // convertBSTtoLL_bruteForce(root, head);
+    convertBSTtoLL(root, head);
 
     printElementsOfLL(head);
 
