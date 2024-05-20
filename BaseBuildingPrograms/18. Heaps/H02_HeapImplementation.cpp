@@ -48,8 +48,8 @@ class Heap {
                                 // The root element (at index 1) cannot be further heapified as it has no parent.
                 int parentIndex = index / 2;   // Refer 'H01_MaxHeapParentChildRelation.png' for this formula
                 if(arr[index] > arr[parentIndex]) {   // If current value is greater than its parent
-                    swap(arr[index], arr[parentIndex]);
-                    index = parentIndex;
+                    swap(arr[index], arr[parentIndex]);   // Swap the current element with its parent
+                    index = parentIndex;   // Update index to the parent's index to continue heapifying up
                 }
                 else {   // If current value is not greater than its parent
                     break;
