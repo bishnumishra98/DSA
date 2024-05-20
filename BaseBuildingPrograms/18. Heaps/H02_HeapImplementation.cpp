@@ -31,6 +31,7 @@ class Heap {
         }
 
         // Method to insert a new value in heap
+        // T.C: O(h);   where h = logN
         void insert(int val) {
             // If size of heap already is equal to its capacity, no more elements can be inserted
             if(size == capacity) {
