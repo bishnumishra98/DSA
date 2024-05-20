@@ -1,5 +1,6 @@
 // Heaps are implemented using arrays, but visualized using tree concept.
-// Lets create a max heap for {10, 50, 60, 30, 20, 40}
+// Lets create a max heap for {10, 50, 60, 30, 20, 40}.
+// Deleteion is performed always on root node. Then the elements are heapified to form a heap.
 
 #include <iostream>
 using namespace std;
@@ -44,7 +45,7 @@ class Heap {
         // T.C:
         // S.C: 
         void deleteElementFromHeap() {
-            
+
         }
 };
 
