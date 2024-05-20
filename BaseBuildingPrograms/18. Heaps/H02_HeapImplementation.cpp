@@ -44,7 +44,8 @@ class Heap {
             arr[index] = val;
 
             // Take the val to its correct position
-            while(index > 1) {
+            while(index > 1) {   // 'index > 1' because we need to heapify up until the root element. 
+                                // The root element (at index 1) cannot be further heapified as it has no parent.
                 int parentIndex = index / 2;   // Refer 'H01_MaxHeapParentChildRelation.png' for this formula
                 if(arr[index] > arr[parentIndex]) {   // If current value is greater than its parent
                     swap(arr[index], arr[parentIndex]);
