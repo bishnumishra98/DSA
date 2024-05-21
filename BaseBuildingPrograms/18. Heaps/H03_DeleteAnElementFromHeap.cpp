@@ -60,22 +60,28 @@ class Heap {
             // Heapify the elements starting from the root
             int index = 1;
             while(true) {
+                // Calculate indices of left and right children of the current element
                 int leftChildIndex = 2 * index;
                 int rightChildIndex = 2 * index + 1;
-                int largestElementIndex = index;
 
+                int largestElementIndex = index;   // Initialize largest element index as the current element's index
+
+                // Update largest element index to the left child if it's larger
                 if (leftChildIndex <= size && arr[leftChildIndex] > arr[largestElementIndex]) {
                     largestElementIndex = leftChildIndex;
                 }
+
+                // Update largest element index to the right child if it's larger
                 if (rightChildIndex <= size && arr[rightChildIndex] > arr[largestElementIndex]) {
                     largestElementIndex = rightChildIndex;
                 }
 
-                if (largestElementIndex != index) {
-                    swap(arr[index], arr[largestElementIndex]);
-                    index = largestElementIndex;
-                } else {
+                // If the largest element's index is the current element's index, we're done with heapifying. Thus, break the loop.
+                if (largestElementIndex == index) {
                     break;
+                } else {   // Else if the current element is not the largest element, swap them.
+                    swap(arr[index], arr[largestElementIndex]);
+                    index = largestElementIndex;   // Update the current index to the position where the larger child was swapped
                 }
             }
         }
