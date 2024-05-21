@@ -1,6 +1,10 @@
 // Heaps are implemented using arrays, but visualized using tree concept.
 // Lets create a max heap for {10, 50, 60, 30, 20, 40}.
 // Deleteion is performed always on root node. Then the elements are heapified to form a heap.
+// Algorithm:
+// 1. Replace the last element of heap with the root element of heap.
+// 2. Delete the last element(where root element is currently present).
+// 3. Heapify the elements.
 
 #include <iostream>
 using namespace std;
@@ -42,10 +46,38 @@ class Heap {
             cout << endl;
         }
 
-        // T.C:
-        // S.C: 
+        // T.C: O(h);   where h = logN
+        // S.C: O(1)
         void deleteElementFromHeap() {
+            // Step 1: Replace last element with root node
+            arr[1] = arr[size];
 
+            // Step 2: Delete the last element. By doing 'size--', we just reduced the size of element. So eventully,
+            // the last element of array is out of scope now; hence it can be considered as deleted.
+            size--;
+
+            // Step 3: Heapify
+            // Heapify the elements starting from the root
+            int index = 1;
+            while(true) {
+                int leftChildIndex = 2 * index;
+                int rightChildIndex = 2 * index + 1;
+                int largestElementIndex = index;
+
+                if (leftChildIndex <= size && arr[leftChildIndex] > arr[largestElementIndex]) {
+                    largestElementIndex = leftChildIndex;
+                }
+                if (rightChildIndex <= size && arr[rightChildIndex] > arr[largestElementIndex]) {
+                    largestElementIndex = rightChildIndex;
+                }
+
+                if (largestElementIndex != index) {
+                    swap(arr[index], arr[largestElementIndex]);
+                    index = largestElementIndex;
+                } else {
+                    break;
+                }
+            }
         }
 };
 
@@ -69,6 +101,8 @@ int main() {
 
     // Printing elements of heap
     h.printHeap();   // 60 30 50 10 20 40
+    h.deleteElementFromHeap();
+    h.printHeap();   // 50 30 40 10 20
 
     return 0;
 }

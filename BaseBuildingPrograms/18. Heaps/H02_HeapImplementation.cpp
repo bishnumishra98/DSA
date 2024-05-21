@@ -32,6 +32,7 @@ class Heap {
 
         // Method to insert a new value in heap
         // T.C: O(h);   where h = logN
+        // S.C: O(1)
         void insert(int val) {
             // If size of heap already is equal to its capacity, no more elements can be inserted
             if(size == capacity) {
@@ -40,6 +41,9 @@ class Heap {
             }
 
             // Indexing in our heap starts from 1. So first element will be inserted at arr[1], and so on.
+            // Algorithm for inserting an element in Heap:
+            // Step 1: Insert the new element of heap after the last element of the array, i.e., at the end of the array.
+            // Step 2: Compare the element with its parent, if necessary, heapify.
             size++;
             int index = size;
             arr[index] = val;
