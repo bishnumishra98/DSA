@@ -62,7 +62,7 @@ class Heap {
             while(true) {
                 // Calculate indices of left and right children of the current element
                 int leftChildIndex = 2 * index;
-                int rightChildIndex = 2 * index + 1;
+                int rightChildIndex = (2 * index) + 1;
 
                 int largestElementIndex = index;   // Initialize largest element index as the current element's index
 
