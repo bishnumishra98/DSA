@@ -33,7 +33,7 @@ void heapify(int *arr, int n, int index) {
 // S.C: O(h);   where h = logN
 void buildMaxHeap(int *arr, int n) {
     // Start from the last internal node all the way up to the root node.
-    for (int i = n/2 - 1; i >= 0; i--) {
+    for (int i = n/2; i >= 0; i--) {
         heapify(arr, n, i);
     }
 }
