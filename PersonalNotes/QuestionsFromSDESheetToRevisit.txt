@@ -2,3 +2,6 @@ Longest Substring Without Repeating Characters : Leetcode 3
 Morrish Traversal
 Flatten a Linked List
 Leetcode 34. Find First and Last Position of Element in Sorted Array
+Leetcode 1021. Remove Outermost Parentheses
+Leetcode 151. Reverse Words in a String
+Leetcode 1903. Largest Odd Number in String

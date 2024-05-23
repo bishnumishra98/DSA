@@ -76,7 +76,8 @@ class Heap {
                     largestElementIndex = rightChildIndex;
                 }
 
-                // If the largest element's index is the current element's index, we're done with heapifying. Thus, break the loop.
+                // After the above two conditions, if the largest element's index is still the
+                // current element's index, we're done with heapifying. Thus, break the loop.
                 if (largestElementIndex == index) {
                     break;
                 } else {   // Else if the current element is not the largest element, swap them.
