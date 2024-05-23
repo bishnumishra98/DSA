@@ -82,7 +82,8 @@ class Heap {
                     break;
                 } else {   // Else if the current element is not the largest element, swap them.
                     swap(arr[index], arr[largestElementIndex]);
-                    index = largestElementIndex;   // Update the current index to the position where the larger child was swapped
+                    index = largestElementIndex;   // Update the current index to the position where
+                                                  // the larger child was swapped to continue heapification.
                 }
             }
         }
