@@ -17,7 +17,7 @@ struct TreeNode {
 
 class Solution {
 public:
-    // T.C:
+    // T.C: 
     // S.C: 
     bool isCompleteTree(TreeNode* root) {
         if(!root) return true;
