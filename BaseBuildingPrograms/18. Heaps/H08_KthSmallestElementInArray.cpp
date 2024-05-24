@@ -4,8 +4,8 @@
 
 // These type of questions can be solved in 3 mthods:
 // 1. Brute force approach (using sort() function)
-// 2. Using min heap
-// 3. Using max heap
+// 2. Better approach (using min heap)
+// 3. Optimal approach (using max heap)
 
 #include <iostream>
 #include <vector>
@@ -22,14 +22,24 @@ int findKthSmallest_bruteForce(vector<int>& nums, int k) {
 
 //-----------------------------------------------------------------------------
 
-// T.C: O(N);
-// S.C: O(1)
+// T.C: O(N + (k-1)*logN);   Building the heap from N elements of 'nums' takes O(N) time. Each pop operation from
+//                           a heap of size N takes O(logN) time. Therefore, popping k-1 elements will take
+//                           O((k-1)*logN) time. Combining these steps, the total time complexity is O(N + (k-1)*logN).
+// S.C: O(N);   The priority queue (min-heap) stores all N elements from the 'nums' vector, which requires O(N) space.
 int findKthSmallest_minHeap(vector<int>& nums, int k) {
-    // Use a min-heap to store the elements
+    /*
+    // Create a min-heap and then store the elements from 'nums' vector into the min-heap
     priority_queue<int, vector<int>, greater<int>> minHeap;
+    for(int i=0; i<nums.size(); i++) {
+        minHeap.push(nums[i]);
+    }
+    */
 
-    // Extract the minimum element (k-1) times
-    for (int i = 0; i < k - 1; i++) {
+    // The above process to use a min-heap and store the elements from 'nums' vector in it, can be done in 1 single line
+    priority_queue<int, vector<int>, greater<int>> minHeap(nums.begin(), nums.end());
+
+    // Pop (k-1) elements, so that kth smallest element is on top of priority_queue
+    for (int i = 0; i < k-1; i++) {
         minHeap.pop();
     }
 
@@ -39,10 +49,41 @@ int findKthSmallest_minHeap(vector<int>& nums, int k) {
 
 //-----------------------------------------------------------------------------
 
-// T.C: 
-// S.C: 
+// Algorithm:
+// 1. Create a max-heap using the first k elements of the given input array.
+// 2. The top element of the max-heap is the largest among the first k elements. For each remaining element in the array,
+//    compare it with the top element of the max-heap and if the current element is smaller than the top element of the
+//    max-heap, remove the top element from the heap and insert the current element into the heap.
+// 3. After processing all elements, the top element of the max-heap is the k-th smallest element of the input array.
+
+// T.C: O(k + (N−k)logk);   Building the heap from k elements of 'nums' takes O(k) time. For the remaining 'n−k' elements,
+//                          if the if condition is true, the algorithm performs a two heap operations (pop and push) which
+//                          takes O(logK) time.e. Since this is done for each of 'n−k' elements, the total time complexity
+//                          becomes O((n−k)logk). Combining these steps, the total time complexity is O(k + (N−k)logk).
+// S.C: O(K);   The priority queue (max-heap) stores K elements from the 'nums' vector, which requires O(K) space.
 int findKthSmallest_maxHeap(vector<int>& nums, int k) {
-    
+    // Step 1: Make a max-heap from the first k elements of the given input array
+
+    /*
+    priority_queue<int> maxHeap;
+    for(int i=0; i<k; i++) {
+        maxHeap.push(nums[i]);
+    }
+    */
+
+    // The above process to use a max-heap and store the first 'k' elements from 'nums', can be done in 1 single line
+    priority_queue<int> maxHeap(nums.begin(), nums.begin() + k);
+
+    // Step 2: Compare the rest of the elements with the top element of the max-heap
+    for(int i=k; i<nums.size(); i++) {
+        if(nums[i] < maxHeap.top()) {
+            maxHeap.pop();
+            maxHeap.push(nums[i]);
+        }
+    }
+
+    // The top element of the max-heap is the k-th smallest element
+    return maxHeap.top();
 }
 
 //-----------------------------------------------------------------------------
@@ -53,7 +94,7 @@ int main() {
 
     cout << "Brute force: " << findKthSmallest_bruteForce(v, k) << endl;
     cout << "Min heap: " << findKthSmallest_minHeap(v, k) << endl;
-
-
+    cout << "Max heap: " << findKthSmallest_maxHeap(v, k) << endl;
+    
     return 0;
 }

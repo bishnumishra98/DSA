@@ -38,6 +38,8 @@ int main() {
         cout << "The max-heap is not empty." << endl;
     }
 
+//----------------------------------------------------------------------------------------
+
     // Creating a min-heap priority queue
     priority_queue<int, vector<int>, greater<int>> minHeap;
 
