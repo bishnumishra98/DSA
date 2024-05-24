@@ -11,8 +11,8 @@ void printHeap(int *arr, int size) {
 // Recursive method to heapify elements
 // Doing for 0 based index:
 void heapify(int *arr, int n, int index) {
-    int leftIndex = (2 * index) + 1; // Left child index for 0-based index
-    int rightIndex = (2 * index) + 2; // Right child index for 0-based index
+    int leftIndex = (2 * index) + 1;   // Left child index for 0-based index
+    int rightIndex = (2 * index) + 2;   // Right child index for 0-based index
     int largestIndex = index;
 
     if(leftIndex < n && arr[leftIndex] > arr[largestIndex])
