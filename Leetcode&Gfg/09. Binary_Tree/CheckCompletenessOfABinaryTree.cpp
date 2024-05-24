@@ -18,8 +18,8 @@ struct TreeNode {
 class Solution {
 public:
     // The structure of this code is similar to level-order traversal of Binary Tree.
-    // T.C:
-    // S.C:
+    // T.C: O(n)
+    // S.C: O(n)
     bool isCompleteTree(TreeNode* root) {
         if(!root) return true;   // If root of BT is itself a NULL, consider it a CBT or not; its your choice.
         

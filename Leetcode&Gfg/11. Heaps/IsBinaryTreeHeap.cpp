@@ -29,24 +29,24 @@ struct Node {
 
 class Solution {
   public:
+    // Check 'Leetcode&Gfg\09. Binary_Tree\CheckCompletenessOfABinaryTree.cpp' for understanding this function.
     bool isCompleteBinaryTree(Node* root) {
-        if(!root) return true;
-        
+        if(!root) return true;   // Let's consider a null root tree as CBT.
+
         queue<Node*> q;
         q.push(root);
-        bool encounteredNull = false;
+        bool encounteredNULL = false;
 
         while(!q.empty()) {
-            Node* current = q.front();
+            Node* front = q.front();
             q.pop();
 
-            if(!current) {
-                encounteredNull = true;   // first null node encountered
+            if(!front) {
+                encounteredNULL = true;
             } else {
-                if(encounteredNull) return false;   // found a non-null node after a null node
-
-                q.push(current->left);
-                q.push(current->right);
+                if(encounteredNULL) return false;
+                q.push(front->left);
+                q.push(front->right);
             }
         }
 
@@ -54,19 +54,25 @@ class Solution {
     }
 
     bool hasHeapProperty(Node* root) {
-        if(!root) return true;
-
+        if(!root) return true;   // Return true if a null node is reached
+        
+        // If the left child exists and the root's data is less than the left child's data,
+        // it violates the max heap property, so return false. Similarly, check for right child.
         if(root->left && (root->data < root->left->data)) return false;
         if(root->right && (root->data < root->right->data)) return false;
 
-        return hasHeapProperty(root->left) && hasHeapProperty(root->right);
+        // Recursively check the heap property for the left and right subtree
+        bool left = hasHeapProperty(root->left);
+        bool right = hasHeapProperty(root->right);
+        
+        // Return true only if both left and right subtrees satisfy the heap property
+        return left && right;
     }
 
-    // T.C:
-    // S.C: 
+    // T.C: O(n) for isCompleteBinaryTree() + O(n) for hasHeapProperty() = O(n)
+    // S.C: O(n) for isCompleteBinaryTree() + O(logn) for hasHeapProperty() = O(n)
     bool isHeap(Node* tree) {
-        if (!tree) return true;
-
+        if(!tree) return true;   // Let's consider a null root tree as heap.
         return isCompleteBinaryTree(tree) && hasHeapProperty(tree);
     }
 };
