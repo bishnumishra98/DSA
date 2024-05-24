@@ -17,29 +17,37 @@ struct TreeNode {
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
+    // The structure of this code is similar to level-order traversal of Binary Tree.
+    // T.C:
+    // S.C:
     bool isCompleteTree(TreeNode* root) {
-        if(!root) return true;
+        if(!root) return true;   // If root of BT is itself a NULL, consider it a CBT or not; its your choice.
         
         queue<TreeNode*> q;
         q.push(root);
         bool encounteredNull = false;
 
         while(!q.empty()) {
-            TreeNode* current = q.front();
+            TreeNode* front = q.front();
             q.pop();
 
-            if(!current) {
-                encounteredNull = true;   // first null node encountered
-            } else {
-                if(encounteredNull) return false;   // found a non-null node after a null node
+            if(!front) {   // If queue contains a null node, it means we are currently at
+                          // a null node. Thus, make the 'encounteredNull' flag as true.
+                encounteredNull = true;
+            } else {   // If queue contains a valid node
+                // If 'encounteredNULL' is true, it means a null node was found. And now,
+                // as we came here means a non-null node is found. Therefore, it means
+                // that a non-null node is found after a null node, which violates the
+                // condition for a CBT. Thus, straightaway return false.
+                if(encounteredNull) return false;
 
-                q.push(current->left);
-                q.push(current->right); 
+                // Push the left and right child of BT into queue
+                q.push(front->left);
+                q.push(front->right); 
             }
         }
-
+        
+        // If all non-null nodes appear before all null nodes, it is a CBT. Return true.
         return true;
     }
 };
