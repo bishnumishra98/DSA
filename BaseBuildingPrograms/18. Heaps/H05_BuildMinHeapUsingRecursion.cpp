@@ -32,7 +32,7 @@ void heapify(int *arr, int n, int index) {
 }
 
 // T.C: O(N)
-// S.C: O(h);   where h = logN
+// S.C: O(H);   where H = logN
 void buildMinHeap(int *arr, int n) {
     // Start from the last internal node all the way up to the root node
     for (int i = n/2; i >= 0; i--) {
