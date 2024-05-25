@@ -1,14 +1,21 @@
 // If we were to merge two or three sorted arrays, we could have used two-pointer or three-pointer approach.
 // But if no.of sorted arrays are many, this approach is not feasible. Thus, we will use concept of min-heap.
 // Algorithm:
-// 1. Create a blank array say 'ans', where the merged array will be constructed.
-// 2. Create a min-heap from the first element of all k arrays.
+// 1. Create an array say 'ans', where the merged array will be constructed.
+// 2. Create a min-heap by pushing the first element from each of the k arrays. Note that not
+//    only just push the elements of the arrays, but also push the element's row-index and
+//    column-index along with it. This will be useful to keep a track of elements that have been
+//    pushed into the min-heap from respective arrays. Thus, each element pushed into the
+//    min-heap should be a tuple(value, row_index, col_index).
 // 3. Pop the top element of min-heap, i.e., the smallest first element amongst all k arrays,
-//    and store it inside the 'ans' array.
-// 4. After popping the top element from min-heap, push the next element from that array from where
+//    and store it inside the 'ans' array. The smaller element in a heap is resolved on the basis
+//    of a functor that determines the ordering of elements in the priority queue. But as we
+//    are not pushing any primitive data types like int or float into heap, we have to define
+//    our own functor, i.e., a custom comparator which will decide which tuple is smaller.
+// 4. After popping the top element from min-heap, push the next element of the array from where
 //    the previous element was popped, into the min-heap.
-// 5. Repeat the process until all elements of all k arrays have been pushed into the min-heap. Also,
-//    keep popping out elements from min-heap and store then in 'ans' array until the min-heap is over.
+// 5. Repeat the process to push all elements of each array into the min-heap. Also, keep
+//    popping and storing the elements from min-heap into 'ans' array until the min-heap is over.
 
 #include <iostream>
 #include <vector>
@@ -23,7 +30,12 @@ struct Compare {
     }
 };
 
-// Merges k sorted arrays into a single sorted array
+// T.C: O(nlogk);   where n = total number of elements across all arrays, and O(logk) time is required
+//                  to push each element into the heap and extract from heap from k arrays. Thus, for
+//                  n elements, total time required to push and extract from heap will be O(nlogk).
+// S.C: O(n+k);   At any given time, the min-heap stores at most k elements (one from each array).
+//                Hence, the space required for the min-heap is O(k). The merged array ans will store
+//                all n elements, thus it will require O(n) space. Thus, overall space complexity is O(n+k).
 void mergeKSortedArrays(vector<vector<int>>& arr, vector<int>& ans) {
     // Min-heap (priority queue) to store (element, row index, column index)
     priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, Compare> minHeap;
