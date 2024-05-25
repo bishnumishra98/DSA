@@ -17,16 +17,16 @@
 using namespace std;
 
 // A comparator function for the priority queue
-struct compare {
+struct Compare {
     bool operator()(const tuple<int, int, int>& a, const tuple<int, int, int>& b) {
-        return get<0>(a) > get<0>(b);   // Compare the first elements (values) of the tuples
+        return get<0>(a) > get<0>(b);   // If the first element of tuple 'a' is greater than that of tuple 'b', return true, else false.
     }
 };
 
 // Merges k sorted arrays into a single sorted array
 void mergeKSortedArrays(vector<vector<int>>& arr, vector<int>& ans) {
     // Min-heap (priority queue) to store (element, row index, column index)
-    priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, compare> minHeap;
+    priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, Compare> minHeap;
 
     // Initialize the heap with the first element of each array
     for(int i = 0; i < arr.size(); ++i) {
