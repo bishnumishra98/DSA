@@ -42,7 +42,7 @@ void mergeKSortedArrays(vector<vector<int>>& arr, vector<int>& ans) {
 
     // Initialize the heap with the first element of each array
     for(int i = 0; i < arr.size(); ++i) {
-        if (!arr[i].empty()) {
+        if(!arr[i].empty()) {
             minHeap.push(make_tuple(arr[i][0], i, 0));
         }
     }
