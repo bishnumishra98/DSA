@@ -1,5 +1,5 @@
-// A tuple is a fixed-size collection of heterogeneous values, meaning that each element in a tuple can be of a different type.
-// The size of a tuple is determined at compile-time and cannot be changed.
+// A tuple is a fixed-size collection of heterogeneous values, meaning that each element in a tuple can
+// be of a different type. The size of a tuple is determined at compile-time and cannot be changed.
 
 #include <iostream>
 #include <tuple>
