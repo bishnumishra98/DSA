@@ -19,7 +19,7 @@ using namespace std;
 // A comparator function for the priority queue
 struct compare {
     bool operator()(const tuple<int, int, int>& a, const tuple<int, int, int>& b) {
-        return get<0>(a) > get<0>(b);  // Compare the first elements (values) of the tuples
+        return get<0>(a) > get<0>(b);   // Compare the first elements (values) of the tuples
     }
 };
 
@@ -29,14 +29,14 @@ void mergeKSortedArrays(vector<vector<int>>& arr, vector<int>& ans) {
     priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, compare> minHeap;
 
     // Initialize the heap with the first element of each array
-    for (int i = 0; i < arr.size(); ++i) {
+    for(int i = 0; i < arr.size(); ++i) {
         if (!arr[i].empty()) {
             minHeap.push(make_tuple(arr[i][0], i, 0));
         }
     }
 
     // Extract elements from the heap and keep adding new elements from the arrays
-    while (!minHeap.empty()) {
+    while(!minHeap.empty()) {
         tuple<int, int, int> current = minHeap.top();
         minHeap.pop();
 
@@ -47,7 +47,7 @@ void mergeKSortedArrays(vector<vector<int>>& arr, vector<int>& ans) {
         ans.push_back(val);
 
         // If there is another element in the same row, add it to the heap
-        if (col + 1 < arr[row].size()) {
+        if(col + 1 < arr[row].size()) {
             minHeap.push(make_tuple(arr[row][col + 1], row, col + 1));
         }
     }
