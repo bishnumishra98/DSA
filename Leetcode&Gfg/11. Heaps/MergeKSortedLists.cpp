@@ -92,7 +92,7 @@ public:
         }
 
         // The dummy node's next pointer points to the head of the merged list
-        ListNode* mergedHead = dummy->next; // Store the head of the merged list
+        ListNode* mergedHead = dummy->next;   // Store the head of the merged list
         delete dummy;   // Free the memory allocated for the dummy node
 
         return mergedHead;
