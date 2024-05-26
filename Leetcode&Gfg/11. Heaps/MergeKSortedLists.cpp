@@ -70,7 +70,7 @@ public:
             if(head) minHeap.push(head);   // Before pushing head into minHeap, ensure it is not empty
         }
 
-        // Create a ans node to help construct the result list.
+        // Create an 'ans' node to help construct the result list.
         ListNode* ans = new ListNode();
         ListNode* current = ans;   // 'current' is a pointer to the 'ans' node
 
