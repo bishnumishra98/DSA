@@ -66,15 +66,13 @@ public:
         priority_queue<ListNode*, vector<ListNode*>, Compare> minHeap;
 
         // Initialize the heap with the head node of each list
-        for(auto list : lists) {
-            if(list) {   // Ensure the list is not empty
-                minHeap.push(list);
-            }
+        for(auto head: lists) {
+            if(head) minHeap.push(head);   // Before pushing head into minHeap, ensure it is not empty
         }
 
-        // Create a dummy node to help construct the result list.
-        ListNode* dummy = new ListNode();
-        ListNode* current = dummy;   // 'current' is a pointer to the 'dummy' node
+        // Create a ans node to help construct the result list.
+        ListNode* ans = new ListNode();
+        ListNode* current = ans;   // 'current' is a pointer to the 'ans' node
 
         // Extract elements from the heap, add into 'current' and keep adding new elements from the lists into the heap
         while(!minHeap.empty()) {
@@ -86,14 +84,12 @@ public:
             current = current->next;   // Move the current pointer to the new last node
 
             // If there is a next node in the same list, push it into the heap
-            if(smallest->next) {
-                minHeap.push(smallest->next);
-            }
+            if(smallest->next) minHeap.push(smallest->next);
         }
 
-        // The dummy node's next pointer points to the head of the merged list
-        ListNode* mergedHead = dummy->next;   // Store the head of the merged list
-        delete dummy;   // Free the memory allocated for the dummy node
+        // The ans node's next pointer points to the head of the merged list
+        ListNode* mergedHead = ans->next;   // Store the head of the merged list
+        delete ans;   // Free the memory allocated for the ans node
 
         return mergedHead;
     }
