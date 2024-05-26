@@ -42,12 +42,12 @@ void mergeKSortedArrays(vector<vector<int>>& arr, vector<int>& ans) {
 
     // Initialize the heap with the first element of each array
     for(int i = 0; i < arr.size(); i++) {
-        if(!arr[i].empty()) {
+        if(!arr[i].empty()) {   // Ensure the array is not empty
             minHeap.push(make_tuple(arr[i][0], i, 0));
         }
     }
 
-    // Extract elements from the heap and keep adding new elements from the arrays
+    // Extract elements from the heap, add into 'ans' and keep adding new elements from the arrays into the heap
     while(!minHeap.empty()) {
         tuple<int, int, int> current = minHeap.top();
         minHeap.pop();
