@@ -441,7 +441,7 @@ int main() {
     // }
 
 
-    // // Full diamond
+    // // Full diamond = Full pyramid + Inverted full pyramid
 
     // // Full pyramid
     // int n, col, row, num;
