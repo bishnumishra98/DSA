@@ -13,7 +13,6 @@ bool checkEven2(int n) {
     return (n & 1) == 0;
 }
 
-
 int main() {
     int n = 5;
 
