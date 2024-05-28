@@ -6,6 +6,8 @@ using namespace std;
 
 // Return nth number of fibonacci series
 // i) Iterative approach
+// T.C: O(n)
+// S.C: O(1)
 int fibo_ite(int n) {
     int n0 = 0;
     int n1 = 1;
@@ -25,6 +27,8 @@ int fibo_ite(int n) {
 
 // Return nth number of fibonacci series
 // ii) Recursive approach
+// T.C: O(2^n)
+// S.C: O(n)
 int fibo_rec(int n) {
     if(n==0) return 0;
     if(n==1) return 1;
@@ -33,6 +37,8 @@ int fibo_rec(int n) {
 
 // print the first n numbers of fibonacci series
 // i) Iterative approach
+// T.C: O(n)
+// S.C: O(1)
 void printFiboSeries_ite(int n) {
     if(n <= 0) return;
 
@@ -53,6 +59,8 @@ void printFiboSeries_ite(int n) {
 
 // print the first n numbers of fibonacci series
 // ii) Recursive approach
+// T.C: O(n)
+// S.C: O(n)
 void printFiboSeries_rec(int n, int n1 = 0, int n2 = 1) {
     if (n <= 0) return;
     if (n == 1) {
