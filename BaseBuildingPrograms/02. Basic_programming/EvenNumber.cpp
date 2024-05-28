@@ -14,13 +14,8 @@ bool checkEven2(int n) {
 }
 
 int main() {
-    int n = 5;
-
-    if(checkEven2(n)) {
-        cout << "Even number";
-    } else {
-        cout << "Odd number";
-    }
-
+    int n = 4;
+    if(checkEven2(n)) cout << "Even number";
+    else cout << "Odd number";
     return 0;
 }
