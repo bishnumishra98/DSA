@@ -473,22 +473,6 @@ int main() {
     // }
 
 
-    // // Inverted full pyramid
-    // int n, col, row;
-    // cin >> n;
-    // for(int row=0; row<n; row++) {
-    //     // for spaces
-    //     for(col=0; col<row; col++) {
-    //         cout << " ";
-    //     }
-    //     // for stars
-    //     for(col=0; col<n-row; col++) {
-    //         cout << "* ";
-    //     }
-    //     cout << endl;
-    // }
-
-
     // // Full pyramid
     // int n, col, row;
     // cin >> n;
