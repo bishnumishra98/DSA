@@ -1,34 +1,29 @@
 #include <iostream>
 using namespace std;
 
-// T.C: O(logn)   base 10
+// T.C: O(log10(n))
 // S.C: O(1)
 bool checkPalindromeNumber(int n) {
-    int num = n;
-    int bit, ans = 0;
+    int num = n;   // making a backup of 'n' in 'num' variable
+    int bit, ans = 0;   // 'bit' and 'ans' will be used to reverse 'n'
 
-    // palindrome number logic
-    while(n) {
-        bit = n % 10;
-        ans = (ans * 10) + bit;
-        n = n / 10;
+    // Reverse the number 'n' and store it in 'ans'
+    while(n) {   // while n is not equal to zero
+        bit = n % 10;   // store unit's place of n in 'bit'
+        ans = (ans * 10) + bit;   // build the reverse number in 'ans'
+        n = n / 10;   // remove unit's place of n
     }
-    // comparing value in ans with original number
-    if(ans == num) {
-        return true;
-    } else {
-        return false;
-    }
+
+    // if 'ans' == 'num', it is a palaindrome(return true), else return false.
+    if(ans == num) return true;
+    else return false;
 }
 
 int main() {
     int n = 212;
 
-    if(checkPalindromeNumber(n)) {
-        cout << "Palindrome number";
-    } else {
-        cout << "Not a Palindrome number";
-    }
+    if(checkPalindromeNumber(n)) cout << "Palindrome number";
+    else cout << "Not a Palindrome number";
 
     return 0;
 }
