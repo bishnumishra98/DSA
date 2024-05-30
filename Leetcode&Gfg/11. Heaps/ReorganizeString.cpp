@@ -12,46 +12,40 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Custom data type
+struct Info {
+    char ch;
+    int count;
+
+    // Constructor
+    Info(char ch, int count) : ch(ch), count(count) {}
+};
+
+// Custom comparator for creating maxHeap
+class Compare {
+    public:
+        bool operator()(Info a, Info b) {
+            return a.count < b.count;
+        }
+};
+
 class Solution {
 public:
     // T.C: O(n)
     // S.C: O(n)
     string reorganizeString(string s) {
-        // Step 1: Count the frequency of each character
-        unordered_map<char, int> freqMap;
-        for(char c : s) {
-            freqMap[c]++;
+        int freq[26] = {0};   // creating a 'freq' array for storing frequency of alphabets. 0 index
+        // represents 'a', and freq[0] represents frequency of 'a'. Same applies for other elements too.
+
+        // Counting frequency of all characters at keeping it inside 'freq' array
+        for(int i=0; i<s.length(); i++) {
+            freq[s[i] - 'a']++;
         }
+
+        // Create a maxHeap
+        priority_queue<Info, vector<Info>, Compare> maxHeap;
         
-        // Step 2: Create a max heap (priority queue) to store characters based on their frequency
-        priority_queue<pair<int, char>> maxHeap;   // intentionally pushing (int, char) so that
-        // maxHeap can be created on the basis of 'int', i.e., frequency of character.
-        for(auto& entry : freqMap) {
-            maxHeap.push({entry.second, entry.first});
-        }
-        
-        // Step 3: Build the result string
-        string result = "";
-        pair<int, char> prev = {0, '#'};   // Initialize previous character as a dummy
-        
-        while(!maxHeap.empty()) {
-            auto current = maxHeap.top();
-            maxHeap.pop();
-            
-            result += current.second;   // Append the current character to the result
-            
-            current.first--;   // Decrease the frequency of the current character
-            
-            // If the previous character has remaining frequency, push it back to the heap
-            if (prev.first > 0) maxHeap.push(prev);
-            
-            prev = current;   // Update the previous pointer to the current one
-        }
-        
-        // Step 4: If result.size() is smaller than s.size(), the reorganization was not possible
-        if(result.size() < s.size()) return "";
-        
-        return result;   // here result.size() == s.size()
+
     }
 };
 

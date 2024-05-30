@@ -69,5 +69,18 @@ int main() {
         cout << "The min-heap is not empty." << endl;
     }
 
+//----------------------------------------------------------------------------------------
+
+    // Creating a maxHeap from an array
+    int arr[] = {10, 20, 30};
+    int size = 3;
+    priority_queue<int> pq_max_fromArray(arr, arr+size);
+
+    // Creating a maxHeap from a vector
+    vector<int> v = {10, 20, 30};
+    priority_queue<int> pq_max_fromVector(v.begin(), v.end());
+
+//----------------------------------------------------------------------------------------
+
     return 0;
 }
