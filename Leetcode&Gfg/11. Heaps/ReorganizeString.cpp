@@ -48,7 +48,7 @@ public:
             prev = current;   // Update the previous pointer to the current one
         }
         
-        // Step 4: Check if the reorganization was possible
+        // Step 4: If result.size() is smaller than s.size(), the reorganization was not possible
         if(result.size() < s.size()) return "";
         
         return result;   // here result.size() == s.size()
@@ -56,7 +56,7 @@ public:
 };
 
 int main() {
-    string s = "aab";
+    string s = "aaabbb";
 
     Solution sol;
     cout << sol.reorganizeString(s);
