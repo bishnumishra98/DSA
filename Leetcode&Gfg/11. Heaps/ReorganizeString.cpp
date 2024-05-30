@@ -19,45 +19,39 @@ public:
     string reorganizeString(string s) {
         // Step 1: Count the frequency of each character
         unordered_map<char, int> freqMap;
-        for (char c : s) {
+        for(char c : s) {
             freqMap[c]++;
         }
         
         // Step 2: Create a max heap (priority queue) to store characters based on their frequency
-        priority_queue<pair<int, char>> maxHeap;
-        for (auto& entry : freqMap) {
+        priority_queue<pair<int, char>> maxHeap;   // intentionally pushing (int, char) so that
+        // maxHeap can be created on the basis of 'int', i.e., frequency of character.
+        for(auto& entry : freqMap) {
             maxHeap.push({entry.second, entry.first});
         }
         
         // Step 3: Build the result string
         string result = "";
-        pair<int, char> prev = {0, '#'};  // Initialize previous character as a dummy
+        pair<int, char> prev = {0, '#'};   // Initialize previous character as a dummy
         
-        while (!maxHeap.empty()) {
+        while(!maxHeap.empty()) {
             auto current = maxHeap.top();
             maxHeap.pop();
             
-            // Append the current character to the result
-            result += current.second;
+            result += current.second;   // Append the current character to the result
             
-            // Decrease the frequency of the current character
-            current.first--;
+            current.first--;   // Decrease the frequency of the current character
             
             // If the previous character has remaining frequency, push it back to the heap
-            if (prev.first > 0) {
-                maxHeap.push(prev);
-            }
+            if (prev.first > 0) maxHeap.push(prev);
             
-            // Update the previous character to the current one
-            prev = current;
+            prev = current;   // Update the previous pointer to the current one
         }
         
-        // Step 4: Check if the reorganization is valid
-        if (result.size() < s.size()) {
-            return "";
-        }
+        // Step 4: Check if the reorganization was possible
+        if(result.size() < s.size()) return "";
         
-        return result;
+        return result;   // here result.size() == s.size()
     }
 };
 
