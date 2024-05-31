@@ -17,46 +17,39 @@
 // Output: "aabaa"
 // Explanation: It is the only correct answer in this case.
 
+// Algorithm: Similar to 'Leetcode&Gfg\11. Heaps\ReorganizeString.cpp'.
+
 #include <bits/stdc++.h>
 using namespace std;
+
+// Custom data-type using struct
+class Info {
+    public:
+        char ch;
+        int count;
+        // Default constructor not required as we will initialize object directly with arguments.
+        // Parameterized constructor
+        Info(char ch, int count) {
+            this->ch = ch;
+            this->count = count;
+        }
+};
+
+// Custom comparator for creating maxHeap
+class Compare {
+    public:
+        bool operator()(Info a, Info b) {
+            return a.count < b.count;
+        }
+};
 
 class Solution {
 public:
     // T.C:
     // S.C: 
     string longestDiverseString(int a, int b, int c) {
-        // Create a max heap to store the counts of 'a', 'b', and 'c'
-        priority_queue<pair<int, char>> maxHeap;
-        if (a > 0) maxHeap.push({a, 'a'});
-        if (b > 0) maxHeap.push({b, 'b'});
-        if (c > 0) maxHeap.push({c, 'c'});
-        
-        string result = "";
-        pair<int, char> prev = {0, '#'};  // Initialize previous character
-        
-        while(!maxHeap.empty()) {
-            auto current = maxHeap.top();
-            maxHeap.pop();
-            
-            // Append current character to result
-            if(result.size() >= 2 && result[result.size() - 1] == current.second && result[result.size() - 2] == current.second) {
-                if(maxHeap.empty()) break;   // If no alternative, stop
-                auto next = maxHeap.top();
-                maxHeap.pop();
-                
-                result += next.second;
-                next.first--;
-                if(next.first > 0) maxHeap.push(next);
-                
-                maxHeap.push(current);  // Put the current back for future consideration
-            } else {
-                result += current.second;
-                current.first--;
-                if(current.first > 0) maxHeap.push(current);
-            }
-        }
-        
-        return result;
+        priority_queue<Info, vector<Info>, Compare> maxHeap;
+
     }
 };
 

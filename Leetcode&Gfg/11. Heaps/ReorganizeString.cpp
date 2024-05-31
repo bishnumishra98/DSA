@@ -9,6 +9,20 @@
 // Input: s = "aaab"
 // Output: ""
 
+// Algorithm:
+// 1. Create a maxHeap of (character, frequency). You can use custom data-type or pair to store elements in heap.
+// 2. Define a comparator to make maxHeap on the basis of frequency of characters. Or simply insert elements in heap
+//    in (frequency, character) sequence, so that elements are compared on the basis of frequency by default.
+// 3. Once maxHeap is ready, pop first two elements from heap, push them into the string 'ans' and decrease their
+//    frequency by 1. Two elements can be popped from heap by making a while loop: 'while(maxHeap.size() > 1)'.
+// 4. Even after decrement of their frequency, if it is greater than 0; push that element back into the maxHeap.
+// 5. After coming out of while loop, the heap may contain one last element(a character with its frequency). Pop
+//    this element, push into the string and decrement its frequency by 1. If even after decrementing frequency of
+//    the last character, it's frequency is not yet 0, it means this character still needs to be pushed into the string
+//    making it occur side by side. Thus, this character can no further be pushed into the string and the required
+//    rearrangement of the given string is not possible. Thus, return a blank string.
+//    And if its frequency is 0, then well and good; all characters have been pushed into the string. Return the string.
+
 #include <bits/stdc++.h>
 using namespace std;
 
