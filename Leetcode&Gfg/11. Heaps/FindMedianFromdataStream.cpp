@@ -17,8 +17,9 @@
 //         to make both their sizes equal.
 //    iii. If minHeap contains more than 1 extra element in it compared to maxHeap, shift the top element from minHeap to maxHeap
 //         to make both their sizes equal.
-// 3. If size of maxHeap is greater than minHeap, the median lies on top element of maxHeap. If size of minHeap is greater than
-//    maxHeap, the median lies on top element of minHeap. If they both are equal, the median lies on average of both top elements.
+// 3. If size of maxHeap is greater than that of minHeap by 1, then the median lies on top element of maxHeap. If size of minHeap
+//    is greater than that of maxHeap by 1, the median lies on top element of minHeap. If they both are equal, the median lies on
+//    the average of top elements from both the heaps.
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -62,8 +63,8 @@ public:
     // T.C: O(1)
     // S.C: O(1)
     double findMedian() {
-        if(maxHeap.size() > minHeap.size()) return maxHeap.top();
-        if(minHeap.size() > maxHeap.size()) return minHeap.top();
+        if(maxHeap.size() == minHeap.size() + 1) return maxHeap.top();
+        if(minHeap.size() == maxHeap.size() + 1) return minHeap.top();
         return (maxHeap.top() + minHeap.top())/2;   // if(minHeap.size() == maxHeap.size())
     }
 };
