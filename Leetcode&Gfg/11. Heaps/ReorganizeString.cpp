@@ -12,13 +12,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Custom data type
-struct Info {
-    char ch;
-    int count;
+// Custom data-type using struct
+class Info {
+    public:
+        char ch;
+        int count;
 
-    // Constructor
-    Info(char ch, int count) : ch(ch), count(count) {}
+        // Default constructor
+        Info() : ch('\0'), count(0) {}
+
+        // Parameterized constructor
+        Info(char ch, int count) {
+            this->ch = ch;
+            this->count = count;
+        }
 };
 
 // Custom comparator for creating maxHeap
@@ -42,10 +49,57 @@ public:
             freq[s[i] - 'a']++;
         }
 
-        // Create a maxHeap
+        // Create a maxHeap(character, frequency)
         priority_queue<Info, vector<Info>, Compare> maxHeap;
-        
+        for(int i=0; i<26; i++) {
+            if(freq[i] > 0) {
+                // Info temp;
+                // temp.ch = i + 'a';
+                // temp.count = freq[i];
+                // The above 3-step initialization of 'temp' can be done in 1 step like this:
+                Info temp(i + 'a', freq[i]);
+                maxHeap.push(temp);
+            }
+        }
 
+        string ans = "";   // the reorganised string will be build in 'ans'
+
+        // maxHeap.size() should be greater than 1, because we have to insert 2 elements at a time into the heap.
+        // Suppose we were inserting only 1 element at a time in the maxHeap, then it may be a probability that after
+        // pushing highest frequency character in string and decrementing the frequency of that character, it is still
+        // the highest occurring element. Thus, the same character gets inserted in the heap and again it becomes the top
+        // element of maxHeap. In this case, the next character to be inserted in the string would be again that same
+        // character that was pushed last time. Hence, two same characters would come side by side. To avoid this problem,
+        // we push the highest and second highest occurring elements from the maxheap into the string at a time, so that
+        // no two same characters gets pushed inside the string side by side.
+        while(maxHeap.size() > 1) {
+            Info first = maxHeap.top();
+            maxHeap.pop();
+            Info second = maxHeap.top();
+            maxHeap.pop();
+
+            ans.push_back(first.ch);
+            first.count--;
+            ans.push_back(second.ch);
+            second.count--;
+
+            if(first.count > 0) maxHeap.push(first);
+            if(second.count > 0) maxHeap.push(second);
+        }
+
+        // After coming out of while loop, maxHeap may have one element left in it, as the above loop runs for only 'maxHeap.size() > 1'
+        if(maxHeap.size() == 1) {
+            Info last = maxHeap.top();
+            maxHeap.pop();
+            ans.push_back(last.ch);   // pushing the last character into string
+            last.count--;
+            // If even after decrementing count of last character, it's count is not yet 0, it means this
+            // character still needs to be pushed into the string making it occur side by side. Thus,
+            // rearrangement of the given string was impossible. Thus, return blank string.
+            if(last.count > 0) return "";
+        }
+        
+        return ans;   // string formed, return it.
     }
 };
 
