@@ -45,8 +45,8 @@ class Compare {
 
 class Solution {
 public:
-    // T.C:
-    // S.C: 
+    // T.C: O(a+b+c)
+    // S.C: O(a+b+c)
     string longestDiverseString(int a, int b, int c) {
         /*
         // Making maxHeap using custom data-type
