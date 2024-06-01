@@ -1,6 +1,5 @@
-// In C++, the map data structure is part of the Standard Template Library (STL) and is used to store key-value pairs
-// in a sorted order based on the keys. In C++, the Standard Template Library (STL) provides two primary types of map
-// containers, each serving different purposes and offering distinct performance characteristics. These are:
+// A map is a collection of key-value pairs, where each key is unique and is associated with a value. Maps are used to efficiently
+// store and retrieve data based on keys. In C++, the Standard Template Library (STL) provides two primary types of maps:
 
 // 1. map or ordered map:
 // -> Ordered Map: map stores elements in a balanced binary search tree (typically a Red-Black tree), ensuring
