@@ -17,7 +17,7 @@
 // 1. Insertion: When you insert a key-value pair, the hash function computes an index for the key. The value is then stored at that index.
 // 2. Collision: Sometimes, different keys may produce the same index (collision). Handling collisions is crucial for hash tables.
 
-// COLLISION RESOLUTION TECHNIQUES IN HASHING: There are varies ways to minimize collisions while hashing in hash tables:
+// COLLISION RESOLUTION TECHNIQUES IN HASHING: There are various ways to minimize collisions while hashing in hash tables:
 // 1. Open Hashing (Chaining): In open hashing, each bucket (slot) in the hash table contains a linked list or another data structure
 //                             (like a tree). When a collision occurs, we insert the new key-value pair into the linked list at that index.
 //                             Chaining allows multiple keys to coexist in the same bucket without overwriting each other.
