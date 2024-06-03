@@ -54,7 +54,7 @@ class TrieNode {
 // T.C: O(L);   where L = length of word
 // S.C: O(L)
 void insertWordInTrie(TrieNode* root, string word) {
-    cout << "Recieved word: " << word << " for insertion " << endl;   // Printing the received word for confirmation
+    // cout << "Recieved word: " << word << " for insertion " << endl;   // Printing the received word for confirmation
     // Base case: if the word is empty, mark the current node as terminal
     if(word.length() == 0) {
         root->isTerminal = true;
@@ -77,10 +77,66 @@ void insertWordInTrie(TrieNode* root, string word) {
     insertWordInTrie(child, word.substr(1));   // substr(1) means remove the first character from word, return the rest
 }
 
+// T.C: O(L)
+// S.C: O(L)
+bool searchWordInTrie(TrieNode* root, string word) {
+    // Base case: if the word is empty, check if the current node is terminal
+    if(word.length() == 0) return root->isTerminal;
+
+    // Calculate the index of the first character of the word
+    // Example: 'a' -> 0, 'b' -> 1, ..., 'z' -> 25
+    int index = word[0] - 'a';
+    TrieNode* child;
+
+    // If a child node exists at the calculated index, proceed with that child
+    if(root->children[index] != NULL) {
+        child = root->children[index];
+    } else {
+        // If no child node exists at the index, the word is not in the trie
+        return false;
+    }
+
+    // Recursive call to search the remaining characters of the word
+    bool found = searchWordInTrie(child, word.substr(1));
+    return found;
+}
+
+// T.C: O(L)
+// S.C: O(L)
+void deleteWordInTrie(TrieNode* root, string word) {
+    // Base case: if the word is empty, mark the current node as non-terminal
+    if(word.length() == 0) {
+        root->isTerminal = false;
+        return;
+    }
+
+    // Calculate the index of the first character of the word
+    // Example: 'a' -> 0, 'b' -> 1, ..., 'z' -> 25
+    int index = word[0] - 'a';
+    TrieNode* child;
+
+    // If a child node exists at the calculated index, proceed with that child
+    if(root->children[index] != NULL) {
+        child = root->children[index];
+    } else {
+        // If no child node exists at the index, the word is not in the trie, return
+        return;
+    }
+
+    // Recursive call to delete the remaining characters of the word
+    deleteWordInTrie(child, word.substr(1));
+}
+
 int main() {
     TrieNode* root = new TrieNode('-');   // marking root node by '-'
-    string str = "summer";
-    insertWordInTrie(root, str);
+    insertWordInTrie(root, "summer");
+    insertWordInTrie(root, "sun");
+    insertWordInTrie(root, "bat");
+
+    cout << searchWordInTrie(root, "sun") << endl;   // o/p: 1
+    cout << searchWordInTrie(root, "sum") << endl;   // o/p: 0
+    deleteWordInTrie(root, "sun");
+    cout << searchWordInTrie(root, "sun") << endl;   // o/p: 0
 
     return 0;
 }
