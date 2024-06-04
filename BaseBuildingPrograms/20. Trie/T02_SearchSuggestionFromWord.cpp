@@ -94,7 +94,7 @@ void findPrefixString(TrieNode* root, string searchString, vector<string>& ans, 
     // Base case: if the searchString is empty, store all words starting from this node
     if(searchString.length() == 0) {
         // After reaching the last character of 'searchString', search for all possible
-        // strings in the trie, via the storeString() function and store them in 'ans'.
+        // strings from there in the trie via the storeString() function and store them in 'ans'.
         TrieNode* lastChar = root;
         storeString(lastChar, ans, searchString, prefix);
         return;
