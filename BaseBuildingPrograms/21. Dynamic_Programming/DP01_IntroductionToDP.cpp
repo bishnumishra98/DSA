@@ -22,6 +22,10 @@
 
 // 2. Tabulation (Bottom-Up Approach): Solve subproblems in a systematic way, typically using iteration, and store
 //                                     their results in a table.
+//                                     Steps involved in this process:
+//                                     i.   Create a dp array.
+//                                     ii.  Fill initial data in dp according to base case.
+//                                     iii. Fill rest of the dp array using recursive relation.
 
 // Although both approaches have same time complexity, the Tabulation (Bottom-Up Approach) is better
 // as it uses iterative solution which saves overhead of recursive function calls.
