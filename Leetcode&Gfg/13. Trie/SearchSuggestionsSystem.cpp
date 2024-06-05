@@ -61,7 +61,7 @@ public:
 
         // Traverse all possible children nodes
         for(char ch = 'a'; ch <= 'z'; ch++) {
-            if(ans.size() >= 3) return;  // If we already have 3 suggestions, stop further processing
+            if(ans.size() >= 3) return;   // If we already have 3 suggestions, stop further processing
             int index = ch - 'a';
             TrieNode* next = root->children[index];
             if(next != NULL) {
@@ -94,9 +94,9 @@ public:
                 vector<string> nicheKaAns;
                 inputhelper.push_back(lastchar);
                 string dummy = "";
-                storeString(curr, nicheKaAns, dummy, inputhelper);  // Pass 'inputhelper' as the prefix and 'dummy' as the current word being formed
+                storeString(curr, nicheKaAns, dummy, inputhelper);   // Pass 'inputhelper' as the prefix and 'dummy' as the current word being formed
                 output.push_back(nicheKaAns);
-                prev = curr;  // Move to the next node
+                prev = curr;   // Move to the next node
             }
         }
         return output;
