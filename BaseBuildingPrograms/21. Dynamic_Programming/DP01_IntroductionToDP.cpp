@@ -89,6 +89,20 @@ int fibo_tabulation(int n) {
     return dp[n];
 }
 
+// The best approach for finding nth term of fibonacci series
+// T.C: O(n)
+// S.C: O(1)
+int fibo_ite(int n) {
+    if(n == 0 || n == 1) return n;
+    int n1 = 0, n2 = 1, n3;
+    for(int i=2; i<=n; i++) {
+        n3 = n2 + n1;
+        n1 = n2;
+        n2 = n3;
+    }
+    return n3;
+}
+
 
 int main() {
     // Fibo series elements: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
@@ -100,6 +114,9 @@ int main() {
     cout << "fibo_memoization ans: " << fibo_memoization(n, dp) << endl;
 
     cout << "fibo_tabulation ans: " << fibo_tabulation(n) << endl;
+
+    // However, remember that the best program for fibonacci series is the simple iterative approach
+    cout << "fibo_ite: " << fibo_ite(n);
 
     return 0;
 }
