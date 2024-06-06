@@ -24,20 +24,18 @@
 #include <vector>
 using namespace std;
 
-int solve(vector<int>& nums, int start, int end) {
-    // base case
-    if(start > end) {
-        return 0;   // when 'start>end', there are no houses left to rob. So we can rob 0 money.
-    }
+int solve(vector<int>& nums, int start) {
+    // Base case: When 'start>=nums.size()', there are no houses left to rob. So we can rob 0 money.
+    if(start >= nums.size()) return 0;
 
     // There are only 2 choices in my hand, either I can rob a house or I cannot rob a house.
     // Case 1: If I rob at 'start' index, I will make nums[start] amount of money, and then I will rob
     // next to next house; that's why next call's starting index is 'start+2'
-    int option1 = nums[start] + solve(nums, start+2, end);
+    int option1 = nums[start] + solve(nums, start+2);
 
     // Case 2: If I rob do not rob at 'start' index, I will make 0 money, but then I can rob
     // next house; that's why next call's starting index is 'start+1'
-    int option2 = 0 + solve(nums, start+1, end);
+    int option2 = 0 + solve(nums, start+1);
 
     return max(option1, option2);
 }
@@ -47,11 +45,7 @@ int solve(vector<int>& nums, int start, int end) {
 int rob(vector<int>& nums) {
     int size = nums.size();
     int start = 0;
-    int end = size - 1;
-
-    int ans = solve(nums, start, end);
-
-    return ans;
+    return solve(nums, start);
 }
 
 int main() {
