@@ -43,7 +43,7 @@ using namespace std;
 
 // Simple recursion
 // T.C: O(2^n)
-// S.C: O(n);   due to recursive call stack
+// S.C: O(2^n);   due to recursive call stack
 int fibo_recursion(int n) {
     if(n == 0) return 0;
     if(n == 1) return 1;
