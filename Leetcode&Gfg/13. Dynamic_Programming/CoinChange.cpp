@@ -141,6 +141,8 @@ int main() {
     cout << "coinChange_recursion: " << coinChange_recursion(coins, amount) << endl;
     cout << "coinChange_memoization: " << coinChange_memoization(coins, amount) << endl;
     cout << "coinChange_tabulation: " << coinChange_tabulation(coins, amount) << endl;
+    // Space optimization is not possible in this problem because the solution to each subproblem(amount)
+    // depends on previous subproblems, which require access to the whole array of amounts.
 
     return 0;
 }
