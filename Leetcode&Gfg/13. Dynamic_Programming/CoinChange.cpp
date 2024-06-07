@@ -16,9 +16,8 @@
 // Input: coins = [1], amount = 0
 // Output: 0
 
-// Note: This problem is being solved with recursion for now, just to understand recursion better.
-// But optimal approach will be solved by dynamic programming.
-
+// Note: This problem was solved with recursion, but now we will solve it by optimal approach with dynamic programming.
+// PATTERN: Exploring all possible ways
 
 #include <iostream>
 #include <vector>
@@ -51,12 +50,11 @@ int solve(vector<int>& coins, int amount) {
     return mini;
 }
 
-
 // T.C: O(n^m);   where n = coins.size(), and m = amount
 // S.C: O(n)
 int coinChange(vector<int>& coins, int amount) {
-    int result = solve(coins, amount);
-    return (result == INT_MAX) ? -1 : result;
+    int ans = solve(coins, amount);
+    return ((ans == INT_MAX) ? -1 : ans);
 }
 
 int main() {
