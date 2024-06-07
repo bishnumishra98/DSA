@@ -43,7 +43,8 @@ int solve(vector<int>& coins, int amount) {
         // If the result is not INT_MAX, it means a valid solution was found
         if (ans != INT_MAX) {
             // Update the minimum number of coins needed
-            mini = min(mini, 1 + ans);
+            mini = min(mini, 1 + ans);   // Already 1 coin used, then searching the minimum no.of coins
+                                        // for rest of the amount left. That's why wrote '1 + ans'.
         }
     }
 

@@ -42,7 +42,8 @@ int solve(vector<int>& coins, int amount) {
         // If the result is not INT_MAX, it means a valid solution was found
         if (ans != INT_MAX) {
             // Update the minimum number of coins needed
-            mini = min(mini, 1 + ans);
+            mini = min(mini, 1 + ans);   // Already 1 coin used, then searching the minimum no.of coins
+                                        // for rest of the amount left. That's why wrote '1 + ans'.
         }
     }
 
@@ -52,16 +53,22 @@ int solve(vector<int>& coins, int amount) {
 
 // T.C: O(n^m);   where n = coins.size(), and m = amount
 // S.C: O(n)
-int coinChange(vector<int>& coins, int amount) {
+int coinChange_recursion(vector<int>& coins, int amount) {
     int ans = solve(coins, amount);
     return ((ans == INT_MAX) ? -1 : ans);
 }
+
+// --------------------------------------------------------------------------------------------------------
+
+
+
+
 
 int main() {
     vector <int> coins = {1, 2, 5};
     int amount = 11;
 
-    cout << coinChange(coins, amount);
+    cout << "coinChange_recursion: " << coinChange_recursion(coins, amount) << endl;
 
     return 0;
 }
