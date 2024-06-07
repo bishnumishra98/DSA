@@ -52,7 +52,7 @@ int solve(vector<int>& coins, int amount) {
 }
 
 // T.C: O(n^m);   where n = coins.size(), and m = amount
-// S.C: O(n)
+// S.C: O(m)
 int coinChange_recursion(vector<int>& coins, int amount) {
     int ans = solve(coins, amount);
     return ((ans == INT_MAX) ? -1 : ans);
@@ -60,15 +60,52 @@ int coinChange_recursion(vector<int>& coins, int amount) {
 
 // --------------------------------------------------------------------------------------------------------
 
+int solve(vector<int>& coins, int amount, vector<int>& dp) {
+    // Base case: if the amount is negative, it's not possible to form this amount with the given coins
+    if (amount < 0) return INT_MAX;
 
+    // Base case: if the amount is 0, no coins are needed to make this amount
+    if (amount == 0) return 0;
 
+    // Initialize the minimum number of coins needed to a large value
+    int mini = INT_MAX;
 
+    // If answer for minimum no.of coins required for building this 'amount' is already present in 'dp' array, return it.
+    if(dp[amount] != -1) return dp[amount];
+
+    // Loop through each coin in the list of coins
+    for (int i = 0; i < coins.size(); i++) {
+        // Recursively solve for the amount minus the current coin
+        int ans = solve(coins, amount - coins[i], dp);
+
+        // If the result is not INT_MAX, it means a valid solution was found
+        if (ans != INT_MAX) {
+            // Update the minimum number of coins needed
+            mini = min(mini, 1 + ans);   // Since we are using 1 coin, then searching the minimum
+            // no.of coins for the rest amount, add 1 to the result of the subproblem.
+        }
+    }
+
+    dp[amount] = mini;   // store the minimum no.of coins required for building this 'amount' in dp[amount]
+    return dp[amount];   // Return the minimum number of coins needed to make the given amount
+}
+
+// T.C: O(n*amount);    because each amount from 1 to amount is computed once, and for each amount, we consider all n coins.
+// S.C: O(amount)
+int coinChange_memoization(vector<int>& coins, int amount) {
+    vector<int> dp(amount+1, -1);
+    int ans = solve(coins, amount, dp);
+    return ((ans == INT_MAX) ? -1 : ans);
+}
+
+// --------------------------------------------------------------------------------------------------------
 
 int main() {
     vector <int> coins = {1, 2, 5};
     int amount = 11;
 
     cout << "coinChange_recursion: " << coinChange_recursion(coins, amount) << endl;
+    cout << "coinChange_memoization: " << coinChange_memoization(coins, amount) << endl;
 
     return 0;
 }
