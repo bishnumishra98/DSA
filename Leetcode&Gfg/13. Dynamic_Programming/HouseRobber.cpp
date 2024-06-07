@@ -18,6 +18,7 @@
 // Total amount you can rob = 2 + 9 + 1 = 12.
 
 // Note: This problem was solved using recursion. But now we will implemenent optimal solution with DP.
+// DP PATTERN: Include/Exclude
 
 #include <iostream>
 #include <vector>

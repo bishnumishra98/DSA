@@ -17,7 +17,7 @@
 // Output: 0
 
 // Note: This problem was solved with recursion, but now we will solve it by optimal approach with dynamic programming.
-// PATTERN: Exploring all possible ways
+// DP PATTERN: Explore all possible ways
 
 #include <iostream>
 #include <vector>
@@ -100,12 +100,20 @@ int coinChange_memoization(vector<int>& coins, int amount) {
 
 // --------------------------------------------------------------------------------------------------------
 
+// T.C: O(n*amount);    because each amount from 1 to amount is computed once, and for each amount, we consider all n coins.
+// S.C: O(amount)
+int coinChange_tabulation(vector<int>& coins, int amount) {
+    int ans = solve(coins, amount);
+    return ((ans == INT_MAX) ? -1 : ans);
+}
+
 int main() {
     vector <int> coins = {1, 2, 5};
     int amount = 11;
 
     cout << "coinChange_recursion: " << coinChange_recursion(coins, amount) << endl;
     cout << "coinChange_memoization: " << coinChange_memoization(coins, amount) << endl;
+    cout << "coinChange_tabulation: " << coinChange_tabulation(coins, amount) << endl;
 
     return 0;
 }
