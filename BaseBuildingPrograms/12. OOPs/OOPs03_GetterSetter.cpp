@@ -39,9 +39,9 @@ int main() {
     s2.setName("Jeet");
     s2.setAge(24);
 
-    cout << s1.getName() << " " << s1.getAge();
+    cout << s1.getName() << " " << s1.getAge();   // o/p: Vishnu 25
     cout << endl;
-    cout << s2.getName() << " " << s2.getAge();
+    cout << s2.getName() << " " << s2.getAge();   // o/p: Jeet 24
 
     return 0;
 }
