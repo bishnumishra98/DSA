@@ -52,7 +52,7 @@ int getTotalWaysOfPainting(int n, int k) {
 }
 
 int main() {
-    int n = 3;
+    int n = 4;
     int k = 3;
 
     cout << getTotalWaysOfPainting(n, k);
