@@ -57,8 +57,45 @@ int getTotalWaysOfPainting_memoization(int n, int k, vector<int>& dp) {
     return dp[n];
 }
 
+// T.C: O(n)
+// S.C: O(n)
+int getTotalWaysOfPainting_tabulation(int n, int k) {
+    vector<int> dp(n+1, -1);
+
+    dp[1] = k;
+    dp[2] = k + k*(k-1);
+
+    for(int i=3; i<=n; i++) {
+        dp[i] = (k-1) * (dp[i-2] + dp[i-1]);
+    }
+
+    return dp[n];
+}
+
+// dp[i] depends on only 2 variables dp[i-2] and dp[i-1]. Thus, we can space optimize it further.
+// T.C: O(n)
+// S.C: O(1)
+int getTotalWaysOfPainting_tabulation_SO(int n, int k) {
+    int prev2 = k;
+    int prev1 = k + k*(k-1);
+
+    // base case
+    if(n==1) return prev2;
+    if(n==2) return prev1;
+
+    int curr;
+    for(int i=3; i<=n; i++) {
+        curr = (k-1) * (prev2 + prev1);   // curr represents dp[i], prev2 represents dp[i-2] and prev1 represents dp[i-1], respectively.
+        // update prev2 and prev1
+        prev2 = prev1;
+        prev1 = curr;
+    }
+
+    return curr;   // or we can even return prev1 as both stands on same value after the bove loop
+}
+
 int main() {
-    int n = 3;
+    int n = 5;
     int k = 3;
 
     cout << "Recursion: " << getTotalWaysOfPainting_recursion(n, k) << endl;
@@ -66,6 +103,9 @@ int main() {
     vector<int> dp(n+1, -1);
     cout << "Memoization: " << getTotalWaysOfPainting_memoization(n, k, dp) << endl;
 
+    cout << "Tabulation: " << getTotalWaysOfPainting_tabulation(n, k) << endl;
+
+    cout << "Tabulation_SO: " << getTotalWaysOfPainting_tabulation_SO(n, k) << endl;
 
     return 0;
 }
