@@ -1,14 +1,4 @@
-There are 3 parts of a recursive program :-
-
-1) Base case: It is a mandatory step. If this step is missed, program results in run-time memory overflow.
-It tells the program where to stop.
-
-2) Recursive relation / recursive call: It is also a mandatory step. It calls next function in stack.
-
-3) Processing: This part is not required for some programs. It is basically a processing block of code.
-
-
-Practice recursion in the following sequence :-
+Practice recursion problems in the following sequence :-
 
 1) FactorialOfANumber
 
