@@ -14,7 +14,7 @@ using namespace std;
 
 // T.C: O(n);   as print function is called n times
 // S.C: O(n);   as the stack had at most five print functions in stack
-void print(string str, int n, int i) {
+void print(string str, int i, int n) {
     // Base case: When i reaches n, return
     if(i >= n) return;
 
@@ -23,14 +23,14 @@ void print(string str, int n, int i) {
     cout << str << endl;
 
     // Recursive relation
-    print(str, n, i+1);
+    print(str, i+1, n);
 }
 
 int main() {
     string str = "Bishnu";
     int n = 5;   // no.of times you want to print
     int i = 0;   // starting index
-    print(str, n, i);
+    print(str, i, n);
 
     return 0;
 }
