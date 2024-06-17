@@ -31,6 +31,7 @@ void printSubsequence(int index, int arr[], int n, vector<int>& ds) {
     ds.pop_back();   // ds.pop_back() is used to remove the last element that was added to the 'ds' vector in the previous
     // step. This is necessary because, after all subsequences that include the current element (at arr[index]) have been
     // printed, you need to backtrack and remove that element from 'ds' to explore subsequences that do not include this element.
+    // However, note that we do not need to perform this pop operation, if Case 2 was written prior to Case 1.
 
     // Case 2: Not take the current element of 'arr' and proceed to make the subsequence
     printSubsequence(index+1, arr, n, ds);
