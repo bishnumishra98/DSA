@@ -12,7 +12,7 @@
 #include <vector>
 using namespace std;
 
-// T.C: O((2^n)*n)
+// T.C: O(2^n)
 // S.C: O(n);   maximum depth of recursive tree is no.of elements in 'arr'.
 void printSubsequence(int index, int arr[], int n, vector<int>& ds) {
     // Base case: if index >= n, print the subsequence formed inside 'ds' and return.

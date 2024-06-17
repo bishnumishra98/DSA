@@ -7,7 +7,7 @@
 using namespace std;
 
 // T.C: O(2^n);   where 'n' is the length of the input string 'str'
-// S.c: O(2^n);   where 'n' is the length of the input string 'str'
+// S.c: O(n);   where 'n' is the length of the input string 'str'
 void findSubSequences(string str, string output, int index, vector<string>& ans) {
     // base case
     if(index >= str.length()) {
