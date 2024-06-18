@@ -22,10 +22,10 @@ using namespace std;
 
 // T.C: O(2^n)
 // S.C: O(n)
-void printAllSubsequence_approach1(int index, int arr[], int n, int& target, int sum, int& count) {
+void countSubsequence_approach1(int index, int arr[], int n, int& target, int sum, int& count) {
     // Base case: If we've considered all elements
     if(index >= n) {
-        // Check if the sum of the current subsequence equals the target
+        // If the sum of the current subsequence equals the target, increment count
         if(sum == target) {
             count++;
         }
@@ -33,10 +33,32 @@ void printAllSubsequence_approach1(int index, int arr[], int n, int& target, int
     }
 
     // Case 1: Including the current element and proceed to make the subsequence
-    printAllSubsequence_approach1(index + 1, arr, n, target, sum + arr[index], count);
+    countSubsequence_approach1(index + 1, arr, n, target, sum + arr[index], count);
 
     // Case 2: Excluding the current element and proceed to make the subsequence
-    printAllSubsequence_approach1(index + 1, arr, n, target, sum, count);
+    countSubsequence_approach1(index + 1, arr, n, target, sum, count);
+}
+
+// T.C: O(2^n)
+// S.C: O(n)
+int countSubsequence_approach2(int index, int arr[], int n, int& target, int sum) {
+    // Base case: If we've considered all elements
+    if(index >= n) {
+        // If the sum of the current subsequence equals the target, return 1 indicating a subsequence found.
+        if(sum == target) {
+            return 1;
+        }
+        return 0;   // If the sum of the current subsequence does not equals the target, return 0 indicating no subsequence found.
+    }
+
+    // Case 1: Including the current element and proceed to make the subsequence
+    int include = countSubsequence_approach2(index + 1, arr, n, target, sum + arr[index]);
+
+    // Case 2: Excluding the current element and proceed to make the subsequence
+    int exclude = countSubsequence_approach2(index + 1, arr, n, target, sum);
+
+    // return the sum of number of subsequences found from include and exclude paths
+    return include + exclude;
 }
 
 int main() {
@@ -46,9 +68,11 @@ int main() {
     int index = 0;   // starting index
 
     int sum = 0;   // used as a helper data-structure to store sum of elements in the subsequences
-    int count = 0;   // it will store no.of subsequences
-    printAllSubsequence_approach1(index, arr, n, target, sum, count);
+    int count = 0;   // it will be used to store no.of subsequences
+    countSubsequence_approach1(index, arr, n, target, sum, count);
     cout << count << endl;
+
+    cout << countSubsequence_approach2(index, arr, n, target, sum);
 
     return 0;
 }
