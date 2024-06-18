@@ -16,7 +16,6 @@ void findSubSequences(string str, string output, int index, vector<string>& ans)
         return;
     }
 
-    // processing
     char ch = str[index];
 
     // Case 1: Excluding the character 'ch' in 'output' building
