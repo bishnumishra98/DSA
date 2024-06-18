@@ -1,4 +1,4 @@
-// An extension of the previous problem, print only 1 subsequence, not all.
+// An extension of the previous problem '08_AllSubsequenceTargetSum.cpp', print only 1 subsequence, not all.
 // Find any one subsequence whose sum is equal to target.
 
 // Example 1:
