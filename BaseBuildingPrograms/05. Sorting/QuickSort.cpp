@@ -7,8 +7,9 @@
 #include <iostream>
 using namespace std;
 
-// T.C: O(n^2);   where n = size of array. However, average time complexity of quickSort is O(nlogn)
-// S.C: O(logn)
+// T.C: O(nlogn);   where n = size of array.
+//                  However, worst time complexity of quickSort is O(n^2), when pivot is chosen as the biggest element of array.
+// S.C: O(1)
 void quickSort(int *arr, int start, int end) {
     // base case
     if(start >= end) return;
