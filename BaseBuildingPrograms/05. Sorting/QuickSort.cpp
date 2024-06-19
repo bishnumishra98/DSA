@@ -9,7 +9,8 @@ using namespace std;
 
 // T.C: O(nlogn);   where n = size of array.
 //                  However, worst time complexity of quickSort is O(n^2), when pivot is chosen as the biggest element of array.
-// S.C: O(1)
+// S.C: O(logn);   due to recursive stack.
+//                 However, worst case space complexity is O(n).
 void quickSort(int *arr, int start, int end) {
     // base case
     if(start >= end) return;
