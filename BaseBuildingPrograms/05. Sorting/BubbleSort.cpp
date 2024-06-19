@@ -41,7 +41,7 @@ void print(vector<int>& v) {
     }
 }
 
-// T.C: O(n2)
+// T.C: O(n^2)
 // S.C: O(1)
 void bubbleSort(vector<int>& v) {
     int n = v.size();
