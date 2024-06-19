@@ -14,19 +14,19 @@ void quickSort(int *arr, int start, int end) {
     if(start >= end) return;
 
     int pivot = end;
-    int i = start;
-    int j = start - 1;
+    int i = start - 1;
+    int j = start;
 
-    while(i < pivot) {
-        if(arr[i] < arr[pivot]) {
-            j++;
-            swap(arr[j], arr[i]);
+    while(j < pivot) {
+        if(arr[j] < arr[pivot]) {
+            i++;
+            swap(arr[i], arr[j]);
         }
-        i++;
+        j++;
     }
 
-    j++;
-    swap(arr[j], arr[pivot]);   // pivot element comes to its correct index at this step
+    i++;
+    swap(arr[i], arr[pivot]);   // pivot element comes to its correct index at this step
 
     // element at ith index has all elements smaller than it on its left, and all elements larger
     // than it on its right. Then, we do quickSort for sub-array on its left and right also.
