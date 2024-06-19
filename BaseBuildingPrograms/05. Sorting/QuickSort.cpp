@@ -11,9 +11,7 @@ using namespace std;
 // S.C: O(logn)
 void quickSort(int *arr, int start, int end) {
     // base case
-    if(start >= end) {
-        return;
-    }
+    if(start >= end) return;
 
     int pivot = end;
     int i = start - 1;
