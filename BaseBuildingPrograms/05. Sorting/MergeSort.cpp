@@ -53,9 +53,9 @@ void merge(int *arr, int start, int mid, int end) {
         right++;
     }
 
-    // copy the sorted elements of 'temp' back to the original array this function had originally received
+    // Take the sorted elements of 'temp' and put in directly inside the original array, i.e., {20, 10, 50, 40, 30, 60} this one.
     for(int i=start; i<=end; i++) {
-        arr[i] = temp[i-start]; 
+        arr[i] = temp[i-start];
     }
 
     delete[] temp;   // deallocating the 'temp' from heap
