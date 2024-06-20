@@ -3,6 +3,9 @@
 #include <vector>
 using namespace std;
 
+// A custom comparator is a user-defined function or function object that defines the sorting criteria for containers such as
+// sort, priority_queue, set, and map. A comparator specifies how elements are compared during sorting or ordering operations.
+
 // You can create comparators in C++ using functions, functors, or lambdas.
 // Each approach has its use cases and benefits:
 // -> Functions are simple and straightforward.
