@@ -1,3 +1,5 @@
+// This type of problem follows PICK/NOT PICK pattern.
+
 // An extension of the previous problem '08_AllSubsequenceTargetSum.cpp', return the count of subsequences.
 
 // Example 1:

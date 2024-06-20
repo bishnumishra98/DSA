@@ -1,5 +1,6 @@
-// Find all subsequence whose sum is equal to target.
+// This type of problem follows PICK/NOT PICK pattern.
 
+// Find all subsequence whose sum is equal to target.
 // Example 1:
 // Input:
 // {1, 2, 1, 4, 2, 3}, target = 4

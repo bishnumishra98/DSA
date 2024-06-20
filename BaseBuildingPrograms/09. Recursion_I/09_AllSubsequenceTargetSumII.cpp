@@ -1,3 +1,5 @@
+// This type of problem follows PICK/NOT PICK pattern.
+
 // An extension of the previous problem '08_AllSubsequenceTargetSum.cpp', print only 1 subsequence, not all.
 // Find any one subsequence whose sum is equal to target.
 

@@ -1,3 +1,5 @@
+// This type of problem follows PICK/NOT PICK pattern.
+
 // Given an array, print all its subsequence. All subsequence must follow the ordering of elements as it is in parent array.
 // For example, {8, 6} cannot be a subsequence, but {6, 8} is a subsequence.
 // Example:
@@ -5,8 +7,6 @@
 // {6, 7, 8}
 // Output:
 // {6, 7, 8}, {6, 7}, {6, 8}, {6}, {7, 8}, {7}, {8}, {}
-
-// This type of problem follows TAKE/NOT TAKE pattern.
 
 #include <iostream>
 #include <vector>
