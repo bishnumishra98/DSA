@@ -6,8 +6,8 @@ Practice sorting in the following sequence :-
 
 3) InsertionSort -> O(n^2)
 
-4) CustomComparator
+4) MergeSort -> O(nlogn)
 
-5) MergeSort -> O(nlogn)
+5) QuickSort -> O(nlogn)
 
-6) QuickSort -> O(n^2)
+6) HeapSort -> O(nlogn)    Follow: '18. Heaps\H06_HeapSort.cpp'
