@@ -1,4 +1,4 @@
-Practice sorting in the following sequence :-
+Practice sorting algorithms in the following sequence :-
 
 1) BubbleSort -> O(n^2)
 
