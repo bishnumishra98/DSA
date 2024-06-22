@@ -17,6 +17,7 @@
 #include <vector>
 using namespace std;
 
+
 // T.C: O(2^n)
 // S.C: O(n)
 void printAllSubsequence(int index, int arr[], int n, int& target, vector<int>& ds, int sum) {
@@ -41,15 +42,42 @@ void printAllSubsequence(int index, int arr[], int n, int& target, vector<int>& 
     printAllSubsequence(index + 1, arr, n, target, ds, sum);
 }
 
+// The same above function can be implemented without using a sum variable
+// T.C: O(2^n)
+// S.C: O(n)
+void printAllSubsequence_withoutSum(int index, int arr[], int n, int target, vector<int>& ds) {
+    // Base case: If we've considered all elements
+    if(index >= n) {
+        // Check if the the target equals to zero
+        if(target == 0) {
+            for(int i: ds) {
+                cout << i << " ";
+            }
+            cout << endl;
+        }
+        return;   // Exit the current recursive call
+    }
+
+    // Case 1: Including the current element and proceed to make the subsequence
+    ds.push_back(arr[index]);
+    printAllSubsequence_withoutSum(index + 1, arr, n, target - arr[index], ds);
+    ds.pop_back();   // Backtrack to remove the current element
+
+    // Case 2: Excluding the current element and proceed to make the subsequence
+    printAllSubsequence_withoutSum(index + 1, arr, n, target, ds);
+}
+
 int main() {
     int arr[] = {1, 2, 1};
-    int n = 3;
+    int n = sizeof(arr) / sizeof(arr[0]);
     int target = 3;
     int index = 0;   // starting index
 
     vector<int> ds;   // used as a helper data-structure to store subsequences
     int sum = 0;   // used as a helper data-structure to store sum of elements in the subsequences
     printAllSubsequence(index, arr, n, target, ds, sum);
+    cout << endl;
+    printAllSubsequence_withoutSum(index, arr, n, target, ds);
 
     return 0;
 }
