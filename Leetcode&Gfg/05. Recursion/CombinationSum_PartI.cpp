@@ -32,21 +32,21 @@ using namespace std;
 class Solution {
 public:
     void findCombination(vector<int>& candidates, vector<vector<int>>& ans, int index, int target, vector<int>& ds) {
-        // Base case: When we reach the end of the candidates list
-        if(index == candidates.size()) {
+        // Base case: When we reach beyond the end of the candidates list
+        if(index > candidates.size() - 1) {
             if(target == 0) ans.push_back(ds);   // If target becomes zero, add the current combination to 'ans'
-            return;   // Return regardless of whether target is zero or not
+            return;
         }
 
-        // Case 1: Include the current element if it does not exceed the target
+        // Case 1: Include the current element only if subtracting it from target doesn't make target negative
         if(target >= candidates[index]) {
             ds.push_back(candidates[index]);
             // Call the function recursively with the same index (since the same element can be chosen multiple times)
             findCombination(candidates, ans, index, target - candidates[index], ds);
-            ds.pop_back();   // Remove current element from 'ds' while coming back from the above recursive call
+            ds.pop_back();   // Backtracking, i.e., remove current element from 'ds' while coming back from the above recursive call
         }
 
-        // Case 2: Exclude the current element and go to next element
+        // Case 2: Exclude the current element and just go to next element
         findCombination(candidates, ans, index+1, target, ds);
     }
 
@@ -62,7 +62,7 @@ public:
 };
 
 int main() {
-    vector<int> candidates = {2, 3, 4};
+    vector<int> candidates = {2, 3};
     int target = 6;
 
     Solution sol;
