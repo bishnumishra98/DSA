@@ -31,16 +31,39 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
+    void findCombination(vector<int>& candidates, vector<vector<int>>& ans, int index, int target, vector<int>& ds) {
+        // Base case: When we reach the end of the candidates list
+        if(index == candidates.size()) {
+            if(target == 0) ans.push_back(ds);   // If target becomes zero, add the current combination to 'ans'
+            return;   // Return regardless of whether target is zero or not
+        }
+
+        // Case 1: Include the current element if it does not exceed the target
+        if(target >= candidates[index]) {
+            ds.push_back(candidates[index]);
+            // Call the function recursively with the same index (since the same element can be chosen multiple times)
+            findCombination(candidates, ans, index, target - candidates[index], ds);
+            ds.pop_back();   // Remove current element from 'ds' while coming back from the above recursive call
+        }
+
+        // Case 2: Exclude the current element and go to next element
+        findCombination(candidates, ans, index+1, target, ds);
+    }
+
+    // T.C: O(n^t)*k;   where n = no.of elements in candidates[], t = target value, k = average length of each combination in 'ans'
+    // S.C: O(t+m*k);   where m = no.of combinations in 'ans'
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        
+        vector<vector<int>> ans;   // This will be our final answer
+        vector<int> ds;   // This is going to store elements temporary, while traversing
+        int index = 0;   // starting index
+        findCombination(candidates, ans, index, target, ds);
+        return ans;
     }
 };
 
 int main() {
-    vector<int> candidates = {2, 3, 6, 7};
-    int target = 7;
+    vector<int> candidates = {2, 3, 4};
+    int target = 6;
 
     Solution sol;
     vector<vector<int>> v = sol.combinationSum(candidates, target);
