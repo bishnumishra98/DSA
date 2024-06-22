@@ -24,40 +24,40 @@ using namespace std;
 
 // T.C: O(2^n)
 // S.C: O(n)
-void countSubsequence_approach1(int index, int arr[], int n, int& target, int sum, int& count) {
+void countSubsequence_approach1(int index, int arr[], int n, int target, int& count) {
     // Base case: If we've considered all elements
     if(index >= n) {
         // If the sum of the current subsequence equals the target, increment count
-        if(sum == target) {
+        if(target == 0) {
             count++;
         }
         return;   // Exit the current recursive call
     }
 
     // Case 1: Including the current element and proceed to make the subsequence
-    countSubsequence_approach1(index + 1, arr, n, target, sum + arr[index], count);
+    countSubsequence_approach1(index + 1, arr, n, target - arr[index], count);
 
     // Case 2: Excluding the current element and proceed to make the subsequence
-    countSubsequence_approach1(index + 1, arr, n, target, sum, count);
+    countSubsequence_approach1(index + 1, arr, n, target, count);
 }
 
 // T.C: O(2^n)
 // S.C: O(n)
-int countSubsequence_approach2(int index, int arr[], int n, int& target, int sum) {
+int countSubsequence_approach2(int index, int arr[], int n, int target) {
     // Base case: If we've considered all elements
     if(index >= n) {
         // If the sum of the current subsequence equals the target, return 1 indicating a subsequence found.
-        if(sum == target) {
+        if(target == 0) {
             return 1;
         }
         return 0;   // If the sum of the current subsequence does not equals the target, return 0 indicating no subsequence found.
     }
 
     // Case 1: Including the current element and proceed to make the subsequence
-    int include = countSubsequence_approach2(index + 1, arr, n, target, sum + arr[index]);
+    int include = countSubsequence_approach2(index + 1, arr, n, target - arr[index]);
 
     // Case 2: Excluding the current element and proceed to make the subsequence
-    int exclude = countSubsequence_approach2(index + 1, arr, n, target, sum);
+    int exclude = countSubsequence_approach2(index + 1, arr, n, target);
 
     // return the sum of number of subsequences found from include and exclude paths
     return include + exclude;
@@ -65,16 +65,15 @@ int countSubsequence_approach2(int index, int arr[], int n, int& target, int sum
 
 int main() {
     int arr[] = {1, 2, 1, 4, 2, 3};
-    int n = 6;
+    int n = sizeof(arr) / sizeof(arr[0]);
     int target = 4;
     int index = 0;   // starting index
 
-    int sum = 0;   // used as a helper data-structure to store sum of elements in the subsequences
     int count = 0;   // it will be used to store no.of subsequences
-    countSubsequence_approach1(index, arr, n, target, sum, count);
+    countSubsequence_approach1(index, arr, n, target, count);
     cout << count << endl;
 
-    cout << countSubsequence_approach2(index, arr, n, target, sum);
+    cout << countSubsequence_approach2(index, arr, n, target);
 
     return 0;
 }
