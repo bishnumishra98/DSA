@@ -9,7 +9,7 @@ int intToBinary(int n) {
     int bit, i = 0;
     
     while(n) {
-        bit = n & 1;   // kicking out last bit of binary number
+        bit = n & 1;   // kicking out last bit from binary equivalent of decimal number
         ans = ans + (bit * round(pow(10, i)));
         n = n >> 1;
         i++;
