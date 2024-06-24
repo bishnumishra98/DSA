@@ -19,7 +19,7 @@ int BinaryToInt(long long n) {
 
 int main() {
     long long n = 1001;
-    cout << "Binary representation: " << BinaryToInt(n);
+    cout << "Decimal representation: " << BinaryToInt(n);
 
     return 0;
 }
