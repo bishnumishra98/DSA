@@ -8,7 +8,7 @@ int BinaryToInt(long long n) {
     int bit, i = 0, ans = 0;
 
     while(n) {
-        bit = n % 10;   // kicking out last bit of decimal number
+        bit = n % 10;   // kicking out last bit of binary number
         ans = ans + (bit * round(pow(2, i)));
         n = n / 10;
         i++;
