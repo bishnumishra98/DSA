@@ -45,9 +45,7 @@ public:
     void arrangeAndRemoveDuplicateCombinations(vector<vector<int>>& ans) {
         // Sort all elements in each combinations
         for(int i=0; i<ans.size(); i++) {
-            for(int j=0; j<ans[i].size(); j++) {
-                sort(ans[i].begin(), ans[i].end());
-            }
+            sort(ans[i].begin(), ans[i].end());
         }
         // Sort ans based on combinations
         sort(ans.begin(), ans.end());
