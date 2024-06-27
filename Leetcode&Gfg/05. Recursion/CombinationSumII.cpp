@@ -82,7 +82,7 @@ public:
             // it should be picked. The only case it shouldn't be picked is when the current element
             // is the same as the previous element, and it is not the first time being considered
             // in this iteration. 'i > index' indicates that the current element is about to get
-            // picked more than once in this iteration, so skip it to avoid duplicates.
+            // picked up more than once in this iteration, so skip it to avoid duplicates.
             if(i > index && candidates[i] == candidates[i - 1]) continue;
 
             // If the current candidate is greater than the target, no need to proceed further
