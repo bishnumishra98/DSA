@@ -70,17 +70,23 @@ public:
 
     void findCombination(vector<int>& candidates, vector<vector<int>>& ans, int index, int target, vector<int>& ds) {
         // Base case: If target becomes zero, add the current combination to ans
-        if (target == 0) {
+        if(target == 0) {
             ans.push_back(ds);
             return;
         }
 
         // Iterate over the candidates starting from the current index
-        for (int i = index; i < candidates.size(); i++) {
-            // Skip duplicates
-            if (i > index && candidates[i] == candidates[i - 1]) continue;
+        for(int i = index; i < candidates.size(); i++) {
+            // Skip duplicates: If the current element is the same as the previous element,
+            // but it is the first time the current element is being considered in this iteration,
+            // it should be picked. The only case it shouldn't be picked is when the current element
+            // is the same as the previous element, and it is not the first time being considered
+            // in this iteration. 'i > index' indicates that the current element is about to get
+            // picked more than once in this iteration, so skip it to avoid duplicates.
+            if(i > index && candidates[i] == candidates[i - 1]) continue;
+
             // If the current candidate is greater than the target, no need to proceed further
-            if (candidates[i] > target) break;
+            if(candidates[i] > target) break;
 
             // Include the current element and move to the next element
             ds.push_back(candidates[i]);
