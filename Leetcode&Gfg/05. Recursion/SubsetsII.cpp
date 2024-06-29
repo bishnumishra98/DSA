@@ -56,7 +56,18 @@ class Solution {
         ans.push_back(ds);
 
         for(int i=index; i<nums.size(); i++) {
-            if(i > index && )
+            // Skip duplicates: If the current element is the same as the previous element,
+            // but it is the first time the current element is being considered in this iteration,
+            // it should be picked. The only case it shouldn't be picked is when the current element
+            // is the same as the previous element, and it is not the first time being considered
+            // in this iteration. 'i > index' indicates that the current element is about to get
+            // picked up more than once in this iteration, so skip it to avoid duplicates.
+            if(i > index && nums[i] == nums[i-1]) continue;
+
+            // Include the current element and move to the next element
+            ds.push_back(nums[i]);
+            findSubsets(i+1, nums, ans, ds);
+            ds.pop_back();   // Backtrack
         }
     }
 
