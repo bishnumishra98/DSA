@@ -1,0 +1,86 @@
+// Leetcode: 90. Subsets II   --->   Given an integer array nums that may contain duplicates, return all possible
+// subsets (the power set). The solution set must not contain duplicate subsets. Return the solution in any order.
+
+// Example 1:
+// Input: nums = [1,2,2]
+// Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+
+// Example 2:
+// Input: nums = [0]
+// Output: [[],[0]]
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+    public:
+        void allSubsequence(int index, vector<int>& nums, vector<int>& ds, vector<vector<int>>& ans) {
+        if(index == nums.size()) {
+            ans.push_back(ds);
+            return;
+        } 
+
+        // Pick current element
+        ds.push_back(nums[index]);
+        allSubsequence(index+1, nums, ds, ans);
+        ds.pop_back();   // Backtrack
+
+        // Not pick the current element
+        allSubsequence(index+1, nums, ds, ans);
+    }
+
+    void arrangeAndRemoveDuplicateCombinations(vector<vector<int>>& ans) {
+        // Sort all elements in each combinations
+        for(int i=0; i<ans.size(); i++) {
+            sort(ans[i].begin(), ans[i].end());
+        }
+        // Sort ans based on combinations
+        sort(ans.begin(), ans.end());
+        // Remove duplicate combinations
+        ans.erase(unique(ans.begin(), ans.end()), ans.end());
+    }
+
+    // T.C: O(2^n)
+    // S.C: O(n)
+    vector<vector<int>> subsetsWithDup_bruteforce(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> ds;
+        allSubsequence(0, nums, ds, ans);
+        arrangeAndRemoveDuplicateCombinations(ans);
+        return ans;
+    }
+
+// -------------------------------------------------------------------------------------------------------
+
+    // T.C: 
+    // S.C: 
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        
+    }
+};
+
+int main() {
+    vector<int> nums = {1, 2, 2};
+
+    Solution sol;
+
+    cout << "Brute force: " << endl;
+    vector<vector<int>> ans1 = sol.subsetsWithDup_bruteforce(nums);
+    for(int i=0; i<ans1.size(); i++) {
+        for(int j=0; j<ans1[i].size(); j++) {
+            cout << ans1[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    cout << endl << "Optimal approach: " << endl;
+    vector<vector<int>> ans2 = sol.subsetsWithDup(nums);
+    for(int i=0; i<ans2.size(); i++) {
+        for(int j=0; j<ans2[i].size(); j++) {
+            cout << ans2[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
