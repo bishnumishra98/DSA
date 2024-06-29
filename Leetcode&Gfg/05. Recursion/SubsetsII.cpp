@@ -40,8 +40,8 @@ class Solution {
         ans.erase(unique(ans.begin(), ans.end()), ans.end());
     }
 
-    // T.C: O(2^n)
-    // S.C: O(n)
+    // T.C: O(2^n * k);   where n = nums.size(), k = average size of each subset           
+    // S.C: O(2^n * k);
     vector<vector<int>> subsetsWithDup_bruteforce(vector<int>& nums) {
         vector<vector<int>> ans;
         vector<int> ds;
@@ -52,10 +52,22 @@ class Solution {
 
 // -------------------------------------------------------------------------------------------------------
 
-    // T.C: 
-    // S.C: 
+    void findSubsets(int index, vector<int>& nums, vector<vector<int>>& ans, vector<int>& ds) {
+        ans.push_back(ds);
+
+        for(int i=index; i<nums.size(); i++) {
+            if(i > index && )
+        }
+    }
+
+    // T.C: O(2^n * k);   where n = nums.size(), k = average size of each subset               
+    // S.C: O(2^n * k);
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+        vector<int> ds;
+        findSubsets(0, nums, ans, ds);
+        return ans;
     }
 };
 
@@ -73,7 +85,7 @@ int main() {
         cout << endl;
     }
 
-    cout << endl << "Optimal approach: " << endl;
+    cout << "Optimal approach: " << endl;
     vector<vector<int>> ans2 = sol.subsetsWithDup(nums);
     for(int i=0; i<ans2.size(); i++) {
         for(int j=0; j<ans2[i].size(); j++) {
