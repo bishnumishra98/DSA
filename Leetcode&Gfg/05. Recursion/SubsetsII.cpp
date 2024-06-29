@@ -2,7 +2,7 @@
 // subsets (the power set). The solution set must not contain duplicate subsets. Return the solution in any order.
 
 // Example 1:
-// Input: nums = [1,2,2]
+// Input: nums = [2,1,2]
 // Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
 
 // Example 2:
@@ -83,7 +83,7 @@ class Solution {
 };
 
 int main() {
-    vector<int> nums = {1, 2, 2};
+    vector<int> nums = {2, 1, 2};
 
     Solution sol;
 
