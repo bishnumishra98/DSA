@@ -1,5 +1,4 @@
-// Exact same problem as in 'BaseBuildingPrograms\09. Recursion_I\07_AllSubsequenceOfArray.cpp'.
-// Just difference being, here string is present instead of array.
+// Exact same problem as previous one. Just difference being, here string is present instead of array.
 // PATTERN: PICK/NOT PICK
 
 // For a string containing 'n' characters, there can be 2^n subsequences of it.
