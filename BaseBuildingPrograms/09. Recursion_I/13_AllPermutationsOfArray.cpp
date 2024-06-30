@@ -53,13 +53,46 @@ vector<vector<int>> findPermutations_bruteForce(vector<int>& candidates) {
     return ans;
 }
 
+// --------------------------------------------------------------------------------------------------------------------
+
+    void allPermut(int index, vector<int>& candidates, vector<vector<int>>& ans) {
+        // Base case: When we reach beyond last element of 'candidates', push the 'candidates' vector in 'ans' and return.
+        if(index == candidates.size()) {
+            ans.push_back(candidates);
+            return;
+        }
+
+        // Swapping current element with itself and elements on its right.
+        for(int i=index; i<candidates.size(); i++) {
+            swap(candidates[index], candidates[i]);
+            allPermut(index+1, candidates, ans);
+            swap(candidates[index], candidates[i]);   // backtrack to unswap 'candidates' after coming from the above recursion call
+        }
+    }
+
+    // T.C: O(n! * n);   where n = candidates.size()
+    // S.C: O(1);   excluding 'ans' space
+    vector<vector<int>> findPermutations(vector<int>& candidates) {
+        vector<vector<int>> ans;
+        allPermut(0, candidates, ans);
+        return ans;
+    }
+
 int main() {
     vector<int> candidates = {1, 2, 3};
-    vector<vector<int>> ans = findPermutations_bruteForce(candidates);
 
-    for(int i=0; i<ans.size(); i++) {
-        for(int j=0; j<ans[i].size(); j++) {
-            cout << ans[i][j] << " ";
+    vector<vector<int>> ans1 = findPermutations_bruteForce(candidates);
+    for(int i=0; i<ans1.size(); i++) {
+        for(int j=0; j<ans1[i].size(); j++) {
+            cout << ans1[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+    vector<vector<int>> ans2 = findPermutations(candidates);
+    for(int i=0; i<ans2.size(); i++) {
+        for(int j=0; j<ans2[i].size(); j++) {
+            cout << ans2[i][j] << " ";
         }
         cout << endl;
     }
