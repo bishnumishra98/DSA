@@ -57,7 +57,9 @@ vector<vector<int>> findPermutations_bruteForce(vector<int>& candidates) {
 
     void allPermut(int index, vector<int>& candidates, vector<vector<int>>& ans) {
         // Base case: When we reach beyond last element of 'candidates', push the 'candidates' vector in 'ans' and return.
-        if(index == candidates.size()) {
+        if(index == candidates.size()) {   // Base case can also be if(index == candidates.size() - 1) {...} as when 'index'
+                                          // reaches 'candidates.size() - 1', no change in position of elements occur on further
+                                         // recursive call. Thus, the 2nd last level of recursion can also be treated as the base case.
             ans.push_back(candidates);
             return;
         }
