@@ -1,6 +1,6 @@
 #include <vector>
 #include <iostream>
-#include <cstddef>   // For size_t. It is an unsigned integer type. It is the type returned by the sizeof operator.
+#include <cstddef>   // For size_t. It is an unsigned integer type. It is the type returned by the size, sizeof, count, etc.
 #include <set>   // for set
 
 #include <iostream>
