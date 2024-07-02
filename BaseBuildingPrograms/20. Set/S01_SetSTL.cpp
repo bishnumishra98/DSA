@@ -27,7 +27,7 @@ int main() {
     // iii) Copy constructor:
     set<int> s3(s2);   // 's3' is copy of 's2'
 
-// --------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 
     // 2. ACCESSING VALUES OF SET
     // i) Through iterators
@@ -42,6 +42,33 @@ int main() {
     }
     cout << endl;
 
+// ------------------------------------------------------------------------------------------------------------
+
+    // 3. CAPACITY OF SET
+    size_t size = s3.size();   // you can even use 'int' instead of 'size_t'
+    cout << "Size of s3: " << size << endl;
+
+    bool isEmpty = s3.empty();
+    cout << "s3 is empty: " << isEmpty << endl;
+
+    s3.clear();   // clears the set
+
+    size = s3.size();   // you can even use 'int' instead of 'size_t'
+    cout << "Size of s3: " << size << endl;
+
+    isEmpty = s3.empty();
+    cout << "s3 is empty: " << isEmpty << endl;
+
+// ------------------------------------------------------------------------------------------------------------
+
+    // 4. LOOKUP VALUE IN SET
+    // i) find: Searches for an element in the set
+    if(s1.find(20) != s1.end()) cout << "20 is present in set s1." << endl;
+    else cout << "20 is not present in the set s1" << endl;
+
+    // ii) count: Returns the number of elements matching the value (always 0 or 1 for set)
+    size_t count = s1.count(20);
+    cout << "count in set s1: " << count << endl;   // o/p: 1
     
 
     return 0;
