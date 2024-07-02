@@ -17,28 +17,28 @@ using namespace std;
 
 class Solution {
 public:
-    void allPermut(int index, vector<int>& candidates, vector<vector<int>>& ans) {
-        // Base case: When we reach beyond last element of 'candidates', push the 'candidates' vector in 'ans' and return.
-        if(index == candidates.size()) {   // Base case can also be if(index == candidates.size() - 1) {...} as when 'index'
-                                          // reaches 'candidates.size() - 1', no change in position of elements occur on further
+    void allPermut_withSet(int index, vector<int>& nums, vector<vector<int>>& ans) {
+        // Base case: When we reach beyond last element of 'nums', push the 'nums' vector in 'ans' and return.
+        if(index == nums.size()) {   // Base case can also be if(index == nums.size() - 1) {...} as when 'index'
+                                          // reaches 'nums.size() - 1', no change in position of elements occur on further
                                          // recursive call. Thus, the 2nd last level of recursion can also be treated as the base case.
-            ans.push_back(candidates);
+            ans.push_back(nums);
             return;
         }
 
         // Swapping current element with itself and elements on its right.
-        for(int i=index; i<candidates.size(); i++) {
-            swap(candidates[index], candidates[i]);
-            allPermut(index+1, candidates, ans);
-            swap(candidates[index], candidates[i]);   // backtrack to unswap 'candidates' after coming from the above recursion call
+        for(int i=index; i<nums.size(); i++) {
+            swap(nums[index], nums[i]);
+            allPermut_withSet(index+1, nums, ans);
+            swap(nums[index], nums[i]);   // backtrack to unswap 'nums' after coming from the above recursion call
         }
     }
 
-    // T.C: O(n! * logn!);   where n = candidates.size()
+    // T.C: O(n! * logn!);   where n = nums.size()
     // S.C: O(n! * n);   excluding 'ans' space
     vector<vector<int>> permuteUnique_withSet(vector<int>& nums) {
         vector<vector<int>> ans;
-        allPermut(0, nums, ans);
+        allPermut_withSet(0, nums, ans);
 
         // Use a set to remove duplicates
         set<vector<int>> st;
@@ -52,19 +52,60 @@ public:
 
         return ans;
     }
-};
 
-// ---------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------------
+
+    void allPermut(int index, vector<int>& nums, vector<vector<int>>& ans) {
+        // Base case: When we reach beyond last element of 'nums', push the 'nums' vector in 'ans' and return.
+        if(index == nums.size()) {   // Base case can also be if(index == nums.size() - 1) {...} as when 'index'
+                                    // reaches 'nums.size() - 1', no change in position of elements occur on further
+                                   // recursive call. Thus, the 2nd last level of recursion can also be treated as the base case.
+            ans.push_back(nums);
+            return;
+        }
+
+        // Creating a map to keep track of visited elements so that we can skip a duplicate element iteration
+        unordered_map<int, bool> visited;
+
+        // Swapping current element with itself and elements on its right.
+        for(int i=index; i<nums.size(); i++) {
+            // If this element is already present in 'visited' map, skip this iteration; else mark this element true, i.e., visited.
+            if(visited.find(nums[i]) != visited.end()) continue;
+            else visited[nums[i]] = true;
+            swap(nums[index], nums[i]);
+            allPermut(index+1, nums, ans);
+            swap(nums[index], nums[i]);   // backtrack to unswap 'nums' after coming from the above recursion call
+        }
+    }
+
+    // T.C: O(n! * logn!);   where n = nums.size()
+    // S.C: O(n);   excluding 'ans' space. O(n) due to map.
+    // Without using set. We will use map to keep a track of visited elements in allPermut() function
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int>> ans;
+        allPermut(0, nums, ans);
+        return ans;
+    }
+};
 
 int main() {
     vector<int> nums = {1, 1, 2};
 
     Solution sol;
-    vector<vector<int>> ans = sol.permuteUnique_withSet(nums);
+    vector<vector<int>> ans1 = sol.permuteUnique_withSet(nums);
+    for(int i=0; i<ans1.size(); i++) {
+        for(int j=0; j<ans1[i].size(); j++) {
+            cout << ans1[i][j] << " ";
+        }
+        cout << endl;
+    }
 
-    for(int i=0; i<ans.size(); i++) {
-        for(int j=0; j<ans[i].size(); j++) {
-            cout << ans[i][j] << " ";
+    cout << endl;
+
+    vector<vector<int>> ans2 = sol.permuteUnique(nums);
+    for(int i=0; i<ans2.size(); i++) {
+        for(int j=0; j<ans2[i].size(); j++) {
+            cout << ans2[i][j] << " ";
         }
         cout << endl;
     }
