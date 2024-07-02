@@ -36,7 +36,7 @@ public:
 
     // T.C: O(n! * logn!);   where n = candidates.size()
     // S.C: O(n! * n);   excluding 'ans' space
-    vector<vector<int>> permuteUnique_bruteForce(vector<int>& nums) {
+    vector<vector<int>> permuteUnique_withSet(vector<int>& nums) {
         vector<vector<int>> ans;
         allPermut(0, nums, ans);
 
@@ -60,7 +60,7 @@ int main() {
     vector<int> nums = {1, 1, 2};
 
     Solution sol;
-    vector<vector<int>> ans = sol.permuteUnique_bruteForce(nums);
+    vector<vector<int>> ans = sol.permuteUnique_withSet(nums);
 
     for(int i=0; i<ans.size(); i++) {
         for(int j=0; j<ans[i].size(); j++) {
