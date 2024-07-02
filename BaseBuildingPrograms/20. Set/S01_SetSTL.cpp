@@ -1,34 +1,48 @@
+#include <vector>
 #include <iostream>
 #include <cstddef>   // For size_t. It is an unsigned integer type. It is the type returned by the sizeof operator.
 #include <set>   // for set
 
 #include <iostream>
 #include <set>
+using namespace std;
 
 int main() {
-    std::set<int> s;
+    int arr[] = {60, 50, 70};
+    int n = 3;
+    vector<int> v = {20, 30};
+    
+    // 1. CREATION OF SET: Set can be created from 3 types of constructors:
+    // i) Create set using default constructor and insert values in it using insert() function:
+    set<int> s1;
+    s1.insert(50);
+    s1.insert({40, 10});
+    s1.insert(v.begin(), v.end());   // inserting a vector 'v' in set
+    s1.insert(arr, arr+n);   // inserting a arr 'arr' in set
 
-    // Insert elements
-    s.insert(10);
-    s.insert(20);
-    s.insert(30);
 
-    // Iterate through the set
-    for (auto it = s.begin(); it != s.end(); ++it) {
-        std::cout << *it << " ";
+    // ii) Range constructor:
+    set<int> s2(v.begin(), v.end());   // if you want to initialize s2 with array: set<int> s2(arr, arr+n);
+
+    // iii) Copy constructor:
+    set<int> s3(s2);   // 's3' is copy of 's2'
+
+// --------------------------------------------------------------------------------------
+
+    // 2. ACCESSING VALUES OF SET
+    // i) Through iterators
+    for(auto it = s1.begin(); it != s1.end(); it++) {
+        cout << *it << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
 
-    // Check if an element exists
-    if (s.find(20) != s.end()) {
-        std::cout << "20 is in the set" << std::endl;
+    // ii) Through foreach loop
+    for(auto i: s2) {
+        cout << i << " ";
     }
+    cout << endl;
 
-    // Remove an element
-    s.erase(20);
-
-    // Size of the set
-    std::cout << "Size of set: " << s.size() << std::endl;
+    
 
     return 0;
 }
