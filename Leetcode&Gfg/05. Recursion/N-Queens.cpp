@@ -56,8 +56,8 @@ public:
 
     // solve() function helps in placing queen at all safe rows of the 'col' column
     void solve(int col, vector<string>& board, vector<vector<string>>& ans, int n) {
-        // If 'col' exceeds the last column of board, it means all columns of the board has been
-        // filled with a queen in each column. Thus, push the 'board' in 'ans', and return.
+        // Base case: If 'col' exceeds the last column of board, it means all columns of the board has
+        // been filled with a queen in each column. Thus, push the 'board' in 'ans', and return.
         if(col == n) {
             ans.push_back(board);
             return;
@@ -92,11 +92,49 @@ public:
 
 // --------------------------------------------------------------------------------------------------------------------------
 
-    // The optimal solution is implemented with the help of hashing
-    // T.C: 
-    // S.C: 
+    // solve() function helps in placing queen at all safe rows of the 'col' column
+    void solve(int col, vector<string>& board, vector<vector<string>>& ans, int n, vector<int>& leftRow, vector<int>& upperDiagonal, vector<int>& lowerDiagonal) {
+        // Base case: If 'col' exceeds the last column of board, it means all columns of the board has
+        // been filled with a queen in each column. Thus, push the 'board' in 'ans', and return.
+        if(col == n) {
+            ans.push_back(board);
+            return;
+        }
+
+        // Check if a queen can be placed at each row of this column. And if a queen is placed at any row of
+        // this column, recursively find all safe row no. for the queen to be placed in further columns too.
+        for(int row=0; row<n; row++) {
+            // If hashtables for all 3 directions are 0, means queen can be placed at this position '[row][col]'
+            if(leftRow[row]==0 && lowerDiagonal[row+col]==0 && upperDiagonal[n-1+col-row]==0) {
+                board[row][col] = 'Q';
+                // Mark the hashtables as 1, so that no queens would be allowed to be kept in their direction
+                leftRow[row] = 1;
+                lowerDiagonal[row+col] = 1;
+                upperDiagonal[n-1+col-row] = 1;
+                solve(col+1, board, ans, n, leftRow, upperDiagonal, lowerDiagonal);
+                // Backtrack: Remove 'Q' from board and unmark the hashtables
+                board[row][col] = '.';
+                leftRow[row] = 0;
+                lowerDiagonal[row+col] = 0;
+                upperDiagonal[n-1+col-row] = 0;
+            }
+        }
+    }
+
+    // The optimal solution is implemented with the help of hashing concept.
+    // T.C: O(n!)
+    // S.C: O(n^2 + S);   where S = total space for all solutions
     vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> ans;   // 'ans' contains a collection of boards where queens do not attack each other. Return it.
+        vector<string> board(n);   // 'board' stores positions of queens in a chess board where they do not attack each other
+        string s(n, '.');   // initializaing a string of length 'n' with value '.'
+        for(int i=0; i<n; i++) board[i] = s;   // initializing each element of 'board' with the above string 's'.
         
+        // Creating 3 arrays which will be used as hash tables for checking is it safe to keep queen considering the 3 directions:
+        // Horizontally towards left, Upwards diagonally towards left and Downwards diagonally towards left, respectively.
+        vector<int> leftRow(n, 0), upperDiagonal(2*n - 1, 0), lowerDiagonal(2*n - 1, 0);
+        solve(0, board, ans, n, leftRow, upperDiagonal, lowerDiagonal);
+        return ans;
     }
 };
 
@@ -108,6 +146,14 @@ int main() {
     for(int i=0; i<ans1.size(); i++) {
         for(int j=0; j<ans1[i].size(); j++) {
             cout << ans1[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+    vector<vector<string>> ans2 = sol.solveNQueens(n);
+    for(int i=0; i<ans2.size(); i++) {
+        for(int j=0; j<ans2[i].size(); j++) {
+            cout << ans2[i][j] << " ";
         }
         cout << endl;
     }
