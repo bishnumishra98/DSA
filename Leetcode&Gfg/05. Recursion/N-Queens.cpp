@@ -54,6 +54,7 @@ public:
         return true;
     }
 
+    // solve() function helps in placing queen at all safe rows of the 'col' column
     void solve(int col, vector<string>& board, vector<vector<string>>& ans, int n) {
         // If 'col' exceeds the last column of board, it means all columns of the board has been
         // filled with a queen in each column. Thus, push the 'board' in 'ans', and return.
