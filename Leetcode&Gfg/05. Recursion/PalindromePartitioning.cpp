@@ -9,6 +9,10 @@
 // Input: s = "a"
 // Output: [["a"]]
 
+// Example 3:
+// Input: s = "aabb"
+// Output: [["a","a","b", "b"], ["a","a", "bb"], ["aa", "b", "b"], ["aa"], "bb"]
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -49,7 +53,7 @@ public:
 };
 
 int main() {
-    string s = "aab";
+    string s = "aabb";
 
     Solution sol;
     vector<vector<string>> ans = sol.partition(s);
