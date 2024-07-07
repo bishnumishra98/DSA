@@ -32,11 +32,83 @@
 using namespace std;
 
 class Solution{
-    public:
-    // T.C: 
-    // S.C: 
+public:
+    void solve(int i, int j, vector<vector<int>>& m, int n, vector<string>& ans, string ds, vector<vector<int>> visited) {
+        if(i == n-1 && j == n-1) {
+            ans.push_back(ds);
+            return;
+        }
+
+        // To get strings inside 'ans' in sorted order, we will follow the direction: D -> L -> R -> U
+        // Down
+        if(i+1<n && visited[i+1][j]==0 && m[i+1][j]==1) {
+            visited[i][j] = 1;
+            solve(i+1, j, m, n, ans, ds+'D', visited);
+            visited[i][j] = 0;   // backtracking
+        }
+
+        // Left
+        if(j-1>=0 && visited[i][j-1]==0 && m[i][j-1]==1) {
+            visited[i][j] = 1;
+            solve(i, j-1, m, n, ans, ds+'L', visited);
+            visited[i][j] = 0;   // backtracking
+        }
+
+        // Right
+        if(j+1<n && visited[i][j+1]==0 && m[i][j+1]==1) {
+            visited[i][j] = 1;
+            solve(i, j+1, m, n, ans, ds+'R', visited);
+            visited[i][j] = 0;   // backtracking
+        }
+
+        // Up
+        if(i-1>=0 && visited[i-1][j]==0 && m[i-1][j]==1) {
+            visited[i][j] = 1;
+            solve(i-1, j, m, n, ans, ds+'U', visited);
+            visited[i][j] = 0;   // backtracking
+        }
+    }
+
+    // T.C: O(4^(n^2))
+    // S.C: O(n^2);   due to maximum depth of recursive stack
     vector<string> findPath(vector<vector<int>> &m, int n) {
-        
+        vector<string> ans;
+        vector<vector<int>> visited(n, vector<int>(n, 0));
+        if(m[0][0] == 1) solve(0, 0, m, n, ans, "", visited);   // if m[0][0] is 1, then only we can proceed to build the paths
+        if(ans.empty()) ans = {"-1"};   // return "-1" if no path exists
+        return ans;
+    }
+
+// ----------------------------------------------------------------------------------------------------------------------------
+
+    void solve(int i, int j, vector<vector<int>>& m, int n, vector<string>& ans, string ds, vector<vector<int>> visited, int di[], int dj[]) {
+        if(i == n-1 && j == n-1) {
+            ans.push_back(ds);
+            return;
+        }
+
+        string dir = "DLRU";
+        for(int index=0; index<4; index++) {
+            int nexti = i + di[index];
+            int nextj = j + dj[index];
+            if(nexti>=0 && nextj>=0 && nexti<n && nextj<n && visited[nexti][nextj]==0 && m[nexti][nextj]==1) {
+                visited[i][j] = 1;
+                solve(nexti, nextj, m, n, ans, ds+dir[index], visited, di, dj);
+                visited[i][j] = 0;   // backtracking
+            }
+        }
+    }
+
+    // T.C: O(4^(n^2))
+    // S.C: O(n^2);   due to maximum depth of recursive stack
+    vector<string> findPath_4loopsin1(vector<vector<int>> &m, int n) {
+        vector<string> ans;
+        vector<vector<int>> visited(n, vector<int>(n, 0));
+        int di[] = {1, 0, 0, -1};
+        int dj[] = {0, -1, 1, 0};
+        if(m[0][0] == 1) solve(0, 0, m, n, ans, "", visited, di, dj);
+        if(ans.empty()) ans = {"-1"};
+        return ans;
     }
 };
 
@@ -45,122 +117,14 @@ int main() {
                              {1, 1, 0, 1}, 
                              {1, 1, 0, 0},
                              {0, 1, 1, 1}};
-    int N = 4;
+    int n = 4;
     
     Solution sol;
-    vector<string> ans = sol.findPath(m, N);
-    for(string s: ans) cout << s << endl;
+    vector<string> ans1 = sol.findPath(m, n);
+    for(string s: ans1) cout << s << endl;
+    cout << endl;
+    vector<string> ans2 = sol.findPath_4loopsin1(m, n);
+    for(string s: ans2) cout << s << endl;
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-/*
-bool isAllowed(int maze[][4], int row, int col, int newi, int newj, vector<vector<bool>> &visited) {
-    // It is ony allowed to visit a location, if:
-    // i)   location to be visited is not out of bound
-    // ii)  it's allowed to visit that particular location in the maze, i.e path is open, i.e. 1
-    // iii) the location to be visited is marked 'not visited' i.e. 'false' in 'visited' array'
-    if((newi>=0 && newi<row) && (newj>=0 && newj<col) && (maze[newi][newj] == 1) && (visited[newi][newj] == false)) return true;
-    else return false;
-}
-
-void printAllPath(int maze[][4], int row, int col, int i, int j, string &output, vector<vector<bool>> &visited) {
-    // base case
-    if(i==row-1 && j==col-1) {   // maze[row-1][col-1] is the destination
-        cout << output << endl;
-        return;
-    }
-
-    // The rat can either move up, right, down or left. So we will visit all directions.
-    // UP
-    int newi = i - 1;
-    int newj = j;
-    if(isAllowed(maze, row, col, newi, newj, visited)) {
-        output.push_back('U');
-        visited[newi][newj] = true;   // the location (newi, newj) will be visited now,
-                                     // so we are marking visited[newi][newj] as true
-        printAllPath(maze, row, col, newi, newj, output, visited);   // recursive call to find next location
-        visited[newi][newj] = false;   // backtracking, i.e. marking the location (newi, newj) as false
-                                      // so that it can be visited in further operations
-        output.pop_back();   // clearing out the character 'U' from 'output' string
-    }
-
-    // RIGHT
-    newi = i;
-    newj = j + 1;
-    if(isAllowed(maze, row, col, newi, newj, visited)) {
-        output.push_back('R');
-        visited[newi][newj] = true;   // the location (newi, newj) will be visited now,
-                                     // so we are marking visited[newi][newj] as true
-        printAllPath(maze, row, col, newi, newj, output, visited);   // recursive call to find next location
-        visited[newi][newj] = false;   // backtracking, i.e. marking the location (newi, newj) as false
-                                      // so that it can be visited in further operations
-        output.pop_back();   // clearing out the character 'U' from 'output' string
-    }
-
-    // DOWN
-    newi = i + 1;
-    newj = j;
-    if(isAllowed(maze, row, col, newi, newj, visited)) {
-        output.push_back('D');
-        visited[newi][newj] = true;   // the location (newi, newj) will be visited now,
-                                     // so we are marking visited[newi][newj] as true
-        printAllPath(maze, row, col, newi, newj, output, visited);   // recursive call to find next location
-        visited[newi][newj] = false;   // backtracking, i.e. marking the location (newi, newj) as false
-                                      // so that it can be visited in further operations
-        output.pop_back();   // clearing out the character 'U' from 'output' string
-    }
-
-    // LEFT
-    newi = i;
-    newj = j - 1;
-    if(isAllowed(maze, row, col, newi, newj, visited)) {
-        output.push_back('L');
-        visited[newi][newj] = true;   // the location (newi, newj) will be visited now,
-                                     // so we are marking visited[newi][newj] as true
-        printAllPath(maze, row, col, newi, newj, output, visited);   // recursive call to find next location
-        visited[newi][newj] = false;   // backtracking, i.e. marking the location (newi, newj) as false
-                                      // so that it can be visited in further operations
-        output.pop_back();   // clearing out the character 'U' from 'output' string
-    }
-}
-
-int main() {
-    int maze[4][4] = {
-        {1, 0, 0, 0},
-        {1, 1, 0, 0},
-        {1, 1, 0, 0},
-        {0, 1, 1, 1}
-    };
-    int row = 4;
-    int col = 4;
-
-    int i = 0;   // 'i' will represent row number
-    int j = 0;   // 'j' will represent column number
-
-    string output = " ";
-
-    // creating a 2D vector to keep track of locations that has already been visited
-    vector <vector<bool>> visited(row, vector<bool>(col, false));
-
-    if(maze[0][0] == 0) {   // if source is closed, rat cannot move
-        cout << "No path exists" << endl;
-    } else {
-        // if source is open, i.e. first element of 'maze' array is 1. In this case, rat can move;
-        // which means it has already visited maze[0][0], thus we are marking visited[0][0] as true.
-        visited[0][0] = true;  
-        printAllPath(maze, row, col, i, j, output, visited);
-    }
-
-    return 0;
-}
-*/
