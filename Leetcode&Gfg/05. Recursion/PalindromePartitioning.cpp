@@ -18,6 +18,7 @@ using namespace std;
 
 class Solution {
 public:
+    // isPalindrome() checks whether the substring of string 's' from index 'start' to 'end is a palindrome or not
     bool isPalindrome(string s, int start, int end) {
         while(start <= end) {
             if(s[start] != s[end]) return false;
@@ -27,27 +28,30 @@ public:
         return true;
     }
 
-    void solve(int index, string s, vector<string>& path, vector<vector<string>>& ans) {
+    // solve() function builds partitions temporarily in helper data structure 'ds' and pushes them inside 'ans'
+    void solve(int index, string s, vector<string>& ds, vector<vector<string>>& ans) {
+        // Base case: If index reaches beyond the last character of string 's', the required
+        // palindrome vector is built inside 'ds'. Thus, push it inside 'ans'.
         if(index == s.size()) {
-            ans.push_back(path);
+            ans.push_back(ds);
             return;
         }
 
         for(int i=index; i<s.size(); i++) {
             if(isPalindrome(s, index, i)) {
-                path.push_back(s.substr(index, i-index+1));
-                solve(i+1, s, path, ans);
-                path.pop_back();
+                ds.push_back(s.substr(index, i-index+1));
+                solve(i+1, s, ds, ans);
+                ds.pop_back();
             }
         }
     }
 
-    // T.C: 
-    // S.C: 
+    // T.C: O(2^n * n)
+    // S.C: O(2^n * n)
     vector<vector<string>> partition(string s) {
         vector<vector<string>> ans;
-        vector<string> path;
-        solve(0, s, path, ans);
+        vector<string> ds;
+        solve(0, s, ds, ans);
         return ans;
     }
 };
