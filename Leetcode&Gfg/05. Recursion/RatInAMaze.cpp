@@ -91,7 +91,7 @@ public:
         for(int index=0; index<4; index++) {
             int nexti = i + di[index];
             int nextj = j + dj[index];
-            if(nexti>=0 && nextj>=0 && nexti<n && nextj<n && visited[nexti][nextj]==0 && m[nexti][nextj]==1) {
+            if(nexti>=0 && nextj>=0 && nexti<n && nextj<n && m[nexti][nextj]==1 && visited[nexti][nextj]==0) {
                 visited[i][j] = 1;
                 solve(nexti, nextj, m, n, ans, ds+dir[index], visited, di, dj);
                 visited[i][j] = 0;   // backtracking
@@ -104,6 +104,9 @@ public:
     vector<string> findPath_4loopsin1(vector<vector<int>> &m, int n) {
         vector<string> ans;
         vector<vector<int>> visited(n, vector<int>(n, 0));
+        // Directions       D     L     R     U
+        // i-coordinate     i+1   i     i     i+1
+        // j-coordinate     j     j     j+1   j
         int di[] = {1, 0, 0, -1};
         int dj[] = {0, -1, 1, 0};
         if(m[0][0] == 1) solve(0, 0, m, n, ans, "", visited, di, dj);
