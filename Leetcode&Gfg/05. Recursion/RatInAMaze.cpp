@@ -41,28 +41,28 @@ public:
 
         // To get strings inside 'ans' in sorted order, we will follow the direction: D -> L -> R -> U
         // Down
-        if(i+1<n && visited[i+1][j]==0 && m[i+1][j]==1) {
+        if(i+1<n && m[i+1][j]==1 && visited[i+1][j]==0) {
             visited[i][j] = 1;
             solve(i+1, j, m, n, ans, ds+'D', visited);
             visited[i][j] = 0;   // backtracking
         }
 
         // Left
-        if(j-1>=0 && visited[i][j-1]==0 && m[i][j-1]==1) {
+        if(j-1>=0 && m[i][j-1]==1 && visited[i][j-1]==0) {
             visited[i][j] = 1;
             solve(i, j-1, m, n, ans, ds+'L', visited);
             visited[i][j] = 0;   // backtracking
         }
 
         // Right
-        if(j+1<n && visited[i][j+1]==0 && m[i][j+1]==1) {
+        if(j+1<n && m[i][j+1]==1 && visited[i][j+1]==0) {
             visited[i][j] = 1;
             solve(i, j+1, m, n, ans, ds+'R', visited);
             visited[i][j] = 0;   // backtracking
         }
 
         // Up
-        if(i-1>=0 && visited[i-1][j]==0 && m[i-1][j]==1) {
+        if(i-1>=0 && m[i-1][j]==1 && visited[i-1][j]==0) {
             visited[i][j] = 1;
             solve(i-1, j, m, n, ans, ds+'U', visited);
             visited[i][j] = 0;   // backtracking
