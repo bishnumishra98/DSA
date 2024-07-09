@@ -53,15 +53,35 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
+    // T.C: O(n^2)
+    // S.C: O(n)
     string getPermutation(int n, int k) {
-        
+        // Find factorial of n, and preparing a candidates vector
+        int fact = 1;
+        vector<int> candidates;
+        for(int i=1; i<n; i++) {
+            fact = fact * i;
+            candidates.push_back(i);
+        }
+        candidates.push_back(n);   // candidates = {1, 2, 3, ..., n}
+
+        string ans = "";
+        k = k - 1;   // as we will be using a 0 based indexing
+
+        while(true) {
+            ans = ans + to_string(candidates[k/fact]);
+            candidates.erase(candidates.begin() + k/fact);   // erase the (k/fact)th element from candidates
+            if(candidates.size() == 0) break;
+            k = k % fact;
+            fact = fact / candidates.size();
+        }
+
+        return ans;
     }
 };
 
 int main() {
-    int n = 3, k = 3;
+    int n = 4, k = 9;
     Solution sol;
     cout << sol.getPermutation(n, k);
 
