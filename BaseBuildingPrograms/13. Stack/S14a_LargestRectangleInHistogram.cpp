@@ -28,14 +28,10 @@ int largestRectangleArea_bruteForce(vector<int>& heights) {
         int right = i;
 
         // Find the leftmost index where height is less than the current height
-        while(left > 0 && heights[left - 1] >= heights[i]) {
-            left--;
-        }
+        while(left > 0 && heights[left - 1] >= heights[i]) left--;
 
         // Find the rightmost index where height is less than the current height
-        while(right < (n - 1) && heights[right + 1] >= heights[i]) {
-            right++;
-        }
+        while(right < (n - 1) && heights[right + 1] >= heights[i]) right++;
 
         area = (right - left + 1) * heights[i];   // area = width * height
         maxArea = max(maxArea, area);

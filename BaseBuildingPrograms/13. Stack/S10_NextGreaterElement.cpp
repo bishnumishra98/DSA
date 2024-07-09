@@ -40,15 +40,11 @@ vector<int> nextGreaterElement(int* arr, int size) {
         int currElement = arr[i];
 
         // popping out stack elements until array element becomes smaller than stack top element.
-        while(!st.empty() && currElement >= st.top()) {
-            st.pop();
-        }
+        while(!st.empty() && currElement >= st.top()) st.pop();
 
         // storing top element of stack in ans
-        if(!st.empty())
-            ans[i] = st.top();
-        else
-            ans[i] = -1;
+        if(!st.empty()) ans[i] = st.top();
+        else ans[i] = -1;
 
         // pushing array element into stack
         st.push(currElement);

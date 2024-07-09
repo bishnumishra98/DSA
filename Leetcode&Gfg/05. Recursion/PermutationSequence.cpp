@@ -33,6 +33,7 @@
 //     return s;
 // }
 
+// T.C: O((n!*n)log(n!*n))
 // string getPermutation(int n, int k) {
 //     vector<int> candidates;
 //     for(int i=1; i<=n; i++) {
@@ -52,12 +53,17 @@ using namespace std;
 
 class Solution {
 public:
+    // T.C: 
+    // S.C: 
     string getPermutation(int n, int k) {
         
     }
 };
 
 int main() {
+    int n = 3, k = 3;
+    Solution sol;
+    cout << sol.getPermutation(n, k);
 
     return 0;
 }

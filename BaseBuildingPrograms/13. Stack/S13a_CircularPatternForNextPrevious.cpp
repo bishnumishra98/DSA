@@ -40,17 +40,13 @@ vector<int> nextGreaterElement_circularArray(int* arr, int n) {
         int currElement = arr[i%n];   // CHANGE 2
 
         // popping out stack elements until array element becomes smaller than stack top element.
-        while(!st.empty() && currElement >= st.top()) {
-            st.pop();
-        }
+        while(!st.empty() && currElement >= st.top()) st.pop();
 
         // storing top element of stack in ans
         if(i<n) {   // ADDITION 1 (this condition is necessary as we want
         // only elements from the original array to be an element of 'ans')
-            if(!st.empty())
-                ans[i] = st.top();
-            else
-                ans[i] = -1;
+            if(!st.empty()) ans[i] = st.top();
+            else ans[i] = -1;
         }
 
         // pushing array element into stack

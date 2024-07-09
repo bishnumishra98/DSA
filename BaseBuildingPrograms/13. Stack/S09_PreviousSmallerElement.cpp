@@ -39,9 +39,7 @@ vector<int> previousSmallerElement(int* arr, int size) {
         int currElement = arr[i];
 
         // popping stack until currElement becomes greater than top element of stack
-        while(currElement <= st.top()) {
-            st.pop();
-        }
+        while(currElement <= st.top()) st.pop();
 
         // storing top element of stack in ans
         ans[i] = st.top();
