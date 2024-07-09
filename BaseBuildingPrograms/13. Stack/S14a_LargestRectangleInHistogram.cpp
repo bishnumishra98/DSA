@@ -56,9 +56,7 @@ vector<int> indexOfPrevSmallerElement(vector<int> arr) {
         // ADDITION 1: When top element of stack is -1 in the beginning, we have to make
         //             sure while loop doesn't runs, because arr[-1] makes no sense.
         // popping stack until currElement becomes greater than top element of stack
-        while(st.top()!= -1 && currElement <= arr[st.top()]) {
-            st.pop();
-        }
+        while(st.top()!= -1 && currElement <= arr[st.top()]) st.pop();
 
         // storing top element of stack in ans
         ans[i] = st.top();
