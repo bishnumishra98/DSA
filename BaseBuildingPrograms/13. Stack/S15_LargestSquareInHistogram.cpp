@@ -55,18 +55,14 @@ vector<int> indexOfNextSmallerElement(vector<int> arr) {
         // ADDITION 1: When top element of stack is -1 in the beginning, we have to make
         //             sure while loop doesn't runs, because arr[-1] makes no sense.
         // popping stack until currElement becomes greater than top element of stack
-        while(st.top()!= -1 && currElement <= arr[st.top()]) {
-            st.pop();
-        }
+        while(st.top()!= -1 && currElement <= arr[st.top()]) st.pop();
 
         // CHANGE 2: This case is exclusive only for indexOfNextSmallerElement(). We are
         // assuming that if no next smaller element is found, then we will keep -1 element
         // on the index just after the last element of the array.
         // Thus, all -1 in 'ans' shall be replaced by 'size;, i.e., next index of last element.
-        if(st.top() == -1)
-            ans[i] = size;
-        else
-            ans[i] = st.top();
+        if(st.top() == -1) ans[i] = size;
+        else ans[i] = st.top();
 
         // CHANGE 3: Instead of pushing array elements, we are pushing index of array elements
         // pushing index of array element into stack
