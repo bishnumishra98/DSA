@@ -29,7 +29,6 @@
 //    at the top index of stack. At this point, stop the loop and push the current day index into the stack. In this way,
 //    the top elements of stack remains cooler than the below ones, and this stack helps to populate 'ans' array accordingly.
 
-
 #include <bits/stdc++.h>
 using namespace std;
 
