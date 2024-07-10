@@ -19,16 +19,22 @@ using namespace std;
 
 class Solution {
   public:
-    // T.C: 
-    // S.C: 
+    // T.C: O(n^2)
+    // S.C: O(1)
     long long int inversionCount_bruteForce(long long arr[], int n) {
-        
+        long long count = 0;
+        for(long long i=0; i<n; i++) {
+            for(long long j=i+1; j<n; j++) {
+                if(arr[i] > arr[j]) count++;
+            }
+        }
+        return count;
     }
 
 // ---------------------------------------------------------------------------------------
 
-    // T.C:
-    // S.C:
+    // T.C: O(nlogn)
+    // S.C: O(1)
     long long int inversionCount(long long arr[], int n) {
         
     }
