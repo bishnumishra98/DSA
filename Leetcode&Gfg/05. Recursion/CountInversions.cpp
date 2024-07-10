@@ -21,6 +21,14 @@ class Solution {
   public:
     // T.C: 
     // S.C: 
+    long long int inversionCount_bruteForce(long long arr[], int n) {
+        
+    }
+
+// ---------------------------------------------------------------------------------------
+
+    // T.C:
+    // S.C:
     long long int inversionCount(long long arr[], int n) {
         
     }
@@ -29,8 +37,10 @@ class Solution {
 int main() {
     long long arr[] = {2, 4, 1, 3, 5};
     int n = 5;
-    
+
     Solution sol;
+    cout << sol.inversionCount_bruteForce(arr, n);
+    cout << endl;
     cout << sol.inversionCount(arr, n);
 
     return 0;
