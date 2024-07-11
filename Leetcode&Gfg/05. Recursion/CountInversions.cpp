@@ -14,6 +14,10 @@
 // Output: 0
 // Explanation: As the sequence is already sorted so there is no inversion count.
 
+// Example 3:
+// Input: n = 5, arr[] = {5, 3, 2, 4, 1}
+// Output: 8
+
 // Understand 'BaseBuildingPrograms\05. Sorting\MergeSort.cpp' before understand optimal solution of this problem.
 
 #include <bits/stdc++.h>
@@ -49,10 +53,12 @@ class Solution {
                 k++;
                 left++;
             } else {
+                // If this right array's element is smaller, all elements of left array from this point can form a pair with it.
+                // No.of pairs made will be nothing but the no.of elements remaining in left array, that is: mid - left + 1.
                 temp[k] = arr[right];
                 k++;
                 right++;
-                count += (mid - left + 1);   // Modification 2
+                count += (mid - left + 1);   // Modification 2   // (mid-left+1) is the count of pairs
             }
         }
 
@@ -82,9 +88,9 @@ class Solution {
         if(start >= end) return count;
 
         long long mid = start + (end - start) / 2;
-        count += mergeSort(arr, start, mid);
-        count += mergeSort(arr, mid+1, end);
-        count += merge(arr, start, mid, end);
+        count += mergeSort(arr, start, mid);   // left half
+        count += mergeSort(arr, mid+1, end);   // right half
+        count += merge(arr, start, mid, end);   // merge the two sorted halves
 
         return count;
     }
@@ -97,7 +103,7 @@ class Solution {
 };
 
 int main() {
-    long long arr[] = {2, 4, 1, 3, 5};
+    long long arr[] = {5, 3, 2, 4, 1};
     int n = 5;
 
     Solution sol;
