@@ -24,7 +24,7 @@ using namespace std;
 
 int climbStairs(int n) {
     // Base case
-    if(n <= 1) return 1;
+    if(n <= 2) return n;
 
     // recursive relation
     int ans = climbStairs(n-1) + climbStairs(n-2);
