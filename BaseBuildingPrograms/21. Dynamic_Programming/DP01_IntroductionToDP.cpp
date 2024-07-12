@@ -34,7 +34,7 @@
 // Below is a fibonacci program to print nth number of the fibonacci series. f(0) = 0, f(1) = 1, f(n) = f(n-1) + f(n-2).
 // nth number of fibonacci series can found out in both recursive and dynamic programming way:
 // i)  Simple recursion (uses more space due to calling of same subproblems multiple times)
-// ii) Dynamic programming (uses optimal space)
+// ii) Dynamic programming (optimal solution)
 
 #include <iostream>
 #include <vector>
