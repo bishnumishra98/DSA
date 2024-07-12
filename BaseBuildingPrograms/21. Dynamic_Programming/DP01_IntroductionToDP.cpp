@@ -84,7 +84,7 @@ int fibo_tabulation(int n) {
 
     // Step 2: Fill initial data in dp according to base case.
     dp[0] = 0;
-    dp[1] = 1;
+    if(n >= 1) dp[1] = 1;   // accessing dp[1] will give heap-buffer-overflow if user input n = 0
 
     // Step 3: Fill rest of the dp array using iteration.
     for(int i=2; i<=n; i++) {
