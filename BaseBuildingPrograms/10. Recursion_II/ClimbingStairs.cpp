@@ -23,10 +23,8 @@
 using namespace std;
 
 int climbStairs(int n) {
-    // base case
-    if(n==0 || n==1) {
-        return 1;
-    }
+    // Base case
+    if(n <= 1) return 1;
 
     // recursive relation
     int ans = climbStairs(n-1) + climbStairs(n-2);
