@@ -101,6 +101,7 @@ int fibo_tabulation(int n) {
 // S.C: O(1)
 int fibo_tabulation_SO(int n) {
     int prev2 = 0;
+    if(n == 0) return prev2;   // to cover input n = 0.
     int prev = 1;
 
     for(int i=2; i<=n; i++) {
