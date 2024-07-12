@@ -35,7 +35,6 @@
 // nth number of fibonacci series can found out in both recursive and dynamic programming way:
 // i)  Simple recursion (uses more space due to calling of same subproblems multiple times)
 // ii) Dynamic programming (uses optimal space)
-// Further all DP problems can be solved in both ways: Memoization (Top-Down Approach) and the Tabulation (Bottom-Up Approach).
 
 #include <iostream>
 #include <vector>
@@ -45,30 +44,36 @@ using namespace std;
 // T.C: O(2^n)
 // S.C: O(2^n);   due to recursive call stack
 int fibo_recursion(int n) {
-    if(n == 0) return 0;
-    if(n == 1) return 1;
+    // Base case
+    if(n <= 1) return n;
     int ans = fibo_recursion(n-1) + fibo_recursion(n-2);
     return ans;
+}
+
+// ------------------------------------------------------------------------------------------------------------
+
+int solve(int n, vector<int>& dp) {
+    // Base case
+    if(n <= 1) return n;
+
+    // Step 3: If answer already exist in dp array, utilize the answer by returning it to avoid solving overlapping subproblems.
+    if(dp[n] != -1) return dp[n];
+
+    // Step 2: Store/return answer in the dp array.
+    dp[n] = solve(n-1, dp) + solve(n-2, dp);
+    return dp[n];
 }
 
 // Memoization (Top-Down Approach)
 // T.C: O(n)
 // S.C: O(n)
-int fibo_memoization(int n, vector<int>& dp) {
-    // Base case
-    dp[0] = 0;
-    if(n > 0) dp[1] = 1;   // initiliaze dp[1] only if 'n > 0', or else we will get 'heap-buffer-overflow'
-
-    // Step 1: Create a dp array(already created in driver code, and passed here as an argument).
-
-    // Step 3: If answer already exist in dp array, utilize the answer by returning it. This helps in saving
-    // the time of solving same subproblems multiple times which recursion was doing.
-    if(dp[n] != -1) return dp[n];
-
-    // Step 2: Store/return answer in the dp array.
-    dp[n] = fibo_memoization(n-1, dp) + fibo_memoization(n-2, dp);
-    return dp[n];
+int fibo_memoization(int n) {
+    // Step 1: Create a dp array of size 'n+1' with default values -1
+    vector<int> dp(n+1, -1);
+    return solve(n, dp);
 }
+
+// ------------------------------------------------------------------------------------------------------------
 
 // Tabulation (Bottom-Up Approach)
 // T.C: O(n)
@@ -79,7 +84,7 @@ int fibo_tabulation(int n) {
 
     // Step 2: Fill initial data in dp according to base case.
     dp[0] = 0;
-    if(n > 0) dp[1] = 1;   // initiliaze dp[1] only if 'n > 0', or else we will get 'heap-buffer-overflow'
+    dp[1] = 1;
 
     // Step 3: Fill rest of the dp array using iteration.
     for(int i=2; i<=n; i++) {
@@ -89,34 +94,36 @@ int fibo_tabulation(int n) {
     return dp[n];
 }
 
-// The best approach for finding nth term of fibonacci series
+// ------------------------------------------------------------------------------------------------------------
+
+// Tabulation (Bottom-Up Approach) space optimised
 // T.C: O(n)
 // S.C: O(1)
-int fibo_ite(int n) {
-    if(n == 0 || n == 1) return n;
-    int n1 = 0, n2 = 1, n3;
+int fibo_tabulation_SO(int n) {
+    int prev2 = 0;
+    int prev = 1;
+
     for(int i=2; i<=n; i++) {
-        n3 = n2 + n1;
-        n1 = n2;
-        n2 = n3;
+        int curr = prev + prev2;
+        prev2 = prev;
+        prev = curr;
     }
-    return n3;
+
+    return prev;   // although curr can also be returned
 }
 
 
 int main() {
     // Fibo series elements: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
     int n = 6;
-    cout << "Recursive ans: " << fibo_recursion(n) << endl;
 
-    // Creating a 'dp' array of size 'n+1' with default values -1
-    vector<int> dp(n+1, -1);
-    cout << "fibo_memoization ans: " << fibo_memoization(n, dp) << endl;
+    cout << "Recursion: " << fibo_recursion(n) << endl;
 
-    cout << "fibo_tabulation ans: " << fibo_tabulation(n) << endl;
+    cout << "fibo_memoization: " << fibo_memoization(n) << endl;
 
-    // However, remember that the best program for fibonacci series is the simple iterative approach
-    cout << "fibo_ite: " << fibo_ite(n);
+    cout << "fibo_tabulation: " << fibo_tabulation(n) << endl;
+
+    cout << "fibo_tabulation_SO: " << fibo_tabulation_SO(n);
 
     return 0;
 }
