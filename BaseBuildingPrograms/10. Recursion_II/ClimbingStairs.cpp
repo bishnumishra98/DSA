@@ -16,6 +16,10 @@
 // 2. 1 step + 2 steps
 // 3. 2 steps + 1 step
 
+// Algorithm: Think from top to bottom. If we are at step 'n', we can at max come down to 'n-1'th step or 'n-2'th step.
+//            This means that no.of ways for step 'n' depends on no.of ways for step 'n-1' and 'n-2'.
+//            Thus, recursive relation for climbing n stairs will be: f(n) = f(n-1) + f(n-2).
+
 // Note: This problem is being solved with recursion for now, just to understand recursion better.
 // But optimal approach will be solved by dynamic programming.
 
