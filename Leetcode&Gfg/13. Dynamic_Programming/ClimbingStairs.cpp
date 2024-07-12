@@ -37,7 +37,7 @@ public:
 
     int solve(int n, vector<int>& dp) {
         // Base case
-        if(n <= 1) return 1;
+        if(n <= 2) return n;
         if(dp[n] != -1) return dp[n];
 
         dp[n] = solve(n-1, dp) + solve(n-2, dp);
@@ -57,12 +57,34 @@ public:
     // S.C: O(n)
     int climbStairs_tabulation(int n) {
         vector<int> dp(n+1, -1);
-        dp[0] = 
+        dp[1] = 1;
+        if(n >= 2) dp[2] = 2;   // 'if(n >= 2)' to avoid heap buffer overflow
+
+        for(int i=3; i<=n; i++) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+
+        return dp[n];
     }
 
+// ---------------------------------------------------------------------------------
 
+    // T.C: O(n)
+    // S.C: O(1)
+    int climbStairs_tabulation_SO(int n) {
+        int prev2 = 1;
+        if(n == 1) return prev2;
+        int prev = 2;
+
+        for(int i=3; i<=n; i++) {
+            int curr = prev + prev2;
+            prev2 = prev;
+            prev = curr;
+        }
+
+        return prev;
+    }
 };
-
 
 
 int main() {
@@ -72,6 +94,8 @@ int main() {
 
     cout << sol.climbStairs_recursion(n) << endl;;
     cout << sol.climbStairs_memoization(n) << endl;
+    cout << sol.climbStairs_tabulation(n) << endl;
+    cout << sol.climbStairs_tabulation_SO(n) << endl;
 
     return 0;
 }
