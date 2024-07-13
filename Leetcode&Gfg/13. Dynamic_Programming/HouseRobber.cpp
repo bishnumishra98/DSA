@@ -51,13 +51,24 @@ int rob_recursion(vector<int>& nums) {
 // --------------------------------------------------------------------------------------------------------
 
 int solve(int index, vector<int>& nums, vector<int>& dp) {
-    
+    if(index == 0) return nums[0];
+    if(index < 0) return 0;
+
+    if(dp[index] != -1) return dp[index];
+
+    int rob = nums[index] + solve(index-2, nums, dp);
+    int notRob = 0 + solve(index-1, nums, dp);
+
+    dp[index] = max(rob, notRob);
+    return dp[index];
 }
 
 // T.C: O(n);   where n = nums.size()
 // S.C: O(n)
 int rob_memoization(vector<int>& nums) {
-    
+    int n = nums.size();
+    vector<int> dp(n, -1);
+    return solve(n-1, nums, dp);
 }
 
 // --------------------------------------------------------------------------------------------------------
@@ -65,7 +76,20 @@ int rob_memoization(vector<int>& nums) {
 // T.C: O(n);   where n = nums.size()
 // S.C: O(n)
 int rob_tabulation(vector<int>& nums) {
+    int n = nums.size();
+    vector<int> dp(n, -1);
+    dp[0] = nums[0];
     
+    // Fill the dp array
+    for(int index = 1; index < n; index++) {
+        // int rob = nums[index] + dp[index-2];   // But dp[index-2] should be computed only if 'index>=2'. Thus, write like this:
+        int rob = nums[index];
+        if(index >= 2) rob = rob + dp[index-2];
+        int notRob = 0 + dp[index-1];
+        dp[index] = max(rob, notRob);
+    }
+
+    return dp[n-1];
 }
 
 // --------------------------------------------------------------------------------------------------------
@@ -73,7 +97,19 @@ int rob_tabulation(vector<int>& nums) {
 // T.C: O(n);   where n = nums.size()
 // S.C: O(1)
 int rob_tabulation_SO(vector<int>& nums) {
-    
+    int n = nums.size();
+    int prev = nums[0];
+    int prev2 = 0;
+
+    for(int index = 1; index < n; index++) {
+        int rob = nums[index] + prev2;
+        int notRob = 0 + prev;
+        int curr = max(rob, notRob);
+        prev2 = prev;
+        prev = curr;
+    }
+
+    return prev;
 }
 
 
@@ -82,7 +118,7 @@ int main() {
     cout << "rob_recursion: " << rob_recursion(v) << endl;
     cout << "rob_memoization: " << rob_memoization(v) << endl;
     cout << "rob_tabulation: " << rob_tabulation(v) << endl;
-    cout << "rob_tabulation_SO: " << rob_tabulation_SO(v) << endl;
+    cout << "rob_tabulation_SO: " << rob_tabulation_SO(v);
 
     return 0;
 }
