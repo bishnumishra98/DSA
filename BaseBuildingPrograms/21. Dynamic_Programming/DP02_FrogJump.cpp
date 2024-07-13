@@ -52,6 +52,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/*
+int solve(int n, vector<int>& heights) {
+    // Base cases:
+    // 1) If n is 0, no energy is lost as the frog jumps to the same stair itself.
+    if(n == 0) return 0;
+    // 2) If n = 1, the only way frog can come to 1st step from 0th step is by spending heights[1] - heights[0] energy.
+    if(n == 1) return abs(heights[1] - heights[0]);
+
+    // Path 1 is left recursive call and Path 2 is right recursive call. Return the minimum energy paths amongst them.
+    int left = solve(n-1, heights) + abs(heights[n] - heights[n-1]);
+    int right = solve(n-2, heights) + abs(heights[n] - heights[n-2]);
+
+    return min(left, right);
+}
+*/
+// The above function having 2 base cases can be followed to write the recursive solution. But by chance, if the question is
+// extended and the frog is allowed to jump 'k' steps; then we will have to write 'k' no.of base cases which is not feasible.
+// Thus, it is beneficiary of us if we anyhow try to manage to write the recursive code using only 1 universal base case.
+
 int solve(int n, vector<int>& heights) {
     // Base case: If n is 0, no energy is lost as the frog jumps to the same stair itself.
     if(n == 0) return 0;
