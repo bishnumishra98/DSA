@@ -29,13 +29,13 @@ using namespace std;
 
 class Solution {
 public:
-    int solve(int index, vector<int>& cost) {
-        // Base cases: If index is 0, pay cost[0] and climb up. If index is 1, pay cost[0] and climb up.
-        if(index == 0) return cost[0];
-        if(index == 1) return cost[1];
+    int solve(int n, vector<int>& cost) {
+        // Base cases
+        if(n == 0) return cost[0];
+        if(n == 1) return cost[1];
 
-        int left = solve(index-1, cost) + cost[index];
-        int right = solve(index-2, cost) + cost[index];
+        int left = solve(n-1, cost) + cost[n];
+        int right = solve(n-2, cost) + cost[n];
 
         return min(left, right);
     }
@@ -43,11 +43,18 @@ public:
     // T.C: O(2 * 2^n) = O(2^(n+1))
     // S.C: O(2 * 2^n) = O(2^(n+1))
     int minCostClimbingStairs_recursion(vector<int>& cost) {
-        return min(solve(cost.size() - 1, cost), solve(cost.size() - 2, cost));
+        int n = cost.size();
+        // We want to reach the top of the floor, i.e., beyond the last element of 'cost'. In order to jump out of
+        // the vector 'cost', our 2nd last foot must fall on any one of the two steps: either 'n-1'th or 'n-2'th step,
+        // i.e., the last element of the 2nd last element of 'cost'.
+        // Thus, we try finding minimum cost from both the cases; if our 2nd last foot had fallen on 'n-1'th step
+        // and if our 2nd last foot had fallen of 'n-2'th step. Then return the minimum cost path between the two.
+        return min(solve(n-1, cost), solve(n-2, cost));
     }
 
 // ---------------------------------------------------------------------------------------------
 
+    
 
 };
 
