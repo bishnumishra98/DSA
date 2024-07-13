@@ -16,13 +16,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int solve(int index, int k, vector<int>& heights) {
-    if(index == 0) return 0;
+int solve(int n, int k, vector<int>& heights) {
+    if(n == 0) return 0;
 
     /*
-    int left = solve(index-1, heights) + abs(heights[index] - heights[index-1]);
+    int left = solve(n-1, heights) + abs(heights[n] - heights[n-1]);
     int right = INT_MAX;
-    if(index >= 2) right = solve(index-2, heights) + abs(heights[index] - heights[index-2]);
+    if(n >= 2) right = solve(n-2, heights) + abs(heights[n] - heights[n-2]);
     return min(left, right);
     */
 
@@ -31,7 +31,7 @@ int solve(int index, int k, vector<int>& heights) {
     // Loop to try all possible jumps from '1' to 'k'
     for(int i = 1; i <= k; i++) {
         int jumpEnergy = INT_MAX;
-        if(index >= i) jumpEnergy = solve(index-i, k, heights) + abs(heights[index] - heights[index-i]);   // generalised line
+        if(n >= i) jumpEnergy = solve(n-i, k, heights) + abs(heights[n] - heights[n-i]);   // generalised line
         minEnergy = min(minEnergy, jumpEnergy);
     }
 
@@ -47,21 +47,21 @@ int frogJump_recursion(int n, int k, vector<int> &heights) {
 
 // ---------------------------------------------------------------------------------------------------------------------------------------
 
-int solve(int index, int k, vector<int>& heights, vector<int>& dp) {
-    if(index == 0) return 0;
+int solve(int n, int k, vector<int>& heights, vector<int>& dp) {
+    if(n == 0) return 0;
 
-    if(dp[index] != -1) return dp[index];
+    if(dp[n] != -1) return dp[n];
 
     int minEnergy = INT_MAX;
     // Loop to try all possible jumps from '1' to 'k'
     for(int i = 1; i <= k; i++) {
         int jumpEnergy = INT_MAX;
-        if(index >= i) jumpEnergy = solve(index-i, k, heights) + abs(heights[index] - heights[index-i]);   // generalised line
+        if(n >= i) jumpEnergy = solve(n-i, k, heights) + abs(heights[n] - heights[n-i]);   // generalised line
         minEnergy = min(minEnergy, jumpEnergy);
     }
 
-    dp[index] = minEnergy;
-    return dp[index];
+    dp[n] = minEnergy;
+    return dp[n];
 }
 
 // T.C: O(n)
