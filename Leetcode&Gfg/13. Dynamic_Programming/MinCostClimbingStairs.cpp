@@ -29,15 +29,15 @@ using namespace std;
 
 class Solution {
 public:
-    int solve(int n, vector<int>& cost) {
-        // Base cases
-        if(n == 0) return cost[0];
-        if(n == 1) return cost[1];
+    int solve(int index, vector<int>& cost) {
+        // Base cases: If you are at 0th step, pay cost[0] and climb the top. If you are at 1st step, pay cost[1] and climb the top.
+        if(index == 0) return cost[0];
+        if(index == 1) return cost[1];
 
-        int left = solve(n-1, cost) + cost[n];
-        int right = solve(n-2, cost) + cost[n];
-
-        return min(left, right);
+        // For landing on current index, you must have landed previously on either 'index-1'th or 'index-2'th step.
+        // Minimum cost to land at current index = minimum cost path between the above two paths + cost of current index step.
+        int minCost = min(solve(index-1, cost), solve(index-2, cost)) + cost[index];
+        return minCost;
     }
 
     // T.C: O(2 * 2^n) = O(2^(n+1))
@@ -46,15 +46,67 @@ public:
         int n = cost.size();
         // We want to reach the top of the floor, i.e., beyond the last element of 'cost'. In order to jump out of
         // the vector 'cost', our 2nd last foot must fall on any one of the two steps: either 'n-1'th or 'n-2'th step,
-        // i.e., the last element of the 2nd last element of 'cost'.
-        // Thus, we try finding minimum cost from both the cases; if our 2nd last foot had fallen on 'n-1'th step
-        // and if our 2nd last foot had fallen of 'n-2'th step. Then return the minimum cost path between the two.
+        // i.e., the last element or the 2nd last element of 'cost'.
+        // Thus, we try finding minimum cost from both the cases; and return the minimum cost path between the two.
         return min(solve(n-1, cost), solve(n-2, cost));
     }
 
-// ---------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------
 
-    
+    int solve(int index, vector<int>& cost, vector<int>& dp) {
+        if(index == 0) return cost[0];
+        if(index == 1) return cost[1];
+
+        if(dp[index] != -1) return dp[index];
+
+        dp[index] = min(solve(index-1, cost, dp), solve(index-2, cost, dp)) + cost[index];
+        return dp[index];
+    }
+
+    // T.C: O(n)
+    // S.C: O(n)
+    int minCostClimbingStairs_memoization(vector<int>& cost) {
+        int n = cost.size();
+        vector<int> dp(n, -1);
+        return min(solve(n-1, cost, dp), solve(n-2, cost, dp));
+    }
+
+// --------------------------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n)
+    // S.C: O(n)
+    int minCostClimbingStairs_tabulation(vector<int>& cost) {
+        int n = cost.size();
+        vector<int> dp(n, -1);
+        
+        dp[0] = cost[0];
+        dp[1] = cost[1];
+
+        // Fill the dp array
+        for(int index = 2; index < n; index++) {
+            dp[index] = min(dp[index-1], dp[index-2]) + cost[index];
+        }
+
+        return min(dp[n-1], dp[n-2]);
+    }
+
+// --------------------------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n)
+    // S.C: O(1)
+    int minCostClimbingStairs_tabulation_SO(vector<int>& cost) {
+        int n = cost.size();
+        int prev = cost[1];
+        int prev2 = cost[0];
+
+        for(int index = 2; index < n; index++) {
+            int curr = min(prev, prev2) + cost[index];
+            prev2 = prev;
+            prev = curr;
+        }
+
+        return min(prev, prev2);
+    }
 
 };
 
@@ -63,6 +115,9 @@ int main() {
 
     Solution sol;
     cout << "minCostClimbingStairs_recursion: " << sol.minCostClimbingStairs_recursion(cost) << endl;
+    cout << "minCostClimbingStairs_memoization: " << sol.minCostClimbingStairs_memoization(cost) << endl;
+    cout << "minCostClimbingStairs_tabulation: " << sol.minCostClimbingStairs_tabulation(cost) << endl;
+    cout << "minCostClimbingStairs_tabulation_SO: " << sol.minCostClimbingStairs_tabulation_SO(cost);
 
     return 0;
 }
