@@ -30,7 +30,10 @@
 // Output:
 // 40
 // Explanation:
-// S
+// There can be multiple paths like:
+// 10 -> 20 -> 30 -> 40 -> 40 -> 50
+// or, 10 -> 30 -> 40 -> 40 -> 50
+// or, 10 -> 20 -> 40 -> 40 -> 50
 
 // Constraints:
 // 1 <= n <= 100000
