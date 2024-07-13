@@ -24,117 +24,56 @@
 #include <vector>
 using namespace std;
 
-// Simple recursion
-int solve(vector<int>& nums, int start) {
-    // Base case: When 'start>=nums.size()', there are no houses left to rob. So we can rob 0 money.
-    if(start >= nums.size()) return 0;
+int solve(int index, vector<int>& nums) {
+    // Base cases:
+    // 1) If I am standing at nums[0], I can rob at max nums[0] money only.
+    if(index == 0) return nums[0];
+    // 2) If I go beyond the left of 0th element of 'nums', I cannot rob anything. Thus, return 0 money.
+    if(index < 0) return 0;   // this base case is to handle solve(index-2) when index = 1.
 
-    // There are only 2 choices in my hand, either I can rob a house or I cannot rob a house.
-    // Case 1: If I rob at 'start' index, I will make nums[start] amount of money, and then I will rob
-    // next to next house; that's why next call's starting index is 'start+2'
-    int option1 = nums[start] + solve(nums, start+2);
+    // There are only 2 choices in my hand, either I can rob the house at current index or I cannot rob this house.
+    // Case 1: If I rob at current index, I will make nums[index] amount of money, and then I can rob next to next house left.
+    int rob = nums[index] + solve(index-2, nums);
 
-    // Case 2: If I rob do not rob at 'start' index, I will make 0 money, but then I can rob
-    // next house; that's why next call's starting index is 'start+1'
-    int option2 = 0 + solve(nums, start+1);
+    // Case 2: If I rob do not rob at current index, I will make 0 money, but then I can rob the just next house left.
+    int notRob = 0 + solve(index-1, nums);
 
-    return max(option1, option2);
+    return max(rob, notRob);   // Return the max money I can manage to rob at current index
 }
 
 // T.C: O(2^n);   where n = nums.size()
 // S.C: O(n)
 int rob_recursion(vector<int>& nums) {
-    int size = nums.size();
-    int start = 0;
-    return solve(nums, start);
+    int n = nums.size();
+    return solve(n-1, nums);   // return the maximum money I can rob by standing on the last house
 }
 
 // --------------------------------------------------------------------------------------------------------
 
-// Memoization
-int solve(vector<int>& nums, int index, vector<int>& dp) {
-    // Base case: When 'index>=nums.size()', there are no houses left to rob. So we can rob 0 money.
-    if(index >= nums.size()) return 0;
-
-    // If answer already exist in dp array, return it
-    if(dp[index] != 0) return dp[index];
-
-    // There are only 2 choices in my hand, either I can rob a house or I cannot rob a house.
-    // Case 1: If I rob at current index, I will make nums[index] amount of money, and then I can rob next to next house
-    int option1 = nums[index] + solve(nums, index+2, dp);
-
-    // Case 2: If I rob do not rob at current index, I will make 0 money, but then I can rob the next house
-    int option2 = 0 + solve(nums, index+1, dp);
-
-    dp[index] = max(option1, option2);
-    return dp[index];
+int solve(int index, vector<int>& nums, vector<int>& dp) {
+    
 }
 
 // T.C: O(n);   where n = nums.size()
 // S.C: O(n)
 int rob_memoization(vector<int>& nums) {
-    int start = 0;
-    int n = nums.size();
-    vector<int> dp(n, 0);
-    return solve(nums, start, dp);
+    
 }
 
 // --------------------------------------------------------------------------------------------------------
 
-// Tabulation
 // T.C: O(n);   where n = nums.size()
 // S.C: O(n)
 int rob_tabulation(vector<int>& nums) {
-    int n = nums.size();
-    // Step 1: Create 'dp' array
-    vector<int> dp(n+1, 0);
-
-    // Step 2: Fill initial data in dp according to base case.
-    // dp[i] means total maximum money that can be collected from i index till the last index of 'nums'.
-    // Thus, if we stand at last index, maximum money we can collect will obviously be nums[last index].
-    dp[n-1] = nums[n-1];
-
-    // Step 3: Fill rest of the dp array using iteration. Starting from second last index towards 0 index, we will find answer.
-    for(int index=n-2; index>=0; index--) {
-        // Case 1: If I rob at current index, I will make nums[index] amount of money, and then I can rob next to next house
-        int option1 = nums[index] + dp[index+2];
-        // Case 2: If I rob do not rob at current index, I will make 0 money, but then I can rob the next house
-        int option2 = 0 + dp[index+1];
-
-        dp[index] = max(option1, option2);
-    }
-
-    return dp[0];   // dp[0] represents total maximum money that can be collected from 0 till 'n-1' index of 'nums'.
+    
 }
 
 // --------------------------------------------------------------------------------------------------------
 
-// Tabulation space optimised
 // T.C: O(n);   where n = nums.size()
 // S.C: O(1)
 int rob_tabulation_SO(vector<int>& nums) {
-    int n = nums.size();
-    // We see that dp[i] is dependent on dp[i+1] and dp[i+2]. Thus, no need to create a dp. We can directly initialize
-    // 3 variables as 'prev' and 'next' indicating dp[i+1] and dp[i+2]; while 'curr' indicating dp[i].
-    int prev = nums[n-1];   // last index of 'nums'
-    int next = 0;   // beyond last index of 'nums'
-    int curr;   // curr is dependent on prev and next. Initially curr builds answer for nums[n-2].
-
-    // Fill rest of the dp array using iteration. Starting from second last index towards 0 index, we will find answer.
-    for(int index=n-2; index>=0; index--) {
-        // Case 1: If I rob at curr index, I will make nums[index] amount of money, and then I can rob next to next house
-        int option1 = nums[index] + next;
-        // Case 2: If I rob do not rob at curr index, I will make 0 money, but then I can rob the next house
-        int option2 = 0 + prev;
-
-        curr = max(option1, option2);
-
-        // Update prev and next pointer towards left, i.e., shift them by 1 towards 0 index.
-        next = prev;
-        prev = curr;
-    }
-
-    return prev;   // curr and prev both stands on nums[0] at the end of loop. Dry run for better understanding.
+    
 }
 
 
