@@ -40,7 +40,7 @@ int solve(int i, int j) {
 	// Base cases:
     // 1) If i or j goes out of bounds, return 0 starting that no path found.
     if(i < 0 || j < 0) return 0;
-    // 2) If i and j both are at 0, it means the we successfully reached [0][0]. Thus return 1 stating that 1 path is found.
+    // 2) If i and j both are at 0, it means we successfully reached [0][0]. Thus return 1 stating that 1 path is found.
     if(i == 0 && j == 0) return 1;
 
     int left = solve(i, j-1);   // find no.of paths found by going left of [i][j]
@@ -77,11 +77,66 @@ int uniquePaths_memoization(int m, int n) {
 
 // ----------------------------------------------------------------------------------------------------------------------------
 
+// T.C: O(m*n)
+// S.C: O(m+n)
+int uniquePaths_tabulation(int m, int n) {
+    vector<vector<int>>dp(m, vector<int>(n, 0));   // 2D vector of size m * n, with initial values 0.
+
+    // Compute all values of dp[i][j] where i: 0 -> m-1, and j: 0 to n-1.
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            if(i == 0 && j == 0) {
+                dp[i][j] = 1;
+                continue;
+            }
+            int left = 0, up = 0;   // let no.of paths found from left and up be 0 initially.
+            if(j >= 1) left = dp[i][j-1];   // if() condition is to avoid heap buffer overflow for j = 0
+            if(i >= 1) up = dp[i-1][j];   // if() condition is to avoid heap buffer overflow for i = 0
+            dp[i][j] = left + up;
+        }
+    }
+
+    return dp[m-1][n-1];   // the result is stored in the bottom-right cell (m-1, n-1).
+}
+
+// ----------------------------------------------------------------------------------------------------------------------------
+
+// T.C: O(m*n)
+// S.C: O(m+n)
+int uniquePaths_tabulation_SO(int m, int n) {
+    // Create a vector to represent the previous row of the grid.
+    vector<int> prev(n, 0);
+
+    // Iterate through the rows of the grid.
+    for(int i = 0; i < m; i++) {
+        vector<int> temp(n, 0);   // create a temporary vector to represent the current row.
+
+        // Iterate through the columns of the grid.
+        for(int j = 0; j < n; j++) {
+            if(i == 0 && j == 0) {
+                temp[j] = 1;
+                continue;
+            }
+
+            int left = 0, up = 0;   // let no.of paths found from left and up be 0 initially.
+            if(i >= 1) up = prev[j];   // if we are not at the first row (i >= 1), update 'up' with the value from the previous row.
+            if(j >= 1) left = temp[j - 1];   // if we are not at the first column (j >= 1), update 'left' with the value from the current row.
+            temp[j] = up + left;   // calculate the number of ways to reach the current cell by adding 'up' and 'left'.
+        }
+
+        prev = temp;   // update the previous row with the values calculated for the current row.
+    }
+
+    return prev[n - 1];   // the result is stored in the last cell of the previous row (n-1).
+}
+
 
 int main() {
     int m = 3, n = 3;
     cout << "uniquePaths_recursion: " << uniquePaths_recursion(m, n) << endl;
     cout << "uniquePaths_memoization: " << uniquePaths_memoization(m, n) << endl;
+    cout << "uniquePaths_tabulation: " << uniquePaths_tabulation(m, n) << endl;
+    cout << "uniquePaths_tabulation_SO: " << uniquePaths_tabulation_SO(m, n);
 
     return 0;
 }
