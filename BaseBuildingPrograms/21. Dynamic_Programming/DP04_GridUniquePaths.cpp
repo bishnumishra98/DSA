@@ -24,7 +24,7 @@
 // Output:
 // 3
 
-// Example 2:
+// Example 3:
 // Input:
 // 3 3
 // Output:
@@ -62,8 +62,8 @@ int solve(int i, int j, vector<vector<int>>& dp) {
 
     if(dp[i][j] != -1) return dp[i][j];
 
-    int left = solve(i, j-1);
-    int up = solve(i-1, j);
+    int left = solve(i, j-1, dp);
+    int up = solve(i-1, j, dp);
     dp[i][j] = left + up;
     return dp[i][j];
 }
@@ -130,6 +130,47 @@ int uniquePaths_tabulation_SO(int m, int n) {
     return prev[n - 1];   // the result is stored in the last cell of the previous row (n-1).
 }
 
+// ----------------------------------------------------------------------------------------------------------------------------
+
+// Problem link: https://www.naukri.com/code360/problems/maze-obstacles_977241?source=youtube&campaign=striver_dp_videos&utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_dp_videos
+// Extension of this problem: If suppose there is blockage in the grid denoated by -1. Then in how many ways can you reach
+//                            from [0][0] to [n-1][n-1].
+
+// Example 1:
+// Input:
+// n = 3, m = 3,
+// mat = {{0,  0,  0}
+//        {0, -1,  0}
+//        {0,  0,  0}}
+// Output:
+// 2
+// Explanation:
+// 0  0  0
+// 0 -1  0
+// 0  0  0
+// We can reach source to destination in only 2 ways
+// Algorithm: Same as the above code, just add an extra base case:
+
+int solve(int i, int j, vector<vector<int>> &mat, vector<vector<int>>& dp) {
+    if(i >= 0 && j >= 0 && mat[i][j] == -1) return 0;   // EXTRA BASE CASE
+    if(i < 0 || j < 0) return 0;
+    if(i == 0 && j == 0) return 1;
+
+    if(dp[i][j] != -1) return dp[i][j];
+
+    int left = solve(i, j-1, mat, dp);
+    int up = solve(i-1, j, mat, dp);
+    dp[i][j] = left + up;
+    return dp[i][j];
+}
+
+// T.C: O(m*n)
+// S.C: O(m+n)
+int uniquePathsII_memoization(int m, int n, vector<vector<int>> &mat) {
+    vector<vector<int>>dp(m, vector<int>(n, -1));   // 2D vector of size m * n
+    return solve(m-1, n-1, mat, dp);
+}
+
 
 int main() {
     int m = 3, n = 3;
@@ -137,6 +178,17 @@ int main() {
     cout << "uniquePaths_memoization: " << uniquePaths_memoization(m, n) << endl;
     cout << "uniquePaths_tabulation: " << uniquePaths_tabulation(m, n) << endl;
     cout << "uniquePaths_tabulation_SO: " << uniquePaths_tabulation_SO(m, n);
+
+// ----------------------------------------------------------------------------------------------------------------------------
+
+    vector<vector<int>> mat{
+        {0, 0, 0},
+        {0, -1, 0},
+        {0, 0, 0}
+    };
+    n = mat.size();
+    m = mat[0].size();
+    cout << "\nNumber of paths with obstacles: " << uniquePathsII_memoization(n, m, mat) << endl;
 
     return 0;
 }
