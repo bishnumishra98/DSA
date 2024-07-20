@@ -62,18 +62,58 @@ public:
     void solveSudoku(vector<vector<char>>& board) {
         solve(board);
     }
+
+// --------------------------------------------------------------------------------------------------------------------------
+
+// Leetcode 36. Valid Sudoku   --->   Given an incomplete sudoku, return true if it is a valid sudoku, else return false.
+
+    // isValidCharacter() function validates if the character 'c' at position [i][j] is consistent with Sudoku rules.
+    // 'i != row', 'i != col' and '(boxRow != row || boxCol != col)' conditions are extra than isValid() function. They
+    // ensure that the current cell does not count itself as a duplicate. Without these extra conditions, the function
+    // would always find the current cell's value in its own row, column, and 3x3 sub-box, leading to a false negative.
+    bool isValidCharacter(vector<vector<char>>& board, int row, int col, char c) {
+        for(int i = 0; i < 9; i++) {
+            // Vertical check: ensures 'c' is not already present in the column 'col'
+            if(board[i][col] == c && i != row) return false;
+            
+            // Horizontal check: ensures 'c' is not already present in the row 'row'
+            if(board[row][i] == c && i != col) return false;
+            
+            // 3x3 box check: ensures 'c' is not already present in the 3x3 sub-box
+            int boxRow = 3 * (row / 3) + i / 3;
+            int boxCol = 3 * (col / 3) + i % 3;
+            if(board[boxRow][boxCol] == c && (boxRow != row || boxCol != col)) return false;
+        }
+        return true;
+    }
+
+    // T.C: O(1)
+    // S.C: O(1)
+    bool isValidSudoku(vector<vector<char>>& board) {
+        for(int i = 0; i < 9; i++) {
+            for(int j = 0; j < 9; j++) {
+                if(board[i][j] != '.') {
+                    if(!isValidCharacter(board, i, j, board[i][j])) return false;
+                }
+            }
+        }
+        return true;
+    }
 };
 
+
 int main() {
+    Solution sol;
+
     vector<vector<char>> board = {
         {'5','3','.','.','7','.','.','.','.'}, {'6','.','.','1','9','5','.','.','.'}, {'.','9','8','.','.','.','.','6','.'},
         {'8','.','.','.','6','.','.','.','3'}, {'4','.','.','8','.','3','.','.','1'}, {'7','.','.','.','2','.','.','.','6'},
         {'.','6','.','.','.','.','2','8','.'}, {'.','.','.','4','1','9','.','.','5'}, {'.','.','.','.','8','.','.','7','9'}
     };
 
-    Solution sol;
-    sol.solveSudoku(board);
+    cout << "isValidSudoku: " << (sol.isValidSudoku(board) ? "true" : "false") << endl;
 
+    sol.solveSudoku(board);
     for(int i = 0; i < board.size(); i++) {
         for(int j = 0; j < board[i].size(); j++) {
             cout << board[i][j] << " ";
