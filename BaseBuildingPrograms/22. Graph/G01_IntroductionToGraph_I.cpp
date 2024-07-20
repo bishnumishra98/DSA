@@ -1,5 +1,5 @@
 // Graph theory: https://www.geeksforgeeks.org/introduction-to-graphs-data-structure-and-algorithm-tutorials/
-// Implementation of graph: https://takeuforward.org/graph/graph-representation-in-c/
+// Implementation of graph: https://www.youtube.com/watch?v=3oI-34aPMWM&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=2
 
 // Input:
 // 5 6
@@ -28,7 +28,7 @@ int main() {
     cin >> n >> m;   // n is no.of nodes, while m is no.of edges
 
     cout << "Enter m pairs of edges:\n";
-    
+
     int adj_mat[n+1][n+1];   // for adjacency matrix
     vector<int> adj_list[n+1];   // for adjacency list
 
