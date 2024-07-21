@@ -33,7 +33,7 @@ int main() {
 
     cout << "Enter m pairs of edges:\n";
 
-    int adj_mat[n+1][n+1];   // for adjacency matrix, create a matrix of size (n+1)^2
+    vector<vector<int>> adj_mat(n + 1, vector<int>(n + 1, 0));   // for adjacency matrix, create a matrix of size (n+1)^2
     vector<int> adj_list[n+1];   // for adjacency list, create 'n+1' vectors
 
     for(int i = 0; i < m; i++) {
@@ -46,7 +46,27 @@ int main() {
 
         // 2) Adjacency list for undirected graph
         adj_list[u].push_back(v);
-        adj_list[v].push_back(u);
+        adj_list[v].push_back(u);   // this statement will be removed in case of directed graph
+    }
+
+
+    // Printing the adjacency matrix
+    cout << "Adjacency Matrix:\n";
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            cout << adj_mat[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // Printing the adjacency list
+    cout << "Adjacency List:\n";
+    for (int i = 1; i <= n; i++) {
+        cout << i << ": ";
+        for (int v : adj_list[i]) {
+            cout << v << " ";
+        }
+        cout << endl;
     }
 
     return 0;
