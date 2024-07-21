@@ -62,7 +62,7 @@ int main() {
     // Printing the adjacency list
     cout << "Adjacency List:\n";
     for (int i = 1; i <= n; i++) {
-        cout << i << ": ";
+        cout << i << " -> ";
         for (int v : adj_list[i]) {
             cout << v << " ";
         }
