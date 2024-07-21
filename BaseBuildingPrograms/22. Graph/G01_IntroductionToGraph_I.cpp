@@ -1,6 +1,10 @@
 // Graph theory: https://www.geeksforgeeks.org/introduction-to-graphs-data-structure-and-algorithm-tutorials/
 // Implementation of graph: https://www.youtube.com/watch?v=3oI-34aPMWM&list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn&index=2
 
+// Graph can be created by any of the below two methods:
+// 1) Adjacent matix: O(n^2) space
+// 2) Adjacent list: O(n) space
+
 // Input:
 // 5 6
 // 1 2
