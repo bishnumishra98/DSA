@@ -3,15 +3,16 @@
 #include <unordered_map>
 using namespace std;
 
+template <typename T>   // template class to represent a generalized data type graph
 // Class to represent a graph
 class Graph {
 private:
     // Adjacency list using an unordered_map where the key is the node and the value is a list of adjacent nodes
-    unordered_map<int, vector<int>> adjList;
+    unordered_map<T, vector<T>> adjList;
 
 public:
     // Function to add an edge to the graph
-    void addEdge(int u, int v, bool direction) {   // direction true means directed graph, else undirected
+    void addEdge(T u, T v, bool direction) {   // direction true means directed graph, else undirected
         if(direction) adjList[u].push_back(v);   // add v to u’s list
         else {
             adjList[u].push_back(v);   // add v to u’s list
@@ -32,7 +33,8 @@ public:
 };
 
 int main() {
-    Graph g;   // create a graph object
+    /*
+    Graph<int> g;   // create a graph object of type int
     
     bool directed = false;   // directed 'true' means a directed graph; and false means an undirected graph.
     // Add edges
@@ -42,7 +44,35 @@ int main() {
     g.addEdge(1, 3, directed);
     g.addEdge(1, 4, directed);
     g.addEdge(2, 3, directed);
+    // The above graph looks like this:
+    //     0
+    //    / \
+    //   1---4
+    //  /|
+    // 3 |
+    //  \|
+    //   2
+    */
+
+    Graph<char> g;   // create a graph object of type int
     
+    bool directed = false;   // directed 'true' means a directed graph; and false means an undirected graph.
+    // Add edges
+    g.addEdge('a', 'b', directed);
+    g.addEdge('a', 'e', directed);
+    g.addEdge('b', 'c', directed);
+    g.addEdge('b', 'd', directed);
+    g.addEdge('b', 'e', directed);
+    g.addEdge('c', 'd', directed);
+    // The above graph looks like this:
+    //     a
+    //    / \
+    //   b---e
+    //  /|
+    // d |
+    //  \|
+    //   c
+
     g.printGraph();   // print the adjacency list
     
     return 0;
