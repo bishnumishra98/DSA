@@ -1,5 +1,5 @@
 // BFS Traversal of Graph means to traverse breadth wise, i.e., level order traversal.
-// Consider first element of graph be 0, second be 1, and so on. Thus, if number of nodes(V)
+// Consider first element of graph be 0, second be 1, and so on. Thus, if number of nodes(n)
 // in the graph is 5, the graph elements will be 0, 1, 2, 3 and 4.
 
 // Example 1:
