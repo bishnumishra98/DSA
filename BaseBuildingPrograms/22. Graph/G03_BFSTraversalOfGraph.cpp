@@ -44,13 +44,13 @@ using namespace std;
 //    into the queue and mark them too visited.
 // 4. Follow the 3rd step until the queue is empty. Return the 'bfs' array.
 
-// T.C: O(n) due to queue, where n = no.of nodes in graph; + O(2*E) due to for loop which traverses all neighbours of each node,
-//      where E = no.of edges in graph, 2*E = total degrees in a graph.
+// T.C: O(n) due to queue, + O(2*E) due to for loop which traverses all neighbours of each node,
+//      where E = no.of edges in graph, 2*E = total degrees of graph, i.e., sum of neighbours of all nodes
 //      Overall T.C will be approx O(n+E).
 // S.C: O(3n) due to 'vis', 'q' and 'bfs'.
 //      Overall S.C will be approx O(n).
-vector<int> bfsOfGraph(int V, vector<int> adj[]) {
-    vector<int> vis(V, 0);   // make a 'vis' array to keep track of nodes visited from adj[] list
+vector<int> bfsOfGraph(int n, vector<int> adj[]) {
+    vector<int> vis(n, 0);   // make a 'vis' array to keep track of nodes visited from adj[] list
     queue<int> q;
     q.push(0);   // push the initial starting node 
     vis[0] = 1;   // mark vis[0] as 1, which means 1st element in adj[] list i.e., adj[0] has been visited
@@ -75,7 +75,7 @@ vector<int> bfsOfGraph(int V, vector<int> adj[]) {
 }
 
 int main() {
-    int V = 5;   // no.of nodes
+    int n = 5;   // no.of nodes
     //     0
     //    /|\
     //   1 2 3
@@ -89,7 +89,7 @@ int main() {
     // 4 -> {}
     vector<int> adj[] = {{1,2,3},{},{4},{},{}};
 
-    vector<int> ans = bfsOfGraph(V, adj);
+    vector<int> ans = bfsOfGraph(n, adj);
     for(auto i: ans) cout << i << " ";
 
     return 0;
