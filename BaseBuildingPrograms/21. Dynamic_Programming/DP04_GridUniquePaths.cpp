@@ -133,7 +133,7 @@ int uniquePaths_tabulation_SO(int m, int n) {
 // ----------------------------------------------------------------------------------------------------------------------------
 
 // Problem link: https://www.naukri.com/code360/problems/maze-obstacles_977241?source=youtube&campaign=striver_dp_videos&utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_dp_videos
-// Extension of this problem: If suppose there is blockage in the grid denoated by -1. Then in how many ways can you reach
+// Extension of this problem: If suppose there is blockage in the grid denoted by -1. Then in how many ways can you reach
 //                            from [0][0] to [n-1][n-1].
 
 // Example 1:
