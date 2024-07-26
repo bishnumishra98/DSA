@@ -39,15 +39,30 @@
 #include <vector>
 using namespace std;
 
+void dfsTraversal(int node, vector<int> adj[], vector<int>& vis, vector<int>& dfs) {
+
+}
+
 // T.C: 
 // S.C: 
-vector<int> dfsOfGraph(int V, vector<int> adj[]) {
-
+vector<int> dfsOfGraph(int n, vector<int> adj[]) {
+    vector<int> vis(n, 0);   // make a 'vis' array to keep track of nodes visited from adj[] list
+    vector<int> dfs;   // this data structure will store the dfs traversal of this graph
+    dfsTraversal(0, adj, vis, dfs);
+    return dfs;
 }
 
 int main() {
     int n = 5;   // no.of nodes
     vector<int> adj[] = {{2, 3, 1}, {}, {0, 4}, {0}, {2}};
+//      0
+//     /|\
+//    2 3 1
+//    |
+//    4
+
+    vector<int> ans = dfsOfGraph(n, adj);
+    for(auto i: ans) cout << i << " ";
 
     return 0;
 }

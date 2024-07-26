@@ -52,7 +52,7 @@ vector<int> bfsOfGraph(int n, vector<int> adj[]) {
     queue<int> q;
     q.push(0);   // push the initial starting node 
     vis[0] = 1;   // mark vis[0] as 1, which means 1st element in adj[] list i.e., adj[0] has been visited
-    vector<int> bfs;
+    vector<int> bfs;   // this data structure will store the bfs traversal of this graph
 
     // Iterate till the queue is empty
     while(!q.empty()) {
