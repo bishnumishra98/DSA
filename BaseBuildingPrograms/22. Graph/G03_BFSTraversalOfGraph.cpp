@@ -74,6 +74,7 @@ vector<int> bfsOfGraph(int n, vector<int> adj[]) {
 
 int main() {
     int n = 5;   // no.of nodes
+    vector<int> adj[] = {{1,2,3}, {}, {4} ,{}, {}};
     //     0
     //    /|\
     //   1 2 3
@@ -85,7 +86,6 @@ int main() {
     // 2 -> {4}
     // 3 -> {}
     // 4 -> {}
-    vector<int> adj[] = {{1,2,3},{},{4},{},{}};
 
     vector<int> ans = bfsOfGraph(n, adj);
     for(auto i: ans) cout << i << " ";

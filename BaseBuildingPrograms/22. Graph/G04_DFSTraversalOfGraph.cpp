@@ -46,6 +46,8 @@ vector<int> dfsOfGraph(int V, vector<int> adj[]) {
 }
 
 int main() {
+    int n = 5;   // no.of nodes
+    vector<int> adj[] = {{2, 3, 1}, {}, {0, 4}, {0}, {2}};
 
     return 0;
 }
