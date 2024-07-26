@@ -35,6 +35,15 @@
 // So starting from 0, it will go to 1 then 2 then back to 0 then 0 to 3.
 // Thus dfs will be 0 1 2 3.
 
+// Algorithm:
+// 1. Make a 'vis' array of size as many nodes in the graph with initial values 0, to keep track of nodes visited from adj[] list.
+// 2. Initialize another array named 'dfs' to store DFS traversal of nodes of the graph.
+// 3. Call a recursive function with root node initially, to populate 'dfs' array. The function algorithm is:
+//    i.  Mark the current node as visited in the 'vis' array, so that it is not tarversed again in future; and push the
+//        current node in the 'dfs' array.
+//    ii. With the help of adj[] list, traverse the neighbours of current node if they haven't been visited yet.
+// 4. At the end of recursion, 'dfs' array will be populated with DFS traversal of graph. Thus, return it.
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -62,7 +71,7 @@ vector<int> dfsOfGraph(int n, vector<int> adj[]) {
 
 int main() {
     int n = 5;   // no.of nodes
-    vector<int> adj[] = {{2, 3, 1}, {}, {0, 4}, {0}, {2}};
+    vector<int> adj[] = {{2, 3, 1}, {0}, {0, 4}, {0}, {2}};
 //      0
 //     /|\
 //    2 3 1
