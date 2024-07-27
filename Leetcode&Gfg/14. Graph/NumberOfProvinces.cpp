@@ -42,16 +42,18 @@ public:
         }
     }
 
-    // T.C: 
-    // S.C: 
+    // T.C: O(n^2) for converting into adjacent list + O(n + E) for DFS traversal = O(n^2)
+    // S.C: O(n) for 'adj' + O(n) for 'vis' + O(n) for recursion stack = O(n)
     int findCircleNum(vector<vector<int>>& isConnected) {
         int n = isConnected.size();
         vector<int> adj[n];
         // Convert adjacent matrix to adjacent list
         for(int i=0; i<n; i++) {
             for(int j=0; j<n; j++) {
-                adj[i].push_back(j);
-                adj[j].push_back(i);
+                if(isConnected[i][j] == 1 && i != j) {   // 'i != j' to ensure there is no self nodes
+                    adj[i].push_back(j);
+                    adj[j].push_back(i);
+                }
             }
         }
 
@@ -60,7 +62,7 @@ public:
 
         // Traverse all nodes of graph
         for(int i=0; i<n; i++) {
-            if(!vis[i]) {   // if() will be true, only if 
+            if(!vis[i]) {   // if() will be true, only if the node 'i' is not visited yet
                 provinces++;
                 dfsTraversal(i, adj, vis);
             }
