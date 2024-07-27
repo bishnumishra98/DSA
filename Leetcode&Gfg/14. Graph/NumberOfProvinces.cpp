@@ -22,12 +22,12 @@
 // Algorithm: It is very easy and simple problem.
 // 1. As adjacent matrix is given as input, first convert it to adjacent list.
 // 2. Make a 'vis' array of size as many nodes in the graph with initial values 0, to keep track of nodes visited from adj[] list.
-// 3. Perform any traversal DFS or BFS on each node of graph if it is not visited yet, using a loop. All nodes belonging to one
-//    component will be marked as visited in the DFS or BFS traversal in one iteration. Thus, the next time an already visited node
-//    comes in the loop, it will not be allowed to perform any DFS or BFS traversal. DFS or BFS traversal shall only be only
+// 3. Perform any traversal DFS or BFS on each node of graph if it is not visited yet, using a loop. Considering DFS traversal, all
+//    nodes belonging to one component will be marked as visited in the DFS traversal in one iteration. Thus, the next time an
+//    already visited node comes in the loop, it will not be allowed to perform any DFS traversal. DFS traversal shall only be only
 //    allowed to perform for a node which is not yet visited which means this node is not a part of the last DFS traversal. Hence,
-//    it means this node belongs to another component or province. So, keep a track of no.of times the DFS or BFS traversal is
-//    made throughout the entire loop, and that is the number of components or provinces in the given graph.
+//    it means this node belongs to another component or province. So, keep a track of no.of times the DFS traversal is called
+//    throughout the entire loop, and that is the number of components or provinces in the given graph.
 
 #include <bits/stdc++.h>
 using namespace std;
