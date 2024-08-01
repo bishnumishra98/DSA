@@ -78,7 +78,7 @@ public:
     //        the number of operations in BFS traversal will be n*m, which takes O(n*m) time.
     //      Overall, T.C: O(n*m)
     // S.C: O(n*m) due to 'vis' + O(n*m) as the queue in BFS can grow up to O(n*m) size if all cells are part of single island.
-    //      Overall, S.C is O(n*m).
+    //      Overall, S.C is O(n*m)
     int numIslands(vector<vector<char>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
