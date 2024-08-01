@@ -39,14 +39,63 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
+    // T.C: O(m*n);   where m and n are no.of rows and cols in grid respectively
+    // S.C: O(m*n);   due to the queue in the worst case
     int orangesRotting(vector<vector<int>>& grid) {
-        
+        int n = grid.size();
+        int m = grid[0].size();
+
+        // Queue structure: {{row, col}, time}
+        queue<pair<pair<int, int>, int>> q;
+        int freshOranges = 0;
+
+        // Push all rotten oranges inside queue. Along with it, also count no.of fresh oranges.
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                if(grid[i][j] == 2) q.push({{i, j}, 0});
+                if(grid[i][j] == 1) freshOranges++;
+            }
+        }
+
+        int timePassed = 0;   // time needed to rot oranges
+        int orangesRotten = 0;   // no.of oranges that were fresh initially but have been rotten
+
+        // BFS traversal to rot all oranges
+        while(!q.empty()) {
+            int row = q.front().first.first;
+            int col = q.front().first.second;
+            int time = q.front().second;
+            q.pop();
+            timePassed = max(timePassed, time);
+
+            // Traverse 4 neighbours of current cell. If they are fresh, rot them, push them in queue and increase 'orangesRotten'.
+            int r[] = {-1, 0, 1, 0};
+            int c[] = {0, 1, 0, -1};
+            for(int i = 0; i < 4; i++) {
+                int nrow = row + r[i];
+                int ncol = col + c[i];
+                if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && grid[nrow][ncol] == 1) {
+                    grid[nrow][ncol] = 2;
+                    q.push({{nrow, ncol}, time + 1});   // increase time while pushing neighbour in queue. In
+                    // this way, every orange that got rotten also carries the time instance when it got rotten.
+                    orangesRotten++;
+                }
+            }
+        }
+
+        // If all fresh oranges have been rotten, return the total time needed for them to rot;
+        // else return -1 indicating all fresh oranges couldn't be rotten.
+        if(freshOranges == orangesRotten) return timePassed;
+        return -1;
     }
 };
 
 int main() {
+    vector<vector<int>> grid = {{2, 1, 1},
+                                {1, 1, 0},
+                                {0, 1, 1}};
+    Solution sol;
+    cout << sol.orangesRotting(grid);
 
     return 0;
 }
