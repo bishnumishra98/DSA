@@ -28,7 +28,7 @@
 
 // Algorithm:
 // 1. Change the color of the source cell given.
-// 2. Traverse BFS or DFS from source cell to change colors of all its 4 neighbour cells(up, right, down, left)
+// 2. Traverse BFS or DFS from source cell to change colors of its 4 neighbour cells(up, right, down, left)
 //    if they have the same color as the source cell had initially.
 
 #include <bits/stdc++.h>
