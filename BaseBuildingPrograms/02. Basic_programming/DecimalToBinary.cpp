@@ -4,7 +4,7 @@ using namespace std;
 
 // T.C: O(log(base 2)n)
 // S.C: O(1)
-int intToBinary(int n) {
+long long intToBinary(int n) {
     long long ans = 0;
     int bit, i = 0;
     
