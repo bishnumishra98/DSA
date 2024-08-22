@@ -39,7 +39,7 @@
 // 1. Make a 'vis' array of size as many nodes in the graph with initial values 0, to keep track of nodes visited from adj[] list.
 // 2. Initialize another array named 'dfs' to store DFS traversal of nodes of the graph.
 // 3. Call a recursive function with root node initially, to populate 'dfs' array. The function algorithm is:
-//    i.  Mark the current node as visited in the 'vis' array, so that it is not tarversed again in future; and push the
+//    i.  Mark the current node as visited in the 'vis' array, so that it is not get tarversed again in future; and push the
 //        current node in the 'dfs' array.
 //    ii. With the help of adj[] list, traverse the neighbours of current node if they haven't been visited yet.
 // 4. At the end of recursion, 'dfs' array will be populated with DFS traversal of graph. Thus, return it.
