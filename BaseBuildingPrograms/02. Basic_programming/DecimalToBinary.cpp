@@ -6,10 +6,10 @@ using namespace std;
 // S.C: O(1)
 long long intToBinary(int n) {
     long long ans = 0;
-    int bit, i = 0;
+    int i = 0;
     
     while(n) {
-        bit = n & 1;   // kicking out last bit from binary equivalent of decimal number
+        int bit = n & 1;   // kicking out last bit from binary equivalent of decimal number
         ans = ans + (bit * round(pow(10, i)));
         n = n >> 1;
         i++;
