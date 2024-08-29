@@ -2,4 +2,6 @@
 2. NumberOfIslands
 3. FloodFill
 4. RottingOranges
-5. 
+5. Detect cycle in graph using BFS
+6. Detect cycle in graph using DFS
+7. 
