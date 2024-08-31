@@ -88,7 +88,7 @@ int main() {
     // 4 -> {}
 
     vector<int> ans = bfsOfGraph(n, adj);
-    for(auto i: ans) cout << i << " ";
+    for(auto i: ans) cout << i << " ";   // 0 1 2 3 4
 
     return 0;
 }

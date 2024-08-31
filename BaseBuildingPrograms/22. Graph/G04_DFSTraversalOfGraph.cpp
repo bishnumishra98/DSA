@@ -79,7 +79,7 @@ int main() {
 //    4
 
     vector<int> ans = dfsOfGraph(n, adj);
-    for(auto i: ans) cout << i << " ";
+    for(auto i: ans) cout << i << " ";   // 0 2 4 3 1
 
     return 0;
 }
