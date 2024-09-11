@@ -1,5 +1,48 @@
-// Heaps are implemented using arrays, but visualized using tree concept.
-// Lets create a max heap for {10, 50, 60, 30, 20, 40}
+// Heaps are implemented using arrays, but visualized using tree concept. A heap is a specialized complete binary tree
+// that satisfies the heap property. There are two main types of heaps: Min-Heap and Max-Heap, which differ based on
+// the specific property they maintain.
+// 1. Min-Heap: The key of the parent node is always less than or equal to the keys of its children. The smallest
+//              element is at the root.
+// 2. Max-Heap: The key of the parent node is always greater than or equal to the keys of its children. The largest
+//              element is at the root.
+
+// Lets create a max heap for {20, 50, 60, 30, 10, 40}
+
+// Step 1:
+// 20
+
+// Step 2:
+//   50
+//  /
+// 20
+
+// Step 3:
+//   60
+//  /  \
+// 20  50
+
+// Step 4:
+//     60
+//    /  \
+//   30  50
+//  /
+// 20
+
+// Step 5:
+//     60
+//    /  \
+//   30  50
+//  /  \
+// 20  10
+
+// Step 6:
+//     _ 60 _
+//    /      \
+//   30      50
+//  /  \    /
+// 20  10  40
+
+
 
 #include <iostream>
 using namespace std;
@@ -72,24 +115,25 @@ class Heap {
 
 
 int main() {
-    // Lets create a max heap for {10, 50, 60, 30, 20, 40}
+    // Lets create a max heap for {20, 50, 60, 30, 10, 40}
     // The heap for above array will look like this:
-    //      _ 60 _ 
-    //     /      \
-    //    30      50
-    //   /  \     /
-    //  10  20   40
+    //     _ 60 _
+    //    /      \
+    //   30      50
+    //  /  \    /
+    // 20  10  40
+
     
     Heap h(20);   // creating a heap of capacity 20 elements
-    h.insert(10);
+    h.insert(20);
     h.insert(50);
     h.insert(60);
     h.insert(30);
-    h.insert(20);
+    h.insert(10);
     h.insert(40);
 
     // Printing elements of heap
-    h.printHeap();   // 60 30 50 10 20 40
+    h.printHeap();   // o/p: 60 30 50 20 10 40
 
     return 0;
 }
