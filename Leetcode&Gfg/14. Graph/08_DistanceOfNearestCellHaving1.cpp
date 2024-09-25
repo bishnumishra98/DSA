@@ -28,10 +28,16 @@
 // - 0's at (0,1), (1,2), (2,1) and (2,2) are at a  distance of 1, 1, 1 and 2 from 1's at (0,0), (0,2), (2,0) and (1,1) respectively.
 
 // Algorithm: A BFS traversal will work here, because BFS spreads across all direction uniformly.
-// 1. Create a 'vis' 2D array to keep a track of cells that have been visited.
-// 2. Create a 'dis' 2D array to build the answer and return it. We can even manipulate the input 2D array and return it as the
-//    answer, but its a good practice to not alter the given input; that's why create a 'dist' array for returning the answer.
-// 3. Create a queue 'q' of type <pair<int, int>, int> to store the cell position and the distance to travel to reach 1.
+// 1. i)   Create a 'vis' 2D array to keep a track of cells that have been visited.
+//    ii)  Create a 'dis' 2D array to build the answer and return it. We can even manipulate the input 2D array and return it as the
+//         answer, but its a good practice to not alter the given input; that's why create a 'dist' array for returning the answer.
+//    iii) Create a queue 'q' of type <pair<int, int>, int> to store the cell positions and the steps to travel to reach there.
+// 2. Initially, push cell position of the cells containing 1 along with their steps to travel to reach 1(which will be 0 obviously),
+//    in the queue. Also, mark all of them visited in the 'vis' matrix.
+// 3. Dequeue the front element, and store the value of step in the 'dis' matrix in that element's position.
+// 4. Traverse all neighbours of the current element in all 4 directions. If the neighbour is unvisited, do the same, i.e.,
+//    push their position in queue along with steps required to reach there, and mark them visited.
+// 5. Follow steps 3 and 4 until the queue is empty, and the answer will be built inside 'dis' matrix. Return it.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -48,7 +54,7 @@ class Solution {
         vector<vector<int>> dis(n, vector<int>(m, 0));   // to build the answer and return
         queue<pair<pair<int, int>, int>> q;   // to store the cell position and the distance to travel to reach 1
 
-        // Traversing each cell, and pushing into queue and marking the cell containing 1 as visited.
+        // Traversing each cell, push its position into the queue 'q' and mark them visited if they contain 1.
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < m; j++) {
                 if(grid[i][j] == 1) {
@@ -67,13 +73,16 @@ class Solution {
             int steps = q.front().second;
             q.pop();
 
-            dis[row][col] = steps;
+            dis[row][col] = steps;   // store the value of step for this element in the 'dis' matrix
+
+            // Traverse all neighbours of the current element in all 4 directions. If the neighbour is unvisited,
+            // push their position in queue along with steps required to reach there, and mark them visited.
             for(int i = 0; i < 4; i++) {
                 int nrow = row + delrow[i];
                 int ncol = col + delcol[i];
                 if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && !vis[nrow][ncol]) {
-                    vis[nrow][ncol] = 1;
                     q.push({{nrow, ncol}, steps+1});
+                    vis[nrow][ncol] = 1;
                 }
             }
         }
