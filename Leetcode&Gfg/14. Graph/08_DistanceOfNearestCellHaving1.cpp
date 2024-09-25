@@ -64,9 +64,6 @@ class Solution {
             }
         }
 
-        int delrow[] = {-1, 0, 1, 0};
-        int delcol[] = {0, 1, 0, -1};
-
         while(!q.empty()) {
             int row = q.front().first.first;
             int col = q.front().first.second;
@@ -77,6 +74,9 @@ class Solution {
 
             // Traverse all neighbours of the current element in all 4 directions. If the neighbour is unvisited,
             // push their position in queue along with steps required to reach there, and mark them visited.
+            int delrow[] = {-1, 0, 1, 0};
+            int delcol[] = {0, 1, 0, -1};
+            
             for(int i = 0; i < 4; i++) {
                 int nrow = row + delrow[i];
                 int ncol = col + delcol[i];
