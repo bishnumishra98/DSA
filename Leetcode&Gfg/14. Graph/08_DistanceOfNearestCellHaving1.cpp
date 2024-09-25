@@ -44,8 +44,8 @@ using namespace std;
 
 class Solution {
   public:
-    // T.C:
-    // S.C: 
+    // T.C: O(n*m)
+    // S.C: O(n*m)
     vector<vector<int>> nearest(vector<vector<int>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
