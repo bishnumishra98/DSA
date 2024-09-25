@@ -27,6 +27,11 @@
 // 1 0 0
 // - 0's at (0,1), (1,2), (2,1) and (2,2) are at a  distance of 1, 1, 1 and 2 from 1's at (0,0), (0,2), (2,0) and (1,1) respectively.
 
+// Algorithm: A BFS traversal will work here, because BFS spreads across all direction uniformly.
+// 1. Create a 'vis' 2D array to keep a track of cells that have been visited.
+// 2. Create a 'dis' 2D array to build the answer and return it. We can even manipulate the input 2D array and return it as the
+//    answer, but its a good practice to not alter the given input; that's why create a 'dist' array for returning the answer.
+// 3. Create a queue 'q' of type <pair<int, int>, int> to store the cell position and the distance to travel to reach 1.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -36,7 +41,44 @@ class Solution {
     // T.C:
     // S.C: 
     vector<vector<int>> nearest(vector<vector<int>>& grid) {
-        
+        int n = grid.size();
+        int m = grid[0].size();
+
+        vector<vector<int>> vis(n, vector<int>(m, 0));   // to keep track of cells visited
+        vector<vector<int>> dis(n, vector<int>(m, 0));   // to build the answer and return
+        queue<pair<pair<int, int>, int>> q;   // to store the cell position and the distance to travel to reach 1
+
+        // Traversing each cell, and pushing into queue and marking the cell containing 1 as visited.
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                if(grid[i][j] == 1) {
+                    q.push({{i, j}, 0});
+                    vis[i][j] = 1;
+                }
+            }
+        }
+
+        int delrow[] = {-1, 0, 1, 0};
+        int delcol[] = {0, 1, 0, -1};
+
+        while(!q.empty()) {
+            int row = q.front().first.first;
+            int col = q.front().first.second;
+            int steps = q.front().second;
+            q.pop();
+
+            dis[row][col] = steps;
+            for(int i = 0; i < 4; i++) {
+                int nrow = row + delrow[i];
+                int ncol = col + delcol[i];
+                if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && !vis[nrow][ncol]) {
+                    vis[nrow][ncol] = 1;
+                    q.push({{nrow, ncol}, steps+1});
+                }
+            }
+        }
+
+        return dis;
     }
 };
 
@@ -52,6 +94,7 @@ int main() {
         for(int j = 0; j < v[0].size(); j++) {
             cout << v[i][j] << " ";
         }
+        cout << endl;
     }
 
     return 0;
