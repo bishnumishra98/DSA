@@ -91,8 +91,8 @@ public:
         }
 
         // If any unvisited Os found in mid area (non-boundary area) of matrix, convert them to Xs
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
+        for(int i = 1; i < n-1; i++) {
+            for(int j = 1; j < m-1; j++) {
                 if(!vis[i][j] && mat[i][j] == 'O') mat[i][j] = 'X';
             }
         }
