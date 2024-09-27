@@ -39,7 +39,7 @@
 // You don't need to print or input anything. Complete the function numberOfEnclaves() which takes a 2D integer matrix grid
 // as the input parameter and returns an integer, denoting the number of land cells.
 
-// Algorithm: Almost similar to '09_Replace0sWithXs.cpp'. Only 1s that have no link with boundary are the ones from where we cannot
+// Algorithm: Exactly same as '09_Replace0sWithXs.cpp'. Only 1s that have no link with boundary are the ones from where we cannot
 // walk off the boundary of the grid. So count the no.of such 1s.
 
 #include <bits/stdc++.h>
