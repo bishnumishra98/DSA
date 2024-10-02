@@ -1,15 +1,4 @@
-// Algorithm: We can use any approach BFS or DFS. This algorithm illustrates BFS technique.
-// 1. a) Create a color array of size as many nodes in the graph, initialized all elements with -1 representing the node is uncolored.
-//       We will be using the color conventions 0 and 1 to mark colors in the nodes.
-//    b) Create a blank queue.
-// 2. Starting with a node, mark it with a color(say 0) and push it inside the queue.
-// 3. Dequeue the front element of queue and push its neighbours in the queue if they are yet uncolored. Make sure to color
-//    the neighbour with opposite color as that of the current node.
-//    Else, if the neighbour of the current element is found to be colored, it means this node was traversed previously via some
-//    other path, stating a cycle is present in this graph. Thus, check if the neighbour node's color is same as that of the
-//    current node, simply return false stating that this graph is non-bipartite.
-// 4. Repeat step 3 until the queue is empty. If the queue becomes empty, it means no two adjacent nodes had the same color.
-//    Thus, return true stating that this graph is bipartite.
+// Algorithm: We can use any approach BFS or DFS. This algorithm illustrates DFS technique.
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -20,7 +9,7 @@ private:
         color[node] = col;   // paint the current node with color 'col'
 
         // Traverse all neighbours of the current element one by one and if its
-        // Case 1: Not colored -> invert color of the neighbour with respect to current node and push it inside the queue
+        // Case 1: Not colored -> invert color of the neighbour with respect to current node and call the dfs function again
         // Case 2: Colored -> if the color of neighbour is same as current node, return false stating non-bipartite graph
         for(int neighbour: adj[node]) {
             if(color[neighbour] == -1) {
