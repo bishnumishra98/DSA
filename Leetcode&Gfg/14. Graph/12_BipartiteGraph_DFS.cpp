@@ -16,8 +16,21 @@ using namespace std;
 
 class Solution {
 private:
-    bool checkBipartite_dfs(int node, vector<int> adj[], int color[]) {
-        
+    bool checkBipartite_dfs(int node, int col, vector<int> adj[], int color[]) {
+        color[node] = col;   // paint the current node with color 'col'
+
+        // Traverse all neighbours of the current element one by one and if its
+        // Case 1: Not colored -> invert color of the neighbour with respect to current node and push it inside the queue
+        // Case 2: Colored -> if the color of neighbour is same as current node, return false stating non-bipartite graph
+        for(int neighbour: adj[node]) {
+            if(color[neighbour] == -1) {
+                if(checkBipartite_dfs(neighbour, !col, adj, color) == false) return false;
+            } else {
+                if(color[neighbour] == col) return false;   // if neighbour and current node have same color, return false
+            }
+        }
+
+        return true;   // return true stating that the graph component is bipartite
     }
 
 public:
@@ -29,9 +42,9 @@ public:
 
         // Check bipartite nature for all components of graph
         for(int i = 0; i < V; i++) {
-            // If the current node is uncolored, start BFS traversal for this component
+            // If the current node is uncolored, start DFS traversal for this component. Start with initial node's color as 0.
             if(color[i] == -1) {
-                if(checkBipartite_dfs(i, adj, color) == false) return false;
+                if(checkBipartite_dfs(i, 0, adj, color) == false) return false;
             }
         }
 

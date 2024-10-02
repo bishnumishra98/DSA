@@ -27,7 +27,7 @@ class Solution {
 private:
     bool checkBipartite_bfs(int node, vector<int> adj[], int color[]) {
         queue<int> q;   // queue to help in BFS traversal
-        color[node] = 0;   // marking the initial node as color 0
+        color[node] = 0;   // paint the initial node with color 0
         q.push(node);   // pushing the initial node in the queue
 
         while(!q.empty()) {
