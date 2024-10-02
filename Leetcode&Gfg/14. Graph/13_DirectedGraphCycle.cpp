@@ -6,21 +6,29 @@
 //            \/     |
 //             5 --> 4
 // Output:
-// 1
+// 0
 
 // Example 2:
 // Input:
 // 0 --> 1 --> 2 --> 3
-//             |     |
-//            \/    \/
-//             5 --> 4
+//             /\    |
+//             |    \/
+//             5 <-- 4
 // Output:
-// 0
+// 1
 
 // Problem link: https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=detect-cycle-in-a-directed-graph
 
 // Algorithm:
-// 1. Create 
+// 1. Create two arrays of size as many nodes in the graph. The first array 'vis' keep the track of nodes visited. And the array
+//    'pathVis' will keep a track of the current path we are following.
+// 2. Start DFS traversal from a node and mark it visited in both 'vis' and 'pathVis' arrays.
+// 3. DFS traverse all its neighbours which are unvisited yet. If no cycle found at the end of a path, backtrack and unmark
+//    'pathVis' for that node and return false stating that no cycle found in the path from this node.
+// 4. In the other case, if a neighbour comes out to be visited, check its equivalent 'pathVis' array. If 'pathVis' is unvisited
+//    for this node, it means we are about to visit the neighbour node for the second time via a different path.
+//    But if 'pathVis' is marked visited in this case, it means we are about to visit the neighbour once again via the same path,
+//    which signifies that a cycle is present in this path. Thus, return true in this case.
 
 
 #include <bits/stdc++.h>
@@ -66,20 +74,20 @@ public:
 
 
 int main() {
-    // 0 --> 1 --> 2 --> 3
-    //             |     |
-    //            \/    \/
-    //             5 --> 4
+// 0 --> 1 --> 2 --> 3
+//             /\    |
+//             |    \/
+//             5 <-- 4
 
     // Adjacency list
     // 0 -> {1}
     // 1 -> {2}
-    // 2 -> {3, 5}
+    // 2 -> {3}
     // 3 -> {4}
-    // 4 -> {}
-    // 5 -> {4}
+    // 4 -> {5}
+    // 5 -> {2}
     int V = 6;
-    vector<int> adj[V] = {{1}, {2}, {3, 5}, {4}, {}, {4}};
+    vector<int> adj[V] = {{1}, {2}, {3}, {4}, {5}, {2}};
 
     Solution sol;
     cout << sol.isCyclic(V, adj);
