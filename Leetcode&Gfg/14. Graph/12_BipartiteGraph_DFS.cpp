@@ -1,12 +1,3 @@
-// GFG: Given an adjacency list of a graph adj of V no. of vertices having 0 based index. Check whether the graph is bipartite or not.
-// A bipartite graph is a graph where no two adjacent nodes have same color.
-// Problem link: https://www.geeksforgeeks.org/problems/bipartite-graph/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=bipartite-graph
-
-// Observations(Observations have no link with algorithm. Its just for general knowledge) :
-// 1) A graph that has no cycles is always bipartite.
-// 2) A graph having even no.of nodes in a cycle is always bipartite.
-// 3) A graph having odd no.of nodes in a cycle is always non-bipartite.
-
 // Algorithm: We can use any approach BFS or DFS. This algorithm illustrates BFS technique.
 // 1. a) Create a color array of size as many nodes in the graph, initialized all elements with -1 representing the node is uncolored.
 //       We will be using the color conventions 0 and 1 to mark colors in the nodes.
@@ -25,34 +16,13 @@ using namespace std;
 
 class Solution {
 private:
-    bool checkBipartite_bfs(int node, vector<int> adj[], int color[]) {
-        queue<int> q;   // queue to help in BFS traversal
-        color[node] = 0;   // marking the initial node as color 0
-        q.push(node);   // pushing the initial node in the queue
-
-        while(!q.empty()) {
-            int front = q.front();   // dequeue the front element
-            q.pop();
-
-            // Traverse all neighbours of the current element one by one and if its
-            // Case 1: Not colored -> invert color of the neighbour with respect to current node and push it inside the queue
-            // Case 2: Colored -> if the color of neighbour is same as current node, return false stating non-bipartite graph
-            for(int neighbour: adj[front]) {
-                if(color[neighbour] == -1) {
-                    color[neighbour] = !color[front];
-                    q.push(neighbour);
-                } else {
-                    if(color[neighbour] == color[front]) return false;   // if neighbour and current node have same color, return false
-                }
-            }
-        }
-
-        return true;   // return true stating that the graph component is bipartite
+    bool checkBipartite_dfs(int node, vector<int> adj[], int color[]) {
+        
     }
 
 public:
-    // T.C: O(n)   same as BFS traversal
-    // S.C: O(n)   same as BFS traversal
+    // T.C: O(n)   same as DFS traversal
+    // S.C: O(n)   same as DFS traversal
 	bool isBipartite(int V, vector<int> adj[]){
 	    int color[V];   // creating an array to track the colors of all nodes
         for(int i = 0; i < V; i++) color[i] = -1;   // setting initial color for all nodes as -1
@@ -61,7 +31,7 @@ public:
         for(int i = 0; i < V; i++) {
             // If the current node is uncolored, start BFS traversal for this component
             if(color[i] == -1) {
-                if(checkBipartite_bfs(i, adj, color) == false) return false;
+                if(checkBipartite_dfs(i, adj, color) == false) return false;
             }
         }
 
