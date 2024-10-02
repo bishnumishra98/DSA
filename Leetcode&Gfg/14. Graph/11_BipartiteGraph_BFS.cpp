@@ -71,7 +71,6 @@ public:
 };
 
 int main() {
-    // Adjacency list for a bipartite graph (e.g., a simple graph with even cycle):
     // Graph:
     // 0 -- 1
     // |    |
