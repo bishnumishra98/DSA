@@ -51,8 +51,8 @@
 // 5. DFS(4, 3): Mark vis[4] and call DFS for 5 along with its parent 4.
 // 6. DFS(5, 4): Mark vis[5] and its neighbour is 4, but 4 is already visited and also its parent, i.e., 5 came from 4.
 //               Thus, no more neighbours are there for 5, thus no more DFS calls. Thus, return false signifying no cycle found.
-// 7. Program gets back to DFS(4, 3). 3 is also marked visited and also its parent, i.e., 4 came from 3. Thus, traverse to its
-//    next neighbour 0. 0 is also marked visited, but 0 is not 4's parent. This means 0 was already visited and we came back to 0.
+// 7. Program gets back to DFS(4, 3). 3 is marked visited as 3 is 4's parent. Thus, traverse to its next neighbour 0. 0 is also
+//    marked visited, but 0 is not 4's parent. This means 0 was already visited and we came back to 0.
 //    This means a cycle is present in graph. Thus, DFS(0, 4) is never called and DFS(4, 3) returns true signifying a cycle.
 
 #include <bits/stdc++.h>
