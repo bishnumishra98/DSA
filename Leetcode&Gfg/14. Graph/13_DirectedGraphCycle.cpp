@@ -54,8 +54,8 @@ private:
     }
 
 public:
-    // T.C: O(V + E);   where V: vertices, E: edges
-    // S.C: O(2V) = O(V);   for vis and pathVis arrays
+    // T.C: O(V+E);   where V: vertices, E: edges
+    // S.C: O(V+E)
     bool isCyclic(int V, vector<int> adj[]) {
         int vis[V] = {0};
         int pathVis[V] = {0};
