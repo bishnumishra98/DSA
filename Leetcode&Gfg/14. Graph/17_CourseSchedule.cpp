@@ -85,8 +85,8 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
+    // T.C: O(n+m) or O(V+E)
+    // S.C: O(n+m)
     vector<int> findOrder(int n, int m, vector<vector<int>> prerequisites) {
         int V = n;   // no.of nodes in the graph
         vector<int> adj[V];   // create a adjacent list to prepare and store the graph
