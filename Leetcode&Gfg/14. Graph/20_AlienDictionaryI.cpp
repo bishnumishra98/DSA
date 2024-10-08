@@ -117,13 +117,9 @@ public:
 
 
 int main() {
-    // string dict[] = {"baa", "abcd", "abca", "cab", "cad"};
-    // int n = 5;
-    // int k = 4;
-
-    string dict[] = {"caa", "aaa", "aab"};
-    int n = 3;
-    int k = 3;
+    string dict[] = {"baa", "abcd", "abca", "cab", "cad"};
+    int n = 5;
+    int k = 4;
 
     cout << Solution().findOrder(dict, n, k);
 
