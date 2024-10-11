@@ -31,7 +31,7 @@
 //    with new shorter distance. Continue the process untill the stack becomes empty. Note that, when you pop out the next
 //    node and find distance to reach its neighbour, you have to add up the distance to reach the neighbour from the current
 //    node with the already existing distance(weight) required to reach till the current node.
-// 4. 
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -72,25 +72,28 @@ public:
                 topoSort(i, adj, vis, st);
             }
         }
-
-        vector<int> dist(N);   // create a 'dist' array to store distance to reach a node from source node 
+        
+        // Create a 'dist' array to track distance to reach a node from source node, marked all initially with infinity.
+        vector<int> dist(N);   
         for(int i = 0; i < N; i++) {
             dist[i] = 1e9;
         }
-        dist[0] = 0;   // Considering '0' is the source node. If source node was given as
+
+        // No need to check distance for source node to reach itself. It will obviously be 0. 
+        dist[0] = 0;   // Considering '0' as the source node. If source node was given as
                       // an argument to this function, we would have written dist[src] = 0
+
         while(!st.empty()) {
-            // Pop out the top element of the stack
+            // Pop out the top element of stack and traverse its neighbours, and update 'dist' array if a shorter distance is found.
             int node = st.top();
             st.pop();
 
-            // Traverse neighbours of the current node and update the 'dist' array if a shorter distance is found
             for(auto it: adj[node]) {
                 int v = it.first;
                 int wt = it.second;
                 // Relax the 'dist' array, i.e., update the 'dist' array with with smaller values if found.
-                // If the distance(dist[node]) to reach the current node + the distance(wt) to reach its neighbour v is less
-                // than the already existing distance to reach v, then update the distance to reach v as dist[node] + wt.
+                // If the distance(dist[node]) to reach the current node + the distance(wt) to reach its neighbour 'v' is less
+                // than the already existing distance to reach 'v', then update the distance to reach 'v' as dist[node] + wt.
                 if(dist[node] + wt < dist[v]) {
                     dist[v] = wt + dist[node];
                 }
