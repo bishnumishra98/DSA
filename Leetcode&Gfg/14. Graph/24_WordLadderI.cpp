@@ -40,6 +40,8 @@
 // startWord, targetWord and wordList as input parameter and returns the length of the shortest transformation
 // sequence from startWord to targetWord. If not possible return 0.
 
+// Algorithm: 
+
 #include <bits/stdc++.h>
 using namespace std;
 
