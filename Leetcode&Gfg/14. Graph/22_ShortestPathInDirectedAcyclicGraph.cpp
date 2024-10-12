@@ -90,7 +90,7 @@ public:
                 // If the distance(dist[node]) to reach the current node + the distance(wt) to reach its neighbour 'v' is less
                 // than the already existing distance to reach 'v', then update the distance to reach 'v' as dist[node] + wt.
                 if(dist[node] + wt < dist[v]) {
-                    dist[v] = wt + dist[node];
+                    dist[v] = dist[node] + wt;
                 }
             }
         }
