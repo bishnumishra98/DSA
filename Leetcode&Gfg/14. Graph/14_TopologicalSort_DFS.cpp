@@ -86,6 +86,7 @@ int main() {
 //       2
     int V = 4;
     vector<int> adj[V] = {{}, {0}, {0}, {0}};
+    // vector<int> adj[V] = {{1, 4}, {2}, {3}, {}, {2, 5}, {3}};
 
     Solution sol;
     vector<int> ans = sol.topoSort(V, adj);

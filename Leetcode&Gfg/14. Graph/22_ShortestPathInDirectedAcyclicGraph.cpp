@@ -53,7 +53,7 @@ private:
 public:
     // T.C: O(N+M);   topological sorting takes O(N+M) (DFS traversal), and relaxing all the edges also takes O(N+M).
     // S.C: O(N+M)
-    vector<int> shortestPath(int N, int M, vector<vector<int>>& edges) {
+    vector<int> shortestPath(int N, int M, vector<vector<int>>& edges, int src) {
         // Create a graph in the form of an adjacency list like this: node -> {adj_node, weight}, {adj_node, weight}, etc.
         vector<pair<int, int>> adj[N];   // N is no.of nodes from 0 to N-1
         for(int i = 0; i < M; i++) {   // M is the no.of edges, i.e., edges.size()
@@ -75,14 +75,12 @@ public:
         
         // Create a 'dist' array to track distance to reach a node from source node, marked all initially with infinity.
         vector<int> dist(N, 1e9);
-
-        // No need to check distance for source node to reach itself. It will obviously be 0. 
-        dist[0] = 0;   // Considering '0' as the source node. If source node was given as
-                      // an argument to this function, we would have written dist[src] = 0
+        dist[src] = 0;   // no need to check distance for source node to reach itself. It will obviously be 0
 
         while(!st.empty()) {
             // Pop out the top element of stack and traverse its neighbours, and update 'dist' array if a shorter distance is found.
             int node = st.top();
+            cout << "node popped: " << node << endl;
             st.pop();
 
             for(auto it: adj[node]) {
@@ -110,8 +108,9 @@ public:
 int main() {
     int n = 6, m = 7;
     vector<vector<int>> edges = {{0,1,2}, {0,4,1}, {4,5,4}, {4,2,2}, {1,2,3}, {2,3,6}, {5,3,1}};
+    int src = 4;   // this is an addition to the GFG problem. GFG problem wants hardcoded source node as 0.
 
-    vector<int> ans = Solution().shortestPath(n, m, edges);
+    vector<int> ans = Solution().shortestPath(n, m, edges, src);
     for(int it: ans) {
         cout << it << " ";
     }
