@@ -51,8 +51,8 @@ private:
     }
 
 public:
-    // T.C:
-    // S.C:
+    // T.C: O(N+M);   topological sorting takes O(N+M) (DFS traversal), and relaxing all the edges also takes O(N+M).
+    // S.C: O(N+M)
     vector<int> shortestPath(int N, int M, vector<vector<int>>& edges) {
         // Create a graph in the form of an adjacency list like this: node -> {adj_node, weight}, {adj_node, weight}, etc.
         vector<pair<int, int>> adj[N];   // N is no.of nodes from 0 to N-1
@@ -74,10 +74,7 @@ public:
         }
         
         // Create a 'dist' array to track distance to reach a node from source node, marked all initially with infinity.
-        vector<int> dist(N);   
-        for(int i = 0; i < N; i++) {
-            dist[i] = 1e9;
-        }
+        vector<int> dist(N, 1e9);
 
         // No need to check distance for source node to reach itself. It will obviously be 0. 
         dist[0] = 0;   // Considering '0' as the source node. If source node was given as
@@ -91,7 +88,7 @@ public:
             for(auto it: adj[node]) {
                 int v = it.first;
                 int wt = it.second;
-                // Relax the 'dist' array, i.e., update the 'dist' array with with smaller values if found.
+                // Relax the edge: Update the 'dist' array with with smaller values if found.
                 // If the distance(dist[node]) to reach the current node + the distance(wt) to reach its neighbour 'v' is less
                 // than the already existing distance to reach 'v', then update the distance to reach 'v' as dist[node] + wt.
                 if(dist[node] + wt < dist[v]) {
@@ -108,6 +105,7 @@ public:
         return dist;
     }
 };
+
 
 int main() {
     int n = 6, m = 7;
