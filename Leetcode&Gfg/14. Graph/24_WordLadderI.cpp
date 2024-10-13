@@ -14,9 +14,7 @@
 // Output:
 // 3
 // Explanation:
-// The length of the smallest transformation
-// sequence from "der" to "dfs" is 3
-// i,e "der" -> "dfr" -> "dfs".
+// The length of the smallest transformation sequence from "der" to "dfs" is 3 i,e "der" -> "dfr" -> "dfs".
 
 // Example 2:
 // Input:
