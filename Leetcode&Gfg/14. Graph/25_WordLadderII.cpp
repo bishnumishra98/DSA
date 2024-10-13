@@ -26,3 +26,30 @@
 // from startWord to targetWord.
 // Note: You don't have to return -1 in case of no possible sequence. Just return the Empty List.
 
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    // T.C: 
+    // S.C: 
+    vector<vector<string>> findSequences(string beginWord, string endWord, vector<string>& wordList) {
+        
+    }
+};
+
+int main() {
+    string startWord = "der", targetWord = "dfs";
+    vector<string> wordList = {"des","der","dfr","dgt","dfs"};
+
+    vector<vector<string>> ans = Solution().findSequences(startWord, targetWord, wordList);
+    for(int i = 0; i < ans.size(); i++) {
+        for(int j = 0; j < ans[i].size(); j++) {
+            cout << ans[i][j] << " ";
+        }
+    }
+    cout << endl;
+
+    return 0;
+}
