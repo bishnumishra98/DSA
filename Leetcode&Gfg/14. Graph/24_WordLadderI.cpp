@@ -40,7 +40,7 @@
 
 // Algorithm: The algorithm might look complex, but actually it is not. We shall follow the brute force approach.
 //            Alter one letter from startWord at a time and check if its a valid word in wordList or not. If so, then 
-//            increment the count the no.of words we are going through from wordList. Lets take the first example:
+//            increment the count the no.of words(we will call it steps) we are going through from wordList. For example:
 // wordList = {"des","der","dfr","dgt","dfs"}
 // startWord = "der", targetWord= "dfs"
 // The startWord is "der" and we have to make "dfs" by changing one letter at a time and the word formed by changing
