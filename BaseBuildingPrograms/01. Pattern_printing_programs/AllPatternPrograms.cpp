@@ -4,44 +4,44 @@
 using namespace std;
 
 int main() {
-    // Butterfly pattern
-    int n, row, col, num;
-    cin >> num;
-    n = num/2;
+    // // Butterfly pattern
+    // int n, row, col, num;
+    // cin >> num;
+    // n = num/2;
 
-    // upper part of butterfly
-    for(row=0; row<n; row++) {
-        // left half
-        for(col=0; col<(row+1); col++) {
-            cout << "* ";
-        }
-        // mid part
-        for(col=0; col<(2*n-2*row-2); col++) {
-            cout << "  ";
-        }
-        // right half
-        for(col=0; col<(row+1); col++) {
-            cout << "* ";
-        }
-        cout << endl;
-    }
+    // // upper part of butterfly
+    // for(row=0; row<n; row++) {
+    //     // left half
+    //     for(col=0; col<(row+1); col++) {
+    //         cout << "* ";
+    //     }
+    //     // mid part
+    //     for(col=0; col<(2*n-2*row-2); col++) {
+    //         cout << "  ";
+    //     }
+    //     // right half
+    //     for(col=0; col<(row+1); col++) {
+    //         cout << "* ";
+    //     }
+    //     cout << endl;
+    // }
 
-    // lower part of butterfly
-    for(row=0; row<n; row++) {
-        // left part
-        for(col=0; col<(n-row); col++) {
-            cout << "* ";
-        }
-        // mid part
-        for(col=0; col<(2*row); col++) {
-            cout << "  ";
-        }
-        // right part
-        for(col=0; col<(n-row); col++) {
-            cout << "* ";
-        }
-        cout << endl;
-    }
+    // // lower part of butterfly
+    // for(row=0; row<n; row++) {
+    //     // left part
+    //     for(col=0; col<(n-row); col++) {
+    //         cout << "* ";
+    //     }
+    //     // mid part
+    //     for(col=0; col<(2*row); col++) {
+    //         cout << "  ";
+    //     }
+    //     // right part
+    //     for(col=0; col<(n-row); col++) {
+    //         cout << "* ";
+    //     }
+    //     cout << endl;
+    // }
 
 
     // // Solid half diamond
@@ -570,16 +570,11 @@ int main() {
     // cin >> n;
     // for(int row=0; row<n; row++) {
     //     for(int col=0; col<n; col++) {
-    //         if(row==0 || row==n-1) {
+    //         if((row == 0 || row == n-1) || (col == 0 || col == n-1)) {
     //             cout << "* ";
     //         } else {
-    //             if(col==0 || col==n-1) {
-    //                 cout << "* ";
-    //             } else {
-    //                 cout << "  ";
-    //             }
+    //             cout << "  ";
     //         }
-            
     //     }
     //     cout << endl;
     // }
