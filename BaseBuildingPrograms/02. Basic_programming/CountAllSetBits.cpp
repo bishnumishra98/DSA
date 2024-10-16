@@ -28,7 +28,7 @@ int countSetBits2(int n) {
     return count;
 }
 
-// O(logn) is better than O(32)
+// Note: O(logn) is better than O(32)
 
 int main() {
     int n;
