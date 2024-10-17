@@ -17,12 +17,12 @@ int countNumberOfDigits_approach1(int n) {
 // T.C: O(logn)   base 10
 // S.C: O(1)
 int countNumberOfDigits_approach2(int n) {
-    if(n < 0) {
-        n = -n;   // because log does not works on -ve numbers
+    if(n == 0) {
+        return 1;
     }
 
-    if(n <= 0) {
-        return 1;
+    if(n < 0) {
+        n = -n;   // because log does not works on -ve numbers
     }
 
     int ans = log(n) / log(10);   // or use 'log10(n)' directly.
@@ -32,7 +32,7 @@ int countNumberOfDigits_approach2(int n) {
 
 
 int main() {
-    int n = 125;
+    int n = -125;
 
     // cout << "No.of digits: " << countNumberOfDigits_approach1(n);
 
