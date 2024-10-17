@@ -51,7 +51,7 @@ void printFiboSeries_ite(int n) {
         cout << "0 1";
         int n1 = 0;
         int n2 = 1;
-        for(int i=2; i<n; i++) {
+        for(int i=3; i<=n; i++) {
             int n3 = n2 + n1;
             cout << " " << n3;
             n1 = n2;
