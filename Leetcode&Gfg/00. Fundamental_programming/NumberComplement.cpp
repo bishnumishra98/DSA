@@ -39,6 +39,5 @@ int main() {
     int num = 5;
     cout << sol.findComplement(num);
 
-
     return 0;
 }
