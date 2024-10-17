@@ -24,7 +24,7 @@ using namespace std;
 // T.C: O(nlog(logn))
 // S.C: O(n)
 int countPrimes(int n) {
-    if(n <= 2) return 0;   // as prime numbers should be strictly less than n
+    if(n < 2) return 0;   // as prime numbers should be strictly less than 2
 
     vector <bool> sieve(n, true);   // by default all numbers are prime
 
