@@ -30,7 +30,7 @@ int countPrimes(int n) {
 
     sieve[0] = sieve[1] = false;   // mark sieve[0] and sieve[1] as false, i.e., marking 0 and 1 as composite
 
-    for(int i=2; i*i<n; i++) {
+    for(int i=2; i*i<=n; i++) {
         if(sieve[i]) {   // if its a prime number, mark its multiples as composite
             int j = i * i;
             while(j < n) {
