@@ -30,7 +30,7 @@ int reverse(long long x) {
     }
     
     long long ans = 0;
-    while(x > 0) {
+    while(x) {
         if(ans > INT_MAX/10) return 0;
 
         // logic for reversal
