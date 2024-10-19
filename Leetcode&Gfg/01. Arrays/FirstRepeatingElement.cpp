@@ -63,8 +63,8 @@ public:
 
         return -1;   // if no duplicates found
     }
-
 };
+
 
 int main() {
     vector<int> arr = {1, 5, 3, 4, 3, 5, 6};
