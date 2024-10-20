@@ -55,8 +55,8 @@ public:
     
 
     // T.C: O(n1+n2+n3);   where n1, n2 and n3 are size of arr1, arr2 and arr3 respectively.
-    // S.C: O(n)
-    vector<int> commonElements(vector<int> &arr1, vector<int> &arr2, vector<int> &arr3) {
+    // S.C: O(2n)
+    vector<int> commonElements_timeOptimised(vector<int> &arr1, vector<int> &arr2, vector<int> &arr3) {
         vector<int> commonElements;
         set<int> st;   // set data structure is used to ensure we don't store any duplicate common elements
         int i = 0, j = 0, k = 0;
@@ -76,6 +76,31 @@ public:
         for(int it: st) commonElements.push_back(it);
         return commonElements;
     }
+
+// -----------------------------------------------------------------------------------------------------------------
+
+    // We can further space optimise it by discarding set. This is the best possible solution.
+    // T.C: O(n1+n2+n3);   where n1, n2 and n3 are size of arr1, arr2 and arr3 respectively.
+    // S.C: O(n)
+    vector<int> commonElements(vector<int> &arr1, vector<int> &arr2, vector<int> &arr3) {
+        vector<int> commonElements;
+        int i = 0, j = 0, k = 0;
+
+        while(i < arr1.size() && j < arr2.size() && k < arr3.size()) {
+            if(arr1[i] == arr2[j] && arr2[j] == arr3[k]) {
+                // To avoid duplicates, only add if 'commonElements' is empty or the common element is not already in 'commonElements'
+                if(commonElements.empty() || commonElements.back() != arr1[i]) commonElements.push_back(arr1[i]);
+                i++;
+                j++;
+                k++;
+            } 
+            else if(arr1[i] < arr2[j]) i++;   // if element pointed by i is smaller, then move i
+            else if(arr2[j] < arr3[k]) j++;   // if element pointed by j is smaller, then move j
+            else k++;   // if element pointed by k is smaller, then move k
+        }
+
+        return commonElements;
+    }
 };
 
 
@@ -84,8 +109,11 @@ int main() {
     vector<int> ans1 = Solution().commonElements_bruteforce(arr1, arr2, arr3);
     for(auto it: ans1) cout << it << " ";
     cout << endl;
-    vector<int> ans2 = Solution().commonElements(arr1, arr2, arr3);
+    vector<int> ans2 = Solution().commonElements_timeOptimised(arr1, arr2, arr3);
     for(auto it: ans2) cout << it << " ";
+    cout << endl;
+    vector<int> ans3 = Solution().commonElements(arr1, arr2, arr3);
+    for(auto it: ans3) cout << it << " ";
 
     return 0;
 }
