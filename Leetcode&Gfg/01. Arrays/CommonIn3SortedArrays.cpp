@@ -23,7 +23,7 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(n^3)
+    // T.C: O(n1^n2^n3);   where n1, n2 and n3 are size of arr1, arr2 and arr3 respectively.
     // S.C: O(n)
     vector<int> commonElements_bruteforce(vector<int> &arr1, vector<int> &arr2, vector<int> &arr3) {
         vector<int> commonElements;
@@ -36,31 +36,56 @@ public:
             }
         }
 
-        if(commonElements.size() > 0) return commonElements;
-        return {-1};
+        return commonElements;
     }
 
 // ---------------------------------------------------------------------------------------------------------------
 
     // Optimal algorithm: We shall use 3 pointer approach in this problem and take advantage of the fact that all arrays are sorted.
+    // Algorithm is extremely easy, just point 3 pointers i, j, k on 0th index of all arrays. The goal of this approach is to
+    // efficiently align the three pointers (i, j, k) to identify common elements while skipping elements that cannot be common.
+    // There can be 4 cases:
+    // Case 1: If all pointers point to elements having same value, then store the common element, then move ahead all pointers.
+    // Case 2: If arr1[i] < arr2[j], there’s no point in keeping arr1[i] in consideration as it is not going to be common in
+    //         all the 3 arrays. Hence, check a larger element in arr1 to find any common. Thus, move i ahead.
+    // Case 3: If arr2[j] < arr3[k], there’s no point in keeping arr2[j] in consideration as it is not going to be common in
+    //         all the 3 arrays. Hence, check a larger element in arr2 to find any common. Thus, move j ahead.
+    // Case 4: If arr1[i], arr2[j] and arr3[k] are not equal, nor arr1[i] is less than arr2[j], nor arr2[j] is less than arr3[k],
+    //         the only case it indicates is that arr3[k] is smallest amongst the 3. Hence, move ahead k.
     
-    // T.C: O(n)
+
+    // T.C: O(n1+n2+n3);   where n1, n2 and n3 are size of arr1, arr2 and arr3 respectively.
     // S.C: O(n)
     vector<int> commonElements(vector<int> &arr1, vector<int> &arr2, vector<int> &arr3) {
         vector<int> commonElements;
+        set<int> st;   // set data structure is used to ensure we don't store any duplicate common elements
+        int i = 0, j = 0, k = 0;
 
-        
+        while(i < arr1.size() && j < arr2.size() && k < arr3.size()) {
+            if(arr1[i] == arr2[j] && arr2[j] == arr3[k]) {
+                st.insert(arr1[i]);   // store this element in set, then move all pointers
+                i++;
+                j++;
+                k++;
+            } 
+            else if(arr1[i] < arr2[j]) i++;   // if element pointed by i is smaller, then move i
+            else if(arr2[j] < arr3[k]) j++;   // if element pointed by j is smaller, then move j
+            else k++;   // if element pointed by k is smaller, then move k
+        }
+
+        for(int it: st) commonElements.push_back(it);
+        return commonElements;
     }
 };
 
 
 int main() {
     vector<int> arr1 = {1, 5, 10, 20, 40, 80} , arr2 = {6, 7, 20, 80, 100}, arr3 = {3, 4, 15, 20, 30, 70, 80, 120};
-    vector<int> ans = Solution().commonElements_bruteforce(arr1, arr2, arr3);
-    for(auto it: ans) cout << it << " ";
+    vector<int> ans1 = Solution().commonElements_bruteforce(arr1, arr2, arr3);
+    for(auto it: ans1) cout << it << " ";
     cout << endl;
-    vector<int> ans = Solution().commonElements(arr1, arr2, arr3);
-    for(auto it: ans) cout << it << " ";
+    vector<int> ans2 = Solution().commonElements(arr1, arr2, arr3);
+    for(auto it: ans2) cout << it << " ";
 
     return 0;
 }
