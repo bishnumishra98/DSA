@@ -23,15 +23,44 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
+    // T.C: O(n^3)
+    // S.C: O(n)
+    vector<int> commonElements_bruteforce(vector<int> &arr1, vector<int> &arr2, vector<int> &arr3) {
+        vector<int> commonElements;
+
+        for(int i = 0; i < arr1.size(); i++) {
+            for(int j = 0; j < arr2.size(); j++) {
+                for(int k = 0; k < arr3.size(); k++) {
+                    if(arr1[i] == arr2[j] && arr2[j] == arr3[k]) commonElements.push_back(arr1[i]);
+                }
+            }
+        }
+
+        if(commonElements.size() > 0) return commonElements;
+        return {-1};
+    }
+
+// ---------------------------------------------------------------------------------------------------------------
+
+    // Optimal algorithm: We shall use 3 pointer approach in this problem and take advantage of the fact that all arrays are sorted.
+    
+    // T.C: O(n)
+    // S.C: O(n)
     vector<int> commonElements(vector<int> &arr1, vector<int> &arr2, vector<int> &arr3) {
+        vector<int> commonElements;
+
         
     }
 };
 
 
 int main() {
+    vector<int> arr1 = {1, 5, 10, 20, 40, 80} , arr2 = {6, 7, 20, 80, 100}, arr3 = {3, 4, 15, 20, 30, 70, 80, 120};
+    vector<int> ans = Solution().commonElements_bruteforce(arr1, arr2, arr3);
+    for(auto it: ans) cout << it << " ";
+    cout << endl;
+    vector<int> ans = Solution().commonElements(arr1, arr2, arr3);
+    for(auto it: ans) cout << it << " ";
 
     return 0;
 }
