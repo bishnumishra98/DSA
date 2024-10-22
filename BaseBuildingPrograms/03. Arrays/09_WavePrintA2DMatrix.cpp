@@ -1,4 +1,4 @@
-// Given a 2D matrix, return the sequence of this wave.
+// Given a 2D matrix, return the sequence of its wave.
 
 // Example 1:
 // Input: {10, 20, 30},
