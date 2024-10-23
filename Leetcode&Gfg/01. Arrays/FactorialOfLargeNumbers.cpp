@@ -28,6 +28,9 @@ public:
 };
 
 int main() {
+    int N = 20;
+    vector<int> ans = Solution().factorial(N);
+    for(auto it: ans) cout << it << " ";
 
     return 0;
 }
