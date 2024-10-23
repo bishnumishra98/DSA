@@ -15,31 +15,44 @@
 // You don't need to read input or print anything. Complete the function factorial() that takes integer N as input parameter
 // and returns a list of integers denoting the digits that make up the factorial of N.
 
-// Algorithm: 
+// Algorithm: Understand this problem first to get the intuition 'AddTwoNumbersRepresentedByTwoArrays.cpp'.
+// The algorithm for factorial i.e., multiplication will be similar to that of addition.
+// We will build answer in a vector in reverse order. Thus, reverse the vector and return the answer.
+// Dry run the algorithm for better understanding.
 
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
-    vector<int> factorial(int N){
+    // T.C: O(N^2 * logN);   outer loop runs from 2 to N i.e., O(N) iterations. In the inner loop, For each iteration of i,
+    //      we multiply the current factorial result stored in ans which can have up to d digits. In general, the number of
+    //      digits in the factorial of N grows approximately as O(log(N!)). Uisng Stirling's approximation, log(N!) is
+    //      approximately O(N * logN), meaning the no. of digits in N! is roughly N * logN. Combining these factors, the 
+    //      overall time complexity is: O(N * N * logN) = O(N^2 * logN)
+    // S.C: O(N * logN);   due to no.of digits stored in 'ans' using Stirling's approximation.
+    vector<int> factorial(int N) {
+        // Initialize a vector to store the digits of the factorial. Starting with 1 because factorial of 1 is 1.
         vector<int> ans;
         ans.push_back(1);
+
         int carry = 0;
+        // Loop from 2 to N to calculate N!
         for(int i = 2; i <= N; i++) {
+            // Multiply each digit in 'ans' by i
             for(int j = 0; j < ans.size(); j++) {
-                int product = ans[j] * i + carry;
-                ans[j] = product % 10;
-                carry = product / 10;
+                int product = ans[j] * i + carry;   // multiply current digit by i and add carry
+                ans[j] = product % 10;   // store the last digit of the product in 'ans' 
+                carry = product / 10;   // Update carry with the rest of the product
             }
-            while(carry) {
-                ans.push_back(carry % 10);
-                carry = carry / 10;
+            // If carry remains after multiplying all digits, add it to the 'ans' vector
+            while(carry) { 
+                ans.push_back(carry % 10);   // insert the last digit of the carry
+                carry = carry / 10;   // update carry with the remaining part
             }
         }
 
+        // The digits in 'ans' are stored in reverse order, so reverse the vector to get the correct order
         reverse(ans.begin(), ans.end());
         return ans;
     }
