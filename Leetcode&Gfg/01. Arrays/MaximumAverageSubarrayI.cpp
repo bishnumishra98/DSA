@@ -17,10 +17,26 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
-    double findMaxAverage(vector<int>& nums, int k) {
-        
+    // 2 pointer approach
+    // T.C: O((n-k) * k) = O(n * k);   O(n-k) for outer loop, and O(k) for inner loop
+    // S.C: O(1)
+    double findMaxAverage_bruteforce(vector<int>& nums, int k) {
+        int i = 0, j = k-1;   // i and j surround the range of first k elements in 'nums'
+        int maxSum = INT_MIN;
+
+        while(j < nums.size()) {
+            int sum = 0;
+            for(int x = i; x <= j; x++) {
+                sum = sum + nums[x];
+            }
+            maxSum = max(maxSum, sum);
+            // Move pointers to check next k elements in 'nums'
+            i++;
+            j++;
+        }
+
+        double avg = (double)maxSum / k;
+        return avg;
     }
 };
 
@@ -28,7 +44,7 @@ int main() {
     vector<int> nums = {1, 12, -5, -6, 50, 3};
     int k = 4;
 
-    cout << Solution().findMaxAverage(nums, k);
+    cout << Solution().findMaxAverage_bruteforce(nums, k);
 
     return 0;
 }
