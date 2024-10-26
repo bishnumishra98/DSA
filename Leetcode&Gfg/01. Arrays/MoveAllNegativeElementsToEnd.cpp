@@ -20,7 +20,8 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(2n) = O(n)
+    // As order of elements is important, 2 pointer approach will fail here. Hence, follow simple brute force method.
+    // T.C: O(2n)
     // S.C: O(n)
     void segregateElements(vector<int>& arr) {
         int n = arr.size();

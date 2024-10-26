@@ -3,14 +3,17 @@
 #include <iostream>
 using namespace std;
 
+// Two pointer approach
+// T.C: O(n)
+// S.C: O(1)
 void shiftNegativeToLeft(int arr[], int n) {
-    // we are following two approach here
-    int j = 0;   // This variable will be used to keep track of the position
-                // where the next negative number should be placed.
-    for(int index=0; index<n; index++) {
-        // index variable will be used to traverse the whole array
-        if(arr[index] < 0) {
-            swap(arr[index], arr[j]);
+    int j = 0;   // all elements before j will be a negative number
+
+    // Iterate each element of arr, and if arr[i] is a negative number, swap it with arr[j], so that one more
+    // element gets added to the chain of negative numbers. And then move j ahead to update the new position of j.
+    for(int i = 0; i < n; i++) {
+        if(arr[i] < 0) {
+            swap(arr[i], arr[j]);
             j++;
         }
     }
