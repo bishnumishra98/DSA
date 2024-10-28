@@ -25,7 +25,7 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(N^2 * logN);   outer loop runs from 2 to N i.e., O(N) iterations. In the inner loop, For each iteration of i,
+    // T.C: O(N^2 * logN);   outer loop runs from 2 to N i.e., O(N) iterations. In the inner loop, for each iteration of i,
     //      we multiply the current factorial result stored in ans which can have up to d digits. In general, the number of
     //      digits in the factorial of N grows approximately as O(log(N!)). Uisng Stirling's approximation, log(N!) is
     //      approximately O(N * logN), meaning the no. of digits in N! is roughly N * logN. Combining these factors, the 
