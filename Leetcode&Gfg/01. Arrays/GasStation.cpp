@@ -32,24 +32,22 @@
 
 
 // Algorithm:
-
-// 1) Initialize 3 variables: start = 0, totalFuelBalance = 0 and currentFuelBalance = 0.
-
+// 1. Initialize 3 variables: start = 0, totalFuelBalance = 0 and currentFuelBalance = 0.
 //    -> start: The starting index of the gas station. Every time we start from a new
 //              gas station, currentFuelBalance will reset back to 0.
-
 //    -> totalFuelBalance(tFb): Tracks the overall fuel balance throughout the entire trip.
 //       In simple terms, tFB = sum of all gas elements - sum of all cost elements. But we
 //       will be calculating cumulative tFB throughout each iteration, so our formula will be
 //       tFB = tFB + gas[i] - cost[i]. If tFB >= 0 at the end of the loop, then only the trip
-//       is possible for the given set of gas[] and cost[] arrays. Thus, tFB only tells
+//       is possible for the given pair of gas[] and cost[] arrays. Thus, tFB only tells
 //       whether trip is possible for the given input array sets or not. To find the index from
 //       where trip should start to get completed, we have to take help of 'cFB' and 'start'.
-
 //    -> currentFuelBalance(cFB): Tracks the fuel balance at the current station. The trip
 //       can only start if cFB is found positive for any station. If cFB < 0, for ith station,
 //       then we have to start from the next station, i.e., 'start' will point to
 //       (i+1)th station and 'cFB' shall be reset back to 0 for that station.
+
+//       EXTRA NOTE :-
 //       Q) Why not we check 'start' of trip from each gas station, i.e., start = 0, 1, 2, ...
 //          Why 'start' directly jumps to 'i+1' if cFB is negative for ith station ?
 //       A) We have to agree that if we reach from an index(lets say i=0) to an
@@ -79,27 +77,28 @@ public:
     // T.C: O(n)
     // S.C: O(1)
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-        int start = 0;   // Starting index of the gas station
-        int totalFuelBalance = 0;   // Track total fuel balance throughout the trip
-        int currentFuelBalance = 0;   // Track fuel balance at the current station
+        int start = 0;   // Potential start index
+        int totalFuelBalance = 0;   // Total fuel balance across all stations
+        int currentFuelBalance = 0;   // Current fuel balance for the ongoing trip
 
         for(int i = 0; i < gas.size(); i++) {
-            totalFuelBalance += gas[i] - cost[i];   // Calculate total fuel balance
+            totalFuelBalance += gas[i] - cost[i];   // Total fuel balance at station i
 
-            // If running out of fuel at the current station, reset the starting index to
+            // If running out of fuel at the current station, reset the start index to
             // the next station, and currentFuelBalance to 0.
             currentFuelBalance += gas[i] - cost[i];
             if(currentFuelBalance < 0) {
-                start = i + 1;   // Move to the next station
+                start = i + 1;   // Consider moving to the next station to find next potential start index 
                 currentFuelBalance = 0;
             }
         }
 
         // If the total fuel balance is negative, it means the trip is not possible.
-        // Otherwise, return the starting index
-        return (totalFuelBalance >= 0) ? start : -1;
+        // Otherwise, return the start index
+        return (totalFuelBalance < 0) ? -1 : start;
     }
 };
+
 
 int main() {
     Solution obj;
