@@ -1,31 +1,48 @@
-// leetcode: 1572. Matrix Diagonal Sum
+// leetcode: 1572. Matrix Diagonal Sum   --->   Given a square matrix mat, return the sum of the matrix diagonals.
+// Only include the sum of all the elements on the primary diagonal and all the elements on the secondary diagonal
+// that are not part of the primary diagonal.
 
-#include <iostream>
-#include <vector>
+// Example 1:
+// Input: mat = [[1,2,3],
+//               [4,5,6],
+//               [7,8,9]]
+// Output: 25
+// Explanation: Diagonals sum: 1 + 5 + 9 + 3 + 7 = 25
+// Notice that element mat[1][1] = 5 is counted only once.
+
+// Example 2:
+// Input: mat = [[1,1,1,1],
+//               [1,1,1,1],
+//               [1,1,1,1],
+//               [1,1,1,1]]
+// Output: 8
+
+// Example 3:
+// Input: mat = [[5]]
+// Output: 5
+
+#include <bits/stdc++.h>
 using namespace std;
 
-// T.C: O(n)
-// S.C: O(1)
-int diagonalSum(vector<vector<int>>& mat) {
-    int n = mat.size();
-    int p_diag_sum = 0;
-    int s_diag_sum = 0;
-    int subtract_middle_element = 0;
+class Solution {
+public:
+    // T.C: O(n)
+    // S.C: O(1)
+    int diagonalSum(vector<vector<int>>& mat) {
+        int pds = 0;   // pds = primaryDiagonalSum
+        int sds = 0;   // sds = secondaryDiagonalSum
+        int n = mat.size();
 
-    for(int i=0; i<n; i++) {
-        p_diag_sum += mat[i][i];
-        s_diag_sum += mat[i][n-i-1];
+        for(int i = 0; i < n; i++) {
+            pds += mat[i][i];
+            sds += mat[i][n-i-1];
+        }
+
+        // For n*n matrix, if n is an odd number, we need to subtract the middle element as it has been counted twice.
+        return (n & 1) ? pds + sds - mat[n/2][n/2] : pds + sds;
     }
+};
 
-    // if(n%2 != 0) {   // for odd no.of elements in a row of matrix
-    //     subtract_middle_element = mat[n/2][n/2];
-    // }
-    
-    // int ans = p_diag_sum + s_diag_sum - subtract_middle_element;
-    // return ans;
-
-    return n%2==0 ? (p_diag_sum + s_diag_sum) : (p_diag_sum + s_diag_sum - mat[n/2][n/2]);
-}
 
 int main() {
     vector<vector<int>> matrix = {
@@ -34,7 +51,7 @@ int main() {
         {7, 8, 9}
     };
 
-    cout << diagonalSum(matrix);
+    cout << Solution().diagonalSum(matrix);
     
     return 0;
 }
