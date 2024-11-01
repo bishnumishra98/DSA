@@ -26,7 +26,7 @@ public:
     // T.C: O(n)
     // S.C: O(n)
     void rotate_modulusMethod(vector<int>& nums, int k) {
-        int n= nums.size();
+        int n = nums.size();
         vector<int> temp(n);
 
         for(int i = 0; i < n; i++) {
