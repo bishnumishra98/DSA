@@ -55,13 +55,13 @@ public:
         maxSum = max(maxSum, sum);   // update maxSum
 
         // Now slide the window: subtract and add one element in the window at a time; calculate sum and update maxSum if needed.
-        int i = 0, j = k - 1;
-        while(j < nums.size() - 1) {
+        int i = 0, j = k;
+        while(j < nums.size()) {
             sum = sum - nums[i];
-            i++;
-            j++;
             sum = sum + nums[j];
             maxSum = max(maxSum, sum);
+            i++;
+            j++;
         }
 
         double avg = (double)maxSum / k;
