@@ -34,7 +34,7 @@ public:
         int left = 0;
         int right = arr.size() - 1;
 
-        while(left <= right) {
+        while(left < right) {
             if(arr[left] > 0) left++;
             else if(arr[right] < 0) right--;
             else swap(arr[left], arr[right]);
