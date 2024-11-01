@@ -27,13 +27,13 @@ public:
     // S.C: O(n)
     void rotate_modulusMethod(vector<int>& nums, int k) {
         int n= nums.size();
-        vector<int>t(n);
+        vector<int> temp(n);
 
-        for(int i=0; i<n; i++){
-            t[(i+k)%n]= nums[i];
+        for(int i = 0; i < n; i++) {
+            temp[(i + k) % n]= nums[i];
         }
 
-        nums = t;
+        nums = temp;
     }
 
 // ------------------------------------------------------------------------------------
@@ -53,7 +53,6 @@ public:
         // reverse from (k, n-1)
         reverse(nums.begin() + k, nums.end());
     }
-
 };
 
 
