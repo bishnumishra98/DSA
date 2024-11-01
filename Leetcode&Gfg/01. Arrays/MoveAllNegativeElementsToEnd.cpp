@@ -24,18 +24,16 @@ public:
     // T.C: O(2n)
     // S.C: O(n)
     void segregateElements(vector<int>& arr) {
-        int n = arr.size();
-        
         // Create an auxiliary array to hold positive and negative elements
         vector<int> temp;
 
         // Store positive numbers first
-        for(int i = 0; i < n; i++) {
-            if (arr[i] > 0) temp.push_back(arr[i]);
+        for(int i = 0; i < arr.size(); i++) {
+            if (arr[i] >= 0) temp.push_back(arr[i]);   // 0 is also treated as a positive number
         }
 
         // Store negative numbers next
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < arr.size(); i++) {
             if (arr[i] < 0) temp.push_back(arr[i]);
         }
 
