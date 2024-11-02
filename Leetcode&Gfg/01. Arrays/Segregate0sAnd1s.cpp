@@ -1,76 +1,74 @@
-// gfg: Segregate 0s and 1s
+// GFG: Segregate 0s and 1s   --->   Given an array arr consisting of only 0's and 1's in random order.
+// Modify the array in-place to segregate 0s onto the left side and 1s onto the right side of the array.
 
-#include <iostream>
+// Example 1:
+// Input: arr[] = [0, 0, 1, 1, 0]
+// Output: [0, 0, 0, 1, 1]
+// Explanation:  After segregation, all the 0's are on the left and 1's are on the right. Modified array will be [0, 0, 0, 1, 1].
+
+// Example 2:
+// Input: arr[] = [1, 1, 1, 1]
+// Output: [1, 1, 1, 1]
+// Explanation: There are no 0s in the given array, so the modified array is [1, 1, 1, 1]
+
+#include <bits/stdc++.h>
 using namespace std;
 
-// Brute force
-// T.C: O(n)
-// S.C: O(1)
-void segregate0and1_bruteForce(int arr[], int n) {
-    int zeroCount = 0, oneCount = 0;
-    for(int i=0; i<n; i++) {
-        if(arr[i] == 0) {
-            zeroCount++;
-        } else {
-            oneCount++;
-        }
-    }
-    // inserting 0s and 1s on indexes
-    int index = 0;
-    while(zeroCount--) {
-        arr[index] =  0;
-        index++;
-    }
-    while(oneCount--) {
-        arr[index] =  1;
-        index++;
-    }
-}
+class Solution {
+public:
+    // T.C: O(2n)
+    // S.C: O(1)
+    void segregate0and1_bruteForce(vector<int> &arr) {
+        int zeroCount = 0, oneCount = 0;
 
-// Two pointer approach
-// T.C: O(n)
-// S.C: O(1)
-void segregate0and1(int arr[], int n) {
-    int low = 0, high = n-1;
-
-    while(low<high) {
-        if(arr[low] == 0) {
-            low++;
+        for(int i = 0; i < arr.size(); i++) {
+            if(arr[i] == 0) zeroCount++;
+            else oneCount++;
         }
-        else if(arr[high] == 1) {
-            high--;
-        } else {
-            swap(arr[low], arr[high]);
-            low++;
-            high--;
+
+        // Inserting 0s and 1s on indexes
+        int index = 0;
+        while(zeroCount--) {
+            arr[index] =  0;
+            index++;
+        }
+        while(oneCount--) {
+            arr[index] =  1;
+            index++;
         }
     }
-}
+
+// ----------------------------------------------------------
+
+    // Two pointer approach
+    // T.C: O(n)
+    // S.C: O(1)
+    void segregate0and1(vector<int> &arr) {
+        int low = 0, high = arr.size() - 1;
+
+        while(low<high) {
+            if(arr[low] == 0) {
+                low++;
+            }
+            else if(arr[high] == 1) {
+                high--;
+            } else {
+                swap(arr[low], arr[high]);
+                low++;
+                high--;
+            }
+        }
+    }
+};
+
 
 int main() {
-    int n;
-    cout << "Enter the number of elements in array: ";
-    cin >> n;
+    vector<int> arr = {0, 0, 1, 1, 0};
 
-    // dynamic memory allocation to create the array
-    int* arr = new int[n];
+    // Solution().segregate0and1_bruteForce(arr);
+    Solution().segregate0and1(arr);
 
-    // taking user inputs
-    for (int i=0; i<n; i++) {
-        cin >> arr[i];
-    }
-
-    //segregate0and1_bruteForce(arr, n);
-    
-    segregate0and1(arr, n);
-
-    // printing sorted array
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
-    }
-
-    // releasing the dynamically allocated memory
-    delete[] arr;
+    for(auto it: arr) cout << it << " ";
 
     return 0;
 }
