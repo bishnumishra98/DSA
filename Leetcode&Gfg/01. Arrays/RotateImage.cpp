@@ -43,6 +43,8 @@ public:
         // 90 deg clockwise rotation means = Transpose + reverse each row
 
         // Transpose
+        // Note: Always remember that in in-place swapping of square matrix, j should start from i, not from 0. Because if
+        //       we start j from 0, same elements of matrix gets swapped twice, resulting in no change in original matrix.
         for(int i = 0; i < n; i++) {
             for(int j = i; j < n; j++) {
                 swap(matrix[i][j], matrix[j][i]);
