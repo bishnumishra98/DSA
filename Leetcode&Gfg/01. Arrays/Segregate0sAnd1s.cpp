@@ -40,19 +40,21 @@ public:
 
 // ----------------------------------------------------------
 
-    // Two pointer approach
+    // Algorithm (Two pointer approach):
+    // 1. Initialize low and high on 0 and n-1 index respectively.
+    // 2. Maintain the rule that all left elements till low should be 0, all right elements till high should be 1.
+    //    Thus, if(arr[low] == 0), move the low pointer ahead towards right, to check the position of next element.
+    //    Similarly, if(arr[high] == 1), move the high pointer back towatds left, to check the position of next element.
+    //    If both pointers point to wrong elements, swap the elements. Continue the proecess until low reaches high.
     // T.C: O(n)
     // S.C: O(1)
     void segregate0and1(vector<int> &arr) {
         int low = 0, high = arr.size() - 1;
 
-        while(low<high) {
-            if(arr[low] == 0) {
-                low++;
-            }
-            else if(arr[high] == 1) {
-                high--;
-            } else {
+        while(low < high) {
+            if(arr[low] == 0) low++;
+            else if(arr[high] == 1) high--;
+            else {
                 swap(arr[low], arr[high]);
                 low++;
                 high--;
