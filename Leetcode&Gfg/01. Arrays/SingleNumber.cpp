@@ -1,29 +1,40 @@
-// leetcode: 136. Single Number
+// leetcode: 136. Single Number   --->   Given a non-empty array of integers nums, every element appears twice except
+// for one. Find that single one.
+// You must implement a solution with a linear runtime complexity and use only constant extra space.
 
-#include<iostream>
-#include<vector>
+// Example 1:
+// Input: nums = [2,2,1]
+// Output: 1
+
+// Example 2:
+// Input: nums = [4,1,2,1,2]
+// Output: 4
+
+// Example 3:
+// Input: nums = [1]
+// Output: 1
+
+
+#include <bits/stdc++.h>
 using namespace std;
 
-// T.C: O(n)
-// S.C: O(1)
-int singleNumber(vector<int>& nums) {
-    int ans = 0;
-    for(int i=0; i<nums.size(); i++) {
-        ans = ans ^ nums[i];
+class Solution {
+public:
+    // T.C: O(n)
+    // S.C: O(1)
+    int singleNumber(vector<int>& nums) {
+        int ans = 0;
+        for(int i=0; i<nums.size(); i++) {
+            ans = ans ^ nums[i];
+        }
+        return ans;
     }
-    return ans;
-}
+};
+
 
 int main() {
-    vector <int> v;
-    int n;
-    cout << "Enter the number of elements in array: ";
-    cin >> n;
-    for(int i=0; i<n; i++) {
-        int elements;
-        cin >> elements;
-        v.push_back(elements);
-    }
-    cout << "Single number is: " << singleNumber(v);
+    vector<int> nums = {2, 2, 1};
+    cout << Solution().singleNumber(nums);
+    
     return 0;
 }
