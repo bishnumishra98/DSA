@@ -56,19 +56,60 @@ public:
 
 // ------------------------------------------------------------------------------
 
-    // Two pointer approch using hashing
-    // T.C: O(n^2) * log(M);   where log(M) is the  
+    // Better algorithm: Two-pointer approach using hashing or hash set, i.e., unordered_set
+    // 1. i)  Initialize 'i' as the fixed element (starting from the first element). Initialize 'j' to start from 'i + 1'.
+    //        'nums[i]' represents the first element, and 'nums[j]' represents the second element in the triplet.
+    //        Calculate the required third element as the negative sum of 'nums[i]' and 'nums[j]' because the sum of
+    //        all three elements should equal zero.
+    //    ii) Instead of finding the third element using a nested loop, we use a hashset for quick lookup.
+    //        Create an empty hashset for each iteration of 'i'. The purpose of 'hashset' is to store elements between
+    //        'nums[i]' and 'nums[j]' as 'j' iterates through 'nums'.
+    //        Each time 'i' is updated, a new hashset is initialized to avoid interference between triplet searches.
+    // 2. If the third element is found in the hashset, then sort and store the triplet '{nums[i], nums[j], third}'
+    //    in a set to ensure unique triplets, and then move j ahead. If the third element is not found in the hashset, then
+    //    insert the current 'nums[j]' into the hashset and move 'j' ahead. Continue this process until the end of 'nums'.
+    // T.C: O(n^2);   as hash operations like find() and insert() takes constant time in average case.
     // S.C: O(2n)
     vector<vector<int>> threeSum_twopointer(vector<int>& nums) {
-        
+        set<vector<int>> st;
+
+        for(int i = 0; i < nums.size() - 1; i++) {
+            unordered_set<int> hashset;
+            for(int j = i + 1; j < nums.size(); j++) {
+                int third = -(nums[i] + nums[j]);
+                // If third element is present in hashset, it means a triplet can be formed using 'nums[i]', 'nums[j]'
+                // and third element. Thus, sort and store the triplet in a set to store only unique triplets.
+                // If the third element is not found in hashset, then store the current element 'nums[j]' in hashset.
+                if(hashset.find(third) != hashset.end()) {
+                    vector<int> temp = {nums[i], nums[j], third};
+                    sort(temp.begin(), temp.end());
+                    st.insert(temp);
+                }
+                hashset.insert(nums[j]);
+            }
+        }
+
+        vector<vector<int>> ans(st.begin(), st.end());
+        return ans;
     }
 
+// ---------------------------------------------------------------------------------------
+
+    
+    // T.C: O(n^2)
+    // S.C: O(2n)
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        
+    }
 };
 
 
 int main() {
     vector<int> nums = {-1, 0, 1, 2, -1, -4};
-    vector<vector<int>> ans = Solution().threeSum_bruteforce(nums);
+
+    // vector<vector<int>> ans = Solution().threeSum_bruteforce(nums);
+    vector<vector<int>> ans = Solution().threeSum_twopointer(nums);
+
     for(auto it1: ans) {
         for(auto it2: it1) {
             cout << it2 << " ";
