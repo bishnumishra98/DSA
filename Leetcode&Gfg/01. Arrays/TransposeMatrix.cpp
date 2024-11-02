@@ -14,19 +14,22 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(n^2)
-    // S.C: O(n^2)
+    // T.C: O(m*n)
+    // S.C: O(m*n)
     vector<vector<int>> transpose(vector<vector<int>>& matrix) {
-        int n = matrix.size();   // no.of rows
-        int col = matrix[0].size();   // no.of of elements in each row, i.e, no.of columns
-        vector<vector<int>> t_matrix(col, vector<int>(n));   // creates a new 2D vector t_matrix with the dimensions swapped
+        int rows = matrix.size();
+        int cols = matrix[0].size();
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < col; j++) {
-                t_matrix[j][i] = matrix[i][j];
+        vector<vector<int>> t_matrix(cols, vector<int> (rows));   // create a 2D vector with the dimensions swapped
+
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                t_matrix[j][i] = matrix[i][j];   // t_matrix[i][j] = matrix[j][i] will give
+                // heap buffer overflow error for non-square matrix, because rows no.of rows
+                // does not exists in t_matrix. Hence, always write t_matrix[j][i] = matrix[i][j].
             }
         }
-        
+
         return t_matrix;
     }
 };
@@ -34,8 +37,7 @@ public:
 
 int main() {
     vector<vector<int>> matrix = {{1, 2, 3},
-                                  {4, 5, 6},
-                                  {7, 8, 9}};
+                                  {4, 5, 6}};
 
     vector<vector<int>> ans = Solution().transpose(matrix);
     for(auto it1: ans) {
