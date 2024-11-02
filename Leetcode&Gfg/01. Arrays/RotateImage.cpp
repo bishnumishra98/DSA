@@ -39,16 +39,18 @@ public:
     // S.C: O(1)
     void rotate(vector<vector<int>>& matrix) {
         int n = matrix.size();
-        
-        // transpose
-        for(int i=0; i<n; i++) {
-            for(int j=i; j<matrix[i].size(); j++) {
+
+        // 90 deg clockwise rotation means = Transpose + reverse each row
+
+        // Transpose
+        for(int i = 0; i < n; i++) {
+            for(int j = i; j < n; j++) {
                 swap(matrix[i][j], matrix[j][i]);
             }
         }
 
-        // reverse each row
-        for(int i=0; i<n; i++) {
+        // Reverse each row
+        for(int i = 0; i < n; i++) {
             reverse(matrix[i].begin(), matrix[i].end());
         }
     }
