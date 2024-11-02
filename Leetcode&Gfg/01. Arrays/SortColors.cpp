@@ -91,14 +91,17 @@ public:
     //       Thus, swap(nums[mid], nums[high]), so that 2 comes at a position just left of high+1, in order to elongate chain of 2s.
     //       But the again, indices become incorrect for 2, so shift back high towards left in order to rectify indices.
 
-    //     Repeat the process until mid reches high, and the array would automatically become sorted.
+    //     Repeat the process until mid crosses high, and the array would automatically become sorted.
 
     // T.C: O(n)
     // S.C: O(1)
     void sortColors(vector<int>& nums) {
-        int n = nums.size();
-        int low = 0, mid = 0, high = n-1;
+        int low = 0, mid = 0, high = nums.size() - 1;
 
+        // 0 to low-1    -> 0
+        // low to mid-1  -> 1
+        // mid to high   -> random numbers
+        // high+1 to n-1 -> 2
         while(mid <= high) {
             if(nums[mid] == 0) {
                 swap(nums[mid], nums[low]);
@@ -106,7 +109,7 @@ public:
                 mid++;
             } else if(nums[mid] == 1) {
                 mid++;
-            } else {   // if nums[mid] == 2
+            } else {   // if(nums[mid] == 2)
                 swap(nums[mid], nums[high]);
                 high--;
             }
