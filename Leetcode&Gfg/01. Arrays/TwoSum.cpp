@@ -36,6 +36,7 @@ public:
 
 // ----------------------------------------------------------------------------------------------------------------
 
+    // Hashing techinique using unordered_map
     // T.C: O(n)
     // S.C: O(n)
     vector<int> twoSum(vector<int>& nums, int target) {

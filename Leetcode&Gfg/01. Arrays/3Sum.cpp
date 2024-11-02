@@ -56,7 +56,7 @@ public:
 
 // ------------------------------------------------------------------------------
 
-    // Better algorithm: Two-pointer approach using hashing or hash set, i.e., unordered_set
+    // Better algorithm: Two-pointer approach using hashing using a hashset, i.e., unordered_set
     // 1. i)  Initialize 'i' as the fixed element (starting from the first element). Initialize 'j' to start from 'i + 1'.
     //        'nums[i]' represents the first element, and 'nums[j]' represents the second element in the triplet.
     //        Calculate the required third element as the negative sum of 'nums[i]' and 'nums[j]' because the sum of
@@ -95,9 +95,9 @@ public:
 
 // ---------------------------------------------------------------------------------------
 
-    
+    // Best algorithm: 3 pointer approach
     // T.C: O(n^2)
-    // S.C: O(2n)
+    // S.C: O(n)
     vector<vector<int>> threeSum(vector<int>& nums) {
         
     }
