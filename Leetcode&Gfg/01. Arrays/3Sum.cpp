@@ -96,10 +96,37 @@ public:
 // ---------------------------------------------------------------------------------------
 
     // Best algorithm: 3 pointer approach
+    // 1. Sort the 'nums' array.
+    // 2. 
     // T.C: O(n^2)
     // S.C: O(n)
     vector<vector<int>> threeSum(vector<int>& nums) {
-        
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+
+        for(int i = 0; i < nums.size(); i++) {
+            // while(i > 0 && nums[i] == nums[i-1] && i < nums.size() - 1) i++;
+            // The above line can be simply writte like:
+            if(i > 0 && nums[i] == nums[i-1]) continue;
+            int j = i + 1;
+            int k = nums.size() - 1;
+
+            while(j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                if(sum < 0) j++;
+                else if(sum > 0) k--;
+                else {
+                    vector<int> temp = {nums[i], nums[j], nums[k]};
+                    ans.push_back(temp);
+                    j++;
+                    k--;
+                    while(j < k && nums[j] == nums[j - 1]) j++;
+                    while(j < k && nums[k] == nums[k + 1]) k--;
+                }
+            }
+        }
+
+        return ans;
     }
 };
 
@@ -108,7 +135,8 @@ int main() {
     vector<int> nums = {-1, 0, 1, 2, -1, -4};
 
     // vector<vector<int>> ans = Solution().threeSum_bruteforce(nums);
-    vector<vector<int>> ans = Solution().threeSum_twopointer(nums);
+    // vector<vector<int>> ans = Solution().threeSum_twopointer(nums);
+    vector<vector<int>> ans = Solution().threeSum(nums);
 
     for(auto it1: ans) {
         for(auto it2: it1) {
