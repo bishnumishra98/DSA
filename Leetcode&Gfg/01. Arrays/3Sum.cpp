@@ -97,7 +97,12 @@ public:
 
     // Best algorithm: 3 pointer approach
     // 1. Sort the 'nums' array.
-    // 2. 
+    // 2. Initialize 'i' as the fixed element (starting from the first element). Initialize 'j' to start from 'i + 1'
+    //    and 'k' to last element of 'nums'. 'nums[i]' represents the first element, and 'nums[j]' represents the second
+    //    element and 'nums[k]' represents the third element in the triplet respectively.
+    // 3. Now calculate the sum of nums[i], nums[j] and nums[k]. If the sum is less than 0, j pointers needs to be moved ahead
+    //    towards right, whereas if sum is greater than 0, k pointers needs to be moved towards left. If sum is found to be 0,
+    //    push the triplet nums[i], nums[j] and nums[k] in 'ans'. 
     // T.C: O(n^2)
     // S.C: O(n)
     vector<vector<int>> threeSum(vector<int>& nums) {
@@ -106,7 +111,7 @@ public:
 
         for(int i = 0; i < nums.size(); i++) {
             // while(i > 0 && nums[i] == nums[i-1] && i < nums.size() - 1) i++;
-            // The above line can be simply writte like:
+            // The above line can be simply written like:
             if(i > 0 && nums[i] == nums[i-1]) continue;
             int j = i + 1;
             int k = nums.size() - 1;
