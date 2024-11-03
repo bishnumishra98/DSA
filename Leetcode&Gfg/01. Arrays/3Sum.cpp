@@ -102,14 +102,18 @@ public:
     //    element and 'nums[k]' represents the third element in the triplet respectively.
     // 3. Now calculate the sum of nums[i], nums[j] and nums[k]. If the sum is less than 0, j pointers needs to be moved ahead
     //    towards right, whereas if sum is greater than 0, k pointers needs to be moved towards left. If sum is found to be 0,
-    //    push the triplet nums[i], nums[j] and nums[k] in 'ans'. 
+    //    push the triplet nums[i], nums[j] and nums[k] in 'ans'. Now as j is pushed towards right and k is pushed towards left,
+    //    it might happen that even after reposition, they point to an element that has same value as the previous ones. That's
+    //    why don't push the pointers just 1 step ahead or back, instead keep pushing them until they reach a new element.
+    //    Once j reaches k, stop the iteration and change the position of i to next element on the left. For i too, follow the
+    //    same pushing rule until it reaches a new element. In this this way the i shall move till the 3rd last element og 'nums'.
     // T.C: O(n^2)
     // S.C: O(n)
     vector<vector<int>> threeSum(vector<int>& nums) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> ans;
 
-        for(int i = 0; i < nums.size(); i++) {
+        for(int i = 0; i < nums.size() - 2; i++) {
             // while(i > 0 && nums[i] == nums[i-1] && i < nums.size() - 1) i++;
             // The above line can be simply written like:
             if(i > 0 && nums[i] == nums[i-1]) continue;
