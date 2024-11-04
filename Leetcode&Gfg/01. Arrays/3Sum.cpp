@@ -110,6 +110,7 @@ public:
     // T.C: O(n^2)
     // S.C: O(n)
     vector<vector<int>> threeSum(vector<int>& nums) {
+        if(nums.size() < 3) return {};   // edge case
         sort(nums.begin(), nums.end());
         vector<vector<int>> ans;
 
