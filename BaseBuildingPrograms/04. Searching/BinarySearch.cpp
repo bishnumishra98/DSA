@@ -1,4 +1,4 @@
-// Note that Binary Search applies on only sorted arrays, i.e monotonic functions
+// Note that Binary Search applies on only sorted arrays, i.e., monotonic functions
 
 #include <iostream>
 using namespace std;
