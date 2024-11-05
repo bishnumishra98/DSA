@@ -110,7 +110,7 @@ public:
 // ----------------------------------------------------------------------------------------------
 
     // T.C: O(n)
-    // T.C: O(n)
+    // S.C: O(n)
     vector<int> majorityElement_hashing(vector<int>& nums) {
         int n = nums.size();
         int x = n / 3;
