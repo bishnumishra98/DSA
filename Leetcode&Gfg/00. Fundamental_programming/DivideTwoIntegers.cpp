@@ -26,18 +26,34 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C:
-    // S.C:
+    // T.C: O(dividend)
+    // S.C: O(1)
     int divide_bruteforce(int dividend, int divisor) {
-        
+        if(dividend == INT_MIN && divisor == -1) return INT_MAX;   // edge case
+
+        int sign = ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) ? -1 : 1;
+
+        long long abs_divisor = abs(divisor);
+        long long abs_dividend = abs(dividend);
+        long long sum = abs_divisor;
+        int quotient = 0;        
+
+        // Check how many divisors are required to make dividend or just less than dividend. That many divisors is the value of quotient.
+        while(sum <= abs_dividend) {
+            quotient++;
+            sum += abs_divisor;
+        }
+
+        return quotient * sign;
     }
 
 // ---------------------------------------------------------
 
+    // Algorithm: 
     // T.C:
     // S.C:
     int divide(int dividend, int divisor) {
-
+        
     }
 };
 
@@ -45,7 +61,7 @@ public:
 int main() {
     int dividend = 7, divisor = -3;
     cout << Solution().divide_bruteforce(dividend, divisor) << endl;
-    cout << Solution().divide(dividend, divisor);
+    // cout << Solution().divide(dividend, divisor);
 
     return 0;
 }
