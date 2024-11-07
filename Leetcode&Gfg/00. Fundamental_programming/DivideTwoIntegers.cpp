@@ -21,9 +21,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Algorithm: 
-
-
 class Solution {
 public:
     // T.C: O(dividend)
@@ -33,6 +30,8 @@ public:
 
         int sign = ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) ? -1 : 1;
 
+        // If we convert the negative value '-2147483648' to its absolute value,
+        // its value will become outside the range of a 32-bit signed integer '2147483647'. 
         long long abs_divisor = abs(divisor);
         long long abs_dividend = abs(dividend);
         long long sum = abs_divisor;
@@ -50,10 +49,35 @@ public:
 // ---------------------------------------------------------
 
     // Algorithm: 
-    // T.C:
-    // S.C:
+    // T.C: O((log(base 2)N)^2)
+    // S.C: O(1)
     int divide(int dividend, int divisor) {
-        
+        // Handle the case where dividend is equal to divisor
+        if (dividend == divisor) return 1;
+
+        unsigned int ans = 0;
+        int sign = 1;
+
+        // Determine the sign of the result
+        if ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0))
+            sign = -1;
+
+        // Convert both dividend and divisor to positive integers
+        unsigned int n = abs(dividend), d = abs(divisor);
+
+        // Perform the division
+        while (n >= d) {
+            int count = 0;
+            while (n > (d << (count + 1)))
+                count++;
+            n -= d << count;
+            ans += 1 << count;
+        }
+
+        // Handle overflow case
+        if (ans == (1 << 31) && sign == 1) return INT_MAX;
+
+        return sign * ans;
     }
 };
 
@@ -61,7 +85,7 @@ public:
 int main() {
     int dividend = 7, divisor = -3;
     cout << Solution().divide_bruteforce(dividend, divisor) << endl;
-    // cout << Solution().divide(dividend, divisor);
+    cout << Solution().divide(dividend, divisor);
 
     return 0;
 }
