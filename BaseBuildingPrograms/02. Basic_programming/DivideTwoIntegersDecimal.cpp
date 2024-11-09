@@ -43,13 +43,13 @@ int divide(int dividend, int divisor) {
 
 // T.C: O(precision*log(dividend))
 // S.C: O(1)
-double divide_Decimal(int dividend, int divisor, int precision) {
+double divide_decimal(int dividend, int divisor, int precision) {
     double quot = divide(dividend, divisor);   // getting the nearest integer quotient in 'quot'
     
     double step = 1;
 
     for(int i = 0; i < precision; i++) {
-        step = step / 10;
+        step = step / 10;   // 'step' will decrease by a factor of 10 in each iteration (for ex: 0.1, 0.01, 0.001)
         double j = quot;
 
         while(j * divisor <= dividend) {
@@ -64,7 +64,7 @@ double divide_Decimal(int dividend, int divisor, int precision) {
 
 int main() {
     int dividend = 22, divisor = 3, precision = 2;
-    cout << divide_Decimal(dividend, divisor, precision);
+    cout << "ans: " << divide_decimal(dividend, divisor, precision);
 
     return 0;
 }
