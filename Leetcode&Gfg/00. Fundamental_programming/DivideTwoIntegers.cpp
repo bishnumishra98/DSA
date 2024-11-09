@@ -48,36 +48,53 @@ public:
 
 // ---------------------------------------------------------
 
-    // Algorithm: 
-    // T.C: O((log(base 2)N)^2)
+    // Illustration:
+    // For any pair of dividend and divisor, first find the highest power of 2 upto which we can go. For example:
+    //    If dividend = 22, divisor = 3, we can go max till 2 to the power 3.
+    //    3 * 2^0 = 3   ->   dividend left = 22 - 3 = 19   ->   quotient = 1
+    //    3 * 2^1 = 6   ->   dividend left = 19 - 6 = 13   ->   quotient = 2
+    //    3 * 2^3 = 12  ->   dividend left = 13 - 12 = 1   ->   quotient = 4
+    //    Thus, we cannot go beyond divisor * 2 to the power 3. And total quotient = 1 + 2 + 4 = 7. Thus, 22 divided
+    //    by 3 gives quotient 7.
+
+    // Algorithm:
+    // 1. Loop while dividend is greater than divisor, and subtract 'divisor * 2^highest_power', from the dividend.
+    //    And keep adding powers of 2 in a variable that will be quotient. Hence, in the next iteration, the dividend
+    //    gets reduced by 'divisor * 2^highest_power'. Note that 2^power can be wriiten as 1 << power.
+    // 2. At the end of loop, whatever is the quotient, return it with correct sign.
+
+    // T.C: O((logN)^2)
     // S.C: O(1)
     int divide(int dividend, int divisor) {
         // Handle the case where dividend is equal to divisor
         if (dividend == divisor) return 1;
 
-        unsigned int ans = 0;
-        int sign = 1;
-
-        // Determine the sign of the result
-        if ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0))
-            sign = -1;
+        long long int quotient = 0;
+        int sign = ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) ? -1 : 1;
 
         // Convert both dividend and divisor to positive integers
-        unsigned int n = abs(dividend), d = abs(divisor);
+        long long int n = abs(dividend), d = abs(divisor);
 
-        // Perform the division
-        while (n >= d) {
-            int count = 0;
-            while (n > (d << (count + 1)))
-                count++;
-            n -= d << count;
-            ans += 1 << count;
+        // Perform the division: repeatedly subtract multiples of divisor from dividend until dividend becomes less than divisor.
+        while(n >= d) {
+            int power = 0;
+
+            // Find the highest power of divisor upto which we can go
+            while(n >= (d << (power + 1))) power++;   // while(n >= (d * pow(2, power+1))) power++;
+
+            // Add 2^highest_power in quotient in cumulative way
+            quotient += 1 << power;   // quotient += pow(2, power);
+
+            // Reduce the dividend with 'd * 2^power'
+            n -= d << power;   // n -= d * pow(2, power);
         }
 
         // Handle overflow case
-        if (ans == (1 << 31) && sign == 1) return INT_MAX;
+        if(quotient == (1 << 31) && sign == 1) return INT_MAX;   // if(quotient == pow(2, 31) && sign == 1) return INT_MAX;
+        if(quotient == (1 << 31) && sign == -1) return INT_MIN;   // if(quotient == pow(2, 31) && sign == -1) return INT_MIN;
 
-        return sign * ans;
+        // Return the result with the appropriate sign.
+        return quotient * sign;
     }
 };
 
