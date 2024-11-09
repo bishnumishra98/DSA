@@ -1,15 +1,13 @@
-// Divide Two Integers ---> Given two integers
-// dividend and divisor, divide two integers without using multiplication, division, and
-// mod operator. Return the quotient rounded down to the user defined no.of decimal point.
-// Ex:- i/p: 100, 30, 3,    o/p: 3.333
+// This problem is an extension of Leetcode: 29. Divide Two Integers
+// Solve this problem after you completed Binary Search module.
 
-// This problem is an extension of Leetcode: 29. Divide Two Integers ---> Given two integers
-// dividend and divisor, divide two integers without using multiplication, division, and
-// mod operator. Return the integral part of quotient after dividing dividend by divisor.
+// Example 1:
+// Input:
+// dividend = 22, divisor = 3, precision = 3
+// Output:
+// 7.33
 
-// Constraints -> -2^31 <= dividend, divisor <= 2^31 - 1, divisor != 0
-
-// This problem is an implementation of binary search, and search space concept.
+// This problem is solved using implementation of binary search, and search space concept.
 
 #include <iostream>
 #include <climits>   // for INT_MIN and INT_MAX
@@ -65,7 +63,7 @@ double divide_Decimal(int dividend, int divisor, int precision) {
 
 
 int main() {
-    int dividend = 100, divisor = 30, precision = 3;
+    int dividend = 22, divisor = 3, precision = 2;
     cout << divide_Decimal(dividend, divisor, precision);
 
     return 0;
