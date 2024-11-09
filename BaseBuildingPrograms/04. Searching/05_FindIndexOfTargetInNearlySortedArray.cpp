@@ -13,17 +13,10 @@ int searchNearlySorted(int arr[], int n, int target) {
     int end = n - 1;
     int mid = start + (end - start) / 2;
 
-    while (start <= end) {   // (mid-1 >= 0) and (mid+1 < n) conditions are checked to
-       // prevent the runtime error: array index out of bound.
-        if ((mid-1 >= 0) && (arr[mid - 1] == target)) {
-            return mid - 1;
-        }
-        if (arr[mid] == target) {
-            return mid;
-        }
-        if ((mid+1 < n) && (arr[mid + 1] == target)) {
-            return mid + 1;
-        }
+    while (start <= end) {
+        if ((mid-1 >= 0) && (arr[mid - 1] == target)) return mid - 1;
+        if (arr[mid] == target) return mid;
+        if ((mid+1 < n) && (arr[mid + 1] == target)) return mid + 1;
 
         if (target > arr[mid]) {
             // we need not write 'start = mid + 1' unnecesaarily because element at 'mid+1'

@@ -1,4 +1,6 @@
-// This problem is an implementation of binary search
+// What is a pivot index ?
+// The pivot index is the position in a rotated sorted array where the largest element transitions to the smallest element.
+// Hence, in a rotated sorted array, the largest element is considered the pivot.
 
 #include <iostream>
 #include <vector>
