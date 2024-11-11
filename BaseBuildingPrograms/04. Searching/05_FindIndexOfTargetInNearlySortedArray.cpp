@@ -1,8 +1,6 @@
 // If an element at 'ith' index in a sorted array is present at '(i-1)th', 'ith', or '(i+1th)'
 // index in another array, then the another array can be called a "nearly sorted array".
 
-// This problem is an implementation of binary search.
-
 #include <iostream>
 using namespace std;
 
