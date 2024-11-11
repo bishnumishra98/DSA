@@ -1,5 +1,5 @@
 // In the range of 1 to n integers in a sorted array, any one integer is missing. Find the missing one.
-// This problem can be done with XOR operator in O(n), but we cn do the same with BS in O(logn).
+// This problem can be done with XOR operator in O(n), but we can do the same with BS in O(logn).
 
 // Algorithm: It is very easy.
 //            Array: {1, 2, 3, 4, 5, 7, 8, 9}
