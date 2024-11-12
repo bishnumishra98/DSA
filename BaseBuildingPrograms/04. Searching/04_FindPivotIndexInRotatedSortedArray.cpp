@@ -8,7 +8,7 @@ using namespace std;
 
 // Algorithm: Algo is very simple. Lets consider the array: {40, 50, 60, 70, 10, 20, 30}. There are two monotonic
 //            functions formed here. One is line A (40, 50, 60, 70) and other one is line B (10, 20, 30). Line A
-//            is higher than line B in graphical representation.
+//            is higher than line B in graphical representation, i.e., all elements of line A > all elements of line B.
 //            Although binary search cannot be applied direct on the whole array, but can be applied separately on
 //            line A and line B elements respectively, as they are sorted; and the two elements that are unsorted
 //            for each other(pivot and element next to pivot) shall be handled separately.
