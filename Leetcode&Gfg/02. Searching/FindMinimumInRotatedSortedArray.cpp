@@ -34,7 +34,7 @@ class Solution {
 private:
     int findPivotIndex(vector<int>& nums) {
         int n =  nums.size();
-        int start = 0, end = n - 1, mid = start + (end - start) / 2;
+        int start = 0, end = n - 1, mid = start + (end - start)/2;
 
         while(start <= end) {
             if(start == end) return start;   // if only 1 element is present in the array, then it itself is the pivot element
@@ -46,34 +46,25 @@ private:
 
             mid = start + (end - start) / 2;
         }
+
+        return -1;   // to avoid error 'function does not return a value in all control paths'
     }
 
 public:
-    // T.C: 
-    // S.C: 
+    // T.C: O(logn)
+    // S.C: O(1)
     int findMin(vector<int>& nums) {
-        
+        int pivotIndex = findPivotIndex(nums);
+        if(pivotIndex == nums.size()-1) return nums[0];
+        return nums[pivotIndex+1];
     }
 };
 
 
-
-
-// Leetcode given function
-// T.C: O(logn)
-// S.C: O(1)
-int findMin(vector<int>& nums) {
-    int pivotIndex = findPivotIndex(nums);   // T.C: O(logn), S.C: O(1)
-    if(pivotIndex == nums.size()-1) {   // if array rotated is rotated as many times as no.of elements in array, then it becomes back a perfectly sorted array
-        return nums[0];
-    }
-    return nums[pivotIndex+1];
-}
-
 int main() {
-    vector <int> v = {11, 13, 15, 17};
+    vector <int> v = {18, 11, 13, 15, 17};
 
-    cout << "Minimum element is: " << findMin(v);
+    cout << "Minimum element is: " << Solution().findMin(v);
 
     return 0;
 }

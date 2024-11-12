@@ -51,6 +51,8 @@ int findPivotIndex(vector<int>& nums) {
 
         mid = start + (end - start) / 2;
     }
+
+    return -1;   // to avoid error 'function does not return a value in all control paths'
 }
 
 
