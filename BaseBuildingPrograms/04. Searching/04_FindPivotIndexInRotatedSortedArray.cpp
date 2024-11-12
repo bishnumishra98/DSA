@@ -49,7 +49,7 @@ int findPivotIndex(vector<int>& nums) {
         else if(nums[mid] < nums[start]) end = mid - 1;
         else start = mid + 1;   // if(nums[mid] >= nums[start])
 
-        mid = start + (end - start)/2;
+        mid = start + (end - start) / 2;
     }
 }
 
