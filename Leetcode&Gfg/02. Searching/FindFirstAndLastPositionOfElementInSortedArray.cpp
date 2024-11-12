@@ -15,6 +15,18 @@
 // Input: nums = [], target = 0
 // Output: [-1,-1]
 
+// Algorithm:
+// The algorithm is very simple. In usual BS, we used to return the index of target element. But here do not simply return
+// the target as soon as you get it, because it may not be the first or last occurrence of that target element.
+
+// How to find first occurrence of target ?
+// When the target element's index is found, first store its index in any variable say 'ans', and then shift leftwards to find
+// any more prior occurrences of this element, i.e., end = mid - 1.
+
+// How to find last occurrence of target ?
+// When the target element's index is found, first store its index in any variable say 'ans', and then shift rightwards to find
+// any more further occurrences of this element, i.e., start = mid + 1.
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,15 +41,12 @@ private:
         int ans = -1;
 
         while(start <= end) {
-            if(target == nums[mid]) {
+            if(target > nums[mid]) start = mid + 1;
+            else if(target < nums[mid]) end = mid - 1;
+            else {   // if(target == nums[mid])
                 ans = mid;
                 end = mid - 1;
-            } else if(target > nums[mid]) {
-                start = mid + 1;
-            } else {   // if(target < nums[mid])
-                end = mid - 1;
             }
-
             mid = start + (end - start) / 2;
         }
 
@@ -53,15 +62,12 @@ private:
         int ans = -1;
 
         while(start <= end) {
-            if(target == nums[mid]) {
+            if(target > nums[mid]) start = mid + 1;
+            else if(target < nums[mid]) end = mid - 1;
+            else {   // if(target == nums[mid])
                 ans = mid;
                 start = mid + 1;
-            } else if(target > nums[mid]) {
-                start = mid + 1;
-            } else {   // if(target < nums[mid])
-                end = mid - 1;
             }
-
             mid = start + (end - start) / 2;
         }
 
