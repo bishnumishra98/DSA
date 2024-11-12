@@ -27,11 +27,11 @@ using namespace std;
 
 // Algorithm: We will implementation binary search with search space concept. Algorithm is very simple:
 // 1. As quotient lies in the range 0 to dividend, the initial search space will also be the same i.e., start(0) to end(dividend);
-//    and the mid will be as usual start + end / 2.
+//    and the mid will be as usual (start + end) / 2.
 // 2. Consider 'mid' as quotient, and check if mid * divisor is greater than, equal to or less than dividend, until start <= end.
 //    CASE I:   If mid * divisor > dividend, then shift the search space towards left, i.e., end = mid - 1
 //    CASE II:  If mid * divisor == dividend, then the quotient is found. Hence, return mid.
-//    CASE III: If mid * divisor < dividend, then store the 'mid' can be a potential quotient, so store it
+//    CASE III: If mid * divisor < dividend, then store the 'mid' as it can be a potential quotient, so store it
 //              in any variable say 'ans', so that its value is not lost if loop terminates in next iteration.
 //              Then shift the search space towards right, i.e., start = mid + 1.
 //              If the loop (start <= end) terminates in the next iteration, the 'ans' will be containing the
