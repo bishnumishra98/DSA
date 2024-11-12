@@ -69,15 +69,31 @@ private:
     }
 
 public:
-    // T.C: O(logn) + O(logn) = O(logn)
-    // S.C: O(1) + O(1) = O(1)
+    // T.C: O(logn)
+    // S.C: O(1)
     vector<int> searchRange(vector<int>& nums, int target) {
         int firstPosition = findFirstPosition(nums, target);
         int lastPosition = findLastPosition(nums, target);
+        vector <int> v = {firstPosition, lastPosition};
+        return v;
+    }
 
-        vector <int> v;
-        v.push_back(firstPosition);
-        v.push_back(lastPosition);
+// ------------------------------------------------------------------
+
+    // T.C: O(n)
+    // S.C: O(1)
+    vector<int> searchRange_bruteforce(vector<int>& nums, int target) {
+        int firstPosition = -1;
+        int lastPosition = -1;
+
+        for(int i = 0; i < nums.size(); i++) {
+            if(nums[i] == target) {
+                if(firstPosition == -1) firstPosition = i;
+                lastPosition = i;
+            }
+        }
+
+        vector <int> v = {firstPosition, lastPosition};
         return v;
     }
 };
@@ -87,11 +103,13 @@ int main() {
     vector <int> v = {5, 7, 7, 7, 8, 8, 10};
     int target = 7;
 
-    vector <int> ans = Solution().searchRange(v, target);
+    // vector <int> ans = Solution().searchRange(v, target);
+    vector <int> ans = Solution().searchRange_bruteforce(v, target);
+
+    for(auto it: ans) cout << it << " ";
 
     // Additional info
     cout << "\nTotal no.of occurrences of target: " << (ans.back() - ans.front() + 1);
-
 
     return 0;
 }
