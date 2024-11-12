@@ -13,7 +13,7 @@
 // Output: false
 
 // 2D -> 1D formula: c * i + j
-// 1D -> 2D formula: i = index/c,  j = index % c
+// 1D -> 2D formula: i = index / c,  j = index % c
 
 // This problem is an implementation of binary search.
 
@@ -34,9 +34,9 @@ public:
         int mid = start + (end - start) / 2;
 
         while(start <= end) {
-            int row_no = mid / cols;
-            int col_no = mid % cols;
-            int curr = matrix[row_no][col_no];
+            int row = mid / cols;
+            int col = mid % cols;
+            int curr = matrix[row][col];
 
             if(target > curr) start = mid + 1;
             else if(target < curr) end = mid - 1;
