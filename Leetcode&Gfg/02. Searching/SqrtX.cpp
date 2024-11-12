@@ -36,7 +36,7 @@ public:
     // S.C: O(1)
     int mySqrt(int x) {
         int start = 0;
-        int end = x;   // Our search space is going to be from start, i.e. 0 to end, i.e. x.
+        int end = x;
         long long mid = start + (end - start)/2;
         int ans = -1;
 

@@ -8,35 +8,30 @@
 // i/p: 64, o/p: 8
 // i/p: 68, o/p: 8
 
-// This problem is an implementation of binary search, and search space concept.
+#include<iostream>
+using namespace std;
 
 // integer square-root function
 int mySqrt(int x) {
     int start = 0;
-    int end = x;   // Our search space is going to be from start, i.e. 0 to end, i.e. x.
-    long long mid = start + (end - start)/2;
-    int ans = -1;
+        int end = x;
+        long long mid = start + (end - start)/2;
+        int ans = -1;
 
-    while(start <= end) {
-        if((mid*mid) == x) {   // if mid is the answer
-            return mid;
-        } else if((mid*mid) < x) {   // store ans and go to right
-            // if '(mid*mid) < x', then 'mid' may be a potential answer for square root of x.
-           // That's why we are storing its value before going to further step. If 'x' was a perfect
-          // square, then storing 'mid' was not necessary. Dry run for better understanding.
-            ans = mid;
-            start = mid + 1;
-        } else {   // go to left
-            end = mid - 1;
+        while(start <= end) {
+            if(mid * mid > x) end = mid - 1;
+            else if(mid * mid == x) return mid;
+            else if(mid * mid < x) {
+                ans = mid;
+                start = mid + 1;
+            }
+                
+            mid = start + (end - start) / 2;
         }
-        mid = start + (end - start)/2;
-    }
 
-    return ans;
+        return ans;
 }
 
-#include<iostream>
-using namespace std;
 
 // T.C: O(precision*logn)
 // S.C: O(1)
@@ -45,11 +40,11 @@ double mySqrt_Decimal(int n, int precision) {
     
     double step = 1;
 
-    for(int i=0; i<precision; i++) {
+    for(int i = 0; i < precision; i++) {
         step = step / 10;
         double j = sqrt;
 
-        while(j*j <= n) {
+        while(j * j <= n) {
             sqrt = j;
             j += step;
         }
