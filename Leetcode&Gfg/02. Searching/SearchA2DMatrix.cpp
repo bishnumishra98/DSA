@@ -12,10 +12,9 @@
 // Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
 // Output: false
 
-// 2D -> 1D formula: c * i + j
-// 1D -> 2D formula: i = index / c,  j = index % c
+// 2D -> 1D formula: c * row + col
+// 1D -> 2D formula: row = index / c,  col = index % c
 
-// This problem is an implementation of binary search.
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -34,7 +33,7 @@ public:
         int mid = start + (end - start) / 2;
 
         while(start <= end) {
-            int row = mid / cols;
+            int row = mid / cols;   // 'mid' is the element's index in 1D array
             int col = mid % cols;
             int curr = matrix[row][col];
 
