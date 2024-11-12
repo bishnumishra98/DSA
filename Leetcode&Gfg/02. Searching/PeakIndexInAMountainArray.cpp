@@ -1,46 +1,66 @@
-// Leetcode: 852. Peak Index in a Mountain Array
+// Leetcode: 852. Peak Index in a Mountain Array   --->   You are given an integer mountain array arr of length n
+// where the values increase to a peak element and then decrease.
+// Return the index of the peak element.
+// Your task is to solve it in O(log(n)) time complexity.
 
-#include <iostream>
-#include <vector>
+// Example 1:
+// Input: arr = [0,1,0]
+// Output: 1
+
+// Example 2:
+// Input: arr = [0,2,1,0]
+// Output: 1
+
+// Example 3:
+// Input: arr = [0,10,5,2]
+// Output: 1
+
+// Algorithm:
+// The algorithm is simple. The array has a peak, thus it has two slopes on both sides. Let the left side slope be
+// called slope A, and the right side slope be called slope B.
+// 1. As usual, initialize start = 0, mid = (start + end) / 2, end = n - 1, where n = arr.size(), and compare arr[mid]:
+// 2. While start is less than end, check for two cases:
+//    Case 1: If arr[mid] is on slope A, i.e., arr[mid] < arr[mid+1]:
+//            If we are on slope A, the peak is somewhere on the right. Thus, shift rightwards, i.e., start = mid + 1.
+//    Case 2: If arr[mid] is on slope B, i.e., arr[mid] > arr[mid+1]:
+//            If we are on slope B, the peak is somewhere on the left or arr[mid] coud itslef be the peak element.
+//            Hence, while shifting leftwards, never do 'end = mid - 1'. Instead, do 'end = mid'.
+// 3. When the loop (start < end) terminates, all pointers start, mid and end point to the peak element's index.
+//    So return any one of them.
+// MOST IMPORTANT POINT OF THIS ALGORITHM: Note that the while loop must end as soon as start reaches end. Thus,
+// never write 'while(start <= end)' in this problem as it will cause a huge blunder. Lets say if we allowed the
+// last iteration to happen when start == end, then by this time, all the 3 pointers (start, mid nd end) would
+// already reach the peak elements index. So, the condition if(arr[mid] < arr[mid+1]) would be false, and
+// the program would execute else block which states that end = mid. So technically, there is no change in
+// positions of start and end, which would cause our program to indefinitely always execute else block,
+// resulting in an infinite loop. To avoid this error, always write 'while(start < end)'.
+
+
+#include <bits/stdc++.h>
 using namespace std;
 
-// T.C: O(logn)
-// S.C: O(1)
-// This code uses binary search approach
-int peakIndexInMountainArray(vector<int>& arr) {
-    int start = 0;
-    int end = arr.size() - 1;
-    int mid = start + (end - start)/2;
+class Solution {
+public:
+    // T.C: O(logn)
+    // S.C: O(1)
+    int peakIndexInMountainArray(vector<int>& arr) {
+        int start = 0;
+        int end = arr.size() - 1;
+        int mid = start + (end - start)/2;
 
-    while(start < end) {   // (start <= end) would cause the condition
-    // 'arr[mid] < arr[mid+1]' to be false everytime, when the last element left
-   // is the peak element itself. Thus, it will result in continuous execution of
-  // else block, leading to end becoming equal to mid in every iteration; and mid becoming
- // equal to value of end and start in every iteration, resulting in an infinite loop.
-        if(arr[mid] < arr[mid+1]) {
-            // We are in the ascending part of the mountain (Line A). In this case,
-           // peak may be presnt on 'mid+1' itself or on further right of it. Thus,
-          // we must move right to find the peak.
-            start = mid + 1;
-        } else {   // if(arr[mid] > arr[mid+1])
-            // We are in the descending part of the mountain (Line B). In this case,
-           // peak may be presnt on 'mid' itself or on further left of it. Thus,
-          // we must move to left to find the peak. But, if we go to left in the
-         // traditional way like 'end = mid - 1', there can be a possibility that
-        // we could have missed the peak if it was present at 'mid' index only. So, to
-       // ensure we don't miss the peak while moving left, we move like this: (end = mid).
-            end = mid;
+        while(start < end) {   // never write while(start <= end) {}
+            if(arr[mid] < arr[mid+1]) start = mid + 1;
+            else end = mid;
+            mid = start + (end - start)/2;
         }
 
-        mid = start + (end - start)/2;
+        return start;   // we can even return end or mid
     }
-
-    return start;   // we can even return end or mid
-}
+};
 
 int main() {
     vector <int> v = {0, 2, 3, 4, 1, 0};
-    cout << peakIndexInMountainArray(v);
+    cout << Solution().peakIndexInMountainArray(v);
 
     return 0;
 }
