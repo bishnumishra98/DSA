@@ -11,7 +11,7 @@ using namespace std;
 //            is higher than line B in graphical representation, i.e., all elements of line A > all elements of line B.
 //            Although binary search cannot be applied direct on the whole array, but can be applied separately on
 //            line A and line B elements respectively, as they are sorted; and the two elements that are unsorted
-//            for each other(pivot and element next to pivot) shall be handled separately.
+//            with respect to each other(pivot and element next to pivot) shall be handled separately.
 //            Keep in mind, that pivot element will always lie on line A and it will be the greatest element of line A.
 //            All total there can be 4 cases combined, and as usual start = 0, mid = (start+end)/2 and end = last
 //            element of array, and we will be comparing arr[mid] with other elements until 'start' crosses 'end'.
