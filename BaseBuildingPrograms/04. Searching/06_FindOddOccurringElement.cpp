@@ -67,6 +67,8 @@ int findOddOccurringElement(int arr[], int n) {
 
         mid = start + (end - start) / 2;
     }
+
+    return -1;   // to avoid error 'function does not return value from all control paths'
 }
 
 

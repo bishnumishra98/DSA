@@ -1,13 +1,18 @@
-// Leetcode: 540. Single Element in a Sorted Array
+// Leetcode: 540. Single Element in a Sorted Array   --->   You are given a sorted array consisting of only integers
+// where every element appears exactly twice, except for one element which appears exactly once.
+// Return the single element that appears only once.
+// Your solution must run in O(log n) time and O(1) space.
 
-// This problem is an implementation of binary search.
+// Example 1:
+// Input: nums = [1,1,2,3,3,4,4,8,8]
+// Output: 2
 
-// You are given a sorted array consisting of only +ve integers where every element appears exactly
-// twice, except for one element which appears exactly once. Find that element within O(logn).
-//   i/p: [1, 1, 2, 3, 3, 4, 4, 8, 8], o/p: 2
-// Index:  0  1  2  3  4  5  6  7  8
+// Example 2:
+// Input: nums = [3,3,7,7,10,11,11]
+// Output: 10
 
-// Fact: This question is exactly same as 'BaseBuildingPrograms\Searching\FindOddOccurringElement.cpp'
+
+// This question is exactly same as 'BaseBuildingPrograms\04. Searching\06_FindOddOccurringElement.cpp'
 
 // Approach ---> Our single element will always be found at even index as numbers are in pairs.
 // Case 1: if mid is at even index, we have 3 cases: we may be in left, ans, or right.
