@@ -53,7 +53,7 @@ int findOddOccurringElement(int arr[], int n) {
     int start = 0;
     int end = n - 1;
     int mid = start + (end - start) / 2;
-    int ans = -1;
+    int ans = 0;
 
     while(start <= end) {
         if(mid & 1) {   // if 'mid' lies on an odd index
@@ -62,13 +62,16 @@ int findOddOccurringElement(int arr[], int n) {
         } else {   // if 'mid' lies on an even index
             if(mid + 1 < n && arr[mid] == arr[mid + 1]) start = mid + 2;
             else if(mid - 1 >= 0 && arr[mid] == arr[mid - 1]) end = mid - 2;
-            else if(mid + 1 < n && mid - 1 >= 0 && arr[mid] != arr[mid + 1] && arr[mid] != arr[mid - 1]) return arr[mid];
+            else if(mid + 1 < n && mid - 1 >= 0 && arr[mid] != arr[mid + 1] && arr[mid] != arr[mid - 1]) {
+                ans = mid;
+                break;
+            };
         }
 
         mid = start + (end - start) / 2;
     }
 
-    return -1;   // to avoid error 'function does not return value from all control paths'
+    return arr[ans];
 }
 
 
