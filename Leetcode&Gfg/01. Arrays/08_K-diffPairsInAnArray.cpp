@@ -61,7 +61,7 @@ public:
     //    Edge case: It is given in the problem not to consider an element minus itself, if k = 0, i.e., i != j.
     //               So it may happen that k is given 0, and i and j both somehow came on the same element. In this
     //               case, increment j before going to next iteartion, so that i != j holds true always.
-    // T.C: O(nlogn) + O(n)
+    // T.C: O(nlogn) + O(n) = O(nlogn)
     // S.C: O(m);   where m is the no.of unique pairs. In the worst case m = n^2.
     int findPairs(vector<int>& nums, int k) {
         sort(nums.begin(), nums.end());
