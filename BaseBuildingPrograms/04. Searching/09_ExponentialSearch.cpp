@@ -60,3 +60,13 @@ int main() {
 // would be O(log(2^(k-1))) = O(k-1) = O(k).
 // Combining both, the overall time complexity would be O(k) + O(k) = O(k), and k in the worst
 // case will be log(n), where n is the size of array. Thus, overall time complexity is O(log(n)).
+
+// EXTRA FACT: The above algorithm is applicable for large finite dataset in this module. For
+//             truly infinite the dataset, the algorithm remians the same, only the implementation
+//             of bounds and data access differs. 
+//             If the dataset is truly unbounded (e.g., an infinite stream or large unknown data
+//             source), you cannot rely on arr.size(). Instead, you would modify the algorithm to:    
+//             • Access elements one at a time (e.g., through an API or generator).
+//             • Handle out-of-bound conditions dynamically by catching exceptions or checking
+//               for a "sentinel" value (e.g., None, -1, or an invalid value).
+
