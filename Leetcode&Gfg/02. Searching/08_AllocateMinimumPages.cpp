@@ -64,33 +64,59 @@ public:
         }
 
         // Perform a linear search for the smallest valid page allocation
+        int result = -1;   // To store the minimum possible allocation
         for(int pages = maxi; pages <= sum; pages++) {
-            int students = countStudents(arr, pages);   // 'pages' is the maximum no.of pages a student is allowed to hold
-            if(students == k) return pages;   // return the first valid allocation
+            int students = countStudents(arr, pages);
+            if(students <= k) {
+                result = pages;   // Update result for smaller allocations
+                break;   // Since we're performing a linear search, stop early
+            }
         }
 
-        return -1;   // If no valid allocation is found
+        return result;
+    }
 
-        // // Perform a linear search for the smallest valid page allocation
-        // int ans = -1;   // To store the minimum possible allocation
-        // for(int pages = maxi; pages <= sum; pages++) {
-        //     int students = countStudents(arr, pages);
-        //     if(students <= k) {
-        //         ans = pages;   // Update ans for smaller allocations
-        //         break;   // Since we're performing a linear search, stop early
-        //     }
-        // }
+// --------------------------------------------------------------------------------------------------------
 
-        // return ans;
+    // Binary search
+    // T.C: O(log(sum-maxi+1) * n);   where sum = sum of all elements of 'arr', maxi = maximum element of 'arr', and n = arr.size()
+    // S.C: O(1)
+    int findPages(vector<int> &arr, int k) {
+        if(k > arr.size()) return -1;
+
+        int maxi = 0, sum = 0;
+        for(int i = 0; i < arr.size(); i++) {
+            maxi = max(maxi, arr[i]);
+            sum += arr[i];
+        }
+
+        int start = maxi;
+        int end = sum;
+        // Note: You may even use *max_element(arr.begin(), arr.end()) to calculate 'start' directly,
+        //       and accumulate(arr.begin(), arr.end(), 0) to calculate 'end' directly.
+        int result = -1;
+
+        while(start <= end) {
+            int mid = start + (end - start) / 2;
+            int students = countStudents(arr, mid);
+
+            if(students <= k) {
+                result = mid;   // potential result
+                end = mid - 1;   // try for smaller maximum
+            } else start = mid + 1;   // increase max pages limit
+        }
+
+        return result;
     }
 };
 
 
 int main() {
-    vector<int> arr = {15, 10, 19, 10, 5, 18, 7};
-    int k = 5;
+    vector<int> arr = {12, 34, 67, 90};
+    int k = 2;
 
-    cout << Solution().findPages_linearSearch(arr, k);
+    cout << Solution().findPages_linearSearch(arr, k) << endl;
+    cout << Solution().findPages(arr, k);
 
     return 0;
 }
