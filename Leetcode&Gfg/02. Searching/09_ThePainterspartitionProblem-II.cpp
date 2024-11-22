@@ -22,15 +22,47 @@
 // Explanation: There is only one painter, so the painter must paint all boards sequentially. The total time taken
 // will be the sum of all board lengths, i.e., 100 + 200 + 300 + 400 = 1000.
 
+// Algorithm: As it's almost same problem as '08_AllocateMinimumPages.cpp', we will directly write Binary search approach.
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
+private:
+    bool isPossible(vector<int>& arr, long long maxTimeAllowed, int k) {
+        int painters = 1;   // no.of painters (start with one painter initially)
+        long long timePainter = 0;   // 'timePainter' is the time taken by current painter
+        for(int i = 0; i < arr.size(); i++) {
+            if(timePainter + arr[i] <= maxTimeAllowed) timePainter += arr[i];
+            else {
+                painters++;
+                timePainter = arr[i];
+            }
+        }
+
+        return painters > k ? false : true;
+    }
+
 public:
-    // T.C:
-    // S.C: 
+    // T.C: O(log(end-start+1) * n);   where end = sum of all elements of 'arr', start = maximum element of 'arr', and n = arr.size()
+    // S.C: O(1)
     long long minTime(vector<int>& arr, int k) {
-        
+        // ONLY CHANGE IN CODE: If there are more painters than boards, return the largest board length
+        if (k >= arr.size()) return *max_element(arr.begin(), arr.end());
+
+        long long start = *max_element(arr.begin(), arr.end());
+        long long end = accumulate(arr.begin(), arr.end(), 0);
+
+        long long ans = -1;
+        while(start <= end) {
+            long long mid = start + (end - start) / 2;
+            if(isPossible(arr, mid, k)) {
+                ans = mid;
+                end = mid - 1;
+            } else start = mid + 1;
+        }
+
+        return ans;
     }
 };
 

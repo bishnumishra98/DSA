@@ -124,7 +124,7 @@ public:
 // --------------------------------------------------------------------------------------------------------
 
     // Binary search
-    // T.C: O(log(sum-maxi+1) * n);   where sum = sum of all elements of 'arr', maxi = maximum element of 'arr', and n = arr.size()
+    // T.C: O(log(end-start+1) * n);   where end = sum of all elements of 'arr', start = maximum element of 'arr', and n = arr.size()
     // S.C: O(1)
     int findPages(vector<int> &arr, int k) {
         if(k > arr.size()) return -1;
