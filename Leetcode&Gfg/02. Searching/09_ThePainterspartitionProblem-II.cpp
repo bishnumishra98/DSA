@@ -27,7 +27,7 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: 
+    // T.C:
     // S.C: 
     long long minTime(vector<int>& arr, int k) {
         
