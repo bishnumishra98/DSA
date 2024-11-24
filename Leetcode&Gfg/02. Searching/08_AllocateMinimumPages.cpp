@@ -38,8 +38,8 @@ using namespace std;
 //    If lets say the minimum no.of maximum pages a student can hold is 67, then how can anyone hold the last book with
 //    90 pages ? Thus, a potienial answer shall be atleast the maximum element of given array, i.e., 90 in this case.
 //    Extra fact: The answer would be really 90, if the value of k had been 4.
-//    Edge case: If 'k > arr.size()', it's not possible to distribute books between all the 'k' students. Thus, return -1.
-// 2. Now create another function 'isPossible()' to check if its possible to allocate all books between 'k' students
+//    Edge case: If 'k > arr.size()', it's not possible to distribute books among all the 'k' students. Thus, return -1.
+// 2. Now create another function 'isPossible()' to check if its possible to allocate all books among 'k' students
 //    given that a student can hold atmost 'maxPagesAllowed' no.of pages. The value of 'maxPagesAllowed' will range
 //    from the above search space as discussed in step 1, i.e., no.of pages in the thickest book to sum of pages of
 //    all books. Thus, iterate all values of 'maxPagesAllowed' and the smallest value for which the function
@@ -52,26 +52,26 @@ using namespace std;
 //    Initialize 'start' and 'end' as usual with the lower and upper limit of the above mentioned search space.
 // 2. Find 'mid' by computing 'start + (end - start) / 2' as usual. Here 'mid' denotes the limit of no.of pages that
 //    a student is allowed to hold, i.e., 'maxPagesAllowed' of linear serach. Send the value of 'mid' to the
-//    'isPossible()' function and check if it's possible to allocate all books between 'k' students for given value
+//    'isPossible()' function and check if it's possible to allocate all books among 'k' students for given value
 //    of 'mid'. If it's possible to form a valid allocation, store this potential answer in any variable say 'ans'
 //    and continue the binary search as a smaller value of of 'mid' could also be found in further iterations.
 //    Continue this process until 'start' crosses 'end'.
 // 3. At the end of the loop while(start <= end), the 'ans' will contain the smallest value of 'mid' for which a
-//    valid allocation is possible between 'k' students. Thus, return the vale of 'ans'.
+//    valid allocation is possible among 'k' students. Thus, return the vale of 'ans'.
 
 // 'isPossible()' function algorithm:
 //  i.   Initialize two variables 'students' and 'pagesStudent' to keep track of no.of students required to
-//       distribute all books between 'k' students; and pages allocated to the current student, respectively.
+//       distribute all books among 'k' students; and pages allocated to the current student, respectively.
 //       Initially try to allocate as many books as possible to only 1 student. Start the book allocation from the 1st
 //       book, i.e., from arr[0]. The moment when it's not possible to allocate any further book to the current student
 //       due to the constraint of no. of pages allocated to that student is exceeding the 'maxPagesAllowed' limit;
 //       add a new student(student++) and allocate the next book to the new student(pagesStudent = arr[i]).
 //  ii.  After the iteration of all books, we will be having the count of no.of students required to distribute
-//       all books between 'k' students in the 'students' variable. Note that lesser the limit of 'maxPagesAllowed',
+//       all books among 'k' students in the 'students' variable. Note that lesser the limit of 'maxPagesAllowed',
 //       higher is the 'students' value.
 //       Hence, if value of 'students' is more tha 'k', the books cannot be allocated in just 'k' students, i.e., more
-//       students are required to distribute all books between them. Thus, return false. Else return true stating that
-//       it's possible to allocate all books between 'k' students for the given limit of 'maxPagesAllowed'.
+//       students are required to distribute all books among them. Thus, return false. Else return true stating that
+//       it's possible to allocate all books among 'k' students for the given limit of 'maxPagesAllowed'.
 
 // Some useful predefined methods of C++ that you may use in this code:
 // 1. *max_element(arr.begin(), arr.end()): Returns the largets element of 'arr'.
@@ -81,7 +81,7 @@ using namespace std;
 
 class Solution {
 private:
-    // This function tells if it's possible to allocate all books between 'k' students
+    // This function tells if it's possible to allocate all books among 'k' students
     // or not, given that a student can hold atmost 'maxPagesAllowed' no.of pages.
     bool isPossible(vector<int>& arr, int maxPagesAllowed, int k) {
         int students = 1;   // no.of students (start with one student initially)

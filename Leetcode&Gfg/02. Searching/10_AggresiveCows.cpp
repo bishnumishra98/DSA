@@ -23,13 +23,24 @@
 //              The minimum distance between cows, in this case, is 1, which also is the largest among all possible ways.
 
 // Algorithm:
+// --- LINEAR SEARCH ---
+// 1. Sort the given 'stalls' array.
+// 2. Place the first cow on the first stall, i.e., stall[0], because we have to maximize the minimum distance between
+//    two cows, so the earlier we allocate a stall to first cow, the higher chances are we will be able to maximize the
+//    distance between two cows.
+//    Now one thing we know is, assuming 2 cows the minimum distance between them can be 1. Similarly, the maximum
+//    distance between them can be if the 1st cow is standing on first stall(stall[0]) and the last cow is standing
+//    on the last stall(stall[n-1]). Thus, the maximum distance between 2 cows can be stall[n-1] - stall[0]. So our
+//    answer would lie somewhere between 1 to stall[n-1] - stall[0] for k cows.
+// 3. So start an iterator 'i' from 1 till stall[n-1] - stall[0], and check whether we distribute the given k cows
+//    among all stalls while maintaining a minimum distance of 'i'.
 
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 private:
-    bool isPossible(vector<int> &stalls, int distance, int k) {
+    bool canWePlaceCows(vector<int> &stalls, int distance, int k) {
         int cows = 1;
         int last = stalls[0];
 
@@ -53,7 +64,7 @@ public:
         int max = stalls[stalls.size() - 1] - stalls[0];
 
         for(int i = 1; i <= max - min; i++) {
-            if(isPossible(stalls, i, k)) continue;
+            if(canWePlaceCows(stalls, i, k)) continue;   // 'i' is the minimum distance that we have to maintain
             else return i - 1;
         }
     }
@@ -71,7 +82,7 @@ public:
         int ans;
         while(start <= end) {
             int mid = start + (end - start) / 2;
-            if(isPossible(stalls, mid, k)) {
+            if(canWePlaceCows(stalls, mid, k)) {
                 ans = mid;
                 start = mid + 1;
             } else end = mid - 1;
