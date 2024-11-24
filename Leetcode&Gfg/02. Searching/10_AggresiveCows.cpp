@@ -32,8 +32,17 @@
 //    distance between them can be if the 1st cow is standing on first stall(stall[0]) and the last cow is standing
 //    on the last stall(stall[n-1]). Thus, the maximum distance between 2 cows can be stall[n-1] - stall[0]. So our
 //    answer would lie somewhere between 1 to stall[n-1] - stall[0] for k cows.
-// 3. So start an iterator 'i' from 1 till stall[n-1] - stall[0], and check whether we distribute the given k cows
-//    among all stalls while maintaining a minimum distance of 'i'.
+// 3. So start an iterator 'i' from 1 to stall[n-1] - stall[0], and check whether we distribute the given 'k' cows
+//    among all stalls while maintaining a minimum distance of 'i', using a function 'canWePlace()'. If it's possible
+//    to place 'k' cows while maintaining a minimum distance of 'i', then continue and check the same for next
+//    value of 'i'. Else if its's not possible, return the previous value of 'i', as that is the maximum distance
+//    we can maintain between two cows.
+
+// --- BINARY SEARCH ---
+
+// 'canWePlace()' function algorithm:
+// i.  
+
 
 #include <bits/stdc++.h>
 using namespace std;

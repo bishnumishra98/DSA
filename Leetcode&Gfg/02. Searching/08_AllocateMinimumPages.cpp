@@ -60,18 +60,18 @@ using namespace std;
 //    valid allocation is possible among 'k' students. Thus, return the vale of 'ans'.
 
 // 'isPossible()' function algorithm:
-//  i.   Initialize two variables 'students' and 'pagesStudent' to keep track of no.of students required to
-//       distribute all books among 'k' students; and pages allocated to the current student, respectively.
-//       Initially try to allocate as many books as possible to only 1 student. Start the book allocation from the 1st
-//       book, i.e., from arr[0]. The moment when it's not possible to allocate any further book to the current student
-//       due to the constraint of no. of pages allocated to that student is exceeding the 'maxPagesAllowed' limit;
-//       add a new student(student++) and allocate the next book to the new student(pagesStudent = arr[i]).
-//  ii.  After the iteration of all books, we will be having the count of no.of students required to distribute
-//       all books among 'k' students in the 'students' variable. Note that lesser the limit of 'maxPagesAllowed',
-//       higher is the 'students' value.
-//       Hence, if value of 'students' is more tha 'k', the books cannot be allocated in just 'k' students, i.e., more
-//       students are required to distribute all books among them. Thus, return false. Else return true stating that
-//       it's possible to allocate all books among 'k' students for the given limit of 'maxPagesAllowed'.
+//  i.  Initialize two variables 'students' and 'pagesStudent' to keep track of no.of students required to
+//      distribute all books among 'k' students; and pages allocated to the current student, respectively.
+//      Initially try to allocate as many books as possible to only 1 student. Start the book allocation from the 1st
+//      book, i.e., from arr[0]. The moment when it's not possible to allocate any further book to the current student
+//      due to the constraint of no. of pages allocated to that student is exceeding the 'maxPagesAllowed' limit;
+//      add a new student(student++) and allocate the next book to the new student(pagesStudent = arr[i]).
+//  ii. After the iteration of all books, we will be having the count of no.of students required to distribute
+//      all books among 'k' students in the 'students' variable. Note that lesser the limit of 'maxPagesAllowed',
+//      higher is the 'students' value.
+//      Hence, if value of 'students' is more tha 'k', the books cannot be allocated in just 'k' students, i.e., more
+//      students are required to distribute all books among them. Thus, return false. Else return true stating that
+//      it's possible to allocate all books among 'k' students for the given limit of 'maxPagesAllowed'.
 
 // Some useful predefined methods of C++ that you may use in this code:
 // 1. *max_element(arr.begin(), arr.end()): Returns the largets element of 'arr'.
