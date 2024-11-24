@@ -49,8 +49,8 @@ public:
     // S.C: O(1)
     int aggressiveCows_bruteforce(vector<int> &stalls, int k) {
         sort(stalls.begin(), stalls.end());
-        int min = *min_element(stalls.begin(), stalls.end());
-        int max = accumulate(stalls.begin(), stalls.end(), 0);
+        int min = stalls[0];
+        int max = stalls[stalls.size() - 1] - stalls[0];
 
         for(int i = 1; i <= max - min; i++) {
             if(isPossible(stalls, i, k)) continue;
@@ -61,17 +61,23 @@ public:
 // ------------------------------------------------------------------
 
     // Binary search
-    // T.C: O(log(max - min) * n);   where n = stalls.size()
+    // T.C: O(log(end - start) * n);   where n = stalls.size()
     // S.C: O(1)
     int aggressiveCows(vector<int> &stalls, int k) {
         sort(stalls.begin(), stalls.end());
-        int min = *min_element(stalls.begin(), stalls.end());
-        int max = accumulate(stalls.begin(), stalls.end(), 0);
+        int start = stalls[0];
+        int end = stalls[stalls.size() - 1] - stalls[0];
 
-        for(int i = 1; i <= max - min; i++) {
-            if(isPossible(stalls, i, k)) continue;
-            else return i - 1;
+        int ans;
+        while(start <= end) {
+            int mid = start + (end - start) / 2;
+            if(isPossible(stalls, mid, k)) {
+                ans = mid;
+                start = mid + 1;
+            } else end = mid - 1;
         }
+
+        return ans;
     }
 };
 
