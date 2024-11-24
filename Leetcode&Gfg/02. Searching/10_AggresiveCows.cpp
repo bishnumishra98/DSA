@@ -22,16 +22,56 @@
 // Explanation: Each cow can be placed in any of the stalls, as the no. of stalls are exactly equal to the number of cows.
 //              The minimum distance between cows, in this case, is 1, which also is the largest among all possible ways.
 
+// Algorithm:
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
+private:
+    bool isPossible(vector<int> &stalls, int distance, int k) {
+        int cows = 1;
+        int last = stalls[0];
+
+        for(int i = 0; i < stalls.size(); i++) {
+            if(stalls[i] - last >= distance) {
+                cows++;
+                last = stalls[i];
+            }
+        }
+
+        return cows >= k ? true : false;
+    }
+
 public:
     // Linear search
-    // T.C: 
-    // S.C: 
+    // T.C: O((max - min) * n);   where n = stalls.size()
+    // S.C: O(1)
     int aggressiveCows_bruteforce(vector<int> &stalls, int k) {
-        
+        sort(stalls.begin(), stalls.end());
+        int min = *min_element(stalls.begin(), stalls.end());
+        int max = accumulate(stalls.begin(), stalls.end(), 0);
+
+        for(int i = 1; i <= max - min; i++) {
+            if(isPossible(stalls, i, k)) continue;
+            else return i - 1;
+        }
+    }
+
+// ------------------------------------------------------------------
+
+    // Binary search
+    // T.C: O(log(max - min) * n);   where n = stalls.size()
+    // S.C: O(1)
+    int aggressiveCows(vector<int> &stalls, int k) {
+        sort(stalls.begin(), stalls.end());
+        int min = *min_element(stalls.begin(), stalls.end());
+        int max = accumulate(stalls.begin(), stalls.end(), 0);
+
+        for(int i = 1; i <= max - min; i++) {
+            if(isPossible(stalls, i, k)) continue;
+            else return i - 1;
+        }
     }
 };
 
@@ -40,7 +80,8 @@ int main() {
     vector<int> stalls = {1, 2, 4, 8, 9};
     int k = 3;
 
-    cout << Solution().aggressiveCows_bruteforce(stalls, k);
+    cout << Solution().aggressiveCows_bruteforce(stalls, k) << endl;
+    cout << Solution().aggressiveCows(stalls, k);
     
     return 0;
 }
