@@ -7,7 +7,7 @@
 // Output: 3
 // Explanation: The first cow can be placed at stalls[0], the second cow can be placed at stalls[2] and the third cow
 //              can be placed at stalls[3]. The minimum distance between cows, in this case, is 3, which also is the
-//               largest among all possible ways.
+//              largest among all possible ways.
 
 // Example 2:
 // Input: stalls[] = [10, 1, 2, 7, 5], k = 3
@@ -27,10 +27,11 @@ using namespace std;
 
 class Solution {
 public:
+    // Linear search
     // T.C: 
     // S.C: 
-    int aggressiveCows(vector<int> &stalls, int k) {
-
+    int aggressiveCows_bruteforce(vector<int> &stalls, int k) {
+        
     }
 };
 
@@ -39,7 +40,7 @@ int main() {
     vector<int> stalls = {1, 2, 4, 8, 9};
     int k = 3;
 
-    cout << Solution().aggressiveCows(stalls, k);
+    cout << Solution().aggressiveCows_bruteforce(stalls, k);
     
     return 0;
 }
