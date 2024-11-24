@@ -39,6 +39,18 @@
 //    we can maintain between two cows.
 
 // --- BINARY SEARCH ---
+// 1. The 'canWePlace()' function the remains the same; only the driver function changes. We already know that the
+//    search space lies in the range of 1 to stall[n-1] - stall[0] where stalls are already sorted. Thus, we will
+//    apply binary search on this search space.
+//    Initialize 'start' and 'end' as usual with the lower and upper limit of the above mentioned search space.
+// 2. Find 'mid' by computing 'start + (end - start) / 2' as usual. Here 'mid' denotes the minimum distance
+//    that we have to maintain. Send the value of 'mid' to the 'canWePlace()' function and check if it's possible
+//    to distribute 'k' cows among stalls while maintaining the minimum distance of 'mid'.
+//    If it's possible to distribute the 'k' cows, store this potential answer in any variable say 'ans'
+//    and continue the binary search to find some larger value of of 'mid' (start = mid + 1). If not possible,
+//    then shorten the search space (end = mid - 1). Continue this process until 'start' crosses 'end'.
+// 3. At the end of the loop while(start <= end), the 'ans' will contain the largest value of 'mid' for which
+//    'k' cows can be distributed among stalls while maintaining a minimum distance of 'mid'. Thus, return 'ans'.
 
 // 'canWePlace()' function algorithm:
 // i.   Initialize two variables 'cows' and 'last' to keep track of no.of cows we can place while maintaining a minimum
@@ -76,7 +88,7 @@ public:
     // S.C: O(1)
     int aggressiveCows_bruteforce(vector<int> &stalls, int k) {
         sort(stalls.begin(), stalls.end());
-        int min = stalls[0];
+        int min = 1;
         int max = stalls[stalls.size() - 1] - stalls[0];
 
         for(int i = 1; i <= max - min; i++) {
@@ -92,13 +104,13 @@ public:
     // S.C: O(1)
     int aggressiveCows(vector<int> &stalls, int k) {
         sort(stalls.begin(), stalls.end());
-        int start = stalls[0];
+        int start = 1;
         int end = stalls[stalls.size() - 1] - stalls[0];
 
         int ans;
         while(start <= end) {
             int mid = start + (end - start) / 2;
-            if(canWePlaceCows(stalls, mid, k)) {
+            if(canWePlaceCows(stalls, mid, k)) {   // 'mid' is the minimum distance that we have to maintain
                 ans = mid;
                 start = mid + 1;
             } else end = mid - 1;

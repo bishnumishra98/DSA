@@ -46,7 +46,7 @@ using namespace std;
 //    'isPossible()' returns a true is the minimum no.of maximum pages assigned to any student. Thus, return this answer.
 
 // --- BINARY SEARCH ---
-// 1. The 'ifPossible() function the remains; only the driver function changes. We already know that the search space
+// 1. The 'ifPossible() function the remains the same; only the driver function changes. We already know that the search space
 //    lies in the range no.of pages the thickest book has, i.e., maximum element in the given array, to the sum of pages
 //    of all books, i.e., sum of all elements of given array. Thus, we will apply binary search on this search space.
 //    Initialize 'start' and 'end' as usual with the lower and upper limit of the above mentioned search space.
