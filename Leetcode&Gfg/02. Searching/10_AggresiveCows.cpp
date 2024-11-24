@@ -41,7 +41,14 @@
 // --- BINARY SEARCH ---
 
 // 'canWePlace()' function algorithm:
-// i.  
+// i.   Initialize two variables 'cows' and 'last' to keep track of no.of cows we can place while maintaining a minimum
+//      distance of 'i' (minDistance), and the last index where the cows are allocated, respectively. So initially,
+//      start with 1 cow and stall[0] as the last index as the first cow will always be placed on the first stall.
+// ii.  Now start iterating over the 'stalls' array from index 1 till n - 1, and check if another cow can be placed at stall[1],
+//      i.e., if(stall[i] - last >= minDistance). If it can be placed, increment the count of cows(cows++) and update the last
+//      index where cow is kept, i,e., (last = stall[i]).
+// iii. At the end of the above loop, if count of 'cows' is greater than or equal to 'k', it means we can distribute 'k' cows
+//      among the stalls while maintaining a minimum distance of 'minDistance'. Thus, return true, else false.
 
 
 #include <bits/stdc++.h>
@@ -49,12 +56,12 @@ using namespace std;
 
 class Solution {
 private:
-    bool canWePlaceCows(vector<int> &stalls, int distance, int k) {
+    bool canWePlaceCows(vector<int> &stalls, int minDistance, int k) {
         int cows = 1;
         int last = stalls[0];
 
         for(int i = 0; i < stalls.size(); i++) {
-            if(stalls[i] - last >= distance) {
+            if(stalls[i] - last >= minDistance) {
                 cows++;
                 last = stalls[i];
             }
