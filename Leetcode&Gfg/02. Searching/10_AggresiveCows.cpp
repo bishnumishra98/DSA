@@ -72,7 +72,7 @@ private:
         int cows = 1;
         int last = stalls[0];
 
-        for(int i = 0; i < stalls.size(); i++) {
+        for(int i = 1; i < stalls.size(); i++) {
             if(stalls[i] - last >= minDistance) {
                 cows++;
                 last = stalls[i];
@@ -87,6 +87,8 @@ public:
     // T.C: O((max - min) * n);   where n = stalls.size()
     // S.C: O(1)
     int aggressiveCows_bruteforce(vector<int> &stalls, int k) {
+        if(k > stalls.size()) return -1;
+
         sort(stalls.begin(), stalls.end());
         int min = 1;
         int max = stalls[stalls.size() - 1] - stalls[0];
@@ -103,11 +105,13 @@ public:
     // T.C: O(log(end - start) * n);   where n = stalls.size()
     // S.C: O(1)
     int aggressiveCows(vector<int> &stalls, int k) {
+        if(k > stalls.size()) return -1;
+
         sort(stalls.begin(), stalls.end());
         int start = 1;
         int end = stalls[stalls.size() - 1] - stalls[0];
+        int ans = 0;
 
-        int ans;
         while(start <= end) {
             int mid = start + (end - start) / 2;
             if(canWePlaceCows(stalls, mid, k)) {   // 'mid' is the minimum distance that we have to maintain
