@@ -5,13 +5,13 @@ using namespace std;
 // T.C: O(logn)   base 10
 // S.C: O(1)
 int countNumberOfDigits_approach1(int n) {
-    int count_digits = 0;
+    int digits = 0;
     while(n) {
-        count_digits++;
+        digits++;
         n = n / 10;
     }
 
-    return count_digits;
+    return digits;
 }
 
 // T.C: O(logn)   base 10
