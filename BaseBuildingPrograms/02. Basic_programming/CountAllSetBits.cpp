@@ -7,7 +7,7 @@ using namespace std;
 int countSetBits1(int n) {
     int count = 0;
     // Iterate through each bit position from 0 to 31 (32 bits in an integer)
-    for(int i=0; i<32; i++) {
+    for(int i = 0; i < 32; i++) {
         // Check if the i-th bit from right-most side(LSB) of n is 1.
         if(n & (1 << i)) {
             count++;
