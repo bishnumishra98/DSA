@@ -20,8 +20,8 @@ int fibo_ite(int n) {
     int n3;   
     for(int i = 3; i <= n; i++) {   // Iterating from the 3rd term to the nth term
         n3 = n2 + n1;   // n3 is sum of n2 and n1
-        n1 = n2;   // Updating value of n1 with n2
-        n2 = n3;   // Updating value of n2 with n3
+        n1 = n2;   // n1 is now n2
+        n2 = n3;   // n2 is now n3
     }
 
     return n3;   // return the nth number of fibonacci series that is stored in n3
@@ -84,9 +84,9 @@ int main() {
     cout << endl;
 
     // print the first 6 numbers of fibonacci series
-    printFiboSeries_ite(6);
+    printFiboSeries_ite(6);   // o/p: 0 1 1 2 3 5
     cout << endl;
-    printFiboSeries_rec(6);
+    printFiboSeries_rec(6);   // o/p: 0 1 1 2 3 5
 
     return 0;
 }
