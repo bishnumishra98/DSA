@@ -9,8 +9,8 @@ using namespace std;
 // T.C: O(n)
 // S.C: O(1)
 int fibo_ite(int n) {
-    int n1 = 0;   // Initializing first element of fibonacci series
-    int n2 = 1;   // Initializing second term of fibonacci series
+    int n1 = 0;   // initializing first element of fibonacci series
+    int n2 = 1;   // initializing second term of fibonacci series
 
     if(n <= 0) return 0;   // n <= 0 is invalid, so return 0
     if(n == 1) return n1;   // 1st element of fibonacci series is n1
@@ -18,7 +18,7 @@ int fibo_ite(int n) {
 
     // Initializing 'n3' that will store sum of last two elements of the series
     int n3;   
-    for(int i=3; i<=n; i++) {   // Iterating from the 3rd term to the nth term
+    for(int i = 3; i <= n; i++) {   // Iterating from the 3rd term to the nth term
         n3 = n2 + n1;   // n3 is sum of n2 and n1
         n1 = n2;   // Updating value of n1 with n2
         n2 = n3;   // Updating value of n2 with n3
@@ -32,10 +32,10 @@ int fibo_ite(int n) {
 // T.C: O(2^n)
 // S.C: O(n)
 int fibo_rec(int n) {
-    if(n<=0) return 0;
-    if(n==1) return 0;
-    if(n==2) return 1;
-    return fibo_rec(n-1) + fibo_rec(n-2);
+    if(n <= 0) return 0;
+    if(n == 1) return 0;
+    if(n == 2) return 1;
+    return fibo_rec(n - 1) + fibo_rec(n - 2);
 }
 
 // print the first n numbers of fibonacci series
@@ -45,13 +45,13 @@ int fibo_rec(int n) {
 void printFiboSeries_ite(int n) {
     if(n <= 0) return;
 
-    if(n==1) cout << "0";
-    else if(n==2) cout << "0 1";
+    if(n == 1) cout << "0";
+    else if(n == 2) cout << "0 1";
     else {
         cout << "0 1";
         int n1 = 0;
         int n2 = 1;
-        for(int i=3; i<=n; i++) {
+        for(int i = 3; i <= n; i++) {
             int n3 = n2 + n1;
             cout << " " << n3;
             n1 = n2;
