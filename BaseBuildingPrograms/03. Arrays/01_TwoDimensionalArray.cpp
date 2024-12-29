@@ -20,8 +20,8 @@ int main() {
     // sizeof(arr[0]) gives you the size of the first row of the array in bytes.
 
     // print original matrix
-    for(int i=0; i<row; i++) {
-        for(int j=0; j<col; j++) {
+    for(int i = 0; i < row; i++) {
+        for(int j = 0; j < col; j++) {
             cout << arr[i][j] << " ";
         }
         cout << endl;
@@ -31,15 +31,15 @@ int main() {
 
     // Transpose of matrix
     int brr[col][row];
-    for(int i=0; i<row; i++) {
-        for(int j=0; j<col; j++) {
+    for(int i = 0; i < row; i++) {
+        for(int j = 0; j < col; j++) {
             brr[j][i] = arr[i][j];
         }
     }
 
     // Printing brr(Transpose of A)
-    for(int i=0; i<col; i++) {
-        for(int j=0; j<row; j++) {
+    for(int i = 0; i < col; i++) {
+        for(int j = 0; j < row; j++) {
             cout << brr[i][j] << " ";
         }
         cout << endl;
