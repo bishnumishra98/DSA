@@ -14,9 +14,9 @@ int main() {
 
     int row = sizeof(arr) / sizeof(arr[0]);
 
-    for(int i=0; i<col; i++) {
+    for(int i = 0; i < col; i++) {
         int sum = 0;
-        for(int j=0; j<row; j++) {
+        for(int j = 0; j < row; j++) {
             sum += arr[j][i];
         }
         cout << sum << endl;
