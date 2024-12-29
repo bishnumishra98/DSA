@@ -2,8 +2,8 @@
 // It is a very efficient algorithm, and it is still widely used today. Let's say given input is n.
 
 // The algorithm states that :-
-// 1) Create an array of size n, and mark all of them as prime, i.e true.
-// 2) Iterate starting from 2 to n, mark all the numbers that comes in table of 2 as composite, i.e false.
+// 1) Create an array of size n, and mark all of them as prime, i.e., true.
+// 2) Iterate starting from 2 to n, mark all the numbers that comes in table of 2 as composite, i.e., false.
 // 3) Repeat step 2 till n, only for numbers that are marked prime.
 // 4) In the end of the loop, elements still marked as prime are the prime numbers in the range 2 to n.
 
