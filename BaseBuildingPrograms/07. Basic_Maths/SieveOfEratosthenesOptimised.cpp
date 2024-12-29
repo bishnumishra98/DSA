@@ -19,7 +19,7 @@ using namespace std;
 // T.C: O(nlog(logn))
 // S.C: O(n);   as the function creates a vector of size 'n+1'
 vector<bool> createSieveArray(int n) {
-    vector<bool> sieve(n+1, true);   // all elements of sieve array contains true in the beginning
+    vector<bool> sieve(n + 1, true);   // all elements of sieve array contains true in the beginning
 
     // sieve[0] and sieve[1] will be treated as 0 and 1 respectively. So marking them false, i.e composite.
     sieve[0] = sieve[1] = false;
@@ -27,7 +27,7 @@ vector<bool> createSieveArray(int n) {
     // Optimization 2: inner loop will never run more than √n times due to optimization 1.
     // Inshort, we are never going to check any value of i where i*i is greater than n. So,
     // there is no need of running the outer loop from 2 to n unnecessarily.
-    for(int i=2; i*i<=n; i++) {   // or, for(int i=2; i<=sqrt(n); i++) {
+    for(int i = 2; i * i <= n; i++) {   // or, for(int i = 2; i <= sqrt(n); i++) {
     
         if(sieve[i] == true) {   // sieve[2] will be true only, so we will enter the loop
             // Optimization 1:  // we will start marking numbers as composite from i*i because numbers
@@ -35,7 +35,7 @@ vector<bool> createSieveArray(int n) {
             // 2, 4, 6, etc. as composite. So there is no need to mark 6 explicitly as composite from 3.
             int j = i * i;
             
-            while(j<=n) {   // this loop runs max √n times due to optimization 1. For example, for n = 23,
+            while(j <= n) {   // this loop runs max √n times due to optimization 1. For example, for n = 23,
             // we will enter this loop only twice (for, j = 4, 9).
                 sieve[j] = false;   // marking multiples of i as composite, i.e false
                 j = j + i;
@@ -51,7 +51,7 @@ int main() {
 
     vector<bool> sieve = createSieveArray(n);
 
-    for(int i=0; i<=n; i++) {
+    for(int i = 0; i <= n; i++) {
         if(sieve[i]) {   // sieve[i] contains true if i is prime number
             cout << i << " ";
         }
