@@ -25,11 +25,11 @@ using namespace std;
 int countPrimes(int n) {
     if(n < 2) return 0;   // as prime numbers should be strictly less than 2
 
-    vector <bool> sieve(n, true);   // by default all numbers are prime
+    vector<bool> sieve(n, true);   // by default all numbers are prime
 
     sieve[0] = sieve[1] = false;   // mark sieve[0] and sieve[1] as false, i.e., marking 0 and 1 as composite
 
-    for(int i=2; i*i<n; i++) {   // i*i < n because we have to count prime number strictly less than n
+    for(int i = 2; i * i < n; i++) {   // i*i < n because we have to count prime number strictly less than n
         if(sieve[i]) {   // if its a prime number, mark its multiples as composite
             int j = i * i;
             while(j < n) {
@@ -41,7 +41,7 @@ int countPrimes(int n) {
 
     // The sieve of primes is ready. Thus, count how many are primes.
     int count = 0;
-    for(int i=0; i<n; i++) {
+    for(int i = 0; i < n; i++) {
         if(sieve[i]) count++;
     }
 
