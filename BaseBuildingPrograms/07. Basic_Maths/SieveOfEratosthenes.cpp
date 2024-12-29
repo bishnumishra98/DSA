@@ -23,11 +23,11 @@ vector<bool> createSieveArray(int n) {
     // sieve[0] and sieve[1] will be treated as 0 and 1 respectively. So marking them false, i.e composite.
     sieve[0] = sieve[1] = false;
 
-    for(int i=2; i<=n; i++) {
+    for(int i = 2; i <= n; i++) {
         if(sieve[i] == true) {   // sieve[2] will be true only, so we will enter the loop
             int j = i * 2;   // storing 2nd multiple of i inside j. Note that 1st multiple of a number is the number itself.
 
-            while(j<=n) {
+            while(j <= n) {
                 sieve[j] = false;   // marking multiples of i as composite, i.e false
                 j = j + i;   // here j = 3rd, 4th, ... last multiple of i uptil n
             }
@@ -42,7 +42,7 @@ int main() {
 
     vector<bool> sieve = createSieveArray(n);
 
-    for(int i=0; i<=n; i++) {
+    for(int i = 0; i <= n; i++) {
         if(sieve[i]) {   // sieve[i] contains true if i is prime number
             cout << i << " ";
         }
