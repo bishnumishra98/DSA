@@ -18,7 +18,7 @@ using namespace std;
 // T.C: O(nlog(logn))
 // S.C: O(n);   as the function creates a vector of size 'n+1'
 vector<bool> createSieveArray(int n) {
-    vector<bool> sieve(n+1, true);   // all elements of sieve array contains true in the beginning
+    vector<bool> sieve(n + 1, true);   // all elements of sieve array contains true in the beginning
 
     // sieve[0] and sieve[1] will be treated as 0 and 1 respectively. So marking them false, i.e composite.
     sieve[0] = sieve[1] = false;
