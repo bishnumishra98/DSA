@@ -11,7 +11,8 @@
 // Output : [7, 9, 10, 11, -5, -3, -4, -1]
 
 
-// Brute force algorithm: Just sort the array in reverse order -> sort(arr.begin(), arr.end(), greater<int>());
+// Brute force algorithm: Just sort the array in reverse order -> sort(arr.begin(), arr.end(), greater<int>())
+//                        OR reverse(arr.begin(), arr.end()).
 
 // Algorithm: We will follow 2 pointer approach here. The algorithm is extremely easy.
 // 1. Create and point left and right pointers at index 0 and n-1 respectively. The left pointer is supposed
