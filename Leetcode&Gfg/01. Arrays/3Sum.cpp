@@ -106,7 +106,7 @@ public:
     //    it might happen that even after reposition, they point to an element that has same value as the previous ones. That's
     //    why don't push the pointers just 1 step ahead or back, instead keep pushing them until they reach a new element.
     //    Once j reaches k, stop the iteration and change the position of i to next element on the left. For i too, follow the
-    //    same pushing rule until it reaches a new element. In this this way the i shall move till the 3rd last element og 'nums'.
+    //    same pushing rule until it reaches a new element. In this this way the i shall move till the 3rd last element of 'nums'.
     // T.C: O(n^2)
     // S.C: O(n)
     vector<vector<int>> threeSum(vector<int>& nums) {
