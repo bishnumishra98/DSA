@@ -9,8 +9,8 @@ void printSquareVector(const vector<vector<int>>& v) {
     int row = v.size();
     int col = v[0].size();
 
-    for(int i=0; i<row; i++) {
-        for(int j=0; j<col; j++) {
+    for(int i = 0; i < row; i++) {
+        for(int j = 0; j < col; j++) {
             cout << v[i][j] << " ";
         }
         cout << endl;
@@ -23,8 +23,8 @@ void transposeSquareVector(vector<vector<int>>& matrix) {
     int row = matrix.size();
     int col = matrix[0].size();
     
-    for(int i=0; i<row; i++) {
-        for(int j=i; j<col; j++) {   //  Note to start j from i, not from 0. Reason is mentioned in 07a.
+    for(int i = 0; i < row; i++) {
+        for(int j = i; j < col; j++) {   //  note to start j from i, not from 0. Reason is mentioned in 07a.
             swap(matrix[i][j], matrix[j][i]);
         }
     }
