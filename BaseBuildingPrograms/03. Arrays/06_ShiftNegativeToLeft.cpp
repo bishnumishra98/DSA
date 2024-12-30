@@ -1,4 +1,9 @@
 // love babbar practice problem
+// Example:
+// Input:
+// {-2, 3, 5, -10, 9, -7, 11, -6}
+// Output:
+// {-2, -10, -7, -6, +ve numbers}
 
 #include <iostream>
 using namespace std;
@@ -26,7 +31,7 @@ int main() {
     shiftNegativeToLeft(arr, n);
 
     // printing array
-    for(int i=0; i<n; i++) {
+    for(int i = 0; i < n; i++) {
         cout << arr[i] << " ";
     }
 
