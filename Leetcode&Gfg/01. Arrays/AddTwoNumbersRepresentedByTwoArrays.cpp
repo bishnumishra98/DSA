@@ -16,7 +16,7 @@
 // 1. Initialize a 'carry' variable with 0, and mark 2 pointers i and j, on the last element of arr1 and arr2 respectively,
 //    as addition always starts from unit's digit. Also create a blank string variable 'ans' to build and store the answer.
 // 2. Add arr1[i], arr2[j] and carry, and store its result (sum % 10) in the 'ans' and update the carry with sum/10.
-// 3. Keep doing the same, until i and j reaches first elements of arr1 or arr2.
+// 3. Keep doing the same, until i and j reaches first elements of arr1 or arr2, respectively.
 // 4. If some elements are left in arr1 or arr2, process them individually in the similar way.
 // 5. If something is left in carry, process that too. Note that carry can be only 1 or 0.
 // 6. Finally, the number gets stored in the 'ans' in reverse order, so reverse the string and return.
