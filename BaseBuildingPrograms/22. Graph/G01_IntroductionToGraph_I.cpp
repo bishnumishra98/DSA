@@ -6,7 +6,6 @@
 // 2) Adjacent list: O(n) space
 
 // Input:
-// 5 6
 // 1 2
 // 1 3
 // 2 4
