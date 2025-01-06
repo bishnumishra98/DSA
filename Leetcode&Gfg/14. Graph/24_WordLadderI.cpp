@@ -63,7 +63,7 @@
 //    built, then the targetWord cannot be built, hence return 0 step.
 //    More info: In BFS, we used to create a 'vis' array to keep track of nodes visited, so that we do not visit an already
 //               visited node again. Here, we are doing the same using the set.
-//               We are deleting the word from set that has been matched while the word buildup process, so that we can keep track
+//               We are deleting the word from set that has been matched during the word buildup process, so that we can keep track
 //               of words that are already build, and we do not push it in the queue if the same word is rebuild in further steps.
  
 
