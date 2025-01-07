@@ -1,4 +1,4 @@
-// GFG: Given an integer N, find its factorial. return a list of integers denoting the digits that make up the factorial of N.
+// GFG: Given an integer N, find its factorial. Return a list of integers denoting the digits that make up the factorial of N.
 
 // Example 1:
 // Input: N = 5
