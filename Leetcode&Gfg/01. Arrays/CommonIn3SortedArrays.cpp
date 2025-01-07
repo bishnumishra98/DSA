@@ -6,12 +6,12 @@
 // Example 1:
 // Input: arr1 = [1, 5, 10, 20, 40, 80] , arr2 = [6, 7, 20, 80, 100] , arr3 = [3, 4, 15, 20, 30, 70, 80, 120]
 // Output: [20, 80]
-// Explanation: 20 and 80 are the only common elements in arr, brr and crr.
+// Explanation: 20 and 80 are the only common elements in arr1, arr2 and arr3.
 
 // Example 2:
 // Input: arr1 = [1, 2, 3, 4, 5] , arr2 = [6, 7] , arr3 = [8,9,10]
 // Output: [-1]
-// Explanation: There are no common elements in arr, brr and crr.
+// Explanation: There are no common elements in arr, arr2 and arr3.
 
 // Example 3:
 // Input: arr1 = [1, 1, 1, 2, 2, 2], B = [1, 1, 2, 2, 2], arr3 = [1, 1, 1, 1, 2, 2, 2, 2]
