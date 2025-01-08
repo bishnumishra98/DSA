@@ -27,7 +27,7 @@ public:
     //            If 'x - arr[low] < arr[high] - x', move high towards left to find a shorter distance of arr[high] from x.
     //    Case 2: arr[low] and arr[high] are equidistant from x:
     //            If 'x - arr[low] == arr[high] - x', still move high towards left to find a shorter distance of arr[high] from x,
-    //            because its given that it case of a tie, choose the smaller element, and smaller elements are pointer by low.
+    //            because its given that in case of a tie, choose the smaller element, and smaller elements are pointer by low.
     //    Case 3: arr[low] is more distant to x than arr[high]:
     //            If 'x - arr[low] > arr[high] - x', move low towards right to find a shorter distance of arr[low] from x.
     //    Continue the process until no.of elements left between low and high are exactly k, i.e., while(high - low >= k) {}.
