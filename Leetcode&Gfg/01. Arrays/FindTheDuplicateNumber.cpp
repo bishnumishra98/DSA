@@ -36,11 +36,12 @@ public:
     // S.C: O(n)
     int findDuplicate(vector<int>& nums) {
         unordered_map<int, int> map;
+
+        // If an entry for nums[i] is already present in the map, then return nums[i]. Else, add nums[i] to the map.
+        // Note that map should be made by considering nums[i] as the key, and value can be anything(for instance, lets consider i).
         for(int i = 0; i < nums.size(); i++) {
-            // If an entry for nums[i] does not exists in map, then create it considering nums[i] as the key and value as i.
-            // Else if an entry for nums[i] does exists, it means it is an duplicate element. Thus, return that element.
-            if(map.find(nums[i]) == map.end()) map[nums[i]] = i;
-            else return nums[i];
+            if(map.find(nums[i]) != map.end()) return nums[i];
+            map[nums[i]] = i;
         }
 
         return -1;   // if no duplicates found
