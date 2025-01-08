@@ -21,7 +21,7 @@
 // Understand 'NumberOfProvinces.cpp' before this problem. This problem also has a similar approach.
 // Algorithm:
 // 1. Consider all elements of the grid to be nodes of a graph. For a n*m grid, no.of nodes will also be obviously n*m.
-// 2. Make a 'vis' array of size as many nodes in the graph with initial values 0, to keep track of nodes visited from the grid.
+// 2. Make a 2D 'vis' array of size as many nodes in the graph with initial values 0, to keep track of nodes visited from the grid.
 // 3. Perform any traversal (DFS or BFS) starting with each element of the grid that contains '1' and is unvisted yet. In the BFS
 //    traversal of that node, all its neighbours shall be marked as visited. Thus, the next time a BFS traversal is called, it belongs
 //    to a separate component. Thus, count the no.of times the BFS traversal is called, and that is the no. of islands in the grid.
