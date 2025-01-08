@@ -47,9 +47,10 @@ public:
     int findCircleNum(vector<vector<int>>& isConnected) {
         int n = isConnected.size();
         vector<int> adj[n];
+
         // Convert adjacent matrix to adjacent list
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
                 if(isConnected[i][j] == 1 && i != j) {   // 'i != j' to ensure there is no self nodes
                     adj[i].push_back(j);
                     adj[j].push_back(i);
@@ -61,7 +62,7 @@ public:
         int provinces = 0;   // to keep a count of provinces by checking the no.of times the if(!vis[i]) condition is executed
 
         // Traverse all nodes of graph
-        for(int i=0; i<n; i++) {
+        for(int i = 0; i < n; i++) {
             if(!vis[i]) {   // if() will be true, only if the node 'i' is not visited yet
                 provinces++;
                 dfsTraversal(i, adj, vis);
