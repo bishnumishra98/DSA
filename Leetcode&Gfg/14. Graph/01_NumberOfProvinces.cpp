@@ -35,7 +35,7 @@ using namespace std;
 class Solution {
 public:
     // DFS traversal of graph. Well, we do not require to print or store the dfs traversal in this problem.
-    void dfsTraversal(int node, vector<int> adj[], vector<int>& vis) {
+    void dfsTraversal(int node, vector<vector<int>> adj, vector<int>& vis) {
         vis[node] = 1;
         for(int neighbour: adj[node]) {
             if(!vis[neighbour]) dfsTraversal(neighbour, adj, vis);
@@ -46,7 +46,7 @@ public:
     // S.C: O(n) for 'adj' + O(n) for 'vis' + O(n) for recursion stack = O(n)
     int findCircleNum(vector<vector<int>>& isConnected) {
         int n = isConnected.size();
-        vector<int> adj[n];
+        vector<vector<int>> adj(n);
 
         // Convert adjacent matrix to adjacent list
         for(int i = 0; i < n; i++) {
