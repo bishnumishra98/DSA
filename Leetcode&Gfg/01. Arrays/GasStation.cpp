@@ -77,18 +77,18 @@ public:
     // T.C: O(n)
     // S.C: O(1)
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-        int start = 0;   // Potential start index
-        int totalFuelBalance = 0;   // Total fuel balance across all stations
-        int currentFuelBalance = 0;   // Current fuel balance for the ongoing trip
+        int start = 0;   // potential start index
+        int totalFuelBalance = 0;   // total fuel balance across all stations
+        int currentFuelBalance = 0;   // current fuel balance for the ongoing trip
 
         for(int i = 0; i < gas.size(); i++) {
-            totalFuelBalance += gas[i] - cost[i];   // Total fuel balance at station i
+            totalFuelBalance += gas[i] - cost[i];   // total fuel balance at station i
 
             // If running out of fuel at the current station, reset the start index to
             // the next station, and currentFuelBalance to 0.
             currentFuelBalance += gas[i] - cost[i];
             if(currentFuelBalance < 0) {
-                start = i + 1;   // Consider moving to the next station to find next potential start index 
+                start = i + 1;   // consider moving to the next station to find next potential start index 
                 currentFuelBalance = 0;
             }
         }
