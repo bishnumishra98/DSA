@@ -29,8 +29,8 @@ public:
         
         // Collect all duplicate elements in 'duplicates' vector.
         for(int i = 0; i < arr.size(); i++) {
-            if(map.find(arr[i]) == map.end()) map[arr[i]] = i;
-            else duplicates.push_back(arr[i]);
+            if(map.find(arr[i]) != map.end()) duplicates.push_back(arr[i]);
+            else map[arr[i]] = i;
         }
         
         // Iterate the whole array, and check if any of the elements from the array matches any element from 'duplicates' or not.
