@@ -59,7 +59,7 @@ public:
                 leftSum += nums[j];
             }
 
-            for(int j = i+1; j < nums.size(); j++) {
+            for(int j = i + 1; j < nums.size(); j++) {
                 rightSum += nums[j];
             }
 
@@ -80,7 +80,7 @@ public:
             leftSum[i] = nums[i-1] + leftSum[i-1];   // leftSum[i] has sum of all elements towards left of i
         }
 
-        for(int i = n-2; i >= 0; i--) {
+        for(int i = n - 2; i >= 0; i--) {
             rightSum[i] = nums[i+1] + rightSum[i+1];   // rightSum[i] has sum of all elements towards right of i
         }
 
