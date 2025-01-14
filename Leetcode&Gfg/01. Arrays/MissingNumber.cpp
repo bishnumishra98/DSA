@@ -29,8 +29,8 @@ using namespace std;
 int missingNumber_technique1(vector<int>& nums) {
     int n = nums.size();
     int sum = 0;
-    for(int i=0; i<n; i++) {
-        sum+= nums[i];
+    for(int i = 0; i < n; i++) {
+        sum += nums[i];
     }
 
     int total_sum = (n*(n+1))/2;
@@ -45,13 +45,13 @@ int missingNumber_technique2(vector<int>& nums) {
     int missingNumber = 0;
 
     // XOR all numbers from 0 to n
-    for (int i=0; i <= nums.size(); i++) {
+    for (int i = 0; i <= nums.size(); i++) {
         missingNumber ^= i;      
     }
     // missingNumber = 0 ^ 1 ^ 2 ^ 3
 
     // XOR all numbers in the array
-    for (int i=0; i < nums.size(); i++) {
+    for (int i = 0; i < nums.size(); i++) {
         missingNumber ^= nums[i];
     }
     // missingNumber = 0 ^ 1 ^ 2 ^ 3 ^ 3 ^ 0 ^ 1 = 2
