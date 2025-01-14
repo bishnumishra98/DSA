@@ -42,7 +42,7 @@ public:
 // -------------------------------------------------------------------------------------------
 
     // Sliding window technique (just subtract and add one element in the window at a time; calculate sum and update maxSum if needed)
-    // T.C: O(k + (n-k)) = O(k) + O(n) = O(n)
+    // T.C: O(k + (n-k)) = O(n)
     // S.C: O(1)
     double findMaxAverage(vector<int>& nums, int k) {
         int sum = 0;
