@@ -32,10 +32,10 @@ public:
     // S.C: O(2n)
     vector<int> rearrangeArray_bruteForce(vector<int>& nums) {
         int n = nums.size();
-        vector <int> positive;
-        vector <int> negative;
+        vector<int> positive;
+        vector<int> negative;
 
-        for(int i=0; i<n; i++) {
+        for(int i = 0; i < n; i++) {
             if(nums[i] > 0) {
                 positive.push_back(nums[i]);
             } else {
@@ -43,9 +43,9 @@ public:
             }
         }
 
-        vector <int> arr;
+        vector<int> arr;
 
-        for(int i=0; i<n/2; i++) {
+        for(int i = 0; i < n/2; i++) {
             arr.push_back(positive[i]);
             arr.push_back(negative[i]);
         }
@@ -62,7 +62,7 @@ public:
         vector<int> ans(nums.size());
         int even = 0, odd = 1;
 
-        for(int i=0; i<nums.size(); i++) {
+        for(int i = 0; i < nums.size(); i++) {
             if(nums[i] > 0) {
                 ans[even] = nums[i];
                 even += 2;
