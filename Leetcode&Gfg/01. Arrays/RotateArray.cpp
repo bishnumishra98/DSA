@@ -43,7 +43,7 @@ public:
     // S.C: O(1)
     void rotate(vector<int>& nums, int k) {
         k = k % nums.size();   // to handle the case when 'k > no.of elements in vector'
-
+        // Note: In reverse function, reverse(start, end), the range is inclusive of start and exclusive of end.
         // reverse from (0, n-1)
         reverse(nums.begin(), nums.end());
 
