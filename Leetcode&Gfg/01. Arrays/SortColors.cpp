@@ -26,7 +26,7 @@ public:
         int n = nums.size();
         int zeroCount = 0, oneCount = 0, twoCount = 0;
 
-        for(int i=0; i<n; i++) {
+        for(int i = 0; i < n; i++) {
             if(nums[i] == 0) zeroCount++;
             else if(nums[i] == 1) oneCount++;
             else twoCount++;
