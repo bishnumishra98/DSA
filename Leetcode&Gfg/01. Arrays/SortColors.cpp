@@ -18,11 +18,19 @@ using namespace std;
 
 class Solution {
 public:
+    // T.C: O(nlogn)
+    // S.C: O(1)
+    void sortColors_bruteForce1(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+    }
+
+// -----------------------------------------------------------------------
+
     // Brute force algorithm: Count the number of zeroes, ones and twos in the given input array, and then insert
     // those many zeroes, ones and twos in the array in sequence.
     // T.C: O(2n)
     // S.C: O(1)
-    void sortColors_bruteForce(vector<int>& nums) {
+    void sortColors_bruteForce2(vector<int>& nums) {
         int n = nums.size();
         int zeroCount = 0, oneCount = 0, twoCount = 0;
 
@@ -121,7 +129,8 @@ public:
 int main() {
     vector<int> nums = {2, 0, 2, 1, 1, 0};
 
-    // Solution().sortColors_bruteForce(nums);
+    // Solution().sortColors_bruteForce1(nums);
+    // Solution().sortColors_bruteForce2(nums);
     Solution().sortColors(nums);
 
     for(auto it: nums) cout << it << " ";
