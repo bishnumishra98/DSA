@@ -16,9 +16,17 @@ using namespace std;
 
 class Solution {
 public:
+    // T.C: O(nlogn)
+    // S.C: O(1)
+    void segregate0and1_bruteForce1(vector<int> &arr) {
+        sort(arr.begin(), arr.end());
+    }
+
+// ----------------------------------------------------------
+
     // T.C: O(2n)
     // S.C: O(1)
-    void segregate0and1_bruteForce(vector<int> &arr) {
+    void segregate0and1_bruteForce2(vector<int> &arr) {
         int zeroCount = 0, oneCount = 0;
 
         for(int i = 0; i < arr.size(); i++) {
@@ -67,7 +75,8 @@ public:
 int main() {
     vector<int> arr = {0, 0, 1, 1, 0};
 
-    // Solution().segregate0and1_bruteForce(arr);
+    // Solution().segregate0and1_bruteForce1(arr);
+    // Solution().segregate0and1_bruteForce2(arr);
     Solution().segregate0and1(arr);
 
     for(auto it: arr) cout << it << " ";
