@@ -23,8 +23,8 @@ public:
         int n = matrix.size();
         vector<vector<int>> arr(n, vector<int>(n, 0));   // Initialize arr with the same dimensions as matrix
 
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
                 arr[i][j] = matrix[n-j-1][i];
             }
         }
