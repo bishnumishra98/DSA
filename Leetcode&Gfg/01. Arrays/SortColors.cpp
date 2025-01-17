@@ -74,12 +74,6 @@ public:
     //       the above rules becomes invalid for 1 and 2, thus rectify the indices by shifting low and mid 1 step ahead.
 
     //           0       0      0      1      1       1       2       0       1       2       0       2       2
-    //    Index: 0     low-1          low    mid-1   mid                                     high   high+1   n-1
-    //    Observe element at nums[mid] and alter the pointers accordingly.
-    //    -> If nums[mid] == 1, then it means 1 is at a wrong position. Its correct position should be from low to mid-1.
-    //       Hence, move only mid pointer ahead by 1 step, so that indices for 1 become rectified.
-
-    //           0       0      0      1      1       1       2       0       1       2       0       2       2
     //    Index: 0     low-1          low            mid-1   mid                             high   high+1   n-1
     //    Observe element at nums[mid] and alter the pointers accordingly.
     //    -> If nums[mid] == 1, then it means 1 is at a wrong position. Its correct position should be from low to mid-1.
