@@ -80,24 +80,24 @@ public:
             if(!vis[0][j] && grid[0][j] == 1) dfs(0, j, vis, grid);
         }
         for(int j = 0; j < m; j++) {
-            if(!vis[n-1][j] && grid[n-1][j] == 1) dfs(n-1, j, vis, grid);
+            if(!vis[n - 1][j] && grid[n - 1][j] == 1) dfs(n - 1, j, vis, grid);
         }
         for(int i = 0; i < n; i++) {
             if(!vis[i][0] && grid[i][0] == 1) dfs(i, 0, vis, grid);
         }
         for(int i = 0; i < n; i++) {
-            if(!vis[i][m-1] && grid[i][m-1] == 1) dfs(i, m-1, vis, grid);
+            if(!vis[i][m - 1] && grid[i][m - 1] == 1) dfs(i, m - 1, vis, grid);
         }
 
         // Traverse the mid area of grid to count the unvisited 1s. They are the land cells from where we cannot walk off the boundary.
-        int count = 0;
-        for(int i = 1; i < n-1; i++) {
-            for(int j = 0; j < m-1; j++) {
-                if(!vis[i][j] && grid[i][j] == 1) count++;
+        int enclaves = 0;
+        for(int i = 1; i < n - 1; i++) {
+            for(int j = 0; j < m - 1; j++) {
+                if(!vis[i][j] && grid[i][j] == 1) enclaves++;
             }
         }
 
-        return count;
+        return enclaves;
     }
 };
 
