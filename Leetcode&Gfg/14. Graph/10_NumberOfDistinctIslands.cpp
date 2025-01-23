@@ -39,7 +39,7 @@
 // Algorithm: Distinct islands are islands that are different in shape. To store only distinct shapes of islands,
 // we can store the shapes of all islands in a set. The no.of elements in the set will be the no.of distinct islands.
 // All 1s of the island can be traversed using dfs or bfs traversal, but our main challenge is to identify their shapes.
-// Shapes can identified using a formula: {row - row0, col - col0}, where wor0 & col0 are base indexes, i.e., indexes from
+// Shapes can identified using a formula: {row - row0, col - col0}, where row0 & col0 are base indexes, i.e., indexes from
 // where bfs or dfs traversal started. For example:
 
 // {{1, 1, 0, 1, 1}, 
