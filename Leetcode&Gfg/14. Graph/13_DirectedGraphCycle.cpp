@@ -20,8 +20,8 @@
 // Problem link: https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=detect-cycle-in-a-directed-graph
 
 // Algorithm:
-// 1. Create two arrays of size as many nodes in the graph. The first array 'vis' keep the track of nodes visited. And the array
-//    'pathVis' will keep a track of the current path we are following.
+// 1. Create two arrays of size as many nodes in the graph. The first array 'vis' keeps the track of nodes visited. And the array
+//    'pathVis' keeps a track of the current path we are following.
 // 2. Start DFS traversal from a node and mark it visited in both 'vis' and 'pathVis' arrays.
 // 3. DFS traverse all its neighbours which are unvisited yet. If no cycle found at the end of a path, backtrack and unmark
 //    'pathVis' for that node and return false stating that no cycle found in the path from this node.
