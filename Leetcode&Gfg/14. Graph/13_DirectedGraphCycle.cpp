@@ -40,7 +40,6 @@ private:
         vis[node] = 1;   // mark the current node as visited
         pathVis[node] = 1;   // mark the current node as path visited
 
-        
         for(int neighbour: adj[node]) {
             if(!vis[neighbour]) {
                 if(checkForCycle_dfs(neighbour, adj, vis, pathVis) == true) return true;
