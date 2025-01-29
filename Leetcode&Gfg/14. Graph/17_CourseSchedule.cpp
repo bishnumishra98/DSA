@@ -119,7 +119,7 @@ public:
             }
         }
 
-        // If no cycles present in graph, its a DAG. In a DAG, no.of elements in the topological sorted array is awlays
+        // If no cycles present in graph, its a DAG. In a DAG, no.of elements in the topological sorted array is always
         // equal to the no.of nodes in the graph. So all tasks can be finished in this case. Hence, return the
         // order of exceution of tasks stored in the 'ans' array; else return a blank array.
         if(ans.size() == V) return ans;
