@@ -40,9 +40,9 @@
 
 // Illustration 1: For example, consider the prerequisites: 
 // {{1, 0},
-// {2, 0},
-// {3, 1},
-// {3, 2}}
+//  {2, 0},
+//  {3, 1},
+//  {3, 2}}
 // The edges of graph for the above prerequisite will be:
 // 0 --> 1
 // 0 --> 2
@@ -60,9 +60,9 @@
 
 // Illustration 2: For example, consider the prerequisites: 
 // {{1, 0},
-// {2, 3},
-// {3, 1},
-// {3, 2}}
+//  {2, 3},
+//  {3, 1},
+//  {3, 2}}
 // The edges of graph for the above prerequisite will be:
 // 0 --> 1
 // 3 --> 2
