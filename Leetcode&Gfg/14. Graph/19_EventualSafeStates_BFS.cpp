@@ -47,7 +47,7 @@
 // 2. Now follow simple topological sort method (kahn's algorithm) to remove edges from graph. So first get all the nodes
 //    with indegree 0, push into the queue. Dequeue the front element, print it, and push its adjacent nodes in the queue
 //    with indegree 0. Continue the process untill the queue becomes empty.
-//    At the end, all nodes connected or a prt of cycle remains as it is and do not get pushed in queue. Hence, all safe
+//    At the end, all nodes connected or a part of cycle remains as it is and do not get pushed in queue. Hence, all safe
 //    nodes have been printed or stored in any array, whatever you want.
 
 #include <bits/stdc++.h>
