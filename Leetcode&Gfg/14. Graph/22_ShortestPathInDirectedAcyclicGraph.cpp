@@ -80,7 +80,7 @@ public:
         while(!st.empty()) {
             // Pop out the top element of stack and traverse its neighbours, and update 'dist' array if a shorter distance is found.
             int node = st.top();
-            cout << "node popped: " << node << endl;
+            // cout << "node popped: " << node << endl;
             st.pop();
 
             for(auto it: adj[node]) {
