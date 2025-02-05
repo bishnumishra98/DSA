@@ -39,7 +39,7 @@ using namespace std;
 class Solution {
 private:
     // DFS toposort
-    void topoSort(int node, vector<pair<int, int>> adj[],int vis[], stack<int> &st) {
+    void topoSort(int node, vector<pair<int, int>> adj[], int vis[], stack<int> &st) {
         vis[node] = 1;
 
         for(auto it: adj[node]) {
