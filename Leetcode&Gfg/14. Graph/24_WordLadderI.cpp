@@ -53,7 +53,7 @@
 //              dfs   ---> step 3
 // Thus, it took 3 words to reach from startWord to targetWord there. So return 3. It is obviously that if startWord can
 // be converted to targetWord, the minimum no.of words would be 2 (the two words itself).
-// 1. a) Create a queue to store {node, steps} pair in order to facilitate BFS:
+// 1. a) Create a queue to store {node, steps} pair in order to facilitate BFS.
 //    b) Create a set and store all elements of wordList in it. This is made to make search faster.
 // 2. Push the startWord with 1 step in the queue.
 // 3. Dequeue the front element of queue and start altering first letter of the word with all possible characters from 'a' to 'z',
