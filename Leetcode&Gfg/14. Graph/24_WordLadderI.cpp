@@ -94,7 +94,7 @@ public:
 
             // Alter every letter of the word and check if it matches with any word in the wordList
             for(int i = 0; i < word.size(); i++) {   // lets say if word = "der"
-                char letter = word[i];   // when i = 0, the letter = 'd'; when i = 1, then letter 'e', when i = 2, then letter = 'r'
+                char letter = word[i];   // when i = 0, then letter = 'd'; when i = 1, then letter 'e', when i = 2, then letter = 'r'
                 for(char ch = 'a'; ch <= 'z'; ch++) {
                     word[i] = ch;   // replacing first letter of word with ch(runs from 'a' to 'z'). When ch = 'a', then word = "aer"
                     // If the formed word exists in the set 'st', then push it along with steps in the queue and erase it from the set.
