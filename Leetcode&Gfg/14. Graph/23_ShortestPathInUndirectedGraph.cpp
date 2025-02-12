@@ -4,7 +4,7 @@
 // Example 1:
 // Input:
 // n = 9, m = 10
-// edges={0,1],{0,3],{3,4],{4,5],[5,6],[1,2],[2,6],[6,7],[7,8],[6,8]] 
+// edges=[[0,1],[0,3],[3,4],[4,5],[5,6],[1,2],[2,6],[6,7],[7,8],[6,8]] 
 // src=0
 // Output:
 // 0 1 2 1 2 3 3 4 4
@@ -20,7 +20,7 @@
 // Algorithm: We will follow a BFS algorithm here. Note that weight of every edge is 1 in this problem. The algorithm is
 //            somewhat similar to previous problem, but much easier than the previous problem.
 // 1. a) Create an adjacency list for the undirected graph from the given edges.
-//    b) Create a queue to nodes in order to facilitate BFS.
+//    b) Create a queue to store nodes in order to facilitate BFS.
 //    c) Create a 'dist' array initialized all elements with infinity to keep a track of shortest distance from source.
 // 2. Push the source node in the queue and mark its distance in the 'dist' array as 0 as the source node is obviously
 //    0 distance away from it.
