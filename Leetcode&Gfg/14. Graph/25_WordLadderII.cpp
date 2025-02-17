@@ -38,11 +38,12 @@
 // 2. Push the startWord in the queue. Also, store the startWord in 'usedOnLevel'.
 // 3. Dequeue the front element of queue and the store the word sequence in a vector of string 'seq'. Then pop the queue.
 // 4. If the length of the word sequence, i.e., seq.size() is greater than the level, then increment the level and erase all
-//    the words from the set that were used on the previous level. Note that, on level 1, word sequence length will be 1,
-//    on level 2, word sequence length will be 2 and so on.
+//    the words from the set that were used on the previous level. Note that, on level 1, word sequence length will be 1(only
+//    beginWord is present at level 1), on level 2, word sequence length will be 2 and so on.
 // 5. Get the last word from the current word sequence and store it in 'word'.
 // 6. If 'word' is equal to 'endWord', then we have finally reached our target. So now check if the word belongs to the
-//    part of a shortest sequence or not. This can be checked via checking if the 'ans' is empty or not.
+//    part of a shortest sequence or not. If it does, then add it to the ans. This can be checked via checking if the
+//    'ans' is empty or not.
 //    Case A: If ans is empty, it means this is the first word sequence that reaches the endWord. Since we are
 //            performing a level-wise BFS, the first sequence to reach endWord will always be the shortest one.
 //            Thus, definitely add this sequence to ans.
@@ -74,10 +75,10 @@ public:
         vector<vector<string>> ans;
 
         while(!q.empty()) {
-            vector<string> seq = q.front();   // 'seq' is the current sequence of words in this level
+            vector<string> seq = q.front();   // 'seq' is the current word sequence at the front of the BFS queue
             q.pop();
             
-            // beginWord is considered level 1. In level 2, there will be 2 words, in level 3, there will be 3 words and so on.
+            // Only beginWord is present at level 1. In level 2, there will be 2 words, in level 3, there will be 3 words and so on.
             // Thus, if we are on a new level, seq.size() will be greater than level. In this case, erase all words from the
             // set that were used on the previous level.
             if(seq.size() > level) {
