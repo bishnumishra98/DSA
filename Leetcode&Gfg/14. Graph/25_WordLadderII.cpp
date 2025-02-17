@@ -29,15 +29,23 @@
 // Algorithm: The algorithm might look complex, but actually it is not. We shall follow the brute force approach. It is just an
 //            extension of the previous problem. The only difference is that we have to return all the valid words that come in the
 //            path while building the targetWord from the startWord.
-
+// 1. a) Create a queue to store {node, steps} pair in order to facilitate BFS.
+//    b) Create a set and store all elements of wordList in it. This is made to make search faster.
+// 2. Push the startWord with 1 step in the queue.
+// 3. Dequeue the front element of queue and start altering first letter of the word with all possible characters from 'a' to 'z',
+//    to check if any valid word(a word that exists in the set) can be formed or not. If a valid word is formed, push that word
+//    along with the steps in the queue and erase that word from the set. Continue the process until the queue is empty.
+// 4. If the targetWord is found, then return the no.of steps. If not found, return 0.
+// 5. If the targetWord is found, then backtrack the path from targetWord to startWord and store all the words in the path in a
+//    vector. Return the vector.
 
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
+    // T.C: O(N * M * 26^L), N = no.of words in wordList, M = length of each word, L = length of the word
+    // S.C: O(N * M * 26^L)
     vector<vector<string>> findSequences(string beginWord, string endWord, vector<string>& wordList) {
         unordered_set<string> st(wordList.begin(), wordList.end());
         queue<vector<string>> q;
@@ -99,6 +107,7 @@ int main() {
         for(int j = 0; j < ans[i].size(); j++) {
             cout << ans[i][j] << " ";
         }
+        cout << endl;
     }
     cout << endl;
 
