@@ -38,18 +38,18 @@
 // The shortest distance from 0 to 1 is 1.
 
 // Algorithm (priority queue):
-// 1.  Create a priority queue 'pq' to store the pair of integers. The first integer will store the distance of the node from
-//     the source vertex and the second integer will store the node number.
-// 2.  Create a vector 'dist' of size equal to the number of vertices in the graph and initialize all the elements with INT_MAX.
-// 3.  Push the pair {0, src} in the priority queue. This means that the distance of the source vertex from itself is 0.
-// 4.  Initialize the distance of the source vertex from itself as 0 in the 'dist' vector.
-// 5.  Run a while loop until the priority queue is not empty.
-// 6.  Dequeue the front element of the priority queue and store the distance in 'dis' and the node number in 'node'.
-// 7.  Traverse through all the adjacent nodes of the current node and update the distance of the adjacent node if the new
-//     distance is less than the previous distance.
-// 8.  Push the pair {dist[adjNode], adjNode} in the priority queue.
-// 9.  Repeat the above steps 6-8 until the priority queue is empty.
-// 10. Return the 'dist' vector.
+// 1. a) Create a priority queue (min-Heap) 'pq' to store the pair of integers. The first integer will store the distance of
+//       the node from the source vertex and the second integer will store the node number.
+//    b) Create a vector 'dist' of size equal to the number of vertices in the graph and initialize all the elements with INT_MAX.
+// 2. Push the pair {0, src} in the priority queue. This means that the distance of the source vertex from itself is 0.
+// 3. Initialize the distance of the source vertex from itself as 0 in the 'dist' vector.
+// 4. Run a while loop until the priority queue is not empty. Dequeue the front element of the priority queue and store the
+//    distance in 'dis' and the node number in 'node'.
+// 5. Traverse through all the adjacent nodes of the current node and update the distance of the adjacent node if the new
+//    distance is less than the previous distance.
+// 6. Push the pair {dist[adjNode], adjNode} in the priority queue. Repeat the above steps 4-6 until the priority queue is empty.
+// 7. Return the 'dist' vector.
+
 
 #include <bits/stdc++.h>
 using namespace std;
