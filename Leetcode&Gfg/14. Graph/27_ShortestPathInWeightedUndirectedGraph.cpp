@@ -8,6 +8,7 @@
 // Note: The driver code here will first check if the weight of the path returned is equal to the sum of the
 // weights along the nodes on that path, if equal it will output the weight of the path, else -2. In case the
 // list contains only a single element (-1) it will simply output -1.
+// Problem link: https://www.geeksforgeeks.org/problems/shortest-path-in-weighted-undirected-graph/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=shortest-path-in-weighted-undirected-graph
 
 // Example 1:
 // Input:
