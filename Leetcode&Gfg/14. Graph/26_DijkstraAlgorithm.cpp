@@ -110,7 +110,7 @@ public:
         dist[src] = 0;
 
         while(!st.empty()) {
-            auto it = *st.begin();
+            auto it = *st.begin();   // set by default stores elements in ascending order. So 'it' is sorted by distance.
             int dis = it.first;
             int node = it.second;
             st.erase(it);
