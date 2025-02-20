@@ -50,6 +50,20 @@
 // 6. Push the pair {dist[adjNode], adjNode} in the priority queue. Repeat the above steps 4-6 until the priority queue is empty.
 // 7. Return the 'dist' vector.
 
+// Algorithm (set): Almost same algorithm as priority queue.
+// 1. a) Create a set 'st' to store the pair of integers. The first integer will store the distance of the node from the source
+//       vertex and the second integer will store the node number.
+//    b) Create a vector 'dist' of size equal to the number of vertices in the graph and initialize all the elements with INT_MAX.
+// 2. Insert the pair {0, src} in the set. This means that the distance of the source vertex from itself is 0.
+// 3. Initialize the distance of the source vertex from itself as 0 in the 'dist' vector.
+// 4. Run a while loop until the set is not empty. Dequeue the front element of the set and store the distance in 'dis' and the
+//    node number in 'node'.
+// 5. Traverse through all the adjacent nodes of the current node and update the distance of the adjacent node if the new distance
+//    is less than the previous distance. To update the distance of the adjacent node, first erase the old pair from the set and
+//    then insert the new pair in the set.
+// 6. Repeat the above steps 4-5 until the set is empty.
+// 7. Return the 'dist' vector.
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -86,10 +100,34 @@ public:
 
 // ---------------------------------------------------------------------------------------------------------------
 
-    // T.C: 
-    // S.C:  
+    // T.C: O(E * log(V));   where E = no.of edges, V = no.of vertices
+    // S.C: O(V)
     vector<int> dijkstra_set(vector<vector<pair<int, int>>> &adj, int src) {
+        set<pair<int, int>> st;
+        vector<int> dist(adj.size(), INT_MAX);
 
+        st.insert({0, src});
+        dist[src] = 0;
+
+        while(!st.empty()) {
+            auto it = *st.begin();
+            int dis = it.first;
+            int node = it.second;
+            st.erase(it);
+
+            for(auto it: adj[node]) {
+                int edgeWeight = it.second;
+                int adjNode = it.first;
+
+                if(dis + edgeWeight < dist[adjNode]) {
+                    st.erase({dist[adjNode], adjNode});   // erase the old pair from set
+                    dist[adjNode] = dis + edgeWeight;   // update the distance
+                    st.insert({dist[adjNode], adjNode});   // insert the new pair in set
+                }
+            }
+        }
+
+        return dist;
     }
 };
 
@@ -98,8 +136,14 @@ int main() {
     vector<vector<pair<int, int>>> adj = {{{1, 1}, {2, 6}}, {{2, 3}, {0, 1}}, {{1, 3}, {0, 6}}};
     int src = 2;
 
-    vector<int> ans = Solution().dijkstra_priorityQueue(adj, src);
-    for(auto it: ans) {
+    vector<int> ans1 = Solution().dijkstra_priorityQueue(adj, src);
+    for(auto it: ans1) {
+        cout << it << " ";
+    }
+    cout << endl;
+
+    vector<int> ans2 = Solution().dijkstra_set(adj, src);
+    for(auto it: ans2) {
         cout << it << " ";
     }
 
