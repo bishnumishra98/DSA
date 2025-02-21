@@ -57,7 +57,7 @@ public:
     // T.C: O(E * log(V));   where E = no.of edges, V = no.of vertices
     // S.C: O(V)
     vector<int> shortestPath(int n, int m, vector<vector<int>>& edges) {
-        vector<vector<pair<int, int>>> adj(n + 1);
+        vector<vector<pair<int, int>>> adj(n + 1);   // node -> {adjNode, edgeWeight}
         for(auto it: edges) {
             adj[it[0]].push_back({it[1], it[2]});
             adj[it[1]].push_back({it[0], it[2]});
