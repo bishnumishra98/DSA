@@ -14,14 +14,14 @@
 // Input:
 // n = 5, m = 6, edges = [[1, 2, 2], [2, 5, 5], [2, 3, 4], [1, 4, 1], [4, 3, 3], [3, 5, 1]]
 // Output:
-// 1 4 3 5
-// Explanation: Shortest path from 1 to n is by the path 1 4 3 5.
+// 5 1 4 3 5
+// Explanation: Shortest path from 1 to n is by the path 1 4 3 5 whose weight is 5.
 
 // Example 2:
 // Input:
 // n = 2, m = 1, edges = [[1, 2, 2]]
-// Output: 1 2
-// Explanation: Shortest path from 1 to 2 is by the path 1 2.
+// Output: 2 1 2
+// Explanation: Shortest path from 1 to 2 is by the path 1 2 whose weight is 2. 
 
 // Example 3:
 // Input: n = 2, m = 0, edges = [ ]
@@ -35,7 +35,7 @@
 //        node from the source vertex and the second integer will store the node number.
 //     b) Create a vector 'dist' of size n+1 and initialize all the elements with INT_MAX.
 //     c) Create a vector 'parent' of size n+1 and initialize all the elements with -1.
-// 4.  Push the pair {0, 1} in the priority queue. This means that the distance of the source vertex from itself is 0.
+// 4.  Push the pair {0, src} in the priority queue. This means that the distance of the source vertex from itself is 0.
 // 5.  Initialize the distance of the source vertex from itself as 0 in the 'dist' vector and the parent of the source
 //     vertex as itself.
 // 6.  Run a while loop until the priority queue is not empty. Dequeue the front element of the priority queue and store
@@ -45,8 +45,9 @@
 // 8.  Push the pair {dist[adjNode], adjNode} in the priority queue. Repeat the above steps 6-8 until the priority queue
 //     is empty. If the distance of the destination node is INT_MAX, return {-1}.
 // 9.  Create a vector 'path' and initialize 'node' as n.
-// 10. Traverse through the parent array and add the nodes in the 'path' vector until the parent of the node is itself.
-// 11. Reverse the 'path' vector and return the 'path' vector.
+// 10. Traverse from the destination node to the source node and store the nodes in the 'path' vector.
+// 11. Reverse the 'path' vector and insert the distance of the destination node at the beginning of the 'path' vector.
+// 12. Return the 'path' vector.
 
 
 #include <bits/stdc++.h>
@@ -63,13 +64,16 @@ public:
             adj[it[1]].push_back({it[0], it[2]});
         }
 
+        // Dijkstra's Algorithm
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        vector<int> dist(n + 1, INT_MAX);
+        vector<int> dist(n + 1, 1e9);
         vector<int> parent(n + 1, -1);
 
-        pq.push({0, 1});
-        dist[1] = 0;
-        parent[1] = 1;
+        int src = 1, dest = n;
+
+        pq.push({0, src});
+        dist[src] = 0;
+        parent[src] = src;
 
         while(!pq.empty()) {
             auto it = pq.top();
@@ -89,16 +93,19 @@ public:
             }
         }
 
-        if(dist[n] == INT_MAX) return {-1};
+        if(dist[n] == 1e9) return {-1};
 
         vector<int> path;
-        int node = n;
-        while(parent[node] != node) {
+        int node = dest;
+        while(node != src) {
             path.push_back(node);
-            node = parent[node];
+            node = parent[node];   // move back the node from where it came
         }
-        path.push_back(1);
+        path.push_back(src);
         reverse(path.begin(), path.end());
+
+        path.insert(path.begin(), dist[dest]);   // prepend the total weight of the path
+
         return path;
     }
 };
@@ -109,10 +116,8 @@ int main() {
     vector<vector<int>> edges = {{1, 2, 2}, {2, 5, 5}, {2, 3, 4}, {1, 4, 1}, {4, 3, 3}, {3, 5, 1}};
 
     vector<int> ans = Solution().shortestPath(n, m, edges);
-    int sum = 0;
     for(int i: ans) {
         cout << i << " ";
-        sum += i;
     }
 
     return 0;
