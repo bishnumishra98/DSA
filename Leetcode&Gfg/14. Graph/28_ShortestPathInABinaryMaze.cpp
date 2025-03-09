@@ -55,16 +55,15 @@
 //    each cell from the source cell.
 // 3. Initialize the distance of the source cell as 0 in the dist[][] array.
 // 4. Run a loop until the queue is not empty.
-// 5. Pop the front element of the queue and store it in a variable it.
-// 6. Extract the distance, row, and column of the cell from the variable it.
-// 7. Run a loop from i = 0 to 3. In each iteration, calculate the new row and column of the cell by adding dr[i] and dc[i] to
-//    the current row and column respectively. dr[] and dc[] are arrays that store the change in row and column respectively
-//    to move in all four directions.
-// 8. Check if the new row and column are within the matrix bounds and the cell is not visited and the cell is not blocked.
-//    If all the conditions are satisfied, then update the distance of the new cell as dis + 1 and push the new cell into the
-//    queue.
-// 9. If the new cell is the destination cell, then return the distance of the new cell.
-// 10. If the destination cell is not reached, then return -1.
+//    i.   Pop the front element of the queue and store it in a variable it.
+//    ii.  Extract the distance, row, and column of the cell from the variable it.
+//    iii. Move in all four directions: up, right, bottom and left. And check if the coordinates are within the matrix bounds
+//         and the cell is not blocked, and the new distance is less than the previous distance. If all the conditions are
+//         satisfied, then do the following:
+//         a) If the new cell is the destination cell, then straight away return the distance + 1 and the function ends here.
+//         b) Update the distance of the new cell in the dist[][] array as distance + 1, and push the updated distance and
+//            the coordinates of the new cell in the queue.
+// 5. If the destination cell is not reached, then return -1.
 
 
 #include <bits/stdc++.h>
@@ -105,8 +104,8 @@ public:
 
                 if(newr >= 0 && newr < n && newc >= 0 && newc < m && grid[newr][newc] == 1
                 && dis + 1 < dist[newr][newc]) {
-                    dist[newr][newc] = dis + 1;
                     if(newr == destination.first && newc == destination.second) return dis + 1;
+                    dist[newr][newc] = dis + 1;
                     q.push({dis + 1, {newr, newc}});
                 }
             }
