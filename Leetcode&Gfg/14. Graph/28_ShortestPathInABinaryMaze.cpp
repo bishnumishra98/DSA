@@ -45,6 +45,8 @@
 // 2D integer array grid, source cell and destination cell as an input parameters and returns the shortest distance
 // between source and destination cell.
 
+// Problem link: https://www.geeksforgeeks.org/problems/shortest-path-in-a-binary-maze-1655453161/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=shortest-path-in-a-binary-maze
+
 // Algorithm:
 // 1. Create a queue and push the source cell into the queue with distance 0. We are following Djiakstra's algorithm only,
 //    but we do not require a priority queue as we are not updating the distance of a cell if it is already visited. We
@@ -74,6 +76,13 @@ public:
     // S.C: O(n*m)
     int shortestPath(vector<vector<int>> &grid, pair<int, int> source, pair<int, int> destination) {
         int n = grid.size(), m = grid[0].size();
+
+        // Edge case: If the source is the destination
+        if (source == destination) {   // source.first == destination.first && source.second == destination.second
+            if (grid[source.first][source.second] == 1) return 0;
+            else return -1;   // if the source/destination cell is blocked
+        }
+
         queue<pair<int, pair<int, int>>> q;
         vector<vector<int>> dist(n, vector<int>(m, 1e9));
 
