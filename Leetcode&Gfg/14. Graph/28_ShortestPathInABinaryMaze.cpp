@@ -48,7 +48,7 @@
 // Problem link: https://www.geeksforgeeks.org/problems/shortest-path-in-a-binary-maze-1655453161/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=shortest-path-in-a-binary-maze
 
 // Algorithm:
-// 1. Create a queue and push the source cell into the queue with distance 0. We are following Djiakstra's algorithm only,
+// 1. Create a queue and push the distance 0 with source cell coordinates. We are following Djiakstra's algorithm only,
 //    but we do not require a priority queue as we are not updating the distance of a cell if it is already visited. We
 //    are updating the distance of a cell only if it is not visited. So, we can use a normal queue.
 // 2. Create a 2D array dist[][] of size n*m and initialize it with 1e9. This array will store the minimum distance of
@@ -83,11 +83,12 @@ public:
             else return -1;   // if the source/destination cell is blocked
         }
 
-        queue<pair<int, pair<int, int>>> q;
-        vector<vector<int>> dist(n, vector<int>(m, 1e9));
-
-        dist[source.first][source.second] = 0;
+        queue<pair<int, pair<int, int>>> q;   // queue to store the distance and the cell coordinates
         q.push({0, {source.first, source.second}});
+
+        vector<vector<int>> dist(n, vector<int>(m, 1e9));   // to store the minimum distance of each cell from the source
+        dist[source.first][source.second] = 0;
+        
         int dr[] = {-1, 0, 1, 0};
         int dc[] = {0, 1, 0, -1};
 
