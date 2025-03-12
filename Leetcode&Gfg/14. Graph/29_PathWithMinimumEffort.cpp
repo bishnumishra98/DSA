@@ -36,7 +36,8 @@ using namespace std;
 class Solution {
 public:
     int MinimumEffort(int rows, int columns, vector<vector<int>> &heights) {
-        // code here
+        // Don't write auto complete code
+        
     }
 };
 
@@ -46,6 +47,6 @@ int main() {
 
     Solution obj;
     cout << obj.MinimumEffort(rows, columns, heights) << endl;
-    
+
     return 0;
 }
