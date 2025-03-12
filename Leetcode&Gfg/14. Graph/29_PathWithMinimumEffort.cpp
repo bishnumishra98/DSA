@@ -30,16 +30,66 @@
 // intergers rows, columns, and the 2D array heights[][]  and returns the minimum effort required to travel from the
 // top-left cell to the bottom-right cell.
 
+// Algorithm:
+// 1. Create a priority queue of pairs of integers and a pair of integers.
+// 2. Create a 2D vector of integers to store the minimum effort required to reach a cell.
+// 3. Initialize the priority queue with the top-left cell and the minimum effort required to reach that cell.
+// 4. Create two arrays to store the row and column directions.
+// 5. While the priority queue is not empty, pop the top element from the priority queue.
+// 6. If the current cell is the bottom-right cell, return the minimum effort required to reach that cell.
+// 7. Iterate over the four directions and calculate the new row and column.
+// 8. If the new row and column are within the bounds and the new effort is less than the minimum effort required to reach
+//    that cell, update the minimum effort required to reach that cell and push the new cell into the priority queue.
+// 9. Return 0 if the bottom-right cell is unreachable.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
+    // T.C: O(n*m*log(n*m))
+    // S.C: O(n*m)
     int MinimumEffort(int rows, int columns, vector<vector<int>> &heights) {
-        // Don't write auto complete code
-        
+        priority_queue<pair<int, pair<int, int>>,
+        vector<pair<int, pair<int, int>>>,
+        greater<pair<int, pair<int, int>>>> pq;
+
+        int n = heights.size(), m = heights[0].size();
+        vector<vector<int>> dist(n, vector<int>(m, 1e9));
+
+        dist[0][0] = 0;
+        pq.push({0, {0, 0}});
+        int dr[] = {-1, 0, 1, 0};
+        int dc[] = {0, 1, 0, -1};
+
+        while(!pq.empty()) {
+            auto it = pq.top();
+            pq.pop();
+
+            int diff = it.first;
+            int row = it.second.first;
+            int col = it.second.second;
+
+            if(row == n-1 && col == m-1) return diff;
+
+            for(int i = 0; i < 4; i++) {
+                int newr = row + dr[i];
+                int newc = col + dc[i];
+                if(newr >= 0 && newr < n && newc >= 0 && newc < m) {
+                    int newdiff = max(diff, abs(heights[newr][newc] - heights[row][col]));
+                    if(newdiff < dist[newr][newc]) {
+                        dist[newr][newc] = newdiff;
+                        pq.push({newdiff, {newr, newc}});
+                    }
+                }
+            }
+        }
+
+        return 0;   // unreachable
     }
 };
+
 
 int main() {
     int rows = 3, columns = 3;
