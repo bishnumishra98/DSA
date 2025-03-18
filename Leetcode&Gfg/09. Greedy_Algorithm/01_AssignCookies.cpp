@@ -18,13 +18,35 @@
 // Expected Time Complexity: O(nlogn)
 // Expected Auxiliary Space: O(1)
 
+// Algorithm: It is a very simple and easy greedy approach.
+// 1. Sort the greed and cookie arrays.
+// 2. Initialize two pointers i and j to each of the arrays, initially pointing at index 0.
+// 3. Traverse the arrays until either of the arrays is exhausted.
+//    i.  If greed of ith child is less than or equal to the cookie of jth size, then increment i.
+//    ii. Increment j in each iteration.
+// 4. Return the value of i, which is the maximum number of children that can be content.
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
+    // T.C: O(nlogn + mlogm + min(n, m))
+    // S.C: O(1)
     int maxChildren(vector<int> &greed, vector<int> &cookie) {
-        // Your Code goes here.
+        int n = greed.size(), m = cookie.size();
+        sort(greed.begin(), greed.end());
+        sort(cookie.begin(), cookie.end());
+
+        int i = 0, j = 0;
+        while(i < n && j < m) {
+            if(greed[i] <= cookie[j]) {
+                i++;
+            }
+            j++;
+        }
+
+        return i;
     }
 };
 
