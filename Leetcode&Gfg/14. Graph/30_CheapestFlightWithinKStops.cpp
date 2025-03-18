@@ -29,7 +29,8 @@
 //    with infinity except the source node, which will have 0 cost.
 // 4. While the queue is not empty:
 //    i.   Pop the top element from the queue. Extract the stops, node, and cost from it.
-//    ii.  If the stops are greater than K, continue to the next iteration.
+//    ii.  If the stops are greater than K, continue to the next iteration because we no need to go further to any
+//         other adjacent nodes, i.e., cities.
 //    iii. Traverse the adjacency list of the current node and calculate the new cost as the sum of the current cost and
 //         the cost of the adjacent node.
 //    iv.  If the new cost is less than the cost of the adjacent node and the stops are less than or equal to K, update
