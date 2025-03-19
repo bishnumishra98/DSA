@@ -25,8 +25,8 @@
 // 2. We will iterate from l to r, where l is the leftmost index of the current range and r is the rightmost index of
 //    the current range. We will find the farthest index we can reach from the current range.
 // 3. Traverse while r < n - 1, where n is the size of the array, because once r reaches 'n - 1'th index or beyond, we stop.
-//    i.  Find the farthest index we can reach from the current range.
-//    ii. Update l with r + 1 and r with the farthest index.
+//    i.   Find the farthest index we can reach from the current range.
+//    ii.  Update l with r + 1 and r with the farthest index.
 //    iii. Increment the jumps.
 // 4. Return the number of jumps.
 
