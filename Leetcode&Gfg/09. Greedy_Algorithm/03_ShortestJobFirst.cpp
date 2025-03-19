@@ -40,18 +40,18 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(nlogn);   where n = bt.size()
+    // T.C: O(nlogn) + O(n) = O(nlogn);   where n = bt.size()
     // S.C: O(1)
     long long solve(vector<int>& bt) {
         sort(bt.begin(), bt.end());
-        long long waitTime = 0, time = 0;
+        long long totalWaitTime = 0, waitTime = 0;
 
         for(int i = 0; i < bt.size(); i++) {
-            waitTime += time;
-            time += bt[i];
+            totalWaitTime += waitTime;
+            waitTime += bt[i];
         }
 
-        return waitTime / bt.size();
+        return totalWaitTime / bt.size();
     }
 };
 
