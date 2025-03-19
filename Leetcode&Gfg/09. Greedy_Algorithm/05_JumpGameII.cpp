@@ -24,8 +24,9 @@
 // 1. We will keep track of the current end index 'currEnd' and the current farthest index 'currFarthest' we can reach.
 //    Initialize jumps, currEnd, and currFarthest to 0. 'currEnd' represents the end of the current jump range, and
 //    'currFarthest' is the farthest index we can reach from the current jump range.
-// 2. Traverse the array from i = 0 to n-1, and for each index i, update the currFarthest with the maximum of currFarthest
-//    and i + nums[i]. This will help us to keep track of the maximum index we can reach from the current jump range.
+// 2. Traverse the array from i = 0 to n-2(we stop before the last index because reaching it completes the goal), and
+//    for each index i, update the currFarthest with the maximum of currFarthest and i + nums[i]. This will help us to
+//    keep track of the maximum index we can reach from the current jump range.
 //    If i == currEnd, it means the current jump range is exhausted, and we need to jump to the next range. Thus, increment
 //    jumps and update currEnd with currFarthest.
 // 3. Finally, return the number of jumps.
