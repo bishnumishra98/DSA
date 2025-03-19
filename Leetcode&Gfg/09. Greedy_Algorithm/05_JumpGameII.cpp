@@ -59,7 +59,7 @@ int main() {
     vector<int> nums = {1, 2, 3, 1, 2, 0, 2, 5};
 
     Solution obj;
-    cout << obj.jump(nums);
+    cout << obj.jump(nums) << endl;
 
     return 0;
 }
