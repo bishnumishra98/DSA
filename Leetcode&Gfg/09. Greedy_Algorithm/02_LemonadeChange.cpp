@@ -18,7 +18,6 @@
 // From the fifth customer, we give a $10 bill and a $5 bill.
 // Since all customers got correct change we return true.
  
-
 // Example 2:
 // Input:
 // N = 5
@@ -38,13 +37,53 @@
 // Expected Time Complexity: O(N)
 // Expected Auxiliary Space: O(1)
 
+// Problem link: https://www.geeksforgeeks.org/problems/lemonade-change/0
+
+// Algorithm: Very simple and easy greedy approach.
+// 1. Initialize two variables five and ten to 0, because we can return only either fives or ten.
+// 2. Traverse the bills array.
+//    Case 1:  If the bill is 5:
+//             We can give a lemon and take one $5 note, so increment five.
+//    Case 2:  If the bill is 10:
+//             If we have a $5 note, then we can give a lemon, take the $10 note and give a $5 note, so decrement five and increment ten.
+//             Otherwise, return false.
+//    Case 3:  If the bill is 20:
+//             If we have a $5 note and a $10 note, then we can give a lemon, take the $20 note and give a $5 note and a $10 note,
+//             so decrement five and ten.
+//             Otherwise, if we have three $5 notes, then we can give a lemon, take the $20 note and give three $5 notes, so decrement
+//             five by 3.
+//             Otherwise, return false.
+// 3. If the whole array is traversed, it means we could sell lemons to all customers, so return true.
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
+    // T.C: O(N)
+    // S.C: O(1)
     bool lemonadeChange(int N, vector<int> &bills) {
-        // code here
+        int five = 0, ten = 0;   // because we can return only either fives or ten
+
+        for(int i = 0; i < N; i++) {
+            if(bills[i] == 5) {
+                five++;
+            } else if(bills[i] == 10) {
+                if(five) {
+                    five--;
+                    ten++;
+                } else return false;
+            } else {   // bills[i] == 20
+                if(five && ten) {
+                    five--;
+                    ten--;
+                } else if(five >= 3) {
+                    five -= 3;
+                } else return false;
+            }
+        }
+
+        return true;
     }
 };
 
