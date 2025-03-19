@@ -20,16 +20,15 @@
 // Input: nums = [1, 2, 3, 1, 2, 0, 2, 5]
 // Output: 5
 
-// Algorithm: This is a greedy approach.
-// 1. We will keep track of the current end index 'currEnd' and the current farthest index 'currFarthest' we can reach.
-//    Initialize jumps, currEnd, and currFarthest to 0. 'currEnd' represents the end of the current jump range, and
-//    'currFarthest' is the farthest index we can reach from the current jump range.
-// 2. Traverse the array from i = 0 to n-2(we stop before the last index because reaching it completes the goal), and
-//    for each index i, update the currFarthest with the maximum of currFarthest and i + nums[i]. This will help us to
-//    keep track of the maximum index we can reach from the current jump range.
-//    If i == currEnd, it means the current jump range is exhausted, and we need to jump to the next range. Thus, increment
-//    jumps and update currEnd with currFarthest.
-// 3. Finally, return the number of jumps.
+// Algorithm: This is a greedy approach based on range.
+// 1. We will keep track of the current range of the jumps.
+// 2. We will iterate from l to r, where l is the leftmost index of the current range and r is the rightmost index of
+//    the current range. We will find the farthest index we can reach from the current range.
+// 3. Traverse while r < n - 1, where n is the size of the array, because once r reaches 'n - 1'th index or beyond, we stop.
+//    i.  Find the farthest index we can reach from the current range.
+//    ii. Update l with r + 1 and r with the farthest index.
+//    iii. Increment the jumps.
+// 4. Return the number of jumps.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -40,15 +39,16 @@ public:
     // S.C: O(1)
     int jump(vector<int>& nums) {
         int n = nums.size();
-        if(n == 1) return 0;
+        int jumps = 0, l = 0, r = 0;
 
-        int jumps = 0, currEnd = 0, currFarthest = 0;
-        for(int i = 0; i < n - 1; i++) {
-            currFarthest = max(currFarthest, i + nums[i]);
-            if(i == currEnd) {
-                jumps++;
-                currEnd = currFarthest;
+        while(r < n - 1) {
+            int farthest = 0;
+            for(int i = l; i <= r; i++) {
+                farthest = max(farthest, i + nums[i]);
             }
+            l = r + 1;
+            r = farthest;
+            jumps++;
         }
 
         return jumps;
