@@ -27,13 +27,31 @@
 // Expected Time Complexity: O(nlog(n))
 // Expected Auxiliary Space: O(1)
 
+// Algorithm: It is a very simple and easy greedy approach.
+// 1. Sort the burst time array.
+// 2. Initialize two variables waitTime and time to 0.
+// 3. Traverse the array.
+//    i.  Add time to waitTime.
+//    ii. Increment time by the burst time of the current process.
+// 4. Return the average waiting time by dividing waitTime by the size of the array.
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
+    // T.C: O(nlogn);   where n = bt.size()
+    // S.C: O(1)
     long long solve(vector<int>& bt) {
-        // code here
+        sort(bt.begin(), bt.end());
+        long long waitTime = 0, time = 0;
+
+        for(int i = 0; i < bt.size(); i++) {
+            waitTime += time;
+            time += bt[i];
+        }
+
+        return waitTime / bt.size();
     }
 };
 
