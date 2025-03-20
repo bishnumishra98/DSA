@@ -76,6 +76,7 @@ public:
         result[0] = maxJobs;
         result[1] = maxProfit;
         return result;
+        // Note: If sequence of jobs scheduled on each day is asked, then return the 'slot' vector.
     }
 };
 
