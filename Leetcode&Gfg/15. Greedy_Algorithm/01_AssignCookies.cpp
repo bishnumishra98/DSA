@@ -18,6 +18,8 @@
 // Expected Time Complexity: O(nlogn)
 // Expected Auxiliary Space: O(1)
 
+// Problem link: https://www.geeksforgeeks.org/problems/assign-cookies/0
+
 // Algorithm: It is a very simple and easy greedy approach.
 // 1. Sort the greed and cookie arrays.
 // 2. Initialize two pointers i and j to each of the arrays, initially pointing at index 0.

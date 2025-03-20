@@ -20,6 +20,8 @@
 // Output: [3, 100]
 // Explanation: Job1, Job3 and Job4 can be completed with a maximum profit of 100 (50 + 20 + 30).
 
+// Problem link: https://www.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1
+
 // Algorithm: This is a greedy approach. We want to maximize the profit, so we would like to consider the jobs with
 // higher profit first. Also, we want to complete as many jobs as possible, so that profits can be further maximized,
 // Thus we will try to complete the jobs with the nearest deadline first, i.e., delay the jobs to be executed as late as

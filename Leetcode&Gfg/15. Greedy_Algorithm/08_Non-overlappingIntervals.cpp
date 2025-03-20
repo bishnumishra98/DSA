@@ -17,6 +17,8 @@
 // Output: 0
 // Explanation: You don't need to remove any of the intervals since they're already non-overlapping.
 
+// Problem link: https://leetcode.com/problems/non-overlapping-intervals/description/
+
 // Algorithm: It is exactly the same as the previous problem 'Leetcode&Gfg\15. Greedy_Algorithm\07_NMeetingsInOneRoom.cpp'.
 // The only difference is that we need to find the minimum number of intervals to remove to make the rest of the intervals
 // non-overlapping. So, the total number of intervals less the maximum number of intervals that can be accommodated in a

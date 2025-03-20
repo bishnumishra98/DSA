@@ -1,4 +1,4 @@
-// Leetcode: 57. Insert Intervals   --->   You are given an array of non-overlapping intervals intervals where
+// Leetcode: 57. Insert Interval   --->   You are given an array of non-overlapping intervals intervals where
 // intervals[i] = [starti, endi] represent the start and the end of the ith interval and intervals is sorted in
 // ascending order by starti. You are also given an interval newInterval = [start, end] that represents the start
 // and end of another interval.
@@ -15,6 +15,8 @@
 // Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
 // Output: [[1,2],[3,10],[12,16]]
 // Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+
+// Problem link: https://leetcode.com/problems/insert-interval/description/
 
 // Algorithm: The algortihm is very simple. We will divide the given intervals into 3 parts: left, middle(overlapping) and right.
 // 1. Create a vector of vector to store the final result.

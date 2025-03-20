@@ -1,4 +1,4 @@
-// Leetcode: Jump Game II   --->   You are given a 0-indexed array of integers nums of length n. You are initially
+// Leetcode: 45. Jump Game II   --->   You are given a 0-indexed array of integers nums of length n. You are initially
 // positioned at nums[0].
 // Each element nums[i] represents the maximum length of a forward jump from index i. In other words, if you are at
 // nums[i], you can jump to any nums[i + j] where:
@@ -19,6 +19,8 @@
 // Example 3:
 // Input: nums = [1, 2, 3, 1, 2, 0, 2, 5]
 // Output: 5
+
+// Problem link: https://leetcode.com/problems/jump-game-ii/description/
 
 // Algorithm: This is a greedy approach based on range.
 // 1. We will keep track of the current range of the jumps.

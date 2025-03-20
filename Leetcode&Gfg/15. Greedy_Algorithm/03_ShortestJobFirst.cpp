@@ -27,6 +27,8 @@
 // Expected Time Complexity: O(nlog(n))
 // Expected Auxiliary Space: O(1)
 
+// Problem link: https://www.geeksforgeeks.org/problems/shortest-job-first/0
+
 // Algorithm: It is a very simple and easy greedy approach.
 // 1. Sort the burst time array.
 // 2. Initialize two variables waitTime and time to 0.
