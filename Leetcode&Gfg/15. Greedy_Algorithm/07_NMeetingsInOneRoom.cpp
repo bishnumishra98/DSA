@@ -40,7 +40,7 @@ public:
     // S.C: O(n)
     int maxMeetings(vector<int>& start, vector<int>& end) {
         int n = start.size();
-        if (n == 0) return 0;   // handle empty input case
+        if(n == 0) return 0;   // handle empty input case
 
         vector<pair<int, int>> meetings(n);   // {end, start}
         for(int i = 0; i < n; i++) {
@@ -53,7 +53,7 @@ public:
         int maxMeetings = 0;
         int prevEnd = -1;
         
-        for (int i = 0; i < n; i++) {
+        for(int i = 0; i < n; i++) {
             if (meetings[i].second > prevEnd) {
                 maxMeetings++;
                 prevEnd = meetings[i].first;
@@ -71,10 +71,10 @@ public:
     // meetings that are scheduled in the meeting room. The code snippet for the same is as follows:
     vector<int> selectedMeetings(vector<int>& start, vector<int>& end) {
         int n = start.size();
-        if (n == 0) return {};   // handle empty input case
+        if(n == 0) return {};   // handle empty input case
 
         vector<pair<int, pair<int, int>>> meetings(n);   // {end, {start, id}}
-        for (int i = 0; i < n; i++) {
+        for(int i = 0; i < n; i++) {
             meetings[i] = {end[i], {start[i], i + 1}};   // include original meeting ID (1-based index)
         }
 
@@ -84,8 +84,8 @@ public:
         int prevEnd = -1;
         vector<int> result;
 
-        for (int i = 0; i < n; i++) {
-            if (meetings[i].second.first > prevEnd) {
+        for(int i = 0; i < n; i++) {
+            if(meetings[i].second.first > prevEnd) {
                 prevEnd = meetings[i].first;
                 result.push_back(meetings[i].second.second);
             }
