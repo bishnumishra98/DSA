@@ -16,13 +16,47 @@
 // Output: [[1,2],[3,10],[12,16]]
 // Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
 
+// Algorithm: The algortihm is very simple. We will divide the given intervals into 3 parts: left, middle(overlapping) and right.
+// 1. Create a vector of vector to store the final result.
+// 2. Create an iterator i to traverse the intervals array, initially set to 0.
+// 3. Traverse the intervals array and add all the intervals which are less than newInterval[0] to the result.
+// 4. Traverse the intervals array and merge all the overlapping intervals with newInterval.
+// 5. Traverse the intervals array and add all the intervals which are greater than newInterval[1] to the result.
+// 6. Return the result.
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
+    // T.C: O(n)
+    // S.C: O(n)
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
-        
+        vector<vector<int>> res;   // to store the final result
+        int n = intervals.size();
+        int i = 0;
+
+        // Left part: Here no overlapping interval is there. So, we will add all the intervals which are less than newInterval[0].
+        while(i < n && intervals[i][1] < newInterval[0]) {
+            res.push_back(intervals[i]);
+            i++;
+        }
+
+        // Middle part: Here overlapping interval is there. So, we will merge all the overlapping intervals.
+        while(i < n && intervals[i][0] <= newInterval[1]) {
+            newInterval[0] = min(newInterval[0], intervals[i][0]);
+            newInterval[1] = max(newInterval[1], intervals[i][1]);
+            i++;
+        }
+        res.push_back(newInterval);
+
+        // Right part: Here no overlapping interval is there. So, we will add all the intervals which are greater than newInterval[1].
+        while(i < n) {
+            res.push_back(intervals[i]);
+            i++;
+        }
+
+        return res;
     }
 };
 
@@ -33,7 +67,7 @@ int main() {
     Solution sol;
     vector<vector<int>> res = sol.insert(intervals, newInterval);
     for(auto x: res) {
-        cout << x[0] << " " << x[1] << endl;
+        cout << "(" << x[0] << ", " << x[1] << ")" << endl;
     }
 
     return 0;
