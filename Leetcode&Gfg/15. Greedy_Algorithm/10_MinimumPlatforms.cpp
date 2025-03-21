@@ -43,9 +43,9 @@
 // At time 1900, a train departs and we don't need a platform. So, platform = 1.
 // At time 2000, a train departs and we don't need a platform. So, platform = 0.
 // So, the maximum number of platforms needed at any time is 3.
-// The arrival array is already sorted, so if we sort the departure array, we can easily monitor the number of platforms
-// needed at any time. Just initialize two pointers i and j to 0. i will point to the arrival time and j will point to the
-// departure time. If the time pointed by i is less than or equal to time pointed by j, it means a train has arrived before
+// If we sort the arrival and the departure array, we can easily monitor the number of platforms needed at any time.
+// Just initialize two pointers i and j to 0. i will point to the arrival time and j will point to the departure time.
+// If the time pointed by i is less than or equal to time pointed by j, it means a train has arrived before
 // another train has departed. So, we need a platform. Hence, increment the platform and move the i pointer ahead.
 // Else if the time pointed by i is greater than the time pointed by j, it means a train has arrived after another train
 // has departed. So, we don't need a platform. We can use the same platform from where the previous train has departed.
@@ -53,9 +53,8 @@
 // at any time and find out the maximum number of platforms needed at any time.
 
 // Algorithm:
-// 1. Sort the arrival and departure times of the trains. In this problem, arrival time array is already sorted, so
-//    no need to sort it again. In order to not manipulate the given departure array, we will create a copy of it
-//    and sort it.
+// 1. Sort the arrival and departure times of the trains. In order to not manipulate the given arrays,
+//    create a copy of them and then sort them.
 // 2. Initialize two pointers i and j to 0. i will point to the arrival time and j will point to the departure time.
 // 3. Initialize a variable platform to 0 and maxPlatform to 0.
 // 4. While i < n and j < n, do the following:
@@ -76,12 +75,14 @@ public:
     // S.C: O(n)
     int findPlatform(vector<int>& arr, vector<int>& dep) {
         int n = arr.size();
+        vector<int> sortedArr = arr;
+        sort(sortedArr.begin(), sortedArr.end());
         vector<int> sortedDep = dep;
         sort(sortedDep.begin(), sortedDep.end());
 
         int i = 0, j = 0, platform = 0, maxPlatform = 0;
         while (i < n && j < n) {
-            if (arr[i] <= sortedDep[j]) {
+            if (sortedArr[i] <= sortedDep[j]) {
                 platform++;
                 i++;
             } else {
