@@ -34,7 +34,6 @@
 // 3. At the end of the loop, if count == 0, return true. Else, return false.
 
 
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -62,11 +61,59 @@ public:
     }
 
 // -----------------------------------------------------------------------------------------------------------------
+
+    // Optimal approach algorithm: The idea is inspired by brute force. The idea is to keep track of minimum and maximum
+    // value of count. If we encounter a '(', then we used to increment count. If we encounter a ')', then we used to decrement
+    // count. If we encounter '*', then we had 3 choices which would make the count either increase(+1), decrease(-1) or remain
+    // the same(+0). So instead of maintaining a count, we will be maintaining a range of count (from count - 1 to count + 1).
+    // So the minimum value of count will be count - 1, and maximum value of count will be count + 1.
+    // 1. Initialize min and max value of count to 0.
+    // 2. Iterate through the string. For each character, do the following:
+    //    i.   If character is '(':
+    //            Increment both min and max value of count by 1.
+    //    ii.  Else if character is ')':
+    //            Decrement both min and max value of count by 1.
+    //    iii: Else if character is '*':
+    //            Decrement min value of count by 1 and increment max value of count by 1 as we have 3 choices for '*'
+    //            as discussed above.
+    //    iv. If Maximum value of count is negative:
+    //            It means that there are more ')' than '(' and '*' in the string. Thus, return false stating that a valid string
+    //            is not possible.
+    //    v. If minimum value of count is negative:
+    //            It means that max value is still >= 0, otherwise we would have returned from above only. Only min value has come
+    //            down to negative. It can only happen is a '*' is encountered and is treated as ')'. Thus, there is no use of
+    //            considering '*' as ')', as a valid string is not possible. So, explore the other minimum value of count, i.e.,
+    //            an empty character or blank. Thus, set the min value of count to 0.
+    // 3. At the end of the loop, if range of count is within 0 to +ve number, it means a valid string is possible. Thus, check if
+    //    the minimum value of count is 0. If it is 0, return true. Else, return false.
+
+    // T.C: O(n);   where n = s.length()
+    // S.C: O(1)
+    bool checkValidString(string s) {
+        int min = 0, max = 0;
+        for(char c : s) {
+            if(c == '(') {
+                min++;
+                max++;
+            } else if (c == ')') {
+                min--;
+                max--;
+            } else {
+                min--;
+                max++;
+            }
+            if(max < 0) return false;
+            if(min < 0) min = 0;
+        }
+
+        return min == 0;
+    }
 };
 
 int main() {
     Solution sol;
-    cout << sol.checkValidString_bruteforce("(*))");
+    cout << sol.checkValidString_bruteforce("(*))") << endl;
+    cout << sol.checkValidString("(*))");
 
     return 0;
 }
