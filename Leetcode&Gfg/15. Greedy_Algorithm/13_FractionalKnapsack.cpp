@@ -24,7 +24,7 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1
 
-// Brute force Algorithm: Extremely simple
+// Algorithm: Extremely simple.
 // 1. Calculate density of each item (value/weight) and store it in a vector of pairs.
 // 2. Sort the items by density in descending order.
 // 3. Traverse the items and take the whole item if capacity is greater than or equal to weight of the item.
@@ -38,7 +38,7 @@ class Solution {
 public:
     // T.C: O(nlogn) + O(n) = O(nlogn)
     // S.C: O(n)
-    double fractionalKnapsack_bruteforce(vector<int>& val, vector<int>& wt, int capacity) {
+    double fractionalKnapsack(vector<int>& val, vector<int>& wt, int capacity) {
         int n = val.size();
         vector<double> density(n);
         
@@ -77,7 +77,7 @@ int main() {
     int capacity = 50;
 
     Solution obj;
-    cout << obj.fractionalKnapsack_bruteforce(val, wt, capacity) << endl;
+    cout << obj.fractionalKnapsack(val, wt, capacity) << endl;
 
     return 0;
 }
