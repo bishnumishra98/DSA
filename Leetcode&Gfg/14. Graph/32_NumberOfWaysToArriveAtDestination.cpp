@@ -22,6 +22,21 @@
 // Output: 1
 // Explanation: There is only one way to go from intersection 0 to intersection 1, and it takes 10 minutes.
 
+// Algorithm: Simple Dijkstra's Algorithm
+// 1. Create an adjacency list of the graph.
+// 2. Create a priority queue to store the distance and node pair. Initialize the distance and ways vectors to track the
+//    least distance and the number of ways to reach a node.
+// 3. Push the start node into the priority queue with distance 0 and ways 1.
+// 4. Run a while loop until the priority queue is empty.
+//    i.   Pop the top element from the priority queue. Extract the distance and node from the top element.
+//    ii.  Traverse the adjacency list of the current node. For each neighbour, check if the distance from the current node
+//         to the neighbour plus the distance of the current node is less than the distance of the neighbour. If yes, update
+//         the distance of the neighbour and the number of ways to reach the neighbour.
+//    iii. If the distance of the neighbour is equal to the distance of the current node plus the distance from the current
+//         node to the neighbour, then update the number of ways to reach the neighbour.
+// 5. Return the number of ways to reach the destination node.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -37,7 +52,7 @@ public:
         }
 
         int start = 0;
-        int end = n-1;
+        int end = n - 1;
 
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;   // {distance, node}
         vector<int> dist(n, 1e9), ways(n, 0);   // distance, ways vectors to track least distance and no.of ways to reach a node
