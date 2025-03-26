@@ -35,13 +35,52 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/minimum-multiplications-to-reach-end/0
 
+// Algorithm: It is a simple BFS. We will start from the start node and keep on multiplying it with the numbers in the array
+// and then take mod with 100000. We will keep on doing this until we reach the end node.
+// 1. i.  Create a queue and push the steps to reach start(0) along with start node in it. We will be following Djiakstra's
+//       algorithm, but a priority queue is not required here as we are not dealing with weights. We just need to keep track
+//       of the steps taken to reach a node. So a queue will also work fine.
+//    ii. Create a vector dist of size 100000 and initialize it with 1e9.
+// 2. Initialize dist[start] = 0, as we need 0 steps to reach start from start.
+// 3. Run a loop until the queue is not empty.
+//    i.  Get the front element of the queue and pop it. Extract the steps and node from it.
+//    ii. For each number in the array, calculate the new node by multiplying the node with the number and taking mod with
+//        100000. If the steps + 1 is less than dist[num], it means we have found a shorter path to reach num. Update the
+//        dist[num] with steps + 1 and push the steps + 1 and num in the queue.
+// 4. If we reach the end node, return steps + 1.
+// 5. If we are not able to reach the end node, return -1.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
     int minimumMultiplications(vector<int>& arr, int start, int end) {
-        // code here
+        queue<pair<int, int>> q;   // {steps, node}
+        q.push({0, start});
+        vector<int> dist(100000, 1e9);
+
+        dist[start] = 0;
+        int mod = 100000;
+
+        while(!q.empty()) {
+            auto it = q.front();
+            q.pop();
+            int steps = it.first;
+            int node = it.second;
+
+            for(auto it: arr) {
+                int num = (node * it) % mod;
+                if(steps + 1 < dist[num]) {
+                    if(num == end) return steps + 1;
+                    dist[num] = steps + 1;
+                    q.push({steps + 1, num});
+                }
+            }
+        }
+
+        return -1;
     }
 };
 
