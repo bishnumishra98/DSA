@@ -46,7 +46,7 @@
 //         If yes, it means we have found a way to reach the neighbour in a shorter time. So, update the time to reach the
 //         neighbour, the number of ways to reach the neighbour and push the neighbour into the priority queue with the
 //         updated time. The number of ways to reach the neighbour will be the same as the number of ways to reach the
-//         current node as we have arrived at the neighbour with the shortest distance for the first time.
+//         current node as we have arrived at the neighbour with this shortest distance for the first time.
 //    iii. Else if the time taken to reach the neighbour is equal to the time taken to reach the current node plus the time
 //         taken to reach the neighbour from the current node, it means we have arrived at the neighbour already in the past
 //         via any other path. This time, again we are arriving at the neighbour with the same shortest time again but from a
