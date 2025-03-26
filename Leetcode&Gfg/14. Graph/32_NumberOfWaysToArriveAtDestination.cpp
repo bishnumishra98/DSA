@@ -59,12 +59,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define ll long long
+
 class Solution {
 public:
     // T.C: O(ElogV);   where E = no.of edges, V = no.of vertices
     // S.C: O(V)
     int countPaths(int n, vector<vector<int>>& roads) {
-        vector<vector<pair<int, int>>> adj(n);   // node -> {neighbour, time}
+        vector<vector<pair<ll, ll>>> adj(n);   // node -> {neighbour, time}
         for(auto it: roads) {
             adj[it[0]].push_back({it[1], it[2]});
             adj[it[1]].push_back({it[0], it[2]});
@@ -73,8 +75,8 @@ public:
         int start = 0;
         int end = n - 1;
 
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;   // {time, node}
-        vector<int> time(n, 1e9), ways(n, 0);   // time, ways vectors to track least time and no.of ways to reach a node
+        priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>> pq;   // {time, node}
+        vector<ll> time(n, LLONG_MAX), ways(n, 0);   // time, ways vectors to track least time and no.of ways to reach a node
 
         time[start] = 0;   // time to reach start from itself is 0
         ways[start] = 1;   // we can reach start in only 1 way, i.e., via itself
@@ -83,13 +85,13 @@ public:
         int mod = (int)(1e9 + 7);   // given in the problem to keep answer within this range
 
         while(!pq.empty()) {
-            int timeTaken = pq.top().first;   // time taken to reach the current node
-            int currNode = pq.top().second;
+            ll timeTaken = pq.top().first;   // time taken to reach the current node
+            ll currNode = pq.top().second;
             pq.pop();
 
             for(auto it: adj[currNode]) {
-                int adjNode = it.first;
-                int adjtime = it.second;
+                ll adjNode = it.first;
+                ll adjtime = it.second;
                 
                 if(timeTaken + adjtime < time[adjNode]) {   // if a shorter time found to reach 'adjNode', via 'currNode'
                     time[adjNode] = timeTaken + adjtime;
