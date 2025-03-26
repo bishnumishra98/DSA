@@ -22,6 +22,7 @@
 // Output: 1
 // Explanation: There is only one way to go from intersection 0 to intersection 1, and it takes 10 minutes.
 
+
 // Algorithm: Simple Dijkstra's Algorithm
 // Note: Number of ways to reach current node = sum of number of ways to reach the nodes from where the current node came.
 //       For example: node1 --- node3 --- node5
@@ -35,21 +36,23 @@
 //       • ways[node5] = ways[node6] + ways[node3]
 
 // 1. Create an adjacency list of the graph.
-// 2. Create a priority queue to store the distance and node pair. Initialize the distance and ways vectors to track the
-//    least distance and the number of ways to reach a node.
-// 3. Push the start node into the priority queue with distance 0 and ways 1.
+// 2. Create a priority queue to store the time and node pair. Initialize the time and ways vectors to track the
+//    least time and the number of ways to reach a node.
+// 3. Push the start node into the priority queue with time 0 and ways 1.
 // 4. Run a while loop until the priority queue is empty.
-//    i.   Pop the top element from the priority queue. Extract the distance and node from the top element.
-//    ii.  Traverse the adjacency list of the current node. For each neighbour, check if the distance from the current node
-//         to the neighbour plus the distance of the current node is less than the distance of the neighbour. If yes, it means
-//         we have first time visited the neighbour. Update the distance of the neighbour, the number of ways to reach the
-//         neighbour and push the neighbour into the priority queue with the updated distance. The number of ways to reach
-//         the neighbour will be the same as the number of ways to reach the current node as we have arrived at the neighbour
-//         for the first time.
-//    iii. Else if the distance of the neighbour is equal to the distance of the current node plus the distance from the current
-//         node to the neighbour, it means we have arrived at the neighbour with the same shortest distance again. In this case,
-//         update the number of ways to reach the neighbour as the sum of the number of ways to reach the neighbour and the number
-//         of ways to reach the current node. Modulo the number of ways to reach the neighbour by 10^9 + 7.
+//    i.   Pop the top element from the priority queue. Extract the time and current node from the top element.
+//    ii.  Traverse the adjacency list of the current node. For each neighbour, check if the time taken to reach the neighbour
+//         from the current node plus the time to reach the current node is less than the existing time to reach the neighbour.
+//         If yes, it means we have found a way to reach the neighbour in a shorter time. So, update the time to reach the
+//         neighbour, the number of ways to reach the neighbour and push the neighbour into the priority queue with the
+//         updated time. The number of ways to reach the neighbour will be the same as the number of ways to reach the
+//         current node as we have arrived at the neighbour with the shortest distance for the first time.
+//    iii. Else if the time taken to reach the neighbour is equal to the time taken to reach the current node plus the time
+//         taken to reach the neighbour from the current node, it means we have arrived at the neighbour already in the past
+//         via any other path. This time, again we are arriving at the neighbour with the same shortest time again but from a
+//         different path. In this case, update the number of ways to reach the neighbour by adding the number of ways to
+//         reach the current node to its existing number of ways to reach. Modulo the total number of ways to reach the
+//         neighbour by 10^9 + 7 to keep the answer within this range.
 // 5. Return the number of ways to reach the destination node.
 
 
@@ -61,7 +64,7 @@ public:
     // T.C: O(ElogV);   where E = no.of edges, V = no.of vertices
     // S.C: O(V)
     int countPaths(int n, vector<vector<int>>& roads) {
-        vector<vector<pair<int, int>>> adj(n);   // node -> {neighbour, weight}
+        vector<vector<pair<int, int>>> adj(n);   // node -> {neighbour, time}
         for(auto it: roads) {
             adj[it[0]].push_back({it[1], it[2]});
             adj[it[1]].push_back({it[0], it[2]});
@@ -70,29 +73,30 @@ public:
         int start = 0;
         int end = n - 1;
 
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;   // {distance, node}
-        vector<int> dist(n, 1e9), ways(n, 0);   // distance, ways vectors to track least distance and no.of ways to reach a node
-        pq.push({0, start});
-        dist[start] = 0;
-        ways[start] = 1;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;   // {time, node}
+        vector<int> time(n, 1e9), ways(n, 0);   // time, ways vectors to track least time and no.of ways to reach a node
 
-        int mod = (int)(1e9 + 7);
+        time[start] = 0;   // time to reach start from itself is 0
+        ways[start] = 1;   // we can reach start in only 1 way, i.e., via itself
+        pq.push({0, start});
+
+        int mod = (int)(1e9 + 7);   // given in the problem to keep answer within this range
 
         while(!pq.empty()) {
-            int dis = pq.top().first;
-            int node = pq.top().second;
+            int timeTaken = pq.top().first;   // time taken to reach the current node
+            int currNode = pq.top().second;
             pq.pop();
 
-            for(auto it: adj[node]) {
+            for(auto it: adj[currNode]) {
                 int adjNode = it.first;
-                int adjDis = it.second;
+                int adjtime = it.second;
                 
-                if(dis + adjDis < dist[adjNode]) {   // if a shorter distance found to reach 'adjNode', via 'node'
-                    dist[adjNode] = dis + adjDis;
-                    ways[adjNode] = ways[node];
-                    pq.push({dis + adjDis, adjNode});
-                } else if(dis + adjDis == dist[adjNode]) {   // we have arrived at adjNode with the same shortest distance again
-                    ways[adjNode] = (ways[adjNode] + ways[node]) % mod;
+                if(timeTaken + adjtime < time[adjNode]) {   // if a shorter time found to reach 'adjNode', via 'currNode'
+                    time[adjNode] = timeTaken + adjtime;
+                    ways[adjNode] = ways[currNode];
+                    pq.push({timeTaken + adjtime, adjNode});
+                } else if(timeTaken + adjtime == time[adjNode]) {   // if adjNode has been arrived again with the same shortest time
+                    ways[adjNode] = (ways[adjNode] + ways[currNode]) % mod;
                 }
             }
         }
