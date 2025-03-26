@@ -56,6 +56,9 @@ using namespace std;
 
 class Solution {
 public:
+    // T.C: O(10^5);   but it is hypothetical if all the nodes are visited which is practically never possible. So actual
+    //                 time complexity will be much less than this.
+    // S.C: O(10^5)
     int minimumMultiplications(vector<int>& arr, int start, int end) {
         queue<pair<int, int>> q;   // {steps, node}
         q.push({0, start});

@@ -27,8 +27,46 @@ using namespace std;
 
 class Solution {
 public:
+    // T.C: O(ElogV);   where E = no.of edges, V = no.of vertices
+    // S.C: O(V)
     int countPaths(int n, vector<vector<int>>& roads) {
-        
+        vector<vector<pair<int, int>>> adj(n);   // node -> {neighbour, weight}
+        for(auto it: roads) {
+            adj[it[0]].push_back({it[1], it[2]});
+            adj[it[1]].push_back({it[0], it[2]});
+        }
+
+        int start = 0;
+        int end = n-1;
+
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;   // {distance, node}
+        vector<int> dist(n, 1e9), ways(n, 0);   // distance, ways vectors to track least distance and no.of ways to reach a node
+        pq.push({0, start});
+        dist[0] = 0;
+        ways[0] = 1;
+
+        int mod = (int)(1e9 + 7);
+
+        while(!pq.empty()) {
+            int dis = pq.top().first;
+            int node = pq.top().second;
+            pq.pop();
+
+            for(auto it: adj[node]) {
+                int adjNode = it.first;
+                int adjDis = it.second;
+                
+                if(dis + adjDis < dist[adjNode]) {   // this is the first time we are visiting this node
+                    dist[adjNode] = dis + adjDis;
+                    ways[adjNode] = ways[node];
+                    pq.push({dis + adjDis, adjNode});
+                } else if(dis + adjDis == dist[adjNode]) {   // we have already visited this node
+                    ways[adjNode] = (ways[adjNode] + ways[node]) % mod;
+                }
+            }
+        }
+
+        return ways[end];
     }
 };
 
@@ -38,6 +76,6 @@ int main() {
 
     Solution obj;
     cout << obj.countPaths(n, roads);
-    
+
     return 0;
 }
