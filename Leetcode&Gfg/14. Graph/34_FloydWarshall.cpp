@@ -45,8 +45,46 @@ using namespace std;
 
 class Solution {
 public:
+    // T.C: O(V^3);   where V = number of vertices in graph
+    // S.C: O(V^2);   for using matrix
     void shortestDistance(vector<vector<int>>& mat) {
-        // Code here
+        int V = mat.size();   // no.of vertices
+
+        // Optional: In GFG, its given that if mat[i][j] = -1, it means there is no edge from i to j, as they have
+        //           given all positive edge weights. But we would like to write a more generalized algorithm which
+        //           could handle negative edge weights too. So we will change all '-1' it to '1e9'.
+        for(int i = 0; i < V; i++) {
+            for(int j = 0; j < V; j++) {
+                if(mat[i][j] == -1) mat[i][j] = 1e9;
+            }
+        }
+
+        // Floyd Warshall algorithm
+        // 1. Mark all the distances from a vertex to itself as 0
+        for(int i = 0; i < V; i++) {
+            mat[i][i] = 0;
+        }
+        
+        // 2. Update the shortest path between every pair of vertices
+        for(int k = 0; k < V; k++) {
+            for(int i = 0; i < V; i++) {
+                for(int j = 0; j < V; j++) {
+                    mat[i][j] = min(mat[i][j], mat[i][k] + mat[k][j]);
+                }
+            }
+        }
+
+        // Optional: Checking negative cycles
+        for(int i = 0; i < V; i++) {
+            if(mat[i][i] <  0) cout << "Negative cycle is present." << endl;
+        }
+
+        // Optional: As we had changed all '-1' to '1e9'. Let's revert it back for GFG problem statement.
+        for(int i = 0; i < V; i++) {
+            for(int j = 0; j < V; j++) {
+                if(mat[i][j] == 1e9) mat[i][j] = -1;
+            }
+        }
     }
 };
 
@@ -54,6 +92,14 @@ int main() {
     vector<vector<int>> mat = {{0, 1, 43},{1, 0, 6}, {-1, -1, 0}};
 
     Solution().shortestDistance(mat);
+
+    int V = mat.size();
+    for(int i = 0; i < V; i++) {
+        for(int j = 0; j < V; j++) {
+            cout << mat[i][j] << " ";
+        }
+        cout << endl;
+    }
 
     return 0;
 }
