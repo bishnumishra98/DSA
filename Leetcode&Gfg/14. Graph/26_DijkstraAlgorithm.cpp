@@ -1,11 +1,17 @@
-// Dijkstra Algorithm is a famous algorithm to find the shortest path from a source vertex to all other vertices in a graph.
-// It is a greedy algorithm and works for both directed and undirected graphs. It is used to find the shortest path from
-// a source vertex to all other vertices in a graph. It is based on the principle of relaxation, where the shortest path
-// for all vertices is updated if a shorter path is found. It is used in various applications like GPS, network routing,
-// and traffic control systems. This algorithm can be implemented using various data structures like arrays, queues,
-// priority queues, and sets. But most efficient implementation is using priority queue and set.
-// Note that Dijkstra Algorithm works only for graphs with non-negative edge weights. If the graph contains negative edge
-// weights, then Bellman-Ford Algorithm is used.
+// • Dijkstra Algorithm is a famous algorithm to find the shortest path from a source vertex to all other vertices in a graph.
+//   This algorithm can be implemented using various data structures like arrays, queues, priority queues, and sets. But most
+//   efficient implementation is using priority queue and set.
+
+// • It is a greedy algorithm and works for both directed and undirected graphs.
+
+// • It is based on the principle of relaxation, where the shortest path for all vertices is updated if a shorter path is found.
+
+// • Dijkstra's Algorithm works only for graphs with non-negative edge weights. It produces incorrect results for graphs with
+//   negative edge weights.
+
+// • It cannot even be used to detect negative weight cycles in a graph.
+
+// • It is used in various applications like GPS, network routing, and traffic control systems.
 
 
 // GFG: Dijkstra Algorithm   --->   Given a weighted, undirected and connected graph where you have given adjacency list adj.
