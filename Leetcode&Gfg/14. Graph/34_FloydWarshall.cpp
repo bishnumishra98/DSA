@@ -65,7 +65,7 @@ public:
             mat[i][i] = 0;
         }
         
-        // 2. Update the shortest path between every pair of vertices
+        // 2. Update the shortest path between every pair of vertices. Updating distance to reach from 'i' to 'j' via 'k'.
         for(int k = 0; k < V; k++) {
             for(int i = 0; i < V; i++) {
                 for(int j = 0; j < V; j++) {
