@@ -1,11 +1,14 @@
 // • The Bellman-Ford algorithm is a graph algorithm used to find the shortest paths from a single source vertex
-//   to all other vertices in a directed weighted graph. Unlike Dijkstra's algorithm, Bellman-Ford can handle graphs
-//   with negative weight edges, making it suitable for more general cases. It cannot be used directly on undirected
-//   graphs. To use it, we have to convert undirected graph to directed graph. For example, if there is an edge between
-//   u and v in an undirected graph, it can be represented as a directed graph like u -> v, v -> u.
+//   to all other vertices in a directed weighted graph.
+
+// • It cannot be used directly on undirected graphs. To use it, we have to convert undirected graph to directed graph.
+//   For example, if there is an edge between u and v in an undirected graph, it can be represented as a directed graph
+//   like an edge directed from u and v and viceversa, i.e., u -> v, v -> u.
 
 // • According to this algorithm, for a graph containing n vertices, n−1 iterations of edge relaxation are sufficient to
 //   ensure that the shortest paths from the source vertex to all other vertices are computed correctly.
+
+// • Unlike Dijkstra's algorithm, Bellman-Ford can handle graphs with negative weight edges.
 
 // • It can also be used to detect negative weight cycles in a graph. Even after n - 1 iterations, if the edges of the
 //   graph are getting relaxed, it means a negative weight cycle is present in the graph.
