@@ -40,6 +40,15 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/implementing-floyd-warshall2042/1
 
+// Algorithm: Extremely simple.
+// 1. Just update the shortest path between every pair of vertices. Updating distance to reach from 'i' to 'j' via 'k'.
+//    To reach from 'i' to 'j' via 'k', the distance will be sum of distances from 'i' to 'k' and 'k' to 'j' respectively,
+//    i.e., dist[i][j] via 'k' = dist[i][k] + dist[k][j]. Now if this new distance is shorter than the already existing
+//    distance to reach from 'i' to 'j' anyhow, update it with this new distance.
+//    Hence, simply take minimum of both distances: dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+// 2. To check for negative cycles in graph, check if any dist[i][i] is less than 0 or not. If found any such element
+//    is less than 0, it means a negative cycle is present in graph.
+
 #include <bits/stdc++.h>
 using namespace std;
 
