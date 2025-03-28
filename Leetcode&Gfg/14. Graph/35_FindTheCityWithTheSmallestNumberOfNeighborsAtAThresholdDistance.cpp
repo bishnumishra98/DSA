@@ -29,13 +29,72 @@
 // City 4 -> [City 1, City 2, City 3] 
 // The city 0 has 1 neighboring city at a distanceThreshold = 2.
 
+// Algorithm: Extremely simple.
+// This problem can be solved using two approaches: the Floyd Warshall algorithm or Dijkstra's algorithm. 
+// Floyd Warshall is suitable for finding the shortest distances between all pairs of cities, 
+// while Dijkstra's is a single-source shortest path algorithm that needs to be applied to all cities to achieve the same result.
+
+// For now, we will stick to the Floyd Warshall algorithm as it efficiently computes the shortest paths for all city pairs.
+// Steps to solve the problem using Floyd Warshall:
+// 1. Initialize a 2D matrix (dist) where dist[i][j] represents the shortest distance between city i and city j.
+//    i.   Set dist[i][j] to the edge weight for directly connected cities.
+//    ii.  Set dist[i][j] to INT_MAX if cities i and j are not directly connected.
+//    iii. Set dist[i][i] to 0 as the distance from a city to itself is always 0.
+// 2. Use three nested loops to apply the Floyd Warshall algorithm:
+//    i.   Iterate through each intermediate city k.
+//    ii.  Update the shortest paths between all city pairs (i, j) considering k as an intermediate city.
+//    iii. If the path from i to k and k to j is shorter than the current path from i to j, update dist[i][j].
+// 3. After computing the shortest paths, iterate over all cities to calculate the number of reachable neighbors for each city:
+//    - A neighbor is considered reachable if the shortest distance from the current city to that neighbor is less than or
+//      equal to the threshold distance.
+// 4. Find the city with the smallest number of reachable neighbors.
+//    - If there are multiple cities with the same number of reachable neighbors, choose the city with the largest index.
+// 5. Return the city that satisfies the above conditions.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
     int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
-        
+        // Creating the initial 2D matrix for Floyd Warshall algorithm
+        vector<vector<int>> dist(n, vector<int>(n, INT_MAX));
+        for(auto it: edges) {
+            dist[it[0]][it[1]] = it[2];
+            dist[it[1]][it[0]] = it[2];
+        }
+
+        for(int i = 0; i < n; i++) dist[i][i] = 0;   // setting the distance from a city to itself to 0
+
+        // Creating the final matrix containing shortest distance between each pair of cities
+        for(int k = 0; k < n ; k++) {
+            for(int i = 0; i < n; i++) {
+                for(int j = 0; j < n; j++) {
+                    if(dist[i][k] == INT_MAX || dist[k][j] == INT_MAX) continue;
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+                }
+            }
+        }
+
+        // Initialize variables to track the city with the smallest number of neighbors
+        int cityCount = n;   // track the minimum number of reachable cities
+        int cityNo = -1;   // track the city number with the smallest count of reachable cities
+
+        // Iterate over all cities to count reachable neighbors within the threshold distance
+        for(int city = 0; city < n; city++) {
+            int count = 0;
+            for(int adjCity = 0; adjCity < n; adjCity++) {
+                if(dist[city][adjCity] <= distanceThreshold) count++;
+            }
+
+            if(count <= cityCount) {
+                cityCount = count;
+                cityNo = city;
+            }
+        }
+
+        return cityNo;
     }
 };
 
