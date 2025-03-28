@@ -90,6 +90,67 @@ public:
                 if(dist[city][adjCity] <= distanceThreshold) count++;
             }
 
+            // If a smaller count found, update the 'cityCount' with this value, and also update the 'cityNo'
+            if(count <= cityCount) {
+                cityCount = count;
+                cityNo = city;
+            }
+        }
+
+        return cityNo;
+    }
+
+// --------------------------------------------------------------------------------------------------
+
+    // T.C: O(n * (n + e)logn);   where n = no.of vertices, e = no.of edges
+    // S.C: O(n^2 + e)
+    int findTheCity_Dijkstra(int n, vector<vector<int>>& edges, int distanceThreshold) {
+        // Creating the adjacency list
+        vector<vector<pair<int,int>>> adj(n);   // {node} -> {adjNode, distance}
+        for(auto it:edges) {
+            adj[it[0]].push_back({it[1],it[2]});
+            adj[it[1]].push_back({it[0],it[2]});
+        }
+
+        // 2D distance matrix to store shortest paths from each city to every other city
+        vector<vector<int>> dist(n, vector<int>(n, INT_MAX));
+
+        for(int i = 0; i < n; i++) dist[i][i] = 0;   // setting the distance from a city to itself to 0
+
+        // Priority queue for Dijkstra's algorithm to process nodes based on their current distance (min-heap)
+        priority_queue<pair<int, int>,vector<pair<int, int>>, greater<pair<int, int>>> pq;   // {distance, node}
+
+        // Apply Dijkstra's algorithm for each city as the source
+        for(int i = 0; i < n; i++) {
+            pq.push({0, i});   // start with distance 0 for the current source city 'i'
+            while(!pq.empty()) {
+                int dis = pq.top().first;
+                int node = pq.top().second;
+                pq.pop();
+                for(auto it: adj[node]) {
+                    int adjNode = it.first;
+                    int adjWeight = it.second;
+                    // Relaxation step: Update the shortest distance from city 'i' to city 'adjNode' if a better path is found
+                    if(dis + adjWeight < dist[i][adjNode]) {
+                        dist[i][adjNode] = dis + adjWeight;
+                        pq.push({dist[i][adjNode], adjNode});
+                    }
+                }
+            }
+        }
+
+        // Initialize variables to track the city with the smallest number of neighbors
+        int cityCount = n;   // track the minimum number of reachable cities
+        int cityNo = -1;   // track the city number with the smallest count of reachable cities
+
+        // Iterate over all cities to count reachable neighbors within the threshold distance
+        for(int city = 0; city < n; city++) {
+            int count = 0;
+            for(int adjCity = 0; adjCity < n; adjCity++) {
+                if(dist[city][adjCity] <= distanceThreshold) count++;
+            }
+
+            // If a smaller count found, update the 'cityCount' with this value, and also update the 'cityNo'
             if(count <= cityCount) {
                 cityCount = count;
                 cityNo = city;
@@ -105,7 +166,8 @@ int main() {
     vector<vector<int>> edges = {{0,1,2},{0,4,8},{1,2,3},{1,4,2},{2,3,1},{3,4,1}};
     int distanceThreshold = 2;
 
-    cout << Solution().findTheCity(n, edges, distanceThreshold);
+    cout << Solution().findTheCity(n, edges, distanceThreshold) << endl;
+    cout << Solution().findTheCity_Dijkstra(n, edges, distanceThreshold);
 
     return 0;
 }
