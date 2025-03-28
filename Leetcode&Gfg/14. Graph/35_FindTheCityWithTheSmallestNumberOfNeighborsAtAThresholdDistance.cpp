@@ -57,6 +57,8 @@ using namespace std;
 
 class Solution {
 public:
+    // T.C: O(n^3)
+    // S.C: O(n^2)
     int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
         // Creating the initial 2D matrix for Floyd Warshall algorithm
         vector<vector<int>> dist(n, vector<int>(n, INT_MAX));
