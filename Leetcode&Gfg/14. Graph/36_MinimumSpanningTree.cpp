@@ -33,17 +33,108 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1
 
+// Algorithm: It is a greedy approach. 
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
-    // Function to find sum of weights of edges of the Minimum Spanning Tree.
+    // T.C: O(ElogE) + O(ElogE) = O(ElogE)
+    // S.C: O(E)
     int spanningTree(int V, vector<vector<int>> adj[]) {
-        // code here
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        vector<int> vis(V, 0);
+
+        pq.push({0, 0});
+        int sum = 0;
+
+        while(!pq.empty()) {
+            auto it = pq.top();
+            pq.pop();
+            int node = it.second;
+            int wt = it.first;
+
+            if(vis[node] == 1) continue;
+
+            vis[node] = 1;
+            sum+= wt;
+
+            for(auto it: adj[node]) {
+                int adjNode = it[0];
+                int edW = it[1];
+                if(!vis[adjNode]) {
+                    pq.push({edW, adjNode});
+                }
+            }
+        }
+
+        return sum;
+    }
+
+// -------------------------------------------------------------------------------
+
+    // T.C: O(ElogE);   where E = no.of edges
+    // S.C: O(V + E);   where V = no.of vertices
+    vector<vector<int>> buildMST(int V, vector<vector<int>> adj[]) {
+        priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> pq;   // {edgeWeight, node, parent}
+        vector<int> vis(V, 0);   // Visited array to track visited nodes
+        vector<vector<int>> result;   // To store the MST edges {parent, node edgeWeight}
+
+        // Push the initial node with weight 0 and parent -1 (no parent for the starting node)
+        pq.push({0, 0, -1}); // {edgeWeight, node, parent}
+
+        while (!pq.empty()) {
+            auto it = pq.top();
+            pq.pop();
+            int edgeWeight = get<0>(it);
+            int node = get<1>(it);
+            int parent = get<2>(it);
+            
+            // Skip if the node is already visited
+            if (vis[node]) continue;
+
+            // Mark the current node as visited
+            vis[node] = 1;
+
+            // If the node has a parent, add the edge to the MST result
+            if (parent != -1) {
+                result.push_back({parent, node, edgeWeight});
+            }
+
+            // Traverse all adjacent nodes
+            for (auto &it : adj[node]) {
+                int adjNode = it[0];
+                int adjWeight = it[1];
+
+                // If the adjacent node is not visited, add it to the priority queue
+                if (!vis[adjNode]) {
+                    pq.push({adjWeight, adjNode, node});
+                }
+            }
+        }
+
+        return result;
     }
 };
 
 int main() {
+    int V = 3;
+    vector<vector<int>> adj[V];
 
+    adj[0].push_back({1, 5});  // Edge 0 -> 1 with weight 5
+    adj[1].push_back({0, 5});  // Edge 1 -> 0 with weight 5
+    adj[1].push_back({2, 3});  // Edge 1 -> 2 with weight 3
+    adj[2].push_back({1, 3});  // Edge 2 -> 1 with weight 3
+    adj[0].push_back({2, 1});  // Edge 0 -> 2 with weight 1
+    adj[2].push_back({0, 1});  // Edge 2 -> 0 with weight 1
+
+    cout << Solution().spanningTree(V, adj) << endl;
+
+    vector<vector<int>> mst = Solution().buildMST(V, adj);
+    for(int i = 0; i < mst.size(); i++) {
+        cout << mst[i][0] << " -> " << mst[i][1] << " with edge weight " << mst[i][2] << endl;
+    }
+
+    return 0;
 }
