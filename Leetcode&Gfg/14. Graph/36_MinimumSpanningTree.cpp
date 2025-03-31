@@ -109,11 +109,11 @@ public:
     // S.C: O(V + E);   where V = no.of vertices
     vector<vector<int>> buildMST(int V, vector<vector<int>> adj[]) {
         priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> pq;   // {edgeWeight, node, parent}
-        vector<int> vis(V, 0);   // Visited array to track visited nodes
-        vector<vector<int>> result;   // To store the MST edges {parent, node edgeWeight}
+        vector<int> vis(V, 0);   // visited array to track visited nodes
+        vector<vector<int>> result;   // to store the MST edges {parent, node edgeWeight}
 
         // Push the initial node with weight 0 and parent -1 (no parent for the starting node)
-        pq.push({0, 0, -1}); // {edgeWeight, node, parent}
+        pq.push({0, 0, -1});   // {edgeWeight, node, parent}
 
         while (!pq.empty()) {
             auto it = pq.top();
