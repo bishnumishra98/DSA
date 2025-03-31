@@ -33,7 +33,23 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1
 
-// Algorithm: It is a greedy approach. 
+// Algorithm to find the sum of edges in the Minimum Spanning Tree (MST) using Prim's Algorithm: It is a greedy approach.
+// 1. i.  Create a min-heap (priority queue) 'pq' that stores {edgeWeight, node} pairs.
+//    ii. Create a 'visited' array of size 'V' to track which nodes are included in the MST.
+// 2. Push the initial edge {0, 0} into the priority queue, meaning:
+//    - Start from node 0, and the cost to include it in the MST is 0.
+// 3. Initialize 'sum' = 0 (this will store the total weight of the MST).
+// 4. While 'pq' is not empty:
+//    i.   Extract the {edgeWeight, node} from the top of 'pq', then pop it. Extracting edgeWeight 'ew' and node 'n' from
+//         the 'pq' means that node 'n' is being added to the MST with an edge of weight 'ew' from some already included
+//         node in the MST.
+//    ii.  If the node is already visited, skip it (continue).
+//    iii. Otherwise, mark it as visited and add the 'edgeWeight' to 'sum'.
+//    iv.  Traverse all adjacent nodes of this node:
+//         - Extract {adjNode, weight} from the adjacency list.
+//         - If 'adjNode' is not yet visited, push {weight, adjNode} into 'pq'.
+// 5. At the end, return 'sum'.
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -43,10 +59,10 @@ public:
     // T.C: O(ElogE) + O(ElogE) = O(ElogE)
     // S.C: O(E)
     int spanningTree(int V, vector<vector<int>> adj[]) {
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;   // {edgeWeight, node}
         vector<int> vis(V, 0);
 
-        pq.push({0, 0});
+        pq.push({0, 0});   // start with node 0 and an initial edge weight of 0
         int sum = 0;
 
         while(!pq.empty()) {
