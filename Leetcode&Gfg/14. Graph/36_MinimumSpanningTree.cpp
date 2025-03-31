@@ -35,8 +35,8 @@
 
 // Algorithm to find the sum of edges in the Minimum Spanning Tree (MST) using Prim's Algorithm: It is a greedy approach.
 // 1. i.  Create a min-heap (priority queue) 'pq' that stores {edgeWeight, node} pairs.
-//    ii. Create a 'visited' array of size 'V' to track which nodes are included in the MST.
-// 2. Push the initial edge {0, 0} into the priority queue, meaning:
+//    ii. Create a visited array of size 'V' to track which nodes are included in the MST.
+// 2. Push the initial edge with node {0, 0} into the priority queue, meaning:
 //    - Start from node 0, and the cost to include it in the MST is 0.
 // 3. Initialize 'sum' = 0 (this will store the total weight of the MST).
 // 4. While 'pq' is not empty:
@@ -49,6 +49,21 @@
 //         - Extract {adjNode, weight} from the adjacency list.
 //         - If 'adjNode' is not yet visited, push {weight, adjNode} into 'pq'.
 // 5. At the end, return 'sum'.
+
+// Algorithm to build the Minimum Spanning Tree (MST) using Prim's Algorithm: Almost same as above algorithm.
+// 1. i.   Create a min-heap (priority queue) 'pq' that stores {edgeWeight, node, parent}.
+//    ii.  Create a visited array of size 'V' to track which nodes are included in the MST.
+//    iii. Create a 'result' array to store and return the built MST in the order {parent, node edgeWeight}. 
+// 2. Push the initial node 0 with weight 0 and parent -1 (no parent for the starting node) into the 'pq'.
+// 3. While 'pq' is not empty:
+//    i.   Extract edgeWeight, node and parent from top element of 'pq'. Then pop the top element.
+//    ii.  If the node is already visited, skip it (continue).
+//    iii. Otherwise, mark it as visited.
+//    iv.  If the node has a parent, add the edge with edgeWeight to the MST 'result' array ({parent, node, edgeWeight}).
+//    v.   Traverse all adjacent nodes of this node:
+//         - Extract {adjNode, weight} from the adjacency list.
+//         - If 'adjNode' is not yet visited, push {adjWeight, adjNode, node} into 'pq'.
+// 5. At the end, return 'result'.
 
 
 #include <bits/stdc++.h>
