@@ -56,7 +56,8 @@
 //    iii. Create a 'result' array to store and return the built MST in the order {parent, node edgeWeight}. 
 // 2. Push the initial node 0 with weight 0 and parent -1 (no parent for the starting node) into the 'pq'.
 // 3. While 'pq' is not empty:
-//    i.   Extract edgeWeight, node and parent from top element of 'pq'. Then pop the top element.
+//    i.   Extract edgeWeight, node and parent from top element of 'pq'. Then pop the top element. Extracting edgeWeight 'ew',
+//         node 'n' and parent 'p' from the 'pq' means that edgeWeight between 'p' and 'n' is 'ew'.
 //    ii.  If the node is already visited, skip it (continue).
 //    iii. Otherwise, mark it as visited.
 //    iv.  If the node has a parent, add the edge with edgeWeight to the MST 'result' array ({parent, node, edgeWeight}).
@@ -123,7 +124,7 @@ public:
             int parent = get<2>(it);
             
             // Skip if the node is already visited
-            if (vis[node]) continue;
+            if (vis[node] == 1) continue;
 
             // Mark the current node as visited
             vis[node] = 1;
@@ -133,7 +134,7 @@ public:
                 result.push_back({parent, node, edgeWeight});
             }
 
-            // Traverse all adjacent nodes
+            // Traverse all adjacent nodes of 'node'
             for (auto &it : adj[node]) {
                 int adjNode = it[0];
                 int adjWeight = it[1];
