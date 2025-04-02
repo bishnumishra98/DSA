@@ -20,23 +20,130 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1
 
+// Algorithm to find the sum of edges in the Minimum Spanning Tree (MST) using Kruskal's Algorithm:
+// 1. i.   Create an edge list from the adjacency list in the format {edgeWeight, node, adjNode}.
+//    ii.  Sort the edges in ascending order of edgeWeight.
+// 2. Initialize a Disjoint Set of size as many vertices in the graph, to manage connected components.
+// 3. Initialize 'sum' = 0 (this will store the total weight of the MST).
+// 4. Traverse through sorted edges:
+//    - If the edge connects two different components (i.e., findParent(u) != findParent(v)),  
+//      add the edge weight to 'sum' and perform a union operation to merge the components.
+// 5. At the end, return 'sum'.
+
+// Algorithm to build the Minimum Spanning Tree (MST) using Kruskal's Algorithm: Almost same as above
+// 1. i.   Create an edge list from the adjacency list in the format {edgeWeight, node, adjNode}.
+//    ii.  Sort the edges in ascending order of weight.
+// 2. Initialize a Disjoint Set of size as many vertices in the graph, to manage connected components.
+// 3. Initialize 'result' array to store the MST edges {parent, node, edgeWeight}.
+// 4. Traverse through sorted edges:
+//    - If the edge connects two different components (i.e., findParent(u) != findParent(v)),  
+//      add {parent, node, edgeWeight} to 'result' and perform a union operation to merge the components.
+// 5. At the end, return 'result'.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
+class DisjointSet {
+private:
+    vector<int> parent, rank;
+
+public:
+    DisjointSet(int n) {
+        parent.resize(n + 1);
+        rank.resize(n + 1, 0);
+        for(int i = 0; i <= n; i++) {
+            parent[i] = i;
+        }
+    }
+
+    int findParent(int node) {
+        if(node == parent[node]) return node;
+        return parent[node] = findParent(parent[node]);
+    }
+
+    void unionByRank(int u, int v) {
+        int root_u = findParent(u);
+        int root_v = findParent(v);
+
+        if(root_u == root_v) return;
+        else if(rank[root_u] < rank[root_v]) {
+            parent[root_u] = root_v;
+        } else if(rank[root_v] < rank[root_u]) {
+            parent[root_v] = root_u;
+        } else {
+            parent[root_u] = root_v;
+            rank[root_v]++;
+        }
+    }
+};
+
 class Solution {
 public:
-    // T.C:
-    // S.C:
+    // T.C: O(ElogE);   where E = no.of edges
+    // S.C: O(V + E);   where V = no.of vertices
     int spanningTree(int V, vector<vector<int>> adj[]) {
-        
+        vector<tuple<int, int, int>> edges;
+        for(int i = 0; i < V; i++) {
+            for(auto it: adj[i]) {
+                int adjNode = it[0];
+                int adjWeight = it[1];
+                int node = i;
+                edges.push_back(make_tuple(adjWeight, node, adjNode));
+            }
+        }
+
+        sort(edges.begin(), edges.end());
+
+        DisjointSet ds(V);
+        int sum = 0;
+        for(auto it: edges) {
+            int wt = get<0>(it);
+            int u = get<1>(it);
+            int v = get<2>(it);
+
+            if(ds.findParent(u) != ds.findParent(v)) {
+                sum += wt;
+                ds.unionByRank(u, v);
+            }
+        }
+
+        return sum;
     }
 
 // -------------------------------------------------------------------------------
 
-    // T.C:
-    // S.C:
+    // T.C: O(ElogE);   where E = no.of edges
+    // S.C: O(V + E);   where V = no.of vertices
     vector<vector<int>> buildMST(int V, vector<vector<int>> adj[]) {
-        
+        vector<tuple<int, int, int>> edges;
+        for(int i = 0; i < V; i++) {
+            for(auto it: adj[i]) {
+                int adjNode = it[0];
+                int adjWeight = it[1];
+                int node = i;
+                edges.push_back(make_tuple(adjWeight, node, adjNode));
+            }
+        }
+
+        sort(edges.begin(), edges.end());
+
+        DisjointSet ds(V);
+
+        vector<vector<int>> result;   // to store the MST edges {parent, node edgeWeight}
+
+        for(auto it: edges) {
+            int wt = get<0>(it);
+            int u = get<1>(it);
+            int v = get<2>(it);
+
+            if(ds.findParent(u) != ds.findParent(v)) {
+                result.push_back({u, v, wt});
+                ds.unionByRank(u, v);
+            }
+        }
+
+        return result;
     }
 };
 
