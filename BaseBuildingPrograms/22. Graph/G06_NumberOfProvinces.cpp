@@ -27,13 +27,12 @@ using namespace std;
 
 class DisjointSet {
 private:
-    vector<int> parent, rank, size;
+    vector<int> parent, rank;
 
 public:
     DisjointSet(int n) {
         parent.resize(n + 1);
         rank.resize(n + 1, 0);
-        size.resize(n + 1, 1);
         for(int i = 0; i <= n; i++) {
             parent[i] = i;
         }
@@ -62,10 +61,27 @@ public:
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
+    // T.C: O(V^2);   where V = no.of cities, i.e., isConnected.size()
+    // S.C: O(V)
     int findCircleNum(vector<vector<int>>& isConnected) {
-        
+        int V = isConnected.size();   // number of cities or vertices in graph
+        DisjointSet ds(V);
+
+        // Traverse the matrix and merge connected cities or components
+        for(int i = 0; i < V; i++) {
+            for(int j = 0; j < V; j++) {
+                if(isConnected[i][j] == 1) ds.unionByRank(i, j);
+            }
+        }
+
+        // Count the number of nodes which are parent of itself. Such nodes are unique root nodes, i.e., root of
+        // an isolated component. Thus, number of such nodes means number of isolated components or number of provinces.
+        int provinces = 0;
+        for(int i = 0; i < V; i++) {
+            if(ds.findParent(i) == i) provinces++;
+        }
+
+        return provinces;
     }
 };
 
