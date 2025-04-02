@@ -19,8 +19,8 @@
 //                       [0,0,1]]
 // Output: 3
 
-// Algorithm: It is very easy and simple problem already solved using traversal technique in 'Leetcode&Gfg\14. Graph\01_NumberOfProvinces.cpp'
-// Here we will try to solve the same problem using Disjoint set.
+// Algorithm: It is very easy and simple problem already solved using traversal technique in
+// 'Leetcode&Gfg\14. Graph\01_NumberOfProvinces.cpp' Here we will solve the same problem using Disjoint set.
 
 #include <bits/stdc++.h>
 using namespace std;
