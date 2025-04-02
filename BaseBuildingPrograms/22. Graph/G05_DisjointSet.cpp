@@ -8,7 +8,7 @@
 //                        under the tree with higher rank. This prevents unnecessary tree height growth.
 //    • Union by size:    This function is similar to Union by Rank but instead of tracking tree height (rank), it tracks
 //                        the number of nodes in each set. The smaller tree is always attached under the larger tree to
-//                        keep the overall structure balanced.
+//                        keep the overall structure balanced. This is more meaningful than Union by Rank.
 //    • Path compression: Path Compression is an optimization technique in the FindParent() operation of the
 //                        Disjoint Set data structure. It flattens the structure of the tree whenever findParent(node)
 //                        is called by making every node in the path directly point to the root (ultimate parent).
@@ -112,7 +112,6 @@ int main() {
 
     if(ds2.findParent(3) == ds2.findParent(7)) cout << "3 and 7 belong to same component" << endl;
     else cout << "3 and 7 do not belong to same component" << endl;
-
     
     return 0;
 }
