@@ -32,6 +32,8 @@
 //  ["Hanzo","Hanzo0@m.co","Hanzo1@m.co","Hanzo3@m.co"],["Kevin","Kevin0@m.co","Kevin3@m.co","Kevin5@m.co"],
 //  ["Fern","Fern0@m.co","Fern1@m.co","Fern5@m.co"]]
 
+// Algorithm: 
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -74,30 +76,32 @@ public:
     // T.C: 
     // S.C: 
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
-        int n = accounts.size();
+        int n = accounts.size();   // number of accounts
         DisjointSet ds(n);
-        unordered_map<string, int> mapMailNode;
+        unordered_map<string, int> mapMailNode;   // maps mail to its first occurrence's account index
 
+        // Step 1: Connect accounts that share the same email
         for(int i = 0; i < n; i++) {
             for(int j = 1; j < accounts[i].size(); j++) {
                 string mail = accounts[i][j];
-                if(mapMailNode.find(mail) == mapMailNode.end()) {
-                    mapMailNode[mail] = i;
+                if(mapMailNode.find(mail) == mapMailNode.end()) {   // if email is seen for the first time,
+                    mapMailNode[mail] = i;                         // map it to this account index
                 } else {
-                    ds.unionByRank(i, mapMailNode[mail]);
+                    ds.unionByRank(i, mapMailNode[mail]);   // if email already exists, union the two account indices
                 }
             }
         }
 
-        vector<vector<string>> mergedMail(n);
+        // Step 2: Group emails by their parent representative in the disjoint set
+        vector<vector<string>> mergedMail(n);   // stores grouped emails
         for(auto it: mapMailNode) {
             string mail = it.first;
-            int node = ds.findParent(it.second);
-            mergedMail[node].push_back(mail);
+            int parentNode = ds.findParent(it.second);   // find the ultimate parent of this email
+            mergedMail[parentNode].push_back(mail);   // add mail to its ultimate parent's list
         }
 
+        // Step 3: Format the final output and return
         vector<vector<string>> ans;
-
         for(int i = 0; i < n; i++) {
             if(mergedMail[i].size() == 0) continue;
             sort(mergedMail[i].begin(), mergedMail[i].end());
