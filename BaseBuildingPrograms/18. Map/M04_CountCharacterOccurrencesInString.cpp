@@ -7,7 +7,7 @@ using namespace std;
 void countCharacters(string str) {
     map<char, int> map;
     // Creating a map of (char, frequency) from the string
-    for(int i=0; i<str.length(); i++) {
+    for(int i = 0; i < str.length(); i++) {
         char ch = str[i];
         map[ch]++;
     }
