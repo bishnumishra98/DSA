@@ -66,13 +66,96 @@
 // integer n denoting no. of rows in the matrix, an integer m denoting the number of columns in the matrix and a
 // 2D array of size k denoting  the number of operators.
 
+// Problem link: https://www.geeksforgeeks.org/problems/number-of-islands/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=number-of-islands
+
+// Algorithm:
+// 1. In the n * m 2D matrix, consider the first cell to be node 0 and the last cell to be node (n * m) - 1.
+
 #include <bits/stdc++.h>
 using namespace std;
 
+class DisjointSet {
+private:
+    vector<int> parent, rank;
+
+public:
+    DisjointSet(int n) {
+        parent.resize(n + 1);
+        rank.resize(n + 1, 0);
+        for(int i = 0; i <= n; i++) {
+            parent[i] = i;
+        }
+    }
+
+    int findParent(int node) {
+        if(node == parent[node]) return node;
+        return parent[node] = findParent(parent[node]);
+    }
+
+    void unionByRank(int u, int v) {
+        int root_u = findParent(u);
+        int root_v = findParent(v);
+
+        if(root_u == root_v) return;
+        else if(rank[root_u] < rank[root_v]) {
+            parent[root_u] = root_v;
+        } else if(rank[root_v] < rank[root_u]) {
+            parent[root_v] = root_u;
+        } else {
+            parent[root_u] = root_v;
+            rank[root_v]++;
+        }
+    }
+};
+
 class Solution {
 public:
+    // T.C: O(k * 4) = O(k);   where k is the number of operations
+    // S.C: O(n * m)   for the visited matrix and O(n * m) for the disjoint set
     vector<int> numOfIslands(int n, int m, vector<vector<int>> &operators) {
+        DisjointSet ds(n * m);
+        vector<vector<bool>> vis(n, vector<bool>(m, false));   // 2D visited matrix to track which cells have been turned into land
+        int cnt = 0;   // number of islands
+        vector<int> ans;   // result array to store island count after each operation
+    
+        int dr[] = {-1, 0, 1, 0};
+        int dc[] = {0, -1, 0, 1};
         
+        // Process each operator (i.e., a cell to convert from water to land)
+        for(auto& it : operators) {
+            int row = it[0];
+            int col = it[1];
+            
+            // If this cell is already land, island count doesn't change. So simply push the current count to the result
+            // and continue to the next iteration. Otherwise, mark it as land and increment the count.
+            if(vis[row][col]) {
+                ans.push_back(cnt);
+                continue;
+            }
+            vis[row][col] = true;
+            cnt++;
+    
+            int nodeNo = row * m + col;   // Unique 1D ID for the cell in DSU
+            
+            // Check all 4 adjacent cells (up, down, left, right) to see if they are also land
+            // If they are, union them with the current cell and decrement the island count
+            for(int i = 0; i < 4; i++) {
+                int adjRow = row + dr[i];
+                int adjCol = col + dc[i];
+                if(adjRow >= 0 && adjRow < n && adjCol >= 0 && adjCol < m && vis[adjRow][adjCol]) {
+                    int adjNodeNo = adjRow * m + adjCol;
+
+                    // If the adjacent land cell belongs to a different island, merge them and decrement the count
+                    if(ds.findParent(nodeNo) != ds.findParent(adjNodeNo)) {
+                        ds.unionByRank(nodeNo, adjNodeNo);
+                        cnt--;   // two islands merged, so reduce count
+                    }
+                }
+            }
+            ans.push_back(cnt);   // append the current number of islands to the result
+        }
+    
+        return ans;
     }
 };
 
