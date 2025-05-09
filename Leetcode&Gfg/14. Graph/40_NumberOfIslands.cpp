@@ -68,14 +68,25 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/number-of-islands/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=number-of-islands
 
-// Algorithm:
-// 1. In the n * m 2D matrix, consider the first cell to be node 0 and the last cell to be node (n * m) - 1.
-//    Thus, the cells will be labelled as follows:
-//    0 1 2 3 4
-//    5 6 7 8 9
-//    10 11 12 13 14
-//    15 16 17 18 19
-//    The formula to convert a cell (row, col) to a node number is: nodeNo = no.of_col * row_no + col_no
+// Algorithm: The approach is quiet simple.
+//            In the n * m 2D matrix, consider the first cell to be node 0 and the last cell to be node (n * m) - 1.
+//            Thus, the cells will be labelled as follows:
+//            0 1 2 3 4
+//            5 6 7 8 9
+//            10 11 12 13 14
+//            15 16 17 18 19
+//            The formula to convert a cell (row, col) to a node number is: nodeNo = no.of_col * row_no + col_no
+// 1. Create a Disjoint Set Union (DSU) data structure to keep track of the connected components in the matrix.
+// 2. Create a 2D visited matrix to track which cells have been turned into land. Initialize all cells to false (water).
+// 3. Initialize a counter to keep track of the number of islands (connected components) in the matrix. Set it to 0 initially.
+// 4. For each operation (i.e., a cell to convert from water to land):
+//    a. If the cell is already land, the island count doesn't change. So simply push the current count to the result
+//       and continue to the next iteration. Otherwise, mark it as land and increment the count.
+//    b. Convert the cell (row, col) to a unique node number using the formula: nodeNo = no.of_col * row_no + col_no
+//    c. Check all 4 adjacent cells (up, down, left, right) to see if they are also land. If they are, union them with the
+//       current cell and decrement the island count.
+// 5. After processing each operation, append the current number of islands to the result array.
+// 6. Return the result array.
 
 #include <bits/stdc++.h>
 using namespace std;
