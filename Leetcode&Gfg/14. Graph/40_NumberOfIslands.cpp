@@ -70,6 +70,12 @@
 
 // Algorithm:
 // 1. In the n * m 2D matrix, consider the first cell to be node 0 and the last cell to be node (n * m) - 1.
+//    Thus, the cells will be labelled as follows:
+//    0 1 2 3 4
+//    5 6 7 8 9
+//    10 11 12 13 14
+//    15 16 17 18 19
+//    The formula to convert a cell (row, col) to a node number is: nodeNo = no.of_col * row_no + col_no
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -135,7 +141,7 @@ public:
             vis[row][col] = true;
             cnt++;
     
-            int nodeNo = row * m + col;   // Unique 1D ID for the cell in DSU
+            int nodeNo = m * row + col;   // Unique 1D ID for the cell in DSU (nodeNo = no.of_col * row_no + col_no)
             
             // Check all 4 adjacent cells (up, down, left, right) to see if they are also land
             // If they are, union them with the current cell and decrement the island count
@@ -143,7 +149,7 @@ public:
                 int adjRow = row + dr[i];
                 int adjCol = col + dc[i];
                 if(adjRow >= 0 && adjRow < n && adjCol >= 0 && adjCol < m && vis[adjRow][adjCol]) {
-                    int adjNodeNo = adjRow * m + adjCol;
+                    int adjNodeNo = m * adjRow + adjCol;
 
                     // If the adjacent land cell belongs to a different island, merge them and decrement the count
                     if(ds.findParent(nodeNo) != ds.findParent(adjNodeNo)) {
@@ -152,12 +158,14 @@ public:
                     }
                 }
             }
+
             ans.push_back(cnt);   // append the current number of islands to the result
         }
     
         return ans;
     }
 };
+
 
 int main() {
     int n = 4, m = 5, k = 4;
