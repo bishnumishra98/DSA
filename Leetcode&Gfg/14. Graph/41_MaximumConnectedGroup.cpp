@@ -60,6 +60,8 @@ public:
 
 class Solution {
 public:
+    // T.C: O(n^2)   for the grid traversal
+    // S.C: O(n^2)   for the disjoint set
     int MaxConnection(vector<vector<int>>& grid) {
         int n = grid.size();
         DisjointSet ds(n * n);
@@ -99,11 +101,11 @@ public:
                     }
                 }
 
-                int sizeTotal = 1;   // adding this cell as 1
+                int sizeTotal = 0;
                 for (auto it : uniqueComponents) {
                     sizeTotal += ds.size[it];
                 }
-                maxSize = max(maxSize, sizeTotal);
+                maxSize = max(maxSize, sizeTotal + 1);
             }
         }
 
@@ -121,7 +123,9 @@ int main() {
     vector<vector<int>> grid = {{1, 0, 1},
                                 {1, 0, 1},
                                 {1, 0, 1}};
+
     Solution obj;
     cout << obj.MaxConnection(grid);
+    
     return 0;
 }
