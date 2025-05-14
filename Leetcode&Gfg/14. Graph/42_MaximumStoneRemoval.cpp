@@ -40,9 +40,16 @@
 // 2. Traverse the stones array and compute the label of row and column coordinates of each stone. Then union the
 //    row and column of each stone in the disjoint set. For example, for a 5*4 grid, if a stone is present at (0, 0),
 //    we will union the node 0 (label of row 0) and node 5 (label of column 0) in the disjoint set.
-//    This will create a disjoint set of all the connected components, i.e., we will get unqiue components of the grid.
-// 3. 
-// 
+//    This will create a disjoint set of all the connected components, i.e., we will get unique components of the grid.
+// 3. Now we will count the number of unique components in the disjoint set. The number of unique components will be equal to
+//    the number of stones that cannot be removed. So, the maximum number of stones that can be removed will be equal to
+//    the total number of stones - number of unique components.
+// 4. Return the maximum number of stones that can be removed.
+
+// How to count the number of unique components in the disjoint set ?
+// i.   We can create a map to store the nodes (node is a row or a column) of the disjoint set which contain stones.
+// ii.  Then we will iterate through the map and find the parent of each node using the findParent function.
+// iii. If the parent of a node is equal to the node itself, then it is the parent of a unique component. Thus, count them.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -83,6 +90,8 @@ public:
 
 class Solution {
 public:
+    // T.C: O(n);   where n is the number of stones
+    // S.C: O(n)
     int maxRemove(vector<vector<int>>& stones, int n) {
         int maxRow = 0, maxCol = 0;
         for(auto it: stones) {
@@ -91,18 +100,20 @@ public:
         }
 
         DisjointSet ds(maxRow + maxCol + 2);   // +2 for 0-based indexing
-        unordered_map<int, int> stoneNodes;
+        vector<bool> stoneNodes(maxRow + maxCol + 2, false);   // to store the nodes of the disjoint set which contain stones
         for(auto it: stones) {
             int nodeRow = it[0];
             int nodeCol = it[1] + maxRow + 1;
             ds.unionBySize(nodeRow, nodeCol);
-            stoneNodes[nodeRow] = 1;
-            stoneNodes[nodeCol] = 1;
+            stoneNodes[nodeRow] = true;
+            stoneNodes[nodeCol] = true;
         }
 
-        int cnt = 0;   // count of the number of unique components
-        for(auto it: stoneNodes) {
-            if(ds.findParent(it.first) == it.first) cnt++;
+        int cnt = 0;   // to store the count of the number of parent nodes, i.e., unique components
+        for(int i = 0; i < stoneNodes.size(); i++) {
+            if(stoneNodes[i] && ds.findParent(i) == i) {
+                cnt++;
+            }
         }
 
         return n - cnt;
