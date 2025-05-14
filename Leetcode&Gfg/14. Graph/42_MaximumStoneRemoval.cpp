@@ -28,7 +28,21 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/maximum-stone-removal-1662179442/1
 
-// Algorithm:
+// Algorithm: As we are supposed to remove maximum number of stones only from the row or column where already
+//            atleast one stone is present, we can use the disjoint set data structure to solve this problem.
+//            But the catch is that we will not consider the stones as nodes in the disjoint set; instead we will
+//            consider the rows and columns as nodes in the disjoint set.
+// 1. Create a disjoint set of size (maxRow + maxCol + 2) where maxRow and maxCol are the maximum row and column
+//    indices in the stones array. The row no.s will start from 0 to maxRow and the columns will start from
+//    (maxRow + 1) to (maxRow + maxCol + 1), i.e., lets say there is a 5*4 grid with rows 0 to 4, and columns 0 to 3,
+//    so its disjoint set will be of size 4 + 3 + 2 = 9. And rows will be labelled as 0, 1, 2, 3, 4 and columns will
+//    be labelled as 5, 6, 7, 8.
+// 2. Traverse the stones array and compute the label of row and column coordinates of each stone. Then union the
+//    row and column of each stone in the disjoint set. For example, for a 5*4 grid, if a stone is present at (0, 0),
+//    we will union the node 0 (label of row 0) and node 5 (label of column 0) in the disjoint set.
+//    This will create a disjoint set of all the connected components, i.e., we will get unqiue components of the grid.
+// 3. 
+// 
 
 #include <bits/stdc++.h>
 using namespace std;
