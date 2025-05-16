@@ -32,7 +32,7 @@ int main() {
     Solution obj;
     ans = obj.criticalConnections(n, connections);
     for(auto it : ans) {
-        cout << "[" << it[0] << ", " << it[1] << "] ";
+        cout << "[" << it[0] << ", " << it[1] << "]\n";
     }
 
     return 0;
