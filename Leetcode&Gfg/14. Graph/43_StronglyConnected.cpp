@@ -23,6 +23,8 @@
 //               order obtained from the first DFS. Each DFS call in this step will identify a SSC.
 //            The number of times we perform DFS in the second step gives us the number of SSCs.
 
+// Problem link: https://www.geeksforgeeks.org/problems/strongly-connected-components-kosarajus-algo/1
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -48,6 +50,8 @@ private:
     }
 
 public:
+    // T.C: O(V + E);   where V = number of vertices and E = number of edges
+    // S.C: O(V)
     int kosaraju(vector<vector<int>> &adj) {
         int V = adj.size();
         vector<bool> vis(V, false);

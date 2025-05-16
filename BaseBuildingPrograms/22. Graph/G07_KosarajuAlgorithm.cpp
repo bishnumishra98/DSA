@@ -70,6 +70,8 @@ private:
     }
 
 public:
+    // T.C: O(V + E);   where V = number of vertices and E = number of edges
+    // S.C: O(V)
     vector<vector<int>> kosaraju(vector<vector<int>> &adj) {
         int V = adj.size();
         vector<bool> vis(V, false);
