@@ -53,9 +53,46 @@
 using namespace std;
 
 class Solution {
+private:
+    int timer = 0;   // timer to keep track of discovery time
+
+    void dfs(int node, int parent, vector<vector<int>> &adj, vector<int> &disc, vector<int> &low, vector<vector<int>> &bridges) {
+        disc[node] = low[node] = timer++;
+        for(auto it : adj[node]) {
+            if(it == parent) continue;   // skip the edge to the parent
+            if(disc[it] == -1) {   // if it is not visited
+                dfs(it, node, adj, disc, low, bridges);
+                low[node] = min(low[node], low[it]);
+                if(low[it] > disc[node]) {
+                    bridges.push_back({node, it});
+                }
+            } else {
+                low[node] = min(low[node], disc[it]);
+            }
+        }
+    }
+
 public:
+    // T.C: O(V + E);   where V = number of vertices and E = number of edges
+    // S.C: O(V)
     vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
-        
+        // Creating the adjacency list from the connections, i.e., edges
+        vector<vector<int>> adj(n);
+        for(auto it : connections) {
+            adj[it[0]].push_back(it[1]);
+            adj[it[1]].push_back(it[0]);
+        }
+        vector<bool> vis(n, false);   // visited array
+        vector<int> disc(n, -1), low(n, -1);   // discovery and low values
+        vector<vector<int>> bridges;   // to store the critical connections
+
+        // Performing DFS for each unvisited node to find bridges
+        for(int i = 0; i < n; i++) {
+            if(disc[i] == -1) {
+                dfs(i, -1, adj, disc, low, bridges);
+            }
+        }
+        return bridges;
     }
 };
 
