@@ -6,7 +6,7 @@
 // connected components.
 // The algorithm has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges.
 
-// Example: [{2, 3}, {0}, {1}, {4}, {}]
+// Example: {{2, 3}, {0}, {1}, {4}, {}}
 //          0 __________
 //       /\    |        |
 //       |     |        |
