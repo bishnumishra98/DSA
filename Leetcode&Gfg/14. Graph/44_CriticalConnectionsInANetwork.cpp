@@ -17,11 +17,10 @@
 //   The low[] array stores the lowest discovery time reachable from each vertex.
 
 // ● How Tarjan's Bridge-Finding Algorithm works ?
-//   The algorithm works as follows:
 //   1. Initialize the disc[] and low[] arrays to -1 for all vertices.
 //   2. Perform a DFS traversal of the graph.
 //   3. For each vertex, update its discovery time and low value.
-//   4. For each adjacent vertex, check if it is visited.
+//   4. For each adjacent vertex, check:
 //      ▸ If it is not visited, recursively call the DFS function for that vertex.
 //        ▪ After returning from the recursive call, update the low value of the current vertex.
 //        ▪ If the low value of the adjacent vertex is greater than the discovery time of the current vertex,
@@ -30,7 +29,7 @@
 //        update the low value of the current vertex to the minimum of its low value and the discovery time
 //        of the adjacent vertex.
 //   5. After the DFS traversal, all the bridges will be identified.
-//   The algorithm is efficient and can be implemented using a single DFS traversal of the graph.
+//   6. Return the list of bridges.
 
 
 // Leetcode: 1192. Critical Connections in a Network   --->   There are n servers numbered from 0 to n - 1
@@ -57,16 +56,15 @@ private:
     int timer = 0;   // timer to keep track of discovery time
 
     void dfs(int node, int parent, vector<vector<int>> &adj, vector<int> &disc, vector<int> &low, vector<vector<int>> &bridges) {
-        disc[node] = low[node] = timer++;
+        disc[node] = low[node] = timer;
+        timer++;
         for(auto it : adj[node]) {
             if(it == parent) continue;   // skip the edge to the parent
             if(disc[it] == -1) {   // if it is not visited
                 dfs(it, node, adj, disc, low, bridges);
                 low[node] = min(low[node], low[it]);
-                if(low[it] > disc[node]) {
-                    bridges.push_back({node, it});
-                }
-            } else {
+                if(low[it] > disc[node]) bridges.push_back({node, it});
+            } else {   // if it is visited
                 low[node] = min(low[node], disc[it]);
             }
         }
@@ -82,14 +80,14 @@ public:
             adj[it[0]].push_back(it[1]);
             adj[it[1]].push_back(it[0]);
         }
-        vector<bool> vis(n, false);   // visited array
-        vector<int> disc(n, -1), low(n, -1);   // discovery and low values
+        
+        vector<int> disc(n, -1), low(n, -1);   // initializing the discovery and low values
         vector<vector<int>> bridges;   // to store the critical connections
 
         // Performing DFS for each unvisited node to find bridges
         for(int i = 0; i < n; i++) {
             if(disc[i] == -1) {
-                dfs(i, -1, adj, disc, low, bridges);
+                dfs(i, -1, adj, disc, low, bridges);   // dfs(node, parent, adj, disc, low, bridges);
             }
         }
         return bridges;
