@@ -71,8 +71,8 @@ private:
     }
 
 public:
-    // T.C: O(V + E);   where V = number of vertices and E = number of edges
-    // S.C: O(V)
+    // T.C: O(V + 2E);   where V = number of vertices and E = number of edges
+    // S.C: O(V + 2E);   for the adjacency list
     vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
         // Creating the adjacency list from the connections, i.e., edges
         vector<vector<int>> adj(n);
