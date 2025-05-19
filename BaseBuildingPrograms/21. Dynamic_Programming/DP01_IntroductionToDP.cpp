@@ -72,7 +72,7 @@ int solve(int n, vector<int>& dp) {
 // S.C: O(n)
 int fibo_memoization(int n) {
     // Step 1: Create a dp array of size 'n+1' with default values -1
-    vector<int> dp(n+1, -1);
+    vector<int> dp(n + 1, -1);
     return solve(n, dp);
 }
 
@@ -83,14 +83,14 @@ int fibo_memoization(int n) {
 // S.C: O(n)
 int fibo_tabulation(int n) {
     // Step 1: Create a 'dp' array of size 'n+1' with default values -1
-    vector<int> dp(n+1, -1);
+    vector<int> dp(n + 1, -1);
 
     // Step 2: Fill initial data in dp according to base case.
     dp[0] = 0;
     if(n >= 1) dp[1] = 1;   // accessing dp[1] will give heap-buffer-overflow if user input n = 0
 
     // Step 3: Fill rest of the dp array using iteration.
-    for(int i=2; i<=n; i++) {
+    for(int i = 2; i <= n; i++) {
         dp[i] = dp[i-1] + dp[i-2];
     }
 
@@ -107,7 +107,7 @@ int fibo_tabulation_SO(int n) {
     if(n == 0) return prev2;   // to cover input n = 0.
     int prev = 1;
 
-    for(int i=2; i<=n; i++) {
+    for(int i = 2; i <= n; i++) {
         int curr = prev + prev2;
         prev2 = prev;
         prev = curr;
