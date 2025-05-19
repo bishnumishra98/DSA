@@ -1,3 +1,5 @@
+// THOSE WHO DO NOT REMEMBER THE PAST ARE CONDEMNED TO REPEAT IT
+
 // ✦ Dynamic programming(DP) is a method for solving complex problems by breaking them down into simpler subproblems.
 // It is particularly useful for optimization problems where the solution can be built up from solutions to smaller
 // instances of the same problem. Here are the key concepts and steps involved in dynamic programming:
