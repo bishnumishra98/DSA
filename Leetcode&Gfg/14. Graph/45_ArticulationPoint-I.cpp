@@ -72,6 +72,7 @@ private:
         for(auto it: adj[node]) {
             if(it == parent) continue;   // skip the parent node
             if(disc[it] == -1) {   // if the adjacent node is not visited
+                children++;   // increment the number of children for the current node
                 dfs(it, node, disc, low, adj, articulationPoints);
                 low[node] = min(low[node], low[it]);
 
@@ -80,7 +81,6 @@ private:
                 if(low[it] >= disc[node] && parent != -1) {
                     articulationPoints[node] = true;
                 }
-                children++;   // increment the number of children
             } else {   // if the adjacent node is already visited
                 low[node] = min(low[node], disc[it]);
             }
