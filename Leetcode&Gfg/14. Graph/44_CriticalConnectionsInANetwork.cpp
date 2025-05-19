@@ -14,7 +14,7 @@
 //   The low value of a vertex is the lowest discovery time reachable from that vertex.
 //   The algorithm maintains two arrays: disc[] and low[].
 //   The disc[] array stores the discovery time of each vertex.
-//   The low[] array stores the lowest discovery time reachable from each vertex.
+//   The low[] array stores the lowest discovery time reachable from each vertex except the parent vertex.
 
 // ● How Tarjan's Bridge-Finding Algorithm works ?
 //   1. Initialize the disc[] and low[] arrays to -1 for all vertices.
@@ -22,12 +22,12 @@
 //   3. For each vertex, update its discovery time and low value.
 //   4. For each adjacent vertex, check:
 //      ▸ If it is not visited, recursively call the DFS function for that vertex.
-//        ▪ After returning from the recursive call, update the low value of the current vertex.
+//        ▪ After returning from the recursive call, update the low value of the current vertex. the value of
+//          low is the minimum of the current low value and the low value of the adjacent vertex.
 //        ▪ If the low value of the adjacent vertex is greater than the discovery time of the current vertex,
 //          then the edge between the current vertex and the adjacent vertex is a bridge.
-//      ▸ If the adjacent vertex is already visited and is not the parent of the current vertex,
-//        update the low value of the current vertex to the minimum of its low value and the discovery time
-//        of the adjacent vertex.
+//      ▸ If the adjacent vertex is already visited, update the low value of the current vertex to the minimum
+//        of its low value and the discovery time of the adjacent vertex.
 //   5. After the DFS traversal, all the bridges will be identified.
 //   6. Return the list of bridges.
 
@@ -65,7 +65,7 @@ private:
                 low[node] = min(low[node], low[it]);
                 if(low[it] > disc[node]) bridges.push_back({node, it});
             } else {   // if it is visited
-                low[node] = min(low[node], disc[it]);
+                low[node] = min(low[node], disc[it]);   // you may even write min(low[node], low[it]), doesn't matters
             }
         }
     }
