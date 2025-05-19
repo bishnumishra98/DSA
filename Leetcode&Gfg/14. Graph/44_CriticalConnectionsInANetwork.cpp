@@ -27,7 +27,7 @@
 //        ▪ If the low value of the adjacent vertex is greater than the discovery time of the current vertex,
 //          then the edge between the current vertex and the adjacent vertex is a bridge.
 //      ▸ If the adjacent vertex is already visited, update the low value of the current vertex to the minimum
-//        of its low value and the discovery time of the adjacent vertex.
+//        of low value of the current vertex and the low value of the adjacent vertex.
 //   5. After the DFS traversal, all the bridges will be identified.
 //   6. Return the list of bridges.
 
@@ -65,7 +65,7 @@ private:
                 low[node] = min(low[node], low[it]);
                 if(low[it] > disc[node]) bridges.push_back({node, it});
             } else {   // if it is visited
-                low[node] = min(low[node], disc[it]);   // you may even write min(low[node], low[it]), doesn't matters
+                low[node] = min(low[node], low[it]);
             }
         }
     }
