@@ -47,13 +47,14 @@
 // 2. Perform a DFS traversal of the graph.
 // 3. For each vertex, update its discovery time and low value.
 // 4. For each adjacent vertex, check:
-//    ▸ If it is not visited, recursively call the DFS function for that vertex.
+//    ▸ If it is not visited, first increment the number of children for the current node, then
+//      recursively call the DFS function for that vertex.
 //      ▪ After returning from the recursive call, update the low value of the current vertex. The value of
 //        low is the minimum of the current low value and the low value of the adjacent vertex.
 //      ▪ If the low value of the adjacent vertex is greater than or equal to the discovery time of the current
 //        vertex and the parent is not -1, then the current vertex is an articulation point.
 //    ▸ If the adjacent vertex is already visited, update the low value of the current vertex to the minimum
-//      of low value of the current vertex and the low value of the adjacent vertex.
+//      of low value of the current vertex and the discovery time of the adjacent vertex.
 // 5. After the DFS traversal, all the articulation points will be identified.
 // 6. Return the list of articulation points.
 
