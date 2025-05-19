@@ -1,16 +1,17 @@
 // THOSE WHO DO NOT REMEMBER THE PAST ARE CONDEMNED TO REPEAT IT
 
+
 // ✦ Dynamic programming(DP) is a method for solving complex problems by breaking them down into simpler subproblems.
 // It is particularly useful for optimization problems where the solution can be built up from solutions to smaller
 // instances of the same problem. Here are the key concepts and steps involved in dynamic programming:
 
-// -> Optimal Substructure: The problem can be broken down into smaller, simpler subproblems, which can be solved independently.
-//                          DP method of solving problems makes the solution easier to understand and implement by clearly
-//                          defining subproblems and their interrelationships.
+// -> Optimal Substructure: The problem can be broken down into smaller, simpler subproblems, which can be solved
+//                          independently. DP method of solving problems makes the solution easier to understand
+//                          and implement by clearly defining subproblems and their interrelationships.
 
-// -> Overlapping Subproblems: The problem has overlapping subproblems, meaning the same subproblems are solved multiple times.
-//                             DP method of solving problem can help avoid these overlapping sub-problems, by storing
-//                             intermediate results and avoiding redundant calculations.
+// -> Overlapping Subproblems: The problem has overlapping subproblems, meaning the same subproblems are solved
+//                             multiple times. DP method of solving problem can help avoid these overlapping
+//                             sub-problems, by storing intermediate results and avoiding redundant calculations.
 
 
 // ✦ DP problems can be solved in either of the two ways:
@@ -48,7 +49,7 @@ using namespace std;
 int fibo_recursion(int n) {
     // Base case
     if(n <= 1) return n;
-    int ans = fibo_recursion(n-1) + fibo_recursion(n-2);
+    int ans = fibo_recursion(n - 1) + fibo_recursion(n - 2);
     return ans;
 }
 
