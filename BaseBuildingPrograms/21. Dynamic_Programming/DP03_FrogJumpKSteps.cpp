@@ -20,9 +20,9 @@ int solve(int index, int k, vector<int>& heights) {
     if(index == 0) return 0;
 
     /*
-    int left = solve(index-1, heights) + abs(heights[index] - heights[index-1]);
+    int left = solve(index - 1, heights) + abs(heights[index] - heights[index - 1]);
     int right = INT_MAX;
-    if(index >= 2) right = solve(index-2, heights) + abs(heights[index] - heights[index-2]);
+    if(index >= 2) right = solve(index - 2, heights) + abs(heights[index] - heights[index - 2]);
     return min(left, right);
     */
 
@@ -31,7 +31,7 @@ int solve(int index, int k, vector<int>& heights) {
     // Loop to try all possible jumps from '1' to 'k'
     for(int i = 1; i <= k; i++) {
         int jumpEnergy = INT_MAX;
-        if(index >= i) jumpEnergy = solve(index-i, k, heights) + abs(heights[index] - heights[index-i]);   // generalised line
+        if(index >= i) jumpEnergy = solve(index - i, k, heights) + abs(heights[index] - heights[index - i]);   // generalised line
         minEnergy = min(minEnergy, jumpEnergy);
     }
 
@@ -42,7 +42,7 @@ int solve(int index, int k, vector<int>& heights) {
 // S.C: O(2^n)
 int frogJump_recursion(int n, int k, vector<int> &heights) {
     // The frog wants to jump from 1st to nth step. We have re-indexed it from 0th to 'n-1'th step as indexing in vector starts from 0.
-    return solve(n-1, k, heights);
+    return solve(n - 1, k, heights);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ int solve(int index, int k, vector<int>& heights, vector<int>& dp) {
     // Loop to try all possible jumps from '1' to 'k'
     for(int i = 1; i <= k; i++) {
         int jumpEnergy = INT_MAX;
-        if(index >= i) jumpEnergy = solve(index-i, k, heights) + abs(heights[index] - heights[index-i]);   // generalised line
+        if(index >= i) jumpEnergy = solve(index - i, k, heights) + abs(heights[index] - heights[index - i]);   // generalised line
         minEnergy = min(minEnergy, jumpEnergy);
     }
 
@@ -68,7 +68,7 @@ int solve(int index, int k, vector<int>& heights, vector<int>& dp) {
 // S.C: O(n)
 int frogJump_memoization(int n, int k, vector<int> &heights) {
     vector<int> dp(n, -1);
-    return solve(n-1, k, heights, dp);
+    return solve(n - 1, k, heights, dp);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------------
@@ -85,13 +85,13 @@ int frogJump_tabulation(int n, int k, vector<int> &heights) {
         // Loop to try all possible jumps from '1' to 'k'
         for(int i = 1; i <= k; i++) {
             int jumpEnergy = INT_MAX;
-            if(j >= i) jumpEnergy = dp[j-i] + abs(heights[j] - heights[j-i]);   // generalised line
+            if(j >= i) jumpEnergy = dp[j - i] + abs(heights[j] - heights[j - i]);   // generalised line
             minEnergy = min(minEnergy, jumpEnergy);
         }
         dp[j] = minEnergy;
     }
     
-    return dp[n-1];
+    return dp[n - 1];
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------------------
