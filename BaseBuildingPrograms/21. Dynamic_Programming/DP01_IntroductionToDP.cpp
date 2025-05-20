@@ -63,7 +63,7 @@ int solve(int n, vector<int>& dp) {
     if(dp[n] != -1) return dp[n];
 
     // Step 2: Store/return answer in the dp array.
-    dp[n] = solve(n-1, dp) + solve(n-2, dp);
+    dp[n] = solve(n - 1, dp) + solve(n - 2, dp);
     return dp[n];
 }
 
@@ -91,7 +91,7 @@ int fibo_tabulation(int n) {
 
     // Step 3: Fill rest of the dp array using iteration.
     for(int i = 2; i <= n; i++) {
-        dp[i] = dp[i-1] + dp[i-2];
+        dp[i] = dp[i - 1] + dp[i - 2];
     }
 
     return dp[n];
