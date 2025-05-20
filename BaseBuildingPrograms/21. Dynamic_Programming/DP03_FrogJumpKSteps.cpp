@@ -11,7 +11,7 @@
 
 // Algorithm:
 // In the previous problem, when frog could jump at max 2 steps, there were 2 paths. Here when
-// frog can jump at max k steps, there will be k paths to reach 'n-1'th index of heights.
+// frog can jump at max k steps, there will be k paths to reach 'n - 1'th index of heights.
 
 #include <bits/stdc++.h>
 using namespace std;
