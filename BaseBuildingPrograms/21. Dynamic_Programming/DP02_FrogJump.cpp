@@ -70,7 +70,7 @@ int solve(int index, vector<int>& heights) {
 */
 // The above function having 2 base cases can be followed to write the recursive solution. But by chance, if the question is
 // extended and the frog is allowed to jump 'k' steps; then we will have to write 'k' no.of base cases which is not feasible.
-// Thus, it is beneficiary of us if we anyhow try to manage to write the recursive code using only 1 universal base case.
+// Thus, it is beneficiary for us if we anyhow try to manage to write the recursive code using only 1 universal base case.
 
 int solve(int index, vector<int>& heights) {
     // Base case: If frog is at index is 0, no energy is lost as the frog jumps to the same stair itself.
