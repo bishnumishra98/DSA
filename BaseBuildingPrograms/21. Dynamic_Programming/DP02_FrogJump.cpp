@@ -139,7 +139,7 @@ int frogJump_tabulation(int n, vector<int> &heights) {
 // S.C: O(1)
 int frogJump_tabulation_SO(int n, vector<int> &heights) {
     int prev = 0;
-    int prev2 = 0;   // prev2 is also 0, as we will need this while computing right initially, i.e., when index=2.
+    int prev2 = 0;   // prev2 is also 0, as we will need this while computing right initially, i.e., when index = 2.
 
     for(int index = 1; index < n; index++) {
         int left = prev + abs(heights[index] - heights[index - 1]);
