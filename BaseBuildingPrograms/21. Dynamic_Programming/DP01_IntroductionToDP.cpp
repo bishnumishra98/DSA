@@ -115,7 +115,7 @@ int fibo_tabulation_SO(int n) {
         prev = curr;
     }
 
-    return prev;   // although curr can also be returned
+    return prev;   // although curr can also be returned, but returning prev covers the case of n = 1
 }
 
 
