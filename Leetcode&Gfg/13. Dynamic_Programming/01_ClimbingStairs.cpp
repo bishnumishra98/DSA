@@ -29,7 +29,7 @@ public:
         // Base case
         if(n <= 2) return n;
 
-        int ans = climbStairs_recursion(n-1) + climbStairs_recursion(n-2);
+        int ans = climbStairs_recursion(n - 1) + climbStairs_recursion(n - 2);
         return ans;
     }
 
@@ -40,14 +40,14 @@ public:
         if(n <= 2) return n;
         if(dp[n] != -1) return dp[n];
 
-        dp[n] = solve(n-1, dp) + solve(n-2, dp);
+        dp[n] = solve(n - 1, dp) + solve(n - 2, dp);
         return dp[n];
     }
 
     // T.C: O(n)
     // S.C: O(n)
     int climbStairs_memoization(int n) {
-        vector<int> dp(n+1, -1);
+        vector<int> dp(n + 1, -1);
         return solve(n, dp);
     }
 
@@ -56,12 +56,12 @@ public:
     // T.C: O(n)
     // S.C: O(n)
     int climbStairs_tabulation(int n) {
-        vector<int> dp(n+1, -1);
+        vector<int> dp(n + 1, -1);
         dp[1] = 1;
         if(n >= 2) dp[2] = 2;   // 'if(n >= 2)' to avoid heap buffer overflow
 
-        for(int i=3; i<=n; i++) {
-            dp[i] = dp[i-1] + dp[i-2];
+        for(int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
         }
 
         return dp[n];
@@ -76,7 +76,7 @@ public:
         if(n == 1) return prev2;
         int prev = 2;
 
-        for(int i=3; i<=n; i++) {
+        for(int i = 3; i <= n; i++) {
             int curr = prev + prev2;
             prev2 = prev;
             prev = curr;
