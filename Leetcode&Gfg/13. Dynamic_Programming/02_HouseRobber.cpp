@@ -33,10 +33,10 @@ int solve(int index, vector<int>& nums) {
 
     // There are only 2 choices in my hand, either I can rob the house at current index or I cannot rob this house.
     // Case 1: If I rob at current index, I will make nums[index] amount of money, and then I can rob next to next house left.
-    int rob = nums[index] + solve(index-2, nums);
+    int rob = nums[index] + solve(index - 2, nums);
 
     // Case 2: If I rob do not rob at current index, I will make 0 money, but then I can rob the just next house left.
-    int notRob = 0 + solve(index-1, nums);
+    int notRob = 0 + solve(index - 1, nums);
 
     return max(rob, notRob);   // Return the max money I can manage to rob at current index
 }
@@ -45,7 +45,7 @@ int solve(int index, vector<int>& nums) {
 // S.C: O(n)
 int rob_recursion(vector<int>& nums) {
     int n = nums.size();
-    return solve(n-1, nums);   // return the maximum money I can rob by standing on the last house
+    return solve(n - 1, nums);   // return the maximum money I can rob by standing on the last house
 }
 
 // --------------------------------------------------------------------------------------------------------
@@ -56,8 +56,8 @@ int solve(int index, vector<int>& nums, vector<int>& dp) {
 
     if(dp[index] != -1) return dp[index];
 
-    int rob = nums[index] + solve(index-2, nums, dp);
-    int notRob = 0 + solve(index-1, nums, dp);
+    int rob = nums[index] + solve(index - 2, nums, dp);
+    int notRob = 0 + solve(index - 1, nums, dp);
 
     dp[index] = max(rob, notRob);
     return dp[index];
@@ -68,7 +68,7 @@ int solve(int index, vector<int>& nums, vector<int>& dp) {
 int rob_memoization(vector<int>& nums) {
     int n = nums.size();
     vector<int> dp(n, -1);
-    return solve(n-1, nums, dp);
+    return solve(n - 1, nums, dp);
 }
 
 // --------------------------------------------------------------------------------------------------------
@@ -84,12 +84,12 @@ int rob_tabulation(vector<int>& nums) {
     for(int index = 1; index < n; index++) {
         // int rob = nums[index] + dp[index-2];   // But dp[index-2] should be computed only if 'index>=2'. Thus, write like this:
         int rob = nums[index];
-        if(index >= 2) rob = rob + dp[index-2];
-        int notRob = 0 + dp[index-1];
+        if(index >= 2) rob = rob + dp[index - 2];
+        int notRob = 0 + dp[index - 1];
         dp[index] = max(rob, notRob);
     }
 
-    return dp[n-1];
+    return dp[n - 1];
 }
 
 // --------------------------------------------------------------------------------------------------------
