@@ -82,7 +82,7 @@ int rob_tabulation(vector<int>& nums) {
     
     // Fill the dp array
     for(int index = 1; index < n; index++) {
-        // int rob = nums[index] + dp[index-2];   // But dp[index-2] should be computed only if 'index>=2'. Thus, write like this:
+        // int rob = nums[index] + dp[index - 2];   // But dp[index - 2] should be computed only if 'index >= 2'. Thus, write like this:
         int rob = nums[index];
         if(index >= 2) rob = rob + dp[index - 2];
         int notRob = 0 + dp[index - 1];
