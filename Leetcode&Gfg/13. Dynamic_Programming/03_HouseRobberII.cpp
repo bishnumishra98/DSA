@@ -24,7 +24,7 @@
 // are adjacent, thus they cannot be robbed together. We can rob only one of them. Thus, make two arrays from given input.
 // Array 1: Containing 1st element to 'n-1'th element.
 // Array 2: Containing 0th element to 'n-2'th element.
-// Then return the maximum of the two arrays. 
+// Then return the maximum of the two arrays.
 
 #include <bits/stdc++.h>
 using namespace std;
