@@ -97,7 +97,7 @@ public:
         int maxi = 0;
         for(int task = 0; task <= 2; task++) {
             if(task != last) {
-                int earning = points[day][task] + solve(day-1, task, points, dp);
+                int earning = points[day][task] + solve(day - 1, task, points, dp);
                 maxi = max(maxi, earning);
             }
         }
@@ -109,7 +109,7 @@ public:
     // S.C: O(n)(recursion stack space) + O(n * 4) = O(n)
     int maximumPoints_memoization(vector<vector<int>>& points, int n) {
         vector<vector<int>> dp(n, vector<int>(4, -1));   // kept column size 4 as tasks are T0, T1, T2, T3(for initial recursive call)
-        return solve(n-1, 3, points, dp);
+        return solve(n - 1, 3, points, dp);
     }
 
 // -----------------------------------------------------------------------------------------------------------------------
@@ -133,15 +133,14 @@ public:
                 // Iterate through the tasks for the current day (just copy paste the memoization logic)
                 for(int task = 0; task <= 2; task++) {
                     if(task != last) {
-                        // int earning = points[day][task] + dp[day-1][task];
-                        // dp[day][last] = max(dp[day][last], earning);
-                        dp[day][last] = max(dp[day][last], points[day][task] + dp[day-1][task]);   // the above 2 lines in 1 single line
+                        int earning = points[day][task] + dp[day - 1][task];
+                        dp[day][last] = max(dp[day][last], earning);
                     }
                 }
             }
         }
 
-        return dp[n-1][3];   // return the maximum points for the last day
+        return dp[n - 1][3];   // return the maximum points for the last day
     }
 
 // -----------------------------------------------------------------------------------------------------------------------
@@ -183,7 +182,7 @@ public:
 };
 
 int main() {
-    vector<vector<int>> points = {{1,2,5},{3,1,1},{3,2,3}};
+    vector<vector<int>> points = {{1, 2, 5},{3, 1, 1},{3, 2, 3}};
     int n = points.size();
     Solution sol;
 
