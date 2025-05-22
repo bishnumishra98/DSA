@@ -28,9 +28,12 @@
 //            collected on each day while ensuring that the same activity is not performed on consecutive days.
 //            We can use memoization or tabulation to optimize the recursive solution and avoid redundant calculations.
 // 1. Recursion: The recursive function will take the current day(initially passing the last day) and the last activity
-//               performed(T3 which doen't exists) as arguments.
-// 2. Base Case: If we are at the first day, we can choose any activity among the three available activities as the last
-//               activity will not be defined.
+//               performed(initially passing T3 which doesn't exists) as arguments.
+// 2. Base Case: If we are at the first day, we can choose any activity among the three available activities except
+//               the last activity performed. We will return the maximum points that can be collected on that day.
+//               This is done by iterating through the three activities and checking if the current activity is not
+//               the same as the last activity performed. If it is not, we will take the maximum points of that activity.
+//               We will return the maximum points that can be collected on that day.
 // 3. Recursive Case: For each day, we will iterate through the three activities except the last activity performed to
 //                    calculate the maximum points that can be collected. We will call the recursive function for the
 //                    previous day with the current activity as the last activity.
