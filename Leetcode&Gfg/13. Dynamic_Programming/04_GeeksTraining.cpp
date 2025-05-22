@@ -23,6 +23,19 @@
 // Geek will learn a new move and earn 5 point then on second day he will do running and earn 3 point and on third day
 // he will do running and earn 3 points so, maximum point is 11.
 
+// Algorithm: The problem is a variation of the "House Robber" problem, where we need to maximize the points collected
+//            over n days. The key idea is to use recursion to keep track of the maximum points that can be
+//            collected on each day while ensuring that the same activity is not performed on consecutive days.
+//            We can use memoization or tabulation to optimize the recursive solution and avoid redundant calculations.
+// 1. Recursion: The recursive function will take the current day(initially passing the last day) and the last activity
+//               performed(T3 which doen't exists) as arguments.
+// 2. Base Case: If we are at the first day, we can choose any activity among the three available activities as the last
+//               activity will not be defined.
+// 3. Recursive Case: For each day, we will iterate through the three activities except the last activity performed to
+//                    calculate the maximum points that can be collected. We will call the recursive function for the
+//                    previous day with the current activity as the last activity.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -31,18 +44,25 @@ public:
     // solve() function returns the maximum points collected till day 'day'. It takes two varying arguments: current day
     // and the last day's task that was performed so that we do not repeat the last day's task on current day.
     int solve(int day, int last, vector<vector<int>>& points) {
-        // Base case: When you are at index 0, i.e., 0th day; return the maximum points possible from the all days except the last day.
+        // Base case: When you are at index 0, i.e., 0th day; return the maximum points possible from the days
+        // except the task performed on the last day.
+        // The last day's task is represented by the variable 'last'. Example: If last = 0, it means the last task was T0,
+        // so we can take T1 or T2 on the current day.
         if(day == 0) {
             int maxi = 0;
-            for(int task = 0; task <= 2; task++) if(task != last) maxi = max(maxi, points[0][task]);
+            for(int task = 0; task <= 2; task++) {
+                // Apart from the last day's task, we can take the maximum points of any task on the current day.
+                if(task != last) maxi = max(maxi, points[0][task]);
+            }
             return maxi;
         }
 
         int maxi = 0;
         for(int task = 0; task <= 2; task++) {
-            if(task != last) {
-                // Calculate earning by taking each task(except the last day's task) of current day and return the maximum one.
-                int earning = points[day][task] + solve(day-1, task, points);
+            if(task != last) {   // if the task is not the same as the last day's task, we can take it.
+                // Calculate the maximum points for the current day by individually adding the merits of each of the two
+                // possible tasks on the current day with the maximum points collected from the previous day (day - 1).
+                int earning = points[day][task] + solve(day - 1, task, points);   // solve(currrent day's task, last day's task, points)
                 maxi = max(maxi, earning);
             }
         }
@@ -52,10 +72,12 @@ public:
     // T.C: O(3^n)
     // S.C: O(n)
     int maximumPoints_recursion(vector<vector<int>>& points, int n) {
-        // Start computing maximum points collected from last element to first element. Starting with last task as '3',
-        // means task 3 (T3) was the last task, which actually does not exists in the list. This signifies that none of
-        // the tasks are performed yet. So geek is free to take up any task(T0, T1, T2) initially.
-        return solve(n-1, 3, points);
+        // Start computing maximum points collected from last element to first element.
+        // solve() function is called with first argument as the last day, i.e., n-1. The second argument is the task
+        // performed on the previous day. As we are starting from the last day, we can assume that the task performed
+        // on the previous day is T3 (which does not exist in the list of tasks). This signifies that none of
+        // the tasks were performed. So geek is free to take up any task(T0, T1, T2) initially.
+        return solve(n - 1, 3, points);
     }
 
 // ------------------------------------------------------------------------------------------------------------
