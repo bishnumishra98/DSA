@@ -166,8 +166,8 @@ public:
                 // Iterate through the tasks for the current day
                 for(int task = 0; task <= 2; task++) {
                     if(task != last) {
-                        // Calculate the points for the current activity and add it to the
-                        // maximum points obtained on the previous day (stored in prev)
+                        // Calculate the maximum points for the current day by adding the points of the current task
+                        // to the maximum points from the previous day (prev[task])
                         temp[last] = max(temp[last], points[day][task] + prev[task]);
                     }
                 }
