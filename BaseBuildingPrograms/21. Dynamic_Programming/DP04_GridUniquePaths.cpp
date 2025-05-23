@@ -1,11 +1,11 @@
 // Problem link: https://www.naukri.com/code360/problems/total-unique-paths_1081470?source=youtube&campaign=striver_dp_videos&utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_dp_videos
 
-// Unique Paths   --->   You are present at point ‘A’ which is the top-left cell of an M X N matrix, your destination is point ‘B’,
-// which is the bottom-right cell of the same matrix. Your task is to find the total number of unique paths from point ‘A’ to point ‘B’.
-// In other words, you will be given the dimensions of the matrix as integers ‘M’ and ‘N’, your task is to find the total number of
-// unique paths from the cell MATRIX[0][0] to MATRIX['M' - 1]['N' - 1].
-// To traverse in the matrix, you can either move Right or Down at each step. For example in a given point MATRIX[i] [j], you can
-// move to either MATRIX[i + 1][j] or MATRIX[i][j + 1].
+// Unique Paths   --->   You are present at point ‘A’ which is the top-left cell of an M X N matrix, your destination is
+// point ‘B’, which is the bottom-right cell of the same matrix. Your task is to find the total number of unique paths
+// from point ‘A’ to point ‘B’. In other words, you will be given the dimensions of the matrix as integers ‘M’ and ‘N’,
+// your task is to find the total number of unique paths from the cell MATRIX[0][0] to MATRIX['M' - 1]['N' - 1].
+// To traverse in the matrix, you can either move Right or Down at each step. For example in a given point MATRIX[i] [j],
+// you can move to either MATRIX[i + 1][j] or MATRIX[i][j + 1].
 
 // Example 1:
 // Input:
@@ -30,8 +30,9 @@
 // Output:
 // 6
 
-// Algorithm: We are allowed to move only right or down to reach from [0][0] to [n-1][n-1] in a grid. Thus, it means the same as
-// going only left or up from [n-1][n-1] to [0][0]. So find out all possible ways in which we can reach from [n-1][n-1] to [0][0].
+// Algorithm: We are allowed to move only right or down to reach from [0][0] to [n-1][n-1] in a grid. Thus, it means
+// the same as going only left or up from [n-1][n-1] to [0][0]. So find out all possible ways in which we can reach
+// from [n-1][n-1] to [0][0].
 
 #include <bits/stdc++.h>
 using namespace std;
