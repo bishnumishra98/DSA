@@ -101,7 +101,7 @@ public:
                 maxi = max(maxi, earning);
             }
         }
-        dp[day][last] = maxi;   // dp[day][last] stores the maximum points collected till day 'day' when last day's task was 'last'.
+        dp[day][last] = maxi;   // dp[day][last] stores the maximum points collected till day 'day' when last day's task was 'last'
         return dp[day][last];
     }
 
