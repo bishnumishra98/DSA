@@ -88,16 +88,16 @@ int uniquePaths_tabulation(int m, int n) {
         for(int j = 0; j < n; j++) {
             if(i == 0 && j == 0) {
                 dp[i][j] = 1;
-                continue;
+            } else {
+                int left = 0, up = 0;   // let no.of paths found from left and up be 0 initially.
+                if(j >= 1) left = dp[i][j - 1];   // if() condition is to avoid heap buffer overflow for j = 0
+                if(i >= 1) up = dp[i - 1][j];   // if() condition is to avoid heap buffer overflow for i = 0
+                dp[i][j] = left + up;
             }
-            int left = 0, up = 0;   // let no.of paths found from left and up be 0 initially.
-            if(j >= 1) left = dp[i][j - 1];   // if() condition is to avoid heap buffer overflow for j = 0
-            if(i >= 1) up = dp[i - 1][j];   // if() condition is to avoid heap buffer overflow for i = 0
-            dp[i][j] = left + up;
         }
     }
 
-    return dp[m - 1][n - 1];   // the result is stored in the bottom-right cell (m-1, n-1).
+    return dp[m - 1][n - 1];   // the result is stored in the bottom-right cell (m - 1, n - 1).
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------
