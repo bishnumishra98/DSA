@@ -69,8 +69,8 @@ int solve(int i, int j, vector<vector<int>>& dp) {
     return dp[i][j];
 }
 
-// T.C: O(m*n)
-// S.C: O(m+n)
+// T.C: O(m * n)
+// S.C: O(m + n)
 int uniquePaths_memoization(int m, int n) {
     vector<vector<int>>dp(m, vector<int>(n, -1));   // 2D vector of size m * n
     return solve(m - 1, n - 1, dp);
@@ -78,8 +78,8 @@ int uniquePaths_memoization(int m, int n) {
 
 // ----------------------------------------------------------------------------------------------------------------------------
 
-// T.C: O(m*n)
-// S.C: O(m+n)
+// T.C: O(m * n)
+// S.C: O(m + n)
 int uniquePaths_tabulation(int m, int n) {
     vector<vector<int>>dp(m, vector<int>(n, 0));   // 2D vector of size m * n, with initial values 0.
 
@@ -102,8 +102,8 @@ int uniquePaths_tabulation(int m, int n) {
 
 // ----------------------------------------------------------------------------------------------------------------------------
 
-// T.C: O(m*n)
-// S.C: O(m+n)
+// T.C: O(m * n)
+// S.C: O(m + n)
 int uniquePaths_tabulation_SO(int m, int n) {
     // Create a vector to represent the previous row of the grid.
     vector<int> prev(n, 0);
