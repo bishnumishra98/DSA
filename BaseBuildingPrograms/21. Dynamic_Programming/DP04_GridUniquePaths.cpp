@@ -153,6 +153,7 @@ int uniquePaths_tabulation_SO(int m, int n) {
 // Algorithm: Same as the above code, just add an extra base case:
 
 int solve(int i, int j, vector<vector<int>> &mat, vector<vector<int>>& dp) {
+    // EXTRA BASE CASE: If the cell is blocked, return 0 as no path can be formed through it.
     if(i >= 0 && j >= 0 && mat[i][j] == -1) return 0;   // EXTRA BASE CASE
     if(i < 0 || j < 0) return 0;
     if(i == 0 && j == 0) return 1;
@@ -165,8 +166,8 @@ int solve(int i, int j, vector<vector<int>> &mat, vector<vector<int>>& dp) {
     return dp[i][j];
 }
 
-// T.C: O(m*n)
-// S.C: O(m+n)
+// T.C: O(m * n)
+// S.C: O(m + n)
 int uniquePathsII_memoization(int m, int n, vector<vector<int>> &mat) {
     vector<vector<int>>dp(m, vector<int>(n, -1));   // 2D vector of size m * n
     return solve(m - 1, n - 1, mat, dp);
