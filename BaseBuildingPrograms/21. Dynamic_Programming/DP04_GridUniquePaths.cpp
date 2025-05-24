@@ -30,9 +30,9 @@
 // Output:
 // 6
 
-// Algorithm: We are allowed to move only right or down to reach from [0][0] to [n-1][n-1] in a grid. Thus, it means
-// the same as going only left or up from [n-1][n-1] to [0][0]. So find out all possible ways in which we can reach
-// from [n-1][n-1] to [0][0].
+// Algorithm: We are allowed to move only right or down to reach from [0][0] to [m - 1][n - 1] in a grid. Thus, it means
+// the same as going only left or up from [m - 1][n - 1] to [0][0]. So find out all possible ways in which we can reach
+// from [m - 1][n - 1] to [0][0].
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -49,8 +49,8 @@ int solve(int i, int j) {
     return left + up;   // return the sum of no.of paths found by going left of [i][j] and up of [i][j].
 }
 
-// T.C: O(2^(m+n))
-// S.C: O(m+n)
+// T.C: O(2^(m + n))
+// S.C: O(m + n)
 int uniquePaths_recursion(int m, int n) {
     return solve(m - 1, n - 1);
 }
