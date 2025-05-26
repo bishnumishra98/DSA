@@ -87,7 +87,7 @@ int solve(int index, vector<int>& heights) {
 }
 
 // T.C: O(2^n)
-// S.C: O(2^n)
+// S.C: O(2^n);   recursion stack space
 int frogJump_recursion(int n, vector<int> &heights) {
     // The frog wants to jump from 1st to nth step. We have re-indexed it from 0th to 'n-1'th step as indexing in vector starts from 0.
     return solve(n - 1, heights);
@@ -109,7 +109,7 @@ int solve(int index, vector<int>& heights, vector<int>& dp) {
 }
 
 // T.C: O(n)
-// S.C: O(n)
+// S.C: O(n) for dp array + O(n) for recursion stack space = O(n)
 int frogJump_memoization(int n, vector<int> &heights) {
     vector<int> dp(n, -1);
     return solve(n - 1, heights, dp);

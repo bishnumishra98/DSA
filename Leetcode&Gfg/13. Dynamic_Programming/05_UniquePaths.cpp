@@ -44,7 +44,7 @@ public:
     }
 
     // T.C: O(2^(m + n))
-    // S.C: O(m + n)
+    // S.C: O(m + n);   recursion stack space
     int uniquePaths_recursion(int m, int n) {
         return solve(m - 1, n - 1);
     }
@@ -65,7 +65,7 @@ public:
     }
 
     // T.C: O(m * n)
-    // S.C: O(m * n)
+    // S.C: O(m * n) for dp array + O(m + n) for recursion stack space = O(m * n)
     int uniquePaths_memoization(int m, int n) {
         vector<vector<int>> dp(m, vector<int>(n, -1));
         return solve(m - 1, n - 1, dp);

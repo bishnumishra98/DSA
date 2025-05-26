@@ -69,7 +69,7 @@ int solve(int n, vector<int>& dp) {
 
 // Memoization (Top-Down Approach)
 // T.C: O(n)
-// S.C: O(n)
+// S.C: O(n) for dp array + O(n) for recursion stack space = O(n)
 int fibo_memoization(int n) {
     // Step 1: Create a dp array of size 'n+1' with default values -1
     vector<int> dp(n + 1, -1);

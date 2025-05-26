@@ -48,7 +48,7 @@ private:
     
 public:
     // T.C: O(m * n)
-    // S.C: O(m * n)
+    // S.C: O(m * n) for dp array + O(m + n) for recursion stack space = O(m * n)   
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         int m = obstacleGrid.size();
         int n = obstacleGrid[0].size();

@@ -24,7 +24,7 @@ using namespace std;
 class Solution {
 public:
     // T.C: O(2^n)
-    // S.C: O(2^n)
+    // S.C: O(2^n);   recursion stack space
     int climbStairs_recursion(int n) {
         // Base case
         if(n <= 2) return n;
@@ -45,7 +45,7 @@ public:
     }
 
     // T.C: O(n)
-    // S.C: O(n)
+    // S.C: O(n) + O(n) for recursion stack space = O(n)
     int climbStairs_memoization(int n) {
         vector<int> dp(n + 1, -1);
         return solve(n, dp);

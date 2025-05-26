@@ -42,7 +42,7 @@ int solve(int index, vector<int>& nums) {
 }
 
 // T.C: O(2^n);   where n = nums.size()
-// S.C: O(n)
+// S.C: O(n);   recursion stack space
 int rob_recursion(vector<int>& nums) {
     int n = nums.size();
     return solve(n - 1, nums);   // return the maximum money I can rob by standing on the last house
@@ -64,7 +64,7 @@ int solve(int index, vector<int>& nums, vector<int>& dp) {
 }
 
 // T.C: O(n);   where n = nums.size()
-// S.C: O(n)
+// S.C: O(n) for dp array + O(n) for recursion stack space = O(n)
 int rob_memoization(vector<int>& nums) {
     int n = nums.size();
     vector<int> dp(n, -1);

@@ -73,7 +73,7 @@ public:
     }
 
     // T.C: O(3^n)
-    // S.C: O(n)
+    // S.C: O(n);   recursion stack space
     int maximumPoints_recursion(vector<vector<int>>& points, int n) {
         // Start computing maximum points collected from last element to first element.
         // solve() function is called with first argument as the last day, i.e., n-1. The second argument is the task
@@ -106,7 +106,7 @@ public:
     }
 
     // T.C: O(n * 4) = O(n)
-    // S.C: O(n)(recursion stack space) + O(n * 4) = O(n)
+    // S.C: O(n * 4) for dp array + O(n) for recursion stack space = O(n)
     int maximumPoints_memoization(vector<vector<int>>& points, int n) {
         vector<vector<int>> dp(n, vector<int>(4, -1));   // kept column size 4 as tasks are T0, T1, T2, T3(for initial recursive call)
         return solve(n - 1, 3, points, dp);
