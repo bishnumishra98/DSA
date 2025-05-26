@@ -40,7 +40,7 @@ public:
         return solve(m - 1, n - 1, grid);
     }
 
-// --------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------
 
     int solve(int i, int j, vector<vector<int>>& grid, vector<vector<int>>& dp) {
         if(i < 0 || j < 0) return 1e9;
@@ -63,12 +63,72 @@ public:
         vector<vector<int>> dp(m, vector<int>(n, -1));
         return solve(m - 1, n - 1, grid, dp);
     }
+
+// ----------------------------------------------------------------------------------------------
+
+    // T.C: O(m * n)
+    // S.C: O(m * n)
+    int minPathSum_tabulation(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        vector<vector<int>> dp(m, vector<int>(n, 0));
+
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(i == 0 && j == 0) dp[i][j] = grid[0][0];
+                else {
+                    int left = grid[i][j];
+                    if(j >= 1) left += dp[i][j - 1];
+                    else left += 1e9;
+                    int up = grid[i][j];
+                    if(i >= 1) up += dp[i - 1][j];
+                    else up += 1e9;
+                    dp[i][j] = min(left, up);
+                }
+            }
+        }
+
+        return dp[m - 1][n - 1];
+    }
+
+// ----------------------------------------------------------------------------------------
+
+    // T.C: O(m * n)
+    // S.C: O(n)
+    int minPathSum_tabulation_SO(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        vector<int> prev(n, 0);   // this will store the previous row's results.
+
+        for(int i = 0; i < m; i++) {
+            vector<int> cur(n, 0);   // this will store the current row's results.
+            for(int j = 0; j < n; j++) {
+                if(i == 0 && j == 0) cur[j] = grid[0][0];   
+                else {
+                    int left = grid[i][j];
+                    if(j >= 1) left += cur[j - 1];
+                    else left += 1e9;
+                    int up = grid[i][j];
+                    if(i >= 1) up += prev[j];
+                    else up += 1e9;
+                    cur[j] = min(left, up);
+                }
+            }
+
+            prev = cur;
+        }
+
+        return prev[n - 1];
+    }
 };
+
 
 int main() {
     vector<vector<int>> grid = {{1, 3, 1}, {1, 5, 1}, {4, 2, 1}};
     cout << Solution().minPathSum_recursion(grid) << endl;
     cout << Solution().minPathSum_memoization(grid) << endl;
+    cout << Solution().minPathSum_tabulation(grid) << endl;
+    cout << Solution().minPathSum_tabulation_SO(grid);
 
     return 0;
 }
