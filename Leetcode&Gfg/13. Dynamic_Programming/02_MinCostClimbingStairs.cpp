@@ -34,21 +34,21 @@ public:
         if(index == 0) return cost[0];
         if(index == 1) return cost[1];
 
-        // For landing on current index, you must have landed previously on either 'index-1'th or 'index-2'th step.
+        // For landing on current index, you must have landed previously on either 'index - 1'th or 'index - 2'th step.
         // Minimum cost to land at current index = minimum cost path between the above two paths + cost of current index step.
         int minCost = min(solve(index-1, cost), solve(index-2, cost)) + cost[index];
         return minCost;
     }
 
-    // T.C: O(2 * 2^n) = O(2^(n+1))
-    // S.C: O(2 * 2^n) = O(2^(n+1))
+    // T.C: O(2 * 2^n) = O(2^(n + 1))
+    // S.C: O(2 * 2^n) = O(2^(n + 1));   recursion stack space
     int minCostClimbingStairs_recursion(vector<int>& cost) {
         int n = cost.size();
         // We want to reach the top of the floor, i.e., beyond the last element of 'cost'. In order to jump out of
-        // the vector 'cost', our 2nd last foot must fall on any one of the two steps: either 'n-1'th or 'n-2'th step,
+        // the vector 'cost', our 2nd last foot must fall on any one of the two steps: either 'n - 1'th or 'n - 2'th step,
         // i.e., the last element or the 2nd last element of 'cost'.
         // Thus, we try finding minimum cost from both the cases; and return the minimum cost path between the two.
-        return min(solve(n-1, cost), solve(n-2, cost));
+        return min(solve(n - 1, cost), solve(n - 2, cost));
     }
 
 // --------------------------------------------------------------------------------------------------------------------------
@@ -59,12 +59,12 @@ public:
 
         if(dp[index] != -1) return dp[index];
 
-        dp[index] = min(solve(index-1, cost, dp), solve(index-2, cost, dp)) + cost[index];
+        dp[index] = min(solve(index - 1, cost, dp), solve(index - 2, cost, dp)) + cost[index];
         return dp[index];
     }
 
-    // T.C: O(n)
-    // S.C: O(n)
+    // T.C: O(n * 2) = O(n);   where n is the size of 'cost' vector
+    // S.C: O(n) for dp array + O(n) for recursion stack space = O(n)
     int minCostClimbingStairs_memoization(vector<int>& cost) {
         int n = cost.size();
         vector<int> dp(n, -1);
@@ -84,10 +84,10 @@ public:
 
         // Fill the dp array
         for(int index = 2; index < n; index++) {
-            dp[index] = min(dp[index-1], dp[index-2]) + cost[index];
+            dp[index] = min(dp[index - 1], dp[index-2]) + cost[index];
         }
 
-        return min(dp[n-1], dp[n-2]);
+        return min(dp[n - 1], dp[n - 2]);
     }
 
 // --------------------------------------------------------------------------------------------------------------------------
@@ -107,7 +107,6 @@ public:
 
         return min(prev, prev2);
     }
-
 };
 
 int main() {
