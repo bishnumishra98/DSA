@@ -110,7 +110,7 @@ public:
 };
 
 int main() {
-    vector<int> cost = {1,100,1,1,1,100,1,1,100,1};
+    vector<int> cost = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
 
     Solution sol;
     cout << "minCostClimbingStairs_recursion: " << sol.minCostClimbingStairs_recursion(cost) << endl;
