@@ -197,7 +197,7 @@ public:
             prev = cur;   // update prev to current row's results
         }
 
-        return prev[0][col - 1];   // return the maximum cherries collected starting from (0, 0
+        return prev[0][col - 1];   // return the maximum cherries collected starting from (0, 0)
     }
 };
 
