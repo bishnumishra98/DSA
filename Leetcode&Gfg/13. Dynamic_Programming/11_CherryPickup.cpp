@@ -22,7 +22,7 @@
 // Input: grid = [[1,1,-1],[1,-1,1],[-1,1,1]]
 // Output: 0
 
-// Algorithm: Extremely simple problem, it is nothing but same problem of Unique Paths II with some modifications.
+// Algorithm: 
 
 #include <bits/stdc++.h>
 using namespace std;
