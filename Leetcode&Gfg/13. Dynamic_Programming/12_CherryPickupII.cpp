@@ -69,8 +69,8 @@ public:
         return maxCherries;
     }
 
-    // T.C: O(3^n * 3^n) = O(3^(2n)) = O(9^n);   where n is the no.of rows in the grid
-    // S.C: O(n^2);   recursion stack space
+    // T.C: O(3^n * 3^n) = O(9^n);   where n is the no.of rows in the grid
+    // S.C: O(n);   recursion stack space
     int cherryPickup_recursion(vector<vector<int>>& grid) {
         int row = grid.size();   // no.of rows in grid
         int col = grid[0].size();   // no.of columns in grid
@@ -79,14 +79,128 @@ public:
 
 // ---------------------------------------------------------------------------------------
 
-    // T.C: O(N * M * M) * 9;   where N is the no.of rows and M is the no.of columns in the grid
-    // S.C: O(N * M * M) for memoization table + O(N) for recursion stack space = O(N * M * M)
-    int cherryPickup_memoization(vector<vector<int>>& grid) {
-        
+    int solve(int i, int j1, int j2, int row, int col, vector<vector<int>>& grid, vector<vector<vector<int>>>& dp) {
+        if(j1 < 0 || j2 < 0 || j1 >= col || j2 >= col) return -1e8;
+        if(i == row - 1) {
+            if(j1 == j2) return grid[i][j1];
+            else return grid[i][j1] + grid[i][j2];
+        }
+
+        if(dp[i][j1][j2] != -1) return dp[i][j1][j2];
+
+        int maxCherries = -1e8;
+        for(int dj1 = -1; dj1 <= 1; dj1++) {
+            for(int dj2 = -1; dj2 <= 1; dj2++) {
+                int cherries;
+                if(j1 == j2) cherries = grid[i][j1];
+                else cherries = grid[i][j1] + grid[i][j2];
+                cherries += solve(i + 1, j1 + dj1, j2 + dj2, row, col, grid, dp);
+                maxCherries = max(maxCherries, cherries);
+            }
+        }
+
+        dp[i][j1][j2] = maxCherries;
+        return dp[i][j1][j2];
     }
 
-    // ---------------------------------------------------------------------------------------
+    // T.C: O(N * M * M) * 9;   where N is the no.of rows and M is the no.of columns in the grid
+    // S.C: O(N * M * M) for dp table + O(N) for recursion stack space = O(N * M * M)
+    int cherryPickup_memoization(vector<vector<int>>& grid) {
+        int row = grid.size();
+        int col = grid[0].size();
+        vector<vector<vector<int>>> dp(row, vector<vector<int>>(col, vector<int>(col, -1)));
+        return solve(0, 0, col - 1, row, col, grid, dp);
+    }
+
+// ---------------------------------------------------------------------------------------
+
+    // T.C: O(N * M * M) * 9;   where N is the no.of rows and M is the no.of columns in the grid
+    // S.C: O(N * M * M)
+    int cherryPickup_tabulation(vector<vector<int>>& grid) {
+        int row = grid.size();
+        int col = grid[0].size();
+        vector<vector<vector<int>>> dp(row, vector<vector<int>>(col, vector<int>(col, 0)));
+
+        // Fill the last row of dp table
+        for(int j1 = 0; j1 < col; j1++) {
+            for(int j2 = 0; j2 < col; j2++) {
+                if(j1 == j2) dp[row - 1][j1][j2] = grid[row - 1][j1];
+                else dp[row - 1][j1][j2] = grid[row - 1][j1] + grid[row - 1][j2];
+            }
+        }
+
+        // Fill the dp table from bottom to top
+        for(int i = row - 2; i >= 0; i--) {
+            for(int j1 = 0; j1 < col; j1++) {
+                for(int j2 = 0; j2 < col; j2++) {
+                    int maxCherries = -1e8;
+                    for(int dj1 = -1; dj1 <= 1; dj1++) {
+                        for(int dj2 = -1; dj2 <= 1; dj2++) {
+                            int cherries;
+                            if(j1 == j2) cherries = grid[i][j1];
+                            else cherries = grid[i][j1] + grid[i][j2];
+                            if(j1 + dj1 >= 0 && j1 + dj1 < col && j2 + dj2 >= 0 && j2 + dj2 < col)
+                                cherries += dp[i + 1][j1 + dj1][j2 + dj2];
+                            else
+                                cherries += -1e8;   // if out of bounds, add a very small value to avoid that path being considered
+                            maxCherries = max(maxCherries, cherries);
+                        }
+                    }
+
+                    dp[i][j1][j2] = maxCherries;
+                }
+            }
+        }
+
+        return dp[0][0][col - 1];   // return the maximum cherries collected starting from (0, 0) and (0, col - 1)
+    }
+
+// ---------------------------------------------------------------------------------------
+
+    // T.C: O(N * M * M) * 9;   where N is the no.of rows and M is the no.of columns in the grid
+    // S.C: O(M * M)
+    int cherryPickup_tabulation_SO(vector<vector<int>>& grid) {
+        int row = grid.size();
+        int col = grid[0].size();
+        vector<vector<int>> prev(col, vector<int>(col, 0));   // to store the previous row's results
+
+        // Fill the last row of prev with values of last row of grid
+        for(int j1 = 0; j1 < col; j1++) {
+            for(int j2 = 0; j2 < col; j2++) {
+                if(j1 == j2) prev[j1][j2] = grid[row - 1][j1];
+                else prev[j1][j2] = grid[row - 1][j1] + grid[row - 1][j2];
+            }
+        }
+
+        // Fill the dp table from bottom to top
+        for(int i = row - 2; i >= 0; i--) {
+            vector<vector<int>> cur(col, vector<int>(col, 0));   // to store the current row's results
+            for(int j1 = 0; j1 < col; j1++) {
+                for(int j2 = 0; j2 < col; j2++) {
+                    int maxCherries = -1e8;
+                    for(int dj1 = -1; dj1 <= 1; dj1++) {
+                        for(int dj2 = -1; dj2 <= 1; dj2++) {
+                            int cherries;
+                            if(j1 == j2) cherries = grid[i][j1];
+                            else cherries = grid[i][j1] + grid[i][j2];
+                            if(j1 + dj1 >= 0 && j1 + dj1 < col && j2 + dj2 >= 0 && j2 + dj2 < col)
+                                cherries += prev[j1 + dj1][j2 + dj2];
+                            else
+                                cherries += -1e8;   // if out of bounds, add a very small value to avoid that path being considered
+                            maxCherries = max(maxCherries, cherries);
+                        }
+                    }
+
+                    cur[j1][j2] = maxCherries;
+                }
+            }
+            prev = cur;   // update prev to current row's results
+        }
+
+        return prev[0][col - 1];   // return the maximum cherries collected starting from (0, 0
+    }
 };
+
 
 int main() {
     vector<vector<int>> grid = {{3, 1, 1},
@@ -95,7 +209,9 @@ int main() {
                                 {2, 1, 1}};
     
     cout << Solution().cherryPickup_recursion(grid) << endl;
+    cout << Solution().cherryPickup_memoization(grid) << endl;
+    cout << Solution().cherryPickup_tabulation(grid) << endl;
+    cout << Solution().cherryPickup_tabulation_SO(grid);
 
     return 0;
 }
- 
