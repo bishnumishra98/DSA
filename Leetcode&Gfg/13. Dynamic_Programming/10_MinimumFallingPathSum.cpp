@@ -88,6 +88,8 @@ public:
 
 // --------------------------------------------------------------------------------------------------
 
+    // T.C: O(n^2);   where n is the no.of rows in the matrix
+    // S.C: O(n^2)
     int minFallingPathSum_tabulation(vector<vector<int>>& matrix) {
         int n = matrix.size();
         vector<vector<int>> dp(n, vector<int>(n, 0));
@@ -95,7 +97,7 @@ public:
         // Fill the first row of dp with values of first row of matrix
         for(int j = 0; j < n; j++) dp[0][j] = matrix[0][j];
 
-        // Fill the rest of the dp
+        // Fill the rest of the dp table row by row
         for(int i = 1; i < n; i++) {
             for(int j = 0; j < n; j++) {
                 int left_diagonal = 1e9, up, right_diagonal = 1e9;
@@ -118,8 +120,37 @@ public:
 
 // --------------------------------------------------------------------------------------------------
 
+    // T.C: O(n^2);   where n is the no.of rows in the matrix
+    // S.C: O(n)
     int minFallingPathSum_tabulation_SO(vector<vector<int>>& matrix) {
-        
+        int n = matrix.size();
+        vector<int> prev(n, 0);   // to store the previous row's results
+
+        // Fill the first row of prev with values of first row of matrix
+        for(int j = 0; j < n; j++) prev[j] = matrix[0][j];
+
+        for(int i = 1; i < n; i++) {
+            vector<int> cur(n, 0);   // to store the current row's results
+
+            for(int j = 0; j < n; j++) {
+                int left_diagonal = 1e9, up, right_diagonal = 1e9;
+
+                if(j >= 1) left_diagonal = matrix[i][j] + prev[j - 1];
+                up = matrix[i][j] + prev[j];
+                if(j < n - 1) right_diagonal = matrix[i][j] + prev[j + 1];
+
+                cur[j] = min({left_diagonal, up, right_diagonal});
+            }
+
+            prev = cur;
+        }
+
+        int mini = INT_MAX;
+        for(int j = 0; j < n; j++) {
+            mini = min(mini, prev[j]);
+        }
+
+        return mini;
     }
 };
 
@@ -135,3 +166,7 @@ int main() {
 
     return 0;
 }
+
+// Note: The same type of problem can be asked in interviews with different variation like to find maximum falling path sum.
+//       The approach remains the same, just the comparison changes from min to max.
+// Problem link: https://www.geeksforgeeks.org/problems/path-in-matrix3805/1
