@@ -89,7 +89,31 @@ public:
 // --------------------------------------------------------------------------------------------------
 
     int minFallingPathSum_tabulation(vector<vector<int>>& matrix) {
-        
+        int n = matrix.size();
+        vector<vector<int>> dp(n, vector<int>(n, 0));
+
+        // Fill the first row of dp with values of first row of matrix
+        for(int j = 0; j < n; j++) dp[0][j] = matrix[0][j];
+
+        // Fill the rest of the dp
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                int left_diagonal = 1e9, up, right_diagonal = 1e9;
+
+                if(j >= 1) left_diagonal = matrix[i][j] + dp[i - 1][j - 1];
+                up = matrix[i][j] + dp[i - 1][j];
+                if(j < n - 1) right_diagonal = matrix[i][j] + dp[i - 1][j + 1];
+
+                dp[i][j] = min({left_diagonal, up, right_diagonal});
+            }
+        }
+
+        int mini = INT_MAX;
+        for(int j = 0; j < n; j++) {
+            mini = min(mini, dp[n - 1][j]);
+        }
+
+        return mini;
     }
 
 // --------------------------------------------------------------------------------------------------
