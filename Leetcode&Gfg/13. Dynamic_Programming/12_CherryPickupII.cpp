@@ -28,7 +28,7 @@
 
 // Algorithm: As we have two fixed starting points, but variable ending points, we will start recursion from the
 //            starting points, i.e., (0, 0) and (0, cols - 1) and move downwards to the last row.
-//            To track movements of both robots, we must two pair of indices: (i1, j1) and (i2, j2) for Robot1 and Robot2.
+//            To track movements of both robots, we must have two pair of indices: (i1, j1) and (i2, j2) for Robot1 and Robot2.
 //            But as at every step, both robots move to the next row, we can use a single index 'i' for both robots. Thus,
 //            we will have (i, j1) for Robot1 and (i, j2) for Robot2.
 //            Each robot can move to 3 possible positions in the next row, i.e., (i + 1, j1 - 1), (i + 1, j1), (i + 1, j1 + 1).
