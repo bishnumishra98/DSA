@@ -18,7 +18,17 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1
 
-// Algorithm: 
+// Algorithm: This is a simple brute force problem. At each step, we have two choices:
+//            1) Either we take the current element and reduce the target by the value of the current element.
+//            2) Or we do not take the current element and keep the target as it is.
+//            We can use recursion to explore all possible subsets and check if any of them sum up to the target value.
+//            The recursive function will take the current index, the array, and the target sum as parameters.
+//            f(int i, vector<int>& arr, int target) {} means in the entire array till the index i, can we form a subset
+//            that sums to the target value ? If yes, return true; else return false.
+//            The base cases of the function will be:
+//            1) If the target is 0, we have found a subset that sums to the target.
+//            2) If we have no elements left (i == 0), we can only form the subset if the first element equals the target.
+//               Else, if the first element is not equal to the target, we cannot form the subset.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -27,12 +37,14 @@ class Solution {
 public:
     bool solve(int i, vector<int>& arr, int target) {
         // Base cases:
-        // 1) If target is 0, the subset is made up now
+        // 1) If the target is 0, we have found a subset that sums to the target.
         // 2) If we have no elements left (i == 0), we can only form the subset if the first element equals target.
         if(target == 0) return true;
         if(i == 0) return (arr[0] == target);
 
         bool notTake = solve(i - 1, arr, target);
+        // By default, assume we cannot take the current element. If the current element is less than or equal to
+        // the target, we can consider taking it.
         bool take = false;
         if(arr[i] <= target) take = solve(i - 1, arr, target - arr[i]);
         return take || notTake;
@@ -74,12 +86,18 @@ public:
     // S.C: O(n * sum)
     int isSubsetSum_tabulation(vector<int>& arr, int sum) {
         int n = arr.size();
+        // dp[i][j] means i are the index of the array till which we are considering elements, and j is the target sum.
         vector<vector<bool>> dp(n, vector<bool>(sum + 1, false));
 
+        // Base cases:
+        // A subset is already formed if target is 0, so mark all rows in the first column as true
+        for(int i = 0; i < n; i++) dp[i][0] = true;
+        // If the first element is equal to target, mark it as true
         dp[0][arr[0]]= true;
+
         for(int i = 1; i < n; i++) {
             for(int target = 1; target <= sum; target++) {
-                bool notTake =dp[i - 1][target];
+                bool notTake = dp[i - 1][target];
                 bool take = false;
                 if(arr[i] <= target) take = dp[i - 1][target - arr[i]];
                 dp[i][target] = take || notTake;
