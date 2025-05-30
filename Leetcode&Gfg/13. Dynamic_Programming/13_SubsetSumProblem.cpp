@@ -90,10 +90,13 @@ public:
         vector<vector<bool>> dp(n, vector<bool>(sum + 1, false));
 
         // Base cases:
-        // A subset is already formed if target is 0, so mark all rows in the first column as true
+        // 1) A subset is already formed if target is 0, so mark all rows in the first column as true.
+        // 2) If the first element is equal to target, mark it as true.
         for(int i = 0; i < n; i++) dp[i][0] = true;
-        // If the first element is equal to target, mark it as true
-        dp[0][arr[0]]= true;
+        if(arr[0] <= sum) dp[0][arr[0]]= true;   // if(arr[0] <= sum) condition is added to avoid the case when the
+        // first element itself is greater than sum. If the first element is itself is greater than sum, then it does
+        // not makes any sense to mark dp[0][arr[0]] as true, because dp[0][arr[0]] means that we can form a subset
+        // with the first element itself, which is not possible if the first element is greater than sum.
 
         for(int i = 1; i < n; i++) {
             for(int target = 1; target <= sum; target++) {
@@ -117,7 +120,7 @@ public:
 
         // Base cases:
         prev[0] = curr[0] = true;   // a subset is already formed if target is 0, so mark all rows in the first column as true
-        prev[arr[0]] = true;   // if the first element is equal to target, mark it as true
+        if(arr[0] <= sum) prev[arr[0]] = true;   // if the first element is equal to target, mark it as true.
 
         for(int i = 1; i < n; i++) {
             for(int target = 1; target <= sum; target++) {
