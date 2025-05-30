@@ -115,9 +115,9 @@ public:
         int n = arr.size();
         vector<bool> prev(sum + 1, false), curr(sum + 1, false);
 
-        prev[0] = curr[0] = true;
-
-        if(arr[0] <= sum) prev[arr[0]] = true;
+        // Base cases:
+        prev[0] = curr[0] = true;   // a subset is already formed if target is 0, so mark all rows in the first column as true
+        prev[arr[0]] = true;   // if the first element is equal to target, mark it as true
 
         for(int i = 1; i < n; i++) {
             for(int target = 1; target <= sum; target++) {
@@ -132,6 +132,7 @@ public:
         return prev[sum];
     }
 };
+
 
 int main() {
     vector<int> arr = {3, 34, 4, 12, 5, 2};
