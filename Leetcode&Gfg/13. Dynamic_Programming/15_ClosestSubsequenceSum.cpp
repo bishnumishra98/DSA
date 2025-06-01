@@ -29,7 +29,8 @@
 //                   use binary search to find the closest sum to the goal in the combined sums of both halves.
 //                   The steps are as follows:
 //                   1) Split the array into two halves.
-//                   2) Find all possible subset sums for each half.
+//                   2) Find all possible subset sums for each half. Least sum will be 0 and maximum sum will be the sum of
+//                      all elements in that half.
 //                   3) Sort the subset sums of the second half.
 //                   4) For each subset sum in the first half, use binary search to find the closest sum in the second half
 //                      that, when added to the first half's sum, is closest to the goal.
@@ -128,8 +129,8 @@ public:
         // that, when added to the left half's sum, is closest to the goal
         for(int i = 0; i < leftSubsetSums.size(); i++) {
             int leftSum = leftSubsetSums[i];
-            int low = 0, high = rightSubsetSums.size() - 1;
 
+            int low = 0, high = rightSubsetSums.size() - 1;
             while(low <= high) {
                 int mid = low + (high - low) / 2;
                 int sum = leftSum + rightSubsetSums[mid];
