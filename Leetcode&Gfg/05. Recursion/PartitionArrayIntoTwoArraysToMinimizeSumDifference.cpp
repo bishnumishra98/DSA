@@ -23,6 +23,18 @@
 // Explanation: One optimal partition is: [2,4,-9] and [-1,0,-2].
 // The absolute difference between the sums of the arrays is abs((2 + 4 + -9) - (-1 + 0 + -2)) = 0.
 
+// Algorithm: The algorithm uses a meet-in-the-middle approach to efficiently find the closest subset sums, used in
+//            the problem 'Leetcode&Gfg\05. Recursion\ClosestSubsequenceSum.cpp'.
+//            
+// 1) Split the array into two halves. The first half will contain the first n / 2 elements and the second half will contain
+//    the last n / 2 elements.
+// 2) Generate all possible subset sums for each half, along with the count of elements in each subset.
+// 3) For each subset sum in the first half, find the closest sum in the second half that, when added to the first half's sum,
+//    results in a sum closest to half of the total sum of the original array.
+// 4) Use binary search to efficiently find the closest sum in the second half for each subset sum in the first half.
+// 5) Calculate the absolute difference between the two sums and keep track of the minimum difference found.
+// 6) Return the minimum absolute difference.
+
 
 #include <bits/stdc++.h>
 using namespace std;
