@@ -29,22 +29,40 @@
 using namespace std;
 
 class Solution {
-    // Helper function to generate all subset sums of a given array
+    // Helper function to generate all subset sums of a given array. It stores the sums in a 2D vector
+    // where the index represents the number of elements in the subset. Example:-
+    // For an array of size 3, lets say arr = [2, 4, -1], this function will generate the following subset sums:
+    // subsetSums[0] = [0]              // sums of all subsets of size 0 (empty subset)
+    // subsetSums[1] = [-1, 4, 2]       // sums of all subsets of size 1
+    // subsetSums[2] = [3, 1, 6]        // sums of all subsets of size 2
+    // subsetSums[3] = [5]              // sums of all subsets of size 3
     void generateSubsetSums(const vector<int>& arr, vector<vector<int>>& subsetSums) {
         int n = arr.size();
-        int totalSubsets = pow(2, n); // Total subsets = 2^n
+        int totalSubsets = 1 << n;   // same as pow(2, n)
 
-        for (int mask = 0; mask < totalSubsets; ++mask) {
+        // Iterate through all possible subsets using bit masking
+        for (int mask = 0; mask < totalSubsets; mask++) {
             int sum = 0, count = 0;
-            int temp = mask;
-            for (int i = 0; i < n; ++i) {
-                if (temp % 2 == 1) {
+
+            // Iterate through each bit of the mask and check if ith bit is set, then include arr[i] in the sum
+            // and increment the count of elements in the subset. Exaple:-
+            // For array of size 3, the masks will be:
+            // 000 -> empty subset (sum = 0, count = 0)
+            // 001 -> subset with only arr[0] (sum = arr[0], count = 1)
+            // 010 -> subset with only arr[1] (sum = arr[1], count = 1)
+            // 011 -> subset with arr[0] and arr[1] (sum = arr[0] + arr[1], count = 2)
+            // 100 -> subset with only arr[2] (sum = arr[2], count = 1)
+            // 101 -> subset with arr[0] and arr[2] (sum = arr[0] + arr[2], count = 2)
+            // 110 -> subset with arr[1] and arr[2] (sum = arr[1] + arr[2], count = 2)
+            // 111 -> subset with all elements (sum = arr[0] + arr[1] + arr[2], count = 3)
+            for (int i = 0; i < n; i++) {
+                if (mask & (1 << i)) {   // check if i-th bit is set
                     sum += arr[i];
                     count++;
                 }
-                temp /= 2;
             }
-            subsetSums[count].push_back(sum);
+
+            subsetSums[count].push_back(sum);   // store the sum in the corresponding count index
         }
     }
 
@@ -88,8 +106,8 @@ class Solution {
 
 public:
     int minimumDifference(vector<int>& nums) {
-        int n = nums.size() / 2;
         int totalSum = accumulate(nums.begin(), nums.end(), 0);
+        int n = nums.size() / 2;
 
         // Split nums into two halves
         vector<int> left(nums.begin(), nums.begin() + n);
@@ -108,6 +126,9 @@ public:
         // Find the minimum absolute difference
         int minDiff = INT_MAX;
         for (int i = 0; i <= n; ++i) {
+            // The findMinimumDifference() function takes all subset sums of size i from subsetSumsLeft, and all subset sums
+            // of size (n - i) from subsetSumsRight, then finds the pair whose combined sum is closest to totalSum / 2,
+            // and returns the minimum absolute difference between the two resulting partition sums.
             minDiff = min(minDiff, findMinimumDifference(subsetSumsLeft[i], subsetSumsRight[n - i], totalSum));
         }
 
@@ -118,7 +139,9 @@ public:
 
 int main() {
     vector<int> nums = {3, 9, 7, 3};
+
     Solution sol;
-    cout << sol.minimumDifference(nums) << endl;
+    cout << sol.minimumDifference(nums);
+
     return 0;
 }
