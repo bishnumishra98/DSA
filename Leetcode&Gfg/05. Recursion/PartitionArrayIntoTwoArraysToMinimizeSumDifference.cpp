@@ -1,4 +1,5 @@
 // Leetcode: 2035. Partition Array Into Two Arrays To Minimize Sum Difference   --->   You are given an integer array
+    // 
 // nums of 2 * n integers. You need to partition nums into two arrays of length n to minimize the absolute difference
 // of the sums of the arrays. To partition nums, put each element of nums into one of the two arrays.
 // Return the minimum possible absolute difference.
@@ -23,112 +24,101 @@
 // Explanation: One optimal partition is: [2,4,-9] and [-1,0,-2].
 // The absolute difference between the sums of the arrays is abs((2 + 4 + -9) - (-1 + 0 + -2)) = 0.
 
-// Algorithm: The algorithm uses a meet-in-the-middle approach to efficiently find the closest subset sums, used in
-//            the problem 'Leetcode&Gfg\05. Recursion\ClosestSubsequenceSum.cpp'.
-//            
-// 1) Split the array into two halves. The first half will contain the first n / 2 elements and the second half will contain
-//    the last n / 2 elements.
-// 2) Generate all possible subset sums for each half, along with the count of elements in each subset.
-// 3) For each subset sum in the first half, find the closest sum in the second half that, when added to the first half's sum,
-//    results in a sum closest to half of the total sum of the original array.
-// 4) Use binary search to efficiently find the closest sum in the second half for each subset sum in the first half.
-// 5) Calculate the absolute difference between the two sums and keep track of the minimum difference found.
-// 6) Return the minimum absolute difference.
-
 
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
-public:
-    void generateSubsetSums(vector<int>& arr, int index, int currentSum, int count, vector<pair<int, int>>& sums) {
-        if (index == arr.size()) {
-            sums.push_back({currentSum, count});
-            return;
+    // Helper function to generate all subset sums of a given array
+    void generateSubsetSums(const vector<int>& arr, vector<vector<int>>& subsetSums) {
+        int n = arr.size();
+        int totalSubsets = pow(2, n); // Total subsets = 2^n
+
+        for (int mask = 0; mask < totalSubsets; ++mask) {
+            int sum = 0, count = 0;
+            int temp = mask;
+            for (int i = 0; i < n; ++i) {
+                if (temp % 2 == 1) {
+                    sum += arr[i];
+                    count++;
+                }
+                temp /= 2;
+            }
+            subsetSums[count].push_back(sum);
         }
-        // Include the current element in the subset
-        generateSubsetSums(arr, index + 1, currentSum + arr[index], count + 1, sums);
-        // Exclude the current element from the subset
-        generateSubsetSums(arr, index + 1, currentSum, count, sums);
     }
 
+    // Manual binary search to find lower_bound (index of first element >= target)
+    int binarySearchLowerBound(const vector<int>& arr, int target) {
+        int left = 0, right = arr.size();
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] < target) left = mid + 1;
+            else right = mid;
+        }
+        return left;
+    }
+
+    // Helper function to find the minimum difference using two subset sums
+    int findMinimumDifference(vector<int>& sum1, vector<int>& sum2, int totalSum) {
+        int minDiff = INT_MAX;
+
+        for (int x : sum1) {
+            int target = totalSum / 2 - x;
+
+            int idx = binarySearchLowerBound(sum2, target);
+
+            // Check the closest higher value
+            if (idx < sum2.size()) {
+                int sum1Part = x + sum2[idx];
+                int sum2Part = totalSum - sum1Part;
+                minDiff = min(minDiff, abs(sum1Part - sum2Part));
+            }
+
+            // Check the closest lower value
+            if (idx > 0) {
+                int sum1Part = x + sum2[idx - 1];
+                int sum2Part = totalSum - sum1Part;
+                minDiff = min(minDiff, abs(sum1Part - sum2Part));
+            }
+        }
+
+        return minDiff;
+    }
+
+public:
     int minimumDifference(vector<int>& nums) {
         int n = nums.size() / 2;
+        int totalSum = accumulate(nums.begin(), nums.end(), 0);
+
+        // Split nums into two halves
         vector<int> left(nums.begin(), nums.begin() + n);
         vector<int> right(nums.begin() + n, nums.end());
 
-        // Generate subset sums along with their counts for the left and right halves
-        vector<pair<int, int>> leftSums, rightSums;
-        generateSubsetSums(left, 0, 0, 0, leftSums);
-        generateSubsetSums(right, 0, 0, 0, rightSums);
+        // Generate all subset sums for each half
+        vector<vector<int>> subsetSumsLeft(n + 1), subsetSumsRight(n + 1);
+        generateSubsetSums(left, subsetSumsLeft);
+        generateSubsetSums(right, subsetSumsRight);
 
-        // Organize rightSums by count
-        unordered_map<int, vector<int>> rightMap;
-        for (int i = 0; i < rightSums.size(); i++) {
-            int sum = rightSums[i].first;
-            int count = rightSums[i].second;
-            rightMap[count].push_back(sum);
+        // Sort subset sums for efficient manual binary search
+        for (auto& sums : subsetSumsRight) {
+            sort(sums.begin(), sums.end());
         }
 
-
-        // Sort each subset in rightMap for binary search
-        for (auto it = rightMap.begin(); it != rightMap.end(); ++it) {
-            vector<int>& vec = it->second;
-            sort(vec.begin(), vec.end());
-        }
-
-
-        int totalSum = accumulate(nums.begin(), nums.end(), 0);
+        // Find the minimum absolute difference
         int minDiff = INT_MAX;
-
-        // For each sum in leftSums, find the closest match in rightSums with equal subset size
-        for (auto it = leftSums.begin(); it != leftSums.end(); ++it) {
-            int sumLeft = it->first;
-            int countLeft = it->second;
-
-            if (rightMap.find(n - countLeft) == rightMap.end()) {
-                continue;
-            }
-
-            vector<int>& rightSubset = rightMap[n - countLeft];
-            int requiredSum = totalSum / 2 - sumLeft;
-
-            // Perform binary search for the closest sum in rightSubset
-            int low = 0, high = rightSubset.size() - 1, closestIndex = -1;
-            while (low <= high) {
-                int mid = low + (high - low) / 2;
-                if (rightSubset[mid] >= requiredSum) {
-                    closestIndex = mid;
-                    high = mid - 1;
-                } else {
-                    low = mid + 1;
-                }
-            }
-
-            // Check the closest sum found by binary search
-            if (closestIndex != -1) {
-                int sum1 = sumLeft + rightSubset[closestIndex];
-                int sum2 = totalSum - sum1;
-                minDiff = min(minDiff, abs(sum1 - sum2));
-            }
-
-            // Check the previous sum if available (to ensure closest match)
-            if (closestIndex > 0) {
-                int sum1 = sumLeft + rightSubset[closestIndex - 1];
-                int sum2 = totalSum - sum1;
-                minDiff = min(minDiff, abs(sum1 - sum2));
-            }
+        for (int i = 0; i <= n; ++i) {
+            minDiff = min(minDiff, findMinimumDifference(subsetSumsLeft[i], subsetSumsRight[n - i], totalSum));
         }
 
         return minDiff;
     }
 };
 
+
 int main() {
     vector<int> nums = {3, 9, 7, 3};
-
     Solution sol;
-    cout << sol.minimumDifference(nums);
-
+    cout << sol.minimumDifference(nums) << endl;
     return 0;
 }
