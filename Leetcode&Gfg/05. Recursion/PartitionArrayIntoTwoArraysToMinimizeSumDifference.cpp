@@ -24,18 +24,29 @@
 // Explanation: One optimal partition is: [2,4,-9] and [-1,0,-2].
 // The absolute difference between the sums of the arrays is abs((2 + 4 + -9) - (-1 + 0 + -2)) = 0.
 
+// Algorithm: The algorithm uses the meet in the middle (MITM) approach to solve the problem.
+//             The idea is to split the array into two halves, find all possible subset sums for each half, and then
+//             use binary search to find the closest sum to totalSum / 2 in the combined sums of both halves.
+// 1. Split the array into two halves.
+// 2. Generate all possible subset sums for each half and store them in a 2D vector. The index of the vector represents
+//    the number of elements in the subset. For example, for an array of size 3, lets say arr = [2, 4, -1] the vector will
+//    have 4 indices:
+//    subsetSums[0] = [0]              // sums of all subsets of size 0 (empty subset)
+//    subsetSums[1] = [-1, 4, 2]       // sums of all subsets of size 1
+//    subsetSums[2] = [3, 1, 6]        // sums of all subsets of size 2
+//    subsetSums[3] = [5]              // sums of all subsets of size 3
+// 3. Sort the subset sums of the second half for efficient binary search.
+// 4. For each subset sum in the first half, use binary search to find the closest sum in the second half that,
+//    when added to the first half's sum, is closest to totalSum / 2.
+// 5. Calculate the absolute difference between the two resulting partition sums and return the minimum absolute difference.
+
 
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
     // Helper function to generate all subset sums of a given array. It stores the sums in a 2D vector
-    // where the index represents the number of elements in the subset. Example:-
-    // For an array of size 3, lets say arr = [2, 4, -1], this function will generate the following subset sums:
-    // subsetSums[0] = [0]              // sums of all subsets of size 0 (empty subset)
-    // subsetSums[1] = [-1, 4, 2]       // sums of all subsets of size 1
-    // subsetSums[2] = [3, 1, 6]        // sums of all subsets of size 2
-    // subsetSums[3] = [5]              // sums of all subsets of size 3
+    // where the index represents the number of elements in the subset.
     void generateSubsetSums(const vector<int>& arr, vector<vector<int>>& subsetSums) {
         int n = arr.size();
         int totalSubsets = 1 << n;   // same as pow(2, n)
@@ -67,14 +78,14 @@ class Solution {
     }
 
     // Manual binary search to find lower_bound (index of first element >= target)
-    int binarySearchLowerBound(const vector<int>& arr, int target) {
-        int left = 0, right = arr.size();
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (arr[mid] < target) left = mid + 1;
-            else right = mid;
+    int binarySearchLowerBound(vector<int>& arr, int target) {
+        int low = 0, high = arr.size() - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] < target) low = mid + 1;
+            else high = mid - 1;
         }
-        return left;
+        return low;   // when loop exits, 'low' is the index of the first element >= target
     }
 
     // Helper function to find the minimum difference using two subset sums
