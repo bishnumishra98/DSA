@@ -99,7 +99,7 @@ public:
         // with the first element itself, which is not possible if the first element is greater than sum.
 
         for(int i = 1; i < n; i++) {
-            for(int target = 1; target <= sum; target++) {
+            for(int target = 0; target <= sum; target++) {
                 bool notTake = dp[i - 1][target];
                 bool take = false;
                 if(arr[i] <= target) take = dp[i - 1][target - arr[i]];
@@ -123,7 +123,7 @@ public:
         if(arr[0] <= sum) prev[arr[0]] = true;   // if the first element is equal to target, mark it as true.
 
         for(int i = 1; i < n; i++) {
-            for(int target = 1; target <= sum; target++) {
+            for(int target = 0; target <= sum; target++) {
                 bool notTake = prev[target];
                 bool take = false;
                 if(arr[i] <= target) take = prev[target - arr[i]];
