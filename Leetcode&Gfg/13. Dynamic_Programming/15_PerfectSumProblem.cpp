@@ -145,7 +145,7 @@ public:
                 if (arr[i] <= t) take = prev[t - arr[i]];   // include current element if valid
                 curr[t] = take + notTake;
             }
-            prev = curr;   // ,ove to the next row
+            prev = curr;   // move to the next row
         }
 
         return prev[target];
