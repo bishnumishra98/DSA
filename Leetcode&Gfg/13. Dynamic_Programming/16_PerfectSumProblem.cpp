@@ -106,16 +106,16 @@ public:
         vector<vector<int>> dp(n, vector<int>(target + 1, 0));
 
         // Base cases
-        dp[0][0] = 1;   // if target is 0, a subset is already formed
+        for(int i = 0; i < n; i++) dp[i][0] = 1;   // a subset is already formed if target is 0, so mark all rows in the first column as 1
         if (arr[0] == 0) dp[0][0] = 2;   // if target is 0, and first element is also 0, 2 subsets can be formed
         if (arr[0] <= target && arr[0] != 0) dp[0][arr[0]] = 1;   // if first element is equal to target, a subset can be formed
 
         // Fill the DP table
         for (int i = 1; i < n; i++) {
             for (int t = 0; t <= target; t++) {
-                int notTake = dp[i - 1][t]; // Exclude current element
+                int notTake = dp[i - 1][t];   // exclude current element
                 int take = 0;
-                if (arr[i] <= t) take = dp[i - 1][t - arr[i]]; // Include current element if valid
+                if (arr[i] <= t) take = dp[i - 1][t - arr[i]];   // include current element if valid
                 dp[i][t] = take + notTake;
             }
         }
@@ -129,16 +129,15 @@ public:
     // S.C: O(target)
     int perfectSum_tabulation_SO(vector<int>& arr, int target) {
         int n = arr.size();
-        vector<int> prev(target + 1, 0);
+        vector<int> prev(target + 1, 0), curr(target + 1, 0);
 
         // Base cases
-        prev[0] = 1;   // if target is 0, a subset is already formed
+        prev[0] = curr[0] = 1;   // a subset is already formed if target is 0, so mark all rows in the first column as 1
         if (arr[0] == 0) prev[0] = 2;    // if target is 0, and first element is also 0, 2 subsets can be formed
         if (arr[0] <= target && arr[0] != 0) prev[arr[0]] = 1;   // if first element is equal to target, a subset can be formed
 
         // Fill the DP table row-by-row
         for (int i = 1; i < n; i++) {
-            vector<int> curr(target + 1, 0);   // temporary array for the current row
             for (int t = 0; t <= target; t++) {
                 int notTake = prev[t];   // exclude current element
                 int take = 0;
