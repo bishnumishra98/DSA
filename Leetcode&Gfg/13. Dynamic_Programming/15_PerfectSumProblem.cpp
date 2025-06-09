@@ -1,3 +1,5 @@
+// Ye problem dubara dekhna hai due to failure of a test case {0, 0, 4} and all 0 related test cases.
+
 // GFG: Perfect Sum Problem   --->   Given an array arr of non-negative integers and an integer target, the task
 // is to count all subsets of the array whose sum is equal to the given target.
 
@@ -136,13 +138,13 @@ public:
 
 
 int main() {
-    vector<int> arr = {5, 2, 3, 10, 6, 8};
-    int target = 10;
+    vector<int> arr = {0, 0, 4};
+    int target = 4;
 
     cout << Solution().perfectSum_recursion(arr, target) << endl;
-    cout << Solution().perfectSum_memoization(arr, target) << endl;
-    cout << Solution().perfectSum_tabulation(arr, target) << endl;
-    cout << Solution().perfectSum_tabulation_SO(arr, target);
+    // cout << Solution().perfectSum_memoization(arr, target) << endl;
+    // cout << Solution().perfectSum_tabulation(arr, target) << endl;
+    // cout << Solution().perfectSum_tabulation_SO(arr, target);
 
     return 0;
 }
