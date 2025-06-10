@@ -7,7 +7,7 @@
 // Example 1:
 // Input: W = 4, val[] = [1, 2, 3], wt[] = [4, 5, 1] 
 // Output: 3
-// Explanation: Choose the last item that weighs 1 unit and holds a value of 3.
+// Explanation:
 // knapsack capacity(W): 4kg
 // Thus, sum of items weighing less than or equal 4kg can only be placed in the knapsack.
 // Weight: Item1(4Kg) Item2(5Kg) Item3(1Kg)  Value(Rs.)
@@ -19,6 +19,7 @@
 //             1          0          1          0 (not possible to keep due to overweight, W < (4+1)Kg)
 //             1          1          0          0 (not possible to keep due to overweight, W < (4+5)Kg)
 //             1          1          1          0 (not possible to keep due to overweight, W < (4+5+1)Kg)
+// Thus, choose the last item that weighs 1 unit and holds a value of 3.
 
 // Example 2:
 // Input: W = 3, val[] = [1, 2, 3], wt[] = [4, 5, 6] 
@@ -32,113 +33,144 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1
 
+// Algorithm: It is a very simple problem. You have to put items in the knapsack such that the item weights is below
+//            the threshold of the knapsack capacity, and the total value of items is maximum. Greedy won't work
+//            here as there is no uniformity between values and weights. The only option is to try out all possible
+//            combination of items using recursion.
+
+//            Call a function solve(i, W) which returns the maximum value that can be kept in knapsack till
+//            the index 'i', with a knapsack capacity of 'W'. Call the recursive function solve() from the
+//            last item of the knapsack and go deeper into the recursive tree until index 0.
+//            1. The base cases of the recursion will be at index 0:
+//               i)  If weight of item at 0th index is less than or equal to current knapsack capacity, take it,
+//                   i.e., if(wt[0] <= W) return val[0];
+//               ii) If weight of item at 0th index exceeds the knapsack capacity, then reject taking it, i.e.,
+//                   if(wt[0] > W) return 0;
+//            2. The recursive body will have only two simple take, not take options. At index 'i', you have only
+//               two choices:
+//               I)  Take the item: If weight of item at 'i'th index is less than equal to current knapsack capacity,
+//                                  take it and call recursion for next index with decremented knapsack capacity,
+//                                  i.e., val[i] + solve(i - 1, W - wt[i]);
+//               II) Not take the item: If you choose to not take the current item, just call recursion for next index
+//                                      with the same knapsack capacity, i.e., 0 + solve(i - 1, W);
+//            3. At the end, return the maximum value obtained from both the paths (take and not take).
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
-    public:
-        int solve(int W, int wt[], int val[], int index, int n) {
-            // Base case: If we reach beyond the last item, return 0 value
-            if(index >= n) return 0;
-
-            // Case 1: Include the current item if its weight is within the capacity
-            int include = 0;
-            if(wt[index] <= W) include = val[index] + solve(W-wt[index], wt, val, index+1, n);
-
-            // Case 2: Exclude the current item and move to the next item
-            int exclude = 0 + solve(W, wt, val, index+1, n);
-
-            // Return the maximum value obtained by either including or excluding the current item
-            return max(include, exclude);
+public:
+    int solve(int i, int W, vector<int>& val, vector<int>& wt) {
+        if (i == 0) {
+            if (wt[0] <= W) return val[0];
+            else return 0;
         }
 
-        // T.C: O(2^n)
-        // S.C: O(n)
-        int knapSack_recursion(int W, int wt[], int val[], int n) {
-            int index = 0;   // Start with the first item
-            return solve(W, wt, val, index, n);
+        // At the current index, we have only two choices:
+        // 1) Take the current item
+        int take = INT_MIN;   // initially initialzed to 'INT_MIN', so that if 'wt[i] > W', the current item cannot be included
+        if (wt[i] <= W) take = val[i] + solve(i - 1, W - wt[i], val, wt);
+
+        // 2) Not take the current item
+        int notTake = 0 + solve(i - 1, W, val, wt);
+
+        return max(take, notTake);
+    }
+
+    // T.C: O(2^n)
+    // S.C: O(n);   recursion stack space
+    int knapsack_recursion(int W, vector<int> &val, vector<int> &wt) {
+        int n = val.size();   // no.of items
+        return solve(n - 1, W, val, wt);
+    }
+
+// -----------------------------------------------------------------------------------------------------------
+
+    int solve(int i, int W, vector<int>& val, vector<int>& wt, vector<vector<int>>& dp) {
+        if (i == 0) {
+            if (wt[0] <= W) return val[0];
+            else return 0;
         }
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------
+        if (dp[i][W] != -1) return dp[i][W];
 
-        int solve(int W, int wt[], int val[], int index, int n, vector<vector<int>> dp) {
-            // Base case: If we reach beyond the last item, return 0 value
-            if(index >= n) return 0;
+        int take = INT_MIN;
+        if (wt[i] <= W) take = val[i] + solve(i - 1, W - wt[i], val, wt, dp);
+        int notTake = 0 + solve(i - 1, W, val, wt, dp);
 
-            if(dp[W][index] != -1) return dp[W][index];
+        return dp[i][W] = max(take, notTake);
+    }
 
-            // Case 1: Include the current item if its weight is within the capacity
-            int include = 0;
-            if(wt[index] <= W) include = val[index] + solve(W-wt[index], wt, val, index+1, n);
+    // T.C: O(n * W)
+    // S.C: O(n * W) for dp array + O(n) for recursion stack space = O(n * W)
+    int knapsack_memoization(int W, vector<int> &val, vector<int> &wt) {
+        int n = val.size();
+        vector<vector<int>> dp(n, vector<int>(W + 1, -1));
+        return solve(n - 1, W, val, wt, dp);
+    }
 
-            // Case 2: Exclude the current item and move to the next item
-            int exclude = 0 + solve(W, wt, val, index+1, n);
+// -----------------------------------------------------------------------------------------------------------
 
-            // Return the maximum value obtained by either including or excluding the current item
-            dp[W][index] = max(include, exclude);
-            return dp[W][index];
-        }
+    // T.C: O(n * W)
+    // S.C: O(n * W)
+    int knapsack_tabulation(int W, vector<int> &val, vector<int> &wt) {
+        int n = val.size();
+        vector<vector<int>> dp(n, vector<int>(W + 1, 0));
 
-        // T.C: O(n)
-        // S.C: O(n)
-        int knapSack_memoization(int W, int wt[], int val[], int n) {
-            // Creating a 2D vector with 'W+1' rows and 'n+1' columns with all elements initialized to -1.
-            vector<vector<int>> dp(W+1, vector<int>(n+1, -1));
-            int index = 0;   // Start with the first item
-            return solve(W, wt, val, index, n, dp);
-        }
+        // Base case: At index 0, if weight is less than or equal to knapsack capacity, we can take the 0th item.
+        for (int j = wt[0]; j <= W; j++) dp[0][j] = val[0];
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------
+        // Fill rest of the dp table
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j <= W; j++) {
+                int take = INT_MIN;
+                if (wt[i] <= j) take = val[i] + dp[i - 1][j - wt[i]];
+                int notTake = 0 + dp[i - 1][j];
 
-        // T.C: O(n)
-        // S.C: O(n)
-        int knapSack_tabulation(int W, int wt[], int val[], int n) {
-            // Creating a 2D vector with 'W+1' rows and 'n+1' columns with all elements initialized to -1.
-            // This 2D vector dp[i][j] represents the maximum value with the first 'j' items and weight capacity of knapack 'i'.
-            vector<vector<int>> dp(W+1, vector<int>(n+1, -1));
-            
-            // Initialize the DP table with base case values:
-            // Keeping nth index of each row as 0, because no value is returned if we reach beyond the last item
-            for(int row=0; row<=W; row++) {
-                dp[row][n] = 0;
+                dp[i][j] = max(take, notTake);
             }
-
-            // i represents 'capacity' and j represents 'index'.
-            // capacity approaches from W to 0 in memoization. So in tabulation, it will approach from 0 to W.
-            // index runs from 0 to n in memoization. So in tabulation, it will approach from n to 0.
-            // Also as per tabulation rules, the value to be returned from tabulation function is the initial value of arguments
-            // that was received by the memoization function. In memoization, W and index=0 was received initially, thus in
-            // tabulation dp[W][0] shall be returned from this function. To stop the loop at index [W][0], the outer loop
-            // should run from 0 to W and the inner loop should run from 'n-1' to 0. j starts from 'n-1' because dp[][n] is
-            // already calculated as 0 in the above for loop. So no need of again unnecessarily run j from 'n'.
-
-            // Build the DP table in bottom-up manner
-            for(int i=0; i<=W; i++) {   // Iterate through all capacities from 1 to W
-                for(int j=n-1; j>=0; j--) {   // Iterate through all items
-                    int include = 0;
-                    // Case 1: Include the current item if its weight is within the capacity
-                    if(wt[j] <= i) include = val[j] + dp[i-wt[j]][j+1];
-                    // Case 2: Exclude the current item and move to the next item
-                    int exclude = 0 + dp[i][j+1];
-                    dp[i][j] = max(include, exclude);
-                }
-            }
-
-            return dp[W][0];
         }
 
+        return dp[n - 1][W];
+    }
+
+// -----------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n * W)
+    // S.C: O(W)
+    int knapsack_tabulation_SO(int W, vector<int> &val, vector<int> &wt) {
+        int n = val.size();
+        vector<int> prev(W + 1, 0), curr(W + 1, 0);
+
+        // Base case: At index 0, if weight is less than or equal to knapsack capacity, we can take the 0th item.
+        for (int j = wt[0]; j <= W; j++) prev[j] = val[0];
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j <= W; j++) {
+                int take = INT_MIN;
+                if (wt[i] <= j) take = val[i] + prev[j - wt[i]];
+                int notTake = 0 + prev[j];
+
+                curr[j] = max(take, notTake);
+            }
+            prev = curr;
+        }
+
+        return prev[W];
+    }
 };
+
 
 int main() {
     int W = 4;
-    int wt[] = {4, 5, 1};
-    int val[] = {1, 2, 3};
-    int n = 3;
-
+    vector<int> val = {1, 2, 3};
+    vector<int> wt = {4, 5, 1};
+    
     Solution sol;
-    cout << "Recursion: " << sol.knapSack_recursion(W, wt, val, n) << endl;
-    cout << "Memoization: " << sol.knapSack_memoization(W, wt, val, n) << endl;
-    cout << "Tabulation: " << sol.knapSack_tabulation(W, wt, val, n) << endl;
+    cout << sol.knapsack_recursion(W, val, wt) << endl;
+    cout << sol.knapsack_memoization(W, val, wt) << endl;
+    cout << sol.knapsack_tabulation(W, val, wt) << endl;
+    cout << sol.knapsack_tabulation_SO(W, val, wt);
 
     return 0;
 }
