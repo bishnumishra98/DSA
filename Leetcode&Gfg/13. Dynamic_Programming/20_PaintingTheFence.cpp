@@ -25,11 +25,103 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/painting-the-fence3727/1
 
-// Algorithm:
+// Algorithm: Think mathematically. If there are 2 posts and the first post can be colored in 'x' ways, and the
+//            second post can be colored in 'y' ways. They both together can be colored in 'x * y' ways.
+//            This is a fundamental principle of counting in combinatorics. Example:
+//            Lets say the post P1 can be colored in two ways 'V' and 'I', and post P2 can be colored in three
+//            ways 'B', 'G' and 'Y', respectively. Then the two posts can be colored in 2 * 3 = 6 ways.
+//            The color combinations will be as follows: VB, VG, VY, IB, IG and IY.
+
+//            Now in this problem, we are asked to find the number of ways in which we can paint 'n' posts with
+//            'k' colors such that not more than 2 adjacent posts are of same color.
+//            To solve this problem, call a function solve(n, k) which returns the total number of ways in which
+//            'n' posts can be colored with 'k' colors such that not more than 2 adjacent posts are of same color.
+//            Call the recursive function solve() for all 'n' posts and go deeper into the recursive tree until
+//            there are only 1 post / 2 posts left.
+//            1. The base cases of the recursion will be:
+//               i)  If only 1 post is there: If there is only 1 post, it can be painted in any of the 'k' colors,
+//                                            i.e., total ways to paint it is 'k'. Thus return k.
+//               ii) If only 2 posts are there: If there are 2 posts, both posts can be painted in any of the 'k'
+//                                              colors, i.e., total they can be painted in k^2 ways. Example:
+//                                              Let the colors be RBG. Then the 2 posts can be colored in either
+//                                              of the ways: RR, BB, GG, RB, RG, BR, BG, GR, GB.
+//            2. The recursion(solve(n, k)) will have only two simple options. We can either paint the 'n'th and
+//               the 'n - 1'th post with different color, or we can paint both of them with the same color.
+//               I)  Painting both posts with different colors:
+//                   If we paint the 'n'th post a different color from the one before it('n - 1'th post),
+//                   we have k - 1 choices (all colors except the previous post’s color) to paint the 'n'th post.
+//                   The number of ways to paint the first n - 1 posts is given by solve(n - 1, k).
+//                   This means to paint 'n - 1'th and 'n'th post differently, solve(n - 1, k) is multiplied by k - 1.
+//               II) Paint both posts with same color:
+//                   If the last two posts are the same color, they must differ from the post before them
+//                   (the third-last post, i.e., 'n - 2'th post). Thus, we have k - 1 choices for the last two posts,
+//                   and the number of ways to paint the first n - 2 posts is given by solve(n - 2).
+//                   This means to paint 'n - 1'th and 'n'th post with same color, solve(n - 2, k) is multiplied by k - 1.
+//            3. At the end, return the sum of both ways: painting both posts with different colors and painting
+//               both posts with the same color.
 
 #include <bits/stdc++.h>
 using namespace std;
 
+class Solution {
+public:
+    int solve(int n, int k) {
+        // Base cases:
+        // 1) If there is only 1 post, it can be painted in any of the 'k' colors, i.e., total ways to paint it is 'k'.
+        // 2) If there are 2 posts, both posts can be painted in any of the 'k' colors, i.e., total they can be painted
+        //    in k^2 ways. Example: Let the colors be RBG. Then the 2 posts can be colored in either of the ways:
+        //    
+        if(n == 1) return k;
+        if(n == 2) return k * k;
+
+        // Ways in which last fence is of different color
+        int ways1 = solve(n - 1, k) * (k - 1);
+
+        // Ways in which last 2 fences are of same color
+        int ways2 = solve(n - 2, k) * (k - 1);
+
+        return ways1 + ways2;
+    }
+
+    int countWays_recursion(int n, int k) {
+        return solve(n, k);        
+    }
+
+// -------------------------------------------------------------------------------------
+
+    int countWays_memoization(int n, int k) {
+        // code here
+        
+    }
+
+// -------------------------------------------------------------------------------------
+
+    int countWays_tabulation(int n, int k) {
+        // code here
+        
+    }
+
+// -------------------------------------------------------------------------------------
+
+    int countWays_tabulation_SO(int n, int k) {
+        // code here
+        
+    }
+};
+
+int main() {
+    int n = 3, k = 2;
+
+    cout << Solution().countWays_recursion(n, k) << endl;
+    cout << Solution().countWays_memoization(n , k) << endl;
+    cout << Solution().countWays_tabulation(n, k) << endl;
+    cout << Solution().countWays_tabulation_SO(n, k);
+
+    return 0;
+}
+
+
+/*
 // T.C: O(2^n)
 // S.C: O(n)
 int getTotalWaysOfPainting_recursion(int n, int k) {
@@ -106,3 +198,4 @@ int main() {
 
     return 0;
 }
+*/
