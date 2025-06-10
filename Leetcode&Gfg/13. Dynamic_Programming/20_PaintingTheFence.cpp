@@ -135,7 +135,7 @@ int solve(int n, int k, vector<int>& dp) {
         int prev1 = k * k;
 
         if(n == 1) return prev2;
-        if(n == 2) return prev2;
+        if(n == 2) return prev1;
 
         for(int i = 3; i <= n; i++) {
             int ways1 = prev1 * (k - 1);
