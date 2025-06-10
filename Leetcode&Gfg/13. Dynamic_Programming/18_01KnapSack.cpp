@@ -1,16 +1,11 @@
-// gfg: 0-1 Knapsack Problem   --->   You are given weights and values of N items, put these items in a knapsack of capacity W
-// to get the maximum total value in the knapsack. Note that we have only one quantity of each item.
-// In other words, given two integer arrays val[0..N-1] and wt[0..N-1] which represent values and weights associated with N items
-// respectively. Also given an integer W which represents knapsack capacity, find out the maximum value subset of val[] such that
-// sum of the weights of this subset is smaller than or equal to W. You cannot break an item, either pick the complete item or
-// dont pick it (0-1 property).
+// GFG: 0-1 Knapsack Problem   --->   Given n items, each with a specific weight and value, and a knapsack with
+// a capacity of W, the task is to put the items in the knapsack such that the sum of weights of the items <= W
+// and the sum of values associated with them is maximized. 
+// Note: You can either place an item entirely in the bag or leave it out entirely. Also, each item is available
+// in single quantity.
 
 // Example 1:
-// Input:
-// N = 3
-// W = 4
-// values[] = {1,2,3}
-// weight[] = {4,5,1}
+// Input: W = 4, val[] = [1, 2, 3], wt[] = [4, 5, 1] 
 // Output: 3
 // Explanation: Choose the last item that weighs 1 unit and holds a value of 3.
 // knapsack capacity(W): 4kg
@@ -26,19 +21,16 @@
 //             1          1          1          0 (not possible to keep due to overweight, W < (4+5+1)Kg)
 
 // Example 2:
-// Input:
-// N = 3
-// W = 3
-// values[] = {1,2,3}
-// weight[] = {4,5,6}
+// Input: W = 3, val[] = [1, 2, 3], wt[] = [4, 5, 6] 
 // Output: 0
 // Explanation: Every item has a weight exceeding the knapsack's capacity (3).
 
-// Your Task:
-// Complete the function knapSack() which takes maximum capacity W, weight array wt[], value array val[], and the number of items n
-// as a parameter and returns the maximum possible value you can get.
+// Example 3:
+// Input: W = 5, val[] = [10, 40, 30, 50], wt[] = [5, 4, 2, 3] 
+// Output: 80
+// Explanation: Choose the third item (value 30, weight 2) and the last item (value 50, weight 3) for a total value of 80.
 
-// DP PATTERN: Include/Exclude
+// Problem link: https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1
 
 #include <bits/stdc++.h>
 using namespace std;

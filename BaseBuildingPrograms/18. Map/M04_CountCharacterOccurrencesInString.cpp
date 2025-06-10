@@ -34,6 +34,13 @@ void countCharacters(string str) {
 int main() {
     string str = "aabccdefabcafedbcafedfa";
     countCharacters(str);
+    // o/p:
+    // a: 6
+    // b: 3
+    // c: 4
+    // d: 3
+    // e: 3
+    // f: 4
 
     return 0;
 }
