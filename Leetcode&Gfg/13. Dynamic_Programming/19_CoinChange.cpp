@@ -58,7 +58,7 @@ public:
     int solve(int i, vector<int>& coins, int amount) {
         if(i == 0) {
             if(amount % coins[0] == 0) return amount / coins[0];
-            return 1e9;   // don't return INT_MAX, otherwise 1 + INT_MAX will give signed integer overflow
+            else return 1e9;   // don't return INT_MAX, otherwise 1 + INT_MAX will give signed integer overflow
         }
 
         // At the current index, we have two choices only:
@@ -86,7 +86,7 @@ public:
     int solve(int i, vector<int>& coins, int amount, vector<vector<int>>& dp) {
         if(i == 0) {
             if(amount % coins[0] == 0) return amount / coins[0];
-            return 1e9;
+            else return 1e9;
         }
 
         if(dp[i][amount] != -1) return dp[i][amount];
@@ -98,8 +98,8 @@ public:
         return dp[i][amount] = min(take, notTake);
     }
 
-    // T.C: O(n*amount);
-    // S.C: O(n*amount) for dp array + O(n) for recursion stack space = O(n*amount)
+    // T.C: O(n*amount)
+    // S.C: O(n*amount) for dp array + O(amount) for recursion stack space = O(n*amount)
     int coinChange_memoization(vector<int>& coins, int amount) {
         int n = coins.size();
         vector<vector<int>> dp(n, vector<int>(amount + 1, -1));
@@ -110,18 +110,65 @@ public:
 
 // --------------------------------------------------------------------------------------------------------
 
-    // T.C: O(n*amount);
-    // S.C: O(amount)
+    // T.C: O(n*amount)
+    // S.C: O(n*amount)
     int coinChange_tabulation(vector<int>& coins, int amount) {
-        
+        int n = coins.size();
+        vector<vector<int>> dp(n, vector<int>(amount + 1, 0));
+
+        // Base case: At 0th index, if amount is divisible by denomination of 0th coin, store the number of coins
+        //            required to make the amount, which is amount / denomination of 0th coin.
+        //            Else if amount is not divisible by denomination of 0th coin, store '1e9' so that it is never
+        //            included while considering minimum number of coins.
+        for(int j = 0; j <= amount; j++) {
+            if(j % coins[0] == 0) dp[0][j] = j / coins[0];
+            else dp[0][j] = 1e9;
+        }
+
+        // Fill rest of the dp table
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j <= amount; j++) {
+                int take = INT_MAX;
+                if(coins[i] <= j) take = 1 + dp[i][j - coins[i]];
+                int notTake = 0 + dp[i - 1][j];
+
+                dp[i][j] = min(take, notTake);
+            }
+        }
+
+        int ans = dp[n - 1][amount];
+        if(ans >= 1e9) return -1;
+        return ans;
     }
 
 // --------------------------------------------------------------------------------------------------------
 
-    // T.C: 
-    // S.C: 
+    // T.C: O(n*amount)
+    // S.C: O(amount)
     int coinChange_tabulation_SO(vector<int>& coins, int amount) {
+        int n = coins.size();
+        vector<int> prev(amount + 1, 0), curr(amount + 1, 0);
 
+        for(int j = 0; j <= amount; j++) {
+            if(j % coins[0] == 0) prev[j] = j / coins[0];
+            else prev[j] = 1e9;
+        }
+
+        // Fill rest of the dp table
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j <= amount; j++) {
+                int take = INT_MAX;
+                if(coins[i] <= j) take = 1 + curr[j - coins[i]];
+                int notTake = 0 + prev[j];
+
+                curr[j] = min(take, notTake);
+            }
+            prev = curr;
+        }
+
+        int ans = prev[amount];
+        if(ans >= 1e9) return -1;
+        return ans;
     }
 };
 
