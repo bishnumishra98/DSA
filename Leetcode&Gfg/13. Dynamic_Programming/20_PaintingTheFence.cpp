@@ -44,9 +44,9 @@
 //               ii) If only 2 posts are there: If there are 2 posts, both posts can be painted in any of the 'k'
 //                                              colors, i.e., total they can be painted in k^2 ways. Example:
 //                                              Let the colors be RBG. Then the 2 posts can be colored in either
-//                                              of the ways: RR, BB, GG, RB, RG, BR, BG, GR, GB.
-//            2. The recursion(solve(n, k)) will have only two simple options. We can either paint the 'n'th and
-//               the 'n - 1'th post with different color, or we can paint both of them with the same color.
+//                                              of the ways: RR, BB, GG, RB, RG, BR, BG, GR, GB. Thus, return k * k.
+//            2. The body of recursion(solve(n, k)) will have only two simple options. We can either paint the 'n'th
+//               and the 'n - 1'th post with different color, or we can paint both of them with the same color.
 //               I)  Painting both posts with different colors:
 //                   If we paint the 'n'th post a different color from the one before it('n - 1'th post),
 //                   we have k - 1 choices (all colors except the previous post’s color) to paint the 'n'th post.
@@ -55,7 +55,7 @@
 //               II) Paint both posts with same color:
 //                   If the last two posts are the same color, they must differ from the post before them
 //                   (the third-last post, i.e., 'n - 2'th post). Thus, we have k - 1 choices for the last two posts,
-//                   and the number of ways to paint the first n - 2 posts is given by solve(n - 2).
+//                   and the number of ways to paint the first n - 2 posts is given by solve(n - 2, k).
 //                   This means to paint 'n - 1'th and 'n'th post with same color, solve(n - 2, k) is multiplied by k - 1.
 //            3. At the end, return the sum of both ways: painting both posts with different colors and painting
 //               both posts with the same color.
@@ -65,12 +65,7 @@ using namespace std;
 
 class Solution {
 public:
-    int solve(int n, int k) {
-        // Base cases:
-        // 1) If there is only 1 post, it can be painted in any of the 'k' colors, i.e., total ways to paint it is 'k'.
-        // 2) If there are 2 posts, both posts can be painted in any of the 'k' colors, i.e., total they can be painted
-        //    in k^2 ways. Example: Let the colors be RBG. Then the 2 posts can be colored in either of the ways:
-        //    
+    int solve(int n, int k) { 
         if(n == 1) return k;
         if(n == 2) return k * k;
 
@@ -83,29 +78,74 @@ public:
         return ways1 + ways2;
     }
 
+    // T.C: O(2^n)
+    // S.C: O(n);   recursion stack space
     int countWays_recursion(int n, int k) {
-        return solve(n, k);        
+        return solve(n, k);
     }
 
 // -------------------------------------------------------------------------------------
 
+int solve(int n, int k, vector<int>& dp) {   
+        if(n == 1) return k;
+        if(n == 2) return k * k;
+
+        if(dp[n] != -1) return dp[n];
+
+        int ways1 = solve(n - 1, k) * (k - 1);
+        int ways2 = solve(n - 2, k) * (k - 1);
+
+        return dp[n] = ways1 + ways2;
+    }
+
+    // T.C: O(n)
+    // S.C: O(n) for dp array + O(n) for recursion stack space = O(n)
     int countWays_memoization(int n, int k) {
-        // code here
-        
+        vector<int> dp(n + 1, -1);
+        return solve(n, k, dp);
     }
 
 // -------------------------------------------------------------------------------------
 
+    // T.C: O(n)
+    // S.C: O(n)
     int countWays_tabulation(int n, int k) {
-        // code here
-        
+        vector<int> dp(n + 1, 0);
+
+        // Base cases:
+        dp[1] = k;
+        dp[2] = k * k;
+
+        for(int i = 3; i <= n; i++) {
+            int ways1 = dp[i - 1] * (k - 1);
+            int ways2 = dp[i - 2] * (k - 1);
+
+            dp[i] = ways1 + ways2;
+        }
+
+        return dp[n];
     }
 
 // -------------------------------------------------------------------------------------
 
+    // T.C: O(n)
+    // S.C: O(1) 
     int countWays_tabulation_SO(int n, int k) {
-        // code here
-        
+        int prev2 = k;
+        int prev1 = k * k;
+
+        if(n == 1) return prev2;
+        if(n == 2) return prev2;
+
+        int curr = 0;
+        for(int i = 3; i <= n; i++) {
+            int ways1 = prev1 * (k - 1);
+            int ways2 = prev2 * (k - 1);
+            prev2 = prev1;
+            prev1 = curr;
+        }
+
+        return prev1;   // or we can even return curr as both stands on same value after the bove loop
     }
 };
 
