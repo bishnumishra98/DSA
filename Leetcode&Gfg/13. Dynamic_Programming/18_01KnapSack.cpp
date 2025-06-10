@@ -61,7 +61,7 @@ using namespace std;
 class Solution {
 public:
     int solve(int i, int W, vector<int>& val, vector<int>& wt) {
-        if (i == 0) {
+        if(i == 0) {
             if (wt[0] <= W) return val[0];
             else return 0;
         }
@@ -69,7 +69,7 @@ public:
         // At the current index, we have only two choices:
         // 1) Take the current item
         int take = INT_MIN;   // initially initialzed to 'INT_MIN', so that if 'wt[i] > W', the current item cannot be included
-        if (wt[i] <= W) take = val[i] + solve(i - 1, W - wt[i], val, wt);
+        if(wt[i] <= W) take = val[i] + solve(i - 1, W - wt[i], val, wt);
 
         // 2) Not take the current item
         int notTake = 0 + solve(i - 1, W, val, wt);
@@ -87,15 +87,15 @@ public:
 // -----------------------------------------------------------------------------------------------------------
 
     int solve(int i, int W, vector<int>& val, vector<int>& wt, vector<vector<int>>& dp) {
-        if (i == 0) {
+        if(i == 0) {
             if (wt[0] <= W) return val[0];
             else return 0;
         }
 
-        if (dp[i][W] != -1) return dp[i][W];
+        if(dp[i][W] != -1) return dp[i][W];
 
         int take = INT_MIN;
-        if (wt[i] <= W) take = val[i] + solve(i - 1, W - wt[i], val, wt, dp);
+        if(wt[i] <= W) take = val[i] + solve(i - 1, W - wt[i], val, wt, dp);
         int notTake = 0 + solve(i - 1, W, val, wt, dp);
 
         return dp[i][W] = max(take, notTake);
@@ -118,11 +118,11 @@ public:
         vector<vector<int>> dp(n, vector<int>(W + 1, 0));
 
         // Base case: At index 0, if weight is less than or equal to knapsack capacity, we can take the 0th item.
-        for (int j = wt[0]; j <= W; j++) dp[0][j] = val[0];
+        for(int j = wt[0]; j <= W; j++) dp[0][j] = val[0];
 
         // Fill rest of the dp table
-        for (int i = 1; i < n; i++) {
-            for (int j = 0; j <= W; j++) {
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j <= W; j++) {
                 int take = INT_MIN;
                 if (wt[i] <= j) take = val[i] + dp[i - 1][j - wt[i]];
                 int notTake = 0 + dp[i - 1][j];
@@ -143,10 +143,10 @@ public:
         vector<int> prev(W + 1, 0), curr(W + 1, 0);
 
         // Base case: At index 0, if weight is less than or equal to knapsack capacity, we can take the 0th item.
-        for (int j = wt[0]; j <= W; j++) prev[j] = val[0];
+        for(int j = wt[0]; j <= W; j++) prev[j] = val[0];
 
-        for (int i = 1; i < n; i++) {
-            for (int j = 0; j <= W; j++) {
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j <= W; j++) {
                 int take = INT_MIN;
                 if (wt[i] <= j) take = val[i] + prev[j - wt[i]];
                 int notTake = 0 + prev[j];

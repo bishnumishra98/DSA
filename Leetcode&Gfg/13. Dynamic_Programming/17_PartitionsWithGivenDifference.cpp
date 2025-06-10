@@ -55,11 +55,11 @@ private:
         vector<int> prev(target + 1, 0), curr(target + 1, 0);
 
         prev[0] = curr[0] = 1;
-        if (arr[0] == 0) prev[0] = 2;
-        if (arr[0] <= target && arr[0] != 0) prev[arr[0]] = 1;
+        if(arr[0] == 0) prev[0] = 2;
+        if(arr[0] <= target && arr[0] != 0) prev[arr[0]] = 1;
 
-        for (int i = 1; i < n; i++) {
-            for (int t = 0; t <= target; t++) {
+        for(int i = 1; i < n; i++) {
+            for(int t = 0; t <= target; t++) {
                 int notTake = prev[t];
                 int take = 0;
                 if (arr[i] <= t) take = prev[t - arr[i]];

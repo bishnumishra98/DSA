@@ -107,12 +107,12 @@ public:
 
         // Base cases
         for(int i = 0; i < n; i++) dp[i][0] = 1;   // a subset is already formed if target is 0, so mark all rows in the first column as 1
-        if (arr[0] == 0) dp[0][0] = 2;   // if target is 0, and first element is also 0, 2 subsets can be formed
-        if (arr[0] <= target && arr[0] != 0) dp[0][arr[0]] = 1;   // if first element is equal to target, a subset can be formed
+        if(arr[0] == 0) dp[0][0] = 2;   // if target is 0, and first element is also 0, 2 subsets can be formed
+        if(arr[0] <= target && arr[0] != 0) dp[0][arr[0]] = 1;   // if first element is equal to target, a subset can be formed
 
         // Fill the DP table
-        for (int i = 1; i < n; i++) {
-            for (int t = 0; t <= target; t++) {
+        for(int i = 1; i < n; i++) {
+            for(int t = 0; t <= target; t++) {
                 int notTake = dp[i - 1][t];   // exclude current element
                 int take = 0;
                 if (arr[i] <= t) take = dp[i - 1][t - arr[i]];   // include current element if valid
@@ -133,12 +133,12 @@ public:
 
         // Base cases
         prev[0] = curr[0] = 1;   // a subset is already formed if target is 0, so mark all rows in the first column as 1
-        if (arr[0] == 0) prev[0] = 2;    // if target is 0, and first element is also 0, 2 subsets can be formed
-        if (arr[0] <= target && arr[0] != 0) prev[arr[0]] = 1;   // if first element is equal to target, a subset can be formed
+        if(arr[0] == 0) prev[0] = 2;    // if target is 0, and first element is also 0, 2 subsets can be formed
+        if(arr[0] <= target && arr[0] != 0) prev[arr[0]] = 1;   // if first element is equal to target, a subset can be formed
 
         // Fill the DP table row-by-row
-        for (int i = 1; i < n; i++) {
-            for (int t = 0; t <= target; t++) {
+        for(int i = 1; i < n; i++) {
+            for(int t = 0; t <= target; t++) {
                 int notTake = prev[t];   // exclude current element
                 int take = 0;
                 if (arr[i] <= t) take = prev[t - arr[i]];   // include current element if valid
