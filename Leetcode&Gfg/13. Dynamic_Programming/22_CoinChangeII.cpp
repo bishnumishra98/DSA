@@ -97,7 +97,28 @@ public:
     // T.C: O(n*amount)
     // S.C: O(n*amount)
     int change_tabulation(int amount, vector<int>& coins) {
+        int n = coins.size();
+        vector<vector<int>> dp(n, vector<int>(amount + 1, 0));
 
+        // Base case: At 0th index, if 0th coin is divisible by amount, store 1 denoting that 1 way is found
+        //            to build the amount, else store 0.
+        for(int j = 0; j <= amount; j++) {
+            if(j % coins[0] == 0) dp[0][j] = 1;
+            else dp[0][j] = 0;
+        }
+
+        // Fill rest of the dp table
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j <= amount; j++) {
+                int take = 0;
+                if(coins[i] <= j) take = dp[i][j - coins[i]];
+                int notTake = dp[i - 1][j];
+
+                dp[i][j] = take + notTake;
+            }
+        }
+
+        return dp[n - 1][amount];
     }
 
 // --------------------------------------------------------------------------------------------------------
@@ -105,9 +126,32 @@ public:
     // T.C: O(n*amount)
     // S.C: O(amount)
     int change_tabulation_SO(int amount, vector<int>& coins) {
+        int n = coins.size();
+        vector<int> prev(amount + 1, 0), curr(amount + 1, 0);
 
+        // Base case: At 0th index, if 0th coin is divisible by amount, store 1 denoting that 1 way is found
+        //            to build the amount, else store 0.
+        for(int j = 0; j <= amount; j++) {
+            if(j % coins[0] == 0) prev[j] = 1;
+            else prev[j] = 0;
+        }
+
+        // Fill rest of the dp table
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j <= amount; j++) {
+                int take = 0;
+                if(coins[i] <= j) take = curr[j - coins[i]];
+                int notTake = prev[j];
+
+                curr[j] = take + notTake;
+            }
+            prev = curr;
+        }
+
+        return prev[amount];
     }
 };
+
 
 int main() {
     vector<int> coins = {1, 2, 5};
