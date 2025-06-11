@@ -72,7 +72,7 @@ public:
         return min(take, notTake);
     }
 
-    // T.C: Much greater than O(2^n);   because there can be cases that we are standing at same index even after
+    // T.C: Exponential, i.e., much greater than O(2^n);   because there can be cases that we are standing at same index even after next function call
     // S.C: O(amount);   recursion stack space
     int coinChange_recursion(vector<int>& coins, int amount) {
         int n = coins.size();   // no.of coins
