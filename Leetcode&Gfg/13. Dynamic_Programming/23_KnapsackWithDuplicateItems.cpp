@@ -25,10 +25,10 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1
 
-// Algorithm: It is again a simple problem. Its just a variant of 'Leetcode&Gfg\13. Dynamic_Programming\18_01KnapSack.cpp'.
+// Algorithm: Again a very simple problem. Its just a variant of 'Leetcode&Gfg\13. Dynamic_Programming\18_01KnapSack.cpp'.
 //            In that problem, the supply of items was limited. But here the supply of items are unlimited,
 //            i.e., we can take any item multiple times in the knapsack.
-//            Thus, we can apply same logic for infinite supply.
+//            Thus, we can apply same logic for infinite supply(remaining at same index even after taking the item).
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -37,7 +37,7 @@ class Solution {
 public:
     int solve(int i, int capacity, vector<int>& val, vector<int>& wt) {
         if(i == 0) {
-            if (wt[0] <= capacity) return val[0];
+            if(wt[0] <= capacity) return (capacity / wt[0]) * val[0];
             else return 0;
         }
 

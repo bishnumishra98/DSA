@@ -62,7 +62,7 @@ class Solution {
 public:
     int solve(int i, int W, vector<int>& val, vector<int>& wt) {
         if(i == 0) {
-            if (wt[0] <= W) return val[0];
+            if(wt[0] <= W) return val[0];
             else return 0;
         }
 
@@ -88,7 +88,7 @@ public:
 
     int solve(int i, int W, vector<int>& val, vector<int>& wt, vector<vector<int>>& dp) {
         if(i == 0) {
-            if (wt[0] <= W) return val[0];
+            if(wt[0] <= W) return val[0];
             else return 0;
         }
 
@@ -124,7 +124,7 @@ public:
         for(int i = 1; i < n; i++) {
             for(int j = 0; j <= W; j++) {
                 int take = INT_MIN;
-                if (wt[i] <= j) take = val[i] + dp[i - 1][j - wt[i]];
+                if(wt[i] <= j) take = val[i] + dp[i - 1][j - wt[i]];
                 int notTake = 0 + dp[i - 1][j];
 
                 dp[i][j] = max(take, notTake);
@@ -148,7 +148,7 @@ public:
         for(int i = 1; i < n; i++) {
             for(int j = 0; j <= W; j++) {
                 int take = INT_MIN;
-                if (wt[i] <= j) take = val[i] + prev[j - wt[i]];
+                if(wt[i] <= j) take = val[i] + prev[j - wt[i]];
                 int notTake = 0 + prev[j];
 
                 curr[j] = max(take, notTake);
