@@ -44,7 +44,7 @@ public:
         // At the current index, we have only two choices:
         // 1) Take the current item
         int take = INT_MIN;   // initially initialzed to 'INT_MIN', so that if 'wt[i] > capacity', the current item cannot be included
-        if(wt[i] <= capacity) take = val[i] + solve(i - 1, capacity - wt[i], val, wt);
+        if(wt[i] <= capacity) take = val[i] + solve(i, capacity - wt[i], val, wt);
 
         // 2) Not take the current item
         int notTake = 0 + solve(i - 1, capacity, val, wt);
@@ -52,17 +52,66 @@ public:
         return max(take, notTake);
     }
 
+    // T.C: O(2^n)
+    // S.C: O(n);   recursion stack space
     int knapSack_recursion(vector<int>& val, vector<int>& wt, int capacity) {
         int n = val.size();   // no.of items
         return solve(n - 1, capacity, val, wt);
     }
+
+// -----------------------------------------------------------------------------------------------------------
+
+    int solve(int i, int capacity, vector<int>& val, vector<int>& wt,vector<vector<int>>& dp) {
+        if(i == 0) {
+            if(wt[0] <= capacity) return (capacity / wt[0]) * val[0];
+            else return 0;
+        }
+
+        if(dp[i][capacity] != -1) return dp[i][capacity];
+
+        int take = INT_MIN;
+        if(wt[i] <= capacity) take = val[i] + solve(i, capacity - wt[i], val, wt, dp);
+        int notTake = 0 + solve(i - 1, capacity, val, wt, dp);
+
+        return dp[i][capacity] = max(take, notTake);
+    }
+
+    // T.C: O(n * W)
+    // S.C: O(n * W) for dp array + O(n) for recursion stack space = O(n * W)
+    int knapSack_memoization(vector<int>& val, vector<int>& wt, int capacity) {
+        int n = val.size();
+        vector<vector<int>> dp(n, vector<int>(capacity + 1, -1));
+        return solve(n - 1, capacity, val, wt, dp);
+    }
+
+// -----------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n * W)
+    // S.C: O(n * W)
+    int knapSack_tabulation(vector<int>& val, vector<int>& wt, int capacity) {
+        int n = val.size();
+        
+    }
+
+// -----------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n * W)
+    // S.C: O(W)
+    int knapSack_tabulation_SO(vector<int>& val, vector<int>& wt, int capacity) {
+        int n = val.size();
+        
+    }
 };
+
 
 int main() {
     vector<int> val = {6, 1, 7, 7}, wt = {1, 3, 4, 5};
     int capacity = 8;
 
     cout << Solution().knapSack_recursion(val, wt, capacity) << endl;
+    cout << Solution().knapSack_memoization(val, wt, capacity) << endl;
+    cout << Solution().knapSack_tabulation(val, wt, capacity) << endl;
+    cout << Solution().knapSack_tabulation_SO(val, wt, capacity) << endl;
 
     return 0;
 }
