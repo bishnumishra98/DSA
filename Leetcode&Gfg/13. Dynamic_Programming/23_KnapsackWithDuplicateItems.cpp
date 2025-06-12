@@ -90,7 +90,22 @@ public:
     // S.C: O(n * W)
     int knapSack_tabulation(vector<int>& val, vector<int>& wt, int capacity) {
         int n = val.size();
-        
+        vector<vector<int>> dp(n, vector<int>(capacity + 1, 0));
+
+        // Base case: At index 0, if weight is less than or equal to knapsack capacity, we can take the 0th item.
+        for(int j = wt[0]; j <= capacity; j++) dp[0][j] = (j / wt[0]) * val[0];
+
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j <= capacity; j++) {
+                int take = INT_MIN;
+                if(wt[i] <= j) take = val[i] + dp[i][j - wt[i]];
+                int notTake = 0 + dp[i - 1][j];
+
+                dp[i][j] = max(take, notTake);
+            }
+        }
+
+        return dp[n - 1][capacity];
     }
 
 // -----------------------------------------------------------------------------------------------------------
@@ -99,7 +114,23 @@ public:
     // S.C: O(W)
     int knapSack_tabulation_SO(vector<int>& val, vector<int>& wt, int capacity) {
         int n = val.size();
-        
+        vector<int> prev(capacity + 1, 0), curr(capacity + 1, 0);
+
+        // Base case: At index 0, if weight is less than or equal to knapsack capacity, we can take the 0th item.
+        for(int j = wt[0]; j <= capacity; j++) prev[j] = (j / wt[0]) * val[0];
+
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j <= capacity; j++) {
+                int take = INT_MIN;
+                if(wt[i] <= j) take = val[i] + curr[j - wt[i]];
+                int notTake = 0 + prev[j];
+
+                curr[j] = max(take, notTake);
+            }
+            prev = curr;
+        }
+
+        return prev[capacity];
     }
 };
 
