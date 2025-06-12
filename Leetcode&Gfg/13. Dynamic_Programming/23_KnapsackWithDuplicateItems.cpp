@@ -52,8 +52,8 @@ public:
         return max(take, notTake);
     }
 
-    // T.C: O(2^n)
-    // S.C: O(n);   recursion stack space
+    // T.C: Exponential, i.e., much greater than O(2^n);   because there can be cases that we are standing at same index even after next function call
+    // S.C: O(capacity);   recursion stack space
     int knapSack_recursion(vector<int>& val, vector<int>& wt, int capacity) {
         int n = val.size();   // no.of items
         return solve(n - 1, capacity, val, wt);
@@ -76,8 +76,8 @@ public:
         return dp[i][capacity] = max(take, notTake);
     }
 
-    // T.C: O(n * W)
-    // S.C: O(n * W) for dp array + O(n) for recursion stack space = O(n * W)
+    // T.C: O(n * capacity)
+    // S.C: O(n * capacity) for dp array + O(n) for recursion stack space = O(n * capacity)
     int knapSack_memoization(vector<int>& val, vector<int>& wt, int capacity) {
         int n = val.size();
         vector<vector<int>> dp(n, vector<int>(capacity + 1, -1));
@@ -86,8 +86,8 @@ public:
 
 // -----------------------------------------------------------------------------------------------------------
 
-    // T.C: O(n * W)
-    // S.C: O(n * W)
+    // T.C: O(n * capacity)
+    // S.C: O(n * capacity)
     int knapSack_tabulation(vector<int>& val, vector<int>& wt, int capacity) {
         int n = val.size();
         vector<vector<int>> dp(n, vector<int>(capacity + 1, 0));
@@ -110,8 +110,8 @@ public:
 
 // -----------------------------------------------------------------------------------------------------------
 
-    // T.C: O(n * W)
-    // S.C: O(W)
+    // T.C: O(n * capacity)
+    // S.C: O(capacity)
     int knapSack_tabulation_SO(vector<int>& val, vector<int>& wt, int capacity) {
         int n = val.size();
         vector<int> prev(capacity + 1, 0), curr(capacity + 1, 0);
