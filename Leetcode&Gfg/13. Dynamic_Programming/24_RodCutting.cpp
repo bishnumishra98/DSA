@@ -43,20 +43,20 @@ using namespace std;
 
 class Solution {
 public:
-    int solve(int i, int capacity, vector<int>& price) {
+    int solve(int i, int n, vector<int>& price) {
         if(i == 0) {
             // At 0th index, rod length is 1. Thus, we return a value of '(capacity / 1) * price[0]'.
-            // If capacity becomes 0, automatically '(0 / 1) * price[0]' will return 0.
-            return capacity * price[0];
+            // If capacity becomes 0, automatically '(0 / 1) * price[0]' will return 0. Capacity is 'n'.
+            return n * price[0];
         }
 
         // At the current index, we have only two choices:
         // 1) Take the current rod with length 'i + 1'
         int take = INT_MIN;   // initially initialzed to 'INT_MIN', so that if 'i + 1 > capacity', the current rod cannot be taken
-        if(i + 1 <= capacity) take = price[i] + solve(i, capacity - (i + 1), price);
+        if(i + 1 <= n) take = price[i] + solve(i, n - (i + 1), price);
 
         // 2) Not take the rod
-        int notTake = 0 + solve(i - 1, capacity, price);
+        int notTake = 0 + solve(i - 1, n, price);
 
         return max(take, notTake);
     }
@@ -70,15 +70,86 @@ public:
 
 // -----------------------------------------------------------------------------------------------------------
 
-// -----------------------------------------------------------------------------------------------------------
+    int solve(int i, int n, vector<int>& price, vector<vector<int>>& dp) {
+        if(i == 0) {
+            return n * price[0];
+        }
+
+        if(dp[i][n] != -1) return dp[i][n];
+
+        int take = INT_MIN;
+        if(i + 1 <= n) take = price[i] + solve(i, n - (i + 1), price, dp);
+        int notTake = 0 + solve(i - 1, n, price, dp);
+
+        return max(take, notTake);
+    }
+
+    // T.C: O(n * n) = O(n^2)
+    // S.C: O(n * n) for dp array + O(n) for recursion stack space = O(n^2)
+    int cutRod_memoization(vector<int> &price) {
+        int n = price.size();
+        vector<vector<int>> dp(n, vector<int>(n + 1, -1));
+        return solve(n - 1, n, price, dp);   // solve(n - 1, capacity, price, dp)
+    }
 
 // -----------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n * n) = O(n^2)
+    // S.C: O(n * n) = O(n^2)
+    int cutRod_tabulation(vector<int> &price) {
+        int n = price.size();
+        vector<vector<int>> dp(n, vector<int>(n + 1, 0));   // in dp[i][j], 'i' refers to rod length at index 'i'
+                                                           // and 'j' refers to capacity
+        
+        // Base case: At index 0, if rod length is less than or equal to capacity, we can take the rod. At 0th index,
+        //            rod length is 1, so we can take the rod 'j' no.of times, and value obtained will be 'j * price[0]'.
+        for(int j = 1; j <= n; j++) dp[0][j] = j * price[0];
+
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j <= n; j++) {   // for(int j = 0; j <= capacity; j++)
+                int take = INT_MIN;
+                if(i + 1 <= j) take = price[i] + dp[i][j - (i + 1)];
+                int notTake = 0 + dp[i - 1][j];
+
+                dp[i][j] = max(take, notTake);
+            }
+        }
+
+        return dp[n - 1][n];   // dp[n - 1][capacity]
+    }
+
+// -----------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n * n) = O(n^2)
+    // S.C: O(n)
+    int cutRod_tabulation_SO(vector<int> &price) {
+        int n = price.size();
+        vector<int> prev(n + 1, 0), curr(n + 1, 0);
+
+        for(int j = 1; j <= n; j++) prev[j] = j * price[0];
+
+        for(int i = 1; i < n; i++) {
+            for(int j = 0; j <= n; j++) {   // for(int j = 0; j <= capacity; j++)
+                int take = INT_MIN;
+                if(i + 1 <= j) take = price[i] + curr[j - (i + 1)];
+                int notTake = 0 + prev[j];
+
+                curr[j] = max(take, notTake);
+            }
+            prev = curr;
+        }
+
+        return prev[n];   // prev[capacity]
+    }
 };
 
 int main() {
     vector<int> price = {1, 5, 8, 9, 10, 17, 17, 20};
 
     cout << Solution().cutRod_recursion(price) << endl;
+    cout << Solution().cutRod_memoization(price) << endl;
+    cout << Solution().cutRod_tabulation(price) << endl;
+    cout << Solution().cutRod_tabulation_SO(price);
 
     return 0;
 }
