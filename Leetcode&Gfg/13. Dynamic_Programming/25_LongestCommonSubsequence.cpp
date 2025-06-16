@@ -88,7 +88,7 @@ public:
         vector<string> s1 = allSubsequence(text1);
         vector<string> s2 = allSubsequence(text2);
 
-        int maxLength= 0;
+        int maxLength = 0;
         for(auto it1: s1) {
             string word1 = it1;   // word from s1
             for(auto it2: s2) {
