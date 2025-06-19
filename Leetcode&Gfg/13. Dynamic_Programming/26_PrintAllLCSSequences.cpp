@@ -22,9 +22,9 @@
 //                    For this we will require the tabulation table of the previous problem
 //                    'Leetcode&Gfg\13. Dynamic_Programming\25_LongestCommonSubsequence.cpp'.
 //                    The dp table for the input text1 = "abcde", text2 = "ace" would look like this:
-//                                   a c e
+//                             s2    a c e
 // Indexes of dp table(col):       0 1 2 3
-//                                --------
+//                           s1   --------
 // Indexes of dp table(row):   0 | 0 0 0 0
 //                           a 1 | 0 1 1 1
 //                           b 2 | 0 1 1 1
