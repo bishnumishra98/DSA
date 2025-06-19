@@ -15,6 +15,8 @@
 // Input: s1 = "YZ", s2 = "yz"
 // Output: 0
 
+// Problem link: https://www.geeksforgeeks.org/problems/longest-common-substring1452/1
+
 // Algorithm: This problem is very similar to 'Leetcode&Gfg\13. Dynamic_Programming\25_LongestCommonSubsequence.cpp'.
 //            We can easily solve it by using tabulation table of the previous problem, with some minor changes.
 //            The minor change is in the condition when characters do not match.
@@ -26,23 +28,23 @@
 //                                Setting dp[i][j] to 0 means that there is no common substring ending at the
 //                                current character of both strings.
 //            Illustration: s1 = "ABCDGH", s2 = "ACDGHR"
-//                             s2    a c e
-// Indexes of dp table(col):       0 1 2 3
-//                           s1   --------
-// Indexes of dp table(row):   0 | 0 0 0 0
-//                           a 1 | 0 1 1 1
-//                           b 2 | 0 1 1 1
-//                           c 3 | 0 1 2 2
-//                           d 4 | 0 1 2 2
-//                           e 5 | 0 1 2 3
-//
+//                             s2    A C D G H R
+// Indexes of dp table(col):       0 1 2 3 4 5 6
+//                           s1   --------------
+// Indexes of dp table(row):   0 | 0 0 0 0 0 0 0
+//                           A 1 | 0 1 0 0 0 0 0
+//                           B 2 | 0 0 0 0 0 0 0
+//                           C 3 | 0 0 1 0 0 0 0
+//                           D 4 | 0 0 0 2 0 0 0
+//                           G 5 | 0 0 0 0 3 0 0
+//                           H 6 | 0 0 0 0 0 4 0
 
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
-    // T.C: O(m * n);   where m and n are lengths of text1 and text2 respectively
+    // T.C: O(m * n);   where m and n are lengths of s1 and s2 respectively
     // S.C: O(m * n)
     int longestCommonSubstr(string& s1, string& s2) {
         int m = s1.length(), n = s2.length();
@@ -62,12 +64,37 @@ public:
 
         return ans;
     }
+
+// -------------------------------------------------------------------------------------------------------------
+
+    // T.C: O(m * n);   where m and n are lengths of s1 and s2 respectively
+    // S.C: O(n)
+    int longestCommonSubstr_SO(string& s1, string& s2) {
+        int m = s1.length(), n = s2.length();
+        vector<int> curr(n + 1, 0), prev(n + 1, 0);
+
+        int ans = 0;
+        for(int i = 1; i <= m; i++) {
+            for(int j = 1; j <= n; j++) {
+                if(s1[i - 1] == s2[j - 1]) {
+                    curr[j] = 1 + prev[j - 1];
+                    ans = max(ans, curr[j]);
+                } else {
+                    curr[j] = 0;
+                }
+            }
+            prev = curr;
+        }
+
+        return ans;
+    }
 };
 
 int main() {
     string s1 = "ABCDGH", s2 = "ACDGHR";
 
     cout << Solution().longestCommonSubstr(s1, s2) << endl;
+    cout << Solution().longestCommonSubstr_SO(s1, s2);
 
     return 0;
 }
