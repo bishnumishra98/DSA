@@ -108,7 +108,7 @@ public:
                 int length = 0;
     
                 // Check for longest substring from current (i, j) pair
-                while (i + length < m && j + length < n && s1[i + length] == s2[j + length]) length++;
+                while(i + length < m && j + length < n && s1[i + length] == s2[j + length]) length++;
     
                 // Update the maximum length found so far
                 maxLen = max(maxLen, length);
