@@ -39,6 +39,9 @@
 //                           G 5 | 0 0 0 0 3 0 0
 //                           H 6 | 0 0 0 0 0 4 0
 
+// Optimal approach: This is one of the rarest problem where brute force is the best solution, lol !!!
+//                   It is a reminder that sometimes, the simplest hammer is the best tool for the job. 😄
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -88,13 +91,41 @@ public:
 
         return ans;
     }
+
+// -------------------------------------------------------------------------------------------------------------
+
+    // T.C: O(m * n);   where m and n are lengths of s1 and s2 respectively
+    // S.C: O(1)
+    int longestCommonSubstr_bruteforce(string& s1, string& s2) {
+        int m = s1.length(), n = s2.length();
+    
+        int maxLen = 0;
+    
+        // Iterate over all starting points in s1
+        for(int i = 0; i < m; i++) {
+            // Iterate over all starting points in s2
+            for(int j = 0; j < n; j++) {
+                int length = 0;
+    
+                // Check for longest substring from current (i, j) pair
+                while (i + length < m && j + length < n && s1[i + length] == s2[j + length]) length++;
+    
+                // Update the maximum length found so far
+                maxLen = max(maxLen, length);
+            }
+        }
+    
+        return maxLen;
+    }
 };
+
 
 int main() {
     string s1 = "ABCDGH", s2 = "ACDGHR";
 
     cout << Solution().longestCommonSubstr(s1, s2) << endl;
-    cout << Solution().longestCommonSubstr_SO(s1, s2);
+    cout << Solution().longestCommonSubstr_SO(s1, s2) << endl;
+    cout << Solution().longestCommonSubstr_bruteforce(s1, s2);
 
     return 0;
 }
