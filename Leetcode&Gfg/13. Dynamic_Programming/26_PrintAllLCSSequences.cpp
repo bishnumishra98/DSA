@@ -157,6 +157,8 @@ public:
 
 // -----------------------------------------------------------------------------------------------------
 
+    // T.C: O(m * n) for dp table computation + O(m + n) for LCS reconstruction = O(m * n)
+    // S.C: O(m * n)
     string allLCS(string &s1, string &s2) {
         int m = s1.length(), n = s2.length();
         vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
