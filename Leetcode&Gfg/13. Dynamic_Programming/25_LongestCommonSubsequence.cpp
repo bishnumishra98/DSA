@@ -161,7 +161,7 @@ public:
 
 // -----------------------------------------------------------------------------------------------------
 
-    // This is inspired by 'longestCommonSubsequence_memoization_rightShifted()' function
+    // This is based on 'longestCommonSubsequence_memoization_rightShifted()' function
     // T.C: O(m * n);   where m and n are lengths of text1 and text2 respectively
     // S.C: O(m * n)
     int longestCommonSubsequence_tabulation(string text1, string text2) {
