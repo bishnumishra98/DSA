@@ -156,9 +156,47 @@ public:
         int m = s.length();
         int n = t.length();
         vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+
+        // Base cases:
+        for(int i = 0; i <= m; i++) dp[i][0] = 1;
+        // 'j' will start from 1, else it will rewrite the value of dp[0][0] set by the above for loop.
+        // However, this line is optional as all cells are already set to 0 by default.
+        // for(int j = 1; j <= n; j++) dp[0][j] = 0;
         
+        for(int i = 1; i <= m; i++) {
+            for(int j = 1; j <= n; j++) {
+                if(s[i - 1] == t[j - 1]) dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+                else dp[i][j] = dp[i - 1][j];
+            }
+        }
+
+        return dp[m][n];
+    }
+
+// ----------------------------------------------------------------------------------------------------
+
+    // T.C: O(m * n);   where m = s.length, n = t.length()
+    // S.C: O(n)
+    int numDistinct_tabulation_SO(string s, string t) {
+        int m = s.length();
+        int n = t.length();
+        vector<int> curr(n + 1, 0), prev(n + 1, 0);
+
+        // Base cases:
+        prev[0] = curr[0] = 1;
+        
+        for(int i = 1; i <= m; i++) {
+            for(int j = 1; j <= n; j++) {
+                if(s[i - 1] == t[j - 1]) curr[j] = prev[j - 1] + prev[j];
+                else curr[j] = prev[j];
+            }
+            prev = curr;
+        }
+
+        return prev[n];
     }
 };
+
 
 int main() {
     string s = "rabbbit", t = "rabbit";
@@ -166,6 +204,8 @@ int main() {
     cout << Solution().numDistinct_recursion(s, t) << endl;
     cout << Solution().numDistinct_memoization(s, t) << endl;
     cout << Solution().numDistinct_memoization_rightShifted(s, t) << endl;
+    cout << Solution().numDistinct_tabulation(s, t) << endl;
+    cout << Solution().numDistinct_tabulation_SO(s, t);
 
     return 0;
 }
