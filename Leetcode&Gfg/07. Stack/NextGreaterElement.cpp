@@ -35,9 +35,8 @@
 #include <stack>
 using namespace std;
 
-class Solution
-{
-    public:
+class Solution {
+public:
     // T.C: O(n)
     // S.C: O(n)
     //Function to find the next greater element for each element of the array.

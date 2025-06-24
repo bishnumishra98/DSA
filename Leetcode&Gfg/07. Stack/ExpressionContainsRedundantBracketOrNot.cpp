@@ -28,7 +28,7 @@
 using namespace std;
 
 class Solution {
-  public:
+public:
     int checkRedundancy(string s) {
         // code here
         stack <char> st;
