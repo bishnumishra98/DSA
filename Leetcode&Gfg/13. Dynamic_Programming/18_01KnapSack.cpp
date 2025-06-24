@@ -137,7 +137,7 @@ public:
 // -----------------------------------------------------------------------------------------------------------
 
     // T.C: O(n * W)
-    // S.C: O(W)
+    // S.C: O(2W)
     int knapsack_tabulation_SO(int W, vector<int> &val, vector<int> &wt) {
         int n = val.size();
         vector<int> prev(W + 1, 0), curr(W + 1, 0);
@@ -158,6 +158,41 @@ public:
 
         return prev[W];
     }
+
+// -----------------------------------------------------------------------------------------------------------
+
+    // ● Further space optimization to only one 1D array:
+    //   We can further space optimize the above code because curr values depends only on the previous row's values
+    //   and not on the current row's values. Thus, we will compute the values of the current row from
+    //   the previous rows only, but we will store the values of the current row in the same array 'prev'
+    //   which was used to store the previous row's values.
+    //   The only thing to note is that to filling a cell at index 'j' depends on the value of the cell at
+    //   'j'th index itself and 'j - wt[i]' index of the same row, i.e., to fill the cell at 'j'th index, the cells
+    //   at right of 'j'th index are of no use. Hence, we must traverse in the opposite fashion, i.e., from right to
+    //   left so that the value of the cell at 'j - wt[i]' index is not overwritten before it is used to fill
+    //   the cell at 'j'th index.
+    // T.C: O(n * W)
+    // S.C: O(W)
+    int knapsack_tabulation_SO_1D(int W, vector<int> &val, vector<int> &wt) {
+        int n = val.size();
+        vector<int> prev(W + 1, 0), curr(W + 1, 0);
+
+        // Base case: At index 0, if weight is less than or equal to knapsack capacity, we can take the 0th item.
+        for(int j = wt[0]; j <= W; j++) prev[j] = val[0];
+
+        for(int i = 1; i < n; i++) {
+            for(int j = W; j >= 0; j--) {   // go in reverse fashion, i.e., from right to left
+                int take = INT_MIN;
+                if(wt[i] <= j) take = val[i] + prev[j - wt[i]];
+                int notTake = 0 + prev[j];
+
+                prev[j] = max(take, notTake);
+            }
+            // prev = curr;   // no more required
+        }
+
+        return prev[W];
+    }
 };
 
 
@@ -170,7 +205,8 @@ int main() {
     cout << sol.knapsack_recursion(W, val, wt) << endl;
     cout << sol.knapsack_memoization(W, val, wt) << endl;
     cout << sol.knapsack_tabulation(W, val, wt) << endl;
-    cout << sol.knapsack_tabulation_SO(W, val, wt);
+    cout << sol.knapsack_tabulation_SO(W, val, wt) << endl;
+    cout << sol.knapsack_tabulation_SO_1D(W, val, wt);
 
     return 0;
 }
