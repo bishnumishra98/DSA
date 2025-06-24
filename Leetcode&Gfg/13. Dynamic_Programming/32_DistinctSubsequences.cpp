@@ -176,7 +176,7 @@ public:
 // ----------------------------------------------------------------------------------------------------
 
     // T.C: O(m * n);   where m = s.length, n = t.length()
-    // S.C: O(n)
+    // S.C: O(2n)
     int numDistinct_tabulation_SO(string s, string t) {
         int m = s.length();
         int n = t.length();
@@ -195,6 +195,39 @@ public:
 
         return prev[n];
     }
+
+// ----------------------------------------------------------------------------------------------------
+
+    // ● Further space optimization to only one 1D array:
+    //   We can further space optimize the above code because curr values depends only on the previous row's values
+    //   and not on the current row's values. Thus, we will compute the values of the current row from
+    //   the previous rows only, but we will store the values of the current row in the same array 'prev'
+    //   which was used to store the previous row's values.
+    //   The only thing to note is that to filling a cell at index 'j' depends on the value of the cell at
+    //   'j'th index itself and 'j - 1' index of the same row, i.e., to fill the cell at 'j'th index, the cell
+    //   at 'j + 1'th index is of no use. Hence, we must traverse in the opposite fashion, i.e., from right to
+    //   left so that the value of the cell at 'j - 1'th index is not overwritten before it is used to fill
+    //   the cell at 'j'th index.
+    // T.C: O(m * n);   where m = s.length, n = t.length()
+    // S.C: O(n)
+    int numDistinct_tabulation_SO_1D(string s, string t) {
+        int m = s.length();
+        int n = t.length();
+        vector<int> prev(n + 1, 0);
+
+        // Base cases:
+        prev[0] = 1;
+        
+        for(int i = 1; i <= m; i++) {
+            for(int j = n; j >= 1; j--) {   // go in reverse fashion, i.e., from right to left
+                if(s[i - 1] == t[j - 1]) prev[j] = prev[j - 1] + prev[j];
+                // else prev[j] = prev[j];   // its no more required
+            }
+            // prev = prev;   // its no more required
+        }
+
+        return prev[n];
+    }
 };
 
 
@@ -205,7 +238,8 @@ int main() {
     cout << Solution().numDistinct_memoization(s, t) << endl;
     cout << Solution().numDistinct_memoization_rightShifted(s, t) << endl;
     cout << Solution().numDistinct_tabulation(s, t) << endl;
-    cout << Solution().numDistinct_tabulation_SO(s, t);
+    cout << Solution().numDistinct_tabulation_SO(s, t) << endl;
+    cout << Solution().numDistinct_tabulation_SO_1D(s, t);
 
     return 0;
 }
