@@ -26,7 +26,8 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/cutted-segments1642/1
 
-// Algorithm: Its an very easy problem. You are smart enough to understand the code.
+// Algorithm: Its a very easy problem. You are smart enough to understand the code.
+//            If you still need algorithm, quit coding today.
 
 #include <bits/stdc++.h>
 using namespace std;
