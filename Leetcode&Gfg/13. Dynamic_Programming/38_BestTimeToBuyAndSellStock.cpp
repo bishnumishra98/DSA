@@ -19,17 +19,17 @@
 // 1 <= prices.length <= 10^5
 // 0 <= prices[i] <= 10^4
 
-// Algorithm: Extremely simple brute force approach. Infact dynamic programming is not even required for this problem.
-//            It falls under the tag of 'Dynamic Programming' because we are remembering previous state in 'maxProfit'.
+// Algorithm: Extremely simple problem. Infact dynamic programming is not even required for this problem. It falls
+//            under the tag of 'Dynamic Programming' because we are remembering previous states.
 
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
-    // T.C: O(n)
+    // T.C: O(n^2)
     // S.C: O(1)
-    int maxProfit(vector<int>& prices) {
+    int maxProfit_bruteforce(vector<int>& prices) {
         int maxProfit = 0;
 
         for(int i = 0; i < prices.size() - 1; i++) {
@@ -41,11 +41,33 @@ public:
 
         return maxProfit;
     }
+
+// --------------------------------------------------------------------------------------------------------------
+
+    // Optimal approach: The idea is to keep a track of lowest buying price of the stock and calculate the profit
+    //                   at each step. Store the maximum profit encountered so far. If the current price is lower than
+    //                   the lowest buying price, update the lowest buying price. This way we ensure that we are always
+    //                   buying at the lowest price and selling at the current price to maximize profit.
+    // T.C: O(n)
+    // S.C: O(1)
+    int maxProfit(vector<int>& prices) {
+        int buyPrice = prices[0];
+        int maxProfit = 0;
+
+        for(int i = 1; i < prices.size(); i++) {
+            int profit = prices[i] - buyPrice;
+            maxProfit = max(maxProfit, profit);
+            buyPrice = min(buyPrice, prices[i]);
+        }
+
+        return maxProfit;
+    }
 };
 
 int main() {
     vector<int> prices = {7, 1, 5, 3, 6, 4};
 
+    cout << Solution().maxProfit_bruteforce(prices) << endl;
     cout << Solution().maxProfit(prices);
 
     return 0;
