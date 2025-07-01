@@ -29,7 +29,8 @@
 // Algorithm: Its an easy problem. We have to try out all ways of buying and selling stocks using recursion.
 //            Call a function f(index, buy) which returns the maximum profit that can be generated till the
 //            index 'index', and buy parameter as 'buy'. 'buy' is either 1 which means you are allowed to buy
-//            the stock on 'index'th day, or 0 which means are not allowed to buy the stock on 'index'th day.
+//            the stock on 'index'th day, or 0 which means are not allowed to buy the stock on 'index'th day,
+//            i.e., you are allowed to sell the stock on 'index'th day.
 //            Start recursive call initially from the 0th day with the liberty to buy it.
 //
 //            1. Base case: The base case is extremely straight forward. If the array 'prices' is over, no
