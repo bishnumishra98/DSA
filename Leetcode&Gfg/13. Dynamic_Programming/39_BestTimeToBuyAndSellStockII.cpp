@@ -127,7 +127,7 @@ public:
 
         int profit = 0;
         for(int i = n - 1; i >= 0; i--) {
-            for(int j = 1; j >= 0; j--) {   // or, for(int j = 0; j <= 1; j++)
+            for(int j = 0; j <= 1; j++) {
                 if(j == 1){
                     profit = max(-prices[i] + dp[i + 1][0], 0 + dp[i + 1][1]);
                 } else {
@@ -150,7 +150,7 @@ public:
 
         int profit = 0;
         for(int i = n - 1; i >= 0; i--) {
-            for(int j = 1; j >= 0; j--) {   // or, for(int j = 0; j <= 1; j++)
+            for(int j = 0; j <= 1; j++) {
                 if(j == 1){
                     profit = max(-prices[i] + next[0], 0 + next[1]);
                 } else {

@@ -80,8 +80,8 @@ public:
         return dp[index][buy][capacity] = profit;
     }
 
-    // T.C: O(n * 2 * 3) = O(6n)
-    // S.C: O(n * 2 * 3) for dp table + O(n) for recursion stack space = O(7n)
+    // T.C: O(n * 2 * capacity) = O(2n * capacity)
+    // S.C: O(2n * capacity) for dp table + O(n) for recursion stack space = O(2n * capacity)
     int maxProfit_memoization(vector<int>& prices) {
         int n = prices.size();
         int capacity = 2;
@@ -91,56 +91,60 @@ public:
 
 // -------------------------------------------------------------------------------------------------------
 
-    // T.C: O(6n)
-    // S.C: O(6n)
+    // T.C: O(n * 2 * capacity) = O(2n * capacity)
+    // S.C: O(2n * capacity)
     int maxProfit_tabulation(vector<int>& prices) {
         int n = prices.size();
         int capacity = 2;
-        vector<vector<vector<int>>> dp(n, vector<vector<int>>(2, vector<int>(capacity + 1, 0)));
+        vector<vector<vector<int>>> dp(n + 1, vector<vector<int>>(2, vector<int>(capacity + 1, 0)));
 
         // Base case is optional because all cells are already initialized with 0.
 
         int profit = 0;
         for(int i = n - 1; i >= 0; i--) {
-            for(int j = 1; j >= 0; j--) {   // or, for(int j = 0; j <= 1; j++)
-                for(int k = capacity; k >= 0; k--) {   // or, for(int k = 0; k <= capacity; k++)
+            for(int j = 0; j <= 1; j++) {
+                for(int k = 1; k <= capacity; k++) {   // capacity must start from 1
                     if(j == 1){
-                        profit = max(-prices[i] + dp[i + 1][0][capacity], 0 + dp[i + 1][1][capacity]);
+                        profit = max(-prices[i] + dp[i + 1][0][k], 0 + dp[i + 1][1][k]);
                     } else {
-                        profit = max(prices[i] + dp[i + 1][1][capacity - 1], 0 + dp[i + 1][0][capacity]);
+                        profit = max(prices[i] + dp[i + 1][1][k - 1], 0 + dp[i + 1][0][k]);
                     }
-                    dp[i][j][capacity] = profit;
+                    dp[i][j][k] = profit;
                 }
             }
         }
 
-        return dp[0][1][0];
+        return dp[0][1][capacity];
     }
 
 // -------------------------------------------------------------------------------------------------------
 
-    // T.C: O(2n)
-    // S.C: O(2) = O(1)
+    // T.C: O(n * 2 * capacity) = O(2n * capacity)
+    // S.C: O(2 * capacity)
     int maxProfit_tabulation_SO(vector<int>& prices) {
         int n = prices.size();
-        vector<int> curr(2, 0), next(2, 0);
+        int capacity = 2;
+        vector<vector<int>> curr(2, vector<int>(capacity + 1, 0)), next(2, vector<int>(capacity + 1, 0));
 
         int profit = 0;
         for(int i = n - 1; i >= 0; i--) {
-            for(int j = 1; j >= 0; j--) {   // or, for(int j = 0; j <= 1; j++)
-                if(j == 1){
-                    profit = max(-prices[i] + next[0], 0 + next[1]);
-                } else {
-                    profit = max(prices[i] + next[1], 0 + next[0]);
+            for(int j = 0; j <= 1; j++) {
+                for(int k = 1; k <= capacity; k++) {
+                    if(j == 1){
+                        profit = max(-prices[i] + next[0][k], 0 + next[1][k]);
+                    } else {
+                        profit = max(prices[i] + next[1][k - 1], 0 + next[0][k]);
+                    }
+                    curr[j][k] = profit;
                 }
-                curr[j] = profit;
             }
             next = curr;
         }
 
-        return next[1];
+        return next[1][capacity];
     }
 };
+
 
 int main() {
     vector<int> prices = {3, 3, 5, 0, 0, 3, 1, 4};
@@ -148,7 +152,7 @@ int main() {
     cout << Solution().maxProfit_recursion(prices) << endl;
     cout << Solution().maxProfit_memoization(prices) << endl;
     cout << Solution().maxProfit_tabulation(prices) << endl;
-    // cout << Solution().maxProfit_tabulation_SO(prices);
+    cout << Solution().maxProfit_tabulation_SO(prices);
 
     return 0;
 }
