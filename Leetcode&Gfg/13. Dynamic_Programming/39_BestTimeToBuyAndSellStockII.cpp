@@ -143,7 +143,7 @@ public:
 // -------------------------------------------------------------------------------------------------------
 
     // T.C: O(2n)
-    // S.C: O(2) = O(1)
+    // S.C: O(4) = O(1)
     int maxProfit_tabulation_SO(vector<int>& prices) {
         int n = prices.size();
         vector<int> curr(2, 0), next(2, 0);
