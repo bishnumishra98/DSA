@@ -14,7 +14,7 @@
 // Input: prices = [1]
 // Output: 0
 
-// Algorithm: This is also just an extension of the previous problem '39_BestTimeToBuyAndSellStockII.cpp'.
+// Algorithm: This is also just an extension of the problem '39_BestTimeToBuyAndSellStockII.cpp'.
 //            It is also a very simple problem. The only difference in this problem is that we are not allowed
 //            to buy the stock on 'i + 1'th day, if we sold it on 'i'th day, i.e., there has to be a cooldown
 //            period of atleast 1 day. The algorithm is exactly the same as in the previous problem, the
