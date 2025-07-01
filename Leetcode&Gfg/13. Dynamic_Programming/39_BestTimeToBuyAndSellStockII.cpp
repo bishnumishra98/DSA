@@ -108,7 +108,7 @@ public:
     }
 
     // T.C: O(n * 2) = O(2n)
-    // S.C: O(n * 2) for dp table + O(n) for recursion stack space = O(2n)
+    // S.C: O(n * 2) for dp table + O(n) for recursion stack space = O(3n)
     int maxProfit_memoization(vector<int>& prices) {
         int n = prices.size();
         vector<vector<int>> dp(n, vector<int>(2, -1));
