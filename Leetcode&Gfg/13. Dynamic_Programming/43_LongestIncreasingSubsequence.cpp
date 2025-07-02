@@ -56,6 +56,15 @@
 //                                              taken in the LIS.
 //    At the end, return the larger value returned by trying out both the above paths.
 
+// ● How to memoize the above recursive code ?
+//   As the index can take a value from 0 to n - 1, and the lastIndex can take values from -1 to n - 1 (where n is
+//   the size of 'nums'), a 2D dp table of size n x n is required to store the results of the recursive calls.
+//   But the problem is that the lastIndex can take -1 as a value, but the dp table cannot have negative indices.
+//   Thus, we can shift the lastIndex by 1, i.e., if last index is -1, we can store it as 0 in the dp table,
+//   if last index is 0, we can store it as 1 in the dp table, and so on. Thus, the lastIndex will take values from
+//   0 to n, and the dp table will have size n x (n + 1). Hence, the result of recursive call f(index, lastIndex)
+//   will be stored in dp[index][lastIndex + 1], not dp[index][lastIndex].
+
 #include <bits/stdc++.h>
 using namespace std;
 
