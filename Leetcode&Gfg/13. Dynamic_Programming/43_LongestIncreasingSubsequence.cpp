@@ -14,6 +14,9 @@
 // Input: nums = [7,7,7,7,7,7,7]
 // Output: 1
 
+// IMPORTANT NOTE: YOU MAY SKIP THE TAUGHT APPROACHES OF THIS PROBLEM COMPLETELY. AN EASIER APPROACH FOR THE SAME PROBLEM
+//                 IS TAUGHT IN 'BaseBuildingPrograms\21. Dynamic_Programming\DP04_PrintLongestIncreasingSubsequence.cpp'.
+
 // Brute force: The brute force approach is to generate all the subsequences of the given array and then check
 //              which of them is strictly increasing and return the length of the longest one.
 //              This approach has exponential time complexity and is not efficient for large inputs.
