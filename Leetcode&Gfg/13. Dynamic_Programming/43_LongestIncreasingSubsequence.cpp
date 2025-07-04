@@ -65,6 +65,11 @@
 //   0 to n. Hence, the result of recursive call f(index, lastIndex) will be stored in dp[index][lastIndex + 1],
 //   not dp[index][lastIndex].
 
+// Note: One more way is there to find the LIS. And that way is the better way because that will also help in
+//       figuring the elements of the LIS using backtracking. The time and space complexity of that algorithm
+//       is O(n^2) and O(n) respectively, which is as good as tabulation space optimized code of this algorithm.
+//       That algorithm can be found here: BaseBuildingPrograms\21. Dynamic_Programming\DP04_PrintLongestIncreasingSubsequence.cpp
+
 #include <bits/stdc++.h>
 using namespace std;
 
