@@ -116,13 +116,62 @@ public:
         vector<vector<int>> dp(n, vector<int>(n + 1, -1));
         return solve(0, -1, nums, n, dp);
     }
+
+// -------------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n^2)
+    // S.C: O(n^2)
+    int lengthOfLIS_tabulation(vector<int>& nums) {
+        int n = nums.size();
+        // As 'i' starts from 'n - 1', and we are accessing 'dp[i + 1][...]', i.e., 'i' starts from dp[n][...]
+        // and ends at dp[0][...], we will require 'n + 1' rows to store all states of dp.
+        vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0));
+        
+        // No need to write base case as all cells are already initialized to 0.
+
+        // As we did coordinate shift in memoization, add +1 to all column coordinates
+        for(int i = n - 1; i >= 0; i--) {
+            for(int j = i - 1; j >= -1; j--) {
+                int takeLen = 0;
+                if(j == -1 || nums[i] > nums[j]) takeLen = 1 + dp[i + 1][i + 1];   // 'i + 1' due to coordinate shift during memoization
+                int notTakeLen = 0 + dp[i + 1][j + 1];    // 'j + 1' due to coordinate shift during memoization
+                dp[i][j + 1] = max(notTakeLen, takeLen);
+            }
+        }
+
+        return dp[0][-1 + 1];   // as we did coordinate shift during memoization, we need to add +1 to column coordinates
+    }
+
+// -------------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n^2)
+    // S.C: O(n)
+    int lengthOfLIS_tabulation_SO(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> curr(n + 1, 0), next(n + 1, 0);
+
+        for(int i = n - 1; i >= 0; i--) {
+            for(int j = i - 1; j >= -1; j--) {
+                int takeLen = 0;
+                if(j == -1 || nums[i] > nums[j]) takeLen = 1 + next[i + 1];
+                int notTakeLen = 0 + next[j + 1];
+                curr[j + 1] = max(notTakeLen, takeLen);
+            }
+            next = curr;
+        }
+
+        return next[-1 + 1];
+    }
 };
+
 
 int main() {
     vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 18};
 
     cout << Solution().lengthOfLIS_recursion(nums) << endl;
     cout << Solution().lengthOfLIS_memoization(nums) << endl;
+    cout << Solution().lengthOfLIS_tabulation(nums) << endl;
+    cout << Solution().lengthOfLIS_tabulation_SO(nums);
 
     return 0;
 }
