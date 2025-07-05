@@ -14,7 +14,95 @@
 // Input: nums = [7,7,7,7,7,7,7]
 // Output: 1
 
-// IMPORTANT NOTE: YOU MAY SKIP THE TAUGHT APPROACHES OF THIS PROBLEM COMPLETELY. AN EASIER APPROACH FOR THE SAME PROBLEM
+// Brute force: The brute force approach is to generate all the subsequences of the given array and then check
+//              which of them is strictly increasing and return the length of the longest one.
+//              This approach has exponential time complexity and is not efficient for large inputs.
+
+// Better approach: Follow 'BaseBuildingPrograms\21. Dynamic_Programming\DP04_FindLongestIncreasingSubsequence.cpp'.
+
+// Best approach: The problem can be solved using a greedy approach with binary search.
+// Intuition:
+// Let's consider the array 'nums' = [0, 1, 0, 3, 2, 3]
+// Now start traversal from 0th index of 'nums' till the last index and try to form multiple vectors that contains
+// subsequences of 'nums'. And the longest of them is the required LIS of 'nums'.
+
+// ● When we are at index 0, i.e., element = 0:
+//   Push nums[0] in a vector v1, i.e., v1 = {0}.
+//
+// ● When we are at index 1, i.e., element = 1:
+//   As nums[1] > last element of v1, we can push nums[1] in v1, i.e., v1 = {0, 1}.
+//
+// ● When we are at index 2, i.e., element = 0:
+//   As nums[2] is not greater than last element of v1, we cannot push it in v1. In this case, we need to find
+//   the smallest number in v1 which is greater than or equal to nums[2]. In this case, it is 0.
+//   So, we replace the 0 of v1 with nums[2], i.e., v1 remains {0, 1}.
+//
+// ● When we are at index 3, i.e., element = 3:
+//   As nums[3] > last element of v1, we can push nums[3] in v1, i.e., v1 = {0, 1, 3}.
+//
+// ● When we are at index 4, i.e., element = 2:
+//   As nums[4] is not greater than last element of v1, we cannot push it in v1. In this case, we need to find
+//   the smallest number in v1 which is greater than or equal to nums[4]. In this case, it is 3.
+//   So, we replace the 3 of v1 with nums[4], i.e., v1 becomes {0, 1, 2}.
+//
+// ● When we are at index 5, i.e., element = 3:
+//   As nums[5] > last element of v1, we can push nums[5] in v1, i.e., v1 becomes {0, 1, 2, 3}.
+
+// Algorithm:
+// 1. Create a temporary array lets say named 'temp'.
+// 2. Push the first element of 'nums' in the 'temp' array.
+// 3. Now iterate the 'nums' from second element to last element.
+//    i.  If nums[i] is greater than the last element inserted in 'temp', then insert nums[i] in 'temp'. This will
+//        create a set of numbers in increasing fashion.
+//    ii. If nums[i] is not greater than the last element inserted in 'temp', then we need to find the index of the
+//        smallest number in 'temp' which is greater than or equal to nums[i]. This is because we want to replace
+//        the smallest number in 'temp' which is greater than or equal to nums[i] with nums[i] to maintain the
+//        increasing order in 'temp'.
+//        We can use the lower_bound() function from the STL to find this index. The lower_bound() function returns
+//        an iterator to the first element in 'temp' which is not less than nums[i]. We can then subtract the
+//        beginning of the 'temp' array from this iterator to get the index.
+// 4. At the end, the size of 'temp' will give us the length of the longest increasing subsequence.
+// Note: The 'temp' array may not contain the actual LIS. It is accurate in just telling the length of LIS.
+
+#include <bits/stdc++.h>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    // T.C: O(n * log(n))
+    // S.C: O(n)
+    int lengthOfLIS(vector<int>& nums) {
+        vector<int> temp;
+        temp.push_back(nums[0]);
+
+        for(int i = 1; i < nums.size(); i++) {
+            if(nums[i] > temp.back()) {
+                temp.push_back(nums[i]);
+            } else {
+                // Find the index of the smallest number in 'temp' which is greater than or equal to 'nums[i]'.
+                // lower_bound() returns an iterator to the first element that is not less than 'nums[i]'.
+                // temp.begin() is subtracted from the iterator returned by lower_bound() to get the index.
+                int ind = lower_bound(temp.begin(), temp.end(), nums[i]) - temp.begin();
+                temp[ind] = nums[i];
+            }
+        }
+
+        return temp.size();
+    }
+};
+
+int main() {
+    vector<int> nums = {0, 1, 0, 3, 2, 3};
+
+    cout << Solution().lengthOfLIS(nums);
+
+    return 0;
+}
+
+
+/*
+// IMPORTANT NOTE: YOU MAY SKIP THE BELOW TAUGHT APPROACHES OF THIS PROBLEM. AN EASIER APPROACH FOR THE SAME PROBLEM
 //                 IS TAUGHT IN 'BaseBuildingPrograms\21. Dynamic_Programming\DP04_PrintLongestIncreasingSubsequence.cpp'.
 
 // Brute force: The brute force approach is to generate all the subsequences of the given array and then check
@@ -183,3 +271,4 @@ int main() {
 
     return 0;
 }
+*/
