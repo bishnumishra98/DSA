@@ -21,7 +21,24 @@
 // Better approach: Follow 'BaseBuildingPrograms\21. Dynamic_Programming\DP04_FindLongestIncreasingSubsequence.cpp'.
 
 // Best approach: The problem can be solved using a greedy approach with binary search.
-// Intuition:
+
+// Algorithm:
+// 1. Create a temporary array lets say named 'temp'.
+// 2. Push the first element of 'nums' in the 'temp' array.
+// 3. Now iterate the 'nums' from second element to last element.
+//    i.  If nums[i] is greater than the last element inserted in 'temp', then insert nums[i] in 'temp'. This will
+//        create a set of numbers in increasing fashion.
+//    ii. If nums[i] is not greater than the last element inserted in 'temp', then we need to find the index of the
+//        smallest number in 'temp' which is greater than or equal to nums[i]. This is because we want to replace
+//        the smallest number in 'temp' which is greater than or equal to nums[i] with nums[i] to maintain the
+//        increasing order in 'temp'.
+//        We can use the lower_bound() function from the STL to find this index. The lower_bound() function returns
+//        an iterator to the first element in 'temp' which is not less than nums[i]. We can then subtract the
+//        beginning of the 'temp' array from this iterator to get the index.
+// 4. At the end, the size of 'temp' will give us the length of the longest increasing subsequence.
+// Note: The 'temp' array may not contain the actual LIS. It is accurate in just telling the length of LIS.
+
+// Dry run:
 // Let's consider the array 'nums' = [0, 1, 0, 3, 2, 3]
 // Now start traversal from 0th index of 'nums' till the last index and try to form multiple vectors that contains
 // subsequences of 'nums'. And the longest of them is the required LIS of 'nums'.
@@ -47,22 +64,8 @@
 //
 // ● When we are at index 5, i.e., element = 3:
 //   As nums[5] > last element of v1, we can push nums[5] in v1, i.e., v1 becomes {0, 1, 2, 3}.
-
-// Algorithm:
-// 1. Create a temporary array lets say named 'temp'.
-// 2. Push the first element of 'nums' in the 'temp' array.
-// 3. Now iterate the 'nums' from second element to last element.
-//    i.  If nums[i] is greater than the last element inserted in 'temp', then insert nums[i] in 'temp'. This will
-//        create a set of numbers in increasing fashion.
-//    ii. If nums[i] is not greater than the last element inserted in 'temp', then we need to find the index of the
-//        smallest number in 'temp' which is greater than or equal to nums[i]. This is because we want to replace
-//        the smallest number in 'temp' which is greater than or equal to nums[i] with nums[i] to maintain the
-//        increasing order in 'temp'.
-//        We can use the lower_bound() function from the STL to find this index. The lower_bound() function returns
-//        an iterator to the first element in 'temp' which is not less than nums[i]. We can then subtract the
-//        beginning of the 'temp' array from this iterator to get the index.
-// 4. At the end, the size of 'temp' will give us the length of the longest increasing subsequence.
-// Note: The 'temp' array may not contain the actual LIS. It is accurate in just telling the length of LIS.
+//
+// At the end, the size of v1 is 4, which is the length of the longest increasing subsequence of 'nums'.
 
 #include <bits/stdc++.h>
 #include <algorithm>
