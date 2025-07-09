@@ -29,9 +29,11 @@
 //            by the number of paths to reach nums[j]. This is because, if '1 + dp[j] == dp[i]', it means what ? It means
 //            the number of paths to reach nums[i] was already dp[i]. And now, we got one more path to reach nums[i] from
 //            nums[j] which is also of same length as LIS. It means, we can now reach nums[i] from both the group of ways,
-//            first it's already existing paths, i.e., count[i] ; second from nums[j] path. And nums[j] can be reached from
+//            first it's already existing paths, i.e., count[i]; second from nums[j] path. And nums[j] can be reached from
 //            count[j] paths. Inshort, the number of paths to reach nums[i] is now it's already existing paths, plus the
 //            paths of nums[j]. Thus, we will update count[i] as count[i] += count[j].
+//            Note that everywhere where it is mentioned th number of paths to reach nums[i] or nums[j] is not any ordinary
+//            path, it is path formed with nums[i] or nums[j] as the last element of the LIS till that index.
 //            Repeat the process until the last value of j (which is the index just on the left of i), and then move to the
 //            next ith index, i.e., next current element.
 //            Finally, when dp and count arrays have been computed, just find the length of LIS, i.e., the largest
