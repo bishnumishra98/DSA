@@ -24,7 +24,7 @@
 //    if(nums[i] % nums[j] == 0).
 
 // ● Intuition behind sorting the array and applying LIS logic:
-//   One thing we know is that problem is asking for subset, not subsequence; hence order of element doesn't matters.
+//   One thing we know is that problem is asking for subset, not subsequence; hence order of elements doesn't matters.
 //   Thus, we can sort the given input array, so that the next element is always greater than the previous element
 //   as all elements given are unique.
 //   This will help in identifying the divisibility of each element in a straightforward manner.
