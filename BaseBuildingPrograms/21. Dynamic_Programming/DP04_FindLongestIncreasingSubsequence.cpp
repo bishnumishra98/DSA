@@ -31,7 +31,9 @@
 // Input: nums = [7, 7, 7, 7, 7, 7, 7]
 // Output: [7]
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 // Algorithm: It is a simple algorithm. Create a dp array of size 'n', where n = nums.size(). Now each cell of dp[i]
