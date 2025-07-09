@@ -13,20 +13,34 @@
 // Explanation: The length of the longest increasing subsequence is 1, and there are 5 increasing subsequences of
 // length 1, so output 5.
 
-// Algorithm: It is just an extension of the problem 'BaseBuildingPrograms\21. Dynamic_Programming\DP04_FindLongestIncreasingSubsequence.cpp'.
+// Algorithm: It is just an easy extension of the problem 'BaseBuildingPrograms\21. Dynamic_Programming\DP04_FindLongestIncreasingSubsequence.cpp'.
 //            The length of LIS of the given 'nums' array is given by the value of the largest dp element.
 //            But here, we are asked to find the number of LIS. To find so, we will initialize one more array with all
 //            elements as 1, of size 'n', where n = nums.size(), and name it let's say 'count'.
 //            An element of 'count' array, count[i] tells the number of LIS that can be formed with the element
 //            nums[i] as the last element of the LIS.
-//            
+//            In the LIS code, if(nums[i] > nums[j]), we wrote 'if(1 + dp[j] > dp[i]) dp[i] = 1 + dp[j]', it means
+//            if dp[i] gets updated, a longer length of LIS is formed, i.e., a new subsequence is found.
+//            Now for any further values of j, if '1 + dp[j]' comes out to be equal to 'dp[i]', it means again
+//            a new subsequence is found which is also of same length as LIS. It means one more LIS is found.
+//            Thus, in this case increase the count at index 'i', stating that there are 2 LIS which ends at
+//            index 'i' or you can say there are 2 LIS with the element nums[i] as the last element of the LIS.
+//            Now for any further values of j, again if '1 + dp[j]' comes out to be equal to 'dp[i]', it means
+//            one more LIS is found that ends with nums[i] as last element of LIS. Hence, again increment count[i],
+//            and repeat the process until the last value of j (which is the index just on the left of i), and
+//            then move to next ith index, i.e., next current element.
+//            Finally, when dp and count arrays have been computed, just find the length of LIS, i.e., the largest
+//            dp element. And return the count value at the same index. If there are multiple largest dp elements,
+//            return the sum of their count values at corresponding indexes.
 
 // ● Illustration:
 //   input 'nums' = [1, 3, 5, 8, 4, 7]
 //   dp array =     [1, 2, 3, 4, 3, 4]
 //   count array =  [1, 1, 1, 1, 1, 2]
-//   numberOfLIS = count[3] + count[5] = 1 + 2 = 3, i.e., there are 3 LIS of length 4 in the given 'nums' array.
-//   Those LIS are: {1, 3, 5, 8}, {1, 3, 5, 7} and {1, 3, 4, 7}.
+//   Largest dp element is 4. So check their corresponding count vlaues.
+//   count[3] tells that the number of LIS that ends at index 3 is 1, i.e., {1, 3, 5, 8}.
+//   count[5] tells that the number of LIS that ends at index 5 is 2, i.e., {1, 3, 5, 7} and {1, 3, 4, 7}.
+//   Thus, total number of LIS = count[3] + count[5] = 1 + 2 = 3.
 
 
 #include <bits/stdc++.h>
@@ -64,9 +78,6 @@ public:
         for(int i = 0; i < n; i++) {
             if(dp[i] == maxi) numberOfLIS += count[i];
         }
-
-        for(auto it: count) cout << it << " ";
-        cout << endl;
 
         return numberOfLIS;
     }
