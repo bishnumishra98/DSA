@@ -103,7 +103,6 @@ int main() {
 
     vector<int> ans1 = Solution().largestDivisibleSubset(nums);
     for(auto it: ans1) cout << it << " ";
-    cout << endl;
 
     return 0;
 }
