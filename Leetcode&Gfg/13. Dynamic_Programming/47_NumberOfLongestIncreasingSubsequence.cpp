@@ -13,7 +13,7 @@
 // Explanation: The length of the longest increasing subsequence is 1, and there are 5 increasing subsequences of
 // length 1, so output 5.
 
-// Algorithm: It is just an easy extension of the problem 'BaseBuildingPrograms\21. Dynamic_Programming\DP04_FindLongestIncreasingSubsequence.cpp'.
+// Algorithm: It is just an extension of the problem 'BaseBuildingPrograms\21. Dynamic_Programming\DP04_FindLongestIncreasingSubsequence.cpp'.
 //            The length of LIS of the given 'nums' array is given by the value of the largest dp element.
 //            But here, we are asked to find the number of LIS. To find so, we will initialize one more array with all
 //            elements as 1, of size 'n', where n = nums.size(), and name it let's say 'count'.
@@ -21,14 +21,19 @@
 //            nums[i] as the last element of the LIS.
 //            In the LIS code, if(nums[i] > nums[j]), we wrote 'if(1 + dp[j] > dp[i]) dp[i] = 1 + dp[j]', it means
 //            if dp[i] gets updated, a longer length of LIS is formed, i.e., a new subsequence is found.
-//            Now for any further values of j, if '1 + dp[j]' comes out to be equal to 'dp[i]', it means again
-//            a new subsequence is found which is also of same length as LIS. It means one more LIS is found.
-//            Thus, in this case increase the count at index 'i', stating that there are 2 LIS which ends at
-//            index 'i' or you can say there are 2 LIS with the element nums[i] as the last element of the LIS.
-//            Now for any further values of j, again if '1 + dp[j]' comes out to be equal to 'dp[i]', it means
-//            one more LIS is found that ends with nums[i] as last element of LIS. Hence, again increment count[i],
-//            and repeat the process until the last value of j (which is the index just on the left of i), and
-//            then move to next ith index, i.e., next current element.
+//            Thus in this case, we will update the count[i] as count[i] = count[j], stating that the number of
+//            paths to reach the nums[i] is same as the number of paths to reach nums[j].
+//            Now for any further values of j, if '1 + dp[j]' comes out to be equal to 'dp[i]', it means again a new
+//            subsequence is found which ends at index 'i' which is also of same length as LIS. Thus, we will update the
+//            count[i] as count[i] += count[j], stating that the number of paths to reach nums[i] is now increased
+//            by the number of paths to reach nums[j]. This is because, if '1 + dp[j] == dp[i]', it means what ? It means
+//            the number of paths to reach nums[i] was already dp[i]. And now, we got one more path to reach nums[i] from
+//            nums[j] which is also of same length as LIS. It means, we can now reach nums[i] from both the group of ways,
+//            first it's already existing paths, i.e., count[i] ; second from nums[j] path. And nums[j] can be reached from
+//            count[j] paths. Inshort, the number of paths to reach nums[i] is now it's already existing paths, plus the
+//            paths of nums[j]. Thus, we will update count[i] as count[i] += count[j].
+//            Repeat the process until the last value of j (which is the index just on the left of i), and then move to the
+//            next ith index, i.e., next current element.
 //            Finally, when dp and count arrays have been computed, just find the length of LIS, i.e., the largest
 //            dp element. And return the count value at the same index. If there are multiple largest dp elements,
 //            return the sum of their count values at corresponding indexes.
@@ -62,9 +67,9 @@ public:
                     // Update dp[i] only if a larger value is supposed to be computed from '1 + dp[j]'
                     if(1 + dp[j] > dp[i]) {
                         dp[i] = 1 + dp[j];
-                        count[i] = count[j];
+                        count[i] = count[j];   // number of ways to reach nums[i] is same as number of ways to reach nums[j]
                     } else if(1 + dp[j] == dp[i]) {
-                        count[i] += count[j];
+                        count[i] += count[j];   // number of ways to reach nums[i] is now increased by the number of ways to reach nums[j]
                     }
                 }
             }
