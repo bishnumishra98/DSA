@@ -120,9 +120,14 @@
 //                                   the value of k for which we get the least number of multiplications will be our answer.
 //                                   Hence, the recursive relation is:
 //                                   f(i, j) = min(f(i, k) + (arr[i - 1] * arr[k] * arr[j]) + f(k + 1, j)) for all
-//                                   k from i to j - 1.                                
+//                                   k from i to j - 1.                             
 //                                   I know the algorithm looks hard to understand, thus to understand it better watch
 //                                   the video: https://www.youtube.com/watch?v=vRVfmbCFW7Y&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=49
+//            Just remember the 3 simple steps for all partition dp problems.
+//            1. Start with the entire block / array.
+//            2. Try out all partitions(divide block/array into two groups), probably by running a loop.
+//            3. Return the best possible partition.
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -148,7 +153,7 @@ public:
         return solve(1, n - 1, arr);
     }
 
-// ------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------
 
     int solve(int i, int j, vector<int> &arr, vector<vector<int>>& dp) {
         if(i == j) return 0;
@@ -171,6 +176,20 @@ public:
         vector<vector<int>> dp(n, vector<int>(n, -1));
         return solve(1, n - 1, arr, dp);
     }
+
+// --------------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n^2) for dp * O(n) for the for loop = O(n^3)
+    // S.C: O(n^2)
+    int matrixMultiplication_tabulation(vector<int> &arr) {
+        int n = arr.size();
+        vector<vector<int>> dp(n + 1, vector<int>(n, 0));
+        
+        // Writing the base case is not needed, as all cells are already initialized to 0.
+
+
+    }
+
 };
 
 int main() {
@@ -178,6 +197,7 @@ int main() {
 
     cout << Solution().matrixMultiplication_recursion(arr) << endl;
     cout << Solution().matrixMultiplication_memoization(arr) << endl;
+    cout << Solution().matrixMultiplication_tabulation(arr) << endl;
 
     return 0;
 }
