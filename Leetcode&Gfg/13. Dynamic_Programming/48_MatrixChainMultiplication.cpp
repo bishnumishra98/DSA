@@ -115,14 +115,12 @@
 //                                   of multiplications to form the resultant matrix34 is given by f(3, 4) or f(k + 1, j).
 //                                   Hence, f(i, k) + (arr[i - 1] * arr[k] * arr[j]) + f(k + 1, j) gives the number of
 //                                   multiplications needed to form the resultant matrix of the partition
-//                                   '(matrix1 * matrix2) * (matrix3 * matrix4)'.
-//                                   Now, we have to try out all the partitions and find the minimum number of
-//                                   multiplications required to form the resultant matrix.
+//                                   '(matrix(i) * matrix(k)) * (matrix(k+1) * matrix(j))'.
+//                                   Now, we have to try out all possible partitions by running k from 1 to (j - 1), and
+//                                   the value of k for which we get the least number of multiplications will be our answer.
 //                                   Hence, the recursive relation is:
 //                                   f(i, j) = min(f(i, k) + (arr[i - 1] * arr[k] * arr[j]) + f(k + 1, j)) for all
-//                                   k from i to j - 1.
-//                                   In this way, the function f(i, j) which returns the least number of multiplications
-//                                   required to build the resultant matrix from 'i'th matrix to 'j'th matrix'.                                 
+//                                   k from i to j - 1.                                
 //                                   I know the algorithm looks hard to understand, thus to understand it better watch
 //                                   the video: https://www.youtube.com/watch?v=vRVfmbCFW7Y&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=49
 
