@@ -187,21 +187,40 @@ public:
     // S.C: O(n^2)
     int matrixMultiplication_tabulation(vector<int> &arr) {
         int n = arr.size();
-        vector<vector<int>> dp(n + 1, vector<int>(n, 0));
+        vector<vector<int>> dp(n, vector<int>(n, 0));
         
         // Writing the base case is not needed, as all cells are already initialized to 0.
 
+        for(int i = n - 1; i >= 1; i--) {   // reverse the order from memoization
+            for(int j = i + 1; j <= n - 1; j++) {
+                int mini = 1e9;
+                for(int k = i; k < j; k++) {
+                    int multiplications = dp[i][k] + (arr[i - 1] * arr[k] * arr[j]) + dp[k + 1][j];
+                    mini = min(mini, multiplications);
+                }
+                dp[i][j] = mini;
+            }
+        }
 
+        return dp[1][n - 1];
     }
 
+    // ● Why inner loop runs from 'i + 1' to 'n - 1' ?
+    //   Because we want to compute the minimum number of multiplications required to multiply matrices from 'i'th matrix
+    //   to 'j'th matrix, for which we need at least two matrices for a valid multiplication. When 'i == j', it means there
+    //   is only one matrix, and the result of multiplying a single matrix is zero. Hence, 'j' must be at least 'i + 1' to
+    //   ensure we're working with a valid subproblem (a chain of two or more matrices). Inshort 'j' must be on right of
+    //   'i' to ensure we're working with a valid subproblem. The loop goes up to 'n - 1' because the last valid index in
+    //   the array 'arr' is 'n - 1'.
 };
+
 
 int main() {
     vector<int> arr = {2, 1, 3, 4};
 
     cout << Solution().matrixMultiplication_recursion(arr) << endl;
     cout << Solution().matrixMultiplication_memoization(arr) << endl;
-    cout << Solution().matrixMultiplication_tabulation(arr) << endl;
+    cout << Solution().matrixMultiplication_tabulation(arr);
 
     return 0;
 }
