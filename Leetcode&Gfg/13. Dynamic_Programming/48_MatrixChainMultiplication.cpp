@@ -128,10 +128,7 @@
 //                                   the value of k for which we get the least number of multiplications will be our answer.
 //                                   Hence, the recursive relation is:
 //                                   f(i, j) = min(f(i, k) + (arr[i - 1] * arr[k] * arr[j]) + f(k + 1, j)) for all
-//                                   k from i to j - 1.                             
-//                                   I know the algorithm looks hard to understand, thus to understand it better watch
-//                                   the video: https://www.youtube.com/watch?v=vRVfmbCFW7Y&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=49
-
+//                                   k from i to j - 1.
 
 #include <bits/stdc++.h>
 using namespace std;
