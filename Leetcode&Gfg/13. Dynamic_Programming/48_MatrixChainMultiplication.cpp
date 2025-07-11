@@ -53,7 +53,12 @@
 //    no. of multiplications required to compute the resultant matrix will differ based on the order of multiplication.
 
 
-// Algorithm: It is a 100% visualization problem. The better you visualize, the easier the algorithm will be for you.
+// Algorithm: Just remember the 3 simple steps for all partition dp problems.
+//            1. Start with the entire block / array.
+//            2. Try out all partitions(divide block/array into two groups), probably by running a loop.
+//            3. Return the best possible partition.
+//
+//            It is a 100% visualization problem. The better you visualize, the easier the algorithm will be for you.
 //            You are given an array = [1, 2, 3, 4, 3], of size 5. It is given that the 'i'th matrix in the given array
 //            has the dimensions (arr[i - 1] x arr[i]) for i >= 1.
 //            Thus, there can be 5 - 1 = 4 matrices present with the following dimensions: matrix1 = 1 × 2, matrix2 = 2 × 3,
@@ -69,10 +74,13 @@
 //            Thus, to find out which way yields the least number of multiplications, we have to try out all possible
 //            ways via recursion. Call a function f(i, j) which returns the least number of multiplications required
 //            to build the resultant matrix, where 'i' is the index of array which represents the number of columns
-//            in the first matrix and 'j' is the index of the array which represents the number of columns in the last
+//            in the 'i'th matrix and 'j' is the index of the array which represents the number of columns in the 'j'th
 //            matrix. Thus, for the array = [1, 2, 3, 4, 3], of size 5; call the recursive function initially with the
 //            arguments f(1, 4), where 1st index, i.e., 2 is no.of columns in first matrix and 4th index, i.e., 3 is
-//            number of columns in the last matrix (fourth matrix in this case). In every recursive 
+//            number of columns in the fourth matrix. In every recursive call, 'j - 1' new partitions are made, example:
+//            f(1, 4) calls f(1, 1) and f(2, 4) for the first partition, f(1, 2) and f(3, 4) for the second partition,
+//            and f(1, 3) and f(4, 4) for the third partition. Similarly, any other function let's say f(2, 4) will
+//            call f(2, 2) and f(3, 4) for the first partition, f(2, 3) and f(4, 4) for the second partition. And so on.
 //            1. Base case: When only one matrix is left, i.e., when 'i' reaches 'j', multipyling a matrix with itself
 //                          does not makes any sense. Hence return 0 stating that 0 multiplications are required to
 //                          form the resultant matrix as the resultant matrix is the matrix itself.
@@ -123,10 +131,6 @@
 //                                   k from i to j - 1.                             
 //                                   I know the algorithm looks hard to understand, thus to understand it better watch
 //                                   the video: https://www.youtube.com/watch?v=vRVfmbCFW7Y&list=PLgUwDviBIf0qUlt5H_kiKYaNSqJ81PMMY&index=49
-//            Just remember the 3 simple steps for all partition dp problems.
-//            1. Start with the entire block / array.
-//            2. Try out all partitions(divide block/array into two groups), probably by running a loop.
-//            3. Return the best possible partition.
 
 
 #include <bits/stdc++.h>
