@@ -16,8 +16,8 @@
 //   r1 has 2 stars
 //   r2 has 3 stars
 //   r3 has 4 stars
-//   Now try to make a generalized formula, and we find that the formula will be: row = row + 1 stars.
-//   Thus is the formula for the inner loop: for(int col = 0; col < row + 1; col++) cout << "*";
+//   Now try to make a generalized formula, and we find that the formula will be: 'row = row + 1' stars.
+//   Hence, the formula for the inner loop is: for(int col = 0; col < row + 1; col++) cout << "*";
 
 // ● Illustration 2:
 //   Suppose we are asked to print a inverted half pyramid:
@@ -31,8 +31,8 @@
 //   r1 has 3 stars
 //   r2 has 2 stars
 //   r3 has 1 stars
-//   Now try to make a generalized formula, and we find that the formula will be: row = n - row stars.
-//   Thus is the formula for the inner loop: for(int col = 0; col < n - row; col++) cout << "*";
+//   Now try to make a generalized formula, and we find that the formula will be: 'row = n - row' stars.
+//   Hence, the formula for the inner loop is: for(int col = 0; col < n - row; col++) cout << "*";
 
 
 #include <iostream>
