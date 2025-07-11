@@ -79,9 +79,12 @@
 //            arguments f(1, 4), where 1st index, i.e., 2 is no.of columns in first matrix and 4th index, i.e., 3 is
 //            number of columns in the fourth matrix. In every recursive call, 'j - 1' new partitions are made, example:
 //            f(1, 4) calls f(1, 1) and f(2, 4) for the first partition, f(1, 2) and f(3, 4) for the second partition,
-//            and f(1, 3) and f(4, 4) for the third partition. Similarly, any other function let's say f(2, 4) will
-//            call f(2, 2) and f(3, 4) for the first partition, f(2, 3) and f(4, 4) for the second partition. And so on.
-//            1. Base case: When only one matrix is left, i.e., when 'i' reaches 'j', multipyling a matrix with itself
+//            and f(1, 3) and f(4, 4) for the third partition, and eventually returns the partition from where it gets the
+//            minimum number of multiplications. Similarly, any other function let's say f(2, 4) will call f(2, 2) and
+//            f(3, 4) for the first partition, f(2, 3) and f(4, 4) for the second partition, and eventually returns the
+//            partition from where it gets the minimum number of multiplications. And so on the recursion continues until
+//            the base case is reached.
+//            1. Base case: When only one matrix is left, i.e., when 'i' reaches 'j'. Multipyling a matrix with itself
 //                          does not makes any sense. Hence return 0 stating that 0 multiplications are required to
 //                          form the resultant matrix as the resultant matrix is the matrix itself.
 //            2. Recursive relation: At any pair of (i, j), we can have different partitions. For example: for f(1, 4),
