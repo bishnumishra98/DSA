@@ -589,15 +589,15 @@ int main() {
     // }
 
 
-    // Half pyramid
-    int n, col, row;
-    cin >> n;
-    for(int row = 0; row < n; row++) {
-        for(int col = 0; col < row + 1; col++) {
-            cout << "* ";            
-        }
-        cout << endl;
-    }
+    // // Half pyramid
+    // int n, col, row;
+    // cin >> n;
+    // for(int row = 0; row < n; row++) {
+    //     for(int col = 0; col < row + 1; col++) {
+    //         cout << "* ";            
+    //     }
+    //     cout << endl;
+    // }
 
 
     // // Hollow square
