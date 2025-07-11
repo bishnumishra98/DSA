@@ -1,4 +1,39 @@
-// love babbar practice problem
+// Rules for all pattern printing programs:
+// 1. Identify the number of rows or the value of 'n', it is the number of iterations in the outer loop.
+// 2. Identify what is happening in each row, then try to find a relation between between row and elements of that row.
+//    Once you have a generalized formula for row and its corresponding elements, run the inner loop that many times
+//    for each row.
+
+// ● Illustration 1:
+//   Suppose we are asked to print a half pyramid:
+//   For input n = 4
+//   *
+//   **
+//   ***
+//   ****
+//   In the above pattern, observe each row:
+//   r0 has 1 star
+//   r1 has 2 stars
+//   r2 has 3 stars
+//   r3 has 4 stars
+//   Now try to make a generalized formula, and we find that the formula will be: row = row + 1 stars.
+//   Thus is the formula for the inner loop: for(int col = 0; col < row + 1; col++) cout << "*";
+
+// ● Illustration 2:
+//   Suppose we are asked to print a inverted half pyramid:
+//   For input n = 4
+//   ****
+//   ***
+//   **
+//   *
+//   In the above pattern, observe each row:
+//   r0 has 4 star
+//   r1 has 3 stars
+//   r2 has 2 stars
+//   r3 has 1 stars
+//   Now try to make a generalized formula, and we find that the formula will be: row = n - row stars.
+//   Thus is the formula for the inner loop: for(int col = 0; col < n - row; col++) cout << "*";
+
 
 #include <iostream>
 using namespace std;
@@ -554,23 +589,23 @@ int main() {
     // }
 
 
-    // // Half pyramid
-    // int n, col, row;
-    // cin >> n;
-    // for(int row=0; row<n; row++) {
-    //     for(int col=0; col<row+1; col++) {
-    //         cout << "* ";            
-    //     }
-    //     cout << endl;
-    // }
+    // Half pyramid
+    int n, col, row;
+    cin >> n;
+    for(int row = 0; row < n; row++) {
+        for(int col = 0; col < row + 1; col++) {
+            cout << "* ";            
+        }
+        cout << endl;
+    }
 
 
     // // Hollow square
     // int n, col, row;
     // cin >> n;
-    // for(int row=0; row<n; row++) {
-    //     for(int col=0; col<n; col++) {
-    //         if((row == 0 || row == n-1) || (col == 0 || col == n-1)) {
+    // for(int row = 0; row < n; row++) {
+    //     for(int col = 0; col < n; col++) {
+    //         if(row == 0 || row == n - 1 || col == 0 || col == n - 1) {
     //             cout << "* ";
     //         } else {
     //             cout << "  ";
@@ -583,8 +618,8 @@ int main() {
     // // Simple square
     // int n;
     // cin >> n;
-    // for(int i=0; i<n; i++) {
-    //     for(int j=0; j<n; j++) {
+    // for(int i = 0; i < n; i++) {
+    //     for(int j = 0; j < n; j++) {
     //         cout << "* ";
     //     }
     //     cout << endl;
