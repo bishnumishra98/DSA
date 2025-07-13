@@ -32,7 +32,58 @@
 
 // Problem link: https://leetcode.com/problems/minimum-cost-to-cut-a-stick/description/
 
-// Algorithm: 
+// Problem statement: A cakewalk problem if you can visualize. We are asked to cut the rod of length 'n' from multiple
+//                    sections mentioned in 'cuts' array. Now the cost to cut the section of rod is the length of that
+//                    section. We have to find out the minimum cost in which we can cut the rod into the sections given
+//                    in 'cuts' array. Total cost varies if we change the arrangement of elements in 'cuts' array, i.e.,
+//                    there will be an arrangement of 'cuts' array for which you will get the least cost. Return that
+//                    cost. For example, if you follow the cut order of [3, 5, 1, 4] for the rod of length 7, you will
+//                    get the least cost which is 16.
+
+// Algorithm: Follow the same set of rules of every partition dp problem:
+//            1. Start with the entire block / array.
+//            2. Try out all partitions(divide block/array into two groups), probably by running a loop.
+//            3. Return the best possible partition.
+//
+//            Always sort the 'cuts' array before applying recursion or dynamic programming. Sorting ensures that each
+//            recursive subproblem corresponds to a well-defined segment of the stick and only contains valid cut points
+//            within that segment. For example, if cuts = [2, 3, 5, 1, 4] and you don't sort it, making a cut at
+//            position 5 would divide the stick into two parts. Now you might end up solving two recursive subproblems
+//            like f(2, 3) and f(1, 4). But here’s the problem: the second subproblem (for f(1, 4)) tries to cut at
+//            position 1, which actually belongs to the left segment of the stick — handled by f(2, 3).
+//            This creates a dependency between subproblems, which breaks the fundamental requirement of recursion or
+//            dynamic programming: subproblems must be independent.
+//            ✅ By sorting the cuts array, you ensure:
+//               ● Every subproblem only deals with the cuts that belong within its segment.
+//               ● Recursive calls stay independent and valid.
+//               ● You can apply memoization or tabulation efficiently without conflict.
+//            Once the array is sorted, add 0 at the beginning and 'n (length of initial rod)' at th end of the 'cuts'
+//            array. This will help in computing the length of cut section of rod in each recursive call with the
+//            formula of length of cut section of rod = cuts[j + 1] - cuts[i - 1], where 'i' and 'j' are extreme indexes
+//            in the 'cut' array which contains the data on which positions we have to cut the rod.
+//            Call the function f(i, j) which returns the minimum cost to cut the rod from position 'i' to 'j' of the
+//            'cuts' array. As first and last element of 'cuts' array are dummy data, and the actual data lies from index 1
+//            to index 'cuts.size() - 2', call the recursive function with initial arguments f(1, cuts.size() - 2).
+//            I.  Base case: When 'i' crosses 'j', it means 'cuts' array exhausted, i.e., no more cuts, i.e., no more cost.
+//                           Thus, return 0.
+//            II. Recursive relation: In the recursive call of f(i, j), we need to try out all cuts from index 'i' to
+//                                    index 'j' of 'cuts' array. If the rod is cut from a position 'index', then the rod
+//                                    will be divided in two parts: left and right. The left part of rod will be handled
+//                                    by the recursive function f(i, index - 1), and the right part of rod will be handled
+//                                    by the recursive function f(index + 1, j) obviously. Sum up the length of the current
+//                                    section of rod with the two function calls, and this is the cost to cut the rod from
+//                                    position 'index' of 'cuts' array.
+//                                    Now we have to try out all cuts from index 'i' to index 'j' of 'cuts' array, and
+//                                    return the minimum cost of all cuts.
+//
+//            ● Why length of the current section of rod is 'cuts[j + 1] - cuts[i - 1]' ?
+//              Initially, we know that 'j' stands on the second last index, and the last index of the 'cuts' array is
+//              nothing but the length of initial rod itself, i.e., 'n'. Similarly, 'i' stands on second index, the first
+//              index of 'cuts' array is inserted with the value 0. Hence, when the first cut happens on the rod from any
+//              position, the rod length is cuts[j + 1] - cuts[i - 1] = n - 0 = n, which holds true as we had the full rod.
+//              
+//          
+//            
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -44,7 +95,8 @@ public:
 
         int mini = INT_MAX;
         for(int index = i; index <= j; index++) {
-            int cost =  solve(i, index - 1, cuts) + cuts[j + 1] - cuts[i - 1] + solve(index + 1, j, cuts);
+            int length = cuts[j + 1] - cuts[i - 1];   // length of the current section of rod
+            int cost =  solve(i, index - 1, cuts) + length + solve(index + 1, j, cuts);
             mini = min(mini, cost);
         }
 
@@ -54,11 +106,12 @@ public:
     // T.C: Exponential
     // S.C: O(n)
     int minCost_recursion(int n, vector<int>& cuts) {
+        sort(cuts.begin(), cuts.end());
+
         // Add boundaries
         cuts.insert(cuts.begin(), 0);
         cuts.push_back(n);
 
-        sort(cuts.begin(), cuts.end());
         return solve(1, cuts.size() - 2, cuts);
     }
 
