@@ -81,9 +81,16 @@
 //              nothing but the length of initial rod itself, i.e., 'n'. Similarly, 'i' stands on second index, the first
 //              index of 'cuts' array is inserted with the value 0. Hence, when the first cut happens on the rod from any
 //              position, the rod length is cuts[j + 1] - cuts[i - 1] = n - 0 = n, which holds true as we had the full rod.
-//              
-//          
-//            
+//              Now, let's say cuts = [8, 10, 6, 4, 12, 1], n = 14. After sorting and adding boundaries of 0 and 'n',
+//              cuts = [0, 1, 4, 6, 8, 10, 12, 14], n = 14. Note that cuts are to be performed on positions only from
+//              index 1 to 6 of the 'cuts' array.
+//              Suppose the initial rod is cut from a position say 6, so the rod will be divided into two segments each
+//              of length 6 and 8 respectively, which will be handled by f(1, 2) and f(4, 6) respectively. 
+//              Now the left rod length will be given by same formula: cuts[j + 1] - cuts[i - 1] = cuts[3] - cuts[0]
+//              = 6 - 0 = 6, which holds true. Similarly, the right rod length will be given by the same formula:
+//              cuts[j + 1] - cuts[i - 1] = cuts[7] - cuts[3] = 14 - 6 = 8, which holds true again.
+//              You can try out this formula for a bigger array, and you will see it holds true for every recursive call.
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -104,7 +111,7 @@ public:
     }
 
     // T.C: Exponential
-    // S.C: O(n)
+    // S.C: O(c);   where c = cuts.size()
     int minCost_recursion(int n, vector<int>& cuts) {
         sort(cuts.begin(), cuts.end());
 
@@ -112,17 +119,80 @@ public:
         cuts.insert(cuts.begin(), 0);
         cuts.push_back(n);
 
-        return solve(1, cuts.size() - 2, cuts);
+        int c = cuts.size();
+        return solve(1, c - 2, cuts);
     }
 
 // ----------------------------------------------------------------------------------------------------------
+
+    int solve(int i, int j, vector<int>& cuts, vector<vector<int>>& dp) {
+        if(i > j) return 0;
+        if(dp[i][j] != -1) return dp[i][j];
+
+        int mini = INT_MAX;
+        for(int index = i; index <= j; index++) {
+            int length = cuts[j + 1] - cuts[i - 1];
+            int cost =  solve(i, index - 1, cuts, dp) + length + solve(index + 1, j, cuts, dp);
+            mini = min(mini, cost);
+        }
+
+        return dp[i][j] = mini;
+    }
+
+    // T.C: O(c^2) for dp * O(c) for loop = O(c^3);   where c = cuts.size()
+    // S.C: O(c^2) for dp + O(c) for recursive stack space = O(c^2)
+    int minCost_memoization(int n, vector<int>& cuts) {
+        sort(cuts.begin(), cuts.end());
+
+        cuts.insert(cuts.begin(), 0);
+        cuts.push_back(n);
+
+        int c = cuts.size();
+        vector<vector<int>> dp(c + 1, vector<int>(c + 1, -1));
+        return solve(1, c - 2, cuts, dp);
+    }
+
+// ----------------------------------------------------------------------------------------------------------
+
+    // T.C: O(c^2) for dp * O(c) for loop = O(c^3);   where c = cuts.size()
+    // S.C: O(c^2) for dp
+    int minCost_tabulation(int n, vector<int>& cuts) {
+        sort(cuts.begin(), cuts.end());
+
+        cuts.insert(cuts.begin(), 0);
+        cuts.push_back(n);
+
+        int c = cuts.size();
+        vector<vector<int>> dp(c + 2, vector<int>(c + 2, 0));
+
+        for(int i = c; i >= 1; i--) {
+            for(int j = 1; j <= c - 2; j++) {
+                if(i > j) continue;
+                int mini = INT_MAX;
+                for(int index = i; index <= j; index++) {
+                    int length = cuts[j + 1] - cuts[i - 1];
+                    int cost = dp[i][index - 1] + length + dp[index + 1][j];
+                    mini = min(mini, cost);
+                }
+                dp[i][j] = mini;
+            }
+        }
+        return dp[1][c - 2];
+    }
 };
+
 
 int main() {
     int n = 7;
-    vector<int> cuts = {1, 3, 4, 5};
 
+    vector<int> cuts = {1, 3, 4, 5};
     cout << Solution().minCost_recursion(n, cuts) << endl;
+
+    cuts = {1, 3, 4, 5};
+    cout << Solution().minCost_memoization(n, cuts) << endl;
+
+    cuts = {1, 3, 4, 5};
+    cout << Solution().minCost_tabulation(n, cuts);
 
     return 0;
 }
