@@ -25,8 +25,8 @@
 //     would violate the condition that one envelope can fit into another only if both width and height are strictly greater.
 //   - By sorting by height in decreasing order, we ensure that we only consider one of the envelopes with the same width,
 //     thus maintaining the strictness required for the problem.
-//   For more, try out dry run for: envelopes = [[4,5],[4,6],[6,7],[2,3],[1,1]];   correct o/p: 4
-//   But if you don't sort height in decreasing order for same wdiths, then you will get an output of 5, which is wrong.
+//   For illustration, try out dry run for: envelopes = [[4,5],[4,6],[6,7],[2,3],[1,1]];   correct o/p: 4
+//   But if you don't sort height in decreasing order for same widths, then you will get an output of 5, which is wrong.
 
 
 #include <bits/stdc++.h>
