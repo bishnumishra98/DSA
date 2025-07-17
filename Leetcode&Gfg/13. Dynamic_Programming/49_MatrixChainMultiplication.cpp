@@ -24,6 +24,8 @@
 // Output: 0
 // Explanation: As there is only one matrix so, there is no cost of multiplication.
 
+// Problem link: https://www.geeksforgeeks.org/problems/matrix-chain-multiplication0303/1
+
 
 // Basics of matrix:
 // 1. Two matrices can only be multiplied if matrix A consists of 'x' rows and 'y' columns, and matrix B consists of
