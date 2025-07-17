@@ -64,7 +64,7 @@
 //            Call the function f(i, j) which returns the minimum cost to cut the rod from position 'i' to 'j' of the
 //            'cuts' array. As first and last element of 'cuts' array are dummy data, and the actual data lies from index 1
 //            to index 'cuts.size()', call the recursive function with initial arguments f(1, cuts.size()).
-//            I.  Base case: When 'i' crosses 'j', it means 'cuts' array exhausted, i.e., no more cuts, i.e., no more cost.
+//            I.  Base case: When 'i' crosses 'j', it means 'cuts' array is exhausted, i.e., no more cuts, i.e., no more cost.
 //                           Thus, return 0.
 //            II. Recursive relation: In the recursive call of f(i, j), we need to try out all cuts from index 'i' to
 //                                    index 'j' of 'cuts' array. If the rod is cut from a position 'index', then the rod

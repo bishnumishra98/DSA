@@ -31,7 +31,10 @@
 //            element of 'nums'. Thus, the number of elements in 'nums' becomes 'n + 2', where n = initial nums.size();
 //            and the operating range where we have to find our answer lies in the range of nums[1] to nums[n].
 //            Call a function f(i, j) which returns the maximum coins that can be collected by bursting balloons from
-//            index 'i' to index 'j' of 'nums' array.
+//            index 'i' to index 'j' of 'nums' array. Thus, call the recursive function initially with f(1, n).
+//            I.  Base case: When 'i' crosses 'j', it means 'nums' array is exhausted, i.e., no more coins can be collected.
+//                           Thus, return 0.
+//            II. Recursive relation: 
 
 #include <bits/stdc++.h>
 using namespace std;
