@@ -32,9 +32,41 @@
 //            and the operating range where we have to find our answer lies in the range of nums[1] to nums[n].
 //            Call a function f(i, j) which returns the maximum coins that can be collected by bursting balloons from
 //            index 'i' to index 'j' of 'nums' array. Thus, call the recursive function initially with f(1, n).
+//
+//            ● Approach of recursion in bursting balloons:
+//              Lets take an example: nums = [b1, b2, b3, b4, b5, b6]
+//                                    index:  1   2   3   4   5   6
+//              We can start with bursting any balloon. So let's say we start with bursting b4. Then can we say that the
+//              total coins collected will be: f(1, 3) + (b3 * b4 * b5) + f(5, 6) ? The answer to that is "NO". It's
+//              because f(1, 3) and f(5, 6) are not independent. After bursting b4, the nums becomes:
+//              nums = [b1, b2, b3, b5, b6], now let's say in f(1, 3), we tried to burst the balloon at 3rd index.
+//              Now the coins collected by bursting the 3rd balloon is dependent on the value of 2nd and 5th balloon.
+//              And as 5th balloon is handled f(5, 6), we can say that the subproblems are not independent. Hence, we
+//              cannot apply recursion in top to bottom approach.
+//              The solution here is to try bottom to up recursive approach. Let's consider that all balloons have
+//              been already bursted, and now only b4 balloon is left to be bursted. As 1 is added to both extreme sides
+//              of 'nums', the coins we get by bursting the final b4 balloon will be: 1 * b4 * 1 = b4.
+//              Now, as b4 was bursted in the last step, on going to the above step, we find that it must have existed in
+//              the previous step. We must have had any two balloons in the second last step, it could be any one of
+//              the following pairs: (b1, b4) or (b2, b4) or (b3, b4) or (b5, b4) or (b6, b4). No matter which pair
+//              existed in the second last step, everyone depends on either their adjacent elements or b4. Thus, we can
+//              say that this time, the left subproblem f(1, 3) depends on either leftmost 1, or its adjacent elements
+//              or b4. Similarly, f(5, 6) also depends on either b4, or its adjacent elements or rightmost 1. Hence,
+//              this time both the subproblems f(1, 3) and f(5, 6) are independent, i.e., a subproblem do not depend on
+//              an element that is handled by some any other subproblem.
+//              FUN FACT: The code for both the approaches of recursion(top-down or bottom-up) will be exactly the
+//                        same. The difference is only in the way we intercept the meaning of the code.
+//
 //            I.  Base case: When 'i' crosses 'j', it means 'nums' array is exhausted, i.e., no more coins can be collected.
 //                           Thus, return 0.
-//            II. Recursive relation: 
+//            II. Recursive relation: For every index 'index' from 'i' to 'j', we can try bursting the balloon at 'index'.
+//                                    The coins collected by bursting the balloon at 'index' is:
+//                                    coins = nums[i - 1] * nums[index] * nums[j + 1]
+//                                    Now, the total coins collected by bursting the balloon at 'index' is:
+//                                    totalCoins = f(i, index - 1) + coins + f(index + 1, j)
+//                                    Now, we can try bursting every balloon from 'i' to 'j', and return the maximum coins
+//                                    collected by bursting the balloon at 'index'.
+
 
 #include <bits/stdc++.h>
 using namespace std;
