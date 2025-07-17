@@ -20,7 +20,18 @@
 // 1 <= n <= 300
 // 0 <= nums[i] <= 100
 
-// Algorithm: 
+// Algorithm: Again a simple partition DP problem. Follow the same set of rules of every partition dp problem:
+//            1. Start with the entire block / array.
+//            2. Try out all partitions(divide block/array into two groups), probably by running a loop.
+//            3. Return the best possible partition.
+//            We are asked to find the maximum coins by bursting balloons. The number of coins we get for bursting a
+//            balloon at 'i'th index is nums[i - 1] * nums[i] * nums[i + 1]. Thus, if we burst first or last balloons of
+//            the 'nums' array, we will have nobody to be multiplied with it on its left and right respectively. In this
+//            case, assume the left and right of the above scenarios be 1. Hence, add 1 as the first, and 1 as the last
+//            element of 'nums'. Thus, the number of elements in 'nums' becomes 'n + 2', where n = initial nums.size();
+//            and the operating range where we have to find our answer lies in the range of nums[1] to nums[n].
+//            Call a function f(i, j) which returns the maximum coins that can be collected by bursting balloons from
+//            index 'i' to index 'j' of 'nums' array.
 
 #include <bits/stdc++.h>
 using namespace std;

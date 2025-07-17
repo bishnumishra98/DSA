@@ -63,7 +63,7 @@
 //            in the 'cut' array which contains the data on which positions we have to cut the rod.
 //            Call the function f(i, j) which returns the minimum cost to cut the rod from position 'i' to 'j' of the
 //            'cuts' array. As first and last element of 'cuts' array are dummy data, and the actual data lies from index 1
-//            to index 'cuts.size() - 2', call the recursive function with initial arguments f(1, cuts.size() - 2).
+//            to index 'cuts.size()', call the recursive function with initial arguments f(1, cuts.size()).
 //            I.  Base case: When 'i' crosses 'j', it means 'cuts' array exhausted, i.e., no more cuts, i.e., no more cost.
 //                           Thus, return 0.
 //            II. Recursive relation: In the recursive call of f(i, j), we need to try out all cuts from index 'i' to
@@ -113,14 +113,15 @@ public:
     // T.C: Exponential
     // S.C: O(c);   where c = cuts.size()
     int minCost_recursion(int n, vector<int>& cuts) {
+        int c = cuts.size();
+
         sort(cuts.begin(), cuts.end());
 
         // Add boundaries
         cuts.insert(cuts.begin(), 0);
         cuts.push_back(n);
 
-        int c = cuts.size();
-        return solve(1, c - 2, cuts);
+        return solve(1, c, cuts);
     }
 
 // ----------------------------------------------------------------------------------------------------------
@@ -142,14 +143,15 @@ public:
     // T.C: O(c^2) for dp * O(c) for loop = O(c^3);   where c = cuts.size()
     // S.C: O(c^2) for dp + O(c) for recursive stack space = O(c^2)
     int minCost_memoization(int n, vector<int>& cuts) {
+        int c = cuts.size();
+
         sort(cuts.begin(), cuts.end());
 
         cuts.insert(cuts.begin(), 0);
         cuts.push_back(n);
 
-        int c = cuts.size();
         vector<vector<int>> dp(c + 1, vector<int>(c + 1, -1));
-        return solve(1, c - 2, cuts, dp);
+        return solve(1, c, cuts, dp);
     }
 
 // ----------------------------------------------------------------------------------------------------------
@@ -157,16 +159,16 @@ public:
     // T.C: O(c^2) for dp * O(c) for loop = O(c^3);   where c = cuts.size()
     // S.C: O(c^2) for dp
     int minCost_tabulation(int n, vector<int>& cuts) {
+        int c = cuts.size();
         sort(cuts.begin(), cuts.end());
 
         cuts.insert(cuts.begin(), 0);
         cuts.push_back(n);
 
-        int c = cuts.size();
         vector<vector<int>> dp(c + 2, vector<int>(c + 2, 0));
 
         for(int i = c; i >= 1; i--) {
-            for(int j = 1; j <= c - 2; j++) {
+            for(int j = 1; j <= c; j++) {
                 if(i > j) continue;
                 int mini = INT_MAX;
                 for(int index = i; index <= j; index++) {
@@ -177,7 +179,7 @@ public:
                 dp[i][j] = mini;
             }
         }
-        return dp[1][c - 2];
+        return dp[1][c];
     }
 };
 
