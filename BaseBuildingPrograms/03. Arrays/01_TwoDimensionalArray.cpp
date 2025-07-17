@@ -10,9 +10,9 @@ int main() {
         {1, 2, 3},
         {4, 5, 6}
     };
-    // 2D arrays are stored in memory like a 1D array only, elements are mapped using formula: c*i + j,
-    // where c=no.of columns in array, i & j are row & column indexes respectively. For example,
-    // the element '5' of 2D array will be stored at 3*1+1, i.e., 4th index in 1D array.
+    // 2D arrays are stored in memory like a 1D array only, elements are mapped using formula: (c * i) + j,
+    // where c = no.of columns in array, i & j are row & column indexes respectively. For example,
+    // the element '5' of 2D array will be stored at 3 * 1 + 1, i.e., 4th index in 1D array.
 
     // int row = sizeof(arr) / sizeof(int) / col;   // This is the 1st way to find no.of rows in a 2D array.
     int row = sizeof(arr) / sizeof(arr[0]);   // This is the 2nd way to find no.of rows in a 2D array. 
