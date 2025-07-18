@@ -76,12 +76,12 @@ public:
         if(dividend == INT_MIN && divisor == -1) return INT_MAX;
         if(dividend == INT_MIN && divisor == 1) return INT_MIN;
 
-        long long quotient = 0;
         int sign = ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) ? -1 : 1;
 
         // Convert both dividend and divisor to positive integers
         long long n = abs((long)dividend), d = abs((long)divisor);
 
+        long long quotient = 0;
         // Perform the division: repeatedly subtract multiples of divisor from dividend until dividend becomes less than divisor.
         while(n >= d) {
             int power = 0;
