@@ -11,41 +11,34 @@
 // Output : [7, 9, 10, 11, -5, -3, -4, -1]
 
 
+
+
 // Brute force algorithm: Just sort the array in reverse order -> sort(arr.begin(), arr.end(), greater<int>())
 //                        OR reverse(arr.begin(), arr.end()).
 
-// Algorithm: We will follow 2 pointer approach here. The algorithm is extremely easy.
-// 1. Create and point left and right pointers at index 0 and n - 1 respectively. The left pointer is supposed
-//    to point on positive numbers, while the right one is supposed to point on negative numbers.
-// 2. If the left pointer is already pointing on a positive number, move the pointer ahead towards right, to check
-//    whether the next element is also pointing on a positive number or not.
-//    Similarly, if the right pointer is already pointing on a negative number, move the pointer back towards left,
-//    to check whether the next element is also pointing on a ngative number or not.
-//    If the none of the above two cases are true, it means both pointers are pointing to wrong elements.
-//    Hence, swap the elements of left and right. Continue the process until left reaches right pointer.
+// Optimal algorithm: Almost same as 'BaseBuildingPrograms\03. Arrays\06_ShiftNegativeToLeft.cpp'.
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 using namespace std;
 
-class Solution {
-public:
-    // T.C: O(n)
-    // S.C: O(1)
-    void segregateElements(vector<int>& arr) {
-        int left = 0;
-        int right = arr.size() - 1;
+// T.C: O(n)
+// S.C: O(1)
+void segregateElements(vector<int>& arr) {
+    int i = 0, j = 0;
 
-        while(left < right) {
-            if(arr[left] > 0) left++;
-            else if(arr[right] < 0) right--;
-            else swap(arr[left], arr[right]);
+    while(i < arr.size()) {
+        if(arr[i] > 0) {
+            swap(arr[i], arr[j]);
+            j++;
         }
+        i++;
     }
-};
+}
 
 int main() {
     vector<int> arr = {1, -1, 3, 2, -7, -5, 11, 6};
-    Solution().segregateElements(arr);
+    segregateElements(arr);
     for(auto it: arr) cout << it << " ";
 
     return 0;
