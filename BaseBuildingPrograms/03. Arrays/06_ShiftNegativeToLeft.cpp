@@ -12,15 +12,17 @@ using namespace std;
 // T.C: O(n)
 // S.C: O(1)
 void shiftNegativeToLeft(int arr[], int n) {
-    int j = 0;   // all elements before j will be a negative number
+    // 'i' will be used to iterate each element, and 'j' will always point to first +ve number after chain of negative numbers,
+    // i.e., all elements before 'j'th index will be -ve.
+    int i = 0, j = 0;
 
-    // Iterate each element of arr, and if arr[i] is a negative number, swap it with arr[j], so that one more
-    // element gets added to the chain of negative numbers. And then move j ahead to update the new position of j.
-    for(int i = 0; i < n; i++) {
+    while(i < n) {
         if(arr[i] < 0) {
             swap(arr[i], arr[j]);
+            i++;
             j++;
         }
+        i++;
     }
 }
 
