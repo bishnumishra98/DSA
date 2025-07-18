@@ -26,7 +26,8 @@ public:
     // T.C: O(abs(dividend) / abs(divisor))
     // S.C: O(1)
     int divide_bruteforce(int dividend, int divisor) {
-        if(dividend == INT_MIN && divisor == -1) return INT_MAX;   // edge case
+        if(dividend == INT_MIN && divisor == -1) return INT_MAX;
+        if(dividend == INT_MIN && divisor == 1) return INT_MIN;
 
         int sign = ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) ? -1 : 1;
 
@@ -46,52 +47,54 @@ public:
         return quotient * sign;
     }
 
-// ---------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------
 
-    // Illustration:
-    // For any pair of dividend and divisor, first find the highest power of 2 upto which we can go. For example:
-    //    If dividend = 22, divisor = 3, we can go max till 2 to the power 3.
-    //    3 * 2^0 = 3   ->   dividend left = 22 - 3 = 19   ->   quotient = 1
-    //    3 * 2^1 = 6   ->   dividend left = 19 - 6 = 13   ->   quotient = 2
-    //    3 * 2^3 = 12  ->   dividend left = 13 - 12 = 1   ->   quotient = 4
-    //    Thus, we cannot go beyond divisor * 2 to the power 3. And total quotient = 1 + 2 + 4 = 7. Thus, 22 divided
-    //    by 3 gives quotient 7.
+    // Optimal algorithm:
+    // 1. Convert both dividend and divisor to their absolute values for easier handling. Keep track of the final sign based
+    //    on the original signs of dividend and divisor.
+    // 2. Initialize the quotient as 0.
+    // 3. Loop while the dividend is greater than or equal to the divisor:
+    //    i.   Find the maximum power such that divisor × 2^(power + 1) (i.e., d << (power + 1) is less than or equal to the
+    //         current dividend. This is the biggest chunk we can subtract from n.
+    //    ii.  Subtract divisor × 2^power from the dividend, i.e., (n -= d << power).
+    //    iii. Add 2^power (i.e., 1 << power) to the quotient.
+    // 4. Return the final result with correct sign.
 
-    // Algorithm:
-    // 1. Loop while dividend is greater than divisor, and subtract 'divisor * 2^highest_power', from the dividend.
-    //    And keep adding powers of 2 in a variable that will be quotient. Hence, in the next iteration, the dividend
-    //    gets reduced by 'divisor * 2^highest_power'. Note that 2^power can be wriiten as 1 << power.
-    // 2. At the end of loop, whatever is the quotient, return it with correct sign.
+    // ● Dry run for dividend = 43, divisor = 3
+    //
+    // | Step | n  | power | chunk (d * 2^power) | quotient    | n -= chunk   |
+    // | ---- | -- | ----- | ------------------- | ----------- | ------------ |
+    // | 1    | 43 | 3     | 24                  | 2^3 = 8     | 43 - 24 = 19 |
+    // | 2    | 19 | 2     | 12                  | 2^2 = 4     | 19 - 12 = 7  |
+    // | 3    | 7  | 1     | 6                   | 2^1 = 2     | 7 - 6 = 1    |
+    //                                         Total =   14
+    //                                  Thus, 43 / 3 =   14
 
     // T.C: O(logN);   where N = abs(dividend)
     // S.C: O(1)
     int divide(int dividend, int divisor) {
-        // Handle the case where dividend is equal to divisor
-        if(dividend == divisor) return 1;
+        if(dividend == INT_MIN && divisor == -1) return INT_MAX;
+        if(dividend == INT_MIN && divisor == 1) return INT_MIN;
 
-        long long int quotient = 0;
+        long long quotient = 0;
         int sign = ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) ? -1 : 1;
 
         // Convert both dividend and divisor to positive integers
-        long long int n = abs(dividend), d = abs(divisor);
+        long long n = abs((long)dividend), d = abs((long)divisor);
 
         // Perform the division: repeatedly subtract multiples of divisor from dividend until dividend becomes less than divisor.
         while(n >= d) {
             int power = 0;
 
             // Find the highest power of divisor upto which we can go
-            while(n >= (d << (power + 1))) power++;   // while(n >= (d * pow(2, power+1))) power++;
-
-            // Add 2^highest_power in quotient in cumulative way
-            quotient += 1 << power;   // quotient += pow(2, power);
+            while(n >= (d << (power + 1))) power++;   // while(n >= (d * pow(2, power + 1))) power++;
 
             // Reduce the dividend with 'd * 2^power'
             n -= d << power;   // n -= d * pow(2, power);
-        }
 
-        // Handle overflow case
-        if(quotient == (1 << 31) && sign == 1) return INT_MAX;   // if(quotient == pow(2, 31) && sign == 1) return INT_MAX;
-        if(quotient == (1 << 31) && sign == -1) return INT_MIN;   // if(quotient == pow(2, 31) && sign == -1) return INT_MIN;
+            // Add 2^highest_power in quotient in cumulative way
+            quotient += 1 << power;   // quotient += pow(2, power);
+        }
 
         // Return the result with the appropriate sign.
         return quotient * sign;
