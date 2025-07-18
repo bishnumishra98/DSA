@@ -23,7 +23,7 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(dividend)
+    // T.C: O(abs(dividend) / abs(divisor))
     // S.C: O(1)
     int divide_bruteforce(int dividend, int divisor) {
         if(dividend == INT_MIN && divisor == -1) return INT_MAX;   // edge case
@@ -63,11 +63,11 @@ public:
     //    gets reduced by 'divisor * 2^highest_power'. Note that 2^power can be wriiten as 1 << power.
     // 2. At the end of loop, whatever is the quotient, return it with correct sign.
 
-    // T.C: O((logN)^2)
+    // T.C: O(logN);   where N = abs(dividend)
     // S.C: O(1)
     int divide(int dividend, int divisor) {
         // Handle the case where dividend is equal to divisor
-        if (dividend == divisor) return 1;
+        if(dividend == divisor) return 1;
 
         long long int quotient = 0;
         int sign = ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) ? -1 : 1;
