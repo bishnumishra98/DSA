@@ -12,8 +12,8 @@ using namespace std;
 // T.C: O(n)
 // S.C: O(1)
 void shiftNegativeToLeft(int arr[], int n) {
-    // 'i' will be used to iterate each element, and 'j' will always point to first +ve number after chain of negative numbers,
-    // i.e., all elements before 'j'th index will be -ve.
+    // 'i' will be used to iterate each element, and 'j' will always try to come to index of first +ve number after
+    // chain of negative numbers, i.e., all elements before 'j'th index will be -ve.
     int i = 0, j = 0;
 
     while(i < n) {
