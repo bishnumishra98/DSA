@@ -38,7 +38,7 @@ void reverseArray_twoPointer(int arr[], int n) {
     int* start = arr;   // arr refers to base address of array, i.e., address of element at 0th index of array
     int* end = arr + n - 1;   // 'arr + n - 1' refers to address of last element, i.e., address of element at (n-1)th index of array
 
-    while (start < end) {
+    while(start < end) {
         swap(*start, *end);   // Swap elements pointed by start and end.
                              // swap() has a T.C and S.C of O(1) respectively.
         start++;
