@@ -14,10 +14,10 @@ int main() {
 
     int row = sizeof(arr) / sizeof(arr[0]);
 
-    for(int i = 0; i < col; i++) {
+    for(int j = 0; j < col; j++) {
         int sum = 0;
-        for(int j = 0; j < row; j++) {
-            sum += arr[j][i];
+        for(int i = 0; i < row; i++) {
+            sum += arr[i][j];
         }
         cout << sum << endl;
     }
