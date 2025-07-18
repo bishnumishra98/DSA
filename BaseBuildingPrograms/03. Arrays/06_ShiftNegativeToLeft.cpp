@@ -19,7 +19,6 @@ void shiftNegativeToLeft(int arr[], int n) {
     while(i < n) {
         if(arr[i] < 0) {
             swap(arr[i], arr[j]);
-            i++;
             j++;
         }
         i++;
