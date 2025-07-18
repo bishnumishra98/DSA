@@ -15,7 +15,7 @@
 //                        OR reverse(arr.begin(), arr.end()).
 
 // Algorithm: We will follow 2 pointer approach here. The algorithm is extremely easy.
-// 1. Create and point left and right pointers at index 0 and n-1 respectively. The left pointer is supposed
+// 1. Create and point left and right pointers at index 0 and n - 1 respectively. The left pointer is supposed
 //    to point on positive numbers, while the right one is supposed to point on negative numbers.
 // 2. If the left pointer is already pointing on a positive number, move the pointer ahead towards right, to check
 //    whether the next element is also pointing on a positive number or not.
