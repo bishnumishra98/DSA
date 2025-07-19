@@ -108,21 +108,19 @@ public:
     // T.C: O(n^2)
     // S.C: O(n)
     vector<vector<int>> threeSum(vector<int>& nums) {
-        if(nums.size() < 3) return {};   // edge case
         sort(nums.begin(), nums.end());
         vector<vector<int>> ans;
 
-        for(int i = 0; i < nums.size() - 2; i++) {
-            // while(i > 0 && nums[i] == nums[i - 1] && i < nums.size() - 1) i++;
-            // The above line can be simply written like:
-            if(i > 0 && nums[i] == nums[i - 1]) continue;
+        int i = 0;
+        while(i < nums.size() - 2) {
+            while(i > 0 && nums[i] == nums[i - 1] && i < nums.size() - 2) i++;
             int j = i + 1;
             int k = nums.size() - 1;
 
             while(j < k) {
                 int sum = nums[i] + nums[j] + nums[k];
-                if(sum < 0) j++;
-                else if(sum > 0) k--;
+                if(sum > 0) k--;
+                else if(sum < 0) j++;
                 else {
                     vector<int> temp = {nums[i], nums[j], nums[k]};
                     ans.push_back(temp);
@@ -132,6 +130,8 @@ public:
                     while(j < k && nums[k] == nums[k + 1]) k--;
                 }
             }
+            
+            i++;
         }
 
         return ans;
