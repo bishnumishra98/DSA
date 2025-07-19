@@ -12,6 +12,8 @@
 // Output: -1
 // Explanation: All elements appear only once so answer is -1.
 
+// Problem link: https://www.geeksforgeeks.org/problems/first-repeating-element4018/1
+
 // Brute force algorithm: Very easy, its just inspired by 'FindTheDuplicateNumber.cpp'.
 // Optimal algorithm: Just store the frequencies of all elements in a map. Then return 
 //                    the index of element of map having frequency more than 1.
@@ -24,20 +26,20 @@ public:
     // T.C: O(n^2)
     // S.C: O(n)
     int firstRepeated_bruteforce(vector<int> &arr) {
-        unordered_map<int, int> map;
+        unordered_set<int> st;
         vector<int> duplicates;
         
         // Collect all duplicate elements in 'duplicates' vector.
         for(int i = 0; i < arr.size(); i++) {
-            if(map.find(arr[i]) != map.end()) duplicates.push_back(arr[i]);
-            else map[arr[i]] = i;
+            if(st.find(arr[i]) != st.end()) duplicates.push_back(arr[i]);
+            st.insert(arr[i]);
         }
         
         // Iterate the whole array, and check if any of the elements from the array matches any element from 'duplicates' or not.
         // If any match found, first occurrence of that duplicate element is found, hence return its index(index starts from 1).
         for(int i = 0; i < arr.size(); i++) {
             for(int j = 0; j < duplicates.size(); j++) {
-                if(arr[i] == duplicates[j]) return i+1;   // considering 1 based indexing
+                if(arr[i] == duplicates[j]) return i + 1;   // considering 1 based indexing
             }
         }
         
@@ -58,7 +60,7 @@ public:
 
         // Return the first element that repeats, i.e., element whose frequency is more than 1.
         for(int i = 0; i < arr.size(); i++) {
-            if(map[arr[i]] > 1) return i+1;   // considering 1 based indexing
+            if(map[arr[i]] > 1) return i + 1;   // considering 1 based indexing
         }
 
         return -1;   // if no duplicates found
