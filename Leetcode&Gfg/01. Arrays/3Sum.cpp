@@ -115,7 +115,7 @@ public:
         for(int i = 0; i < nums.size() - 2; i++) {
             // while(i > 0 && nums[i] == nums[i - 1] && i < nums.size() - 1) i++;
             // The above line can be simply written like:
-            if(i > 0 && nums[i] == nums[i-1]) continue;
+            if(i > 0 && nums[i] == nums[i - 1]) continue;
             int j = i + 1;
             int k = nums.size() - 1;
 
