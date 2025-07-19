@@ -31,6 +31,7 @@ public:
     //    Case 3: arr[low] is more distant to x than arr[high]:
     //            If 'x - arr[low] > arr[high] - x', move low towards right to find a shorter distance of arr[low] from x.
     //    Continue the process until no.of elements left between low and high are exactly k, i.e., while(high - low >= k) {}.
+    //    Now all the elements from 'low' to 'high' represents the k closest element to x.
 
     // T.C: O(n - k);   where n = arr.size()
     // S.C: O(k)
