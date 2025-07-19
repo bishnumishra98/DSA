@@ -33,17 +33,7 @@
 //    calculate sum of all elements towards right of i and store it in rightSum. If at any index, its leftSum and rightSum
 //    is equal, return that index.
 
-// Better algorithm:
-// 1. Initialize two vectors leftSum and rightSum of size n, initialized with 0.
-// 2. Build those arrays in the following way:
-//    -> All elements of leftSum must indicate the sum of all elements towards its left.
-//       Thus, its obvious that leftSum[0] would be 0.
-//    -> All elements of rightSum must indicate the sum of all elements towards its right.
-//       Thus, its obvious that rightSum[n - 1] would be 0.
-// 3. Iterate from index 0 to n - 1, and compare elements of leftSum and rightSum with each other.
-//    If at any index, element of leftSum is equal to element of rightSum, return that index.
-
-// Best algorithm:
+// Optimal algorithm:
 // 1. Calculate the total sum of all elements in the array.
 // 2. Initialize a variable left with 0. It will store sum of all elements towards left of 'i'.
 // 3. Iterate through the array, and for each index 'i', check if 'i' is the pivot index or not:
@@ -83,30 +73,6 @@ public:
 // ----------------------------------------------------------------------------------------------------
 
     // T.C: O(n)
-    // S.C: O(n)
-    int pivotIndex_better(vector<int>& nums) {
-        int n = nums.size();      
-        vector<int> leftSum(n, 0);
-        vector <int> rightSum(n, 0);
-
-        for(int i = 1; i < n; i++) {
-            leftSum[i] = nums[i - 1] + leftSum[i - 1];   // leftSum[i] has sum of all elements towards left of i
-        }
-
-        for(int i = n - 2; i >= 0; i--) {
-            rightSum[i] = nums[i + 1] + rightSum[i + 1];   // rightSum[i] has sum of all elements towards right of i
-        }
-
-        for(int i = 0; i < n; i++) {
-            if(leftSum[i] == rightSum[i]) return i;
-        }
-
-        return -1;
-    }
-
-// ----------------------------------------------------------------------------------------------------
-
-    // T.C: O(n)
     // S.C: O(1)
     int pivotIndex(vector<int>& nums) {
         int total = accumulate(nums.begin(), nums.end(), 0);   // sum of all elements of 'nums'
@@ -124,7 +90,8 @@ public:
 
 int main() {
     vector<int> nums = {1, 7, 3, 6, 5, 6};
-    cout << Solution().pivotIndex_bruteforce(nums) << endl << Solution().pivotIndex(nums);
+    cout << Solution().pivotIndex_bruteforce(nums) << endl;
+    cout << Solution().pivotIndex(nums);
 
     return 0;
 }
