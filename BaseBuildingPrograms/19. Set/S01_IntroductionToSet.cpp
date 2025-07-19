@@ -16,12 +16,11 @@
 // Insertion:    |    O(logn)    |    Avg: O(1), worst: O(n)
 // Deletion:     |    O(logn)    |    Avg: O(1), worst: O(n)
 // Search:       |    O(logn)    |    Avg: O(1), worst: O(n)
-// Traversal:    |    O(n)       |    O(n+b);   b = no.of buckets
+// Traversal:    |    O(n)       |    O(n + b);   b = no.of buckets
 // Extra Info: A bucket is a container within a hash table that stores elements that hash to the same value. When
 // an element is inserted into the hash table, its hash value is computed, and it is placed into the corresponding bucket.
 
 #include <iostream>
-#include <cstddef>   // For size_t
 #include <set>   // for set
 #include <unordered_set>   // for unordered_set
 using namespace std;
@@ -31,7 +30,7 @@ int main() {
     // 1) Ordered set
     // i) Elements are stored in ascending order by default
     set<int> s = {50, 20, 10, 30, 40, 20, 40, 50};
-    for (const int& elem : s) {
+    for(const int& elem : s) {
         cout << elem << " ";   // o/p: 10 20 30 40 50
     }
 
@@ -39,8 +38,8 @@ int main() {
 
     // ii) Elements are stored in descending order by providing a comparator 'greater<int>'
     set<int, greater<int>> s_reversed = {50, 20, 10, 30, 40, 20, 40, 50};
-    for (const int& elem : s_reversed) {
-        cout << elem << " ";   // o/p: 10 20 30 40 50
+    for(const int& elem : s_reversed) {
+        cout << elem << " ";   // o/p: 50 40 30 20 10
     }
 
     cout << endl;
@@ -49,7 +48,7 @@ int main() {
 
     // 2) Unordered set: Elements are stored in random order
     unordered_set<int> us = {50, 20, 10, 30, 40, 20, 40, 50};
-    for (const int& elem : us) {
+    for(const int& elem : us) {
         cout << elem << " ";   // o/p: 40 30 10 20 50
     }
 
