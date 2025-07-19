@@ -12,6 +12,8 @@
 // Output : 9763 
 // Explanation : sum of 9549 and 214 is 9763.
 
+// Problem link: https://www.geeksforgeeks.org/problems/add-two-numbers-represented-by-two-arrays2408/1
+
 // Algortihm: Algorithm is very practical.
 // 1. Initialize a 'carry' variable with 0, and mark 2 pointers i and j, on the last element of arr1 and arr2 respectively,
 //    as addition always starts from unit's digit. Also create a blank string variable 'ans' to build and store the answer.

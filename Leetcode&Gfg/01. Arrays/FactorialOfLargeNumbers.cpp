@@ -15,6 +15,8 @@
 // You don't need to read input or print anything. Complete the function factorial() that takes integer N as input parameter
 // and returns a list of integers denoting the digits that make up the factorial of N.
 
+// Problem link: https://www.geeksforgeeks.org/problems/factorials-of-large-numbers2508/1
+
 // Algorithm: Understand this problem first to get the intuition 'AddTwoNumbersRepresentedByTwoArrays.cpp'.
 // The algorithm for factorial i.e., multiplication will be similar to that of addition.
 // We will build answer in a vector in reverse order. Thus, reverse the vector and return the answer.
