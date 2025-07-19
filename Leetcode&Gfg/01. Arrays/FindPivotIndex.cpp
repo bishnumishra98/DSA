@@ -33,16 +33,27 @@
 //    calculate sum of all elements towards right of i and store it in rightSum. If at any index, its leftSum and rightSum
 //    is equal, return that index.
 
-// Optimal algorithm:
+// Better algorithm:
 // 1. Initialize two vectors leftSum and rightSum of size n, initialized with 0.
 // 2. Build those arrays in the following way:
 //    -> All elements of leftSum must indicate the sum of all elements towards its left.
 //       Thus, its obvious that leftSum[0] would be 0.
 //    -> All elements of rightSum must indicate the sum of all elements towards its right.
-//       Thus, its obvious that rightSum[n-1] would be 0.
-// 3. Iterate from index 0 to n-1, and compare elements of leftSum and rightSum with each other.
+//       Thus, its obvious that rightSum[n - 1] would be 0.
+// 3. Iterate from index 0 to n - 1, and compare elements of leftSum and rightSum with each other.
 //    If at any index, element of leftSum is equal to element of rightSum, return that index.
 
+// Best algorithm:
+// 1. Calculate the total sum of all elements in the array.
+// 2. Initialize a variable left with 0. It will store sum of all elements towards left of 'i'.
+// 3. Iterate through the array, and for each index 'i', check if 'i' is the pivot index or not:
+//    - If 'i' is the pivot index, then sum of elements towards left of 'i' should also be equal to right of it. Hence,
+//      if we add both the sides and the pivot element, we should get the total, i.e., if(total == nums[i] + left + right),
+//      then pivot element is found, thus return it's index 'i'. And as we know that from the pivot index, left and right are
+//      equal, thus the above condition can be simplified to if(total == nums[i] + (2 * left)).
+//    - If 'i' is not the pivot index, then total will not be equal to nums[i] + (2 * left). Hence, in this case simply
+//      just add nums[i] to left.
+// 4. If no such index is found, return -1.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -69,23 +80,41 @@ public:
         return -1;
     }
 
+// ----------------------------------------------------------------------------------------------------
+
     // T.C: O(n)
     // S.C: O(n)
-    int pivotIndex(vector<int>& nums) {
+    int pivotIndex_better(vector<int>& nums) {
         int n = nums.size();      
         vector<int> leftSum(n, 0);
         vector <int> rightSum(n, 0);
 
         for(int i = 1; i < n; i++) {
-            leftSum[i] = nums[i-1] + leftSum[i-1];   // leftSum[i] has sum of all elements towards left of i
+            leftSum[i] = nums[i - 1] + leftSum[i - 1];   // leftSum[i] has sum of all elements towards left of i
         }
 
         for(int i = n - 2; i >= 0; i--) {
-            rightSum[i] = nums[i+1] + rightSum[i+1];   // rightSum[i] has sum of all elements towards right of i
+            rightSum[i] = nums[i + 1] + rightSum[i + 1];   // rightSum[i] has sum of all elements towards right of i
         }
 
         for(int i = 0; i < n; i++) {
             if(leftSum[i] == rightSum[i]) return i;
+        }
+
+        return -1;
+    }
+
+// ----------------------------------------------------------------------------------------------------
+
+    // T.C: O(n)
+    // S.C: O(1)
+    int pivotIndex(vector<int>& nums) {
+        int total = accumulate(nums.begin(), nums.end(), 0);   // sum of all elements of 'nums'
+
+        int left = 0;
+        for(int i = 0; i < nums.size(); i++) {
+            if(total == nums[i] + (2 * left)) return i;
+            left += nums[i];
         }
 
         return -1;
