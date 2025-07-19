@@ -25,8 +25,8 @@ public:
     int findDuplicate_bruteforce(vector<int>& nums) {
         sort(nums.begin(), nums.end());
 
-        for(int i = 0; i < nums.size()-1; i++) {
-            if(nums[i] == nums[i+1]) return nums[i];
+        for(int i = 0; i < nums.size() - 1; i++) {
+            if(nums[i] == nums[i + 1]) return nums[i];
         }
 
         return -1;   // if no duplicates found
@@ -34,7 +34,7 @@ public:
 
     // T.C: O(n)
     // S.C: O(n)
-    int findDuplicate(vector<int>& nums) {
+    int findDuplicate_way1(vector<int>& nums) {
         unordered_map<int, int> map;
 
         // If an entry for nums[i] is already present in the map, then return nums[i]. Else, add nums[i] to the map.
@@ -46,12 +46,28 @@ public:
 
         return -1;   // if no duplicates found
     }
+
+    // THE SAME CAN BE DONE USING A SET ALSO ----
+
+    // T.C: O(n)
+    // S.C: O(n)
+    int findDuplicate_way2(vector<int>& nums) {
+        unordered_set<int> st;
+
+        for(int i = 0; i < nums.size(); i++) {
+            if(st.find(nums[i]) != st.end()) return nums[i];
+            st.insert(nums[i]);
+        }
+
+        return -1;
+    }
 };
 
 int main() {
     vector<int> nums = {1, 3, 4, 2, 2};
     cout << Solution().findDuplicate_bruteforce(nums) << endl;
-    cout << Solution().findDuplicate(nums);
+    cout << Solution().findDuplicate_way1(nums) << endl;
+    cout << Solution().findDuplicate_way2(nums);
 
     return 0;
 }
