@@ -10,7 +10,7 @@
 #include <vector>
 using namespace std;
 
-// T.C: O(n*m);   where n = no.of rows and m = no. of cols in array respectively
+// T.C: O(n * m);   where n = no.of rows and m = no. of cols in array respectively
 // S.C: O(n)
 vector<int> wave(vector<vector<int>> arr) {
     int rows = arr.size();
