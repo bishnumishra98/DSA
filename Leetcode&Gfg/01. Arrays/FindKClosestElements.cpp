@@ -32,7 +32,7 @@ public:
     //            If 'x - arr[low] > arr[high] - x', move low towards right to find a shorter distance of arr[low] from x.
     //    Continue the process until no.of elements left between low and high are exactly k, i.e., while(high - low >= k) {}.
 
-    // T.C: O(n - k)
+    // T.C: O(n - k);   where n = arr.size()
     // S.C: O(k)
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
         int low = 0, high = arr.size() - 1;
