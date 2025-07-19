@@ -26,7 +26,7 @@ public:
         
         // Build a mask with all bits as 1. Ex: For num = 5, binary equivalent is 101. Thus, the mask must be: 111
         while(temp) {
-            mask = (mask << 1) | 1; 
+            mask = (mask << 1) | 1;
             temp = temp >> 1;
         }
         
