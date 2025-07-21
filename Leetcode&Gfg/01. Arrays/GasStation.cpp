@@ -36,12 +36,13 @@
 //    -> start: The starting index of the gas station. Every time we start from a new
 //              gas station, currentFuelBalance will reset back to 0.
 //    -> totalFuelBalance(tFb): Tracks the overall fuel balance throughout the entire trip.
-//       In simple terms, tFB = sum of all gas elements - sum of all cost elements. But we
-//       will be calculating cumulative tFB throughout each iteration, so our formula will be
-//       tFB = tFB + gas[i] - cost[i]. If tFB >= 0 at the end of the loop, then only the trip
-//       is possible for the given pair of gas[] and cost[] arrays. Thus, tFB only tells
-//       whether trip is possible for the given input array sets or not. To find the index from
-//       where trip should start to get completed, we have to take help of 'cFB' and 'start'.
+//       In simple terms, tFB = sum of all gas elements - sum of all cost elements. We can
+//       calculate tFB in any of the ways: with an isolated loop or accumulate() function,
+//       or even cumulatively in each iteration, when we will be calculating 'cFB'.
+//       If tFB >= 0 at the end of the loop, then only the trip is possible for the given pair of
+//       gas[] and cost[] arrays. Thus, tFB only tells whether trip is possible for the given input
+//       array sets or not. To find the index from where trip should start to get completed, we
+//       have to take help of 'cFB' and 'start'.
 //    -> currentFuelBalance(cFB): Tracks the fuel balance at the current station. The trip
 //       can only start if cFB is found positive for any station. If cFB < 0, for ith station,
 //       then we have to start from the next station, i.e., 'start' will point to
