@@ -28,7 +28,7 @@ using namespace std;
 class Solution {
 public:
     // T.C: O(n^2)
-    // S.C: O(m);   where m is the no.of unique pairs. In the worst case m = n^2.
+    // S.C: O(m);   where m is the no.of unique pairs. In the worst case m = n - 1.
     int findPairs_bruteforce(vector<int>& nums, int k) {
         set<vector<int>> st;
 
