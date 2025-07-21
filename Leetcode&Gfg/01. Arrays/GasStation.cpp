@@ -45,24 +45,24 @@
 //    -> currentFuelBalance(cFB): Tracks the fuel balance at the current station. The trip
 //       can only start if cFB is found positive for any station. If cFB < 0, for ith station,
 //       then we have to start from the next station, i.e., 'start' will point to
-//       (i+1)th station and 'cFB' shall be reset back to 0 for that station.
+//       (i + 1)th station and 'cFB' shall be reset back to 0 for that station.
 
 //       EXTRA NOTE :-
 //       Q) Why not we check 'start' of trip from each gas station, i.e., start = 0, 1, 2, ...
-//          Why 'start' directly jumps to 'i+1' if cFB is negative for ith station ?
-//       A) We have to agree that if we reach from an index(lets say i=0) to an
-//          index(lets say i=3), it means fuel was enough to reach from station i=0 to i=3,
-//          it means cFB for i=0,1,2 was definitely >= 0.
+//          Why 'start' directly jumps to 'i + 1' if cFB is negative for ith station ?
+//       A) We have to agree that if we reach from an index(lets say i = 0) to an
+//          index(lets say i = 3), it means fuel was enough to reach from station i = 0 to i = 3,
+//          it means cFB for i= 0, 1, 2 was definitely >= 0.
 //          Now lets say, we are still not able to reach station 4, it means total gas we have
 //          accumulated uptil station 3 is not enough for us to reach station 4. It can only
-//          happen if gas[3] - cost[3] is such a huge negative, that it made cFB for i=3 less
+//          happen if gas[3] - cost[3] is such a huge negative, that it made cFB for i = 3 less
 //          less than 0.
 //          Thus the thing to observe here is, if sum of 3 +ve and 1 -ve number is not >= 0,
 //          how will the sum of 2 +ve and 1 -ve number be ever >= 0 ? Thus, without wasting
-//          time by checking from each station, we directly jump to i+1th station, reset back
-//          cFB to 0, and check if cFB is >=0 for this new station or not.
+//          time by checking from each station, we directly jump to (i + 1)th station, reset back
+//          cFB to 0, and check if cFB is >= 0 for this new station or not.
 
-// 2) At the end of loop that runs from i=0 to i=gas.size(), if tFB >= 0, return the index of
+// 2) At the end of loop that runs from i = 0 to i = gas.size(), if tFB >= 0, return the index of
 //    gas station marked by 'start'; or else if trip was not possible, return -1.
 //    In this way, we go to a station only once and successfully find out the station from
 //    which the trip could be completed.
