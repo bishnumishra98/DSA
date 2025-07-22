@@ -77,7 +77,6 @@ public:
             else {   // if(diff == k)
                 vector<int> temp = {nums[i], nums[j]};
                 sort(temp.begin(), temp.end());
-                cout << "Insertion happening in set at, i: " << i << ", j: " << j << endl;
                 st.insert(temp);
                 i++; j++;
             }
