@@ -35,11 +35,11 @@ public:
 
         for(int i = 0; i < n; i++) {
             pds += mat[i][i];
-            sds += mat[i][n-i-1];
+            sds += mat[i][n - i - 1];
         }
 
-        // For n*n matrix, if n is an odd number, we need to subtract the middle element as it has been counted twice.
-        return (n & 1) ? pds + sds - mat[n/2][n/2] : pds + sds;
+        // For n * n matrix, if n is an odd number, we need to subtract the middle element as it has been counted twice.
+        return (n & 1) ? pds + sds - mat[n / 2][n / 2] : pds + sds;
     }
 };
 
