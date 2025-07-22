@@ -31,12 +31,12 @@ public:
 
         // Store positive numbers first
         for(int i = 0; i < arr.size(); i++) {
-            if (arr[i] >= 0) temp.push_back(arr[i]);   // 0 is also treated as a positive number
+            if(arr[i] >= 0) temp.push_back(arr[i]);   // 0 is also treated as a positive number
         }
 
         // Store negative numbers next
         for(int i = 0; i < arr.size(); i++) {
-            if (arr[i] < 0) temp.push_back(arr[i]);
+            if(arr[i] < 0) temp.push_back(arr[i]);
         }
 
         // Copy the elements of 'temp' back into the original array
