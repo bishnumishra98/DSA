@@ -61,24 +61,27 @@ public:
     //    Edge case: It is given in the problem not to consider an element minus itself, if k = 0, i.e., i != j.
     //               So it may happen that k is given 0, and i and j both somehow came on the same element. In this
     //               case, increment j before going to next iteartion, so that i != j holds true always.
+
     // T.C: O(nlogn) + O(n) = O(nlogn)
-    // S.C: O(m);   where m is the no.of unique pairs. In the worst case m = n^2.
+    // S.C: O(m);   where m is the no.of unique pairs. In the worst case m = n - 1.
     int findPairs(vector<int>& nums, int k) {
         sort(nums.begin(), nums.end());
         set<vector<int>> st;
 
         int i = 0, j = 1;
-        while (j < nums.size()) {
+        while(j < nums.size()) {
+            
             int diff = nums[j] - nums[i];
             if(diff > k) i++;
             else if(diff < k) j++;
             else {   // if(diff == k)
                 vector<int> temp = {nums[i], nums[j]};
                 sort(temp.begin(), temp.end());
+                cout << "Insertion happening in set at, i: " << i << ", j: " << j << endl;
                 st.insert(temp);
                 i++; j++;
             }
-            if(i == j) j++;   // edge case
+            if(i == j) j++;   // VERY IMPORTANT EGDE CASE
         }
 
         return st.size();
@@ -88,10 +91,10 @@ public:
 
 int main() {
     vector<int> nums = {3, 1, 4, 1, 5};
-    int k = 2;
+    int k = 0;
 
-    cout << Solution().findPairs_bruteforce(nums, k) << endl;
-    cout << Solution().findPairs(nums, k);
+    // cout << Solution().findPairs_bruteforce(nums, k) << endl;
+    cout << endl << "ans: " << Solution().findPairs(nums, k);
 
     return 0;
 }
