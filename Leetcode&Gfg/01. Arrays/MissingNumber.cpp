@@ -19,8 +19,7 @@
 // Explanation: n = 9 since there are 9 numbers, so all numbers are in the range [0,9]. 8 is the missing number
 // in the range since it does not appear in nums.
 
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 // Mathematical approach
@@ -33,9 +32,9 @@ int missingNumber_technique1(vector<int>& nums) {
         sum += nums[i];
     }
 
-    int total_sum = (n*(n+1))/2;
+    int total_sum = (n * (n + 1)) / 2;
 
-    return total_sum - sum;     
+    return total_sum - sum;
 }
 
 // XOR approach
@@ -45,13 +44,13 @@ int missingNumber_technique2(vector<int>& nums) {
     int missingNumber = 0;
 
     // XOR all numbers from 0 to n
-    for (int i = 0; i <= nums.size(); i++) {
+    for(int i = 0; i <= nums.size(); i++) {
         missingNumber ^= i;      
     }
     // missingNumber = 0 ^ 1 ^ 2 ^ 3
 
     // XOR all numbers in the array
-    for (int i = 0; i < nums.size(); i++) {
+    for(int i = 0; i < nums.size(); i++) {
         missingNumber ^= nums[i];
     }
     // missingNumber = 0 ^ 1 ^ 2 ^ 3 ^ 3 ^ 0 ^ 1 = 2
@@ -63,7 +62,7 @@ int missingNumber_technique2(vector<int>& nums) {
 int main() {
     vector <int> v = {3, 0, 1};
 
-    // cout << missingNumber_technique1(v);
+    cout << missingNumber_technique1(v) << endl;
     cout << missingNumber_technique2(v);
 
     return 0;
