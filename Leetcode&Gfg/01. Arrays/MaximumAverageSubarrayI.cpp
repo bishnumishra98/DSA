@@ -46,14 +46,11 @@ public:
     // S.C: O(1)
     double findMaxAverage(vector<int>& nums, int k) {
         int sum = 0;
-        int maxSum = INT_MIN;
 
         // Calculate sum of first k elements
-        for(int i = 0; i < k; i++) {
-            sum = sum + nums[i];
-        }
-        maxSum = max(maxSum, sum);   // update maxSum
-
+        for(int i = 0; i < k; i++) sum = sum + nums[i];
+        
+        int maxSum = sum;
         // Now slide the window: subtract and add one element in the window at a time; calculate sum and update maxSum if needed.
         int i = 0, j = k;
         while(j < nums.size()) {
