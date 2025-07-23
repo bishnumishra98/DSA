@@ -70,7 +70,6 @@ public:
 
         int i = 0, j = 1;
         while(j < nums.size()) {
-            
             int diff = nums[j] - nums[i];
             if(diff > k) i++;
             else if(diff < k) j++;

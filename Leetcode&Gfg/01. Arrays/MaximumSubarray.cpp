@@ -20,6 +20,7 @@
 //            For the arr: [1, 2, 3, 4, 5, 6]
 //            Subarrays can be: [1] or [2] or [1, 2] or [1, 2, 3] or [2, 3] or [4, 5, 6], etc.
 //            But [1, 3, 4] or [1, 3] or [2, 3, 5] cannot be called a subarray.
+//
 
 #include <bits/stdc++.h>
 using namespace std;

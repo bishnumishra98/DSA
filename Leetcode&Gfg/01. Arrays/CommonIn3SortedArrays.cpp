@@ -57,7 +57,7 @@ public:
     //         the only case it indicates is that arr3[k] is smallest amongst the 3. Hence, move ahead k.
     
 
-    // T.C: O(n1+n2+n3);   where n1, n2 and n3 are size of arr1, arr2 and arr3 respectively.
+    // T.C: O(n1 + n2 + n3);   where n1, n2 and n3 are size of arr1, arr2 and arr3 respectively.
     // S.C: O(2n)
     vector<int> commonElements_timeOptimised(vector<int> &arr1, vector<int> &arr2, vector<int> &arr3) {
         set<int> st;   // set data structure is used to ensure we don't store any duplicate common elements
@@ -82,7 +82,7 @@ public:
 // -----------------------------------------------------------------------------------------------------------------
 
     // We can further space optimise it by discarding set. This is the best possible solution.
-    // T.C: O(n1+n2+n3);   where n1, n2 and n3 are size of arr1, arr2 and arr3 respectively.
+    // T.C: O(n1 + n2 + n3);   where n1, n2 and n3 are size of arr1, arr2 and arr3 respectively.
     // S.C: O(n)
     vector<int> commonElements(vector<int> &arr1, vector<int> &arr2, vector<int> &arr3) {
         vector<int> commonElements;
