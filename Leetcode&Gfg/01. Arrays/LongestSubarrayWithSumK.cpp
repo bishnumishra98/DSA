@@ -67,11 +67,12 @@
 // equal to k, then a subarray is found of sum k for the first time. Store its length. But even if such a subarray
 // is not found, do not worry, continue the iterations. When the prefix sums at indexes starts exceeding k, we will
 // take advantage of reverse engineering to find the new subarrays of sum k. For reverse engineering, it is required
-// to parallelly keep a track of (sum - k) at all indexes in a variable say 'rem'. At any index, if 'rem'
-// is already present as an entry in the map, it means already a subarray existed till the index that corresponds
+// to parallelly keep a track of (sum - k) at all indexes in a variable say 'rem'. At any index, if 'rem' is already
+// present as an entry in the map, it means already a subarray with sum k existed till the index that corresponds
 // to that entry in the map. So if (sum - k) is present at some index, and sum of elements till the current index
-// is 'sum', a subarray with sum k is bound to be present till the current index. The length of this subarray will
-// be prefixSum[sum] - prefixSum[rem].
+// is 'sum', a subarray with sum k is bound to be present till the current index. The subarray with sum k exists
+// from the index 'prefixSum[rem] + 1' to 'prefixSum[sum]', and the length of this subarray will be
+// 'prefixSum[sum] - prefixSum[rem]'.
 //
 // Let's look at an illustration to understand the algorithm:
 // arr = [1, 3, 1, 1, 1, 1, 1, 5, 4, 2], k = 5
@@ -235,9 +236,41 @@ public:
     
 // ● Follow up question: If the array contains only positive integers, can you further optimize it ?
 //   Answer: Yes, the problem can be further optimised if it contains only positive integers.
-//   Algorithm for only positive integers:
-//   
+//   Algorithm: Extremely simple 2 pointer approach.
+//   1. Initialize 2 pointers 'i' and 'j' at index 0 of the given 'arr'. The idea is to keep a track of sum of
+//      elements from 'j'th index to 'i + 1'th index.
+//   2. Now start moving 'j' and parallelly calculate prefix sums till each indexes of 'j'. If sum till 'j'th
+//      index happen to be equal to k, the store the length of the subarray in 'maxLength', maxLength = j - i + 1.
+//      As soon as the sum exceeds k, move ahead the 'i' pointer so that the sum shrinks, i.e., we will trim the
+//      array from 0th index to 'i'th index so that the sum of elements in the range of 'j' to 'i + 1' decreases.
+//      Move ahead 'i' until the sum comes within the range of k, i.e., until sum <= k. Then again move 'j' ahead,
+//      and if the sum in the range of 'j'th index to 'i + 1'th index happen to be equal to k, again a subarray
+//      with sum k is found. Update the 'maxLength' if a greater length of subarray is found.
+//      In this way, keep iterating until 'j' crosses the index of the last element of the given 'arr'.
+//      Note: To calculate sum of elements from 'j'th index to 'i + 1'th index, don't run a loop unnecessarily.
+//            Instead, whenever you move ahead 'j', add arr[j] to the sum; whenever you move ahead 'i', subtract
+//            arr[i] from sum, i.e., apply sliding window technique.  
 
+    // T.C: O(2n)
+    // S.C: O(1)
+    int longestSubarray_positives(vector<int>& arr, int k) {
+        int n = arr.size();
+        int i = 0, j = 0;
+        int sum = arr[0];   // it's given in the problem that at least 1 element will be present in the array
+        int maxLength = 0;
+
+        while(j < n) {
+            while(i <= j && sum > k) {
+                sum -= arr[i];
+                i++;
+            }
+            if(sum == k) maxLength = max(maxLength, j - i + 1);
+            j++;
+            if(j < n) sum += arr[j];
+        }
+
+        return maxLength;
+    }
 };
 
 
@@ -245,12 +278,19 @@ int main() {
     vector<int> arr = {10, 5, 2, 7, 1, -10};
     int k = 15;
 
+    // vector<int> arr = {1, 3, 1, 1, 1, 1, 1, 5, 4, 2};
+    // int k = 5;
+
+    // vector<int> arr = {2};
+    // int k = 2;
+
     cout << Solution().longestSubarray_bruteforce(arr, k) << endl;
     cout << Solution().longestSubarray_bruteforce_optimised(arr, k) << endl;
     cout << Solution().longestSubarray(arr, k) << endl;
     vector<int> ans = Solution().printLongestSubarray(arr, k);
     for(auto it: ans) cout << it << " ";
     cout << endl;
+    cout << Solution().longestSubarray_positives(arr, k);
 
     return 0;
 }
