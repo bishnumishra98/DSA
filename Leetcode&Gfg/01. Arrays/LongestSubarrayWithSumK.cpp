@@ -23,6 +23,9 @@
 // -10^4 ≤ arr[i] ≤ 10^4
 // -10^9 ≤ k ≤ 10^9
 
+// Problem link: https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1
+
+
 // ● What is a subarray ?
 //   A subarray is a contiguous part of the array. Example:
 //   For the arr: [1, 2, 3, 4, 5, 6]
