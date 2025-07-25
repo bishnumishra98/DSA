@@ -24,7 +24,7 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: n(logn) + O(n) = O(nlogn)
+    // T.C: n(nlogn) + O(n) = O(nlogn)
     // S.C: O(1)
     int longestConsecutive_bruteforce(vector<int>& nums) {
         // Edge cases
@@ -72,9 +72,9 @@ public:
 
         for(auto it: st) {
             int curr = it;
-            // If no 'curr - 1' is present in the set, it means 'curr' is the starting element of a sequence.
+            int length = 1;
+            // If 'curr - 1' is not present in the set, it means 'curr' is the starting element of a sequence.
             if(st.find(curr - 1) == st.end()) {
-                int length = 1;
                 // Find the upcoming consecutive elements after 'curr' to find the length of the sequence starting from 'curr'.
                 while(st.find(curr + 1) != st.end()) {
                     length++;
