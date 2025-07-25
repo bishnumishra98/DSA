@@ -53,8 +53,8 @@ public:
     // 2. Iterate through each element in the set.
     //    i.  For each element, check if the previous element (element - 1) is present in the set. If it is not present,
     //        it means that the current element is the starting point of a consecutive sequence.
-    //    ii. Then, keep checking for the next consecutive elements (element + 1, element + 2, ...) in the set until you
-    //        reach an element that is not present, and also side by side, keep counting the length of the sequence.
+    //    ii. Then keep checking for the next consecutive elements (element + 1, element + 2, ...) in the set until you
+    //        reach an element that is not present, and also parallelly, keep counting the length of the sequence.
     //    iii. Update the maximum length of subsequence found so far.
     // 3. Finally, return the maximum length found.
     // The purpose of set in this algorithm is to allow O(1) average time complexity for checking the presence of an element,
@@ -77,8 +77,8 @@ public:
                 int length = 1;
                 // Find the upcoming consecutive elements after 'curr' to find the length of the sequence starting from 'curr'.
                 while(st.find(curr + 1) != st.end()) {
-                    curr++;
                     length++;
+                    curr = curr + 1;
                 }
                 maxLength = max(maxLength, length);   // update the maximum length found so far
             }
