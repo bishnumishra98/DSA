@@ -37,13 +37,12 @@ public:
     int removeDuplicates(vector<int>& nums) {
         int j = 0, i = 1;
         while(i < nums.size()) {
-            if(nums[j] == nums[i]) i++;   // if duplicate element is found at nums[i], go ahead to check next element
-            else {   // if(nums[j] != nums[i])
-                // If an unique element is found, keep it on (j+1)th index, i.e., just next after nums[j]
+            // If an unique element is found at 'i'th index, keep it on (j+1)th index.
+            if(nums[j] != nums[i]) {
                 j++;
                 nums[j] = nums[i];
-                i++;
             }
+            i++;
         }
 
         return j + 1;
