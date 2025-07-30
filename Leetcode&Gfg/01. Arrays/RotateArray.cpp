@@ -38,19 +38,19 @@ public:
 
 // ------------------------------------------------------------------------------------
 
-    // Reversal method: (0, n-1) -> (0, k-1) -> (k, n-1)
+    // Reversal method: (0, n - 1) -> (0, k - 1) -> (k, n - 1)
     // T.C: O(n)
     // S.C: O(1)
     void rotate(vector<int>& nums, int k) {
         k = k % nums.size();   // to handle the case when 'k > no.of elements in vector'
         // Note: In reverse function, reverse(start, end), the range is inclusive of start and exclusive of end.
-        // reverse from (0, n-1)
+        // reverse from (0, n - 1)
         reverse(nums.begin(), nums.end());
 
-        // reverse from (0, k-1)
+        // reverse from (0, k - 1)
         reverse(nums.begin(), nums.begin() + k);
 
-        // reverse from (k, n-1)
+        // reverse from (k, n - 1)
         reverse(nums.begin() + k, nums.end());
     }
 };
