@@ -43,10 +43,10 @@ public:
         unordered_map<int, int> map;
 
         for(int i = 0; i < nums.size(); i++) {
-            int compliment = target - nums[i];
+            int complement = target - nums[i];
             // If the complement exists in the map, return the stored index for the complement and the current index,
             // else create an entry for nums[i] in the map.
-            if(map.find(compliment) != map.end()) return {i, map[compliment]};
+            if(map.find(complement) != map.end()) return {i, map[complement]};
             map[nums[i]] = i;
         }
 
