@@ -283,11 +283,11 @@ int main() {
     // vector<int> arr = {10, 5, 2, 7, 1, -10};
     // int k = 15;
 
-    vector<int> arr = {1, 3, 1, 1, 1, 1, 1, 5, 4, 2};
-    int k = 5;
+    // vector<int> arr = {1, 3, 1, 1, 1, 1, 1, 5, 4, 2};
+    // int k = 5;
 
-    // vector<int> arr = {2};
-    // int k = 2;
+    vector<int> arr = {2, 0, 0, 1, 1, 1};
+    int k = 3;
 
     cout << Solution().longestSubarray_bruteforce(arr, k) << endl;
     cout << Solution().longestSubarray_bruteforce_optimised(arr, k) << endl;
