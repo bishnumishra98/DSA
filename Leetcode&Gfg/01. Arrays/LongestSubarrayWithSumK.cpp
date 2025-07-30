@@ -263,13 +263,15 @@ public:
         int maxLength = 0;
 
         while(j < n) {
+            // If sum is greater than k, move ahead 'i' pointer until sum becomes less than or equal to k
             while(i <= j && sum > k) {
                 sum -= arr[i];
                 i++;
             }
-            if(sum == k) maxLength = max(maxLength, j - i + 1);
+            if(sum == k) maxLength = max(maxLength, j - i + 1);   // update the maximum length of the subarray whose sum equals k
+            // Move ahead 'j' pointer to include next element in the sum
             j++;
-            if(j < n) sum += arr[j];
+            if(j < n) sum += arr[j];   // to avoid out of bounds error, check if j is still within the bounds of the array
         }
 
         return maxLength;
