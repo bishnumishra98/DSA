@@ -144,11 +144,11 @@ public:
 
 // --------------------------------------------------------------------------------------------------------
 
-    // T.C: O(n * logn);   considering ordered map. If we use unordered map, avg T.C would be O(n), but worst case can be O(n^2)
+    // T.C: O(n);   considering unordered map; but worst case can be O(n^2). And if we use ordered map T.C would be O(logn) in all cases.
     // S.C: O(n)
     int longestSubarray(vector<int>& arr, int k) {
         int n = arr.size();
-        map<int, int> prefixSum;
+        unordered_map<int, int> prefixSum;
         int sum = 0;
         int maxLength = 0;
 
@@ -177,7 +177,7 @@ public:
 //    Checking the sum is not already present in the map before adding its entry in map is important if
 //    the given 'arr' contains 0s. If we do not check, the value of sum in the map gets overwritten by
 //    new indexes which will give us incorrect length of longest subarray with sum k.
-//    ● Illustration if we did ot check if the prefix sum is not already present in the map before an entry:
+//    ● Illustration if we do not check if the prefix sum is not already present in the map before an entry:
 //      arr = [2, 0, 0, 1, 1, 1], k = 3
 //      Index: 0  1  2  3  4  5
 //      - At i = 0, entry in map: {2, 0}
@@ -196,14 +196,14 @@ public:
 
 // --------------------------------------------------------------------------------------------------------
 
-// ● Follow up question: Can you generate songest subarray with sum k ?
+// ● Follow up question: Can you generate longest subarray with sum k ?
 //   Answer: yes, the code is very simple.
 
-    // T.C: O(n * logn);   considering ordered map. If we use unordered map, avg T.C would be O(n), but worst case can be O(n^2)
+    // T.C: O(n);   considering unordered map; but worst case can be O(n^2). And if we use ordered map T.C would be O(logn) in all cases.
     // S.C: O(n)
     vector<int> printLongestSubarray(vector<int>& arr, int k) {
         int n = arr.size();
-        map<int, int> prefixSum;
+        unordered_map<int, int> prefixSum;
         int sum = 0;
         int maxLength = 0;
 
@@ -213,7 +213,7 @@ public:
             if(sum == k) {   // if a subarray with sum k found for the first time
                 maxLength = i + 1;
                 ans.clear();   // always clear the ans vector before adding new elements
-                for(int x = 0; x < i + 1; x++) ans.push_back(arr[x]);
+                for(int x = 0; x <= i; x++) ans.push_back(arr[x]);
                 continue;   // optional, but better to write to speed up program
             }
             int rem = sum - k;
@@ -241,7 +241,7 @@ public:
 //   Answer: Yes, the problem can be further optimised if it contains only positive integers.
 //   Algorithm: Extremely simple 2 pointer approach.
 //   1. Initialize 2 pointers 'i' and 'j' at index 0 of the given 'arr'. The idea is to keep a track of sum of
-//      elements from 'j'th index to 'i + 1'th index.
+//      elements from 'i + 1'th index to 'j'th index.
 //   2. Now start moving 'j' and parallelly calculate prefix sums till each indexes of 'j'. If sum till 'j'th
 //      index happen to be equal to k, the store the length of the subarray in 'maxLength', maxLength = j - i + 1.
 //      As soon as the sum exceeds k, move ahead the 'i' pointer so that the sum shrinks, i.e., we will trim the
@@ -250,9 +250,9 @@ public:
 //      and if the sum in the range of 'j'th index to 'i + 1'th index happen to be equal to k, again a subarray
 //      with sum k is found. Update the 'maxLength' if a greater length of subarray is found.
 //      In this way, keep iterating until 'j' crosses the index of the last element of the given 'arr'.
-//      Note: To calculate sum of elements from 'j'th index to 'i + 1'th index, don't run a loop unnecessarily.
-//            Instead, whenever you move ahead 'j', add arr[j] to the sum; whenever you move ahead 'i', subtract
-//            arr[i] from sum, i.e., apply sliding window technique.  
+//      Pro tip: To calculate sum of elements from 'j'th index to 'i + 1'th index, don't run a loop unnecessarily.
+//               Instead, whenever you move ahead 'j', add arr[j] to the sum; whenever you move ahead 'i', subtract
+//               arr[i] from sum, i.e., apply sliding window technique.  
 
     // T.C: O(2n)
     // S.C: O(1)
@@ -278,11 +278,11 @@ public:
 
 
 int main() {
-    vector<int> arr = {10, 5, 2, 7, 1, -10};
-    int k = 15;
+    // vector<int> arr = {10, 5, 2, 7, 1, -10};
+    // int k = 15;
 
-    // vector<int> arr = {1, 3, 1, 1, 1, 1, 1, 5, 4, 2};
-    // int k = 5;
+    vector<int> arr = {1, 3, 1, 1, 1, 1, 1, 5, 4, 2};
+    int k = 5;
 
     // vector<int> arr = {2};
     // int k = 2;
