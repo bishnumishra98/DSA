@@ -254,7 +254,7 @@ public:
 //               Instead, whenever you move ahead 'j', add arr[j] to the sum; whenever you move ahead 'i', subtract
 //               arr[i] from sum, i.e., apply sliding window technique.  
 
-    // T.C: O(2n)
+    // T.C: O(2n) = O(n)
     // S.C: O(1)
     int longestSubarray_positives(vector<int>& arr, int k) {
         int n = arr.size();
