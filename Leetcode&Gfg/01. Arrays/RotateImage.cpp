@@ -25,7 +25,7 @@ public:
 
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
-                arr[i][j] = matrix[n-j-1][i];
+                arr[i][j] = matrix[n - j - 1][i];
             }
         }
 
