@@ -158,6 +158,10 @@ public:
                 maxLength = i + 1;
                 continue;   // optional, but better to write to speed up program
             }
+
+            // Add entry in the map only if the prefix sum is not already present in the map
+            if(prefixSum.find(sum) == prefixSum.end()) prefixSum[sum] = i;
+
             int rem = sum - k;
             // If 'rem' is already present in the map, it means a subarray with sum k is bound to be present
             // till the current index 'i'. The length of this subarray will be prefixSum[sum] - prefixSum[rem],
@@ -166,8 +170,6 @@ public:
                 int length = i - prefixSum[rem];
                 maxLength = max(maxLength, length);
             }
-            // Add entry in the map only if the prefix sum is not already present in the map
-            if(prefixSum.find(sum) == prefixSum.end()) prefixSum[sum] = i;
         }
 
         return maxLength;
@@ -216,6 +218,10 @@ public:
                 for(int x = 0; x <= i; x++) ans.push_back(arr[x]);
                 continue;   // optional, but better to write to speed up program
             }
+
+            // Add entry in the map only if the prefix sum is not already present in the map
+            if(prefixSum.find(sum) == prefixSum.end()) prefixSum[sum] = i;
+
             int rem = sum - k;
             // If 'rem' is already present in the map, it means a subarray with sum k is bound to be present
             // till the current index 'i'. The length of this subarray will be prefixSum[sum] - prefixSum[rem],
@@ -228,8 +234,6 @@ public:
                     for(int x = prefixSum[rem] + 1; x <= i; x++) ans.push_back(arr[x]);
                 }
             }
-            // Add entry in the map only if the prefix sum is not already present in the map
-            if(prefixSum.find(sum) == prefixSum.end()) prefixSum[sum] = i;
         }
 
         return ans;

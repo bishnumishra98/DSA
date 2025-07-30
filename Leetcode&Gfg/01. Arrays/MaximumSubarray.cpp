@@ -64,7 +64,7 @@ public:
 // -------------------------------------------------------------------------------------------------------------
 
     // ● Follow up question: Print the elements of maximum subarray.
-    // Algortihm: It is very simple.
+    // Algorithm: It is very simple.
     // 1. One thing we can observe is that if the sum becomes 0 in Kadane's algorithm, then a new subarray starts from
     //    that index. So, we can keep track of the starting index of the subarray.
     // 2. Whenever we find a new maximum sum, we can update the starting index (already marked when sum was 0) in a
