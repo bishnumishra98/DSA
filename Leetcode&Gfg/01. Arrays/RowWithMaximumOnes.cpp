@@ -25,14 +25,16 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(m*n)
+    // T.C: O(m * n)
     // S.C: O(1)
     vector<int> rowAndMaximumOnes(vector<vector<int>>& mat) {
+        int m = mat.size();
+        int n = mat[0].size();
         vector<int> ans(2, 0);   // Initializing a vector of size 2; by default lets assume row 0 has maximum ones.
 
-        for(int i = 0; i < mat.size(); i++) {
+        for(int i = 0; i < m; i++) {
             int ones = 0;
-            for(int j = 0; j < mat[i].size(); j++) {
+            for(int j = 0; j < n; j++) {
                 if(mat[i][j] == 1) ones++;
             }
             // If no.of ones found is greater than no.of ones present in 'ans', update the row with no.of ones in 'ans'
