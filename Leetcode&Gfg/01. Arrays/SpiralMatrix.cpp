@@ -25,8 +25,8 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(m*n);   where m = no.of rows and n = no.of columns respectively
-    // S.C: O(m*n)
+    // T.C: O(m * n);   where m = no.of rows and n = no.of columns respectively
+    // S.C: O(m * n)
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
         int m = matrix.size();   // no.of rows
         int n = matrix[0].size();   // no.of columns
