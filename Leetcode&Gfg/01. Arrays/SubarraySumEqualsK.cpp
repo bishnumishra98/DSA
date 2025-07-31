@@ -21,7 +21,7 @@
 //    If (x - k) exists, then it means sum of elements having value 'k' is also bound to exist till the
 //    current index. In this case, we can add the frequency of (x - k) to the count of subarrays having sum 'k'.
 //    Then update the frequency of the prefixSum in the hashmap. If the prefixSum occurs first time, its frequency
-//    should be 1. And if it occurs again, its frequency shall increased by 1.
+//    should be 1. And if it occurs again, its frequency shall be increased by 1.
 
 #include <bits/stdc++.h>
 using namespace std;
