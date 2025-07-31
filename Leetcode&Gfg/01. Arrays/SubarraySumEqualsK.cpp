@@ -11,17 +11,21 @@
 // Output: 2
 
 // Algorithm: Approach is somewhat similar to the algorithm of 'Leetcode&Gfg\01. Arrays\LongestSubarrayWithSumK.cpp'.
-// 1. Initialize a hashmap that stores prefixSum till all indexes of the given 'arr', and frequency of prefixSum.
-//    Also initialize a count variable to store the count of subarrays having sum 'k'.
+// Maintain a running prefix sum and use a hash map to store how often each prefix sum has occurred.
+// If the current prefix sum is 'sum', and we previously saw 'sum - k', then there exists a subarray ending at the
+// current index that sums to k.
+// 1. Initialize a hashmap 'mp' that stores prefixSum till all indexes of the given 'arr', and frequency of prefixSum.
+//    Also initialize a 'count' variable to store the count of subarrays having sum 'k'.
 //    The prefixSum is the sum of all elements from the start of the array till the current index. Here, we will
 //    store the first element in the hashmap always as 0, with frequency 1, meaning that the sum of elements before
-//    the first element is 0, and it occurs once.
-// 2. Iterate through the entire array, and at any random index, if prefixSum is 'x', and we are looking for 
-//    sum of elements as 'k', then we must look for sum of 'x - k' till some index before the current index.
-//    If (x - k) exists, then it means sum of elements having value 'k' is also bound to exist till the
-//    current index. In this case, we can add the frequency of (x - k) to the count of subarrays having sum 'k'.
-//    Then update the frequency of the prefixSum in the hashmap. If the prefixSum occurs first time, its frequency
-//    should be 1. And if it occurs again, its frequency shall be increased by 1.
+//    the first element is 0, and it occurs once. mp[0] = 1 is actually for handling the case when prefix sum itself
+//    is equal to k.
+// 2. Traverse the array and for each element in the array:
+//    i.   Calculate the prefixSum till that element.
+//    ii.  Check if (sum - k) exists in mp:
+//         → If yes, it means there are mp[sum - k] subarrays ending at current index with sum k. So, add mp[sum - k] to count.
+//    iii. Increment the frequency of current prefix sum in mp, i.e., mp[sum]++
+// 3.. Return the 'count'.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -60,12 +64,15 @@ public:
             preSum += nums[i];
             int complement = preSum - k;
             if(mp.find(complement) != mp.end()) count += mp[complement];
-            mp[preSum] += 1;   // Keep this line at the end. Otherwise you will get wrong output for test cases like nums = {1}, k = 0.
+            mp[preSum]++;   // Keep this line at the end. Otherwise you will get wrong output for test cases like nums = {1}, k = 0.
             // If mp[preSum] doesn't exists, then C++ automatically inserts a default value of 0 for the key mp[prefixSum].
         }
 
         return count;
     }
+
+    // ● Why mp[preSum]++ is required, why not simply mp[preSum] = 1 ?
+    //   Dry run the test case: nums = [1, -1, 0], k = 0.
 };
 
 
