@@ -61,6 +61,7 @@ public:
             int complement = preSum - k;
             if(mp.find(complement) != mp.end()) count += mp[complement];
             mp[preSum] += 1;   // Keep this line at the end. Otherwise you will get wrong output for test cases like nums = {1}, k = 0.
+            // If mp[preSum] doesn't exists, then C++ automatically inserts a default value of 0 for the key mp[prefixSum].
         }
 
         return count;
