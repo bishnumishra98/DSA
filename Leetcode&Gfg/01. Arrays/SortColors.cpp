@@ -59,10 +59,10 @@ public:
 
     // Optimal algorithm: Dutch National Flag algorithm (3 pointer approach)
     // There will be 3 rules based on which the algorithm is based:
-    // [0 to low-1]    -> contains 0
-    // [low to mid-1]  -> contains 1
+    // [0 to low - 1]    -> contains 0
+    // [low to mid - 1]  -> contains 1
     // [mid to high]   -> contains random numbers
-    // [high+1 to n-1] -> contains 2
+    // [high + 1 to n - 1] -> contains 2
     // 1. Initialize low, mid and high with 0, 0 and n-1 respectively.
     // 2. Our aim is to keep 0, 1, 2 in their given above range. For example, lets take the following unsorted array:
 
