@@ -57,7 +57,7 @@ public:
 
 // -----------------------------------------------------------------------
 
-    // Optimal approach algorithm(3 pointer approach):
+    // Optimal algorithm: Dutch National Flag algorithm (3 pointer approach)
     // There will be 3 rules based on which the algorithm is based:
     // [0 to low-1]    -> contains 0
     // [low to mid-1]  -> contains 1
