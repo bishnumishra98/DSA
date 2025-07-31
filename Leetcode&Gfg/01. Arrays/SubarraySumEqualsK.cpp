@@ -59,7 +59,7 @@ public:
         for(int i = 0; i < n; i++) {
             preSum += nums[i];
             int complement = preSum - k;
-            count += mp[complement];
+            if(mp.find(complement) != mp.end()) count += mp[complement];
             mp[preSum] += 1;   // Keep this line at the end. Otherwise you will get wrong output for test cases like nums = {1}, k = 0.
         }
 
@@ -69,8 +69,11 @@ public:
 
 
 int main() {
-    vector<int> nums = {1};
-    int k = 0;
+    vector<int> nums = {1, 1, 1};
+    int k = 2;
+
+    // vector<int> nums = {1};
+    // int k = 0;
 
     cout << Solution().subarraySum_bruteforce(nums, k) << endl;
     cout << Solution().subarraySum(nums, k);
