@@ -74,24 +74,18 @@ public:
     //       the above rules becomes invalid for 1 and 2, thus rectify the indices by shifting low and mid 1 step ahead.
 
     //           0       0      0      1      1       1       2       0       1       2       0       2       2
-    //    Index: 0     low-1          low            mid-1   mid                             high   high+1   n-1
-    //    Observe element at nums[mid] and alter the pointers accordingly.
+    //    Index: 0            low-1   low    mid-1   mid                                     high   high+1   n-1
     //    -> If nums[mid] == 1, then it means 1 is at a wrong position. Its correct position should be from low to mid-1.
     //       Hence, no need to any swapping, just move mid pointer ahead by 1 step, so that indices for 1 become rectified.
 
     //           0       0      0      1      1       1       2       0       1       2       0       2       2
-    //    Index: 0     low-1          low            mid-1   mid                             high   high+1   n-1
-    //    Observe element at nums[mid] and alter the pointers accordingly.
+    //    Index: 0            low-1   low            mid-1   mid                             high   high+1   n-1
     //    -> If nums[mid] == 2, then it means 2 is at a wrong position. Its correct position should be from high+1 to n-1.
     //       Thus, swap(nums[mid], nums[high]), so that 2 comes at a position just left of high+1, in order to elongate chain of 2s.
     //       But the again, indices become incorrect for 2, so shift back high towards left in order to rectify indices.
 
     //           0       0      0      1      1       1       0       0       1       2       2       2       2
-    //    Index: 0     low-1          low            mid-1   mid                     high   high+1           n-1
-    //    Observe element at nums[mid] and alter the pointers accordingly.
-    //    -> If nums[mid] == 2, then it means 2 is at a wrong position. Its correct position should be from high+1 to n-1.
-    //       Thus, swap(nums[mid], nums[high]), so that 2 comes at a position just left of high+1, in order to elongate chain of 2s.
-    //       But the again, indices become incorrect for 2, so shift back high towards left in order to rectify indices.
+    //    Index: 0             low-1  low            mid-1   mid                     high   high+1           n-1
 
     //     Repeat the process until mid crosses high, and the array would automatically become sorted.
 
