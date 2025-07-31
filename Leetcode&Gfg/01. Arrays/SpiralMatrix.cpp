@@ -39,8 +39,8 @@ public:
         vector<int> ans;
         while(ans.size() < total) {
             // Print starting row: fixed row, varying column
-            for(int i = startCol; i <= endCol && ans.size() < total; i++) {
-                ans.push_back(matrix[startRow][i]);
+            for(int j = startCol; j <= endCol && ans.size() < total; j++) {
+                ans.push_back(matrix[startRow][j]);
             }
             startRow++;   // for next iteration, startRow should be incremented by 1
 
@@ -51,8 +51,8 @@ public:
             endCol--;   // for next iteration, endCol should be decremented by 1
 
             // Print ending row: fixed row, varying column
-            for(int i = endCol; i >= startCol && ans.size() < total; i--) {
-                ans.push_back(matrix[endRow][i]);
+            for(int j = endCol; j >= startCol && ans.size() < total; j--) {
+                ans.push_back(matrix[endRow][j]);
             }
             endRow--;   // for next iteration, endRow should be decremented by 1
 
