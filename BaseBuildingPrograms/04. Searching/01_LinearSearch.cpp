@@ -5,7 +5,7 @@ using namespace std;
 // T.C: O(n)
 // S.C: O(1)
 int linearSearch(int arr[], int n, int target) {
-    for(int i=0; i<n; i++) {
+    for(int i = 0; i < n; i++) {
         if(arr[i] == target) {
             return i;
         }
