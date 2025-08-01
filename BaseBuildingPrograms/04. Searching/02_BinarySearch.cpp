@@ -9,7 +9,7 @@ using namespace std;
 int binarySearch(int arr[], int n, int target) {
     int start = 0;
     int end = n - 1;
-    int mid = start + (end - start)/2;   // same as (start + end)/2
+    int mid = start + (end - start) / 2;   // same as (start + end) / 2
 
     while(start <= end) {   // start == end is the case, when only 1 element is left in array
         if(target == arr[mid]) {
