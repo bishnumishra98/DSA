@@ -1,4 +1,4 @@
-// If an element at 'ith' index in a sorted array is present at '(i-1)th', 'ith', or '(i+1th)'
+// If an element at 'ith' index in a sorted array is present at '(i - 1)th', 'ith', or '(i + 1th)'
 // index in another array, then the another array can be called a "nearly sorted array".
 
 // Algorithm: Extremely simple.
