@@ -31,7 +31,7 @@ int findMissingElement(int arr[], int n) {
     int mid = start + (end - start) / 2;
     int ans = -1;
 
-    while(start <= end) {       
+    while(start <= end) {
         if(arr[mid] - mid == 1) start = mid + 1;
         else {
             ans = mid;
