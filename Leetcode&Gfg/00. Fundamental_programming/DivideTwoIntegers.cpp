@@ -92,7 +92,7 @@ public:
             // Reduce the dividend with 'd * 2^power'
             n -= d << power;   // n -= d * pow(2, power);
 
-            // Add 2^highest_power in quotient in cumulative way
+            // Add 2^highest_power in quotient
             quotient += 1 << power;   // quotient += pow(2, power);
         }
 
