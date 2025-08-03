@@ -35,8 +35,9 @@ int setKthBit(int n, int k) {
 }
 
 int main() {
-    int n, k;
-    cin >> n >> k;
+    int n = 10, k = 2;
+
     cout << "Result: " << setKthBit(n, k);
+    
     return 0;
 }
