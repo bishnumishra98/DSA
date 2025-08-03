@@ -86,7 +86,7 @@ public:
         while(n >= d) {
             int power = 0;
 
-            // Find the highest power of divisor upto which we can go
+            // Find the highest power of 2 such that d * 2^power is less than or equal to n.
             while(n >= (d << (power + 1))) power++;   // while(n >= (d * pow(2, power + 1))) power++;
 
             // Reduce the dividend with 'd * 2^power'
