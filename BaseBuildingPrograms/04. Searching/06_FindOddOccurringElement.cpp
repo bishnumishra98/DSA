@@ -39,10 +39,10 @@ int findOddOccurringElement_XOR(int arr[], int n) {
 //            In this case, there can three sub-cases:
 //            Case I:  The 'mid' lies on an index that lies before the odd occurring element, i.e., arr[mid] == arr[mid + 1]:
 //                     In this case, we know the odd occurring elements is present on the right, thus shift rightwards,
-//                     i.e., start = mid + 2. No need to do 'mid + 1', as it is already done in Case 1.I.
+//                     i.e., start = mid + 2. No need to do 'mid + 1', as it is the same element only.
 //            Case II: The 'mid' lies on an index that lies after the odd occurring element, i.e., arr[mid] == arr[mid - 1]:
 //                     In this case, we know the odd occurring elements is present on the left, thus shift leftwards,
-//                     i.e., end = mid - 2. No need to do 'mid - 1', as it is already done in Case 1.II.
+//                     i.e., end = mid - 2. No need to do 'mid - 1', as it is the same element only.
 //            Case III: The 'mid' lies on the odd occuring element, i.e., arr[mid] != arr[mid + 1] && arr[mid] != arr[mid - 1]:
 //                      Thus, the odd occuring element is found. So return it, i.e., return arr[mid].
 
