@@ -33,7 +33,7 @@ int mySqrt(int x) {
 }
 
 
-// T.C: O(precision*logn)
+// T.C: O(precision * logn)
 // S.C: O(1)
 double mySqrt_Decimal(int n, int precision) {
     double sqrt = mySqrt(n);   // getting the nearest integer square-root in 'sqrt'
