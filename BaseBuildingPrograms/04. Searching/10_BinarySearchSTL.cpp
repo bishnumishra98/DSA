@@ -30,3 +30,8 @@ int main() {
 
     return 0;
 }
+
+// o/p:
+// 5 is found
+// First element >= 5 is 5
+// First element > 5 is 7
