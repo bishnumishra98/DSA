@@ -16,7 +16,7 @@
 // Algorithm: We will implementation binary search with search space concept. Algorithm is very simple:
 // 1. As square root lies in the range 0 to x, the initial search space will also be the same i.e., start(0) to end(x);
 //    and the mid will be as usual (start + end) / 2.
-// 2. Consider 'mid' as square root, and check if mid * divisor is greater than, equal to or less than x, until start <= end.
+// 2. Consider 'mid' as square root, and check mid * divisor until start <= end:
 //    CASE I:   If mid * divisor > x, then shift the search space towards left, i.e., end = mid - 1
 //    CASE II:  If mid * divisor == x, then the square root is found. Hence, return mid.
 //    CASE III: If mid * divisor < x, then store the 'mid' as it can be a potential square root, so store it
