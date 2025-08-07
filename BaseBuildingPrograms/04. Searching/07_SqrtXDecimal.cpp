@@ -40,10 +40,13 @@ double mySqrt_Decimal(int n, int precision) {
     
     double step = 1;
 
+    // The number of times this loop runs is the number of precisions we get
     for(int i = 0; i < precision; i++) {
-        step = step / 10;
+        step = step / 10;   // step size: in each iteration, step size will be 0.1, 0.01, 0.001, and so on.
         double j = sqrt;
-
+        // sqrt of 68 came out to be 8. So try adding 0.1, and sqrt becomes 8.1. Again try adding 0.1, now sqrt becomes 8.2,
+        // again try adding 0.1, now sqrt would become 8.3, but 8.3 * 8.3 is greater than 68, so exit the loop and sqrt remians 8.2.
+        // Now in next iteration, add 0.01 to 8.2, and sqrt becomes 8.11. Again add 0.01 to 8.11, and sqrt becomes 8.12, and so on.
         while(j * j <= n) {
             sqrt = j;
             j += step;
