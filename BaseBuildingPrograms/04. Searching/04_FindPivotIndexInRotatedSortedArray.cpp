@@ -39,10 +39,10 @@ using namespace std;
 // S.C: O(1)
 int findPivotIndex(vector<int>& nums) {
     int n =  nums.size();
-    if(n == 1) return 0;    // if only 1 element is present in the array, then it itself is the pivot element
     int start = 0, end = n - 1, mid = start + (end - start) / 2;
 
     while(start <= end) {
+        if(start == end) return start;   // if only one element is left, it itself is the pivot element
         if((mid + 1 < n) && (nums[mid] > nums[mid + 1])) return mid;
         else if((mid - 1 >= 0) && (nums[mid] < nums[mid - 1])) return mid - 1;
         else if(nums[mid] < nums[start]) end = mid - 1;

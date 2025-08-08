@@ -39,7 +39,7 @@ private:
         int start = 0, end = n - 1, mid = start + (end - start)/2;
 
         while(start <= end) {
-            if(start == end) return start;   // if only 1 element is present in the array, then it itself is the pivot element
+            if(start == end) return start;   // if only one element is left, it itself is the pivot element
 
             if((mid + 1 < n) && (nums[mid] > nums[mid + 1])) return mid;
             else if((mid - 1 >= 0) && (nums[mid] < nums[mid - 1])) return mid - 1;
