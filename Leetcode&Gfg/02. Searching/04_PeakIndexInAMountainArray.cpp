@@ -50,7 +50,7 @@ public:
 
         while(start < end) {   // never write while(start <= end) {}
             if(arr[mid] < arr[mid + 1]) start = mid + 1;
-            else end = mid;
+            else end = mid;   // if(arr[mid] >= arr[mid + 1])
             mid = start + (end - start) / 2;
         }
 
