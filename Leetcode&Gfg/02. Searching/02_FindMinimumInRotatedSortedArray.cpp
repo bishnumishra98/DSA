@@ -24,7 +24,7 @@
 
 
 // Algorithm: Extremely simple. Find the pivot element and return the element just after pivot. But make sure
-//            to handle an edge case: return the first element if pivot element in at index 'nums.size()-1'.
+//            to handle an edge case: return the first element if pivot element in at index 'nums.size() - 1'.
 //            To know how to find pivot index in rotated sorted array, refer: 'BaseBuildingPrograms\04. Searching\04_FindPivotIndexInRotatedSortedArray.cpp'
 
 #include <bits/stdc++.h>
@@ -32,6 +32,7 @@ using namespace std;
 
 class Solution {
 private:
+    // Returns the largest element in 'nums'
     int findPivotIndex(vector<int>& nums) {
         int n =  nums.size();
         int start = 0, end = n - 1, mid = start + (end - start)/2;
@@ -39,8 +40,8 @@ private:
         while(start <= end) {
             if(start == end) return start;   // if only 1 element is present in the array, then it itself is the pivot element
 
-            if((mid+1 < n) && (nums[mid] > nums[mid+1])) return mid;
-            else if((mid-1 >= 0) && (nums[mid] < nums[mid-1])) return mid-1;
+            if((mid + 1 < n) && (nums[mid] > nums[mid + 1])) return mid;
+            else if((mid - 1 >= 0) && (nums[mid] < nums[mid - 1])) return mid - 1;
             else if(nums[mid] < nums[start]) end = mid - 1;
             else start = mid + 1;   // if(nums[mid] >= nums[start])
 
@@ -55,8 +56,10 @@ public:
     // S.C: O(1)
     int findMin(vector<int>& nums) {
         int pivotIndex = findPivotIndex(nums);
-        if(pivotIndex == nums.size()-1) return nums[0];
-        return nums[pivotIndex+1];
+
+        // Smallest element will be always present just after the pivot index (index of largest element)
+        if(pivotIndex == nums.size() - 1) return nums[0];   // if largest element is last element of array, first element is smallest
+        return nums[pivotIndex + 1];
     }
 };
 
