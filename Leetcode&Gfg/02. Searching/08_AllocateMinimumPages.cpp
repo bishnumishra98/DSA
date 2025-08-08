@@ -97,6 +97,8 @@ private:
             }
         }
 
+        // Given the condition, a student can hold atmost 'maxPagesAllowed' no.of pages, if the number of students required
+        // to distribute all books is more than 'k', then it's not possible to allocate all books among 'k' students.
         return students > k ? false : true;
     }
 
