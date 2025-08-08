@@ -20,17 +20,17 @@
 // called slope A, and the right side slope be called slope B.
 // 1. As usual, initialize start = 0, mid = (start + end) / 2, end = n - 1, where n = arr.size(), and compare arr[mid]:
 // 2. While start is less than end, check for two cases:
-//    Case 1: If arr[mid] is on slope A, i.e., arr[mid] < arr[mid+1]:
+//    Case 1: If arr[mid] is on slope A, i.e., arr[mid] < arr[mid + 1]:
 //            If we are on slope A, the peak is somewhere on the right. Thus, shift rightwards, i.e., start = mid + 1.
-//    Case 2: If arr[mid] is on slope B, i.e., arr[mid] > arr[mid+1]:
+//    Case 2: If arr[mid] is on slope B, i.e., arr[mid] > arr[mid + 1]:
 //            If we are on slope B, the peak is somewhere on the left or arr[mid] coud itslef be the peak element.
 //            Hence, while shifting leftwards, never do 'end = mid - 1'. Instead, do 'end = mid'.
 // 3. When the loop (start < end) terminates, all pointers start, mid and end point to the peak element's index.
 //    So return any one of them.
 // MOST IMPORTANT POINT OF THIS ALGORITHM: Note that the while loop must end as soon as start reaches end. Thus,
 // never write 'while(start <= end)' in this problem as it will cause a huge blunder. Lets say if we allowed the
-// last iteration to happen when start == end, then by this time, all the 3 pointers (start, mid nd end) would
-// already reach the peak elements index. So, the condition if(arr[mid] < arr[mid+1]) would be false, and
+// last iteration to happen when start == end, then by this time, all the 3 pointers (start, mid and end) would
+// already reach the peak elements index. So, the condition if(arr[mid] < arr[mid + 1]) would be false, and
 // the program would execute else block which states that end = mid. So technically, there is no change in
 // positions of start and end, which would cause our program to indefinitely always execute else block,
 // resulting in an infinite loop. To avoid this error, always write 'while(start < end)'.
@@ -49,9 +49,9 @@ public:
         int mid = start + (end - start)/2;
 
         while(start < end) {   // never write while(start <= end) {}
-            if(arr[mid] < arr[mid+1]) start = mid + 1;
+            if(arr[mid] < arr[mid + 1]) start = mid + 1;
             else end = mid;
-            mid = start + (end - start)/2;
+            mid = start + (end - start) / 2;
         }
 
         return start;   // we can even return end or mid
