@@ -69,7 +69,7 @@ using namespace std;
 //  ii. After the iteration of all books, we will be having the count of no.of students required to distribute
 //      all books among 'k' students in the 'students' variable. Note that lesser the limit of 'maxPagesAllowed',
 //      higher is the 'students' value.
-//      Hence, if value of 'students' is more tha 'k', the books cannot be allocated in just 'k' students, i.e., more
+//      Hence, if value of 'students' is more than 'k', the books cannot be allocated in just 'k' students, i.e., more
 //      students are required to distribute all books among them. Thus, return false. Else return true stating that
 //      it's possible to allocate all books among 'k' students for the given limit of 'maxPagesAllowed'.
 
