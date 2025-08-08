@@ -97,7 +97,7 @@ private:
             }
         }
 
-        return students > k ? false : true; 
+        return students > k ? false : true;
     }
 
 public:
