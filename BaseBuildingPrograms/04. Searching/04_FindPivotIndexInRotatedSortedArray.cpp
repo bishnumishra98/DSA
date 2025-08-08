@@ -57,6 +57,7 @@ int findPivotIndex(vector<int>& nums) {
 
 int main() {
     vector <int> v = {40, 50, 60, 70, 10, 20, 30};
+    // vector <int> v = {10, 20, 30, 40, 50, 60, 70};
 
     cout << "Pivot element is at index: " << findPivotIndex(v);
 
