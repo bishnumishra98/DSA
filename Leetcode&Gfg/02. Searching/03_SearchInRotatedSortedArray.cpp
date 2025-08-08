@@ -41,8 +41,8 @@ private:
         while(start <= end) {
             if(start == end) return start;   // if only 1 element is present in the array, then it itself is the pivot element
 
-            if((mid+1 < n) && (nums[mid] > nums[mid+1])) return mid;
-            else if((mid-1 >= 0) && (nums[mid] < nums[mid-1])) return mid-1;
+            if((mid + 1 < n) && (nums[mid] > nums[mid + 1])) return mid;
+            else if((mid - 1 >= 0) && (nums[mid] < nums[mid - 1])) return mid - 1;
             else if(nums[mid] < nums[start]) end = mid - 1;
             else start = mid + 1;   // if(nums[mid] >= nums[start])
 
@@ -78,10 +78,10 @@ public:
         // Part 2: Applying binary search in each of the two monotonic parts, i.e., line A and line B.
         // If target lies in line A, i.e., taller ascending slope
         if(target >= nums[0] && target <= nums[pivotIndex]) {
-            ans = findTargetIndexByBinarySearch(nums, 0, pivotIndex, target);   // T.C: O(logn), S.C: O(1)
+            ans = findTargetIndexByBinarySearch(nums, 0, pivotIndex, target);
         } else {
             // If target lies in line B, i.e shorter ascending slope
-            ans = findTargetIndexByBinarySearch(nums, pivotIndex+1, n-1, target);   // T.C: O(logn), S.C: O(1)
+            ans = findTargetIndexByBinarySearch(nums, pivotIndex + 1, n - 1, target);
         }
 
         return ans;
