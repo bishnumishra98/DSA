@@ -12,7 +12,7 @@
 // Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
 // Output: false
 
-// 2D -> 1D formula: c * row + col
+// 2D -> 1D formula: (c * row) + col;   where c = number of columns in 2D array
 // 1D -> 2D formula: row = index / c,  col = index % c
 
 
@@ -21,7 +21,7 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(log(m*n))
+    // T.C: O(log(m * n))
     // S.C: O(1)
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         int rows = matrix.size();
