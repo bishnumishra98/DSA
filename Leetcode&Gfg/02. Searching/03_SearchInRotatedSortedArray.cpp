@@ -67,20 +67,20 @@ private:
     }
 
 public:
-    // T.C: O(logn)
+    // T.C: O(3 * logn) = O(logn)
     // S.C: O(1)
     int search(vector<int>& nums, int target) {
         int n = nums.size();
         // Part 1: Finding pivot index so that we can divide array into 2 monotonic parts
-        int pivotIndex = findPivotIndex(nums);   // T.C: O(logn), S.C: O(1)
+        int pivotIndex = findPivotIndex(nums);
         int ans = -1;
 
         // Part 2: Applying binary search in each of the two monotonic parts, i.e., line A and line B.
-        // If target lies in line A, i.e., taller ascending slope
+        // If target lies in line A, i.e., upper ascending slope
         if(target >= nums[0] && target <= nums[pivotIndex]) {
             ans = findTargetIndexByBinarySearch(nums, 0, pivotIndex, target);
         } else {
-            // If target lies in line B, i.e shorter ascending slope
+            // If target lies in line B, i.e., lower ascending slope
             ans = findTargetIndexByBinarySearch(nums, pivotIndex + 1, n - 1, target);
         }
 
