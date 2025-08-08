@@ -116,6 +116,7 @@ public:
         }
 
         // 'maxPagesAllowed' is limit of maximum no.of pages that can be allowed to allocate to a student.
+        // Return the smallest value of 'maxPagesAllowed' for which the 'isPossible()' function returns true.
         for(int maxPagesAllowed = maxi; maxPagesAllowed <= sum; maxPagesAllowed++) {
             if(isPossible(arr, maxPagesAllowed, k)) {
                 return maxPagesAllowed;
@@ -138,6 +139,8 @@ public:
         }
 
         int ans;
+        // Store the smallest value of 'maxPagesAllowed' for which the 'isPossible()' function returns true.
+        // Here 'maxPagesAllowed' is denoted by 'mid'.
         while(start <= end) {
             int mid = start + (end - start) / 2;
             if(isPossible(arr, mid, k)) {
