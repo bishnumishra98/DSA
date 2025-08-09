@@ -26,10 +26,7 @@
 // Input: arr[] = [22, 23, 67], k = 1
 // Output: 112
 
-#include <bits/stdc++.h>
-using namespace std;
-
-// Algorithm: Although its a hard problem, the algorithm is easy if you deeply concentrate in the problem.
+// Algorithm: Although it's a hard problem, the algorithm is simple if you try to understand it carefully.
 // --- LINEAR SEARCH ---
 // 1. The minimum no.of maximum pages assigned to any student can range from the no.of pages the thickest book has, i.e.,
 //    maximum element in the given array, to the sum of pages of all books, i.e., sum of all elements of given array. The
@@ -59,7 +56,7 @@ using namespace std;
 // 3. At the end of the loop while(start <= end), the 'ans' will contain the smallest value of 'mid' for which a
 //    valid allocation is possible among 'k' students. Thus, return the vale of 'ans'.
 
-// 'isPossible()' function algorithm:
+// --- 'isPossible()' function algorithm ---
 //  i.  Initialize two variables 'students' and 'pagesStudent' to keep track of no.of students required to
 //      distribute all books; and pages allocated to the current student, respectively.
 //      Initially try to allocate as many books as possible to only 1 student. Start the book allocation from the 1st
@@ -78,6 +75,8 @@ using namespace std;
 // 2. accumulate(arr.begin(), arr.end(), x): Calculates the sum of all elements of 'arr' with starting sum as 'x'.
 //                                           If you want, exact sum of all elements, keep the value of 'x' as 0.
 
+#include <bits/stdc++.h>
+using namespace std;
 
 class Solution {
 private:
