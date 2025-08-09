@@ -61,7 +61,7 @@ using namespace std;
 
 // 'isPossible()' function algorithm:
 //  i.  Initialize two variables 'students' and 'pagesStudent' to keep track of no.of students required to
-//      distribute all books among 'k' students; and pages allocated to the current student, respectively.
+//      distribute all books; and pages allocated to the current student, respectively.
 //      Initially try to allocate as many books as possible to only 1 student. Start the book allocation from the 1st
 //      book, i.e., from arr[0]. The moment when it's not possible to allocate any further book to the current student
 //      due to the constraint of no. of pages allocated to that student is exceeding the 'maxPagesAllowed' limit;
@@ -101,6 +101,22 @@ private:
         // to distribute all books is more than 'k', then it's not possible to allocate all books among 'k' students.
         return students > k ? false : true;
     }
+
+    // ● Why not return true only if students == k, why we return true when students <= k ?
+    //   Try out example: arr = [15, 10, 19, 10, 5, 18, 7], k = 5
+    //   If we return true only on students == k, then the function will always return false for every value of
+    //   'maxPagesAllowed' for the given example. Technically for this example, number of students we get according
+    //   to the code we have written is never bound to yield count of students as 5, it will always yield a count
+    //   greater than 5 or less than 5.
+    //   Illustration:
+    //   Let's say we allocated maximum pages for a student as 24. In this case, the minimum number of students
+    //   required to distribute all books will come out to be 6 (15, 10, 19, {10 + 5}, 18, 7), which is greater
+    //   than k = 5. Hence, books cannot be allocated among 5 students.
+    //   But when we allocate maximum pages for a student as 25,  the minimum number of students required to
+    //   distribute all books is 4, which is not equal to k = 5, but less than k.
+    //   But 25 is only the answer because if we can distribute all books among 4 students ({15 + 10}, 19, 15, {18 + 7}),
+    //   we can also distribute all books among 5 students({15 + 10}, 19, 15, 18, 7) or (15, 10, 19, 15, {18 + 7}).
+    //   Hence, return true if students <= k, not only when students == k.
 
 public:
     // Linear search
