@@ -71,7 +71,7 @@
 //      it's possible to allocate all books among 'k' students for the given limit of 'maxPagesAllowed'.
 
 // Some useful predefined methods of C++ that you may use in this code:
-// 1. *max_element(arr.begin(), arr.end()): Returns the largets element of 'arr'.
+// 1. *max_element(arr.begin(), arr.end()): Returns the largest element of 'arr'.
 // 2. accumulate(arr.begin(), arr.end(), x): Calculates the sum of all elements of 'arr' with starting sum as 'x'.
 //                                           If you want, exact sum of all elements, keep the value of 'x' as 0.
 
