@@ -22,6 +22,8 @@
 // Explanation: Each cow can be placed in any of the stalls, as the no. of stalls are exactly equal to the number of cows.
 //              The minimum distance between cows, in this case, is 1, which also is the largest among all possible ways.
 
+// Problem link: https://www.geeksforgeeks.org/problems/aggressive-cows/1
+
 // Algorithm:
 // --- LINEAR SEARCH ---
 // 1. Sort the given 'stalls' array.
@@ -30,7 +32,7 @@
 //    distance between two cows.
 //    Now one thing we know is, assuming 2 cows the minimum distance between them can be 1. Similarly, the maximum
 //    distance between them can be if the 1st cow is standing on first stall(stall[0]) and the last cow is standing
-//    on the last stall(stall[n-1]). Thus, the maximum distance between 2 cows can be stall[n - 1] - stall[0]. So our
+//    on the last stall(stall[n - 1]). Thus, the maximum distance between 2 cows can be stall[n - 1] - stall[0]. So our
 //    answer would lie somewhere between 1 to stall[n - 1] - stall[0] for k cows.
 // 3. So start an iterator 'i' from 1 to stall[n - 1] - stall[0], and check whether we distribute the given 'k' cows
 //    among all stalls while maintaining a minimum distance of 'i', using a function 'canWePlace()'. If it's possible
@@ -40,7 +42,7 @@
 
 // --- BINARY SEARCH ---
 // 1. The 'canWePlace()' function the remains the same; only the driver function changes. We already know that the
-//    search space lies in the range of 1 to stall[n-1] - stall[0] where stalls are already sorted. Thus, we will
+//    search space lies in the range of 1 to stall[n - 1] - stall[0] where stalls are already sorted. Thus, we will
 //    apply binary search on this search space.
 //    Initialize 'start' and 'end' as usual with the lower and upper limit of the above mentioned search space.
 // 2. Find 'mid' by computing 'start + (end - start) / 2' as usual. Here 'mid' denotes the minimum distance
@@ -90,19 +92,23 @@ public:
     // T.C: O((max - min) * n);   where n = stalls.size()
     // S.C: O(1)
     int aggressiveCows_bruteforce(vector<int> &stalls, int k) {
-        if(k > stalls.size()) return -1;
+        if(k > stalls.size()) return -1;   // If no. of cows is greater than no. of stalls, return -1
 
         sort(stalls.begin(), stalls.end());
         int min = 1;
         int max = stalls[stalls.size() - 1] - stalls[0];
 
-        for(int i = 1; i <= max - min; i++) {
-            if(canWePlaceCows(stalls, i, k)) continue;   // 'i' is the minimum distance that we have to maintain
+        for(int i = min; i <= max; i++) {
+            // If we can place 'k' cows while maintaining a minimum distance of 'i', continue to check for larger values of 'i'
+            // Else return the previous value of 'i' as that is the maximum distance we can maintain between two cows.
+            if(canWePlaceCows(stalls, i, k)) continue;
             else return i - 1;
         }
+
+        return max;   // If we reach here, it means we can place 'k' cows while maintaining a minimum distance of 'max'
     }
 
-// ------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------
 
     // Binary search
     // T.C: O(log(end - start) * n);   where n = stalls.size()
