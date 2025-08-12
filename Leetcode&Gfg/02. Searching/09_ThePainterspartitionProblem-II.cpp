@@ -29,6 +29,7 @@ using namespace std;
 
 class Solution {
 private:
+    // Returns true if it's possible to paint all boards with 'k' painters in 'maxTimeAllowed' time, else false.
     bool isPossible(vector<int>& arr, long long maxTimeAllowed, int k) {
         int painters = 1;   // no.of painters (start with one painter initially)
         long long timePainter = 0;   // 'timePainter' is the time taken by current painter
@@ -40,11 +41,12 @@ private:
             }
         }
 
+        // If the number of painters exceeds 'k', then it's not possible to paint all boards in 'maxTimeAllowed' time.
         return painters > k ? false : true;
     }
 
 public:
-    // T.C: O(log(end-start+1) * n);   where end = sum of all elements of 'arr', start = maximum element of 'arr', and n = arr.size()
+    // T.C: O(log(end - start + 1) * n);   where end = sum of all elements of 'arr', start = maximum element of 'arr', and n = arr.size()
     // S.C: O(1)
     long long minTime(vector<int>& arr, int k) {
         // ONLY CHANGE IN CODE: If there are more painters than boards, return the largest board length
@@ -56,7 +58,7 @@ public:
         long long ans = -1;
         while(start <= end) {
             long long mid = start + (end - start) / 2;
-            if(isPossible(arr, mid, k)) {
+            if(isPossible(arr, mid, k)) {   // if it's possible to paint all boards with 'k' painters in 'mid' time
                 ans = mid;
                 end = mid - 1;
             } else start = mid + 1;
