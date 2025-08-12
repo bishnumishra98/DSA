@@ -22,6 +22,8 @@
 // Explanation: There is only one painter, so the painter must paint all boards sequentially. The total time taken
 // will be the sum of all board lengths, i.e., 100 + 200 + 300 + 400 = 1000.
 
+// Problem link: https://www.geeksforgeeks.org/problems/the-painters-partition-problem1535/1
+
 // Algorithm: As it's almost same problem as '08_AllocateMinimumPages.cpp', we will directly write Binary search approach.
 
 #include <bits/stdc++.h>
