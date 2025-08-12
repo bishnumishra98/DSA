@@ -119,8 +119,8 @@ public:
         sort(stalls.begin(), stalls.end());
         int start = 1;
         int end = stalls[stalls.size() - 1] - stalls[0];
-        int ans = 0;
 
+        int ans = -1;
         while(start <= end) {
             int mid = start + (end - start) / 2;
             if(canWePlaceCows(stalls, mid, k)) {   // 'mid' is the minimum distance that we have to maintain
