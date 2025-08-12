@@ -111,7 +111,7 @@ public:
 // ---------------------------------------------------------------------------------------------------------------
 
     // Binary search
-    // T.C: O(log(end - start) * n);   where n = stalls.size()
+    // T.C: O(log(end - start) * n);   where n = stalls.size(), start = 1, end = stalls[n - 1] - stalls[0] in sorted stalls
     // S.C: O(1)
     int aggressiveCows(vector<int> &stalls, int k) {
         if(k > stalls.size()) return -1;
