@@ -12,7 +12,93 @@
 // Output: 2.50000
 // Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
 
-// Optimal algorithm: 
+// Optimal algorithm: The algorithm may look massive, but it is actually simple if you dry run it on paper.
+//                    The idea is to partition the resultant array(sum of both arrays) into two halves such that
+//                    all elements in the left half are less than or equal to all elements in the right half. Each half
+//                    may contain some elements from both arrays, though there can be several cases where one half
+//                    contains all elements from only one array, but that is not a problem.
+//                    If resultant has even number of elements, then each half shall contain 'total / 2' elements, and
+//                    if resultant has odd number of elements, then left half shall contain 'total + 1 / 2' elements,
+//                    whereas the right half shall contain 'total / 2' elements, where total = nums1.size() + nums2.size().
+//                    Generalised formula for number of elements in left half = (total + 1 / 2), and in right half
+//                    = (total / 2). This formula works for both even and odd length resultant arrays.
+//                    ● Illustration:
+//                      For nums1 = [1, 3], nums2 = [2, 4]; left half = [1, 2], right half = [3, 4].
+//                      For nums1 = [1, 3], nums2 = [2, 4, 5]; left half = [1, 2, 3], right half = [4, 5].
+//                      Thus, we can generalize the formula for the number of elements in left half as = (total + 1 / 2),
+//                      and in right half as = (total / 2), where total = nums1.size() + nums2.size().
+//                      Now, let's say number of elements in left half is 'left', out of which 'l1' elements are from
+//                      nums1 and 'l2' elements are from nums2, then we get the formula: left = l1 + l2.
+//                      Similarly, if number of elements in right half is 'right', out of which 'r1' elements are from
+//                      nums1 and 'r2' elements are from nums2, then we get the formula: right = r1 + r2.
+//                      If number of elements in left half from nums1 is 'l1', then number of elements in right half
+//                      from nums1 will be 'r1 = nums1.size() - l1'. Similarly, if number of elements in left half
+//                      from nums2 is 'l2', then number of elements in right half from nums2 will be
+//                      'r2 = nums2.size() - l2'.
+//                      Changing value of l1 will change the value of l2, r1 and r2, but there will be only one
+//                      configuration of l1, l2, r1 and r2 such that all elements in left half are less than or equal
+//                      to all elements in right half.
+//                      Hence, we can only focus on any one of the two arrays (let's say nums1), and find the correct
+//                      configuration of l1 such that all elements in left half are less than or equal to all elements
+//                      in right half.
+//                    ● Illustration:
+//                      nums1 = [1, 3, 5], nums2 = [2, 4, 6];
+//                      • Elements in left half = (3 + 3 + 1) / 2 = 3
+//                      • If we consider l1 = 0, then l2 = 3 - 0 = 3, r1 = 3 - 0 = 3, r2 = 3 - 3 = 0, i.e., we do not
+//                        consider any elements from nums1 in the left half, thus we have to consider all the 3 elements
+//                        from nums2 in left half.
+//                        Similarly, if we do not consider any elements from nums1 in the left half, then we have to
+//                        consider all the elements from nums1 in the right half. And if we consider all elements from
+//                        nums2 in the left half, then we have to consider no elements from nums2 in the right half.
+//                        In this case, the left half = [2, 4, 6], right half = [1, 3, 5].
+//                        But this is not a valid configuration as all elements in left half are not less than or equal
+//                        to all elements in right half.
+//                      • If we consider l1 = 1, then l2 = 3 - 1 = 2, i.e., we consider 1 element from nums1 and 2
+//                        elements from nums2 in the left half. Similarly, if 1 element is considered from nums1 in the
+//                        left half, then (3 - 1) = 2 elements will be considered from nums1 in the right half, and if
+//                        2 elements are considered from nums2 in the left half, then (3 - 2) = 1 element will be
+//                        considered from nums2 in the right half.
+//                        In this case, the left half = [1, 2, 4], and right half = [3, 5, 6].
+//                        But this is also not a valid configuration as all elements in left half are not less than or
+//                        equal to all elements in right half.
+//                      • If we consider l1 = 2, the configuration will be: left half = [1, 2, 3], and
+//                        right half = [4, 5, 6].
+//                        This is a valid configuration as all elements in left half are less than or equal to all
+//                        elements in right half.
+//                      • If we consider l1 = 3, the configuration will be: left half = [1, 3, 5], and
+//                        right half = [2, 4, 6].
+//                        Again, this is not a valid configuration as all elements in left half are not less than or
+//                        equal to all elements in right half.
+//                    Hence, we can say that there is only one configuration of l1 such that all elements in left half
+//                    are less than or equal to all elements in right half.
+//                    Once we find the correct configuration of l1, we can easily find the median.
+//
+//                    ● Illustration for even length resultant: nums1 = [1, 3, 5], nums2 = [2, 4, 6];
+//                      As resultant has even number of elements, left half is considered to have equal number of
+//                      elements as right half, i.e., left half will have (3 + 3) / 2 = 3 elements, and right half
+//                      will have (3 + 3) / 2 = 3 elements.
+//                      Correct configuration for this problem will be: left half = [1, 2, 3], right half = [4, 5, 6].
+//                      l1 will be 2, l2 will be (3 - 2) = 1; thus r1 and r2 will be (3 - 2) = 1 and (3 - 1) = 2,
+//                      respectively. The configuration will be: left half = [1, 2, 3], right half = [4, 5, 6].
+//                      To be precise, the detailed configuartion is actually:
+//                      Left half (l1 = 2, l2 = 1)     |   Right half (r1 = 1, r2 = 2)
+//                      nums1 = [1, 3]                 |   nums1 = [5]
+//                      nums2 = [2]                    |   nums2 = [4, 6]
+//                      Now we can observe that median will be average of largest element of left half and smallest
+//                      element of right half, thus median = maxElement(l1, l2) + minElement(r1, r2) / 2, i.e.,
+//                      (3 + 4) / 2 = 3.5.
+//
+//                    ● Illustration for odd length resultant: nums1 = [1, 3, 5], nums2 = [2, 4];
+//                      As resultant has odd number of elements, left half is considered to have one extra element
+//                      than right half, i.e., left half will have (3 + 2 + 1) / 2 = 3 elements, and right half
+//                      will have (3 + 2) / 2 = 2 elements. Correct configuration for this problem will be:
+//                      left half = [1, 2, 3], right half = [4, 5]; where l1 = 2, l2 = (3 - 2) = 1.
+//                      r1 will be nums1.size() - l1 = (3 - 2) = 1, and r2 will be nums2.size() - l2 = (2 - 1) = 1.
+//                      To be precise, the detailed configuartion is actually:
+//                      Left half (l1 = 2, l2 = 1)     |   Right half (r1 = 1, r2 = 1)
+//                      nums1 = [1, 3]                 |   nums1 = [5]
+//                      nums2 = [2]                    |   nums2 = [4]
+//                      Now we can observe that median lies on left haf, thus median = maxElement(l1, l2), i.e., 3.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -67,7 +153,7 @@ public:
         if(n1 > n2) return findMedianSortedArrays(nums2, nums1);   // to make sure 'nums1' is always of shorter or equal length than 'nums2'
 
         int n = n1 + n2;   // total elements in the resultant array of 'nums1' and 'nums2'
-        int left = (n1 + n2 + 1) / 2;   // no.of elements supposed to be kept in left symmetry
+        int left = (n1 + n2 + 1) / 2;   // no.of elements supposed to be kept in left half
 
         int start = 0, end = n1;
         while(start <= end) {
