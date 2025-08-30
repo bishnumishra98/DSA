@@ -37,7 +37,6 @@
 //                       3. After adding all K gas stations, calculate the maximum distance between two adjacent gas stations
 //                          using another loop and return it.
 
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -99,7 +98,7 @@ public:
 
     // T.C: O(n * logn) + O(K * logn);   where n = stations.size() and K = number of gas stations to be added
     // S.C: O(n - 1) + O(n - 1) = O(n)
-    double findSmallestMaxDist_optimized_bruteforce(vector<int> &stations, int K) {
+    double findSmallestMaxDist(vector<int> &stations, int K) {
         int n = stations.size();
         if(n <= 1) return 0;
         vector<int> howMany(n - 1, 0);
@@ -127,37 +126,6 @@ public:
         // The top element of the max-heap will have the maximum length of a section between two adjacent gas stations
         return pq.top().first;
     }
-
-// ------------------------------------------------------------------------------------------------------------------
-
-    double numberOfGasStationsRequired(double dist, vector<int> &stations) {
-        int cnt = 0;
-        for(int i = 1; i < stations.size(); i++) {
-            int numberInBetween = (stations[i] - stations[i - 1]) / dist;
-            if((stations[i] - stations[i - 1]) / dist == numberInBetween * dist) numberInBetween--;
-            cnt += numberInBetween;
-        }
-        return cnt;
-    }
-
-    // T.C: O(n * logm);   where n = stations.size() and m = maximum distance between two adjacent gas stations
-    // S.C: O(1)
-    double findSmallestMaxDist(vector<int> &stations, int K) {
-        int n = stations.size();
-        double start = 0;
-        double end = 0;
-        for(int i = 0; i < n - 1; i++) end = max(end, double(stations[i + 1] - stations[i]));
-
-        double diff = 1e-6;   // 10^-6
-        while(end - start > diff) {
-            double mid = start + (end - start) / 2;
-            int cnt = numberOfGasStationsRequired(mid, stations);
-            if(cnt > K) start = mid;
-            else end = mid;
-        }
-
-        return end;
-    }
 };
 
 
@@ -167,7 +135,6 @@ int main() {
 
     Solution obj;
     cout << obj.findSmallestMaxDist_bruteforce(stations, K) << endl;
-    cout << obj.findSmallestMaxDist_optimized_bruteforce(stations, K) << endl;
     cout << obj.findSmallestMaxDist(stations, K);
     
     return 0;
