@@ -1,5 +1,8 @@
+// Selection Sort: in selection sort, we repeatedly select the smallest (or largest, depending on sorting order) element
+// from the unsorted portion of the array and move it to the sorted portion of the array.
+
 // Selection Sort: Select the element at ith index and swap it with the smaller element found in the range
-// 'i+1' to 'n-1', where i runs 'n-1', where n = size of array.
+// 'i + 1' to 'n - 1', where i runs 'n - 1', where n = size of array.
 
 // Approach   --->   Consider the following array: int arr[5] = {55, 45, 35, 25, 15};   here n = 5.
 
@@ -39,18 +42,18 @@ void print(vector<int>& v) {
     }
 }
 
-// T.C: O(n2)
+// T.C: O(n^2)
 // S.C: O(1)
 void selectionSort(vector<int>& v) {
     int n = v.size();
 
-    for(int i=0; i<n-1; i++) {
+    for(int i = 0; i < n - 1; i++) {
         // let index of smallest element be 'minIndex'. Consider 'minIndex=i' initially.
         int minIndex = i;
 
         // If any element at (i+1 to n-1)th index is found to be smaller than that at 'minIndex'th,
        // we shall update 'minIndex' as 'index of that element'.
-        for(int j=i+1; j<n; j++) {
+        for(int j = i + 1; j < n; j++) {
             if(v[j] < v[minIndex]) {
                 minIndex = j;
             }
