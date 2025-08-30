@@ -1,35 +1,20 @@
-// Buuble Sort: Compare two adjacent elements at index i and i + 1, if element at ith index is greater than
-//              that present at (i + 1)th index, then swap them.
+// Buuble Sort: The largest numbers will bubble it's way to the right side of the array.
+//              Compare two elements at a time and swap if they are not in order, i.e., swap if left element is greater
+//              than the right element as our aim is to bubble the larger element to the right side of the array.
+//              In the first pass, the largest element will be at the last index, in the second pass the second largest
+//              element will be at the second last index and so on.
+//              Hence, to sort an array of size n, we need to do n - 1 passes.
 
-// Approach   --->    Consider worst case scenario : Let arr[5] = {55, 45, 35, 25, 15};  here n = 5.
+// Illustration:
+// Unsorted array: {55, 45, 35, 25, 15}, n = 5
 
-// For the outer loop i = 0, inner loop takes (n - i - 1) iterations,
-// i.e 4 iterations to position the highest element at last index.
-// {45, 55, 35, 25, 15}
-// {45, 35, 55, 25, 15}
-// {45, 35, 25, 55, 15}
-// {45, 35, 25, 15, 55}
+// Pass 1: {45, 35, 25, 15, 55}   // largest element 55 bubbles it's way through comparisions and reaches the last index
+// Pass 2: {35, 25, 15, 45, 55}   // second largest element 45 bubbles it's way through comparisions and reaches the second last index
+// Pass 3: {25, 15, 35, 45, 55}   // third largest element 35 bubbles it's way through comparisions and reaches the third last index
+// Pass 4: {15, 25, 35, 45, 55}   // fourth largest element 25 bubbles it's way through comparisions and reaches the fourth last index
+// No need of Pass 5 as the first element will be the smallest element 15.
+// Sorted array: {15, 25, 35, 45, 55}
 
-// Similarly for i = 1, it takes (n - i - 1) iterations,
-// i.e 3 iterations to position the 2nd highest element at 2nd last index.
-// {35, 45, 25, 15, 55}
-// {35, 25, 45, 15, 55}
-// {35, 25, 15, 45, 55}
-
-// Similarly for i = 2, it takes (n - i - 1) iterations,
-// i.e 2 iterations to position the 3rd highest element at 3rd last index.
-// {25, 35, 15, 45, 55}
-// {25, 15, 35, 45, 55}
-
-// Similarly for i = 3, it takes (n - i - 1) iterations,
-// i.e 1 iteration to position the 4th highest element at 4th last index.
-// {15, 25, 35, 45, 55}
-
-// The 5th highest element, i.e the smallest element is automatically sorted, so no more iterations required.
-
-// Thus, to sort a strictly unsorted array of 5 elements, outer loop should run 4 times, i.e. (n - 1) times,
-// i.e. i goes from 0 to 3; and inner loop runs (n - i - 1) times. Inner loop will be represented by j.
-// j is nothing, but indexes of elements in array. Dry run for better understanding.
 
 #include <iostream>
 #include <vector>
@@ -46,13 +31,21 @@ void print(vector<int>& v) {
 void bubbleSort(vector<int>& v) {
     int n = v.size();
 
+    // After each pass, the largest element will be at the end of the unsorted array, so
+    // do not need to check it again. Hence, reduce the range of j by i after each pass.
     for(int i = 0; i < n - 1; i++) {
-        for(int j = 0; j < n - i - 1; j++) {
-            if(v[j] > v[j + 1]) {
-                swap(v[j], v[j + 1]);
-            }
+        for(int j = 0; j < n - 1 - i; j++) {
+            if(v[j] > v[j + 1]) swap(v[j], v[j + 1]);
         }
     }
+
+    // OR
+
+    // for(int i = 1; i < n; i++) {
+    //     for(int j = 1; j < n + 1 - i; j++) {
+    //         if(v[j - 1] > v[j]) swap(v[j - 1], v[j]);
+    //     }
+    // }
 }
 
 
