@@ -5,6 +5,14 @@
 //                 Hence, to sort an array of size n, we need to do n - 1 passes. Depending upon the sorting
 //                 order, the same logic can be applied to sort the array in descending order too.
 
+// Illustration: 
+// Unsorted array: {55, 45, 35, 25, 15}, n = 5
+// Pass 1: {15, 45, 35, 25, 55}   // smallest element 15 is selected from the unsorted part and swapped with the first element
+// Pass 2: {15, 25, 35, 45, 55}   // second smallest element 25 is selected from the unsorted part and swapped with the second element
+// Pass 3: {15, 25, 35, 45, 55}   // third smallest element 35 is selected from the unsorted part and swapped with the third element
+// Pass 4: {15, 25, 35, 45, 55}   // fourth smallest element 45 is selected from the unsorted part and swapped with the fourth element
+// No need of Pass 5 as the last element will be the largest element 55.
+
 // Video link: https://www.youtube.com/watch?v=g-PGLbMth_g
 
 #include <iostream>
