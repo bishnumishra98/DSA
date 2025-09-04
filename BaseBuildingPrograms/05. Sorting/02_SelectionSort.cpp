@@ -1,36 +1,11 @@
-// Selection Sort: in selection sort, we repeatedly select the smallest (or largest, depending on sorting order) element
-// from the unsorted portion of the array and move it to the sorted portion of the array.
+// Selection Sort: During each pass, the smallest element from the unsorted part of the array is selected and
+//                 move it to the sorted part of the array. The sorted part is built from left to right.
+//                 After the first pass, the smallest element will be at the first index, after the second
+//                 pass the second smallest element will be at the second index and so on.
+//                 Hence, to sort an array of size n, we need to do n - 1 passes. Depending upon the sorting
+//                 order, the same logic can be applied to sort the array in descending order too.
 
-// Selection Sort: Select the element at ith index and swap it with the smaller element found in the range
-// 'i + 1' to 'n - 1', where i runs 'n - 1', where n = size of array.
-
-// Approach   --->   Consider the following array: int arr[5] = {55, 45, 35, 25, 15};   here n = 5.
-
-// {55, 45, 35, 25, 15}
-//  0   1   2   3   4
-
-// For the outer loop i=0, The element at ith index i.e. 0th index is 15 and
-// smallest element in ('i+1'-'n-1')th i.e. (1-4)th index is 55. So, 15 and 55 gets swapped.
-// {15, 45, 35, 25, 55}
-//  0   1   2   3   4
-
-// For the outer loop i=1, swap the element at ith index i.e. 1th index is 45 and
-// smallest element in ('i+1'-'n-1')th i.e. (2-4)th index is 25. So, 45 and 25 gets swapped.
-// {15, 25, 35, 45, 55}
-//  0   1   2   3   4
-
-// For the outer loop i=2, swap the element at ith index i.e. 2nd index is 35 and
-// smallest element in ('i+1'-'n-1')th i.e. (3-4)th index is 35. So, no change in array happens.
-// {15, 25, 35, 45, 55}
-//  0   1   2   3   4
-
-// For the outer loop i=3, swap the element at ith index i.e. 3rd index is 45 and
-// smallest element in ('i+1'-'n-1')th i.e. (4)th index is 55. So, no change in array happens.
-// {15, 25, 35, 45, 55}
-//  0   1   2   3   4
-
-// Hence, outer loop will always run 'n-1' times, thus it ranges from 0 to 'n-2', where n = size of array.
-
+// Video link: https://www.youtube.com/watch?v=g-PGLbMth_g
 
 #include <iostream>
 #include <vector>
@@ -48,18 +23,18 @@ void selectionSort(vector<int>& v) {
     int n = v.size();
 
     for(int i = 0; i < n - 1; i++) {
-        // let index of smallest element be 'minIndex'. Consider 'minIndex=i' initially.
-        int minIndex = i;
+        // 'minIndex' points to the index of the smallest element from ith index to the second last index.
+        int minIndex = i;   // assuming the element at ith index is the smallest element
 
-        // If any element at (i+1 to n-1)th index is found to be smaller than that at 'minIndex'th,
-       // we shall update 'minIndex' as 'index of that element'.
+        // Update the 'minIndex' with the smallest element found in the unsorted part, i.e.,
+        // smallest element on the right of ith index.
         for(int j = i + 1; j < n; j++) {
             if(v[j] < v[minIndex]) {
                 minIndex = j;
             }
         }
 
-       // swapping element at ith index with element at minIndexth index.
+        // Swap the ith element with the smallest element found in the unsorted part.
         swap(v[i], v[minIndex]);
     }
 }
