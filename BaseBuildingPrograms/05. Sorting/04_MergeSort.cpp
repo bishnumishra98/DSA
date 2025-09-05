@@ -85,7 +85,6 @@ void merge(vector<int>& arr, int start, int mid, int end) {
     }
 }
 
-
 // T.C: O(nlogn);   where n = size of 'arr'
 // S.C: O(n)
 void mergeSort(vector<int>& arr, int start, int end) {
