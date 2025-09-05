@@ -79,7 +79,7 @@ void merge(vector<int>& arr, int start, int mid, int end) {
         right++;
     }
 
-    // Take the sorted elements of 'temp' and put it directly in the original array 'arr'
+    // Take the sorted elements of 'temp' and put it directly in the original array 'arr' at respective indices.
     for(int i = start; i <= end; i++) {
         arr[i] = temp[i - start];
     }
