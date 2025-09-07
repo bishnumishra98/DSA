@@ -1,5 +1,5 @@
 // Selection Sort: During each pass, the smallest element from the unsorted part of the array is selected and
-//                 move it to the sorted part of the array. The sorted part is built from left to right.
+//                 moved to the sorted part of the array. The sorted part is built from left to right.
 //                 After the first pass, the smallest element will be at the first index, after the second
 //                 pass the second smallest element will be at the second index and so on.
 //                 Hence, to sort an array of size n, we need to do n - 1 passes. Depending upon the sorting
