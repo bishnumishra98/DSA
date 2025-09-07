@@ -45,7 +45,7 @@ using namespace std;
 // from mid into two sorted parts and then joins them to make one temporary single sorted array. At last,
 // it inserts elements of those temporary array into the array that merge() function had originally received.
 void merge(vector<int>& arr, int start, int mid, int end) {
-    vector<int> temp(end - start + 1);   // creating an array named 'temp' of size 'end - start + 1' inside heap.
+    vector<int> temp(end - start + 1);   // creating an array named 'temp' of size 'end - start + 1'
     int left = start;   // index of left side of array will range from index 'start' to 'mid'
     int right = mid + 1;   // index of right side of array will range from index 'mid + 1' to 'end'
 
