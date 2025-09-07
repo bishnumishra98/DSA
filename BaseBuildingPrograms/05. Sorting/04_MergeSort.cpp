@@ -85,9 +85,7 @@ void merge(vector<int>& arr, int start, int mid, int end) {
     }
 }
 
-// T.C: O(nlogn);   where n = size of 'arr'
-// S.C: O(n)
-void mergeSort(vector<int>& arr, int start, int end) {
+void ms(vector<int>& arr, int start, int end) {
     // Base case: 'start > end' means invalid array, and 'start == end' means only 1 element is left in sub-array
     if(start >= end) return;
 
@@ -95,24 +93,29 @@ void mergeSort(vector<int>& arr, int start, int end) {
 
     // Step 1: Divide
     // dividing left part of array until base case is reached, i.e., only 1 element is left in array
-    mergeSort(arr, start, mid);
+    ms(arr, start, mid);
 
     // dividing right part of array until base case is reached, i.e., only 1 element is left in array
-    mergeSort(arr, mid + 1, end);
+    ms(arr, mid + 1, end);
 
     // Step 2: Conquer
     // merging 2 sorted arrays
     merge(arr, start, mid, end);
 }
 
+// T.C: O(nlogn);   where n = size of 'arr'
+// S.C: O(n)
+void mergeSort(vector<int>& arr) {
+    int start = 0;
+    int end = arr.size() - 1; 
+    ms(arr, start, end);
+}
+
 
 int main() {
     vector<int> arr = {20, 10, 50, 40, 30, 60};
-    int size = 6;
-    int start = 0;
-    int end = size - 1;
 
-    mergeSort(arr, start, end);
+    mergeSort(arr);
 
     for(int element: arr) {
         cout << element << " ";
