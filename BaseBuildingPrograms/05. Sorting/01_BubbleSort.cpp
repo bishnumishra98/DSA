@@ -40,14 +40,6 @@ void bubbleSort(vector<int>& v) {
             if(v[j] > v[j + 1]) swap(v[j], v[j + 1]);
         }
     }
-
-    // OR
-
-    // for(int i = 1; i < n; i++) {
-    //     for(int j = 1; j < n + 1 - i; j++) {
-    //         if(v[j - 1] > v[j]) swap(v[j - 1], v[j]);
-    //     }
-    // }
 }
 
 
