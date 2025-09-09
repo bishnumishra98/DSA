@@ -1,7 +1,6 @@
 // Quick Sort: We pick a element called pivot element, and partition the array around the pivot such that all elements on left
-//             of pivot are smaller than or equal to pivot, and all elements on right of pivot are greater than or equal to
-//             pivot. Then, we recursively apply the same logic to left and right sub-arrays of pivot. And finally, the whole
-//             array gets sorted.
+//             of pivot are smaller than or equal to pivot, and all elements on right of pivot are greater than pivot. Then,
+//             we recursively apply the same logic to left and right sub-arrays of pivot and finally the whole array gets sorted.
 
 // ● How to partition the array around the pivot element ?
 //   1. Choose a pivot element. Here, we are choosing the first element of the array as pivot.
