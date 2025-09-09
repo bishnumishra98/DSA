@@ -86,7 +86,7 @@ void merge(vector<int>& arr, int start, int mid, int end) {
 }
 
 void ms(vector<int>& arr, int start, int end) {
-    // Base case: 'start > end' means invalid array, and 'start == end' means only 1 element is left in sub-array
+    // Base case: If array has zero or one element, it is already sorted. Thus, we return.
     if(start >= end) return;
 
     int mid = start + (end - start) / 2;   // (start + end) / 2
