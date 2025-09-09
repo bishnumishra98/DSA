@@ -24,8 +24,10 @@
 // 4. Find total occurrence of each unique element and if total occurrence of any particular element
 //    is greater than n/3, then push it in a vector 'ans'. In the end, return 'ans'.
 
-// Approach 2:-
-// 1. 
+// Approach 2:- Hashing
+// 1. Create a map to store the frequency of each element in the vector.
+// 2. Traverse the map and if frequency of any element is greater than n/3, then insert it in a set.
+// 3. Convert the set into a vector and return it.
 
 
 #include <bits/stdc++.h>   // for sort()
