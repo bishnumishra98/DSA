@@ -8,11 +8,11 @@
 //   3. Increment i till we find an element greater than pivot. Decrement j till we find an element smaller than or equal to pivot.
 //      Hence, i stands at the first element encountered from left which is greater than pivot, and j stands at the first element
 //      encountered from right which is smaller than or equal to pivot.
-//   4. If i is still less than j, it means we have found two elements which are at wrong halves, so we swap them. Repeat
-//      steps 3 and 4 till i meets or crosses j.
-//   5. Once i meets or crosses j, j comes to the region where every element is smaller than or equal to pivot. So, we swap the
+//      If i is still less than j, it means we have found two elements which are at wrong halves, so we swap them. Repeat
+//      this process till i meets or crosses j.
+//   4. Once i meets or crosses j, j comes to the region where every element is smaller than or equal to pivot. So, we swap the
 //      pivot element with the element at j. Now, pivot is at its correct position.
-//   6. Return j as the partition index, .i.e., the correct index of pivot element.
+//   5. Return j as the partition index, .i.e., the correct index of pivot element.
 
 // Video link: https://www.youtube.com/watch?v=WIrA4YexLRQ&t=417s
 
