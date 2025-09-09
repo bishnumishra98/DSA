@@ -37,9 +37,7 @@ void selectionSort(vector<int>& v) {
         // Update the 'minIndex' with the smallest element found in the unsorted part, i.e.,
         // smallest element on the right of ith index.
         for(int j = i + 1; j < n; j++) {
-            if(v[j] < v[minIndex]) {
-                minIndex = j;
-            }
+            if(v[j] < v[minIndex]) minIndex = j;
         }
 
         // Swap the ith element with the smallest element found in the unsorted part.
