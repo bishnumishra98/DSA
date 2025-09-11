@@ -30,7 +30,7 @@
 // 3. Convert the set into a vector and return it.
 
 
-#include <bits/stdc++.h>   // for sort()
+#include <bits/stdc++.h>
 using namespace std;
 
 class Solution {

@@ -10,9 +10,7 @@
 // Output: 2
 
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 
 // T.C: O(nlogn);   due to sort()
@@ -20,14 +18,14 @@ using namespace std;
 int majorityElement(vector<int>& nums) {
     int n = nums.size();
     sort(nums.begin(), nums.end());
-    int midElement = nums[n/2];
+    int midElement = nums[n / 2];
 
     return midElement;
 }
 
 
 int main() {
-    vector <int> v = {3,2,3};
+    vector <int> v = {3, 2, 3};
 
     cout << majorityElement(v);
 
