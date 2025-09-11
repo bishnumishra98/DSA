@@ -15,7 +15,7 @@
 // First understand this question present in in Leetcode&gfg\Searching:
 // Leetcode: 34. Find First and Last Position of Element in Sorted Array
 
-// (This question is very easy, and it was solved by me in 1st attempt)
+// Algorithm: Extremely easy approaches:
 
 // Approach 1:- Moore's Voting Algorithm
 // 1. First sort the given vector.
@@ -89,16 +89,16 @@ public:
     // S.C: O(1)
     vector<int> majorityElement(vector<int>& nums) {
         int n = nums.size();
-        vector <int> ans;
+        vector<int> ans;
 
         sort(nums.begin(), nums.end());
 
         int i = 0;
-        while(i<n) {
+        while(i < n) {
             int firstOcc = findFirstPosition(nums, nums[i]);
             int lastOcc = findLastPosition(nums, nums[i]);
 
-            if((lastOcc - firstOcc + 1) > n/3) {
+            if((lastOcc - firstOcc + 1) > n / 3) {
                 ans.push_back(nums[i]);
             }
 
@@ -134,7 +134,7 @@ public:
 
 
 int main() {
-    vector <int> nums = {3,2,3};
+    vector <int> nums = {3, 2, 3};
 
     vector<int> ans1 = Solution().majorityElement(nums);
     for(auto it: ans1) cout << it << " ";
