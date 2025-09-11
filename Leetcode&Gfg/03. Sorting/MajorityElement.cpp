@@ -18,8 +18,8 @@ using namespace std;
 // T.C: O(nlogn);   due to sort()
 // S.C: O(1)
 int majorityElement(vector<int>& nums) {
-    sort(nums.begin(), nums.end());
     int n = nums.size();
+    sort(nums.begin(), nums.end());
     int midElement = nums[n/2];
 
     return midElement;
