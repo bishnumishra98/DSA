@@ -22,10 +22,10 @@ public:
         int carry = 0;
 
         // Iterate while there are digits in either string or there is a carry
-        while (i >= 0 || j >= 0 || carry) {
+        while(i >= 0 || j >= 0 || carry) {
             int sum = carry;   // start with the carry value
-            if (i >= 0) sum += a[i--] - '0';   // add the digit of a if available and move the pointer.
-            if (j >= 0) sum += b[j--] - '0';   // add the digit of b if available and move the pointer
+            if (i >= 0) sum += a[i--] - '0';   // add the digit of a at ith index and move the pointer
+            if (j >= 0) sum += b[j--] - '0';   // add the digit of b at jth index and move the pointer
             carry = sum / 2;   // update the carry (1 if sum is 2 or more, otherwise 0)
             result += (sum % 2) + '0';   // append the current digit (sum % 2) to the result
         }
