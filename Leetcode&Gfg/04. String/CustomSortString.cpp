@@ -10,29 +10,45 @@
 // Input: order = "cbafg", s = "abcd"
 // Output: "cbad"
 
-#include <iostream>
-#include <algorithm>   // for sort()
+#include <bits/stdc++.h>
 using namespace std;
 
-string str;   // global declaration of 'str'
+class Solution {
+public:
+    // T.C: O(n + m);   n = length of string s, m = length of string order
+    // S.C: O(m);   where m = order.size()
+    string customSortString(string order, string s) {
+        // Frequency of characters in s
+        unordered_map<char, int> freq;
+        for(char c : s) freq[c]++;
 
-bool customComparator(char c1, char c2) {
-    return (str.find(c1) < str.find(c2));
-}
+        string result = "";
 
-// leetcode given function
-// T.C: O(nlogn);   because T.C of sort() in C++ is O(nlogn)
-// S.C: O(m);   where m = order.size()
-string customSortString(string order, string s) {
-    str = order;
-    sort(s.begin(), s.end(), customComparator);
-    return s;
-}
+        // Step 1: Add chars according to 'order'
+        for(char c : order) {
+            while(freq[c] > 0) {
+                result.push_back(c);
+                freq[c]--;
+            }
+        }
+
+        // Step 2: Add remaining chars not in 'order'
+        for(char c : s) {
+            while(freq[c] > 0) {
+                result.push_back(c);
+                freq[c]--;
+            }
+        }
+
+        return result;
+    }
+};
+
 
 int main() {
     string order = "cbafg", s = "abcd";
 
-    cout << customSortString(order, s);
+    cout << Solution().customSortString(order, s);
     
     return 0;
 }
