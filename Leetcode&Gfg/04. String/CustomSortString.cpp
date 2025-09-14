@@ -16,7 +16,7 @@ using namespace std;
 class Solution {
 public:
     // T.C: O(n + m);   n = length of string s, m = length of string order
-    // S.C: O(m);   where m = order.size()
+    // S.C: O(1);   as freq array will always have <= 26 characters
     string customSortString(string order, string s) {
         // Frequency of characters in s
         unordered_map<char, int> freq;
