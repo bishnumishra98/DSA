@@ -11,76 +11,71 @@
 // Input: words = ["a","b","c"], pattern = "a"
 // Output: ["a","b","c"]
 
-// Tip: Understand 'Leetcode: 2325. Decode the Message' first.
+// Tip: Understand 'Leetcode&Gfg\04. String\DecodeTheMessage.cpp' first.
 
 // Approach :-
 // We will create a mapping for pattern, then create mapping for each element of 'word' and compare
 // it with 'pattern's' mapping. If they both are matching, return that element.
 
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-void printvector(vector <string>& str) {
-    for(auto element: str) {
-        cout << element << " ";
-    }
-}
-
-// createMapping() function takes a string and changes it to its equivalent 'abc...' pattern.
-// This mapping process is called normalization.
-// T.C: O(n);   where n is str.size()
-// S.C: O(300) = O(1);
-void createMapping(string& str) {
-    char start = 'a';
-    char mapping[300] = {0};   // initializing all characters of 'str' by 0
-
-    // creating a mapping for 'str'
-    for(auto ch: str) {
-        if(mapping[ch] == 0) {
-            mapping[ch] = start;
-            start++;
+class Solution {
+private:
+    string decodeKey(string key) {
+        // Method 1: Using unordered_map
+        unordered_map<char, char> mp;
+        char i = 'a';
+        for(char ch: key) {
+            if(mp.find(ch) == mp.end()) {
+                mp[ch] = i;
+                i++;
+            }
         }
+
+        string result = "";
+        for(char ch: key) result.push_back(mp[ch]);
+        return result;
+
+
+        // // Method 2 (faster): Using vector instead of unordered_map
+        // vector<char> mp(26, '0');   // char: mapped_char; example:- 19: a, 7: b, etc., which means 't': 'a', 'h': 'b', etc.
+        // char i = 'a';
+
+        // for(char ch: key) {
+        //     if(mp[ch - 'a'] == '0') {
+        //         mp[ch - 'a'] = i;
+        //         i++;
+        //     }
+        // }
+
+        // string result = "";
+        // for(char ch: key) result.push_back(mp[ch - 'a']);
+        // return result;
     }
 
-    // normalizing string, i.e replacing all characters of string 'str' by pattern 'abc...'
-    for(int i=0; i<str.size(); i++) {
-        char ch = str[i];
-        str[i] = mapping[ch];
-    }
-}
+public:
+    // T.C: O(pattern) + O(n * m);   where n = words.size() and m = average length of each word
+    // S.C: O(1);   as unordered_map/vector will store at max 26 characters
+    vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
+        string decodedPattern = decodeKey(pattern);
 
-// leetcode given function
-// T.C: O(m*n);   where m = no.of elements in 'words' vector, n = average length of the words.
-// S.C: O(m`+n);    where m` = no.of elements in 'ans' vector
-vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
-    // normalizing pattern
-    createMapping(pattern);
-
-    vector <string> ans;
-
-    for(string element: words) {
-        string temp = element;
-
-        createMapping(temp);   // normalizing 'temp'
-
-        if(temp == pattern) {
-            ans.push_back(element);
+        vector<string> result;
+        for(string word: words) {
+            if(decodeKey(word) == decodedPattern) result.push_back(word);
         }
-    }
 
-    return ans;
-}
+        return result;
+    }
+};
+
 
 int main() {
-    vector <string> words = {"abc","deq","mee","aqq","dkd","ccc"};
+    vector<string> words = {"abc","deq","mee","aqq","dkd","ccc"};
     string pattern = "abb";
 
-    vector <string> v;
-
-    v = findAndReplacePattern(words, pattern);
-
-    printvector(v);
+    vector<string> ans = Solution().findAndReplacePattern(words, pattern);
+    for(auto i: ans) cout << i << " ";
 
     return 0;
 }
