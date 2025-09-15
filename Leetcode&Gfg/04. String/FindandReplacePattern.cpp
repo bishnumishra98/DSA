@@ -13,9 +13,6 @@
 
 // Tip: Understand 'Leetcode&Gfg\04. String\DecodeTheMessage.cpp' first.
 
-// Approach :-
-// We will create a mapping for pattern, then create mapping for each element of 'word' and compare
-// it with 'pattern's' mapping. If they both are matching, return that element.
 
 #include <bits/stdc++.h>
 using namespace std;
