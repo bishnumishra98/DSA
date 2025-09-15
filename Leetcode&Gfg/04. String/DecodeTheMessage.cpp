@@ -26,67 +26,42 @@
 
 // Problem link: https://leetcode.com/problems/decode-the-message/description/
 
-// Approach:-
-// 1) Store elements a, b, c, d, etc mapped to indexes t, h, e, q, etc, in a mapping array;
-//    where t, h, e, q, etc are elements of keys.
-// 2) Store elements from mapping array in a string 'ans' corresponding to indexes of v, k, b, s, etc,
-//    where v, k, b, s, etc are elements of message. Then return the 'ans'.
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-// T.C: O(n);   where n is message.size()
-// S.C: O(n)
-string decodeMessage(string key, string message) {
-    // Creating mapping --->
-    char start = 'a';
-    char mapping[300] = {0};   // Initializing all elements of array with 0, i.e., '\0' null character.
-    // Later, elements of this array will be a, b, c, d, etc. And indexes of this array
-    // will be the letters of 'key'. It will be used to map indexes 'key' to elements 'abcd'.
+class Solution {
+public:
+    // T.C: O(n);   where n is message.size()
+    // S.C: O(1);   as unordered_map will store at max 26 characters
+    string decodeMessage(string key, string message) {
+        unordered_map<char, char> mp;
+        char i = 'a';
 
-    // for(int i=0; i<key.size(); i++) {
-    //     char ch = key[i];
-           // rest body
-    // }
-    // The same above code can be written using foreach loop :-
-    // for(auto ch: key) {
-           // rest body
-    // }
-
-    for(auto ch: key) {
-        if(ch != ' ' && mapping[ch] == 0) {   // ch != ' ' ensures no spaces
-            // are put inside mapping array. 'mapping[ch] == 0' ensures once an
-            // element is given a key, no same key should get a chance to
-            // become an index in mapping array. That's why element should be 0 in
-            // mapping[ch] to become eligible to get an index.
-            mapping[ch] = start;
-            start++;
+        // Create the mapping of {secret_char : normal_char}
+        for(char ch: key) {
+            if(ch != ' ' && mp.find(ch) == mp.end()) {   // only consider non-space characters and map their first occurrence
+                mp[ch] = i;
+                i++;
+            }
         }
-    }
 
-
-    // using mapping --->
-    string ans;
-
-    for(auto ch: message) {
-        if(ch == ' ') {
-            ans.push_back(' ');   // if there is a space in 'message', push a space in 'ans' too. 
-        } else {
-            char decoded = mapping[ch];   // each 'decoded' variable will represent
-                                         //  meaning of each character in 'message'.
-            ans.push_back(decoded);
+        string result = "";
+        // Decode the message using the mapping
+        for(char ch: message) {
+            if(ch == ' ') result.push_back(' ');
+            else result.push_back(mp[ch]);
         }
+
+        return result;
     }
-
-    return ans;
-}
-
+};
 
 int main() {
     string key = "the quick brown fox jumps over the lazy dog";
     string message = "vkbs bs t suepuv";
 
-    cout << decodeMessage(key, message);
+    cout << Solution().decodeMessage(key, message);
 
     return 0;
 }
