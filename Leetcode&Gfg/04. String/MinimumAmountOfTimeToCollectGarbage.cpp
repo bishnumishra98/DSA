@@ -1,29 +1,50 @@
-// Leetcode: 2391. Minimum Amount Of Time to Collect Garbage   --->   You are given a 0-indexed array
-// of strings garbage where garbage[i] represents the assortment of garbage at the ith house.
-// garbage[i] consists only of the characters 'M', 'P' and 'G' representing one unit of metal,
-// paper and glass garbage respectively. Picking up one unit of any type of garbage takes 1 minute.
-// You are also given a 0-indexed integer array travel where travel[i] is the number of minutes needed
-// to go from house i to house i + 1. There are three garbage trucks in the city, each responsible for
-// picking up one type of garbage. Each garbage truck starts at house 0 and must visit each house in
-// order. Only one garbage truck may be used at any given moment. While one truck is driving or picking
-// up garbage, the other two trucks cannot do anything. Return the minimum number of minutes needed to
-// pick up all the garbage.
+// Leetcode: 2391. You are given a 0-indexed array of strings garbage where garbage[i] represents the assortment
+// of garbage at the ith house. garbage[i] consists only of the characters 'M', 'P' and 'G' representing one unit
+// of metal, paper and glass garbage respectively. Picking up one unit of any type of garbage takes 1 minute.
+// You are also given a 0-indexed integer array travel where travel[i] is the number of minutes needed to go from
+// house i to house i + 1.
+// There are three garbage trucks in the city, each responsible for picking up one type of garbage. Each garbage
+// truck starts at house 0 and must visit each house in order; however, they do not need to visit every house.
+// Only one garbage truck may be used at any given moment. While one truck is driving or picking up garbage, the
+// other two trucks cannot do anything.
+// Return the minimum number of minutes needed to pick up all the garbage.
 
 // Example 1:
 // Input: garbage = ["G","P","GP","GG"], travel = [2,4,3]
 // Output: 21
+// Explanation:
+// The paper garbage truck:
+// 1. Travels from house 0 to house 1
+// 2. Collects the paper garbage at house 1
+// 3. Travels from house 1 to house 2
+// 4. Collects the paper garbage at house 2
+// Altogether, it takes 8 minutes to pick up all the paper garbage.
+// The glass garbage truck:
+// 1. Collects the glass garbage at house 0
+// 2. Travels from house 0 to house 1
+// 3. Travels from house 1 to house 2
+// 4. Collects the glass garbage at house 2
+// 5. Travels from house 2 to house 3
+// 6. Collects the glass garbage at house 3
+// Altogether, it takes 13 minutes to pick up all the glass garbage.
+// Since there is no metal garbage, we do not need to consider the metal garbage truck.
+// Therefore, it takes a total of 8 + 13 = 21 minutes to collect all the garbage.
 
 // Example 2:
 // Input: garbage = ["MMM","PGM","GP"], travel = [3,10]
 // Output: 37
+// Explanation:
+// The metal garbage truck takes 7 minutes to pick up all the metal garbage.
+// The paper garbage truck takes 15 minutes to pick up all the paper garbage.
+// The glass garbage truck takes 15 minutes to pick up all the glass garbage.
+// It takes a total of 7 + 15 + 15 = 37 minutes to collect all the garbage.
 
 
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-// T.C: O(n);   where n is garbage.size()
-// S.C: O(1)
+// T.C: O(n);   where n = garbage.size(), i.e., number of houses
+// S.C: O(1);
 int garbageCollection(vector<string>& garbage, vector<int>& travel) {
     int pickM = 0;
     int pickP = 0;
@@ -37,50 +58,44 @@ int garbageCollection(vector<string>& garbage, vector<int>& travel) {
     int lastTravelIndexP = 0;
     int lastTravelIndexG = 0;
 
-    // calculating pick time and last travel index
-    for(int i=0; i<garbage.size(); i++) {
-        // accessing each string of 'garbage' via 'curr'
-        string curr = garbage[i];
-
-        // accessing each character of the string 'curr' via 'ch'
-        for(int j=0; j<curr.length(); j++) {
-            char ch = curr[j];
-
+    // Count the number of each type of garbage and the last house index where each type is found
+    for(int i = 0; i < garbage.size(); i++) {
+        for(char ch : garbage[i]) {
             if(ch == 'M') {
-                pickM++;   // if character 'M' found at ith string, then increment pick time of M by 1
-                lastTravelIndexM = i;   // if character 'M' found at ith string, then update lastTravelIndexM to i
-            } else if(ch == 'P') {
-                pickP++;   // if character 'P' found at ith string, then increment pick time of P by 1
-                lastTravelIndexP = i;   // if character 'P' found at ith string, then update lastTravelIndexP to i
-            } else {
-                pickG++;   // if character 'G' found at ith string, then increment pick time of G by 1
-                lastTravelIndexG = i;   // if character 'G' found at ith string, then update lastTravelIndexG to i
+                pickM++;
+                lastTravelIndexM = i;
+            }
+            else if(ch == 'P') {
+                pickP++;
+                lastTravelIndexP = i;
+            }
+            else if(ch == 'G') {
+                pickG++;
+                lastTravelIndexG = i;
             }
         }
     }
 
-    // calculating travel time
-    for(int i=0; i<lastTravelIndexM; i++) {
-        travelM += travel[i];
+    // Calculate travel time for each type of garbage truck
+    for(int i = 0; i < travel.size(); i++) {
+        if(i < lastTravelIndexM) {
+            travelM += travel[i];
+        }
+        if(i < lastTravelIndexP) {
+            travelP += travel[i];
+        }
+        if(i < lastTravelIndexG) {
+            travelG += travel[i];
+        }
     }
 
-    for(int i=0; i<lastTravelIndexP; i++) {
-        travelP += travel[i];
-    }
-
-    for(int i=0; i<lastTravelIndexG; i++) {
-        travelG += travel[i];
-    }
-
-    int ans = (pickM + travelM) + (pickP + travelP) + (pickG + travelG);
-
-    return ans;
+    return pickM + pickP + pickG + travelM + travelP + travelG;
 }
 
 
 int main() {
-    vector <string> garbage = {"G","P","GP","GG"};
-    vector <int> travel = {2,4,3};
+    vector <string> garbage = {"G", "P", "GP", "GG"};
+    vector <int> travel = {2, 4, 3};
 
     cout << garbageCollection(garbage, travel);
 
