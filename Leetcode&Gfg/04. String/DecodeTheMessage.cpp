@@ -32,13 +32,13 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(n);   where n is message.size()
+    // T.C: O(key + message)
     // S.C: O(1);   as unordered_map will store at max 26 characters
     string decodeMessage(string key, string message) {
         unordered_map<char, char> mp;
         char i = 'a';
 
-        // Create the mapping of {secret_char : normal_char}
+        // Create the mapping of {secret_char: normal_char}
         for(char ch: key) {
             if(ch != ' ' && mp.find(ch) == mp.end()) {   // only consider non-space characters and map their first occurrence
                 mp[ch] = i;
@@ -55,13 +55,42 @@ public:
 
         return result;
     }
+
+// ------------------------------------------------------------------------------------------------------------
+
+    // More optimised code (using vector instead of unordered_map)
+    // T.C: O(key + message)
+    // S.C: O(1);   as vector will store at max 26 characters
+    string decodeMessage_arrayMethod(string key, string message) {
+        vector<char> mp(26, '0');   // secret_char: normal_char; example:- t: 0, h: 1, etc., which means t: a, h: b, etc.
+        char i = 'a';
+
+        // Build mapping
+        for(char ch : key) {
+            if(ch != ' ' && mp[ch - 'a'] == '0') {
+                mp[ch - 'a'] = i;
+                i++;
+            }
+        }
+
+        string result = "";
+        // Decode the message using the mapping
+        for(char ch : message) {
+            if(ch == ' ') result.push_back(' ');
+            else result.push_back(mp[ch - 'a']);
+        }
+
+        return result;
+    }
 };
+
 
 int main() {
     string key = "the quick brown fox jumps over the lazy dog";
     string message = "vkbs bs t suepuv";
 
-    cout << Solution().decodeMessage(key, message);
+    cout << Solution().decodeMessage(key, message) << endl;
+    cout << Solution().decodeMessage_arrayMethod(key, message);
 
     return 0;
 }
