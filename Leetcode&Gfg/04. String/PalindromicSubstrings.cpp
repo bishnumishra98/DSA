@@ -22,7 +22,7 @@ private:
     // even length palindromes) as the centre point, and then goes left and right around the centre to find all
     // palindromes with that centre. It returns the count of palindromes found around that centre.
     // The centre is also included as a palindrome of length 1 if it is really a palindrome.
-    int expandAroundCentre(string &s, int left, int right) {
+    int traverseAroundCentre(string &s, int left, int right) {
         int count = 0;   // stores the no.of palindromes
 
         while(left >= 0 && right < s.length() && s[left] == s[right]) {
@@ -41,8 +41,8 @@ public:
         int total = 0;
 
         for(int i = 0; i < s.length(); i++) {
-            total += expandAroundCentre(s, i, i);   // returns no.of odd length palindromes (ex:- palindrome of length 1, 3, 5, ...)
-            total += expandAroundCentre(s, i, i + 1);   // returns no.of even length palindromes (ex:- palindrome of length 2, 4, 6, ...)
+            total += traverseAroundCentre(s, i, i);   // returns no.of odd length palindromes (ex:- palindrome of length 1, 3, 5, ...)
+            total += traverseAroundCentre(s, i, i + 1);   // returns no.of even length palindromes (ex:- palindrome of length 2, 4, 6, ...)
         }
 
         return total;
