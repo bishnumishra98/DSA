@@ -1,55 +1,60 @@
-// Leetcode: 680. Valid Palindrome II  --->   Given a string s, return true if the s can be
-// palindrome after deleting at most one character from it. Ex:-
-// i/p: "aba",   o/p: true
-// i/p: "abca",    o/p: true
-// i/p: "abc",   o/p: false
+// Leetcode: 680. Valid Palindrome II  --->   Given a string s, return true if the s can be palindrome after
+// deleting at most one character from it.
 
+// Example 1:
+// Input: s = "aba"
+// Output: true
 
-#include <iostream>
-#include <algorithm>   // for reverse()
+// Example 2:
+// Input: s = "abca"
+// Output: true
+// Explanation: You could delete the character 'c'.
+
+// Example 3:
+// Input: s = "abc"
+// Output: false
+
+// Algorithm: Extremely simple.
+// As we are allowed to delete at most one character, if a mismatch happens:
+// ● Skip s[left] and check if remaining substring is palindrome.
+// ● Skip s[right] and check if remaining substring is palindrome.
+// If either works, return true. Otherwise, return false.
+
+#include <bits/stdc++.h>
 using namespace std;
 
-// T.C: O(n)
-// S.C: O(1)
-bool checkPalindrome(string s, int i, int j) {
-    while(i<j) {
-        if(s[i] == s[j]) {
-            i++;
-            j--;
-        } else {
-            return false;
+class Solution {
+private:
+    bool isPalindrome(string& s, int left, int right) {
+        while(left < right) {
+            if(s[left] != s[right]) return false;
+            left++;
+            right--;
         }
+        return true;
     }
 
-    return true;
-}
+public:
+    // T.C: O(n);   where n = s.length()
+    // S.C: O(1)
+    bool validPalindrome(string s) {
+        int left = 0, right = s.length() - 1;
 
-// leetcode given function
-// T.C: O(n)
-// S.C: O(1)
-bool validPalindrome(string s) {
-    int i = 0;
-    int j = s.size() - 1;
-
-    while(i<j) {
-        if(s[i] == s[j]) {
-            i++;
-            j--;
-        } else {
-            bool str1 = checkPalindrome(s, i+1, j);   // removing ith character and checking palindrome
-            bool str2 = checkPalindrome(s, i, j-1);   // removing jth character and checking palindrome
-
-            return str1 || str2;   // if any of the substring is palindrome, we will return true
+        while(left < right) {
+            // If a mismatch happens, try skipping either s[left] or s[right] and check if remaining substring is palindrome.
+            if(s[left] != s[right]) return isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1);
+            left++;
+            right--;
         }
-    }
 
-    return true;   // if we come here, it means while loop completed its lifetime and thus its an palindrome
-}
+        return true;
+    }
+};
 
 int main() {
-    string s = "cbbcc";
+    string s = "abca";
 
-    cout << validPalindrome(s);
+    cout << Solution().validPalindrome(s);
 
     return 0;
 }
