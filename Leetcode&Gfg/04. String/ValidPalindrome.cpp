@@ -1,61 +1,65 @@
-// Leetcode: 125. Valid Palindrome   --->   A phrase is a palindrome if, after converting all
-// uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads
-// the same forward and backward. Ex:-
-// i/p: "A man, a plan, a canal: Panama",   o/p: true
-// i/p: " ",    o/p: true
-// i/p: "race a horse",   o/p: false
+// Leetcode: 125. Valid Palindrome   --->   A phrase is a palindrome if, after converting all uppercase letters
+// into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward.
+// Alphanumeric characters include letters and numbers.
+// Given a string s, return true if it is a palindrome, or false otherwise.
+
+// Example 1:
+// Input: s = "A man, a plan, a canal: Panama"
+// Output: true
+// Explanation: "amanaplanacanalpanama" is a palindrome.
+
+// Example 2:
+// Input: s = "race a car"
+// Output: false
+// Explanation: "raceacar" is not a palindrome.
+
+// Example 3:
+// Input: s = " "
+// Output: true
+// Explanation: s is an empty string "" after removing non-alphanumeric characters.
+// Since an empty string reads the same forward and backward, it is a palindrome.
 
 
-#include <iostream>
-#include <algorithm>   // for reverse()
+#include <bits/stdc++.h>
 using namespace std;
 
-// T.C: O(n);   where n is length of string
-// S.C: O(n);   where n is length of string
-string removeNonAlphaNumericCharacters(string s) {
-    string str = "";
-
-    // removing all alphanumeric characters from string
-    for(int i=0; i<s.size(); i++) {
-        if((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z') || (s[i] >= '0' && s[i] <= '9')) {
-            str.push_back(s[i]);
-        }
+class Solution {
+private:
+    bool isAlphaNumeric(char c) {
+        if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) return true;
+        return false;
     }
 
-    return str;
-}
+public:
+    // T.C: O(n);   where n = s.length()
+    // S.C: O(1)
+    bool isPalindrome(string s) {
+        int left = 0, right = s.length() - 1;
 
-// leetcode given function
-// T.C: O(n);   where n is length of string
-// S.C: O(n);   where n is length of string
-bool isPalindrome(string s) {
-    string str = removeNonAlphaNumericCharacters(s);
+        while(left < right) {
+            // Skip non-alphanumeric characters
+            if(!isAlphaNumeric(s[left])) {
+                left++;
+                continue;
+            } 
+            if(!isAlphaNumeric(s[right])) {
+                right--;
+                continue;
+            }
 
-    // lowering the string
-    for(int i=0; i<str.size(); i++) {
-        if(toupper(str[i])) {
-            str[i] = tolower(str[i]);
+            if(tolower(s[left]) != tolower(s[right])) return false;
+            left++;
+            right--;
         }
+
+        return true;
     }
-
-    // checking if its palindrome
-    string temp = str;
-    reverse(str.begin(), str.end());   // reversing 'str'
-
-    return (temp == str);   // if(temp==str), then return true, else return false
-    
-    // // The same thing can be done using compare(). This functions returns 0 if two strigs are equal.
-    // if(str.compare(temp) == 0) {
-    //     return true;
-    // } else {
-    //     return false;
-    // }
-}
+};
 
 int main() {
     string s = "A man, a plan, a canal: Panama";
 
-    cout << isPalindrome(s);
+    cout << Solution().isPalindrome(s);
 
     return 0;
 }
