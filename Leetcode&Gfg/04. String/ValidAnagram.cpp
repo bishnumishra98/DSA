@@ -19,7 +19,7 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(nlogn)
+    // T.C: O(nlogn) + O(mlogm);   where n and m are lengths of strings s and t respectively.
     // S.C: O(1)
     bool isAnagram_bruteforce(string s, string t) {
         sort(s.begin(), s.end());
@@ -29,7 +29,7 @@ public:
 
 // -------------------------------------------------------------------
 
-    // T.C: O(n)
+    // T.C: O(n) + O(m);   where n and m are lengths of strings s and t respectively.
     // S.C: O(n)
     bool isAnagram(string s, string t) {
         vector<int> freq(26, 0);   // to store frequency of characters; example: 0: 1, 1: 3 means 'a' occurs once, 'b' occurs 3 times and so on.
