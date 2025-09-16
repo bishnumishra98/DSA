@@ -1,5 +1,6 @@
 // Leetcode: 242. Valid Anagram   --->   Given two strings s and t, return true if t is an anagram of s,
 // and false otherwise.
+// Two strings s and t are anagrams if they contain the same characters with the same frequency.
 
 // Example 1:
 // Input: s = "anagram", t = "nagaram"
