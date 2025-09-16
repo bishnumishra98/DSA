@@ -19,6 +19,7 @@
 // Explanation: s is an empty string "" after removing non-alphanumeric characters.
 // Since an empty string reads the same forward and backward, it is a palindrome.
 
+// Note: It is a joke question. Exactly same pattern as 'Leetcode&Gfg\04. String\ReverseVowelsOfAString.cpp'.
 
 #include <bits/stdc++.h>
 using namespace std;
