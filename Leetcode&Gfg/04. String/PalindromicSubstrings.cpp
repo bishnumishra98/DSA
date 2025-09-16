@@ -1,4 +1,6 @@
-// Leetcode: 647. Palindromic Substrings   --->   Given a string s, return the no.of palindromic substrings in it.
+// Leetcode: 647. Palindromic Substrings   --->   Given a string s, return the number of palindromic substrings in it.
+// A string is a palindrome when it reads the same backward as forward.
+// A substring is a contiguous sequence of characters within the string.
 
 // Example 1:
 // Input: s = "abc"
@@ -11,47 +13,46 @@
 // Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
 
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-// T.C: O(n/2);   where n is length of string
-// S.C: O(1)
-int expand(string str, int i, int j) {
-    int count = 0;
+class Solution {
+private:
+    // This function chooses a character (to find no.of odd length palindromes) or a pair of characters (to find no.of
+    // even length palindromes) as the centre point, and then goes left and right around the centre to find all
+    // palindromes with that centre. It returns the count of palindromes found around that centre.
+    // The centre is also included as a palindrome of length 1 if it is really a palindrome.
+    int expandAroundCentre(string &s, int left, int right) {
+        int count = 0;   // stores the no.of palindromes
 
-    // Fountain approach. i and j will jump to previous and next indexes respectively. If s[i] == s[j], count++.
-    while(i>=0 && j<str.size() && str[i] == str[j]) {
-        count++;
-        i--;
-        j++;
+        while(left >= 0 && right < s.length() && s[left] == s[right]) {
+            count++;   // found a palindrome, so increase count
+            left--;
+            right++;
+        }
+
+        return count;
     }
 
-    return count;
-}
+public:
+    // T.C: O(n^2) + O(n^2) = O(n^2);   where n = s.length()
+    // S.C: O(1)
+    int countSubstrings(string s) {
+        int total = 0;
 
-// leetcode given function
-// T.C: O(n);   where n is length of string
-// S.C: O(1)
-int countSubstrings(string s) {
-    int totalSubstrings = 0;
+        for(int i = 0; i < s.length(); i++) {
+            total += expandAroundCentre(s, i, i);   // returns no.of odd length palindromes (ex:- palindrome of length 1, 3, 5, ...)
+            total += expandAroundCentre(s, i, i + 1);   // returns no.of even length palindromes (ex:- palindrome of length 2, 4, 6, ...)
+        }
 
-    for(int i=0; i<s.size(); i++) {
-        // 'odd' means no.of odd length substrings for ith position
-        int odd = expand(s, i, i);
-        
-        // 'even' means no.of even length substrings for ith position
-        int even = expand(s, i, i+1);
-
-        totalSubstrings = totalSubstrings + odd + even;
+        return total;
     }
-    
-    return totalSubstrings;
-}
+};
 
 int main() {
     string s = "abc";
 
-    cout << countSubstrings(s);
+    cout << Solution().countSubstrings(s);
 
     return 0;
 }
