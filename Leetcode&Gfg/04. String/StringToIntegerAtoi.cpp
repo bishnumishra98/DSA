@@ -35,7 +35,9 @@ using namespace std;
 
 class Solution {
 public:
-    int myAtoi_bruteforce(string s) {
+    // T.C: O(n);   where n = s.length()
+    // S.C: O(1)
+    int myAtoi_abstracted(string s) {
         try {
             long long num = stoll(s);   // use stoll (long long) to safely detect overflow, instead of stoi()
             if(num < INT_MIN) return INT_MIN;
@@ -50,12 +52,45 @@ public:
             return INT_MAX;
         }
     }
+
+// --------------------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n);   where n = s.length()
+    // S.C: O(1)
+    int myAtoi(string s) {
+        int i = 0, n = s.size();
+    
+        // 1. Skip spaces
+        while(i < n && s[i] == ' ') i++;
+        
+        // 2. Handle sign
+        int sign = 1;
+        if(i < n && (s[i] == '+' || s[i] == '-')) {
+            if(s[i] == '-') sign = -1;
+            i++;
+        }
+        
+        // 3. Convert digits
+        long result = 0;
+        while(i < n && (s[i] >= '0' && s[i] <= '9')) {   // (i < n && isdigit(s[i]))
+            int digit = s[i] - '0';
+            
+            if(result > (INT_MAX - digit) / 10) return (sign == 1) ? INT_MAX : INT_MIN;   // check overflow before adding
+            
+            result = result * 10 + digit;
+            i++;
+        }
+        
+        return (int)(result * sign);
+    }
 };
+
 
 int main() {
     string s = "1337c0d3";
 
-    cout << Solution().myAtoi_bruteforce(s) << endl;
+    cout << Solution().myAtoi_abstracted(s) << endl;
+    cout << Solution().myAtoi(s);
 
     return 0;
 }
