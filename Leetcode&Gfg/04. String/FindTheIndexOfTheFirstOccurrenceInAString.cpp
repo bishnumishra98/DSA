@@ -13,6 +13,9 @@
 // Output: -1
 // Explanation: "leeto" did not occur in "leetcode", so we return -1.
 
+// Tip: To understand the optimal approach, first understand Knuth-Morris-Pratt algorithm, popularly
+//      known as KMP algorithm; mentioned in 'Leetcode&Gfg\04. String\LongestHappyPrefix.cpp'.
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -25,7 +28,7 @@ public:
         return(index == string::npos) ? -1 : (int)index;
     }
 
-// -------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------
 
     // T.C: O(n * m)
     // S.C: O(1)
@@ -44,6 +47,9 @@ public:
 
         return -1;
     }
+
+// ----------------------------------------------------------------------------------------------
+
 
 };
 
