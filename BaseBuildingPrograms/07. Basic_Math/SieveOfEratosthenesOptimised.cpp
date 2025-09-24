@@ -23,8 +23,8 @@ vector<bool> createSieveArray(int n) {
             // will already be marked as composite by 3. So, there is no need to start from i * 2.
             int j = i * i;
             
-            while(j <= n) {   // this loop runs max √n times due to optimization 1. For example,
-                             // for n = 23, we will enter this loop only twice (for, j = 4, 9).
+            while(j <= n) {   // this loop runs <= √n times due to optimization 1. For example,
+                             // for n = 23, we will enter this loop only twice (for i = 4 and 9).
                 sieve[j] = false;
                 j = j + i;
             }
