@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <math.h>
 using namespace std;
 
 // T.C: O(nlog(logn))
