@@ -10,7 +10,7 @@ vector<bool> createSieveArray(int n) {
 
     sieve[0] = sieve[1] = false;
 
-    // Optimization 2: inner loop will never run more than √n times due to optimization 1.
+    // Optimization 2: Inner loop will never run more than √n times due to optimization 1.
     // Inshort, we are never going to check any value of i where i * i is greater than n. So,
     // there is no need of running the outer loop from 2 to n unnecessarily.
     for(int i = 2; i * i <= n; i++) {   // or, for(int i = 2; i <= sqrt(n); i++) {
