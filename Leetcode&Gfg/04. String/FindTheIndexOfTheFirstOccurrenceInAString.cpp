@@ -13,8 +13,7 @@
 // Output: -1
 // Explanation: "leeto" did not occur in "leetcode", so we return -1.
 
-// Tip: To understand the optimal approach, first understand Knuth-Morris-Pratt algorithm, popularly
-//      known as KMP algorithm; mentioned in 'Leetcode&Gfg\04. String\LongestHappyPrefix.cpp'.
+// Optimal algorithm: First go through 'Leetcode&Gfg\04. String\LongestHappyPrefix.cpp'.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -50,14 +49,67 @@ public:
 
 // ----------------------------------------------------------------------------------------------
 
+    // Function to fill the LPS (Longest Prefix Suffix) array for the needle
+    void lpsFind(vector<int>& lps, string s) {
+        int n = s.size();
 
+        int prefix = 0;
+        int suffix = 1;
+
+        while(suffix < n) {
+            if(s[prefix] == s[suffix]) {
+                lps[suffix] = prefix + 1;
+                prefix++;
+                suffix++;
+            } else {
+                if(prefix == 0) {
+                    lps[suffix] = 0;
+                    suffix++;
+                } else {   // if(prefix != 0)
+                    prefix = lps[prefix - 1];
+                }
+            }
+        }
+    }
+
+    // Optimal Approach: Using KMP Algorithm
+    // Video link: https://www.youtube.com/watch?v=6gQR8TaFXMw&t=2687s
+    // T.C: O(m + n);   where m = length of haystack and n = length of needle
+    // S.C: O(n)
+    int strStr(string haystack, string needle) {
+        int m = haystack.length();
+        int n = needle.length();
+
+        vector<int> lps(n, 0);   // longest prefix suffix array for needle
+        lpsFind(lps, needle);   // fill the lps array for needle
+
+        int i = 0;   // for haystack
+        int j = 0;   // for needle
+        while(i < m && j < n) {
+            if(haystack[i] == needle[j]) {   // if characters match, move both pointers ahead
+                i++;
+                j++;
+            } else {   // if characters don't match
+                if(j == 0) {   // if j is already at the start of needle, move i ahead
+                    i++;
+                } else {   // if j is not at the start of needle, move j to the previous longest prefix suffix position
+                    j = lps[j - 1];
+                }
+            }
+
+            if(j == n) return i - n;   // needle is found
+        }
+
+        return -1;   // needle is not found
+    }
 };
+
 
 int main() {
     string haystack = "sudbutsad", needle = "sad";
 
     cout << Solution().strStr_abstracted(haystack, needle) << endl;
-    cout << Solution().strStr_bruteforce(haystack, needle);
+    cout << Solution().strStr(haystack, needle);
 
     return 0;
 }
