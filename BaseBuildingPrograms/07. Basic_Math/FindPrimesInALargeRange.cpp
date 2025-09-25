@@ -1,5 +1,13 @@
 // Understand SieveOfEratosthenes and SieveOfEratosthenesOptimised before solving this problem
 
+// Problem Statement: Given a range [L, R], find all prime numbers in this range. The range can be
+// large, i.e. L and R can be as large as 10^9.
+
+// Example 1:
+// Input: L = 10, R = 19
+// Output: 11 13 17 19
+
+// Solution:
 // The stack sizes in memory is typically between 1MB to 8MB.
 
 // Thus, if we create a 10^6 size array of type double, it would occupy 8,000,000 bytes, i.e 8MB of space.
@@ -19,19 +27,20 @@
 // possible to create larger arrays, but this may require special techniques or privileges.
 
 
-// Thus, it is not possible to find primes if the range is large, i.e >=10^6.
+// Thus, it is not possible to find primes if the range is large, i.e >= 10^6.
 
-// Thus, we have to apply a different approach. Let's consider a range of 110 to 130 for
-// better understanding. Here, L=110 and R=130. The sieve of numbers representing 110, 111,
-// 112, ..., 130 shall be called segmented sieve. The approach states that:
+// Algorithm:
+// Let's consider a range of 110 to 130 for better understanding. Here, L = 110 and R = 130.
+// The sieve of numbers representing 110, 111, 112, ..., 130 shall be called segmented sieve.
+// The approach states that:
 
 // 1) Generate all primes responsible to mark the segmented sieve(110-130). The base primes will be the
-// prime numbers in the sieve of 0 to √R, i.e. 0 to √130, i.e. 0 to 11 in this case. So base primes in
+// prime numbers in the sieve of 0 to √R, i.e., 0 to √130, i.e., 0 to 11 in this case. So base primes in
 // this sieve are {2, 3, 5, 7, 11}. These will help in marking composite numbers in segmented sieve.
 
 // 2) Find first index to start marking composite indexes in segmented sieve using the formula:-
 // first_mul = first_mul < L ? first_mul + prime : first_mul
-// We will pick each base prime number at a time and start marking its multiples as false, i.e. composite
+// We will pick each base prime number at a time and start marking its multiples as false, i.e., composite
 // in 'segmented sieve'. Example:-
 
 // When base prime = 2, the first index to start marking = (L/prime)*prime = (110/2)*2 = 110.
@@ -59,13 +68,13 @@ using namespace std;
 
 // creates sieve from 0 to n
 vector<bool> createSieveArray(int n) {
-    vector<bool> sieve(n+1, true);
+    vector<bool> sieve(n + 1, true);
     sieve[0] = sieve[1] = false;
 
-    for (int i=2; i*i<=n; i++) {
-        if (sieve[i] == true) {
+    for (int i = 2; i * i <= n; i++) {
+        if (sieve[i]) {
             int j = i * i;
-            while (j<=n) {
+            while (j <= n) {
                 sieve[j] = false;
                 j += i;
             }
@@ -89,17 +98,17 @@ vector<bool> createSieveArray_largeRange(int L, int R) {
         } 
     }
 
-    vector<bool> segSieve(R-L+1, true);   // segSieve has R-L+1, i.e. 130-110+1, i.e. 21 elements
-    if ((L == 0) || (L == 1)) {
+    vector<bool> segSieve(R - L + 1, true);   // segSieve has R - L + 1, i.e., 130 - 110 + 1, i.e., 21 elements
+    if((L == 0) || (L == 1)) {
         segSieve[L] = false;
     }
 
-    for (auto prime : basePrimes) {
+    for(auto prime : basePrimes) {
         int first_mul = (L / prime) * prime;
         first_mul = first_mul < L ? first_mul + prime : first_mul;
-        int j = max(first_mul, prime * prime);   // Remember SieveOfEratosthenesOptimised, j can start from i*i, that's why here we are doing prime*prime. 
-        while (j<=R) {
-            segSieve[j-L] = false;   // Indexes of 'segSieve' will obviously start from 0, not from 110.
+        int j = max(first_mul, prime * prime);   // Remember SieveOfEratosthenesOptimised, j can start from i * i, that's why here we are doing prime * prime. 
+        while (j <= R) {
+            segSieve[j - L] = false;   // Iindexes of 'segSieve' will obviously start from 0, not from 110.
             // So doing 'j-L'. j is multples 110, 111, ... which corresponds to 0, 1, .... indexes respectively.
             j += prime;
         }
@@ -113,7 +122,7 @@ int main() {
 
     vector<bool> segsieve = createSieveArray_largeRange(left, right);
 
-    for (int i=0; i<segsieve.size(); i++) {
+    for (int i = 0; i < segsieve.size(); i++) {
         if(segsieve[i]) {
             cout << left + i << " ";
         }
