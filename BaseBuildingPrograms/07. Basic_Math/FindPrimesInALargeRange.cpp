@@ -50,21 +50,21 @@
 // in 'segmented sieve'. Example:-
 
 // When base prime = 2, the first index to start marking = (L/prime)*prime = (110/2)*2 = 110.
-// Thus, 2 will mark 110, 112, 114, 116, 118, 120, 122, 124, 126, 128, 130 as false i.e. composite.
+// Thus, 2 will mark 110, 112, 114, 116, 118, 120, 122, 124, 126, 128, 130 as false i.e., composite.
 
 // When base prime = 3, the first index to start marking = (L/prime)*prime = (110/3)*3 = 108.
 // As 108<L, so the first index to start marking = 108 + prime = 108 + 3 = 111
-// Thus, 3 will mark 111, 114, 117, 120, 123, 126, 129 as false i.e. composite.
+// Thus, 3 will mark 111, 114, 117, 120, 123, 126, 129 as false i.e., composite.
 
 // When base prime = 5, the first index to start marking = (L/prime)*prime = (110/5)*5 = 110.
-// Thus, 5 will mark 110, 115, 120, 125, 130 as false i.e. composite.
+// Thus, 5 will mark 110, 115, 120, 125, 130 as false i.e., composite.
 
 // When base prime = 7, the first index to start marking = (L/prime)*prime = (110/7)*7 = 105.
 // As 105<L, so the first index to start marking = 105 + prime = 105 + 7 = 112
-// Thus, 7 will mark 112, 119, 126 as false i.e. composite.
+// Thus, 7 will mark 112, 119, 126 as false i.e., composite.
 
 // When base prime = 11, the first index to start marking = (L/prime)*prime = (110/11)*11 = 110.
-// Thus, 11 will mark 110, 121 as false i.e. composite.
+// Thus, 11 will mark 110, 121 as false i.e., composite.
 
 
 #include <iostream>
@@ -98,7 +98,7 @@ vector<bool> createSieveArray_largeRange(int L, int R) {
 
     vector<int> basePrimes;
 
-    for (int i = 0; i < sieve.size(); i++) {
+    for(int i = 0; i < sieve.size(); i++) {
         if(sieve[i]) {
             basePrimes.push_back(i);   // basePrimes = {2, 3, 4, 5, 11}
         } 
@@ -113,9 +113,9 @@ vector<bool> createSieveArray_largeRange(int L, int R) {
         int first_mul = (L / prime) * prime;
         first_mul = first_mul < L ? first_mul + prime : first_mul;
         int j = max(first_mul, prime * prime);   // Remember SieveOfEratosthenesOptimised, j can start from i * i, that's why here we are doing prime * prime. 
-        while (j <= R) {
+        while(j <= R) {
             segSieve[j - L] = false;   // Iindexes of 'segSieve' will obviously start from 0, not from 110.
-            // So doing 'j-L'. j is multples 110, 111, ... which corresponds to 0, 1, .... indexes respectively.
+            // So doing 'j - L'. j is multiples 110, 111, ... which corresponds to 0, 1, .... indexes respectively.
             j += prime;
         }
     }
