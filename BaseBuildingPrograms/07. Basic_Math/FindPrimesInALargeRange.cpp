@@ -33,6 +33,12 @@
 // Let's consider a range of 110 to 130 for better understanding. Here, L = 110 and R = 130.
 // The sieve of numbers representing 110, 111, 112, ..., 130 shall be called segmented sieve.
 // The approach states that:
+// 1. Generate all primes from 0 to √R using SieveOfEratosthenesOptimised. These primes will be
+// called base primes.
+// 2. Use these base primes to mark multiples of each prime in the segmented sieve as composite.
+// 3. The remaining unmarked numbers in the segmented sieve will be prime numbers.
+
+// Let's understand the steps in detail:-
 
 // 1) Generate all primes responsible to mark the segmented sieve(110-130). The base primes will be the
 // prime numbers in the sieve of 0 to √R, i.e., 0 to √130, i.e., 0 to 11 in this case. So base primes in
