@@ -14,16 +14,15 @@ using namespace std;
 
 // T.C: O(n);   as print function is called n times
 // S.C: O(n);   as the stack had at most five print functions in stack
-void print(string str, int i, int n) {
+void print(string& str, int i, int n) {
     // Base case: When i reaches n, return
-    if(i >= n) return;
+    if(i == n) return;
 
     // Processing block
-    cout << "Here i: " << i << ", ";
-    cout << str << endl;
+    cout << "Here i: " << i << ", " << str << endl;
 
     // Recursive relation
-    print(str, i+1, n);
+    print(str, i + 1, n);
 }
 
 int main() {
