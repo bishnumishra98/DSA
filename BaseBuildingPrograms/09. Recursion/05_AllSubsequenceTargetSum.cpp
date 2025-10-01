@@ -17,67 +17,44 @@
 #include <vector>
 using namespace std;
 
-
-// T.C: O(2^n)
-// S.C: O(n)
-void printAllSubsequence(int index, int arr[], int n, int& target, vector<int>& ds, int sum) {
-    // Base case: If we've considered all elements
-    if(index >= n) {
-        // Check if the sum of the current subsequence equals the target
-        if(sum == target) {
-            for(int i: ds) {
-                cout << i << " ";
-            }
-            cout << endl;
-        }
-        return;   // Exit the current recursive call
+void helper(int index, vector<int>& arr, vector<int>& ds, vector<vector<int>>& ans, int target) {
+    // Base case: If index reaches beyond the last element of 'arr', the subsequence is already built in 'ds'.
+    //            If target remaining is 0 at this point, it means the current subsequence equals target.
+    if(index == arr.size()) {
+        if(target == 0) ans.push_back(ds);
+        return;
     }
 
-    // Case 1: Including the current element and proceed to make the subsequence
+    // PICK: Pick the element at ith index to be a part of subsequence and proceed to make the subsequence. If the
+    //       current element is included to be a part of subsequence, then reduce the remaining target by current element.
     ds.push_back(arr[index]);
-    printAllSubsequence(index + 1, arr, n, target, ds, sum + arr[index]);
-    ds.pop_back();   // Backtrack to remove the current element
+    helper(index + 1, arr, ds, ans, target - arr[index]);
+    ds.pop_back();   // Backtracking: remove the last element that was added to the 'ds' vector in the previous step.
+    // However, note that we do not need to perform this pop operation, if Case 2 was written prior to Case 1.
 
-    // Case 2: Excluding the current element and proceed to make the subsequence
-    printAllSubsequence(index + 1, arr, n, target, ds, sum);
+    // NOT PICK: DO not pick the element at ith index to be a part of subsequence and proceed to make the subsequence
+    helper(index + 1, arr, ds, ans, target);
 }
 
-// The same above function can be implemented without using a sum variable
 // T.C: O(2^n)
-// S.C: O(n)
-void printAllSubsequence_withoutSum(int index, int arr[], int n, int target, vector<int>& ds) {
-    // Base case: If we've considered all elements
-    if(index >= n) {
-        // Check if the the target equals to zero
-        if(target == 0) {
-            for(int i: ds) {
-                cout << i << " ";
-            }
-            cout << endl;
-        }
-        return;   // Exit the current recursive call
-    }
-
-    // Case 1: Including the current element and proceed to make the subsequence
-    ds.push_back(arr[index]);
-    printAllSubsequence_withoutSum(index + 1, arr, n, target - arr[index], ds);
-    ds.pop_back();   // Backtrack to remove the current element
-
-    // Case 2: Excluding the current element and proceed to make the subsequence
-    printAllSubsequence_withoutSum(index + 1, arr, n, target, ds);
+// S.C: O(n)   recursive stack space
+vector<vector<int>> findAllSubsequenceEqualsTarget(vector<int>& arr, int target) {
+    vector<int> ds;   // helper data-structure to store each subsequence
+    vector<vector<int>> ans;   // all subsequences will be stored here
+    int index = 0;
+    helper(index, arr, ds, ans, target);
+    return ans;
 }
+
 
 int main() {
-    int arr[] = {1, 2, 1};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    vector<int> arr = {1, 2, 1};
     int target = 3;
-    int index = 0;   // starting index
-
-    vector<int> ds;   // used as a helper data-structure to store subsequences
-    int sum = 0;   // used as a helper data-structure to store sum of elements in the subsequences
-    printAllSubsequence(index, arr, n, target, ds, sum);
-    cout << endl;
-    printAllSubsequence_withoutSum(index, arr, n, target, ds);
+    vector<vector<int>> ans = findAllSubsequenceEqualsTarget(arr, target);
+    for(auto it1: ans) {
+        for(auto it2: it1) cout << it2 << " ";
+        cout << ", ";
+    }
 
     return 0;
 }
