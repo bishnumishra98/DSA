@@ -2,10 +2,10 @@
 using namespace std;
 
 // T.C: O(n)
-// S.C: O(n)
+// S.C: O(n)   recursive stack space
 int fact(int i) {
     if(i <= 1) return 1;
-    return i * fact(i-1);
+    return i * fact(i - 1);
 }
 
 int main() {
