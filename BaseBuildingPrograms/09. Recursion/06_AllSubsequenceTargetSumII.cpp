@@ -1,6 +1,6 @@
 // This type of problem follows PICK/NOT PICK pattern.
 
-// An extension of the previous problem '08_AllSubsequenceTargetSum.cpp', print only 1 subsequence, not all.
+// An extension of the previous problem '05_AllSubsequenceTargetSum.cpp', print only 1 subsequence, not all.
 // Find any one subsequence whose sum is equal to target.
 
 // Example 1:
@@ -19,77 +19,48 @@
 #include <vector>
 using namespace std;
 
-// T.C: O(2^n)
-// S.C: O(n)
-void printAnySubsequence_approach1(int index, int arr[], int n, int target, vector<int>& ds, bool& found) {
-    // Base case: If we've considered all elements
-    if(index >= n) {
-        // If the target equals zero, the subsequence is found in 'ds'. Print it and mark found as true.
+void helper(int index, vector<int>& arr, vector<int>& ds, vector<int>& ans, int target, bool& found) {
+    // Base case: If index reaches beyond the last element of 'arr', the subsequence is already built in 'ds'.
+    //            If target remaining is 0 at this point, it means the current subsequence equals target.
+    //            Thus, change the value of found to true.
+    if(index == arr.size()) {
         if(target == 0) {
-            for(int i: ds) {
-                cout << i << " ";
-            }
-            cout << endl;
+            ans = ds;
             found = true;
         }
-        return;   // Exit the current recursive call
+        return;
     }
 
-    // Case 1: If subsequence is not found yet, try including the current element and proceed to make the subsequence
+    // Perform pick, not pick operations only if unique subsequence equals target has not been found yet
     if(!found) {
+        // PICK
         ds.push_back(arr[index]);
-        printAnySubsequence_approach1(index + 1, arr, n, target - arr[index], ds, found);
+        helper(index + 1, arr, ds, ans, target - arr[index], found);
         ds.pop_back();
+
+        // NOT PICK
+        helper(index + 1, arr, ds, ans, target, found);
     }
-    
-    // Case 2: If subsequence is not found yet, try excluding the current element and proceed to make the subsequence
-    if(!found) printAnySubsequence_approach1(index + 1, arr, n, target, ds, found);
 }
 
 // T.C: O(2^n)
-// S.C: O(n)
-bool printAnySubsequence_approach2(int index, int arr[], int n, int target, vector<int>& ds) {
-    // Base case: If we've considered all elements
-    if(index >= n) {
-        // If the target equals zero, subsequence is found in 'ds'. Print it and return true.
-        if(target == 0) {
-            for(int i: ds) {
-                cout << i << " ";
-            }
-            cout << endl;
-            return true;
-        }
-        return false;   // If the sum of the current subsequence does not equals the target, return false
-    }
-
-    // Case 1: Including the current element and proceed to make the subsequence
-    ds.push_back(arr[index]);
-    // If this function call returns a true, it means a subsequence has already been found via this path. Thus, return true.
-    if(printAnySubsequence_approach2(index + 1, arr, n, target - arr[index], ds) == true) return true;
-    ds.pop_back();
-
-    // Case 2: Excluding the current element and proceed to make the subsequence
-    // If this function call returns a true, it means a subsequence has already been found via this path. Thus, return true.
-    if(printAnySubsequence_approach2(index + 1, arr, n, target, ds) == true) return true;
-
-    // If program comes here, it means no subsequence has been found in any of the 2 paths yet. Thus, return false.
-    return false;
+// S.C: O(n)   recursive stack space
+vector<int> findOneSubsequenceEqualsTarget(vector<int>& arr, int target) {
+    vector<int> ds;   // helper data-structure to store each subsequence
+    vector<int> ans;   // the unique subsequence will be stored here
+    int index = 0;
+    bool found = false;   // helper data structure to notify whether unique subsequence equals target has been found or not
+    helper(index, arr, ds, ans, target, found);
+    return ans;
 }
 
-int main() {
-    int arr[] = {1, 2, 1, 4, 2, 3};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int target = 4;
-    int index = 0;   // starting index
 
-    vector<int> ds;   // used as a helper data-structure to store subsequences
-    bool found = false;   // used as a helper data-structure to validate if any subsequence found or not
-    printAnySubsequence_approach1(index, arr, n, target, ds, found);
-    if(!found) cout << -1 << endl;   // Print -1 if no valid subsequence was found
-    cout << endl;
-    if(!printAnySubsequence_approach2(index, arr, n, target, ds)) {
-        cout << -1 << endl;   // Print -1 if no valid subsequence was found
-    }
+int main() {
+    vector<int> arr = {1, 2, 1, 4, 2, 3};
+    int target = 4;
+
+    vector<int> ans = findOneSubsequenceEqualsTarget(arr, target);
+    for(auto it: ans) cout << it << " ";
 
     return 0;
 }
