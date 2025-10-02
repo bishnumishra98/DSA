@@ -27,29 +27,25 @@
 #include <vector>
 using namespace std;
 
-// THIS IS A VERY EASY PROBLEM COMPARED TO PREVIOUS PROBLEMS
 // Brute force: Build each subset of candidates in 'ds', and keep pushing the sum of elements inside 'ds' into 'ans'
 // Optimal approach: No need of extra data structure 'ds'. You can directly find sum of subsets using recursion. Here's the code:
 
 void subsetSum(int index, vector<int>& candidates, vector<int>& ans, int sum) {
-    // Base case: When we reach beyond the last element of candidates
+    // Base case: When we reach beyond the last element of candidates, push the sum of the current subset into ans
     if(index == candidates.size()) {
         ans.push_back(sum);
         return;
     }
 
-    // Case 1: Pick the current element
-    subsetSum(index+1, candidates, ans, sum + candidates[index]);
+    // PICK: Pick the current element and add it to the sum
+    subsetSum(index + 1, candidates, ans, sum + candidates[index]);
 
-    // Case 2: Not pick the current element
-    subsetSum(index+1, candidates, ans, sum);
+    // NOT PICK: Do not pick the current element, keep the sum unchanged
+    subsetSum(index + 1, candidates, ans, sum);
 }
 
-// T.C: O(2^n * n);   where n = candidates.size()
-//                    The function is called twice at each level (for including or excluding the current element), leading
-//                    to a total of 2^n calls. After generating all subset sums, the sort function is called on the vector
-//                    of sums. Sorting 2^n elements takes O(2^n * log(2^n)) = O(2^n * n) time.
-// S.C: O(2^n + n);   The depth of recursion stack is O(n). The 'ans' vector stores 2^n elements leading O(2^n) space.
+// T.C: O(2^n)
+// S.C: O(n)   recursion stack space
 vector<int> findSubsetSum(vector<int>& candidates) {
     vector<int> ans;
     int sum = 0;   // a helper data structure to keep a track of sum of subsets
@@ -57,6 +53,7 @@ vector<int> findSubsetSum(vector<int>& candidates) {
     sort(ans.begin(), ans.end());
     return ans;
 }
+
 
 int main() {
     vector<int> candidates = {1, 2, 3};
