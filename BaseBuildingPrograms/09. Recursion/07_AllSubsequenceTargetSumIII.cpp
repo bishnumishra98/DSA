@@ -1,6 +1,6 @@
 // This type of problem follows PICK/NOT PICK pattern.
 
-// An extension of the previous problem '08_AllSubsequenceTargetSum.cpp', return the count of subsequences.
+// An extension of the previous problem '05_AllSubsequenceTargetSum.cpp', return the count of subsequences.
 
 // Example 1:
 // Input:
@@ -22,58 +22,37 @@
 #include <vector>
 using namespace std;
 
-// T.C: O(2^n)
-// S.C: O(n)
-void countSubsequence_approach1(int index, int arr[], int n, int target, int& count) {
-    // Base case: If we've considered all elements
-    if(index >= n) {
-        // If the sum of the current subsequence equals the target, increment count
-        if(target == 0) {
-            count++;
-        }
-        return;   // Exit the current recursive call
+void helper(int index, vector<int>& arr, int& count, int target) {
+    // Base case: If index reaches beyond the last element of 'arr' and target remaining is 0 at this point,
+    // it means the current subsequence equals target.
+    if(index == arr.size()) {
+        if(target == 0) count++;
+        return;
     }
 
-    // Case 1: Including the current element and proceed to make the subsequence
-    countSubsequence_approach1(index + 1, arr, n, target - arr[index], count);
-
-    // Case 2: Excluding the current element and proceed to make the subsequence
-    countSubsequence_approach1(index + 1, arr, n, target, count);
+    // PICK: Pick the element at ith index to be a part of subsequence and proceed to make the subsequence. If the
+    //       current element is included to be a part of subsequence, then reduce the remaining target by current element.
+    helper(index + 1, arr, count, target - arr[index]);
+    
+    // NOT PICK: DO not pick the element at ith index to be a part of subsequence and proceed to make the subsequence
+    helper(index + 1, arr, count, target);
 }
 
 // T.C: O(2^n)
-// S.C: O(n)
-int countSubsequence_approach2(int index, int arr[], int n, int target) {
-    // Base case: If we've considered all elements
-    if(index >= n) {
-        // If the sum of the current subsequence equals the target, return 1 indicating a subsequence found.
-        if(target == 0) {
-            return 1;
-        }
-        return 0;   // If the sum of the current subsequence does not equals the target, return 0 indicating no subsequence found.
-    }
-
-    // Case 1: Including the current element and proceed to make the subsequence
-    int include = countSubsequence_approach2(index + 1, arr, n, target - arr[index]);
-
-    // Case 2: Excluding the current element and proceed to make the subsequence
-    int exclude = countSubsequence_approach2(index + 1, arr, n, target);
-
-    // return the sum of number of subsequences found from include and exclude paths
-    return include + exclude;
+// S.C: O(n)   recursive stack space
+int countSubsequence(vector<int>& arr, int target) {
+    int count = 0;   // count of subsequences will be stored here
+    int index = 0;
+    helper(index, arr, count, target);
+    return count;
 }
+
 
 int main() {
-    int arr[] = {1, 2, 1, 4, 2, 3};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    vector<int> arr = {1, 2, 1, 4, 2, 3};
     int target = 4;
-    int index = 0;   // starting index
-
-    int count = 0;   // it will be used to store no.of subsequences
-    countSubsequence_approach1(index, arr, n, target, count);
-    cout << count << endl;
-
-    cout << countSubsequence_approach2(index, arr, n, target);
+    
+    cout << countSubsequence(arr, target);
 
     return 0;
 }
