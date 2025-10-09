@@ -20,35 +20,35 @@ using namespace std;
 class Solution {
 private:
     string decodeKey(string key) {
-        // Method 1: Using unordered_map
-        unordered_map<char, char> mp;
-        char i = 'a';
-        for(char ch: key) {
-            if(mp.find(ch) == mp.end()) {
-                mp[ch] = i;
-                i++;
-            }
-        }
-
-        string result = "";
-        for(char ch: key) result.push_back(mp[ch]);
-        return result;
-
-
-        // // Method 2 (faster): Using vector instead of unordered_map
-        // vector<char> mp(26, '0');   // char: mapped_char; example:- 19: a, 7: b, etc., which means 't': 'a', 'h': 'b', etc.
+        // // Method 1: Using unordered_map
+        // unordered_map<char, char> mp;
         // char i = 'a';
-
         // for(char ch: key) {
-        //     if(mp[ch - 'a'] == '0') {
-        //         mp[ch - 'a'] = i;
+        //     if(mp.find(ch) == mp.end()) {
+        //         mp[ch] = i;
         //         i++;
         //     }
         // }
 
         // string result = "";
-        // for(char ch: key) result.push_back(mp[ch - 'a']);
+        // for(char ch: key) result.push_back(mp[ch]);
         // return result;
+
+
+        // Method 2 (faster): Using vector instead of unordered_map
+        vector<char> mp(26, '0');
+        char i = 'a';
+
+        for(char ch: key) {
+            if(mp[ch - 'a'] == '0') {
+                mp[ch - 'a'] = i;
+                i++;
+            }
+        }
+
+        string result = "";
+        for(char ch: key) result.push_back(mp[ch - 'a']);
+        return result;
     }
 
 public:
