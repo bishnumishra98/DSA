@@ -62,7 +62,10 @@ public:
     // T.C: O(key + message)
     // S.C: O(1);   as vector will store at max 26 characters
     string decodeMessage_arrayMethod(string key, string message) {
-        vector<char> mp(26, '0');   // secret_char: normal_char; example:- 19: a, 7: b, etc., which means 't': 'a', 'h': 'b', etc.
+        // secret_char: normal_char; example:
+        // If mp looks like {'0', '0', '0', '0', '0', '0', '0', 'b', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', 'a', '0', '0', '0', '0', '0', '0'},
+        // then it means 'h' is mapped to 'b' and 't' is mapped to 'a'.
+        vector<char> mp(26, '0');
         char i = 'a';
 
         // Build mapping
