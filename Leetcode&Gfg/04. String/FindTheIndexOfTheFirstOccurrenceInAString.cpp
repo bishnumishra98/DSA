@@ -109,6 +109,7 @@ int main() {
     string haystack = "sudbutsad", needle = "sad";
 
     cout << Solution().strStr_abstracted(haystack, needle) << endl;
+    cout << Solution().strStr_bruteforce(haystack, needle) << endl;
     cout << Solution().strStr(haystack, needle);
 
     return 0;
