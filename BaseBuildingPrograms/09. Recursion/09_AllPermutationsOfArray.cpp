@@ -37,7 +37,7 @@ void allPermut(vector<int>& candidates, vector<vector<int>>& ans, vector<int>& d
 }
 
 // T.C: O(n! * n);   where n = candidates.size()
-// S.C: O(n + n) = O(n)
+// S.C: O(n + n) = O(2n)
 vector<vector<int>> findPermutations_bruteForce(vector<int>& candidates) {
     vector<vector<int>> ans;
     vector<int> ds;   // helper data structure to store elements of candidates temporarily
@@ -68,7 +68,7 @@ vector<vector<int>> findPermutations_bruteForce(vector<int>& candidates) {
     }
 
     // T.C: O(n! * n);   where n = candidates.size()
-    // S.C: O(1);   excluding 'ans' space
+    // S.C: O(n)
     vector<vector<int>> findPermutations(vector<int>& candidates) {
         vector<vector<int>> ans;
         allPermut(0, candidates, ans);
