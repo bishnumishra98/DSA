@@ -51,29 +51,30 @@ vector<vector<int>> findPermutations_bruteForce(vector<int>& candidates) {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-    void allPermut(int index, vector<int>& candidates, vector<vector<int>>& ans) {
-        // Base case: When we reach beyond last element of 'candidates', push the 'candidates' vector in 'ans' and return.
-        if(index == candidates.size()) {   // or, if(index == candidates.size() - 1) as when 'index' reaches 'candidates.size() - 1',
-                                          // no change in position of elements occur on next recursive call (last recursive call).
-            ans.push_back(candidates);
-            return;
-        }
-
-        // Swapping current element with itself and elements on its right.
-        for(int i = index; i < candidates.size(); i++) {
-            swap(candidates[index], candidates[i]);
-            allPermut(index + 1, candidates, ans);
-            swap(candidates[index], candidates[i]);   // backtrack to unswap 'candidates' after coming from the above recursion call
-        }
+void allPermut(int index, vector<int>& candidates, vector<vector<int>>& ans) {
+    // Base case: When we reach beyond last element of 'candidates', push the 'candidates' vector in 'ans' and return.
+    if(index == candidates.size()) {   // or, if(index == candidates.size() - 1) as when 'index' reaches 'candidates.size() - 1',
+                                        // no change in position of elements occur on next recursive call (last recursive call).
+        ans.push_back(candidates);
+        return;
     }
 
-    // T.C: O(n! * n);   where n = candidates.size()
-    // S.C: O(n)
-    vector<vector<int>> findPermutations(vector<int>& candidates) {
-        vector<vector<int>> ans;
-        allPermut(0, candidates, ans);
-        return ans;
+    // Swapping current element with itself and elements on its right.
+    for(int i = index; i < candidates.size(); i++) {
+        swap(candidates[index], candidates[i]);
+        allPermut(index + 1, candidates, ans);
+        swap(candidates[index], candidates[i]);   // backtrack to unswap 'candidates' after coming from the above recursion call
     }
+}
+
+// T.C: O(n! * n);   where n = candidates.size()
+// S.C: O(n)
+vector<vector<int>> findPermutations(vector<int>& candidates) {
+    vector<vector<int>> ans;
+    allPermut(0, candidates, ans);
+    return ans;
+}
+
 
 int main() {
     vector<int> candidates = {1, 2, 3};
