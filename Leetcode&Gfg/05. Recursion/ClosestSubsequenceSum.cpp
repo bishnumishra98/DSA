@@ -75,7 +75,7 @@ public:
 
 // -------------------------------------------------------------------------------------------------------------------
 
-    // T.C: O(2^(n/2)) for subset sum generation 
+    // T.C: O(2^(n/2)) + O(2^(n/2)) ≈ O(2^(n/2)) for subset sum generation 
     //      + O(2^(n/2) * log(2^(n/2))) for sorting 
     //      + O(2^(n/2) * log(2^(n/2))) for binary search 
     //      = O(2^(n/2) * (n/2) * log(2))
