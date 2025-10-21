@@ -85,17 +85,11 @@ public:
     //      = O(2^(n/2))
     int minAbsDifference(vector<int>& nums, int goal) {
         int n = nums.size();
-        int mid = n / 2;
-
-        vector<int> leftSubset, rightSubset;
 
         // Segregate the array into two halves
-        for(int i = 0; i < n / 2; i++) {
-            leftSubset.push_back(nums[i]);
-        }
-        for(int i = n / 2; i < n; i++) {
-            rightSubset.push_back(nums[i]);
-        }
+        vector<int> leftSubset, rightSubset;
+        for(int i = 0; i < n / 2; i++) leftSubset.push_back(nums[i]);
+        for(int i = n / 2; i < n; i++) rightSubset.push_back(nums[i]);
 
         // Generate all possible subset sums for the left half and right half
         vector<int> leftSubsetsSum, rightSubsetsSum;
@@ -117,16 +111,10 @@ public:
                 int sum = leftSum + rightSubsetsSum[mid];
                 minDiff = min(minDiff, abs(sum - goal));
 
-                if(minDiff == 0) {
-                    return 0;   // early exit if we find an exact match
-                }
-
                 // Adjust the binary search bounds based on the current sum
-                if(sum < goal) {
-                    low = mid + 1;   // move to the right half
-                } else {
-                    high = mid - 1;   // move to the left half
-                }
+                if(sum < goal) low = mid + 1;   // move to the right half
+                else if(sum > goal) high = mid - 1;   // move to the left half
+                else return 0;   // if(sum == goal), we found the closest possible sum that is 0
             }
         }
 
