@@ -42,30 +42,30 @@ using namespace std;
 class Solution {
 private:
     // Helper function to find all possible subset sums for a given array
-    void findSubsetSums(int index, vector<int>& arr, vector<int>& subsetSums, int currentSum) {
+    void findSubsetsSum(int index, vector<int>& arr, vector<int>& subsetsSum, int currentSum) {
         // Base case: If we reach beyond the last element of 'arr', add the current sum to the subsetSums
         if(index == arr.size()) {
-            subsetSums.push_back(currentSum);
+            subsetsSum.push_back(currentSum);
             return;
         }
 
         // Case 1: Include the current element in the sum
-        findSubsetSums(index + 1, arr, subsetSums, currentSum + arr[index]);
+        findSubsetsSum(index + 1, arr, subsetsSum, currentSum + arr[index]);
 
         // Case 2: Exclude the current element from the sum
-        findSubsetSums(index + 1, arr, subsetSums, currentSum);
+        findSubsetsSum(index + 1, arr, subsetsSum, currentSum);
     }
 
 public:
     // T.C: O(2^n) for all subsetSum generation + O(2^n) for finding min difference = O(2^n)
     // S.C: O(2^n) to store all subsets of 'nums' + O(n) for recursion stack space = O(2^n)
     int minAbsDifference_bruteforce(vector<int>& nums, int goal) {
-        vector<int> subsetSums;
-        findSubsetSums(0, nums, subsetSums, 0);
+        vector<int> subsetsSum;
+        findSubsetsSum(0, nums, subsetsSum, 0);
 
         int minDiff = INT_MAX;
-        for(int i = 0; i < subsetSums.size(); i++) {
-            int subsetSum = subsetSums[i];
+        for(int i = 0; i < subsetsSum.size(); i++) {
+            int subsetSum = subsetsSum[i];
             int diff = abs(subsetSum - goal);
             minDiff = min(minDiff, diff);
         }
@@ -98,23 +98,23 @@ public:
         }
 
         // Generate all possible subset sums for the left half and right half
-        vector<int> leftSubsetSums, rightSubsetSums;
-        findSubsetSums(0, leftSubset, leftSubsetSums, 0);
-        findSubsetSums(0, rightSubset, rightSubsetSums, 0);
+        vector<int> leftSubsetsSum, rightSubsetsSum;
+        findSubsetsSum(0, leftSubset, leftSubsetsSum, 0);
+        findSubsetsSum(0, rightSubset, rightSubsetsSum, 0);
 
         // Sort the right subset sums for binary search
-        sort(rightSubsetSums.begin(), rightSubsetSums.end());
+        sort(rightSubsetsSum.begin(), rightSubsetsSum.end());
 
         int minDiff = INT_MAX;
         // For each subset sum in the left half, find the closest sum in the right half
         // that, when added to the left half's sum, is closest to the goal
-        for(int i = 0; i < leftSubsetSums.size(); i++) {
-            int leftSum = leftSubsetSums[i];
+        for(int i = 0; i < leftSubsetsSum.size(); i++) {
+            int leftSum = leftSubsetsSum[i];
 
-            int low = 0, high = rightSubsetSums.size() - 1;
+            int low = 0, high = rightSubsetsSum.size() - 1;
             while(low <= high) {
                 int mid = low + (high - low) / 2;
-                int sum = leftSum + rightSubsetSums[mid];
+                int sum = leftSum + rightSubsetsSum[mid];
                 minDiff = min(minDiff, abs(sum - goal));
 
                 if(minDiff == 0) {
