@@ -83,7 +83,6 @@ public:
     // S.C: O(2^(n/2)) for storing subset sums of both halves 
     //      + O(n) for recursion stack
     //      = O(2^(n/2))
-
     int minAbsDifference(vector<int>& nums, int goal) {
         int n = nums.size();
         int mid = n / 2;
