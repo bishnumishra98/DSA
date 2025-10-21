@@ -20,11 +20,12 @@
 // Input: nums = [1,2,3], goal = -7
 // Output: 7
 
-// Bruteforce Approach: The brute force approach is very simple. Just find all subsets of the array and calculate their sums.
-//                      The absolute difference between the sum of each subset and the goal is calculated, and the
-//                      minimum absolute difference is returned.
+// Bruteforce Approach: The brute force approach is very simple. Just find all subsets of the array and their respective sums.
+//                      Then, calculate the absolute difference between each subset sum and the goal, and keep track of the
+//                      minimum difference found.
 
-// Optimal Approach: The optimal approach is to use the meet in the middle (MITM) algorithm. The idea
+// Optimal Approach: Same as brute force, but here we will split the array into two halves to reduce the time complexity.
+//                   The optimal approach is to use the meet in the middle (MITM) algorithm. The idea
 //                   is to split the array into two halves, find all possible subset sums for each half, and then
 //                   use binary search to find the closest sum to the goal in the combined sums of both halves.
 //                   The steps are as follows:
@@ -39,54 +40,10 @@
 using namespace std;
 
 class Solution {
-public:
-    // 'BaseBuildingPrograms\09. Recursion_I\17_AllSubsequencesOfArray.cpp' code:
-    void subsetGenerator(int index, vector<int>& arr, int n, vector<int>& ds, vector<vector<int>>& ans) {
-        // Base case: If we reach beyond the last element of 'arr', the subsequence is already built in 'ds'. Print it.
-        if(index == n) {
-            ans.push_back(ds);
-            return;
-        }
-
-        // Case 1: Take the current element of 'arr' and proceed to make the subsequence
-        ds.push_back(arr[index]);
-        subsetGenerator(index + 1, arr, n, ds, ans);
-        ds.pop_back();
-
-        // Case 2: Not take the current element of 'arr' and proceed to make the subsequence
-        subsetGenerator(index + 1, arr, n, ds, ans);
-    }
-    
-    vector<vector<int>> findSubsets(vector<int>& arr) {
-        int n = arr.size();
-        vector<int> ds;   // helper data structure to store a subset of 'arr' at a time
-        vector<vector<int>> ans;   // stores all subsets of 'arr'
-        subsetGenerator(0, arr, n, ds, ans);
-        return ans;
-    }
-
-    // T.C: O(2^n * n);   2^n subsets and each subset can take O(n) time to calculate its sum, where n = nums.size()
-    // S.C: O(2^n);   to store all subsets of 'nums'
-    int minAbsDifference_bruteforce(vector<int>& nums, int goal) {
-        vector<vector<int>> subsets = findSubsets(nums);
-
-        int diff = INT_MAX;
-        for(int i = 0; i < subsets.size(); i++) {
-            int setSum = 0;
-            for(int j = 0; j < subsets[i].size(); j++) {
-                setSum += subsets[i][j];
-            }
-            diff = min(diff, abs(setSum - goal));
-        }
-
-        return diff;
-    }
-
-// -------------------------------------------------------------------------------------------------------------------
-
+private:
     // Helper function to find all possible subset sums for a given array
     void findSubsetSums(vector<int>& arr, int index, int n, vector<int>& subsetSums, int currentSum) {
-        // Base case: If we reach beyond the last element of 'arr', add the current sum to the subset sums
+        // Base case: If we reach beyond the last element of 'arr', add the current sum to the subsetSums
         if(index == n) {
             subsetSums.push_back(currentSum);
             return;
@@ -99,8 +56,34 @@ public:
         findSubsetSums(arr, index + 1, n, subsetSums, currentSum);
     }
 
-    // T.C: O(2^n * log(2^n));   2^n subsets and each subset can take O(log(2^n)) time to calculate its sum, where n = nums.size()
-    // S.C: O(2^n);   to store all subsets of 'nums'
+public:
+    // T.C: O(2^n) for all subsetSum generation + O(2^n) for finding min difference = O(2^n)
+    // S.C: O(2^n) to store all subsets of 'nums' + O(n) for recursion stack space = O(2^n)
+    int minAbsDifference_bruteforce(vector<int>& nums, int goal) {
+        vector<int> subsetSums;
+        findSubsetSums(nums, 0, nums.size(), subsetSums, 0);
+
+        int minDiff = INT_MAX;
+        for(int i = 0; i < subsetSums.size(); i++) {
+            int subsetSum = subsetSums[i];
+            int diff = abs(subsetSum - goal);
+            minDiff = min(minDiff, diff);
+        }
+
+        return minDiff;
+    }
+
+// -------------------------------------------------------------------------------------------------------------------
+
+    // T.C: O(2^(n/2)) for subset sum generation 
+    //      + O(2^(n/2) * log(2^(n/2))) for sorting 
+    //      + O(2^(n/2) * log(2^(n/2))) for binary search 
+    //      = O(2^(n/2) * (n/2) * log(2))
+    //      = O(n * 2^(n/2));   because log(2) is a constant ≈ 0.693, so (n/2) * log(2) can be approximated as O(n)
+    // S.C: O(2^(n/2)) for storing subset sums of both halves 
+    //      + O(n) for recursion stack
+    //      = O(2^(n/2))
+
     int minAbsDifference(vector<int>& nums, int goal) {
         int n = nums.size();
         int mid = n / 2;
