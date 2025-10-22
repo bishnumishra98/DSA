@@ -73,7 +73,7 @@ public:
     // EXTRA NOTE: Method 1 is faster because you don’t recurse into invalid branches (target < 0 never happens).
 
 
-    // T.C: O(n^t) * k;   where n = no.of elements in candidates[], t = target value, k = average length of each combination in 'ans'
+    // T.C: O((n^t) * k);   where n = no.of elements in candidates[], t = target value, k = average length of each combination in 'ans'
     // S.C: O(t + m * k);   where m = no.of combinations in 'ans'
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> ans;   // This will be our final answer
