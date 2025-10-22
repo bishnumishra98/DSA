@@ -74,7 +74,7 @@ public:
 
 
     // T.C: O((n^t) * k);   where n = no.of elements in candidates[], t = target value, k = average length of each combination in 'ans'
-    // S.C: O(t + m * k);   where m = no.of combinations in 'ans'
+    // S.C: O(t + (m * k));   where m = no.of combinations in 'ans'
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> ans;   // This will be our final answer
         vector<int> ds;   // This is going to store elements temporary, while traversing
