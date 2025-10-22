@@ -22,20 +22,22 @@ class Solution {
 
         // Pick current element
         ds.push_back(nums[index]);
-        allSubsequence(index+1, nums, ds, ans);
+        allSubsequence(index + 1, nums, ds, ans);
         ds.pop_back();   // Backtrack
 
         // Not pick the current element
-        allSubsequence(index+1, nums, ds, ans);
+        allSubsequence(index + 1, nums, ds, ans);
     }
 
     void arrangeAndRemoveDuplicateCombinations(vector<vector<int>>& ans) {
         // Sort all elements in each combinations
-        for(int i=0; i<ans.size(); i++) {
+        for(int i = 0; i < ans.size(); i++) {
             sort(ans[i].begin(), ans[i].end());
         }
+
         // Sort ans based on combinations
         sort(ans.begin(), ans.end());
+
         // Remove duplicate combinations
         ans.erase(unique(ans.begin(), ans.end()), ans.end());
     }
@@ -55,18 +57,18 @@ class Solution {
     void findSubsets(int index, vector<int>& nums, vector<vector<int>>& ans, vector<int>& ds) {
         ans.push_back(ds);
 
-        for(int i=index; i<nums.size(); i++) {
+        for(int i = index; i < nums.size(); i++) {
             // Skip duplicates: If the current element is the same as the previous element,
             // but it is the first time the current element is being considered in this iteration,
             // it should be picked. The only case it shouldn't be picked is when the current element
             // is the same as the previous element, and it is not the first time being considered
             // in this iteration. 'i > index' indicates that the current element is about to get
             // picked up more than once in this iteration, so skip it to avoid duplicates.
-            if(i > index && nums[i] == nums[i-1]) continue;
+            if(i > index && nums[i] == nums[i - 1]) continue;
 
             // Include the current element and move to the next element
             ds.push_back(nums[i]);
-            findSubsets(i+1, nums, ans, ds);
+            findSubsets(i + 1, nums, ans, ds);
             ds.pop_back();   // Backtrack
         }
     }
@@ -89,8 +91,8 @@ int main() {
 
     cout << "Brute force: " << endl;
     vector<vector<int>> ans1 = sol.subsetsWithDup_bruteforce(nums);
-    for(int i=0; i<ans1.size(); i++) {
-        for(int j=0; j<ans1[i].size(); j++) {
+    for(int i = 0; i < ans1.size(); i++) {
+        for(int j = 0; j < ans1[i].size(); j++) {
             cout << ans1[i][j] << " ";
         }
         cout << endl;
@@ -98,8 +100,8 @@ int main() {
 
     cout << "Optimal approach: " << endl;
     vector<vector<int>> ans2 = sol.subsetsWithDup(nums);
-    for(int i=0; i<ans2.size(); i++) {
-        for(int j=0; j<ans2[i].size(); j++) {
+    for(int i = 0; i < ans2.size(); i++) {
+        for(int j = 0; j < ans2[i].size(); j++) {
             cout << ans2[i][j] << " ";
         }
         cout << endl;
