@@ -9,6 +9,9 @@
 // Input: nums = [0]
 // Output: [[],[0]]
 
+// Brute force: Same as 'BaseBuildingPrograms\09. Recursion\04_AllSubsequencesOfArray.cpp' with a slight modification
+//              to store the subsets in a set to avoid duplicates.
+
 // Optimal approach:
 // 1. Sort the array → duplicates become adjacent.
 // 2. Use a recursive function findSubsets(index, ds, ans) where:
