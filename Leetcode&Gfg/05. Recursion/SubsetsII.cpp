@@ -9,6 +9,20 @@
 // Input: nums = [0]
 // Output: [[],[0]]
 
+// Optimal approach:
+// 1. Sort the array → duplicates become adjacent.
+// 2. Use a recursive function findSubsets(index, ds, ans) where:
+//    ds → current subset
+//    ans → all subsets collected
+// 3. In each recursive call, add the current subset ds to 'ans'.
+// 4. Iterate through the array starting from 'index':
+//    a. If the current element is the same as the previous element and it's not the first time being considered
+//       in this iteration, skip it to avoid duplicates.
+//    b. Otherwise, include the current element in ds and make a recursive call to findSubsets with the next index.
+//    c. Backtrack by removing the last element added to ds.
+// 5. Finally, return 'ans' containing all unique subsets.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
