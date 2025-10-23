@@ -13,42 +13,36 @@
 using namespace std;
 
 class Solution {
-    public:
-        void allSubsequence(int index, vector<int>& nums, vector<int>& ds, vector<vector<int>>& ans) {
+public:
+    void allSubsequence(int index, vector<int>& nums, vector<int>& ds, set<vector<int>>& st) {
+        // Base case: If index reaches beyond the size of nums, the subsequence is already made in ds
         if(index == nums.size()) {
-            ans.push_back(ds);
+            // Never sort the ds vector. Store the ds in a temporary vector and sort the temporary vector, because we do
+            // not want to corrupt the original ds vector.
+            // If orginial ds vector is sorted, then the order of elements in the ds will change which will corrupt the
+            // order for further recursive calls.
+            vector<int> temp = ds;
+            sort(temp.begin(), temp.end());
+            st.insert(temp);
             return;
-        } 
+        }
 
         // Pick current element
         ds.push_back(nums[index]);
-        allSubsequence(index + 1, nums, ds, ans);
+        allSubsequence(index + 1, nums, ds, st);
         ds.pop_back();   // Backtrack
 
         // Not pick the current element
-        allSubsequence(index + 1, nums, ds, ans);
+        allSubsequence(index + 1, nums, ds, st);
     }
 
-    void arrangeAndRemoveDuplicateCombinations(vector<vector<int>>& ans) {
-        // Sort all elements in each combinations
-        for(int i = 0; i < ans.size(); i++) {
-            sort(ans[i].begin(), ans[i].end());
-        }
-
-        // Sort ans based on combinations
-        sort(ans.begin(), ans.end());
-
-        // Remove duplicate combinations
-        ans.erase(unique(ans.begin(), ans.end()), ans.end());
-    }
-
-    // T.C: O(2^n * k);   where n = nums.size(), k = average size of each subset           
+    // T.C: O(2^n * k.log(k));   where n = nums.size(), k = average size of each subset               
     // S.C: O(2^n * k);
     vector<vector<int>> subsetsWithDup_bruteforce(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> ds;
-        allSubsequence(0, nums, ds, ans);
-        arrangeAndRemoveDuplicateCombinations(ans);
+        set<vector<int>> st;   // to store unique subsets
+        vector<int> ds;   // to store temporary subsets
+        allSubsequence(0, nums, ds, st);
+        vector<vector<int>> ans(st.begin(), st.end());
         return ans;
     }
 
