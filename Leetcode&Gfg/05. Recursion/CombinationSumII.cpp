@@ -1,5 +1,3 @@
-// Before doing this problem, have a look at: 'Leetcode&Gfg\05. Recursion\SubsetsII.cpp'
-
 // Leetcode: 40. Combination Sum II   --->   Given a collection of candidate numbers (candidates) and a target number (target),
 // find all unique combinations in candidates where the candidate numbers sum to target.
 // Each number in candidates may only be used once in the combination.
@@ -23,87 +21,73 @@
 // [5]
 // ]
 
+// Algorithm: Just a simple extension of 'Leetcode&Gfg\05. Recursion\SubsetsII.cpp' problem. Here, we need
+//            to find all unique combinations that sum to a given target.
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
-    void findAllCombinations(vector<int>& candidates, vector<vector<int>>& ans, int index, int target, vector<int>& ds) {
-        // Base case: If index goes beyond last element of candidates
-        if(index > candidates.size() - 1) {
-            if(target == 0) ans.push_back(ds);
+    void allSubsequence(int index, vector<int>& candidates, vector<int>& ds, set<vector<int>>& st, int target) {
+        // Base case: If index reaches beyond the size of candidates, the subsequence is already made in ds
+        if(index == candidates.size()) {
+            if(target == 0) {
+                vector<int> temp = ds;
+                sort(temp.begin(), temp.end());
+                st.insert(temp);
+            }
             return;
         }
 
-        // Case 1: Include the current element
+        // Pick current element
         ds.push_back(candidates[index]);
-        findAllCombinations(candidates, ans, index+1, target - candidates[index], ds);
-        ds.pop_back();
+        allSubsequence(index + 1, candidates, ds, st, target - candidates[index]);
+        ds.pop_back();   // Backtrack
 
-        // Case 2: Exclude the current element
-        findAllCombinations(candidates, ans, index+1, target, ds);
+        // Not pick the current element
+        allSubsequence(index + 1, candidates, ds, st, target);
     }
 
-    void arrangeAndRemoveDuplicateCombinations(vector<vector<int>>& ans) {
-        // Sort all elements in each combinations
-        for(int i=0; i<ans.size(); i++) {
-            sort(ans[i].begin(), ans[i].end());
-        }
-        // Sort ans based on combinations
-        sort(ans.begin(), ans.end());
-        // Remove duplicate combinations
-        ans.erase(unique(ans.begin(), ans.end()), ans.end());
-    }
-
-    // T.C: O(nlogn + 2^n) 
-    // S.C: O(n)
-    vector<vector<int>> combinationSum2_bruteForce(vector<int>& candidates, int target) {
-        vector<vector<int>> ans;
-        vector<int> ds;
-        int index = 0;   // starting index
-        findAllCombinations(candidates, ans, index, target, ds);
-        arrangeAndRemoveDuplicateCombinations(ans);
+    // T.C: O(2^n * k.log(k));   where n = candidates.size(), k = average size of each subset               
+    // S.C: O(2^n * k);
+    vector<vector<int>> combinationSum2_bruteforce(vector<int>& candidates, int target) {
+        set<vector<int>> st;   // to store unique subsets
+        vector<int> ds;   // to store temporary subsets
+        allSubsequence(0, candidates, ds, st, target);
+        vector<vector<int>> ans(st.begin(), st.end());
         return ans;
     }
 
 // ----------------------------------------------------------------------------------------------------------------------
-    // The above code can be more optimized by leveraging the sorted order during the recursive
-    // combination generation itself, which can avoid the need for post-processing.
 
-    void findCombination(vector<int>& candidates, vector<vector<int>>& ans, int index, int target, vector<int>& ds) {
-        // Base case: If target becomes zero, add the current combination to ans
+    void findSubsets(int index, vector<int>& candidates, vector<vector<int>>& ans, vector<int>& ds, int target) {
         if(target == 0) {
             ans.push_back(ds);
-            return;
+            return;   // No need to explore further once we found a valid combination
         }
 
-        // Iterate over the candidates starting from the current index
         for(int i = index; i < candidates.size(); i++) {
-            // Skip duplicates: If the current element is the same as the previous element,
-            // but it is the first time the current element is being considered in this iteration,
-            // it should be picked. The only case it shouldn't be picked is when the current element
-            // is the same as the previous element, and it is not the first time being considered
-            // in this iteration. 'i > index' indicates that the current element is about to get
-            // picked up more than once in this iteration, so skip it to avoid duplicates.
+            // Skip duplicates in same recursive level
             if(i > index && candidates[i] == candidates[i - 1]) continue;
-
-            // If the current candidate is greater than the target, no need to proceed further
+            // If the current element exceeds the target, no need to explore further (as the array is sorted).
+            // Thus, we can prune the unnecessary branches.
             if(candidates[i] > target) break;
 
             // Include the current element and move to the next element
             ds.push_back(candidates[i]);
-            findCombination(candidates, ans, i + 1, target - candidates[i], ds);
+            findSubsets(i + 1, candidates, ans, ds, target - candidates[i]);
             ds.pop_back();   // Backtrack
         }
     }
 
-    // T.C: O(2^n * k);   where n is the number of candidates and k is the average length of a combination
-    // S.C: O(k * x);   x is the number of combinations
+    // T.C: O(2^n * k);   where n = candidates.size(), k = average size of each subset               
+    // S.C: O(2^n * k);
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
         vector<vector<int>> ans;
         vector<int> ds;
-        sort(candidates.begin(), candidates.end());   // Sort the candidates to handle duplicates easily
-        findCombination(candidates, ans, 0, target, ds);
+        findSubsets(0, candidates, ans, ds, target);
         return ans;
     }
 };
@@ -114,7 +98,7 @@ int main() {
     int target = 5;
 
     Solution sol;
-    vector<vector<int>> v = sol.combinationSum2_bruteForce(candidates, target);
+    vector<vector<int>> v = sol.combinationSum2_bruteforce(candidates, target);
     for(int i=0; i<v.size(); i++) {
         for(int j=0; j<v[i].size(); j++) {
             cout << v[i][j] << " ";
