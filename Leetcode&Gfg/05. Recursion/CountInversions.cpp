@@ -87,7 +87,7 @@ public:
 
         long long mid = start + (end - start) / 2;
         count += mergeSort(arr, start, mid);   // left half
-        count += mergeSort(arr, mid+1, end);   // right half
+        count += mergeSort(arr, mid + 1, end);   // right half
         count += merge(arr, start, mid, end);   // merge the two sorted halves
 
         return count;
@@ -104,7 +104,7 @@ public:
 int main() {
     vector<int> arr = {2, 4, 1, 3, 5};
     Solution sol;
-    
+
     cout << sol.inversionCount_bruteForce(arr);
     cout << endl;
 
