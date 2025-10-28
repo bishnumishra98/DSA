@@ -1,8 +1,5 @@
-// GFG: Count Inversions   --->   Given an array of integers. Find the Inversion Count in the array.
-// Two array elements arr[i] and arr[j] form an inversion if arr[i] > arr[j] and i < j.
-// Inversion Count: For an array, inversion count indicates how far (or close) the array is from being sorted.
-// If the array is already sorted then the inversion count is 0.
-// If an array is sorted in the reverse order then the inversion count is the maximum.
+// GFG: Count Inversions   --->   Given an array of integers arr[]. You have to find the Inversion Count of the array. 
+// Note : Inversion count is the number of pairs of elements (i, j) such that i < j and arr[i] > arr[j].
 
 // Example 1:
 // Input: n = 5, arr[] = {2, 4, 1, 3, 5}
@@ -18,19 +15,22 @@
 // Input: n = 5, arr[] = {5, 3, 2, 4, 1}
 // Output: 8
 
-// Understand 'BaseBuildingPrograms\05. Sorting\MergeSort.cpp' before understand optimal solution of this problem.
+// Understand 'BaseBuildingPrograms\05. Sorting\04_MergeSort.cpp' before understand optimal solution of this problem.
+
+// Problem: https://www.geeksforgeeks.org/problems/inversion-of-array-1587115620/1
 
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
-  public:
+public:
     // T.C: O(n^2)
     // S.C: O(1)
-    long long int inversionCount_bruteForce(long long arr[], int n) {
+    long long int inversionCount_bruteForce(vector<int> &arr) {
+        int n = arr.size();
         long long count = 0;
-        for(long long i=0; i<n; i++) {
-            for(long long j=i+1; j<n; j++) {
+        for(long long i = 0; i < n; i++) {
+            for(long long j = i + 1; j < n; j++) {
                 if(arr[i] > arr[j]) count++;
             }
         }
@@ -39,26 +39,26 @@ class Solution {
 
 // ---------------------------------------------------------------------------------------
 
-    long long merge(long long *arr, long long start, long long mid, long long end) {
-        long long *temp = new long long[end-start+1];
-        long long left = start;
-        long long right = mid+1;
+    long long merge(vector<int> &arr, long long start, long long mid, long long end) {
+        vector<int> temp(end - start + 1);
+        long long left = start;   // index of left side of array will range from index 'start' to 'mid'
+        long long right = mid + 1;   // index of right side of array will range from index 'mid + 1' to 'end'
 
-        long long count = 0;   // Modification 1: count variable to count the pairs
+        long long count = 0;   // Addition 1: count variable to count the pairs
 
         long long k = 0;
-        while(left<=mid && right<=end) {
+        while(left <= mid && right <= end) {
             if(arr[left] <= arr[right]) {
                 temp[k] = arr[left];
                 k++;
                 left++;
             } else {
-                // If this right array's element is smaller, all elements of left array from this point can form a pair with it.
+                // If the right array's element is smaller, all elements of left array from this point can form a pair with it.
                 // No.of pairs made will be nothing but the no.of elements remaining in left array, that is: mid - left + 1.
                 temp[k] = arr[right];
                 k++;
                 right++;
-                count += (mid - left + 1);   // Modification 2   // (mid-left+1) is the count of pairs
+                count += (mid - left + 1);   // Addition 2   // (mid - left + 1) is the count of pairs
             }
         }
 
@@ -74,16 +74,14 @@ class Solution {
             right++;
         }
 
-        for(long long i=start; i<=end; i++) {
-            arr[i] = temp[i-start];
+        for(long long i = start; i <= end; i++) {
+            arr[i] = temp[i - start];
         }
 
-        delete[] temp;
-
-        return count;   // Modification 3
+        return count;   // Addition 3
     }
 
-    long long mergeSort(long long *arr, long long start, long long end) {
+    long long mergeSort(vector<int> &arr, long long start, long long end) {
         long long count = 0;
         if(start >= end) return count;
 
@@ -97,19 +95,21 @@ class Solution {
 
     // T.C: O(nlogn)
     // S.C: O(n)
-    long long int inversionCount(long long arr[], int n) {
+    long long int inversionCount(vector<int> &arr) {
+        int n = arr.size();
         return mergeSort(arr, 0, n - 1);   // return the number of pairs
     }
 };
 
 int main() {
-    long long arr[] = {5, 3, 2, 4, 1};
-    int n = 5;
-
+    vector<int> arr = {2, 4, 1, 3, 5};
     Solution sol;
-    cout << sol.inversionCount_bruteForce(arr, n);
+    
+    cout << sol.inversionCount_bruteForce(arr);
     cout << endl;
-    cout << sol.inversionCount(arr, n);
+
+    arr = {2, 4, 1, 3, 5};
+    cout << sol.inversionCount(arr);
 
     return 0;
 }
