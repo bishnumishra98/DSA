@@ -26,11 +26,11 @@ class Solution {
 public:
     // T.C: O(n^2)
     // S.C: O(1)
-    long long int inversionCount_bruteForce(vector<int> &arr) {
+    int inversionCount_bruteForce(vector<int> &arr) {
         int n = arr.size();
-        long long count = 0;
-        for(long long i = 0; i < n; i++) {
-            for(long long j = i + 1; j < n; j++) {
+        int count = 0;
+        for(int i = 0; i < n; i++) {
+            for(int j = i + 1; j < n; j++) {
                 if(arr[i] > arr[j]) count++;
             }
         }
@@ -39,14 +39,14 @@ public:
 
 // ---------------------------------------------------------------------------------------
 
-    long long merge(vector<int> &arr, long long start, long long mid, long long end) {
+    int merge(vector<int> &arr, int start, int mid, int end) {
         vector<int> temp(end - start + 1);
-        long long left = start;   // index of left side of array will range from index 'start' to 'mid'
-        long long right = mid + 1;   // index of right side of array will range from index 'mid + 1' to 'end'
+        int left = start;   // index of left side of array will range from index 'start' to 'mid'
+        int right = mid + 1;   // index of right side of array will range from index 'mid + 1' to 'end'
 
-        long long count = 0;   // Addition 1: count variable to count the pairs
+        int count = 0;   // Addition 1: count variable to count the pairs
 
-        long long k = 0;
+        int k = 0;
         while(left <= mid && right <= end) {
             if(arr[left] <= arr[right]) {
                 temp[k] = arr[left];
@@ -74,18 +74,18 @@ public:
             right++;
         }
 
-        for(long long i = start; i <= end; i++) {
+        for(int i = start; i <= end; i++) {
             arr[i] = temp[i - start];
         }
 
         return count;   // Addition 3
     }
 
-    long long mergeSort(vector<int> &arr, long long start, long long end) {
-        long long count = 0;
+    int mergeSort(vector<int> &arr, int start, int end) {
+        int count = 0;
         if(start >= end) return count;
 
-        long long mid = start + (end - start) / 2;
+        int mid = start + (end - start) / 2;
         count += mergeSort(arr, start, mid);   // left half
         count += mergeSort(arr, mid + 1, end);   // right half
         count += merge(arr, start, mid, end);   // merge the two sorted halves
@@ -95,7 +95,7 @@ public:
 
     // T.C: O(nlogn)
     // S.C: O(n)
-    long long int inversionCount(vector<int> &arr) {
+    int inversionCount(vector<int> &arr) {
         int n = arr.size();
         return mergeSort(arr, 0, n - 1);   // return the number of pairs
     }
