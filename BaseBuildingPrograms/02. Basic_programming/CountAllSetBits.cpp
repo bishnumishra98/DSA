@@ -22,8 +22,8 @@ int countSetBits1(int n) {
 int countSetBits2(int n) {
     int count = 0;
     while(n) {
-	    n = n & (n-1);   // This line clears the least significant set bit of n
-	    count++;   // Increment the count for each cleared bit
+	    n = n & (n - 1);   // removes the rightmost set bit
+	    count++;
 	}
     return count;
 }
