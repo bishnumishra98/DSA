@@ -78,9 +78,9 @@ class Solution {
     // Manual binary search to find lower_bound (index of first element >= target)
     int binarySearchLowerBound(vector<int>& arr, int target) {
         int low = 0, high = arr.size() - 1;
-        while (low <= high) {
+        while(low <= high) {
             int mid = low + (high - low) / 2;
-            if (arr[mid] < target) low = mid + 1;
+            if(arr[mid] < target) low = mid + 1;
             else high = mid - 1;
         }
         return low;   // when loop exits, 'low' is the index of the first element >= target
