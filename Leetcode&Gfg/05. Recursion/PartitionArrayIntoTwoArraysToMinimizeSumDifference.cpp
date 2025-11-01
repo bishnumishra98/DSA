@@ -103,7 +103,7 @@ class Solution {
             }
 
             // Check the closest lower value
-            if (idx > 0) {
+            if(idx > 0) {
                 int sum1Part = x + sum2[idx - 1];
                 int sum2Part = totalSum - sum1Part;
                 minDiff = min(minDiff, abs(sum1Part - sum2Part));
