@@ -37,10 +37,10 @@ public:
             return;
         }
 
-        for(int i=index; i<s.size(); i++) {
+        for(int i = index; i < s.size(); i++) {
             if(isPalindrome(s, index, i)) {
-                ds.push_back(s.substr(index, i-index+1));
-                solve(i+1, s, ds, ans);
+                ds.push_back(s.substr(index, i - index + 1));   // push the palindrome from index 'index' to 'i' of 's' inside 'ds'
+                solve(i + 1, s, ds, ans);
                 ds.pop_back();
             }
         }
