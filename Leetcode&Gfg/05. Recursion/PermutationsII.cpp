@@ -30,8 +30,8 @@ public:
         }
     }
 
-    // T.C: O(n! * n) + O(n! * logn!) for set insertion;   where n = nums.size()
-    // S.C: O(n) + O(n!);   excluding 'ans' space. O(n) due to recursion stack, O(n!) due to set.
+    // T.C: O(n × n! × log n!);   where n = nums.size()
+    // S.C: O(n! * n)
     vector<vector<int>> permuteUnique_withSet(vector<int>& nums) {
         vector<vector<int>> ans;
         allPermut_withSet(0, nums, ans);
