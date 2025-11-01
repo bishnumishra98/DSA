@@ -56,7 +56,7 @@ public:
     // T.C: O(n^2)
     // S.C: O(n)
     string getPermutation(int n, int k) {
-        // Find factorial of n, and preparing a candidates vector
+        // Create a 'candidates' array having elements from 1 to n. And also calculate (n - 1)! and store it in 'fact'.
         int fact = 1;
         vector<int> candidates;
         for(int i = 1; i < n; i++) {
