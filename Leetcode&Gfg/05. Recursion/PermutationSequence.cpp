@@ -20,6 +20,7 @@
 // Input: n = 3, k = 1
 // Output: "123"
 
+// Optimal solution: Go through the video solution: https://www.youtube.com/watch?v=wT7gcXLYoao&t=497s
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -73,6 +74,7 @@ public:
     // S.C: O(n)
     string getPermutation(int n, int k) {
         // Create a 'candidates' array having elements from 1 to n. And also calculate (n - 1)! and store it in 'fact'.
+        // We calculate (n - 1)! because n! permutations are divided into n groups. So each group has (n - 1)! permutations.
         int fact = 1;
         vector<int> candidates;
         for(int i = 1; i < n; i++) {
