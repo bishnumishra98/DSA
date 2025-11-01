@@ -68,6 +68,7 @@ void allPermut(int index, vector<int>& candidates, vector<vector<int>>& ans) {
 }
 
 // T.C: O(n! * n);   where n = candidates.size()
+//      There are n! permutations and each permutation takes O(n) time to copy and push into ans
 // S.C: O(n)
 vector<vector<int>> findPermutations(vector<int>& candidates) {
     vector<vector<int>> ans;

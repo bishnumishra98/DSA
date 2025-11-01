@@ -20,39 +20,55 @@
 // Input: n = 3, k = 1
 // Output: "123"
 
-// Brute force:
-// 1. Create a vector from 1 to n.
-// 2. Write a function that returns all permutations of a vector. Refer: 'BaseBuildingPrograms\09. Recursion_I\13_AllPermutationsOfArray.cpp'
-// 3. Follow up this code:
-
-// string convertIntVectorToString(vector<int> v) {
-//     string s = "";
-//     for(int i=0; i<v.size(); i++) {
-//         s = s + to_string(v[i]);
-//     }
-//     return s;
-// }
-
-// T.C: O((n!*n)log(n!*n))
-// string getPermutation(int n, int k) {
-//     vector<int> candidates;
-//     for(int i=1; i<=n; i++) {
-//         candidates.push_back(i);
-//     }
-    
-//     vector<vector<int>> ans = findPermutations(candidates);
-//     sort(ans.begin(), ans.end());
-
-//     vector<int> v = ans[k-1];
-//     string s = convertIntVectorToString(v);
-//     return s;
-// }
 
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
+    void generateAllPermutations_helper(int index, vector<int>& candidates, vector<vector<int>>& ans) {
+        if(index == candidates.size()) {
+            ans.push_back(candidates);
+            return;
+        }
+
+        for(int i = index; i < candidates.size(); i++) {
+            swap(candidates[index], candidates[i]);
+            generateAllPermutations_helper(index + 1, candidates, ans);
+            swap(candidates[i], candidates[index]);
+        }
+    }
+
+    vector<vector<int>> generateAllPermutations(vector<int>& candidates) {
+        vector<vector<int>> ans;
+        int index = 0;
+        generateAllPermutations_helper(index, candidates, ans);
+        return ans;
+    }
+
+    // T.C: O(n! * n) as there are n! permutations and each permutation takes O(n) time to copy and push into ans
+    //      + O(n! * log(n!)) for sorting
+    //      = O(n! * n)
+    // S.C: O(n! * n)
+    string getPermutation_bruteforce(int n, int k) {
+        vector<int> candidates;
+        for(int i = 1; i <= n; i++) candidates.push_back(i);
+        vector<vector<int>> allPremutations = generateAllPermutations(candidates);
+
+        // Sort 'allPremutations'
+        sort(allPremutations.begin(), allPremutations.end());
+
+        // Store the Kth permutation
+        vector<int> kthPermutation = allPremutations[k - 1];
+
+        // Convert all integers in kthPermutation to a character and store it in a string
+        string ans = "";
+        for(int i: kthPermutation) ans += to_string(i);
+        return ans;
+    }
+
+// -----------------------------------------------------------------------------------------------------------------------
+
     // T.C: O(n^2)
     // S.C: O(n)
     string getPermutation(int n, int k) {
@@ -83,6 +99,8 @@ public:
 int main() {
     int n = 4, k = 9;
     Solution sol;
+
+    cout << sol.getPermutation_bruteforce(n, k) << endl;
     cout << sol.getPermutation(n, k);
 
     return 0;
