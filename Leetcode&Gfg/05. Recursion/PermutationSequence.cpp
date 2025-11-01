@@ -59,7 +59,7 @@ public:
         // Find factorial of n, and preparing a candidates vector
         int fact = 1;
         vector<int> candidates;
-        for(int i=1; i<n; i++) {
+        for(int i = 1; i < n; i++) {
             fact = fact * i;
             candidates.push_back(i);
         }
@@ -69,8 +69,8 @@ public:
         k = k - 1;   // as we will be using a 0 based indexing
 
         while(true) {
-            ans = ans + to_string(candidates[k/fact]);
-            candidates.erase(candidates.begin() + k/fact);   // erase the (k/fact)th element from candidates
+            ans = ans + to_string(candidates[k / fact]);
+            candidates.erase(candidates.begin() + k / fact);   // erase the (k / fact)th element from candidates
             if(candidates.size() == 0) break;
             k = k % fact;
             fact = fact / candidates.size();
