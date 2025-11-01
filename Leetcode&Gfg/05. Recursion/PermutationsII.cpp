@@ -17,7 +17,7 @@ using namespace std;
 
 class Solution {
 public:
-    void allPermut_withSet(int index, vector<int>& nums, vector<vector<int>>& ans) {
+    void allPermut_bruteforce(int index, vector<int>& nums, vector<vector<int>>& ans) {
         if(index == nums.size()) {
             ans.push_back(nums);
             return;
@@ -25,16 +25,16 @@ public:
 
         for(int i = index; i < nums.size(); i++) {
             swap(nums[index], nums[i]);
-            allPermut_withSet(index + 1, nums, ans);
+            allPermut_bruteforce(index + 1, nums, ans);
             swap(nums[index], nums[i]);
         }
     }
 
     // T.C: O(n × n! × log n!);   where n = nums.size()
     // S.C: O(n! * n)
-    vector<vector<int>> permuteUnique_withSet(vector<int>& nums) {
+    vector<vector<int>> permuteUnique_bruteforce(vector<int>& nums) {
         vector<vector<int>> ans;
-        allPermut_withSet(0, nums, ans);
+        allPermut_bruteforce(0, nums, ans);
 
         set<vector<int>> st(ans.begin(), ans.end());   // using set to store only unique permutations from 'ans' vector
         ans.clear();   // clear the 'ans' vector
@@ -78,7 +78,7 @@ int main() {
     vector<int> nums = {1, 1, 2};
 
     Solution sol;
-    vector<vector<int>> ans1 = sol.permuteUnique_withSet(nums);
+    vector<vector<int>> ans1 = sol.permuteUnique_bruteforce(nums);
     for(int i=0; i<ans1.size(); i++) {
         for(int j=0; j<ans1[i].size(); j++) {
             cout << ans1[i][j] << " ";
