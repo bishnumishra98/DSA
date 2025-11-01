@@ -18,37 +18,27 @@ using namespace std;
 class Solution {
 public:
     void allPermut_withSet(int index, vector<int>& nums, vector<vector<int>>& ans) {
-        // Base case: When we reach beyond last element of 'nums', push the 'nums' vector in 'ans' and return.
-        if(index == nums.size()) {   // Base case can also be if(index == nums.size() - 1) {...} as when 'index'
-                                          // reaches 'nums.size() - 1', no change in position of elements occur on further
-                                         // recursive call. Thus, the 2nd last level of recursion can also be treated as the base case.
+        if(index == nums.size()) {
             ans.push_back(nums);
             return;
         }
 
-        // Swapping current element with itself and elements on its right.
-        for(int i=index; i<nums.size(); i++) {
+        for(int i = index; i < nums.size(); i++) {
             swap(nums[index], nums[i]);
-            allPermut_withSet(index+1, nums, ans);
-            swap(nums[index], nums[i]);   // backtrack to unswap 'nums' after coming from the above recursion call
+            allPermut_withSet(index + 1, nums, ans);
+            swap(nums[index], nums[i]);
         }
     }
 
-    // T.C: O(n! * logn!);   where n = nums.size()
-    // S.C: O(n! * n);   excluding 'ans' space
+    // T.C: O(n! * n) + O(n! * logn!) for set insertion;   where n = nums.size()
+    // S.C: O(n) + O(n!);   excluding 'ans' space. O(n) due to recursion stack, O(n!) due to set.
     vector<vector<int>> permuteUnique_withSet(vector<int>& nums) {
         vector<vector<int>> ans;
         allPermut_withSet(0, nums, ans);
 
-        // Use a set to remove duplicates
-        set<vector<int>> st;
-        for(auto permutation: ans) {
-            st.insert(permutation);
-        }
+        set<vector<int>> st(ans.begin(), ans.end());   // using set to store only unique permutations from 'ans' vector
         ans.clear();   // clear the 'ans' vector
-        for(auto permutation: st) {
-            ans.push_back(permutation);
-        }
+        ans.assign(st.begin(), st.end());   // assign the elements of set 'st' back to 'ans' vector
 
         return ans;
     }
@@ -56,10 +46,7 @@ public:
 // ------------------------------------------------------------------------------------------------------------------------------
 
     void allPermut(int index, vector<int>& nums, vector<vector<int>>& ans) {
-        // Base case: When we reach beyond last element of 'nums', push the 'nums' vector in 'ans' and return.
-        if(index == nums.size()) {   // Base case can also be if(index == nums.size() - 1) {...} as when 'index'
-                                    // reaches 'nums.size() - 1', no change in position of elements occur on further
-                                   // recursive call. Thus, the 2nd last level of recursion can also be treated as the base case.
+        if(index == nums.size()) {
             ans.push_back(nums);
             return;
         }
@@ -68,19 +55,18 @@ public:
         unordered_map<int, bool> visited;
 
         // Swapping current element with itself and elements on its right.
-        for(int i=index; i<nums.size(); i++) {
+        for(int i = index; i < nums.size(); i++) {
             // If this element is already present in 'visited' map, skip this iteration; else mark this element true, i.e., visited.
             if(visited.find(nums[i]) != visited.end()) continue;
-            else visited[nums[i]] = true;
+            visited[nums[i]] = true;
             swap(nums[index], nums[i]);
-            allPermut(index+1, nums, ans);
+            allPermut(index + 1, nums, ans);
             swap(nums[index], nums[i]);   // backtrack to unswap 'nums' after coming from the above recursion call
         }
     }
 
-    // T.C: O(n! * logn!);   where n = nums.size()
-    // S.C: O(n);   excluding 'ans' space. O(n) due to map.
-    // Without using set. We will use map to keep a track of visited elements in allPermut() function
+    // T.C: O(n! * n);   where n = nums.size()
+    // S.C: O(n! * n)
     vector<vector<int>> permuteUnique(vector<int>& nums) {
         vector<vector<int>> ans;
         allPermut(0, nums, ans);
