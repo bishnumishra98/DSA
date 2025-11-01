@@ -38,7 +38,7 @@ public:
         }
 
         for(int i = index; i < s.size(); i++) {
-            if(isPalindrome(s, index, i)) {
+            if(isPalindrome(s, index, i)) {   // if s[index] to s[i] is a palindrome
                 ds.push_back(s.substr(index, i - index + 1));   // push the palindrome from index 'index' to 'i' of 's' inside 'ds'
                 solve(i + 1, s, ds, ans);
                 ds.pop_back();
