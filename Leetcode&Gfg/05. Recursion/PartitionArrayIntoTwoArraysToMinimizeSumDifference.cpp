@@ -4,7 +4,6 @@
 // Return the minimum possible absolute difference.
 
 // Example 1:
-// example-1
 // Input: nums = [3,9,7,3]
 // Output: 2
 // Explanation: One optimal partition is: [3,9] and [7,3].
@@ -51,11 +50,11 @@ class Solution {
         int totalSubsets = 1 << n;   // same as pow(2, n)
 
         // Iterate through all possible subsets using bit masking
-        for (int mask = 0; mask < totalSubsets; mask++) {
+        for(int mask = 0; mask < totalSubsets; mask++) {
             int sum = 0, count = 0;
 
             // Iterate through each bit of the mask and check if ith bit is set, then include arr[i] in the sum
-            // and increment the count of elements in the subset. Exaple:-
+            // and increment the count of elements in the subset. Example:-
             // For array of size 3, the masks will be:
             // 000 -> empty subset (sum = 0, count = 0)
             // 001 -> subset with only arr[0] (sum = arr[0], count = 1)
@@ -65,8 +64,8 @@ class Solution {
             // 101 -> subset with arr[0] and arr[2] (sum = arr[0] + arr[2], count = 2)
             // 110 -> subset with arr[1] and arr[2] (sum = arr[1] + arr[2], count = 2)
             // 111 -> subset with all elements (sum = arr[0] + arr[1] + arr[2], count = 3)
-            for (int i = 0; i < n; i++) {
-                if (mask & (1 << i)) {   // check if i-th bit is set
+            for(int i = 0; i < n; i++) {
+                if(mask & (1 << i)) {   // check if i-th bit is set
                     sum += arr[i];
                     count++;
                 }
@@ -91,13 +90,13 @@ class Solution {
     int findMinimumDifference(vector<int>& sum1, vector<int>& sum2, int totalSum) {
         int minDiff = INT_MAX;
 
-        for (int x : sum1) {
+        for(int x : sum1) {
             int target = totalSum / 2 - x;
 
             int idx = binarySearchLowerBound(sum2, target);
 
             // Check the closest higher value
-            if (idx < sum2.size()) {
+            if(idx < sum2.size()) {
                 int sum1Part = x + sum2[idx];
                 int sum2Part = totalSum - sum1Part;
                 minDiff = min(minDiff, abs(sum1Part - sum2Part));
@@ -129,8 +128,8 @@ public:
         generateSubsetSums(right, subsetSumsRight);
 
         // Sort subset sums for efficient manual binary search
-        for (auto& sums : subsetSumsRight) {
-            sort(sums.begin(), sums.end());
+        for(auto sum : subsetSumsRight) {
+            sort(sum.begin(), sum.end());
         }
 
         // Find the minimum absolute difference
