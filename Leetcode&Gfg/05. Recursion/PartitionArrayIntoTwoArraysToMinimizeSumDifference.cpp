@@ -22,6 +22,8 @@
 // Explanation: One optimal partition is: [2,4,-9] and [-1,0,-2].
 // The absolute difference between the sums of the arrays is abs((2 + 4 + -9) - (-1 + 0 + -2)) = 0.
 
+// NOTE: This problem is actually for SDE3 level and above. It is never asked in SDE1 or rarely in SDE2 interviews.
+
 // Algorithm: The algorithm uses the meet in the middle (MITM) approach to solve the problem.
 //             The idea is to split the array into two halves, find all possible subset sums for each half, and then
 //             use binary search to find the closest sum to totalSum / 2 in the combined sums of both halves.
