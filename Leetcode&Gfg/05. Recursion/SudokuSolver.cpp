@@ -17,6 +17,8 @@
 
 // Problem link: https://leetcode.com/problems/sudoku-solver/description/
 
+// Algorithm: https://www.youtube.com/watch?v=FWAIf_EVUKE&t=939s
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -36,7 +38,7 @@ public:
     bool solve(vector<vector<char>>& board) {
         // Traverse all cells of the Sudoku board to find blank cells where numbers have to be inserted 
         for(int i = 0; i < board.size(); i++) {
-            for(int j = 0; j < board[i].size(); j++) {
+            for(int j = 0; j < board[0].size(); j++) {
                 // If a blank cell is found, try all numbers from '1' to '9' that fit valid in that position
                 if(board[i][j] == '.') {
                     for(char c = '1'; c <= '9'; c++) {
@@ -45,9 +47,9 @@ public:
                             // If solve() returns true, it means a valid Sudoku board has been built. Thus,
                             // return true to indicate the same.
                             // If solve() returns false, it means the current combination of the board is invalid.
-                            // Backtrack by removing the character from this position [i][j] and trying a new path.
+                            // Backtrack by removing the character from this position [i][j] and try a new path.
                             if(solve(board)) return true;
-                            board[i][j] = '.';   // backtrack
+                            else board[i][j] = '.';   // backtrack
                         }
                     }
                     return false;   // If no number from '1' to '9' fits in the blank cell, return
