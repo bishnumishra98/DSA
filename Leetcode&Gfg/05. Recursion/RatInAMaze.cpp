@@ -106,9 +106,9 @@ public:
         int n = maze.size();
         vector<string> ans;
         vector<vector<bool>> visited(n, vector<bool>(n, false));
-        // Directions       D       L     R       U
-        // i-coordinate     i + 1   i     i       i + 1
-        // j-coordinate     j       j     j + 1   j
+        // Directions       D       L         R       U
+        // i-coordinate     i + 1   i         i       i - 1
+        // j-coordinate     j       j - 1     j + 1   j
         vector<int> di = {1, 0, 0, -1};
         vector<int> dj = {0, -1, 1, 0};
         string ds = "";
