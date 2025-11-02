@@ -26,6 +26,8 @@
 // Output: ["DDRR", "RRDD"]
 // Explanation: The rat has two possible paths to reach the destination: DDRR and RRDD.
 
+// Problem link: https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1
+
 #include <bits/stdc++.h>
 using namespace std;
 
