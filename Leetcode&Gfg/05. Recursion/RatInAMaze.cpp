@@ -33,7 +33,7 @@ using namespace std;
 
 class Solution{
 public:
-    void solve(int i, int j, vector<vector<int>>&maze, int n, vector<string>& ans, string ds, vector<vector<bool>> visited) {
+    void solve(int i, int j, vector<vector<int>>&maze, int n, vector<string>& ans, string ds, vector<vector<bool>>& visited) {
         if(i == n - 1 && j == n - 1) {
             ans.push_back(ds);
             return;
@@ -82,7 +82,7 @@ public:
 
 // ----------------------------------------------------------------------------------------------------------------------------
 
-    void solve(int i, int j, vector<vector<int>>& maze, int n, vector<string>& ans, string ds, vector<vector<bool>> visited, vector<int>& di, vector<int>& dj) {
+    void solve(int i, int j, vector<vector<int>>& maze, int n, vector<string>& ans, string ds, vector<vector<bool>>& visited, vector<int>& di, vector<int>& dj) {
         if(i == n - 1 && j == n - 1) {
             ans.push_back(ds);
             return;
