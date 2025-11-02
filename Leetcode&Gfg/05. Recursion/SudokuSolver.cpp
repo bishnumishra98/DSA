@@ -15,6 +15,8 @@
 // ["8","5","9","7","6","1","4","2","3"],["4","2","6","8","5","3","7","9","1"],["7","1","3","9","2","4","8","5","6"],
 // ["9","6","1","5","3","7","2","8","4"],["2","8","7","4","1","9","6","3","5"],["3","4","5","2","8","6","1","7","9"]]
 
+// Problem link: https://leetcode.com/problems/sudoku-solver/description/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -25,7 +27,7 @@ public:
         for(int i = 0; i < 9; i++) {
             if(board[i][col] == c) return false;   // vertical check: checking if the character 'c' is already present in the column 'col'
             if(board[row][i] == c) return false;   // horizontal check: checking if the character 'c' is already present in the row 'row'
-            if(board[3*(row/3) + i/3][3*(col/3) + i%3] == c) return false;   // 3x3 box check
+            if(board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c) return false;   // 3x3 box check
         }
         return true;
     }
@@ -45,11 +47,11 @@ public:
                             // If solve() returns false, it means the current combination of the board is invalid.
                             // Backtrack by removing the character from this position [i][j] and trying a new path.
                             if(solve(board)) return true;
-                            else board[i][j] = '.';   // backtrack
+                            board[i][j] = '.';   // backtrack
                         }
                     }
                     return false;   // If no number from '1' to '9' fits in the blank cell, return
-                    // false to indicate that the current board configuration is invalid.
+                                   // false to indicate that the current board configuration is invalid.
                 }
             }
         }
