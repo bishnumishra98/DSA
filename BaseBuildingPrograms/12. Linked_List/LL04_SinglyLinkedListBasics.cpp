@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// interface of Node for singly linked list
+// Interface of Node for singly linked list
 class Node {
     public:
         int data;
@@ -15,7 +15,7 @@ class Node {
         }
 };
 
-// function for printing details of linked list
+// Function for printing details of linked list
 void printLLDetails(Node* head) {
     // It a good practice to always make a copy of head before doing any operation with linked list
     // where we will need to traverse head Node.
@@ -28,7 +28,7 @@ void printLLDetails(Node* head) {
     }
 }
 
-// function to print elements of linked list
+// Function to print elements of linked list
 void printElements(Node* head) {
     Node* temp = head;
     while(temp != NULL) {
@@ -37,7 +37,7 @@ void printElements(Node* head) {
     }
 }
 
-// function to find length of linked list, i.e. no.of nodes
+// Function to find length of linked list, i.e. no.of nodes
 int lengthLL(Node* head) {
     Node* temp = head;
     int len = 0;
@@ -49,14 +49,14 @@ int lengthLL(Node* head) {
 }
 
 int main() {
-    // creating nodes
+    // Creating nodes
     Node* first = new Node(2);
     Node* second = new Node(4);
     Node* third = new Node(6);
     Node* fourth = new Node(8);
     Node* fifth = new Node(10);
 
-    // creating a linked list by connecting all nodes. To connect all nodes, we set the 'next' pointer
+    // Creating a linked list by connecting all nodes. To connect all nodes, we set the 'next' pointer
     // of each Node to point to the next Node. Note that, no one is pointing to the first Node; and
     // the fifth Node is pointing to NULL, as the 'next' pointer of all Nodes was initially pointing
     // to NULL, but we changed them to point to the next Node except the fifth one.
@@ -65,7 +65,7 @@ int main() {
     third->next = fourth;
     fourth->next = fifth;
 
-    // printing the details of linked list
+    // Printing the details of linked list
     Node* head = first;
 
     cout << "Details of linked list are:\n";
