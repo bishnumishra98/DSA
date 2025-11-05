@@ -52,7 +52,7 @@ int main() {
             // calloc() stands for contiguous allocation.
             // The calloc() functions reserves multiple blocks of memory of the specified no.of bytes.
             // It allocates memory and initializes all elements to zero.
-            // // It also returns the value 'NULL' if memory cannot be allocated.
+            // It also returns the value 'NULL' if memory cannot be allocated.
             // Syntax: int *z = (castType*) calloc(n, size);
 
             int *z = (int*) calloc(10, 4);
@@ -70,7 +70,7 @@ int main() {
         // PRO TIP: Instead of assigning numerical size to malloc() or calloc() function, use
         // sizeof() function to auto calculate data type's size. Example:
         // int *y = (int*) malloc(sizeof(int));
-        // int *z = (int*) malloc(10, sizeof(int));
+        // int *z = (int*) calloc(10, sizeof(int));
 
 
     return 0;
