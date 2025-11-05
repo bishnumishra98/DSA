@@ -122,13 +122,15 @@ void insertAtPosition(Node*& head, int data, int position) {   // Note: Always p
         Node* prevNode = NULL;
         Node* currNode = head;
 
-        int pos = position - 1;   // we did 'pos = position - 1', because if we didn't do this, the
-                                 // newNode was getting insert at 'position + 1'th position in the linked list.
+        int pos = position - 1;   // we did 'pos = position - 1', because to insert at 'position'th position,
+                                 // prevNode should point to (position-1)th node and currNode should point to
+                                // 'position'th node.
         while(pos--) {
             prevNode = currNode;
             currNode = currNode->next;
         }
 
+        // newNode is to be inserted in between prevNode and currNode
         prevNode->next = newNode;
         newNode->next = currNode;
     }
