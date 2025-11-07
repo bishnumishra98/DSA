@@ -3,19 +3,19 @@ using namespace std;
 
 // Interface of node for doubly linked list
 class Node {
-    public:
-        int data;
-        Node* prev;
-        Node* next;
-        Node() {
-            this->prev = NULL;
-            this->next = NULL;
-        }
-        Node(int data) {
-            this->data = data;
-            this->prev = NULL;
-            this->next = NULL;
-        }
+public:
+    int data;
+    Node* prev;
+    Node* next;
+    Node() {
+        this->prev = NULL;
+        this->next = NULL;
+    }
+    Node(int data) {
+        this->data = data;
+        this->prev = NULL;
+        this->next = NULL;
+    }
 };
 
 // Function to print elements of linked list
