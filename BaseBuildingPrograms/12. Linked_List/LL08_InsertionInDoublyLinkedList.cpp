@@ -27,12 +27,12 @@ using namespace std;
 
 // Interface of node for doubly linked list
 class Node {
-    public:
-        int data;
-        Node* prev;
-        Node* next;
-        Node() : prev(NULL), next(NULL) {}
-        Node(int data) : data(data), prev(NULL), next(NULL) {}
+public:
+    int data;
+    Node* prev;
+    Node* next;
+    Node() : prev(NULL), next(NULL) {}
+    Node(int data) : data(data), prev(NULL), next(NULL) {}
 };
 
 // Function to print elements of linked list
