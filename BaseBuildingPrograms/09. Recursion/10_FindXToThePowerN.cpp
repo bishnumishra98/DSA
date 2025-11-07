@@ -17,8 +17,15 @@
 // Output: 0.01
 
 // Algorithm: We will use the concept of divide and conquer to solve this problem.
+// If n is positive:
 // ▪ If n is even, then x^n = x^(n/2) * x^(n/2)
 // ▪ If n is odd, then x^n = x^(n/2) * x^(n/2) * x
+// ▪ If n is 0, then x^n = 1
+
+// If n is negative:
+// ▪ If n is even, then x^n = (x^(n/2) * x^(n/2))
+// ▪ If n is odd, then x^n = (x^(n/2) * x^(n/2)) / x
+// ▪ If n is 0, then x^n = 1
 
 #include <iostream>
 using namespace std;
