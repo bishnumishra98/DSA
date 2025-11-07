@@ -1,4 +1,4 @@
-// This is an extension fo the problem 'Leetcode&Gfg\02. Searching\04_PeakIndexInAMountainArray.cpp'.
+// This is an extension of the problem 'Leetcode&Gfg\02. Searching\04_PeakIndexInAMountainArray.cpp'.
 
 #include <iostream>
 #include <vector>
