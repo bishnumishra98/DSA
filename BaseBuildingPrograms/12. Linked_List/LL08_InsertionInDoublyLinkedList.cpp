@@ -1,15 +1,15 @@
 // A Node in linked list can be inserted in any one of the three areas:
 // 1) At head of linked list:
 //      Step 1: Create a nwNode 
-//      Step 2: Attach newNode to head, i.e. newNode->next = head
-//      Step 3: Attach prev of head to newNode, i.e. head->prev = newNode
-//      Step 4: Update head pointer, i.e. head = newNode
+//      Step 2: Attach newNode to head, i.e., newNode->next = head
+//      Step 3: Attach prev of head to newNode, i.e., head->prev = newNode
+//      Step 4: Update head pointer, i.e., head = newNode
 // 2) At tail of linked list:
 //      Step 1: Create a newNode
-//      Step 2: Attach tail to newNode, i.e. tail->next = newNode
-//      Step 3: Attach prev of newNode to tail, i.e. newNode->prev = tail
-//      Step 4: Update tail pointer, i.e. tail = newNode
-// 3) In between the linked list, i.e. at a particular position(let positions start from 1):
+//      Step 2: Attach tail to newNode, i.e., tail->next = newNode
+//      Step 3: Attach prev of newNode to tail, i.e., newNode->prev = tail
+//      Step 4: Update tail pointer, i.e., tail = newNode
+// 3) In between the linked list, i.e., at a particular position(let positions start from 1):
 //      Step 1: Create a newNode
 //      Step 2: Initialize two nodes named 'currNode' and 'prevNode' with NULL and head respectively.
 //      Step 3: Move forward the 'currNode' and 'prevNode' pointers in such way that 'prevNode' node
@@ -17,15 +17,15 @@
 //              where newNode is to be inserted. For example, if a newNode is to be inserted at
 //              position 3, then 'currNode' should be pointing at the 3rd node, while 'prevNode'
 //              should be pointing at the 2nd node of the linked list, respectively.
-//      Step 4: Attach prevNode to newNode, i.e. prevNode->next = NewNode
-//      Step 5: Attach prev of newNode to prevNode, i.e. newNode->prev = prevNode
-//      Step 5: Attach newNode to currNode node, i.e. newNode->next = currNode
-//      Step 6: Attach prev of currNode to NewNode, i.e. currNode->prev = newNode 
+//      Step 4: Attach prevNode to newNode, i.e., prevNode->next = NewNode
+//      Step 5: Attach prev of newNode to prevNode, i.e., newNode->prev = prevNode
+//      Step 5: Attach newNode to currNode node, i.e., newNode->next = currNode
+//      Step 6: Attach prev of currNode to NewNode, i.e., currNode->prev = newNode 
 
 #include <iostream>
 using namespace std;
 
-// interface of node for doubly linked list
+// Interface of node for doubly linked list
 class Node {
     public:
         int data;
@@ -35,7 +35,7 @@ class Node {
         Node(int data) : data(data), prev(NULL), next(NULL) {}
 };
 
-// function to print elements of linked list
+// Function to print elements of linked list
 void printElements(Node* head) {
     Node* temp = head;
     while(temp != NULL) {
@@ -44,7 +44,7 @@ void printElements(Node* head) {
     }
 }
 
-// function to find length of linked list, i.e. no.of nodes
+// Function to find length of linked list, i.e., no.of nodes
 int lengthLL(Node* head) {
     Node* temp = head;
     int len = 0;
@@ -55,9 +55,9 @@ int lengthLL(Node* head) {
     return len;
 }
 
-// function to find tail of linked list. This function returns address of tail Node of linked list.
+// Function to find tail of linked list. This function returns address of tail Node of linked list.
 Node* findTail(Node* head) {
-    if(head == NULL) {   // if linked list is empty, i.e. there are no nodes, then tail will
+    if(head == NULL) {   // if linked list is empty, i.e., there are no nodes, then tail will
                         // also point to NULL.
         return NULL;
     }
@@ -127,11 +127,7 @@ int main() {
     insertAtTail(head, 6);
     insertAtPosition(head, 8, 3);
 
-    printElements(head);
+    printElements(head);   // o/p: 4 2 8 6
 
     return 0;
 }
-
-// o/p:
-// 4 2 8 6
-
