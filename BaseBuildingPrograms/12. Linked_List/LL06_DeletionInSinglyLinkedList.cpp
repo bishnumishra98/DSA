@@ -96,7 +96,9 @@ void deleteAtPosition(Node* &head, int position) {
             int pos = position - 2;
 
             // Traverse prevNode to 2nd last node
-            while(pos--) prevNode = prevNode->next;
+            while(pos--) {
+                prevNode = prevNode->next;
+            }
 
             prevNode->next = NULL;
             delete tail;
@@ -111,7 +113,7 @@ void deleteAtPosition(Node* &head, int position) {
                 prevNode = currNode;
                 currNode = currNode->next;
             }
-            
+
             prevNode->next = currNode->next;
             currNode->next = NULL;
             delete currNode;
