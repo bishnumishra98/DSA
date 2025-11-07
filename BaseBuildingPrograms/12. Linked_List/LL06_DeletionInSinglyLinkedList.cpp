@@ -23,7 +23,7 @@
 #include <iostream>
 using namespace std;
 
-// interface of Node for singly linked list
+// Interface of Node for singly linked list
 class Node {
 public:
     int data;

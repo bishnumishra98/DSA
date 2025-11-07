@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// interface of node for doubly linked list
+// Interface of node for doubly linked list
 class Node {
     public:
         int data;
@@ -18,7 +18,7 @@ class Node {
         }
 };
 
-// function to print elements of linked list
+// Function to print elements of linked list
 void printElements(Node* head) {
     Node* temp = head;
     while(temp != NULL) {
@@ -27,7 +27,7 @@ void printElements(Node* head) {
     }
 }
 
-// function to find length of linked list, i.e. no.of nodes
+// Function to find length of linked list, i.e. no.of nodes
 int lengthLL(Node* head) {
     Node* temp = head;
     int len = 0;
@@ -38,7 +38,7 @@ int lengthLL(Node* head) {
     return len;
 }
 
-// function for printing details of linked list
+// Function for printing details of linked list
 void printLLDetails(Node* head) {
     Node* temp = head;
     while(temp != NULL) {
@@ -51,14 +51,14 @@ void printLLDetails(Node* head) {
 }
 
 int main() {
-    // creating nodes
+    // Creating nodes
     Node* first = new Node(2);
     Node* second = new Node(4);
     Node* third = new Node(6);
     Node* fourth = new Node(8);
     Node* fifth = new Node(10);
 
-    // creating linked list
+    // Creating linked list
     first->next = second;
     second->next = third;
     third->next = fourth;
