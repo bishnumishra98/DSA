@@ -23,7 +23,7 @@
 // ▪ If n is 0, then x^n = 1
 
 // If n is negative:
-// ▪ If n is even, then x^n = (x^(n/2) * x^(n/2))
+// ▪ If n is even, then x^n = x^(n/2) * x^(n/2)
 // ▪ If n is odd, then x^n = (x^(n/2) * x^(n/2)) / x
 // ▪ If n is 0, then x^n = 1
 
