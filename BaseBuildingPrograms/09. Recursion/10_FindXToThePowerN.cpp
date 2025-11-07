@@ -53,13 +53,12 @@ int xToThePowern_positive(int x, int n) {
 double xToThePowern(int x, int n) {
     if(n == 0) return 1.0;
 
-    double half = xToThePowern(x, n / 2);
-
+    double ans = xToThePowern(x, n / 2);
     if(n & 1) {
-        if(n > 0) return half * half * x;
-        else return (half * half) / x;   // handle negative power
+        if(n > 0) return ans * ans * x;
+        else return (ans * ans) / x;   // handle negative power
     } else {
-        return half * half;
+        return ans * ans;
     }
 }
 
