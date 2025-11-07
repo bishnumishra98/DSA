@@ -65,27 +65,3 @@ int main() {
 
     return 0;
 }
-
-
-// But the above solution fails if the problem is extended to find peak element in an array which may have
-// duplicate elements. In that case, just modify the Binary Search like this:
-
-// int findPeakWithDuplicates(vector<int>& arr) {
-//     int start = 0, end = arr.size() - 1;
-//     while (start < end) {
-//         int mid = start + (end - start) / 2;
-
-//         if (arr[mid] > arr[mid + 1]) {
-//             // could be peak or in decreasing slope
-//             end = mid;
-//         } else if (arr[mid] < arr[mid + 1]) {
-//             // on increasing slope
-//             start = mid + 1;
-//         } else {
-//             // arr[mid] == arr[mid + 1]
-//             // move one step to break the tie
-//             start++;
-//         }
-//     }
-//     return start;
-// }
