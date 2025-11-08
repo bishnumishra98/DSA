@@ -6,29 +6,29 @@
 //    Step 2) Repoint any one of the pointers to head of LL, for instance repoint slow pointer on head.
 //    Step 3) Then move slow and fast pointer by one step respectively until they meet. The point where
 //            they meet is the starting node of LL.
-//    The mathematical proof of this algorithm is illustrated in LL13b.
+//    The mathematical proof of this algorithm is illustrated in 'BaseBuildingPrograms\12. Linked_List\LL13b_StartingNodeOfCycleInLL.jpg'.
 
 #include <iostream>
 using namespace std;
 
-// interface of Node for singly linked list
+// Interface of Node for singly linked list
 class Node {
-    public:
-        int data;
-        Node* next;
-        Node() {
-            this->next = NULL;
-        }
-        Node(int data) {
-            this->data = data;
-            this->next = NULL;
-        }
+public:
+    int data;
+    Node* next;
+    Node() {
+        this->next = NULL;
+    }
+    Node(int data) {
+        this->data = data;
+        this->next = NULL;
+    }
 };
 
 // T.C: O(n)
 // S.C: O(1)
 Node* startingNodeOfCycle(Node* head) {
-    // Step 1) tortoise and hare algorithm
+    // Step 1: Tortoise and hare algorithm
     Node* fast = head;
     Node* slow = head;
 
@@ -40,7 +40,7 @@ Node* startingNodeOfCycle(Node* head) {
             fast = fast->next;
             slow = slow->next;
         }
-        if(fast == slow) {   // if 'fast==slow', it means cycle exists in LL
+        if(fast == slow) {   // if 'fast == slow', it means cycle exists in LL
             break;
         }
     }
@@ -50,10 +50,10 @@ Node* startingNodeOfCycle(Node* head) {
         return NULL;
     }
 
-    // Step 2) Now the repoint slow pointer on head
+    // Step 2: Now the repoint slow pointer on head
     slow = head;
 
-    // Step 3) Moving slow and fast pointer by one step respectively until they meet
+    // Step 3: Moving slow and fast pointer by one step respectively until they meet
     while(slow != fast) {
         slow = slow->next;
         fast = fast->next;
