@@ -86,26 +86,26 @@ void deleteAtPosition(Node* &head, int position) {
         cout << "Cannot delete anything from an empty linked list" << endl;
         return;
     }
-    if(position<1 || position>lengthLL(head)) {   // deletion can be done only if position exist in linked list
+    if(position < 1 || position > lengthLL(head)) {   // deletion can be done only if position exist in linked list
         cout << "Please enter a valid position" << endl;
         return;
     } else {   // if linked list is non-empty and deletion is performed in valid position
         if(position == 1) {
-            // deletion at head
+            // Deletion at head
             Node* temp = head;
             head = head->next;
             temp->next = NULL;
             head->prev = NULL;
             delete temp;
         } else if(position == lengthLL(head)) {
-            // deletion at tail
+            // Deletion at tail
             Node* tail = findTail(head);
             Node* prevNode = tail->prev;
             prevNode->next = NULL;
             tail->prev = NULL;
             delete tail;
         } else {
-            // deletion in between the linked list
+            // Deletion in between the linked list
             Node* currNode = head;
             int pos = position - 1;
             while(pos--) {
