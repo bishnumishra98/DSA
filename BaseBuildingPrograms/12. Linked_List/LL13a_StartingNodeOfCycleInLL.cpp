@@ -50,7 +50,7 @@ Node* startingNodeOfCycle(Node* head) {
         return NULL;
     }
 
-    // Step 2: Now the repoint slow pointer on head
+    // Step 2: Now repoint slow pointer on head
     slow = head;
 
     // Step 3: Moving slow and fast pointer by one step respectively until they meet
