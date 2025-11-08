@@ -33,7 +33,7 @@ Node* startingNodeOfCycle(Node* head) {
     Node* slow = head;
 
     // Don't use while(fast != NULL && fast->next != NULL) here. Instead write this condition
-    // in two parts(while & if). This will help in returning something if LL had no cycles.
+    // in two parts(while & if). This will help in returning NULL if LL had no cycles.
     while(fast != NULL) {
         fast = fast->next;
         if(fast != NULL) {
