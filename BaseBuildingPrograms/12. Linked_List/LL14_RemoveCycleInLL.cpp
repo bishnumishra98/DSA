@@ -2,30 +2,29 @@
 // present just before the starting node of cycle.
 
 // -> How to remove cycle from LL ?
-// -> Step 1) Find starting node of cycle in LL(Refer 'LL13a_StartingNodeOfCycleInLL.cpp')
-//    Step 2) Repoint node present just before the starting node of cycle to NULL.
+// -> Step 1: Find starting node of cycle in LL(Refer 'LL13a_StartingNodeOfCycleInLL.cpp')
+//    Step 2: Repoint node present just before the starting node of cycle to NULL.
 
 #include <iostream>
 using namespace std;
 
-// interface of Node for singly linked list
+// Interface of Node for singly linked list
 class Node {
-    public:
-        int data;
-        Node* next;
-        Node() {
-            this->next = NULL;
-        }
-        Node(int data) {
-            this->data = data;
-            this->next = NULL;
-        }
+public:
+    int data;
+    Node* next;
+    Node() {
+        this->next = NULL;
+    }
+    Node(int data) {
+        this->data = data;
+        this->next = NULL;
+    }
 };
 
-// function to find tail of linked list.
+// Function to find tail of linked list.
 Node* findTail(Node* head) {
-    if(head == NULL) {   // if linked list is empty, i.e. there are no nodes, then tail will
-                        // also point to NULL.
+    if(head == NULL) {   // if linked list is empty, i.e. there are no nodes, then tail will also point to NULL.
         return NULL;
     }
     Node* temp = head;
@@ -38,7 +37,7 @@ Node* findTail(Node* head) {
 // T.C: O(n)
 // S.C: O(1)
 void removeCycle(Node* &head) {
-    // Step 1) Find starting node of cycle in LL
+    // Step 1: Find starting node of cycle in LL
     Node* fast = head;
     Node* slow = head;
 
@@ -68,7 +67,7 @@ void removeCycle(Node* &head) {
     }
     // starting node of cycle is pointed by both fast and slow pointer
 
-    // Step 2) Repoint node present just before the starting node of cycle to NULL
+    // Step 2: Repoint node present just before the starting node of cycle to NULL
     while(slow->next != fast) {
     // Keeping fast pointer on its place, and moving slow pointer by 1 step until, slow->next points
     // to fast. Thus, slow comes at a place which denotes the node just before starting node of cycle.
