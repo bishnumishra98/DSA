@@ -7,21 +7,21 @@
 #include <iostream>
 using namespace std;
 
-// interface of Node for singly linked list
+// Interface of Node for singly linked list
 class Node {
-    public:
-        int data;
-        Node* next;
-        Node() {
-            this->next = NULL;
-        }
-        Node(int data) {
-            this->data = data;
-            this->next = NULL;
-        }
+public:
+    int data;
+    Node* next;
+    Node() {
+        this->next = NULL;
+    }
+    Node(int data) {
+        this->data = data;
+        this->next = NULL;
+    }
 };
 
-// function to print elements of linked list
+// Function to print elements of linked list
 void printElements(Node* head) {
     Node* temp = head;
     while(temp != NULL) {
@@ -64,10 +64,10 @@ Node* reverseLinkedList_Iterative_returnLL(Node* head) {   // 'head' or '&head' 
     return prevNode;
 }
 
-// recursive function
+// Recursive function
 Node* reverse_by_recursion(Node* &prevNode, Node* &currNode) {
     if(currNode == NULL) {
-        return prevNode;   // We know head lies on prevNode of a reversed linked list.
+        return prevNode;   // we know head lies on prevNode of a reversed linked list.
                           // Thus, returning prevNode.
     }
 
@@ -90,14 +90,14 @@ void reverseLinkedList_Recursive(Node* &head) {   // passing '&head' is mandator
 }
 
 int main() {
-    // creating nodes
+    // Creating nodes
     Node* first = new Node(2);
     Node* second = new Node(4);
     Node* third = new Node(6);
     Node* fourth = new Node(8);
     Node* fifth = new Node(10);
 
-    // creating a linked list
+    // Creating a linked list
     first->next = second;
     second->next = third;
     third->next = fourth;
@@ -122,3 +122,13 @@ int main() {
 
     return 0;
 }
+
+// o/p:
+// Original linked list:
+// 2 4 6 8 10 
+// Reversed LL by iteration(in-place):
+// 10 8 6 4 2
+// Reversed linked list by recursion(in-place):
+// 2 4 6 8 10
+// Returned reversed linked list by iteration:
+// 10 8 6 4 2
