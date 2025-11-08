@@ -44,7 +44,7 @@ void reverseLinkedList_Iterative_inPlace(Node* &head) {   // passing '&head' is 
         currNode = nextNode;
     }
     // Loop ends when currNode points to NULL. At that point, prevNode will point to last element of
-    // linked list. Thus, we will repoint head pointer on that node, i.e. on prevNode.
+    // linked list. Thus, we will repoint head pointer on that node, i.e., on prevNode.
     head = prevNode;
 }
 
