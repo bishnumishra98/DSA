@@ -59,7 +59,7 @@ Node* startingNodeOfCycle(Node* head) {
         fast = fast->next;
     }
 
-    return slow;
+    return slow;   // you can also return fast as both are at same node now
 }
 
 int main() {
