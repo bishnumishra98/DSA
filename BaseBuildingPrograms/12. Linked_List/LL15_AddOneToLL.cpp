@@ -73,11 +73,12 @@ Node* addOneToLL_easy(Node* head) {
         } else {   // else we continue with making data as 0 and add 1(carry) to next node
             temp->data = 0;
         }
-            
-        if(temp->next != NULL) {   // if we didn't reached last node of LL, keep moving forward
+        
+        // If next node is not NULL, we move temp to next node to add carry of 1
+        if(temp->next != NULL) {
             temp = temp->next;
         } else {
-            break;   // If last node of LL is reached, break from the loop
+            break;
         }
     }
 
@@ -85,7 +86,7 @@ Node* addOneToLL_easy(Node* head) {
     // ended. This means there is a carry of 1 left to be inserted after the last node. This only
     // happens when input is all 9. For example: 999, 9999, etc. Thus, we insert a new node
     // with data as 1 at the end of the LL and return the reversed list.
-    temp->next = new Node(1);  // adding new node for the carried 1
+    temp->next = new Node(1);   // adding new node for the carried 1
     return reverseLL(head);
 }
 
@@ -93,7 +94,7 @@ Node* addOneToLL_easy(Node* head) {
 // T.C: O(n)
 // S.C: O(1)
 Node* addOneToLL_generalised(Node* head) {
-    head = reverseLL(head);   // reversing list to make addition easy 
+    head = reverseLL(head);   // reversing list to make addition easy
     Node* p = head;
     Node* temp = NULL;   // temp will denote tail at end of while loop
 
@@ -130,8 +131,8 @@ int main() {
 
     printLL(head);
     cout << "\n";
-    // Node* ans = addOneToLL_easy(head);
-    Node* ans = addOneToLL_generalised(head);
+    Node* ans = addOneToLL_easy(head);
+    // Node* ans = addOneToLL_generalised(head);
     printLL(ans);
 
     return 0;
