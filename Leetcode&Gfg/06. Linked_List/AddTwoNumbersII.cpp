@@ -44,14 +44,12 @@ public:
         return prevNode;
     }
 
-    // Note that this question can be done without reversing the lists by using stacks
-    // T.C: O(max(m,n));   where m & n are lengths of l1 & l2 respectively.
+    // T.C: O(max(m,n));   where m & n are lengths of l1 & l2 respectively
     // S.C: O(max(m,n))
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         l1 = reverseLL(l1);
         l2 = reverseLL(l2);
 
-        // same logic as in Leetcode-2(AddTwoNumbers)
         ListNode* ans = new ListNode(0);
         ListNode* p1 = l1, *p2 = l2, *temp = ans;
 
@@ -60,23 +58,23 @@ public:
             int x1 = (p1 != NULL) ? p1->val : 0;
             int x2 = (p2 != NULL) ? p2->val : 0;
             int sum = x1 + x2 + carry;
-            carry = sum/10;
-            temp->next = new ListNode(sum%10);
+            carry = sum / 10;
+            temp->next = new ListNode(sum % 10);
             temp = temp->next;
 
             if(p1 != NULL) p1 = p1->next;
             if(p2 != NULL) p2 = p2->next;
         }
 
-        if(carry>0) {
-            temp->next = new ListNode(carry);
+        if(carry > 0) {
+            temp->next = new ListNode(1);
         }
 
         return reverseLL(ans->next);
     }
 };
 
-// function to print elements of linked list
+// Function to print elements of linked list
 void printLL(ListNode* head) {
     ListNode* temp = head;
     while(temp != NULL) {
