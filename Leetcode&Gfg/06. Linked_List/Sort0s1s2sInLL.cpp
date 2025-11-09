@@ -7,7 +7,7 @@
 // Input: head = [1,2,2,1,2,0,2,2]
 // Output: [0,1,1,2,2,2,2,2]
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 struct Node {

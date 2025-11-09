@@ -15,8 +15,7 @@
 // Input: l1 = [0], l2 = [0]
 // Output: [0]
 
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 // Definition for singly-linked list.

@@ -9,7 +9,7 @@
 // Input: head = [1,1,2,3,3]
 // Output: [1,2,3]
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 // Definition for singly-linked list.
