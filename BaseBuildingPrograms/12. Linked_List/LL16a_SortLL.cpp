@@ -54,15 +54,20 @@ Node* sortList_bruteforce(Node* head) {
 
 // This function receives a list and returns mid index(left one if 2 mids) of that list. 
 Node* findMid(Node* head) {
+    if (head == NULL) return NULL;
+
     Node* slow = head;
     Node* fast = head;
 
-    while(fast->next != NULL && fast->next->next != NULL) {
+    // The while loop condition stops with 'slow' pointer to left-middle for even length lists
+    while (fast->next != NULL && fast->next->next != NULL) {
         slow = slow->next;
         fast = fast->next->next;
     }
+    
     return slow;
 }
+
 
 // This function receives two sorted lists, and returns a sorted list made by combining the two sorted lists
 Node* mergeSortedList(Node* p1, Node* p2) {
