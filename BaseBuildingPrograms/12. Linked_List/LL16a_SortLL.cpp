@@ -82,8 +82,8 @@ Node* mergeSortedList(Node* p1, Node* p2) {
 
     // One of the above list will finish early, and break the while loop.
     // In this case, point temp directly to the list which had some nodes left.
-    if(p1 != NULL || p2 != NULL) {
-        temp->next = (p1 != NULL) ? p1 : p2;
+    if(p1 == NULL || p2 == NULL) {
+        temp->next = (p1 == NULL) ? p2 : p1;
     }
 
     return ans->next;
