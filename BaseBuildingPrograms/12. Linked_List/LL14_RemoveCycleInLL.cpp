@@ -65,7 +65,7 @@ void removeCycle(Node* &head) {
         slow = slow->next;
         fast = fast->next;
     }
-    // starting node of cycle is pointed by both fast and slow pointer
+    // Starting node of cycle is pointed by both fast and slow pointer
 
     // Step 2: Repoint node present just before the starting node of cycle to NULL
     while(slow->next != fast) {
