@@ -21,7 +21,7 @@
 #include <iostream>
 using namespace std;
 
-// interface of Node for singly linked list
+// Interface of Node for singly linked list
 class Node {
     public:
         int data;
@@ -35,7 +35,7 @@ class Node {
         }
 };
 
-// function to print elements of linked list
+// Function to print elements of linked list
 void printLL(Node* head) {
     Node* temp = head;
     while(temp != NULL) {
@@ -44,7 +44,7 @@ void printLL(Node* head) {
     }
 }
 
-// function to return reversed linked list
+// Function to return reversed linked list
 Node* reverseLL(Node* head) {
     Node* prevNode = NULL;
     Node* currNode = head;
@@ -117,6 +117,7 @@ Node* addOneToLL(Node* head) {
 
     return reverseLL(head);
 }
+
 
 int main() {
     // Creating a sample linked list
