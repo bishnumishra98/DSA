@@ -32,7 +32,7 @@ public:
             return head;
         }
 
-        ListNode* dummy = new ListNode(0, head);   // it means 'dummy->val = 0' and 'dummy-next = head'
+        ListNode* dummy = new ListNode(0, head);   // it means 'dummy->val = 0' and 'dummy->next = head'
         ListNode* prev = dummy;
 
         while(head != NULL) {
