@@ -42,7 +42,7 @@ public:
             int x1 = (p1 != NULL) ? p1->val : 0;
             int x2 = (p2 != NULL) ? p2->val : 0;
             int sum = x1 + x2 + carry;
-            carry = sum/10;
+            carry = sum / 10;
             temp->next = new ListNode(sum % 10);
             temp = temp->next;
 
