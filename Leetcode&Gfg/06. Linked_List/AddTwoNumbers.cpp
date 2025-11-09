@@ -16,7 +16,7 @@
 // Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
 // Output: [8,9,9,9,0,0,0,1]
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 // Definition for singly-linked list.
@@ -42,14 +42,14 @@ public:
             int x2 = (p2 != NULL) ? p2->val : 0;
             int sum = x1 + x2 + carry;
             carry = sum/10;
-            temp->next = new ListNode(sum%10);
+            temp->next = new ListNode(sum % 10);
             temp = temp->next;
 
             if(p1 != NULL) p1 = p1->next;
             if(p2 != NULL) p2 = p2->next;
         }
 
-        if(carry>0) {
+        if(carry > 0) {
             temp->next = new ListNode(carry);
         }
 
@@ -57,7 +57,7 @@ public:
     }
 };
 
-// function to print elements of linked list
+// Function to print elements of linked list
 void printLL(ListNode* head) {
     ListNode* temp = head;
     while(temp != NULL) {
