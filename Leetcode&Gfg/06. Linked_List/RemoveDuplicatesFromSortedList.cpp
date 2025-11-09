@@ -26,20 +26,20 @@ public:
     // T.C: O(n)
     // S.C: O(1)
     ListNode* deleteDuplicates(ListNode* head) {
-        // if no or only 1 node exists in LL, return head simply
+        // If no or only 1 node exists in LL, return head simply
         if(head == NULL || head->next == NULL) return head;
 
         ListNode* temp = head;
 
         while(temp->next != NULL) {
             if(temp->val == temp->next->val) {
-                // if next node is a duplicate node, delete the next node
+                // If next node is a duplicate node, delete the next node
                 ListNode* delNode = temp->next;
                 temp->next = delNode->next;
                 delNode->next = NULL;
                 delete delNode;
             } else {
-                // if next node is not duplicate, move temp one step ahead
+                // If next node is not duplicate, move temp one step ahead
                 temp = temp->next;
             }
         }
@@ -48,7 +48,7 @@ public:
     }
 };
 
-// function to print elements of linked list
+// Function to print elements of linked list
 void printLL(ListNode* head) {
     ListNode* temp = head;
     while(temp != NULL) {
