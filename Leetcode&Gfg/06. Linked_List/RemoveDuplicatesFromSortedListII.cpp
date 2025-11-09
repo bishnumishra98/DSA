@@ -3,7 +3,7 @@
 // Return the linked list sorted as well.
 
 // Example 1:
-// Input: head = [1,2,3,3,3,4,5,5]
+// Input: head = [1,2,3,3,4,4,5]
 // Output: [1,2,5]
 
 // Example 2:
@@ -27,7 +27,7 @@ public:
     // T.C: O(n)
     // S.C: O(1)
     ListNode* deleteDuplicates(ListNode* head) {
-        // if no or only 1 node exists in LL, return head simply
+        // If no or only 1 node exists in LL, return head simply
         if(head == NULL || head->next == NULL) {
             return head;
         }
@@ -37,19 +37,19 @@ public:
 
         while(head != NULL) {
             if(head->next != NULL && head->val == head->next->val) {
-                // move head pointer forward continuously if duplicate nodes found, until head
+                // Move head pointer forward continuously if duplicate nodes found, until head
                 // reaches last duplicate node in series.
                 while(head->next != NULL && head->val == head->next->val) {
                     head = head->next;
                 }
-                // here head is at last duplicate node in series, i.e., next node after head is
+                // Here head is at last duplicate node in series, i.e., next node after head is
                 // a distinct node. So repoint prev to next node of head.
                 prev->next = head->next;
             } else {
-                // no duplicates found, move the prev pointer forward
+                // No duplicates found, move the prev pointer forward
                 prev = prev->next;
             }
-            // move head pointer forward on every iteration
+            // Move head pointer forward on every iteration
             head = head->next;
         }
 
@@ -57,7 +57,7 @@ public:
     }
 };
 
-// function to print elements of linked list
+// Function to print elements of linked list
 void printLL(ListNode* head) {
     ListNode* temp = head;
     while(temp != NULL) {
