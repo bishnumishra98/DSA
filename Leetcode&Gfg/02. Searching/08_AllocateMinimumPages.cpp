@@ -103,11 +103,9 @@ private:
 
     // ● Why not return true only if students == k, why we return true when students <= k ?
     //   
-    //   If we return true only on students == k, then the function will always return false for every value of
-    //   'maxPagesAllowed' for the given example. Technically for this example, number of students we get according
-    //   to the code we have written is never bound to yield count of students as 5, it will always yield a count
-    //   greater than 5 or less than 5.
-    //   Thus, try out this example: arr = [15, 10, 19, 10, 5, 18, 7], k = 5
+    //   If we return true only on students == k, then the function may always return false for every value of
+    //   'maxPagesAllowed' for some special testcases.
+    //   Try out this example: arr = [15, 10, 19, 10, 5, 18, 7], k = 5
     //   Illustration:
     //   Let's say we allocated maximum pages for a student as 24. In this case, the minimum number of students
     //   required to distribute all books will come out to be 6 (15, 10, 19, {10 + 5}, 18, 7), which is greater
