@@ -37,7 +37,8 @@ public:
         ListNode* p1 = l1, *p2 = l2, *temp = ans;
 
         int carry = 0;
-        while(p1 != NULL || p2 != NULL) {   // this loop runs until both pointers do not reach NULL
+        // This loop runs until both pointers do not reach NULL
+        while(p1 != NULL || p2 != NULL) {
             int x1 = (p1 != NULL) ? p1->val : 0;
             int x2 = (p2 != NULL) ? p2->val : 0;
             int sum = x1 + x2 + carry;
