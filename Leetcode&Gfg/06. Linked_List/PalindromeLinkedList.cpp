@@ -23,19 +23,15 @@ struct ListNode {
 
 class Solution {
 public:
+    // In even length linked lists, we will consider the left node of the two middle nodes as mid.
     ListNode* middleNode(ListNode* head) {
         ListNode* slow = head;
         ListNode* fast = head;
 
-        while(fast->next != NULL) {   // did small change in the condition
-            fast = fast->next;
-            if(fast->next != NULL) {   // did small change in the condition
-                fast = fast->next;
-                slow = slow->next;
-            }
+        while(fast->next != NULL && fast->next->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        // -> Why we did small change in condition ?
-        // -> So that we point to first node of the two middle nodes obtained in even length linked lists.
 
         return slow;
     }
@@ -50,8 +46,7 @@ public:
             prevNode = currNode;
             currNode = nextNode;
         }
-        head = prevNode;
-        return head;
+        return prevNode;
     }
 
     bool compareLists(ListNode* head, ListNode* head2) {
@@ -60,30 +55,31 @@ public:
                                // or in the same iteration with head. Thus, comparing the two
                               // linked lists with only 'head2 != NULL' in while condition is sufficient.
             if(head->val != head2->val) {
-                // if values don't match, its not a palindrome. Thus, we return false.
+                // If values don't match, its not a palindrome. Thus, we return false.
                 return false;
             } else {
-                // if values matches, move one step ahead.
+                // If values matches, move one step ahead.
                 head = head->next;
                 head2 = head2->next;
             }
         }
-        // we reach here only if while loop completed its lifecycle, which means all values of 
+        // We reach here only if while loop completed its lifecycle, which means all values of 
         // the two linked lists were matching. Thus, its a palindrome and we return true.
         return true;
     }
 
-    // leetcode given function
+    // T.C: O(n);   where n is the number of nodes in the linked list
+    // S.C: O(1)
     bool isPalindrome(ListNode* head) {
-        // finding midNode and breaking linked list from mid in 2 parts 'head to mid' and 'mid+1 to tail'.
+        // Finding midNode and breaking linked list from mid in 2 parts 'head to mid' and 'mid + 1 to tail'.
         ListNode* midNode = middleNode(head);
         ListNode* head2 = midNode->next;
         midNode->next = NULL;
 
-        // reversing the new linked list
+        // Reversing the new linked list
         head2 = reverseList(head2);
 
-        // comparing both linked lists
+        // Comparing both linked lists
         bool ans = compareLists(head, head2);
         return ans;
     }
