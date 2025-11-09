@@ -5,15 +5,15 @@ using namespace std;
 
 // Definition for singly-linked list.
 class Node {
-    public:
-        int data;
-        Node *next;
-        Node() : data(0), next(nullptr) {}
-        Node(int x) : data(x), next(nullptr) {}
-        Node(int x, Node *next) : data(x), next(next) {}
+public:
+    int data;
+    Node *next;
+    Node() : data(0), next(nullptr) {}
+    Node(int x) : data(x), next(nullptr) {}
+    Node(int x, Node *next) : data(x), next(next) {}
 };
 
-// function to print elements of linked list
+// Function to print elements of linked list
 void printLL(Node* head) {
     Node* temp = head;
     while(temp != NULL) {
@@ -24,22 +24,22 @@ void printLL(Node* head) {
 
 // T.C: O(nlogn)
 // S.C: O(n);   n is the size of vector we are using
-Node* sortList_naiveApproach(Node* head) {   // brute force approach is also called naive approach
+Node* sortList_bruteforce(Node* head) {
     Node* temp = head;
-    vector <int> v;
+    vector<int> v;
     
-    // inserting all values of LL into a vector
+    // Inserting all values of LL into a vector
     while(temp != NULL) {
         v.push_back(temp->data);
         temp = temp->next;
     }
 
-    // sorting the vector
+    // Sorting the vector
     sort(v.begin(), v.end());
 
     temp = head;   // repointing temp pointer to head of LL
 
-    // inserting all elements of vector back to the LL
+    // Inserting all elements of vector back to the LL
     int i = 0;
     while(temp != NULL) {
         temp->data = v[i];
@@ -50,7 +50,7 @@ Node* sortList_naiveApproach(Node* head) {   // brute force approach is also cal
     return head;
 }
 
-// .....................................................................................
+// -----------------------------------------------------------------------------------------------------------
 
 // This function receives a list and returns mid index(left one if 2 mids) of that list. 
 Node* findMid(Node* head) {
@@ -119,7 +119,7 @@ int main() {
     printLL(head);
     cout << "\n";
     
-    // Node* ans = sortList_naiveApproach(head);
+    // Node* ans = sortList_bruteforce(head);
     Node* ans = sortList_mergeSortApproach(head);
 
     printLL(ans);
