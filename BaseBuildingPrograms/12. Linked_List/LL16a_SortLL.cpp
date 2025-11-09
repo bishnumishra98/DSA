@@ -64,7 +64,7 @@ Node* findMid(Node* head) {
         slow = slow->next;
         fast = fast->next->next;
     }
-    
+
     return slow;
 }
 
@@ -85,10 +85,9 @@ Node* mergeSortedList(Node* p1, Node* p2) {
         temp = temp->next;
     }
 
-    // One of the above list will finish early, and break the while loop.
-    // In this case, point temp directly to the list which had some nodes left.
-    if(p1 == NULL || p2 == NULL) {
-        temp->next = (p1 == NULL) ? p2 : p1;
+    // If any elements are left in either of the two lists, we append them to the merged list
+    if(p1 != NULL || p2 != NULL) {
+        temp->next = (p1 != NULL) ? p1 : p2;
     }
 
     return ans->next;
