@@ -40,20 +40,14 @@ public:
     // T.C: O(n)
     // S.C: O(1)
     ListNode* reverseKGroup(ListNode* head, int k) {
-        int count = 0;   // By using the count variable, the code ensures that it only attempts
-        // to reverse a group of nodes when there are at least k nodes available.
+        // If number of nodes left is less than k, return head as it is
+        int count = 0;   // to count number of nodes
         ListNode* temp = head;
-
-        // Count the number of nodes in the list
         while(temp != NULL && count < k) {
             temp = temp->next;
             count++;
         }
-
-        // Base case, i.e., if the number of nodes is less than k, no need to reverse
-        if(count < k) {
-            return head;
-        }
+        if(count < k) return head;
 
         // Reverse the first k nodes
         ListNode* reversedHead = reverseLL(head, k);
