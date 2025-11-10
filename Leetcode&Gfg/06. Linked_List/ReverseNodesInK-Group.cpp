@@ -37,20 +37,15 @@ public:
         return prevNode;
     }
 
-    // leetcode given function
     // T.C: O(n)
     // S.C: O(1)
-    // In each recursive call, a constant amount of space is used for variables such as pointers
-    // (prev, current, nextNode, reversedHead) and the function call stack. However, the maximum depth
-    // of the recursion is limited by the size of the linked list, and the space used at each level is
-    // constant. Therefore, the overall space complexity is O(1) despite the use of recursion.
     ListNode* reverseKGroup(ListNode* head, int k) {
         int count = 0;   // By using the count variable, the code ensures that it only attempts
         // to reverse a group of nodes when there are at least k nodes available.
         ListNode* temp = head;
 
         // Count the number of nodes in the list
-        while(temp!=NULL && count<k) {
+        while(temp != NULL && count < k) {
             temp = temp->next;
             count++;
         }
@@ -70,7 +65,7 @@ public:
     }
 };
 
-// function to print elements of linked list
+// Function to print elements of linked list
 void printLL(ListNode* head) {
     ListNode* temp = head;
     while(temp != NULL) {
