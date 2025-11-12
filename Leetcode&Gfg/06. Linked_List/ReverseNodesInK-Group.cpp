@@ -11,6 +11,8 @@
 // Input: head = [1,2,3,4,5], k = 3
 // Output: [3,2,1,4,5]
 
+// Algorithm: https://www.youtube.com/watch?v=lIar1skcQYI&t=357s
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -25,39 +27,75 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode* reverseLL(ListNode* head, int k) {
+    // Helper function to reverse the linked list in place
+    void reverseLL(ListNode* &head) {   // passing '&head' is mandatory in in-place reversal
         ListNode* prevNode = NULL;
         ListNode* currNode = head;
-        while(k--) {
+        while(currNode != NULL) {
             ListNode* nextNode = currNode->next;
             currNode->next = prevNode;
             prevNode = currNode;
             currNode = nextNode;
         }
-        return prevNode;
+        head = prevNode;
     }
 
-    // T.C: O(n)
+    // Helper function to get the k-th node from the current position. If fewer than k nodes remain, returns NULL.
+    ListNode* getkThNode(ListNode* temp, int k) {
+        // we are at the 1st node already; move (k-1) steps
+        k = k - 1;
+        while(temp != NULL && k > 0) {
+            temp = temp->next;
+            k--;
+        }
+        return temp;
+    }
+
+    // T.C: O(n) for traversing all nodes + O(n) for reversing nodes = O(2n) ~ O(n)
     // S.C: O(1)
     ListNode* reverseKGroup(ListNode* head, int k) {
-        // If number of nodes left is less than k, return head as it is
-        int count = 0;   // to count number of nodes
+        if(head == NULL || k <= 1) return head;
+
         ListNode* temp = head;
-        while(temp != NULL && count < k) {
-            temp = temp->next;
-            count++;
+        ListNode* prevLast = NULL;   // tail of the previous reversed group
+
+        while(temp != NULL) {
+            ListNode* kThNode = getkThNode(temp, k);
+            if(kThNode == NULL) {
+                // Fewer than k nodes left -> link remaining part and stop
+                if(prevLast != NULL) prevLast->next = temp;
+                break;
+            }
+
+            ListNode* nextGroupHead = kThNode->next;
+            // Detach current group
+            kThNode->next = NULL;
+
+            // Remember group's start (will become tail after reversal)
+            ListNode* groupStart = temp;
+
+            // Reverse this k-sized group; temp will be updated to new head of the group
+            reverseLL(temp);   // temp now points to the head of reversed group
+
+            // Connect previous group to current reversed group
+            if(prevLast == NULL) {
+                // First reversed group -> update overall head
+                head = temp;
+            } else {
+                prevLast->next = temp;
+            }
+
+            // Update prevLast to the tail of the reversed group (which was groupStart)
+            prevLast = groupStart;
+
+            // Move to next group
+            temp = nextGroupHead;
         }
-        if(count < k) return head;
 
-        // Reverse the first k nodes
-        ListNode* reversedHead = reverseLL(head, k);
-
-        // Recursively reverse the rest of the nodes
-        head->next = reverseKGroup(temp, k);
-
-        return reversedHead;
+        return head;
     }
 };
+
 
 // Function to print elements of linked list
 void printLL(ListNode* head) {
@@ -67,6 +105,7 @@ void printLL(ListNode* head) {
         temp = temp->next;
     }
 }
+
 
 int main() {
     // Create a sample linked list: 1 -> 2 -> 3 -> 4 -> 5
