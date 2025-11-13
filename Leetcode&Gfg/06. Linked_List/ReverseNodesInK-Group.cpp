@@ -27,8 +27,9 @@
 //    Now, preserve the tail of the reversed group in a pointer say prevGroupTail. This pointer will be used to link two
 //    consecutive reversed groups. Initially, prevGroupTail is NULL because there is no previous group for the first group.
 //    But after reversing the first group, we can preserve its tail using prevGroupTail = temp; statement.
-// 6. If we have reversed the first group, we need to update the head of the original LL to point to kThNode because after reversal,
-//    kThNode points to head of the first reversed group.
+// 6. After reversal, do the attachment of previous reversed group with the current reversed group.
+//    If we have just reversed the first group, we need to update the head of the original LL to point to kThNode because, after
+//    reversal, the kThNode points to head of the first reversed group.
 //    if we have reversed any group other than the first group, we need to link the previous group's tail (pointed by prevGroupTail)
 //    to current group's head (pointed by kThNode).
 // 7. Finally, repoint temp to point to nextGroupHead for processing the next group.
@@ -98,10 +99,11 @@ public:
             // Reverse this k-sized group with head pointed by temp
             reverseLL(temp);   // after reversal, temp points to tail of the reversed group
 
-            // temp points to original head of LL only when we have reversed the first group, moreover both temp and head point
-            // to tail of the first reversed group. And the kThNode points to head of the first reversed group. Thus, we need to
-            // update the head of the original LL to point to kThNode.
-            if(temp == head) {
+            // Do the attachment of previous reversed group with the current reversed group
+            if(temp == head) {   // if its the first group being reversed
+                // temp points to original head of LL only when we have reversed the first group, moreover both temp and head point
+                // to tail of the first reversed group. And the kThNode points to head of the first reversed group. Thus, we need to
+                // update the head of the original LL to point to kThNode.
                 head = kThNode;   // update head if we have reversed the first group
             } else {
                 // If we have reversed any group other than the first group, we need to link the previous group's tail to
