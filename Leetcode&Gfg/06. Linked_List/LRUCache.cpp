@@ -115,6 +115,7 @@ public:
         }
     }
 
+    // T.C: O(1), S.C: O(1)
     int get(int key) {
         if(mp.find(key) == mp.end()) return -1;   // key not found
         Node* node = mp[key];
@@ -124,6 +125,7 @@ public:
         return node->val;
     }
 
+    // T.C: O(1), S.C: O(1)
     void put(int key, int value) {
         if(mp.find(key) != mp.end()) {
             // Key exists, update value and move to head
