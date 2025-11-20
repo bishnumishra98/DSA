@@ -92,6 +92,7 @@ public:
     }
 
     // Visit current url: Add url to history and clear forward history
+    // T.C: O(1) amortized, S.C: O(1) amortized
     void visit(string url) {
         curr++;
         // If curr is within bounds, overwrite the history; else append new url.
@@ -108,12 +109,14 @@ public:
     }
 
     // 'steps' move backward in history and return current page
+    // T.C: O(1), S.C: O(1)
     string back(int steps) {
         curr = max(0, curr - steps);
         return history[curr];
     }
 
     // 'steps' move forward and return current page
+    // T.C: O(1), S.C: O(1)
     string forward(int steps) {
         curr = min(last, curr + steps);
         return history[curr];
