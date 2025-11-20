@@ -101,6 +101,10 @@ public:
             history.push_back(url);
         }
         last = curr;   // truncate forward history logically, so that pages beyond 'last' are unreachable
+
+        // Optional: If you want to physically remove forward history from the vector to save space
+        history.resize(last + 1);
+        // or, history.erase(history.begin() + last + 1, history.end());
     }
 
     // 'steps' move backward in history and return current page
