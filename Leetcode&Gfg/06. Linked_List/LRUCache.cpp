@@ -88,6 +88,8 @@ private:
 
     // Add node right after head (most recently used)
     void addToHead(Node* node) {
+        // First attach new node to head->next and head, then adjust head->next's prev and head's next.
+        // If you don't follow this order, you may lose the reference to head->next.
         node->next = head->next;
         node->prev = head;
         head->next->prev = node;
@@ -95,50 +97,50 @@ private:
     }
 
 public:
-    LRUCache(int cap) : capacity(cap) {
-        head = new Node(); // dummy
-        tail = new Node(); // dummy
+    LRUCache(int cap) {
+        capacity = cap;
+        head = new Node();   // dummy head
+        tail = new Node();   // dummy tail
         head->next = tail;
         tail->prev = head;
     }
 
+    // Optional, but good practice to free memory. Destructor is called automatically when object goes out of scope.
     ~LRUCache() {
-        // free all nodes
-        Node* cur = head;
-        while (cur) {
-            Node* nxt = cur->next;
-            delete cur;
-            cur = nxt;
+        Node* temp = head;
+        while(temp) {
+            Node* nextNode = temp->next;
+            delete temp;
+            temp = nextNode;
         }
     }
 
     int get(int key) {
-        auto it = mp.find(key);
-        if (it == mp.end()) return -1;
-        Node* node = it->second;
-        // move to most-recent (after head)
+        if(mp.find(key) == mp.end()) return -1;   // key not found
+        Node* node = mp[key];
+        // Move the accessed node to head (most recently used)
         removeNode(node);
         addToHead(node);
         return node->val;
     }
 
     void put(int key, int value) {
-        auto it = mp.find(key);
-        if (it != mp.end()) {
-            // update value and move to head (MRU)
-            Node* node = it->second;
+        if(mp.find(key) != mp.end()) {
+            // Key exists, update value and move to head
+            Node* node = mp[key];
             node->val = value;
             removeNode(node);
             addToHead(node);
         } else {
-            // new node
-            if ((int)mp.size() == capacity) {
-                // evict least recently used: tail->prev
+            // Key does not exist
+            if(mp.size() == capacity) {   // if cache is full
+                // Remove least recently used node (tail->prev)
                 Node* lru = tail->prev;
                 removeNode(lru);
                 mp.erase(lru->key);
                 delete lru;
             }
+            // If cache is not full or after removing LRU, add new node
             Node* node = new Node(key, value);
             addToHead(node);
             mp[key] = node;
