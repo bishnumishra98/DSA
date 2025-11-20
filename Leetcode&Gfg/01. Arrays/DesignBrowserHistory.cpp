@@ -80,27 +80,27 @@ using namespace std;
 class BrowserHistory {
 private:
     vector<string> history;
-    int curr;   // current index
-    int last;   // last valid index (logical end of history)
+    int curr;   // to keep a track of index of current page
+    int last;   // to keep a track of index of last valid page (logical end of history, not necessarily physical end
+               // of 'history' vector). Pages beyond this index in the 'history' vector can never be reached.
 public:
-    // constructor to initialize object with homepage
+    // Constructor to initialize object with homepage
     BrowserHistory(string homepage) {
         history.push_back(homepage);
-        curr = 0;
-        last = 0;
+        curr = 0;   // initially current page is homepage, i.e., history[0]
+        last = 0;   // initially last valid page is homepage, i.e., history[0]
     }
 
-    // visit current url
+    // Visit current url: Add url to history and clear forward history
     void visit(string url) {
-        ++curr;
-        if (curr < (int)history.size()) {
-            // overwrite existing forward slot (O(1))
+        curr++;
+        // If curr is within bounds, overwrite the history; else append new url.
+        if(curr < history.size()) {
             history[curr] = url;
         } else {
-            // append (amortized O(1))
             history.push_back(url);
         }
-        last = curr; // truncate forward history logically
+        last = curr;   // truncate forward history logically, so that pages beyond 'last' are unreachable
     }
 
     // 'steps' move backward in history and return current page
@@ -117,17 +117,17 @@ public:
 };
 
 int main() {
-    BrowserHistory* obj = new BrowserHistory("gfg.org");
-    obj->visit("google.com");
-    obj->visit("facebook.com");
-    obj->visit("youtube.com");
-    cout << obj->back(1) << endl;
-    cout << obj->back(1) << endl;
-    cout << obj->forward(1) << endl;
-    obj->visit("linkedin.com");
-    cout << obj->forward(2) << endl;
-    cout << obj->back(2) << endl;
-    cout << obj->back(7) << endl;
+    BrowserHistory browserHistory("gfg.org");
+    browserHistory.visit("google.com");
+    browserHistory.visit("facebook.com");
+    browserHistory.visit("youtube.com");
+    cout << browserHistory.back(1) << endl;        // o/p: facebook.com
+    cout << browserHistory.back(1) << endl;        // o/p: google.com
+    cout << browserHistory.forward(1) << endl;     // o/p: facebook.com
+    browserHistory.visit("linkedin.com");
+    cout << browserHistory.forward(2) << endl;     // o/p: linkedin.com
+    cout << browserHistory.back(2) << endl;        // o/p: google.com
+    cout << browserHistory.back(7) << endl;        // o/p: gfg.org
 
     return 0;
 }
