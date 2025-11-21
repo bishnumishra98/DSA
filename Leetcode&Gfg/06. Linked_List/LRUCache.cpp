@@ -89,7 +89,7 @@ private:
 
     // Add node right after head (most recently used)
     void addToHead(Node* node) {
-        // First attach new node to head->next and head, then adjust head->next's prev and head's next.
+        // First attach new node between head->next and head, then adjust head->next's prev and head's next.
         // If you don't follow this order, you may lose the reference to head->next.
         node->next = head->next;
         node->prev = head;
