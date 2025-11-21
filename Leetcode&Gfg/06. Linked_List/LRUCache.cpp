@@ -59,7 +59,7 @@
 //                          iii. Add the key and node address to the hashmap.
 //             Sub-case II: If cache is full:
 //                          i.   Identify the least recently used node (tail->prev).
-//                          ii.  Remove this node from the doubly linked list and delete its entry from the hashmap.
+//                          ii.  Delete its entry from the hashmap and delete the node from the doubly linked list.
 //                          iii. Create a new node with the given key and value.
 //                          iv.  Insert the new node right after the head.
 //                          v.   Add the key and node address to the hashmap.
@@ -81,7 +81,7 @@ private:
     unordered_map<int, Node*> mp;   // key -> node's address
     Node *head, *tail;   // dummy head and tail to simplify operations
 
-    // Remove node from list (but don't delete)
+    // Remove or detach node from list (but do not delete memory here)
     void removeNode(Node* node) {
         node->prev->next = node->next;
         node->next->prev = node->prev;
@@ -139,11 +139,11 @@ public:
             if(mp.size() == capacity) {   // if cache is full
                 // Remove least recently used node (tail->prev)
                 Node* lru = tail->prev;
-                removeNode(lru);
                 mp.erase(lru->key);
-                delete lru;
+                removeNode(lru);   // detach from list
+                delete lru;        // free memory
             }
-            // If cache is not full or after removing LRU, add new node
+            // If cache is not full or after removing LRU, add new node in the LL and key in the map
             Node* node = new Node(key, value);
             addToHead(node);
             mp[key] = node;
