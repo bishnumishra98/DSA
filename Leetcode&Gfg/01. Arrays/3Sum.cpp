@@ -57,10 +57,10 @@ public:
 // ------------------------------------------------------------------------------
 
     // Better algorithm: Two-pointer approach using hashing using a hashset, i.e., unordered_set
-    // 1. Fix the first element of the triplet using index 'i' (from 0 to n-2).
+    // 1. Fix the first element of the triplet using index 'i' (from 0 to n - 2).
     // 2. For each 'i', initialize an empty hashset (unordered_set<int>) to track elements seen so far in the inner loop.
     //    The hashset actually stores all the elements between 'i'th and 'j'th index (nums[i] and nums[j] excluded).
-    // 3. Run an inner loop with index 'j' from i+1 to n-1:
+    // 3. Run an inner loop with index 'j' from i + 1 to n - 1:
     //    a. Calculate the third required number as '-(nums[i] + nums[j])'.
     //    b. If this third number exists in the hashset, it means we’ve found a triplet.
     //       So, sort {nums[i], nums[j], third} and insert into a set to ensure uniqueness.
