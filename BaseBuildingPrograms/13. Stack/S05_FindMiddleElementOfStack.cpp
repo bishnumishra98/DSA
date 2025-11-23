@@ -16,48 +16,33 @@
 #include <stack>
 using namespace std;
 
-int solve(stack <int> &st, int &pos) {
-    // base case
-    if(pos == 1) {
-        return st.top();
-    }
-
-    pos--;
-    int temp = st.top();   // storing top element of stack in 'temp' variable
-    st.pop();
-
-    // recursive call
-    int result = solve(st, pos);
-
-    // backtracking to ensure that the original stack gets reconstructed in the end of the program
-    st.push(temp);
-
-    return result;   // return the result obtained(mid element of original stack) from the recursive call
-}
 
 // T.C: O(n)
 // S.C: O(n)
-int getMiddleElementOfStack(stack <int> &st) {
-    // if stack is empty, return -1
-    if(st.empty()) {
-        return -1;
-    }
+int getMiddleElementOfStack(stack<int>& st) {
+    // If stack is empty, return -1
+    if(st.empty()) return -1;
 
     int size = st.size();
     int pos;
 
-    // finding correct position where mid element could be found:
-    // If size is odd, mid position is (size/2 + 1)th element
     if(size & 1) {
-        pos = size/2 + 1;
+        // If size is odd, mid position is (size / 2 + 1)th element
+        pos = size / 2 + 1;
     } else {
-        // If size is even, mid position(second of two mids) is (size/2)th element
-        pos = size/2;
+        // If size is even, let's consider (size / 2)th element
+        pos = size / 2;
     }
-    // For first of the two mids, no if else condition is required. Directly, pos = size/2 + 1.
+    // For the other mid, no if else condition is required. Directly, pos = size / 2 + 1
 
-    int midElement = solve(st, pos);
-    return midElement;
+    stack<int> tempSt = st;  // copy original stack to temporary stack so that we don't modify original stack
+
+    // If pos is 'x', run loop 'x - 1' times
+    while(--pos) {
+        tempSt.pop();
+    }
+
+    return tempSt.top();
 }
 
 int main() {
