@@ -4,67 +4,67 @@
 using namespace std;
 
 class Stack {
-    public:
-        int* arr;
-        int size;
-        int top;
+public:
+    int* arr;
+    int size;
+    int top;
 
-        // constructor
-        Stack(int size) {
-            arr = new int[size];
-            this->size = size;
-            this->top = -1;
+    // Constructor
+    Stack(int size) {
+        arr = new int[size];
+        this->size = size;
+        this->top = -1;
+    }
+
+    // Push functionality
+    void push(int data) {
+        if(top == size-1) {
+            cout << "Stack overflow\n";
+        } else {
+            top++;
+            arr[top] = data;
         }
+    }
 
-        // push functionality
-        void push(int data) {
-            if(top == size-1) {
-                cout << "Stack overflow\n";
-            } else {
-                top++;
-                arr[top] = data;
+    // Pop functionality
+    void pop() {
+        if(top == -1) cout << "Stack underflow\n";
+        else top--;
+    }
+
+    // Empty functionality
+    bool isEmpty() {
+        if(top == -1) return true;
+        else return false;
+    }
+
+    // Get top element of stack functionality
+    int getTop() {
+        if(top == -1) {
+            cout << "Stack is empty, ";
+            return -1;
+        } else {
+            return arr[top];
+        }
+    }
+
+    // Get size of stack functionality
+    int getSize() {
+        return top+1;
+    }
+
+    // Print elements of stack functionality
+    void printStack() {
+        if(top == -1) {
+            cout << "Stack is empty\n\n";
+        } else {
+            cout << "Stack: ";
+            for (int i=0; i<=top; i++) {
+                cout << arr[i] << " ";
             }
+            cout << endl << endl;
         }
-
-        // pop functionality
-        void pop() {
-            if(top == -1) cout << "Stack underflow\n";
-            else top--;
-        }
-
-        // empty functionality
-        bool isEmpty() {
-            if(top == -1) return true;
-            else return false;
-        }
-
-        // get top element of stack functionality
-        int getTop() {
-            if(top == -1) {
-                cout << "Stack is empty, ";
-                return -1;
-            } else {
-                return arr[top];
-            }
-        }
-
-        // get size of stack functionality
-        int getSize() {
-            return top+1;
-        }
-
-        // print elements of stack functionality
-        void printStack() {
-            if(top == -1) {
-                cout << "Stack is empty\n\n";
-            } else {
-                cout << "Stack: ";
-                for (int i=0; i<=top; i++) {
-                    cout << arr[i] << " ";
-                }
-                cout << endl << endl;
-            }
-        }
+    }
 };
 
 int main() {
