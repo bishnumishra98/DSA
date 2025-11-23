@@ -8,7 +8,7 @@ int main() {
     string str = "Golu";
     stack <char> st;
 
-    for(int i=0; i<str.length(); i++) {
+    for(int i = 0; i < str.length(); i++) {
         char ch = str[i];
         st.push(ch);
     }
