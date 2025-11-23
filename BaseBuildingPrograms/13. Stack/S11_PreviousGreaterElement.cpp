@@ -29,23 +29,24 @@ using namespace std;
 
 // T.C: O(n)
 // S.C: O(n)
-vector<int> nextGreaterElement(int* arr, int size) {
-    vector <int> ans(size);
-    stack <int> st;
+vector<int> nextGreaterElement(vector<int>& arr) {
+    int size = arr.size();
+    vector<int> ans(size);
+    stack<int> st;
     st.push(-1);
 
-    // traversing array from left to right
+    // Traversing array from left to right
     for(int i=0; i<size; i++) {   // *ONLY THIS LINE IS CHANGED, REST ALL CODE IS SAME*
         int currElement = arr[i];
 
-        // popping out stack elements until array element becomes smaller than stack top element.
+        // Popping out stack elements until array element becomes smaller than stack top element.
         while(!st.empty() && currElement >= st.top()) st.pop();
 
-        // storing top element of stack in ans
+        // Storing top element of stack in ans
         if(!st.empty()) ans[i] = st.top();
         else ans[i] = -1;
 
-        // pushing array element into stack
+        // Pushing array element into stack
         st.push(currElement);
     }
 
@@ -60,10 +61,9 @@ NOTE: ONLY DIFFERENCES IN THIS CODE FROM 'PreviousSmallerElement' ARE:
 */
 
 int main() {
-    int arr[4] = {1, 3, 2, 4};
-    int size = 4;
+    vector<int> arr = {1, 3, 2, 4};
 
-    vector <int> ans = nextGreaterElement(arr, size);
+    vector <int> ans = nextGreaterElement(arr);   // o/p: -1 -1 3 -1
 
     for(auto i: ans) {
         cout << i << " ";

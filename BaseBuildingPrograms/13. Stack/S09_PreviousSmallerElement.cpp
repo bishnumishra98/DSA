@@ -29,22 +29,23 @@ using namespace std;
 
 // T.C: O(n)
 // S.C: O(n)
-vector<int> previousSmallerElement(int* arr, int size) {
-    vector <int> ans(size);
-    stack <int> st;
+vector<int> previousSmallerElement(vector<int>& arr) {
+    int size = arr.size();
+    vector<int> ans(size);
+    stack<int> st;
     st.push(-1);
 
-    // traversing array from left to right
-    for(int i=0; i<size; i++) {   // *ONLY THIS LINE IS CHANGED, REST ALL CODE IS SAME*
+    // Traversing array from left to right
+    for(int i = 0; i < size; i++) {   // *ONLY THIS LINE IS CHANGED, REST ALL CODE IS SAME*
         int currElement = arr[i];
 
-        // popping stack until currElement becomes greater than top element of stack
+        // Popping stack until currElement becomes greater than top element of stack
         while(currElement <= st.top()) st.pop();
 
-        // storing top element of stack in ans
+        // Storing top element of stack in ans
         ans[i] = st.top();
 
-        // pushing array element into stack
+        // Pushing array element into stack
         st.push(currElement);
     }
 
@@ -52,13 +53,12 @@ vector<int> previousSmallerElement(int* arr, int size) {
 }
 
 int main() {
-    int arr[5] = {8, 4, 6, 2, 3};
-    int size = 5;
+    vector<int> arr = {8, 4, 6, 2, 3};
 
-    vector <int> ans = previousSmallerElement(arr, size);
+    vector <int> ans = previousSmallerElement(arr);
 
     for(auto i: ans) {
-        cout << i << " ";
+        cout << i << " ";   // o/p: -1 -1 4 -1 2
     }
 
     return 0;

@@ -30,7 +30,8 @@ using namespace std;
 
 // T.C: O(n)
 // S.C: O(n)
-vector<int> nextGreaterElement(int* arr, int size) {
+vector<int> nextGreaterElement(vector<int>& arr) {
+    int size = arr.size();
     vector <int> ans(size);
     stack <int> st;
     st.push(-1);
@@ -61,10 +62,9 @@ NOTE: ONLY DIFFERENCES IN THIS CODE FROM 'NextSmallerElement' ARE:
 */
 
 int main() {
-    int arr[4] = {1, 3, 2, 4};
-    int size = 4;
+    vector<int> arr = {1, 3, 2, 4};
 
-    vector <int> ans = nextGreaterElement(arr, size);
+    vector<int> ans = nextGreaterElement(arr);   // o/p: 3 4 4 -1
 
     for(auto i: ans) {
         cout << i << " ";

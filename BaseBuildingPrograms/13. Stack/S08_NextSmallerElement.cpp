@@ -1,5 +1,5 @@
 // Given an array of positive integers, return a special array of same size following this rule:
-// For an element at ith, start traversing elements from (i+1)th index towards right of the array,
+// For an element at ith, start traversing elements from (i + 1)th index towards right of the array,
 // and place the first element smaller than the element at ith index, on arr[i]. If none of the
 // elements towards right is found to be smaller than the element at ith index, place -1 over there.
 
@@ -29,22 +29,24 @@ using namespace std;
 
 // T.C: O(n)
 // S.C: O(n)
-vector<int> nextSmallerElement(int* arr, int size) {
-    vector <int> ans(size);
-    stack <int> st;
+vector<int> nextSmallerElement(vector<int>& arr) {
+    int size = arr.size();
+    vector<int> ans(size);
+    
+    stack<int> st;
     st.push(-1);
 
-    // traversing array from right to left
-    for(int i=size-1; i>=0; i--) {
+    // Traversing array from right to left
+    for(int i = size - 1; i >= 0; i--) {
         int currElement = arr[i];
 
-        // popping stack until currElement becomes greater than top element of stack
+        // Popping stack until currElement becomes greater than top element of stack
         while(currElement <= st.top()) st.pop();
 
-        // storing top element of stack in ans
+        // Storing top element of stack in ans
         ans[i] = st.top();
 
-        // pushing array element into stack
+        // Pushing array element into stack
         st.push(currElement);
     }
 
@@ -52,13 +54,12 @@ vector<int> nextSmallerElement(int* arr, int size) {
 }
 
 int main() {
-    int arr[5] = {2, 4, 5, 3, 3};
-    int size = 5;
+    vector<int> arr = {2, 4, 5, 3, 3};
 
-    vector <int> ans = nextSmallerElement(arr, size);
+    vector<int> ans = nextSmallerElement(arr);
 
     for(auto i: ans) {
-        cout << i << " ";
+        cout << i << " ";   // o/p: -1 3 3 -1 -1
     }
 
     return 0;
