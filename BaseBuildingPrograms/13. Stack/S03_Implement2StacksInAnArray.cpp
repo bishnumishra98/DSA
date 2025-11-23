@@ -23,7 +23,7 @@ class Stack{
             top2 = size;   // initializing top2 pointer from size (top2 will move towards left)
         }
 
-        // push functionality of stack 1
+        // Push functionality of stack 1
         // The push operations takes place on arr[0], arr[1], ... i.e.,
         // 1st, 2nd, ... elements of array.
         void push1(int data) {
@@ -35,7 +35,7 @@ class Stack{
             }
         }
 
-        // push functionality of stack 2
+        // Push functionality of stack 2
         // The push operations takes place on arr[size-1], arr[size-2], ... i.e., last,
         // 2nd last, ... elements of array respectively.
         void push2(int data) {
@@ -47,7 +47,7 @@ class Stack{
             }
         }
 
-        // pop functionality for stack 1
+        // Pop functionality for stack 1
         void pop1() {
             if(top1 == -1) {
                 cout << "Stack underflow\n\n";   // as we cannot pop out anything from empty stack
@@ -57,7 +57,7 @@ class Stack{
             }
         }
 
-        // pop functionality for stack 2
+        // Pop functionality for stack 2
         void pop2() {
             if(top2 == size) {
                 cout << "Stack underflow\n\n";   // as we cannot pop out anything from empty stack
@@ -67,12 +67,12 @@ class Stack{
             }
         }
 
-        // print stack functionality
+        // Print stack functionality
         void printStack() {
             cout << "Top 1: " << top1 << endl;
             cout << "Top 2: " << top2 << endl;
             cout << "Stack: ";
-            for(int i=0; i<size; i++) {
+            for(int i = 0; i < size; i++) {
                 cout << arr[i] << " ";
             }
             cout << endl << endl;
