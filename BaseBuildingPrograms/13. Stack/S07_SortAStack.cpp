@@ -11,9 +11,6 @@ void printStack(stack<int> s) {
 }
 
 void insertElementInSortedStack(stack<int> &s, int X) {
-    // Base case
-    // If stack is empty, push the element directly into the stack. Or if X is greater than
-    // the top element of stack, push X into stack.
     if(s.empty() || X > s.top()) {
         s.push(X);
         return;
@@ -22,28 +19,23 @@ void insertElementInSortedStack(stack<int> &s, int X) {
     int temp = s.top();
     s.pop();
 
-    // recursive call
     insertElementInSortedStack(s, X);
-
-    // backtracking to reconstruct the original stack
     s.push(temp);
 }
 
 // T.C: O(nlogn)
 // S.C: O(n)
 void sortStack(stack<int> &s) {
-    // Base case
-    if(s.empty()) {
-        return;
-    }
+    // Base case: If stack is empty, return
+    if(s.empty()) return;
 
     int temp = s.top();
     s.pop();
 
-    // recursive relation
+    // Recursive relation
     sortStack(s);
 
-    // backtracking to insert popped out elements back to the stack in sorted order
+    // Backtracking to insert popped out elements back to the stack in sorted order
     insertElementInSortedStack(s, temp);
 }
 
@@ -55,11 +47,11 @@ int main() {
     s.push(10);
     s.push(30);
 
-    printStack(s);
+    printStack(s);   // o/p: 30 10 40 20 50
 
     sortStack(s);
 
-    printStack(s);
+    printStack(s);   // o/p: 50 40 30 20 10
 
     return 0;
 }
