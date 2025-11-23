@@ -23,8 +23,8 @@ void insertElementInSortedStack(stack<int> &s, int X) {
     s.push(temp);
 }
 
-// T.C: O(nlogn)
-// S.C: O(n)
+// T.C: O(n^2) due to nested recursion
+// S.C: O(n) due to recursion stack
 void sortStack(stack<int> &s) {
     // Base case: If stack is empty, return
     if(s.empty()) return;
