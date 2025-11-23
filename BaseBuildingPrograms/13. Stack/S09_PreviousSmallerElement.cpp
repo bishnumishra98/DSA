@@ -12,6 +12,7 @@
 // Output: -1  2  4  2  2
 
 // Algorithm(same as NextSmallerElement, just difference is that we will start traversal from L to R):
+// Stack behaviour: bigger elements on bottom, smaller elements on top
 // 1) We know that no elements are present on the left of first element of the array. Thus,
 //    first element in special array will always be -1. So initialize a stack with -1.
 // 2) Traversing from left to right of given array, we have to compare each element of array with

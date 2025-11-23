@@ -13,6 +13,7 @@
 // Output:  8 -1  1  3 -1
 
 // Algorithm:
+// Stack behaviour: smaller elements on bottom, bigger elements on top
 // 1) We know that no elements are present on the right of last element of the array. Thus,
 //    last element in special array will always be -1. So initialize a stack with -1.
 // 2) Traversing from right to left of given array, we have to compare each element of array with
