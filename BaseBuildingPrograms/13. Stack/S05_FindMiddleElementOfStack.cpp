@@ -1,8 +1,8 @@
 // For example, let there be an odd size stack of size 5:  10  20  30  40  50
-// Here, the mid element position is (size/2 + 1)th, i.e., 3rd element from top i.e., 30.
+// Here, the mid element position is (size / 2 + 1)th, i.e., 3rd element from top i.e., 30.
 // For example, let there be an even size stack of size 4:  10  20  30  40
-// Here, the mid element position is (size/2 + 1)th element, i.e., 3rd element from top i.e., 20.
-// If we want the second element of the two mids, then position shall be (size/2)th element,
+// Here also, the mid element position is (size / 2 + 1)th element, i.e., 3rd element from top i.e., 20.
+// If we want the another element of the two mids, then position shall be (size / 2)th element,
 // i.e., 2nd element from top, i.e., 30.
 
 // To find middle element of the stack, we can follow this algorithm:
@@ -68,7 +68,7 @@ int main() {
     st.push(40);
     st.push(50);
 
-    cout << "Middle element: " << getMiddleElementOfStack(st);
+    cout << "Middle element: " << getMiddleElementOfStack(st);   // o/p: 30
 
     return 0;
 }
