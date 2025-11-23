@@ -16,7 +16,6 @@
 #include <stack>
 using namespace std;
 
-
 // T.C: O(n)
 // S.C: O(n)
 int getMiddleElementOfStack(stack<int>& st) {
