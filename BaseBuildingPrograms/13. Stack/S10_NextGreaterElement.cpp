@@ -42,8 +42,8 @@ using namespace std;
 // S.C: O(n)
 vector<int> nextGreaterElement(vector<int>& arr) {
     int size = arr.size();
-    vector <int> ans(size);
-    stack <int> st;
+    vector<int> ans(size);
+    stack<int> st;
     st.push(-1);
 
     // Traverse array from right to left
