@@ -19,7 +19,7 @@
 
 // Optimal Algorithm:
 // CHEAT CODE OF THIS PROBLEM: Increasing stack + RL traversal
-// ● Stack objective: smaller elements at bottom, bigger elements on top
+// ● Stack objective: Smaller elements at bottom, bigger elements on top
 // ● Array traversal: Right to Left
 // 1. We know that no elements are present on the right of last element of the array. Thus,
 //    last element in special array will always be -1. So initialize a stack with -1.
@@ -46,7 +46,7 @@ vector<int> nextSmallerElement(vector<int>& arr) {
     stack<int> st;
     st.push(-1);
 
-    // Traversing array from right to left
+    // Traverse array from right to left
     for(int i = size - 1; i >= 0; i--) {
         int currElement = arr[i];
 
