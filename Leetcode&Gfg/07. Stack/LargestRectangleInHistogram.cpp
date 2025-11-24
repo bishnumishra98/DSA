@@ -49,7 +49,7 @@ int largestRectangleArea_bruteForce(vector<int>& heights) {
 // CHEAT CODE: Increasing stack + LR traversal
 vector<int> indexOfPrevSmallerElement(vector<int>& arr) {
     int size = arr.size();
-    vector<int> ans(size);
+    vector<int> ans(size);   // ans will contain indexes of previous smaller elements
     stack<int> st;
     st.push(-1);
 
@@ -74,7 +74,7 @@ vector<int> indexOfPrevSmallerElement(vector<int>& arr) {
 // CHEAT CODE: Increasing stack + RL traversal
 vector<int> indexOfNextSmallerElement(vector<int>& arr) {
     int size = arr.size();
-    vector<int> ans(size);
+    vector<int> ans(size);   // ans will contain indexes of next smaller elements
     stack<int> st;
     st.push(-1);
 
