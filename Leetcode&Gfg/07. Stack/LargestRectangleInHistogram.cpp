@@ -42,6 +42,10 @@ int largestRectangleArea_bruteForce(vector<int>& heights) {
 
 //--------------------------------------------------------------------------------------
 
+// NOTE: Here, we have to store indexes of previous and next smaller elements instead of the elements themselves.
+//       So, we will modify the previous smaller element and next smaller element functions accordingly.
+//       Instead of pushing array elements into stack, we will push their indexes.
+
 // CHEAT CODE: Increasing stack + LR traversal
 vector<int> indexOfPrevSmallerElement(vector<int>& arr) {
     int size = arr.size();
@@ -59,7 +63,7 @@ vector<int> indexOfPrevSmallerElement(vector<int>& arr) {
         // Store top element of stack in ans
         ans[i] = st.top();
 
-        // Push the bigger array element index into stack now
+        // Push the bigger array element's index into stack now
         st.push(i);
     }
 
@@ -85,7 +89,7 @@ vector<int> indexOfNextSmallerElement(vector<int>& arr) {
         if(st.top() == -1) ans[i] = size;
         else ans[i] = st.top();
 
-        // Push the bigger array element index into stack now
+        // Push the bigger array element's index into stack now
         st.push(i);
     }
 
