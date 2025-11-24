@@ -45,7 +45,7 @@ vector<int> nextGreaterElement(vector<int>& arr) {
     st.push(-1);
 
     // Traverse array from left to right
-    for(int i=0; i<size; i++) {
+    for(int i = 0; i < size; i++) {
         int currElement = arr[i];
 
         // Continuously pop out top element of stack if current array element is greater than or equal to top element of stack
