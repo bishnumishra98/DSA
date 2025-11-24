@@ -42,6 +42,7 @@ int largestRectangleArea_bruteForce(vector<int>& heights) {
 
 //--------------------------------------------------------------------------------------
 
+// CHEAT CODE: Increasing stack + LR traversal
 vector<int> indexOfPrevSmallerElement(vector<int>& arr) {
     int size = arr.size();
     vector<int> ans(size);
@@ -49,26 +50,23 @@ vector<int> indexOfPrevSmallerElement(vector<int>& arr) {
     st.push(-1);
 
     // Traverse array from left to right
-    for(int i = 0; i < size; i++) {   // *ONLY THIS LINE IS CHANGED, REST ALL CODE IS SAME*
+    for(int i = 0; i < size; i++) {
         int currElement = arr[i];
 
-        // CHANGE 1: Instead of 'st.top()', we are comparing with v[st.top()]
-        // ADDITION 1: When top element of stack is -1 in the beginning, we have to make
-        //             sure while loop doesn't runs, because arr[-1] makes no sense.
-        // popping stack until currElement becomes greater than top element of stack
-        while(st.top() != -1 && currElement <= arr[st.top()]) st.pop();
+        // Continuously pop out top element of stack if arr[top element] is greater than or equal to current array element
+        while(st.top() != -1 && arr[st.top()] >= currElement) st.pop();
 
-        // storing top element of stack in ans
+        // Store top element of stack in ans
         ans[i] = st.top();
 
-        // CHANGE 2: Instead of pushing array elements, we are pushing index of array elements
-        // pushing index of array element into stack
+        // Push the bigger array element index into stack now
         st.push(i);
     }
 
     return ans;
 }
 
+// CHEAT CODE: Increasing stack + RL traversal
 vector<int> indexOfNextSmallerElement(vector<int>& arr) {
     int size = arr.size();
     vector<int> ans(size);
@@ -79,23 +77,15 @@ vector<int> indexOfNextSmallerElement(vector<int>& arr) {
     for(int i = size - 1; i >= 0; i--) {
         int currElement = arr[i];
 
-        // CHANGE 1: Instead of 'st.top()', we are comparing with v[st.top()]
-        // ADDITION 1: When top element of stack is -1 in the beginning, we have to make
-        //             sure while loop doesn't runs, because arr[-1] makes no sense.
-        // popping stack until currElement becomes greater than top element of stack
-        while(st.top() != -1 && currElement <= arr[st.top()]) {
-            st.pop();
-        }
+        // Continuously pop out top element of stack if arr[top element] is greater than or equal to current array element
+        while(st.top() != -1 && arr[st.top()] >= currElement) st.pop();
 
-        // CHANGE 2: This case is exclusive only for indexOfNextSmallerElement(). We are
-        // assuming that if no next smaller element is found, then we will keep -1 element
-        // on the index just after the last element of the array.
-        // Thus, all -1 in 'ans' shall be replaced by 'size;, i.e., next index of last element.
+        // Store top element of stack in ans. If stack top is -1, it means no 
+        // smaller element is found on right, thus store size of array in ans.
         if(st.top() == -1) ans[i] = size;
         else ans[i] = st.top();
 
-        // CHANGE 3: Instead of pushing array elements, we are pushing index of array elements
-        // pushing index of array element into stack
+        // Push the bigger array element index into stack now
         st.push(i);
     }
 
@@ -118,7 +108,6 @@ int largestRectangleArea(vector<int>& heights) {
 
     return maxArea;
 }
-
 
 
 int main() {
