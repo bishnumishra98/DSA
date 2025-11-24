@@ -57,7 +57,8 @@ vector<int> indexOfPrevSmallerElement(vector<int>& arr) {
     for(int i = 0; i < size; i++) {
         int currElement = arr[i];
 
-        // Continuously pop out top element of stack if arr[top element] is greater than or equal to current array element
+        // Continuously pop out top element of stack if arr[top element] is greater than or equal to current array element.
+        // This makes sure that stack has indexes of smaller elements at bottom and indexes of bigger elements at top.
         while(st.top() != -1 && arr[st.top()] >= currElement) st.pop();
 
         // Store top element of stack in ans
@@ -81,7 +82,8 @@ vector<int> indexOfNextSmallerElement(vector<int>& arr) {
     for(int i = size - 1; i >= 0; i--) {
         int currElement = arr[i];
 
-        // Continuously pop out top element of stack if arr[top element] is greater than or equal to current array element
+        // Continuously pop out top element of stack if arr[top element] is greater than or equal to current array element.
+        // This makes sure that stack has indexes of smaller elements at bottom and indexes of bigger elements at top.
         while(st.top() != -1 && arr[st.top()] >= currElement) st.pop();
 
         // Store top element of stack in ans. If stack top is -1, it means no 
