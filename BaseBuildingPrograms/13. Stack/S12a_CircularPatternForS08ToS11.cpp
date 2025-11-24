@@ -30,7 +30,8 @@ using namespace std;
 
 // T.C: O(n)
 // S.C: O(n)
-vector<int> nextGreaterElement_circularArray(int* arr, int n) {
+vector<int> nextGreaterElement_circularArray(vector<int>& arr) {
+    int n = arr.size();
     vector<int> ans(n);
     stack<int> st;
     st.push(-1);
@@ -56,10 +57,10 @@ vector<int> nextGreaterElement_circularArray(int* arr, int n) {
 }
 
 int main() {
-    int arr[5] = {6, 8, 0, 1, 3};
+    vector<int> arr = {6, 8, 0, 1, 3};
     int size = 5;
 
-    vector <int> ans = nextGreaterElement_circularArray(arr, size);
+    vector <int> ans = nextGreaterElement_circularArray(arr);
 
     for(auto i: ans) {
         cout << i << " ";   // o/p: 8 -1 1 3 6
