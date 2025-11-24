@@ -42,7 +42,7 @@ int largestRectangleArea_bruteForce(vector<int>& heights) {
 
 //--------------------------------------------------------------------------------------
 
-vector<int> indexOfPrevSmallerElement(vector<int> arr) {
+vector<int> indexOfPrevSmallerElement(vector<int>& arr) {
     int size = arr.size();
     vector<int> ans(size);
     stack<int> st;
@@ -69,7 +69,7 @@ vector<int> indexOfPrevSmallerElement(vector<int> arr) {
     return ans;
 }
 
-vector<int> indexOfNextSmallerElement(vector<int> arr) {
+vector<int> indexOfNextSmallerElement(vector<int>& arr) {
     int size = arr.size();
     vector<int> ans(size);
     stack<int> st;
@@ -124,8 +124,8 @@ int largestRectangleArea(vector<int>& heights) {
 int main() {
     vector <int> heights{2, 1, 5, 6, 2, 3};
 
-    cout << "Brute force answer: " << largestRectangleArea_bruteForce(heights) << endl;
-    cout << "My answer: " << largestRectangleArea(heights);
+    cout << largestRectangleArea_bruteForce(heights) << endl;
+    cout << largestRectangleArea(heights);
 
     return 0;
 }
