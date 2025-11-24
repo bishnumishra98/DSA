@@ -1,3 +1,5 @@
+// Another variant of the Largest Rectangle in Histogram problem 'Leetcode&Gfg\07. Stack\LargestRectangleInHistogram.cpp'.
+
 // Given an array of integers heights representing the histogram's bar height where the width
 // of each bar is 1, return the area of the largest square in the histogram.
 
