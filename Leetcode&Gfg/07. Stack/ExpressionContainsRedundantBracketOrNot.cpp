@@ -32,8 +32,18 @@
 //   ▶ ((a+b)) --> Redundant, because inner brackets have operator but outer brackets don't have any operator inside it.
 // ● Thereby, we can use stack to solve this problem.
 
-
-
+// 1. Initialize an empty stack to store characters(opening bracket '(' and the operators +, -, *, /).
+// 2. Traverse the given string character by character.
+//    a. If the current character is an opening bracket '(' or an operator (+, -, *, /), push it onto the stack.
+//    b. If the current character is a closing bracket ')':
+//       i.   Initialize a boolean variable hasOperator to false. This variable will help us track if there is any
+//            operator between the opening and closing brackets.
+//       ii.  Pop all operators from the stack until we encounter an opening bracket '('.
+//            - If we pop an operator(+, -, *, /), set hasOperator to true.
+//       iii. After popping, if the stack is not empty, for sure an opening bracket '(' is present. Pop it out from satck.
+//       iv.  If hasOperator is still false after popping, it means there were no operators between the brackets,
+//            indicating that the brackets are redundant. In this case, return 1.
+// 3. If we finish traversing the string without finding any redundant brackets, return 0.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -47,7 +57,7 @@ public:
             // Push only useful characters:
             // 1) '('
             // 2) Operators: + - * /
-            if(ch == '(' || ch=='+' || ch=='-' || ch=='*' || ch=='/') {
+            if(ch == '(' || ch == '+' || ch == '-' || ch == '*' || ch == '/') {
                 st.push(ch);
             }
             else if(ch == ')') {   // if we see a closing bracket ')'
@@ -76,7 +86,7 @@ int main() {
     Solution obj;
     string s = "((a+b))";
 
-    cout << obj.checkRedundancy(s);   // o/p: 1 (redundant brackets present)
+    bool check = obj.checkRedundancy(s);   // o/p: 1 (redundant brackets present)
 
     return 0;
 }
