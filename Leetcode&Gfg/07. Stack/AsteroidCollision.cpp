@@ -45,7 +45,7 @@
 
 // Note: The stack is used here to efficiently manage the collisions between asteroids, allowing us to easily
 //       keep track of the surviving asteroids. But if we use stack, then at the end we will have to pop all elements
-//       from stack and insert them in another vector in reverse order to return the final result.
+//       from stack and insert them in another vector, reverse the vector and then return the final result.
 //       To avoid this extra step, we can use a vector as a stack substitute as vector also follows LIFO principle.
 //       We can directly push and pop elements from the back of the vector. This way, we can return the vector directly
 //       as the result without needing to reverse it.
