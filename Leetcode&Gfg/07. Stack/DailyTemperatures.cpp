@@ -22,23 +22,9 @@
 //    and store this difference in the 'ans' array. If no warmer temperature is found, the value in 'ans' remains 0.
 // 3. Return the 'ans' array after processing all days.
 
-// Algorithm:
-// 1. Initialize an array 'ans' with size as that of 'temperatures', and all values as 0. 'ans' array is initialized
-//    with zeros, representing that initially, we assume there are no future warmer days.
-// 2. Initialize an empty stack. The stack will help us to keep track of indices of temperatures that we have encountered
-//    but not yet resolved (i.e., we haven't found a warmer temperature for these days). By keeping the stack in a
-//    decreasing order of temperatures, we can efficiently determine the next warmer day. When we encounter a warmer
-//    temperature, we can pop elements from the stack until we find a temperature that is warmer than the current one.
-//    This allows us to calculate the number of days to wait for each of those popped indices in one go.
-//    For each popped index, we can directly compute the difference between the current index and the popped index,
-//    which gives us the number of days to wait for a warmer temperature.
-//    For each day, check if the current temperature is warmer than the temperature at the top index of the stack.
-//    If it is, this means we have found the next warmer day for the day at the top index of the stack. Thus,
-//    calculate the number of days between the current day and the day at the top index of stack, and store this difference
-//    in the 'ans' array. Post this, pop the stack.
-//    Continue this process using a loop, until the stack is empty or the current temperature is cooler than the temperature
-//    at the top index of stack. At this point, stop the loop and push the current day index into the stack. In this way,
-//    the top elements of stack remains cooler than the below ones, and this stack helps to populate 'ans' array accordingly.
+// Optimal Algorithm:
+// Same pattern: 'BaseBuildingPrograms\13. Stack\S10_NextGreaterElement.cpp'.
+// CHEAT CODE OF THIS PROBLEM: Decreasing stack + RL traversal
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -71,17 +57,25 @@ public:
     // T.C: O(n)
     // S.C: O(n)
     vector<int> dailyTemperatures(vector<int>& temperatures) {
-        vector<int> ans(temperatures.size(), 0);
-        stack<int> st;   // stack stores the indices of temperatures
+        int n = temperatures.size();
+        vector<int> ans(n, 0);
+        stack<int> st;  // stores indices of temperatures array
 
-        for(int i = 0; i < temperatures.size(); i++) {
+        // Traverse from right to left
+        for(int i = n - 1; i >= 0; i--) {
             int currTemp = temperatures[i];
-            while(!st.empty() && currTemp > temperatures[st.top()]) {
-                ans[st.top()] = i - st.top();
-                st.pop();
-            }
-            st.push(i);   // now push the index of current temperature when it becomes the "cooler" temperature
+
+            // Continuously pop out top element of stack if current temperature is greater than or equal to temperature at top index of stack
+            while(!st.empty() && currTemp >= temperatures[st.top()]) st.pop();
+
+            // If stack is not empty → next warmer day exists
+            if(!st.empty()) ans[i] = st.top() - i;   // number of days to wait = index at top of stack - current index
+            else ans[i] = 0;
+
+            // Now push the current temperature's index into the stack when it becomes the new "lowest" temperature
+            st.push(i);
         }
+
         return ans;
     }
 };
