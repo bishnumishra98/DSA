@@ -1,4 +1,4 @@
-// gfg: Expression contains redundant bracket or not   --->   Given a string of balanced expression,
+// GFG: Expression contains redundant bracket or not   --->   Given a string of balanced expression,
 // find if it contains a redundant parenthesis or not. A set of parenthesis are redundant if the
 // same sub-expression is surrounded by unnecessary or multiple brackets. Expression contains
 // + , - , *, and / operators along with brackets. Given expression is valid and there are no
@@ -21,57 +21,62 @@
 // Explanation:
 // (a+b+(c+d)) doesn't have any redundant or multiple brackets.
 
-// Note: Please don't take this problem lightly. If else condition is very tricky.
+// Problem link: https://www.geeksforgeeks.org/problems/expression-contains-redundant-bracket-or-not/1
 
-#include <iostream>
-#include <stack>
+// Algorithm:
+// ● How to identify redundant brackets from naked eye ?
+//   We can say that brackets are redundant if there is no operator between a pair of brackets.
+//   For example:
+//   ▶ (a+b) --> Not redundant
+//   ▶ (a) --> Redundant
+//   ▶ ((a+b)) --> Redundant, because inner brackets have operator but outer brackets don't have any operator inside it.
+// ● Thereby, we can use stack to solve this problem.
+
+
+
+
+#include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
     int checkRedundancy(string s) {
-        // code here
-        stack <char> st;
+        stack<char> st;   // stack to store characters
 
-        for(int i=0; i<s.length(); i++) {
-            char ch = s[i];
-
-            // if opening bracket or any operator found
-            if(ch=='(' || ch=='+' || ch=='-' || ch=='*' || ch=='/') {
+        for(char ch: s) {
+            // Push only useful characters:
+            // 1) '('
+            // 2) Operators: + - * /
+            if(ch == '(' || ch=='+' || ch=='-' || ch=='*' || ch=='/') {
                 st.push(ch);
             }
-            
-            // if closing bracket found
-            if(ch==')') {
-                int no_of_operators = 0;
+            else if(ch == ')') {   // if we see a closing bracket ')'
+                bool hasOperator = false;   // checks if there is any operator inside the brackets
 
-                // Pop and count operators until an opening bracket is encountered
-                while(!st.empty() && st.top()!='(') {
+                // Pop everything until '(' is encountered
+                while(!st.empty() && st.top() != '(') {
                     char top = st.top();
-                    if(top=='+' || top=='-' || top=='*' || top=='/') {
-                        // counting no.of operators between closing bracket and an opening bracket
-                        no_of_operators++;
-                    }
+                    if(top == '+' || top == '-' || top == '*' || top == '/') hasOperator = true;
                     st.pop();
                 }
-                // if there we reach here, it means opening bracket '(' is found. So pop it.
+
+                // If we reach here, it means '(' has been encountered or stack may be empty. Remove the '(' from stack if exists.
                 if(!st.empty()) st.pop();
 
-                // if there are no operators between '(' and ')', redundancy brackets are present, i.e., return 1
-                if(no_of_operators == 0) return 1;
+                // If NO operator was inside ( ), brackets are redundant
+                if(hasOperator == false) return 1;
             }
         }
 
-        // if we reach here, no redundant brackets are found
-        return 0;
+        return 0;  // no redundant brackets found
     }
 };
 
 int main() {
     Solution obj;
-    string s = "(a+b)";
+    string s = "((a+b))";
 
-    cout << obj.checkRedundancy(s);
+    cout << obj.checkRedundancy(s);   // o/p: 1 (redundant brackets present)
 
     return 0;
 }
