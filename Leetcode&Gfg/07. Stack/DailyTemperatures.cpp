@@ -64,10 +64,10 @@ public:
         return ans;
     }
 
-// -------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 
-    // Stack objective: Indexes of temperatures in decreasing order, i.e., bottom of stack has indxes
-    //                  of highest temperature and top of stack has indexes of lowest temperature.
+    // Stack objective: Decreasing stack, i.e., bottom of stack has index of the highest
+    //                  temperature and top of stack has index of lowest temperature.
     // T.C: O(n)
     // S.C: O(n)
     vector<int> dailyTemperatures(vector<int>& temperatures) {
