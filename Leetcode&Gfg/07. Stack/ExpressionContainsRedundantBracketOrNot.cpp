@@ -77,7 +77,7 @@ public:
                 // If we reach here, it means '(' has been encountered or stack may be empty. Remove the '(' from stack if exists.
                 if(!st.empty()) st.pop();
 
-                // If NO operator was inside ( ), brackets are redundant
+                // If no operator was inside ( ), brackets are redundant
                 if(hasOperator == false) return true;
             }
         }
