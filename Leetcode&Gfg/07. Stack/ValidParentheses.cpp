@@ -17,6 +17,8 @@
 // Output: false
 
 
+// Algorithm: Algorithm is very simple, but look for edge cases carefully. Look at if else conditions carefully.
+
 #include <bits/stdc++.h>
 using namespace std;
 
