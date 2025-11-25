@@ -50,7 +50,7 @@ using namespace std;
 
 class Solution {
 public:
-    int checkRedundancy(string s) {
+    bool checkRedundancy(string &s) {
         stack<char> st;   // stack to store characters
 
         for(char ch: s) {
@@ -76,11 +76,11 @@ public:
                 if(!st.empty()) st.pop();
 
                 // If NO operator was inside ( ), brackets are redundant
-                if(hasOperator == false) return 1;
+                if(hasOperator == false) return true;
             }
         }
 
-        return 0;  // no redundant brackets found
+        return false;  // no redundant brackets found
     }
 };
 
