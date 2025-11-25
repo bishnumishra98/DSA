@@ -86,7 +86,7 @@ int main() {
     Solution obj;
     string s = "((a+b))";
 
-    bool check = obj.checkRedundancy(s);   // o/p: 1 (redundant brackets present)
+    cout << obj.checkRedundancy(s);   // o/p: 1 (redundant brackets present)
 
     return 0;
 }
