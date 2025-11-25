@@ -65,8 +65,7 @@ public:
 
                 // Pop everything until '(' is encountered
                 while(!st.empty() && st.top() != '(') {
-                    char top = st.top();
-                    if(top == '+' || top == '-' || top == '*' || top == '/') hasOperator = true;
+                    hasOperator = true;   // if you come inside this loop, it means there is at least one operator
                     st.pop();
                 }
 
