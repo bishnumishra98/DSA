@@ -21,57 +21,45 @@
 // - 2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3.
 // - 4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.
 
-// This problem is already solved in 'BaseBuildingPrograms\14. Stack\S10_NextGreaterElement.cpp',
-// the only addition here is that we have an extra drama of an extra array.
+// Algorithm:
+// Same as 'BaseBuildingPrograms\14. Stack\S10_NextGreaterElement.cpp'. It is just an easy variant of that problem.
 
-#include <iostream>
-#include <vector>
-#include <stack>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
-    // T.C: O(n2 + n1*n2);  note that time complexity is dominated by the nested loop in the
-    //                      second part of the code, and it can be optimized further using hashmap.
-    // S.C: O(n2 + n1)
+    // T.C: O(n1 + n2)
+    // S.C: O(n1 + n2)
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        int n2 = nums2.size();
-        vector <int> ans(n2);
-        stack <int> st;
-        st.push(-1);
+        // This map will store: an element from nums2  -> its next greater element in nums2
+        unordered_map<int, int> nextGreater;
 
-        for(int i=n2-1; i>=0; i--) {
+        // CHEAT CODE: Decreasing stack + RL traversal of nums2
+        stack<int> st;
+
+        // Step 1: Process nums2 from RIGHT to LEFT and fill "nextGreater" map
+        for(int i = nums2.size() - 1; i >= 0; i--) {
             int currElement = nums2[i];
 
-            while(!st.empty() && currElement >= st.top()) {
+            // Continuously pop out top element of stack if current array element is greater than or equal to top element of stack
+            while (!st.empty() && currElement >= st.top()) {
                 st.pop();
             }
 
-            if(!st.empty()) {
-                ans[i] = st.top();
-            } else {
-                ans[i] = -1;
-            }
+            /// Store top element of stack in nextGreater map, i.e., store {currElement -> its next greater element}
+            if(!st.empty()) nextGreater[currElement] = st.top();
+            else nextGreater[currElement] = -1;
 
+            // Push the smaller array element into stack now
             st.push(currElement);
         }
 
-        // nextGreaterElement for the array nums2 have been created in 'ans'.
-        // Now the extra drama begins.
-        int n1 = nums1.size();
-        vector <int> v;
+        // Step 2: Build answer for nums1 using the map
+        vector<int> ans;
+        for(int x : nums1) ans.push_back(nextGreater[x]);
 
-        for(int i=0; i<n1; i++) {
-            for(int j=0; j<n2; j++) {
-                if(nums1[i] == nums2[j]) {
-                    // finding that nums1 element in nums2, and pushing
-                    // corresponding same 'j' indexed element from 'ans' into 'v'.
-                    v.push_back(ans[j]);
-                }     
-            }
-        }
-
-        return v;
+        return ans;
     }
 };
 
@@ -83,45 +71,8 @@ int main() {
     vector <int> ans = obj.nextGreaterElement(nums1, nums2);
 
     for(auto i: ans) {
-        cout << i << " ";
+        cout << i << " ";   // o/p: 3 -1
     }
 
     return 0;
-}
-
-
-// More optimized solution using hashmap:
-#include <unordered_map>
-// T.C: O(n1 + n2)
-// S.C: O(n2)
-vector<int> nextGreaterElement_hashmap(vector<int>& nums1, vector<int>& nums2) {
-    int n2 = nums2.size();
-    vector<int> ans(n2);
-    stack<int> st;
-    unordered_map<int, int> nextGreater;
-
-    // Calculate next greater element for each element in nums2
-    for (int i= n2-1; i>=0; i--) {
-        int currElement = nums2[i];
-
-        while(!st.empty() && currElement >= nums2[st.top()]) {
-            st.pop();
-        }
-
-        if(!st.empty()) {
-            nextGreater[nums2[i]] = nums2[st.top()];
-        } else {
-            nextGreater[nums2[i]] = -1;
-        }
-
-        st.push(i);
-    }
-
-    // Populate the result for nums1 using the hashmap
-    vector<int> result;
-    for (int num : nums1) {
-        result.push_back(nextGreater[num]);
-    }
-
-    return result;
 }
