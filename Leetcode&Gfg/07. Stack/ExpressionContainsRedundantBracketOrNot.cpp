@@ -65,7 +65,10 @@ public:
 
                 // Pop everything until '(' is encountered
                 while(!st.empty() && st.top() != '(') {
-                    hasOperator = true;   // if you come inside this loop, it means there is at least one operator
+                    // if(st.top() == '+' || st.top() == '-' || st.top() == '*' || st.top() == '/') hasOperator = true;
+                    // The above line is not required because we are only pushing operators and '(' into the stack.
+                    // So, if the stack is not empty and we are popping something other than '(', it has to be an operator.
+                    hasOperator = true;
                     st.pop();
                 }
 
