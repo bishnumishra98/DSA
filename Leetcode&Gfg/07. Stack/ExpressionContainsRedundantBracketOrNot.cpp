@@ -50,6 +50,8 @@ using namespace std;
 
 class Solution {
 public:
+    // T.C: O(n)   where n = length of string s
+    // S.C: O(n)   stack space
     bool checkRedundancy(string &s) {
         stack<char> st;   // stack to store characters
 
