@@ -6,24 +6,23 @@
 using namespace std;
 
 int main() {
-    // Note: We are using STL implementation of queue
-    // creation of int and string type stack
-    queue <int> q;
-    queue <string> q1;
+    // Note: We are using STL implementation of queue creation
+    queue<int> q;
+    queue<string> q1;
 
     // Basic queue operations: push(), pop(), size(), empty(), front(), back()
-    cout << "Queue empty status: " << q.empty() << endl;   // 1
+    cout << "Queue empty status: " << q.empty() << endl;   // o/p: 1
     cout << "Pushed 10, 20, 30, 40 in queue" << endl;
     q.push(10);
     q.push(20);
     q.push(30);
     q.push(40);
-    cout << "Queue empty status: " << q.empty() << endl;   // 0
-    cout << "Size: " << q.size() << endl;   // 4
+    cout << "Queue empty status: " << q.empty() << endl;   // o/p: 0
+    cout << "Size: " << q.size() << endl;   // o/p: 4
     cout << "Popped one element from queue" << endl;
     q.pop();
-    cout << "Front/First element: " << q.front() << endl;   // 20
-    cout << "Rear/last element: " << q.back() << endl;   // 40
+    cout << "Front/First element: " << q.front() << endl;   // o/p: 20
+    cout << "Rear/last element: " << q.back() << endl;   // o/p: 40
     
     return 0;
 }
