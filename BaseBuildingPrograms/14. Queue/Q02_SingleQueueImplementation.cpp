@@ -2,34 +2,29 @@
 
 #include <iostream>
 #include <cstring>   // for memset()
+#include <vector>
 using namespace std;
 // Note: In a queue, push happens from -> rear, and pop happens from -> front
 
 class Queue {
 public:
-    int* arr;
+    vector<int> arr;
     int size;
     int front;
     int rear;
     
     // Constructor
     Queue(int size) {
-        arr = new int[size];
-        memset(arr, 0, size * sizeof(int));   // initializes all elements of arr with 0s.
+        arr.resize(size, -1);   // Resizing array to size 5 and initializing all array elements to -1
         this->size = size;
         front = -1;
         rear = -1;
     }
 
-    // Destructor
-    ~Queue() {
-        delete[] arr;
-    }
-
     void push(int data) {
         // If rear pointer reached last index of array, no more elements can be pushed
-        if(rear == size-1) {
-            cout << "Queue overflow." << endl;
+        if(rear == size - 1) {
+            cout << "Queue overflow.";
             return;
         } else {
             // If rear pointer did not reached last index of array
@@ -38,19 +33,17 @@ public:
 
             // Make sure to bring front pointer to 0th index of array,
             // when a push operation happened on queue for the 1st time.
-            if(front == -1) {
-                front = 0;
-            }
+            if(front == -1) front = 0;
         }
     }
 
     void pop() {
-        // If queue is empty
+        // If queue is empty. 'front > rear' condition is for cases when all elements are popped out of queue
         if(front == -1 || front > rear) {
-            cout << "Queue underflow." << endl;
+            cout << "Queue underflow.";
             return;
         } else {
-            // If queue is not empty
+            // If queue is not empty, pop the front element; thus mark it -1 and increment front pointer
             arr[front] = -1;
             front++;
         }
@@ -68,7 +61,7 @@ public:
 
     int getFront() {
         if(front == -1 || front > rear) {
-            cout << "No front element present." << endl;
+            cout << "No front element present.";
             return -1;
         } else {
             return arr[front];
@@ -77,7 +70,7 @@ public:
 
     int getRear() {
         if(front == -1 || front > rear) {
-            cout << "No rear element present." << endl;
+            cout << "No rear element present.";
             return -1;
         } else {
             return arr[rear];
@@ -86,7 +79,7 @@ public:
 
     void printQueue() {
         cout << "Queue: ";
-        for(int i=0; i<size; i++) {
+        for(int i = 0; i < size; i++) {
             cout << arr[i] << " ";
         }
         cout << endl;
@@ -95,19 +88,19 @@ public:
 
 int main() {
     Queue q(5);
-    q.printQueue();   // o/p: 0 0 0 0 0
+    q.printQueue();   // o/p: -1 -1 -1 -1 -1
     cout << "Queue empty status: " << q.isEmpty() << endl;   // o/p: 1
     cout << "Size of queue: " << q.getSize() << endl;   // o/p: 0
     cout << "Front element: " << q.getFront() << endl;   // o/p: -1
     cout << "Rear element: " << q.getRear() << endl;   // o/p: -1
-    cout << "Popping 1 element from queue.\n"; q.pop();   // o/p: Queue underflow.
+    cout << "Popping 1 element from queue."; q.pop();   // o/p: Queue underflow.
     cout << endl;
 
     cout << "Pushing 10, 20, 30 in queue.\n";
     q.push(10);
     q.push(20);
     q.push(30);
-    q.printQueue();   // o/p: 10 20 30 0 0
+    q.printQueue();   // o/p: 10 20 30 -1 -1
     cout << "Queue empty status: " << q.isEmpty() << endl;   // o/p: 0
     cout << "Size of queue: " << q.getSize() << endl;   // o/p: 3
     cout << "Front element: " << q.getFront() << endl;   // o/p: 10
@@ -116,7 +109,7 @@ int main() {
 
     cout << "Popping 1 element from queue.\n";
     q.pop();
-    q.printQueue();   // o/p: -1 20 30 0 0
+    q.printQueue();   // o/p: -1 20 30 -1 -1
     cout << "Queue empty status: " << q.isEmpty() << endl;   // o/p: 0
     cout << "Size of queue: " << q.getSize() << endl;   // o/p: 2
     cout << "Front element: " << q.getFront() << endl;   // o/p: 20
