@@ -2,18 +2,6 @@
 // FIFO (First In First Out) principle and the last position is connected back to the first
 // position to make a circle. It is also called ‘Ring Buffer’.
 
-// Let a circular queue be implemented by 'arr' of size 'n'. Set both front and rear pointers to -1.
-// -> When an element is pushed in queue, move rear pointer ahead using
-//    the relation: rear = (rear + 1) % n; and then push element at rear index.
-// -> When an element is popped from queue, remove element at front index and move
-//    the front pointer ahead using the relation: front = (front + 1) % n;
-// -> When rear pointer is just behind the front pointer(rear + 1 = front), it means the array
-//    is full, i.e., queue is full. Pushing any further element will throw 'queue overflow'.
-// -> When front pointer reached rear pointer(front == rear), it means only 1 element is remaining
-//    in the array or queue. If any further pop operation is performed, reset both front & rear
-//    to -1, i.e., queue becomes completely empty as it was in the beginning.
-// -> If an element is popped from an empty queue, throw 'queue underflow'.
-
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -67,14 +55,14 @@ public:
         }
     }
 
+    int getSize() {
+        if(front == -1) return 0;
+        return ((rear - front + size) % size) + 1;   // correct modulo arithmetic for circular wrap-around
+    }
+
     bool isEmpty() {
         if(front == -1) return true;
         else return false;
-    }
-
-    int getSize() {
-        if (front == -1) return 0;
-        return ((rear - front + size) % size) + 1;   // correct modulo arithmetic for circular wrap-around
     }
 
     int getFront() {
