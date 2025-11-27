@@ -4,9 +4,9 @@
 
 // Let a circular queue be implemented by 'arr' of size 'n'. Set both front and rear pointers to -1.
 // -> When an element is pushed in queue, move rear pointer ahead using
-//    the relation: rear = (rear+1)%n; and then push element at rear index.
+//    the relation: rear = (rear + 1) % n; and then push element at rear index.
 // -> When an element is popped from queue, remove element at front index and move
-//    the front pointer ahead using the relation: front = (front+1)%n;
+//    the front pointer ahead using the relation: front = (front + 1) % n;
 // -> When rear pointer is just behind the front pointer(rear + 1 = front), it means the array
 //    is full, i.e., queue is full. Pushing any further element will throw 'queue overflow'.
 // -> When front pointer reached rear pointer(front == rear), it means only 1 element is remaining
@@ -16,128 +16,131 @@
 
 #include <iostream>
 #include <cstring>
+#include <vector>
 using namespace std;
 
 class CircularQueue {
-    public:
-        int* arr;
-        int size;
-        int front;
-        int rear;
-        
-        // constructor
-        CircularQueue(int size) {
-            arr = new int[size];
-            memset(arr, 0, size * sizeof(int));   // initializes all elements of arr with 0s.
-            this->size = size;
-            front = -1;
-            rear = -1;
-        }
+public:
+    vector<int> arr;
+    int size;
+    int front;
+    int rear;
+    
+    // Constructor
+    CircularQueue(int size) {
+        arr.resize(size, -1);   // resize arr to 'size' and initialize all elements to -1
+        this->size = size;
+        front = -1;
+        rear = -1;
+    }
 
-        // destructor
-        ~CircularQueue() {
-            delete[] arr;
-        }
+    void push(int data) {
+        // If rear pointer is just behind the front pointer, queue is full
+        if((rear + 1) % size == front) {
+            cout << "Queue overflow.";
+            return;
+        } else {
+            // If queue is not full
+            rear = (rear + 1) % size;
+            arr[rear] = data;
 
-        void push(int data) {
-            // if rear pointer is just behind the front pointer, queue is full
-            if((rear + 1) % size == front) {
-                cout << "Queue overflow." << endl;
-                return;
-            } else {
-                // if queue is not full
-                rear = (rear + 1) % size;
-                arr[rear] = data;
-
-                // make sure to bring front pointer to 0th index of array,
-                // when a push operation happened on queue for the 1st time.
-                if(front == -1) {
-                    front = 0;
-                }
-            }
-        }
-
-        void pop() {
-            // if queue is empty
+            // Make sure to bring front pointer to 0th index of array,
+            // when a push operation happened on queue for the 1st time.
             if(front == -1) {
-                cout << "Queue underflow." << endl;
-                return;
-            } else if(front == rear) {
-                // only 1 element is remaining in queue, popping 1 more element will make queue empty
-                arr[front] = -1;
-                front = rear = -1;
-            } else {
-                // if queue is not empty
-                arr[front] = -1;
-                front = (front + 1) % size;
+                front = 0;
             }
         }
+    }
 
-        bool isEmpty() {
-            if(front == -1) return true;
-            else return false;
+    void pop() {
+        // If queue is empty
+        if(front == -1) {
+            cout << "Queue underflow.";
+            return;
+        } else if(front == rear) {
+            // Only 1 element is remaining in queue, popping 1 more element will make queue empty
+            arr[front] = -1;
+            front = rear = -1;
+        } else {
+            // If queue is not empty
+            arr[front] = -1;
+            front = (front + 1) % size;
+        }
+    }
+
+    bool isEmpty() {
+        if(front == -1) return true;
+        else return false;
+    }
+
+    int getSize() {
+        if (front == -1) return 0;
+        return ((rear - front + size) % size) + 1;   // correct modulo arithmetic for circular wrap-around
+    }
+
+    int getFront() {
+        if(front == -1) {
+            cout << "No front element present.";
+            return -1;
+        } else {
+            return arr[front];
+        }
+    }
+
+    int getRear() {
+        if(front == -1) {
+            cout << "No rear element present.";
+            return -1;
+        } else {
+            return arr[rear];
+        }
+    }
+
+    void printQueue() {
+        if(front == -1) {
+            cout << "Queue: (empty)" << endl;
+            return;
         }
 
-        int getSize() {
-            if(front == -1) return 0;
-            else return (rear - front + 1);
-        }
+        cout << "Queue: ";
+        int count = getSize();
 
-        int getFront() {
-            if(front == -1) {
-                cout << "No front element present." << endl;
-                return -1;
-            } else {
-                return arr[front];
-            }
+        for(int i = 0; i < count; i++) {
+            int idx = (front + i) % size;   // move circularly
+            cout << arr[idx] << " ";
         }
-
-        int getRear() {
-            if(front == -1) {
-                cout << "No rear element present." << endl;
-                return -1;
-            } else {
-                return arr[rear];
-            }
-        }
-
-        void printQueue() {
-            cout << "Queue: ";
-            for(int i=0; i<size; i++) {
-                cout << arr[i] << " ";
-            }
-            cout << endl;
-        }   
+        cout << endl;
+    }
 };
 
 
 int main() {
     CircularQueue q(5);
-    q.printQueue();   // Queue: 0 0 0 0 0
-    cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status: 1
-    cout << "Size of queue: " << q.getSize() << endl;   // Size of queue: 0
-    cout << "Front element: " << q.getFront() << endl;   // No front element present. Front element: -1
-    cout << "Rear element: " << q.getRear() << endl;   // No rear element present. Rear element: -1
+    q.printQueue();   // o/p: (empty)
+    cout << "Queue empty status: " << q.isEmpty() << endl;   // o/p: 1
+    cout << "Size of queue: " << q.getSize() << endl;   // o/p: 0
+    cout << "Front element: " << q.getFront() << endl;   // o/p: No front element present. Front element: -1
+    cout << "Rear element: " << q.getRear() << endl;   // o/p: No rear element present. Rear element: -1
     cout << endl;
 
     cout << "Pushing 10, 20, 30 in queue.\n";
     q.push(10);
     q.push(20);
     q.push(30);
-    q.printQueue();
-    cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status: 0
-    cout << "Size of queue: " << q.getSize() << endl;   // Size of queue: 3
-    cout << "Front element: " << q.getFront() << endl;   // Front element: 10
-    cout << "Rear element: " << q.getRear() << endl;   // Rear element: 30
+    q.printQueue();   // o/p: 10 20 30
+    cout << "Queue empty status: " << q.isEmpty() << endl;   // o/p: 0
+    cout << "Size of queue: " << q.getSize() << endl;   // o/p: 3
+    cout << "Front element: " << q.getFront() << endl;   // o/p: 10
+    cout << "Rear element: " << q.getRear() << endl;   // o/p: 30
     cout << endl;
 
     cout << "Popping 3 elements from queue.\n";
     q.pop(); q.pop(); q.pop();
-    q.printQueue();   // Queue: -1 -1 -1 0 0
-    cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status: 1
-    cout << "Size of queue: " << q.getSize() << endl;   // Size of queue: 0
-    cout << "Front element: " << q.getFront() << endl;   // No front element present. Front element: -1
-    cout << "Rear element: " << q.getRear() << endl;   // No rear element present. Rear element: -1
+    q.printQueue();   // o/p: (empty)
+    cout << "Queue empty status: " << q.isEmpty() << endl;   // o/p: 1
+    cout << "Size of queue: " << q.getSize() << endl;   // o/p: 0
+    cout << "Front element: " << q.getFront() << endl;   // o/p: No front element present. Front element: -1
+    cout << "Rear element: " << q.getRear() << endl;   // o/p: No rear element present. Rear element: -1
     cout << endl;
 
     cout << "Pushing 10, 20, 30, 40, 50 in queue.\n";
@@ -146,58 +149,58 @@ int main() {
     q.push(30);
     q.push(40);
     q.push(50);
-    q.printQueue();   // Queue: 10 20 30 40 50
-    cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status: 0
-    cout << "Size of queue: " << q.getSize() << endl;   // Size of queue: 5
-    cout << "Front element: " << q.getFront() << endl;   // Front element: 10
-    cout << "Rear element: " << q.getRear() << endl;   // Rear element: 50
+    q.printQueue();   // o/p: 10 20 30 40 50
+    cout << "Queue empty status: " << q.isEmpty() << endl;   // o/p: 0
+    cout << "Size of queue: " << q.getSize() << endl;   // o/p: 5
+    cout << "Front element: " << q.getFront() << endl;   // o/p: 10
+    cout << "Rear element: " << q.getRear() << endl;   // o/p: 50
     cout << endl;
 
     cout << "Pushing 60 in queue.\n";
-    q.push(60);   // Queue overflow.
+    q.push(60);   // o/p: Queue overflow.
     cout << endl;
 
     cout << "Popping 2 element from queue.\n";
     q.pop(); q.pop();
-    q.printQueue();   // Queue: -1 -1 30 40 50
-    cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status: 0
-    cout << "Size of queue: " << q.getSize() << endl;   // Size of queue: 2
-    cout << "Front element: " << q.getFront() << endl;   // Front element: 20
-    cout << "Rear element: " << q.getRear() << endl;   // Rear element: 30
+    q.printQueue();   // o/p: 30 40 50
+    cout << "Queue empty status: " << q.isEmpty() << endl;   // o/p: 0
+    cout << "Size of queue: " << q.getSize() << endl;   // o/p: 3
+    cout << "Front element: " << q.getFront() << endl;   // o/p: 30
+    cout << "Rear element: " << q.getRear() << endl;   // o/p: 50
     cout << endl;
 
     cout << "Pushing 60, 70 in queue.\n";
     q.push(60);
     q.push(70);
-    q.printQueue();   // Queue: 60 70 30 40 50
-    cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status: 0
-    cout << "Size of queue: " << q.getSize() << endl;   // Size of queue: 5
-    cout << "Front element: " << q.getFront() << endl;   // Front element: 30
-    cout << "Rear element: " << q.getRear() << endl;   // Rear element: 70
+    q.printQueue();   // o/p: 30 40 50 60 70
+    cout << "Queue empty status: " << q.isEmpty() << endl;   // o/p: 0
+    cout << "Size of queue: " << q.getSize() << endl;   // o/p: 5
+    cout << "Front element: " << q.getFront() << endl;   // o/p: 30
+    cout << "Rear element: " << q.getRear() << endl;   // o/p: 70
     cout << endl;
 
     cout << "Popping 5 elements from queue.\n";
     q.pop(); q.pop(); q.pop(); q.pop(); q.pop();
-    q.printQueue();   // Queue: -1 -1 -1 -1 -1
-    cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status: 1
-    cout << "Size of queue: " << q.getSize() << endl;   // Size of queue: 0
-    cout << "Front element: " << q.getFront() << endl;   // No front element present. Front element: -1
-    cout << "Rear element: " << q.getRear() << endl;   // No rear element present. Rear element: -1
+    q.printQueue();   // o/p: (empty)
+    cout << "Queue empty status: " << q.isEmpty() << endl;   // o/p: 1
+    cout << "Size of queue: " << q.getSize() << endl;   // o/p: 0
+    cout << "Front element: " << q.getFront() << endl;   // o/p: No front element present. Front element: -1
+    cout << "Rear element: " << q.getRear() << endl;   // o/p: No rear element present. Rear element: -1
     cout << endl;
 
     cout << "Popping 1 element from queue.\n";
-    q.pop();   // Queue underflow.
+    q.pop();   // o/p: Queue underflow.
     cout << endl;
 
     cout << "Pushing 10, 20, 30 in queue.\n";
     q.push(10);
     q.push(20);
     q.push(30);
-    q.printQueue();   // Queue: 10 20 30 -1 -1
-    cout << "Queue empty status: " << q.isEmpty() << endl;   // Queue empty status: 0
-    cout << "Size of queue: " << q.getSize() << endl;   // Size of queue: 3
-    cout << "Front element: " << q.getFront() << endl;   // Front element: 10
-    cout << "Rear element: " << q.getRear() << endl;   // Rear element: 30
+    q.printQueue();   // o/p: 10 20 30
+    cout << "Queue empty status: " << q.isEmpty() << endl;   // o/p: 0
+    cout << "Size of queue: " << q.getSize() << endl;   // o/p: 3
+    cout << "Front element: " << q.getFront() << endl;   // o/p: 10
+    cout << "Rear element: " << q.getRear() << endl;   // o/p: 30
     cout << endl;
 
     return 0;
