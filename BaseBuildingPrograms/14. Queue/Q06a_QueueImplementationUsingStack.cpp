@@ -10,17 +10,16 @@
 #include <stack>
 using namespace std;
 
-// METHOD 1: If pop() or getFront() operations are more frequently used in queue,
-//           this algorithm is preferred.
+// METHOD 1: If pop() or getFront() operations are more frequently used in queue, this algorithm is preferred.
 // T.C: O(n) -> push(x), getRear()
 //    : O(1) -> pop(), getFront(), isEmpty(), getSize()
 class Queue1 {
 public:
-    stack <int> s1, s2;   // Here s1 is main stack, and s2 is helper.
+    stack<int> s1, s2;   // here s1 is main stack, and s2 is helper.
     int size = 0;
 
     void push(int x) {
-        size++;   // just keeping a track of size of queue.
+        size++;   // to keep a track of size of queue.
         // Step 1: Transfer all values from s1 to s2
         while(!s1.empty()) {
             s2.push(s1.top());
@@ -106,7 +105,7 @@ public:
 //    : O(1) -> push(), isEmpty(), getSize()
 class Queue2 {
 public:
-    stack <int> s1, s2;   // Here s2 is main stack, and s1 is helper.
+    stack<int> s1, s2;   // here s2 is main stack, and s1 is helper.
     int size = 0;
 
     void push(int x) {
