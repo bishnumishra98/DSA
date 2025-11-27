@@ -12,18 +12,20 @@ void printQueue(queue<int> q) {
     cout << endl;
 }
 
+// This is better than the recursive approach as it doesn't have the overhead of recursive calls
 // T.C: O(n)
 // S.C: O(n)
 void reverseQueue_iterative(queue<int>& q) {
-    stack <int> st;
-    // pushing all elements of queue into stack
+    stack<int> st;
+
+    // Push all elements of queue into stack
     while(!q.empty()) {
         int temp = q.front();
         st.push(temp);
         q.pop();
     }
 
-    // popping all elements from stack back to queue
+    // Pop all elements from stack back to queue
     while(!st.empty()) {
         int temp = st.top();
         q.push(temp);
@@ -34,7 +36,7 @@ void reverseQueue_iterative(queue<int>& q) {
 // T.C: O(n)
 // S.C: O(n)
 void reverseQueue_recursive(queue<int>& q) {
-    // base case
+    // Base case
     if(q.empty()) return;
 
     int temp = q.front();
@@ -62,7 +64,3 @@ int main() {
     return 0;
 }
 
-// Note: In terms of big-O notation, there is no significant difference in the two approaches.
-// However, in practical terms, the iterative approach is more memory-efficient because it
-// uses a stack to store elements temporarily, whereas the recursive approach relies on the
-// call stack, which may lead to a higher memory consumption.
