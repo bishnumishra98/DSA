@@ -1,17 +1,23 @@
-// There is a string containing a stream. Return first non-repeating character in the stream.
-// If no non-repeating character is found in the stream, return #.
+// GFG: Given a string s consisting of only lowercase alphabets, for each index i in the string (0 ≤ i < n),
+//      find the first non-repeating character in the prefix s[0..i]. If no such character exists, use '#'.
 
 // Example 1:
-// Input:
-// ababc
-// Output:
-// aab#c
-// Explanation:
-// For 'a', first non-repeating character is 'a'.
-// For 'ab', first non-repeating character is 'a'.
-// For 'aba', first non-repeating character is 'b'.
-// For 'abab', first non-repeating character is '#'.
-// For 'ababc', first non-repeating character is 'c'.
+// Input: s = "aabc"
+// Output: a#bb
+// Explanation: 
+// At i=0 ("a"): First non-repeating character is 'a'.
+// At i=1 ("aa"): No non-repeating character, so '#'.
+// At i=2 ("aab"): First non-repeating character is 'b'.
+// At i=3 ("aabc"): Non-repeating characters are 'b' and 'c'; 'b' appeared first, so 'b'. 
+
+// Example 2:
+// Input: s = "bb" 
+// Output: "b#" 
+// Explanation: 
+// At i=0 ("b"): First non-repeating character is 'b'.
+// At i=1 ("bb"): No non-repeating character, so '#'.
+
+// Problem link: https://www.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1
 
 // Algorithm:
 // 1) Take one character at a time from the string, increase its count in the 'freq' array,
@@ -38,7 +44,7 @@ using namespace std;
 string firstNonRepeatingCharacter(string str) {
     int n = str.length();
     string ans(n, ' ');   // initialized a string of length 'n' with spaces
-    queue <char> q;
+    queue<char> q;
     int freq[26] = {0};   // as there can be only 26 alphabets in English
     // int freq[n] = {x}; means initializing 1st element of array with 'x', and rest with '0'.
 
