@@ -13,53 +13,53 @@ using namespace std;
 // T.C: O(n) -> push(x)
 //    : O(1) -> pop(), getTop(), isEmpty(), getSize()
 class Stack1 {
-    public:
-        queue <int> q1, q2;   // Here q1 is main queue, and q2 is helper.
-        int size = 0;
+public:
+    queue <int> q1, q2;   // Here q1 is main queue, and q2 is helper.
+    int size = 0;
 
-        void push(int x) {
-            size++;   // just keeping a track of size of stack.
-            // Step 1: Push x in q2
-            q2.push(x);
+    void push(int x) {
+        size++;   // just keeping a track of size of stack.
+        // Step 1: Push x in q2
+        q2.push(x);
 
-            // Step 2: Transfer elements from q1 to q2
-            while(!q1.empty()) {
-                q2.push(q1.front());
-                q1.pop();
-            }
-
-            // Step 3: Transfer back all elements from q2 to q1
-            while(!q2.empty()) {
-                q1.push(q2.front());
-                q2.pop();
-            }
+        // Step 2: Transfer elements from q1 to q2
+        while(!q1.empty()) {
+            q2.push(q1.front());
+            q1.pop();
         }
 
-        void pop() {
-            if(size > 0) size--;   // just keeping a track of size of stack.
-            if(q1.empty()) {
-                cout << "Stack underflow.\n";
-            } else {
-                q1.pop();
-            } 
+        // Step 3: Transfer back all elements from q2 to q1
+        while(!q2.empty()) {
+            q1.push(q2.front());
+            q2.pop();
         }
+    }
 
-        int getTop() {
-            if(q1.empty()) {
-                cout << "No top element in stack.\n";
-                return -1;
-            } else {
-                return q1.front();
-            } 
-        }
+    void pop() {
+        if(size > 0) size--;   // just keeping a track of size of stack.
+        if(q1.empty()) {
+            cout << "Stack underflow.\n";
+        } else {
+            q1.pop();
+        } 
+    }
 
-        bool isEmpty() {
-            return q1.empty() && q2.empty();
-        }
+    int getTop() {
+        if(q1.empty()) {
+            cout << "No top element in stack.\n";
+            return -1;
+        } else {
+            return q1.front();
+        } 
+    }
 
-        int getSize() {
-            return size;
-        }
+    bool isEmpty() {
+        return q1.empty() && q2.empty();
+    }
+
+    int getSize() {
+        return size;
+    }
 };
 
 
@@ -67,50 +67,50 @@ class Stack1 {
 // T.C: O(n) -> push(x)
 //    : O(1) -> pop(), getTop(), isEmpty(), getSize()
 class Stack2 {
-    public:
-        queue <int> q1;   // Here q1 is only queue.
-        int size = 0;
+public:
+    queue <int> q1;   // Here q1 is only queue.
+    int size = 0;
 
-        void push(int x) {
-            size++;   // just keeping track of the size of the stack.
-            
-            // Step 1: Push x into q1
-            q1.push(x);
+    void push(int x) {
+        size++;   // just keeping track of the size of the stack.
+        
+        // Step 1: Push x into q1
+        q1.push(x);
 
-            // Step 2: Reverse the order of elements in q1. This can be done by
-            //         popping 1 element from queue and pushing it back in queue.
-            for(int i = 0; i < q1.size() - 1; i++) {
-                int frontElement = q1.front();
-                q1.pop();
-                q1.push(frontElement);
-            }
+        // Step 2: Reverse the order of elements in q1. This can be done by
+        //         popping 1 element from queue and pushing it back in queue.
+        for(int i = 0; i < q1.size() - 1; i++) {
+            int frontElement = q1.front();
+            q1.pop();
+            q1.push(frontElement);
         }
+    }
 
-        void pop() {
-            if(size > 0) size--;   // just keeping a track of size of stack.
-            if(q1.empty()) {
-                cout << "Stack underflow.\n";
-            } else {
-                q1.pop();
-            } 
-        }
+    void pop() {
+        if(size > 0) size--;   // just keeping a track of size of stack.
+        if(q1.empty()) {
+            cout << "Stack underflow.\n";
+        } else {
+            q1.pop();
+        } 
+    }
 
-        int getTop() {
-            if(q1.empty()) {
-                cout << "No top element in stack.\n";
-                return -1;
-            } else {
-                return q1.front();
-            } 
-        }
+    int getTop() {
+        if(q1.empty()) {
+            cout << "No top element in stack.\n";
+            return -1;
+        } else {
+            return q1.front();
+        } 
+    }
 
-        bool isEmpty() {
-            return q1.empty();
-        }
+    bool isEmpty() {
+        return q1.empty();
+    }
 
-        int getSize() {
-            return size;
-        }
+    int getSize() {
+        return size;
+    }
 };
 
 

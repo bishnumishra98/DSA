@@ -15,187 +15,187 @@ using namespace std;
 // T.C: O(n) -> push(x), getRear()
 //    : O(1) -> pop(), getFront(), isEmpty(), getSize()
 class Queue1 {
-    public:
-        stack <int> s1, s2;   // Here s1 is main stack, and s2 is helper.
-        int size = 0;
+public:
+    stack <int> s1, s2;   // Here s1 is main stack, and s2 is helper.
+    int size = 0;
 
-        void push(int x) {
-            size++;   // just keeping a track of size of queue.
-            // Step 1: Transfer all values from s1 to s2
+    void push(int x) {
+        size++;   // just keeping a track of size of queue.
+        // Step 1: Transfer all values from s1 to s2
+        while(!s1.empty()) {
+            s2.push(s1.top());
+            s1.pop();
+        }
+
+        // Step 2: Push x into s1
+        s1.push(x);
+
+        // Step 3: Transfer back all values from s2 into s1
+        while(!s2.empty()) {
+            s1.push(s2.top());
+            s2.pop();
+        }
+    }
+
+    void pop() {
+        if(size > 0) size--;   // just keeping a track of size of queue.
+        if(s1.empty()) {
+            cout << "Queue underflow.\n";
+        } else {
+            s1.pop();
+        } 
+    }
+
+    int getFront() {
+        if(s1.empty()) {
+            cout << "No front element in queue.\n";
+            return -1;
+        } else {
+            return s1.top();
+        } 
+    }
+
+    int getRear() {
+        if(s1.empty()) {
+            cout << "No rear element in queue.\n";
+            return -1;
+        } else {
+            // Step 1: Tranfer all values from s1 to s2
             while(!s1.empty()) {
                 s2.push(s1.top());
                 s1.pop();
             }
 
-            // Step 2: Push x into s1
-            s1.push(x);
+            // Step 2: Store top element of s2
+            int rearElement = s2.top();
 
-            // Step 3: Transfer back all values from s2 into s1
+            // Step 3: Tranfer back all values from s2 into s1, in order to reconstruct s1
             while(!s2.empty()) {
                 s1.push(s2.top());
                 s2.pop();
             }
+
+            // Step 4: Return rearElement
+            return rearElement;
         }
+    }
 
-        void pop() {
-            if(size > 0) size--;   // just keeping a track of size of queue.
-            if(s1.empty()) {
-                cout << "Queue underflow.\n";
-            } else {
-                s1.pop();
-            } 
+    bool isEmpty() {
+        if(s1.empty()) return true;
+        else return false;
+    }
+
+    int getSize() {
+        return size;
+    }
+
+    // just for checking purpose
+    void printQueue() {
+        cout << "Queue: ";
+        stack <int> temp = s1;
+        while(!temp.empty()) {
+            cout << temp.top() << " ";
+            temp.pop();
         }
-
-        int getFront() {
-            if(s1.empty()) {
-                cout << "No front element in queue.\n";
-                return -1;
-            } else {
-                return s1.top();
-            } 
-        }
-
-        int getRear() {
-            if(s1.empty()) {
-                cout << "No rear element in queue.\n";
-                return -1;
-            } else {
-                // Step 1: Tranfer all values from s1 to s2
-                while(!s1.empty()) {
-                    s2.push(s1.top());
-                    s1.pop();
-                }
-
-                // Step 2: Store top element of s2
-                int rearElement = s2.top();
-
-                // Step 3: Tranfer back all values from s2 into s1, in order to reconstruct s1
-                while(!s2.empty()) {
-                    s1.push(s2.top());
-                    s2.pop();
-                }
-
-                // Step 4: Return rearElement
-                return rearElement;
-            }
-        }
-
-        bool isEmpty() {
-            if(s1.empty()) return true;
-            else return false;
-        }
-
-        int getSize() {
-            return size;
-        }
-
-        // just for checking purpose
-        void printQueue() {
-            cout << "Queue: ";
-            stack <int> temp = s1;
-            while(!temp.empty()) {
-                cout << temp.top() << " ";
-                temp.pop();
-            }
-            cout << endl;
-        }
+        cout << endl;
+    }
 };
 
 // METHOD 2: If push() operation is more frequently used in queue, this algorithm is preferred.
 // T.C: O(n) -> pop(), getFront(), getRear()
 //    : O(1) -> push(), isEmpty(), getSize()
 class Queue2 {
-    public:
-        stack <int> s1, s2;   // Here s2 is main stack, and s1 is helper.
-        int size = 0;
+public:
+    stack <int> s1, s2;   // Here s2 is main stack, and s1 is helper.
+    int size = 0;
 
-        void push(int x) {
-            size++;   // just keeping a track of size of queue.
-            s1.push(x);
+    void push(int x) {
+        size++;   // just keeping a track of size of queue.
+        s1.push(x);
+    }
+
+    void pop() {
+        if(size > 0) size--;   // just keeping a track of size of queue.
+        if(s1.empty() && s2.empty()) {
+            cout << "Queue underflow.\n";
+        } else if(!s2.empty()) {
+            s2.pop();
+        } else {
+            // Step 1: Transfer all values from s1 to s2
+            while(!s1.empty()) {
+                s2.push(s1.top());
+                s1.pop();
+            }
+
+            // Step 2: Pop top element of s2
+            s2.pop();
         }
+    }
 
-        void pop() {
-            if(size > 0) size--;   // just keeping a track of size of queue.
-            if(s1.empty() && s2.empty()) {
-                cout << "Queue underflow.\n";
-            } else if(!s2.empty()) {
+    int getFront() {
+        if(s1.empty() && s2.empty()) {
+            cout << "No front element in queue.\n";
+            return -1;
+        } else if(!s2.empty()) {
+            return s2.top();
+        } else {
+            // Step 1: Transfer all values from s1 to s2
+            while(!s1.empty()) {
+                s2.push(s1.top());
+                s1.pop();
+            }
+
+            // Step 2: Return top element of s2
+            return s2.top();
+        }
+    }
+
+    int getRear() {
+        if(s1.empty() && s2.empty()) {
+            cout << "No rear element in queue.\n";
+            return -1;
+        } else if(!s1.empty()) {
+            return s1.top();
+        } else {
+            // Step 1: Transfer all values from s2 to s1
+            while(!s2.empty()) {
+                s1.push(s2.top());
                 s2.pop();
-            } else {
-                // Step 1: Transfer all values from s1 to s2
-                while(!s1.empty()) {
-                    s2.push(s1.top());
-                    s1.pop();
-                }
-
-                // Step 2: Pop top element of s2
-                s2.pop();
             }
-        }
 
-        int getFront() {
-            if(s1.empty() && s2.empty()) {
-                cout << "No front element in queue.\n";
-                return -1;
-            } else if(!s2.empty()) {
-                return s2.top();
-            } else {
-                // Step 1: Transfer all values from s1 to s2
-                while(!s1.empty()) {
-                    s2.push(s1.top());
-                    s1.pop();
-                }
+            // Step 2: Store top element of s2
+            int rearElement = s1.top();
 
-                // Step 2: Return top element of s2
-                return s2.top();
+            // Step 3: Tranfer back all values from s1 into s2, in order to reconstruct s2
+            while(!s1.empty()) {
+                s2.push(s1.top());
+                s1.pop();
             }
+
+            // Step 4: Return rearElement
+            return rearElement;
         }
+    }
 
-        int getRear() {
-            if(s1.empty() && s2.empty()) {
-                cout << "No rear element in queue.\n";
-                return -1;
-            } else if(!s1.empty()) {
-                return s1.top();
-            } else {
-                // Step 1: Transfer all values from s2 to s1
-                while(!s2.empty()) {
-                    s1.push(s2.top());
-                    s2.pop();
-                }
+    bool isEmpty() {
+        if(s1.empty() && s2.empty()) return true;
+        else return false;
+    }
 
-                // Step 2: Store top element of s2
-                int rearElement = s1.top();
+    int getSize() {
+        return size;
+    }
 
-                // Step 3: Tranfer back all values from s1 into s2, in order to reconstruct s2
-                while(!s1.empty()) {
-                    s2.push(s1.top());
-                    s1.pop();
-                }
-
-                // Step 4: Return rearElement
-                return rearElement;
-            }
+    // just for checking purpose
+    void printQueue() {
+        cout << "Queue: ";
+        stack <int> temp = s2;
+        while(!temp.empty()) {
+            cout << temp.top() << " ";
+            temp.pop();
         }
-
-        bool isEmpty() {
-            if(s1.empty() && s2.empty()) return true;
-            else return false;
-        }
-
-        int getSize() {
-            return size;
-        }
-
-        // just for checking purpose
-        void printQueue() {
-            cout << "Queue: ";
-            stack <int> temp = s2;
-            while(!temp.empty()) {
-                cout << temp.top() << " ";
-                temp.pop();
-            }
-            cout << endl;
-        }
+        cout << endl;
+    }
 };
 
 
