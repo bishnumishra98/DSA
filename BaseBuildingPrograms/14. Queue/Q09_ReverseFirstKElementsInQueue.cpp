@@ -1,3 +1,14 @@
+// Given a queue of integers and an integer k, the task is to reverse the first k elements of the queue,
+// leaving the other elements in the same relative order.
+
+// Example 1:
+// Input: Queue = {10, 20, 30, 40, 50}, k = 3
+// Output: {30, 20, 10, 40, 50}
+
+// Example 2:
+// Input: Queue = {1, 2, 3, 4, 5}, k = 5
+// Output: {5, 4, 3, 2, 1}
+
 #include <iostream>
 #include <queue>
 #include <stack>
@@ -5,13 +16,13 @@ using namespace std;
 
 // Algorithm: Let there be a queue{10, 20, 30, 40, 50} of size(n) = 5, k = 3.
 
-// Step 1: pop first k elements from queue i.e., '10, 20, 30' into stack.
+// Step 1: Pop first k elements from queue i.e., '10, 20, 30' into stack.
 // Dry run:   stack = {10, 20, 30},   queue = {40, 50}
 
 // Step 2: Pop the k elements stored in stack, i.e., '30, 20, 10' and insert them behind the queue.
 // Dry run:   stack = {},   queue = {40, 50, 30, 20, 10} 
 
-// Step 3: Pop the front (n-k) elements from queue, i.e., '40, 50' and insert them behind the queue.
+// Step 3: Pop the front (n - k) elements from queue, i.e., '40, 50' and insert them behind the queue.
 // Dry run:   stack = {},   queue = {30, 20, 10, 40, 50}
 
 void printQueue(queue<int> q) {
@@ -26,9 +37,9 @@ void printQueue(queue<int> q) {
 // T.C: O(n); where n = q.size()
 // S.C: O(k)
 queue<int> reverseFirstKElementsInQueue(queue<int> q, int k) {
-    stack <int> st;
+    stack<int> st;
 
-    // Step 1: pop first k elements into stack
+    // Step 1: Pop first k elements into stack
     int k_ = k;
     while(k_--) {
         int temp = q.front();
@@ -43,7 +54,7 @@ queue<int> reverseFirstKElementsInQueue(queue<int> q, int k) {
         st.pop();
     }
 
-    // Step 3: Pop the front (n-k) elements from queue and insert them behind the queue
+    // Step 3: Pop the front (n - k) elements from queue and insert them behind the queue
     int x = q.size() - k;
     while(x--) {
         int temp = q.front();
@@ -55,16 +66,17 @@ queue<int> reverseFirstKElementsInQueue(queue<int> q, int k) {
 }
 
 int main() {
-    queue <int> q;
+    queue<int> q;
     q.push(10);
     q.push(20);
     q.push(30);
     q.push(40);
     q.push(50);
+    printQueue(q);   // o/p: 10 20 30 40 50
 
     int k = 3;
-    queue <int> q_reversed = reverseFirstKElementsInQueue(q, k);
-    printQueue(q_reversed);
+    queue<int> q_reversed = reverseFirstKElementsInQueue(q, k);
+    printQueue(q_reversed);   // o/p: 30 20 10 40 50
 
     return 0;
 }
