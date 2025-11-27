@@ -25,7 +25,7 @@ public:
     void push_back(int data) {
         // Queue full when next position of rear is front
         if((rear + 1) % size == front) {
-            cout << "Dequeue overflow." << endl;
+            cout << "Dequeue overflow.";
             return;
         }
 
@@ -44,7 +44,7 @@ public:
     void push_front(int data) {
         // Queue full when next position of rear is front
         if((rear + 1) % size == front) {
-            cout << "Dequeue overflow." << endl;
+            cout << "Dequeue overflow.";
             return;
         }
 
@@ -63,12 +63,11 @@ public:
     void pop_front() {
         // If deque is empty
         if(front == -1) {
-            cout << "Dequeue underflow." << endl;
+            cout << "Dequeue underflow.";
             return;
         }
 
-        // Single element -> become empty
-        if(front == rear) {
+        if(front == rear) {   // single element -> become empty
             arr[front] = -1;
             front = rear = -1;
         } else {
@@ -81,12 +80,11 @@ public:
     void pop_back() {
         // If deque is empty
         if(front == -1) {
-            cout << "Dequeue underflow." << endl;
+            cout << "Dequeue underflow.";
             return;
         }
 
-        // Single element -> become empty
-        if(front == rear) {
+        if(front == rear) {   // single element -> become empty
             arr[rear] = -1;
             front = rear = -1;
         } else {
@@ -106,7 +104,7 @@ public:
 
     int getFront() {
         if(front == -1) {
-            cout << "No front element present." << endl;
+            cout << "No front element present.";
             return -1;
         }
         return arr[front];
@@ -114,7 +112,7 @@ public:
 
     int getRear() {
         if(front == -1) {
-            cout << "No rear element present." << endl;
+            cout << "No rear element present.";
             return -1;
         }
         return arr[rear];
