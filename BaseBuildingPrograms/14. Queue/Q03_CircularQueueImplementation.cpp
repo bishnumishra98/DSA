@@ -15,7 +15,6 @@
 // -> If an element is popped from an empty queue, throw 'queue underflow'.
 
 #include <iostream>
-#include <cstring>
 #include <vector>
 using namespace std;
 

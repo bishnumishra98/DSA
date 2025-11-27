@@ -1,7 +1,6 @@
 // We will make our implementation of queue using arrays and OOPs concept
 
 #include <iostream>
-#include <cstring>   // for memset()
 #include <vector>
 using namespace std;
 // Note: In a queue, push happens from -> rear, and pop happens from -> front
