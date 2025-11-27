@@ -24,13 +24,13 @@ public:
     // Insert element at rear (back)
     void push_back(int data) {
         // Queue full when next position of rear is front
-        if ((rear + 1) % size == front) {
+        if((rear + 1) % size == front) {
             cout << "Dequeue overflow." << endl;
             return;
         }
 
         // If deque was empty, set both pointers to 0
-        if (front == -1) {
+        if(front == -1) {
             front = rear = 0;
         } else {
             // Move rear circularly
@@ -43,13 +43,13 @@ public:
     // Insert element at front
     void push_front(int data) {
         // Queue full when next position of rear is front
-        if ((rear + 1) % size == front) {
+        if((rear + 1) % size == front) {
             cout << "Dequeue overflow." << endl;
             return;
         }
 
         // If deque was empty, set both pointers to 0
-        if (front == -1) {
+        if(front == -1) {
             front = rear = 0;
         } else {
             // Move front circularly backwards
@@ -62,13 +62,13 @@ public:
     // Remove element from front
     void pop_front() {
         // If deque is empty
-        if (front == -1) {
+        if(front == -1) {
             cout << "Dequeue underflow." << endl;
             return;
         }
 
         // Single element -> become empty
-        if (front == rear) {
+        if(front == rear) {
             arr[front] = -1;
             front = rear = -1;
         } else {
@@ -80,13 +80,13 @@ public:
     // Remove element from rear
     void pop_back() {
         // If deque is empty
-        if (front == -1) {
+        if(front == -1) {
             cout << "Dequeue underflow." << endl;
             return;
         }
 
         // Single element -> become empty
-        if (front == rear) {
+        if(front == rear) {
             arr[rear] = -1;
             front = rear = -1;
         } else {
@@ -100,12 +100,12 @@ public:
     }
 
     int getSize() {
-        if (front == -1) return 0;
+        if(front == -1) return 0;
         return ((rear - front + size) % size) + 1;   // correct modulo arithmetic
     }
 
     int getFront() {
-        if (front == -1) {
+        if(front == -1) {
             cout << "No front element present." << endl;
             return -1;
         }
@@ -113,7 +113,7 @@ public:
     }
 
     int getRear() {
-        if (front == -1) {
+        if(front == -1) {
             cout << "No rear element present." << endl;
             return -1;
         }
@@ -122,14 +122,14 @@ public:
 
     // Print deque elements in order from front -> rear (logical order)
     void printDeque() {
-        if (front == -1) {
+        if(front == -1) {
             cout << "Deque: (empty)" << endl;
             return;
         }
 
         cout << "Deque: ";
         int count = getSize();
-        for (int i = 0; i < count; i++) {
+        for(int i = 0; i < count; i++) {
             int idx = (front + i) % size;
             cout << arr[idx] << " ";
         }
