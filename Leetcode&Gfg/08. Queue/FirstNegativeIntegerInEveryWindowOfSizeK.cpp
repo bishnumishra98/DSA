@@ -83,7 +83,7 @@ class Solution {
         else ans.push_back(0);
 
         // Step 2: Slide the window from i = k to n - 1
-        for(int i = k; i < n; i++) {
+        for(int i = k; i < n; i++) {   // i marks the end of the current window
             // Remove the element that is out of this window (front of queue should be inside window)
             if(!q.empty() && q.front() == i - k) q.pop();
 
