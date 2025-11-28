@@ -19,20 +19,16 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1
 
-// Algorithm: It is simple.
-// The idea is to maintain a frequency array to store the frequency of each character in the stream.
-// We also maintain a queue to store the characters in the order they appear in the stream.
-// For each character in the stream, we do the following:
-// 1. Increment its frequency in the frequency array.
-// 2. Push it into the queue.
-// 3. While the front character of the queue has frequency more than 1, we pop it from the queue.
-// 4. If the queue is empty, it means there is no non-repeating character in the stream so far, we append '#' to the answer.
-//    Otherwise, we append the front character of the queue to the answer.
-// Finally, we return the answer string.
+// Algorithm: It is very simple.
+// The idea is to maintain a group of characters in the queue which have appeared only once. To know the
+// uniqueness of a character, keep a track of their frequency in a 'freq' vector.
+// If the front element of the queue is found to appear more than once, never allow it to stay in the queue
+// in the currrent iteration as well as in any other future iterations.
+// So for every ith character, the front element of the queue acts as the first non-repeating character
+// till ith character.
 
 
-#include <iostream>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 
 // T.C: O(n)
