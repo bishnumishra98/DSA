@@ -1,76 +1,60 @@
-// gfg: Interleave the First Half of the Queue with Second Half   --->   You are given a queue Q
-// of N integers of even length, rearrange the elements by interleaving the first half of the
-// queue with the second half of the queue.
+// GFG: Given a queue q[] of even size. Your task is to rearrange the queue by interleaving its first half with
+// the second half.
+// Interleaving is the process of mixing two sequences by alternating their elements while preserving their relative order.
+// In other words, Interleaving means place the first element from the first half and then first element from the 2nd half
+// and again second element from the first half and then second element from the 2nd half and so on....
 
 // Example 1:
-// Input:
-// Q = {2,4,3,1}
-// Output:
-// {2,3,4,1}
- 
+// Input: q[] = [2, 4, 3, 1]
+// Output: [2, 3, 4, 1]
+// Explanation: We place the first element of the first half 2 and after that 
+// place the first element of second half 3 and after that repeat
+// the same process one more time so the resulting queue will be [2, 3, 4, 1]
+
 // Example 2:
-// Input:
-// Q = {3,5}
-// Output:
-// {3,5}
+// Input: q[] = [3, 5]
+// Output: [3, 5]
+// Explanation: We place the first element of the first half 3 and first element
+// of the second half 5 so the resulting queue is [3, 5]
 
 // Example 3:
-// Input:
-// Q = {10, 20, 30, 40, 50, 60}
-// Output:
-// {10, 40, 20, 50, 30, 60}
+// Input: q[] = [10, 20, 30, 40, 50, 60]
+// Output: [10, 40, 20, 50, 30, 60]
 
-#include <iostream>
-#include <queue>
+// Algorithm: It is a cakewalk kindergartener problem.
+
+#include <bits/stdc++.h>
 using namespace std;
 
 class Solution{
 public:
-    // T.C: O(n); where n is size of queue
-    // S.C: O(n);
-    vector<int> rearrangeQueue(queue<int> &q){
-        int n = q.size();
+    // T.C: O(n)
+    // S.C: O(n)
+    void rearrangeQueue(queue<int> &q) {
+        int x = q.size() / 2;
 
-        // Step 1: Initialize a queue, and insert the first n/2 elements of original queue into it.
-        queue <int> part;
-
-        int x = n/2;
+        vector<int> firstPart;
         while(x--) {
-            int temp = q.front();
-            part.push(temp);
+            firstPart.push_back(q.front());
             q.pop();
         }
 
-        // Step 2: Pop one element from 'part' and push it into 'q'. Then pop one element from 'q'
-        //         and push that into 'q'. Doing this n/2 times makes an interleaf pattern in 'q'.
-        x = n/2;
+        x = q.size();   // as size of queue is already half now, directly assign 'x' to q.size()
+        vector<int> secondPart;
         while(x--) {
-            // Pushing one element from 'part' into 'q'
-            int temp = part.front();
-            part.pop();
-            q.push(temp);
-
-            // Popping one element of 'q' and pushing into 'q'
-            int temp_ = q.front();
-            q.pop();
-            q.push(temp_);
-        }
-
-        // Storing elements of queue into a vector and returning it
-        vector <int> ans;
-        while(n--) {
-            int temp = q.front();
-            ans.push_back(temp);
+            secondPart.push_back(q.front());
             q.pop();
         }
-        return ans;
+
+        for(int i = 0; i < firstPart.size(); i++) {
+            q.push(firstPart[i]);
+            q.push(secondPart[i]);
+        }
     }
 };
 
 int main() {
-    Solution obj;
-
-    queue <int> q;
+    queue<int> q;
     q.push(10);
     q.push(20);
     q.push(30);
@@ -78,10 +62,12 @@ int main() {
     q.push(50);
     q.push(60);
 
-    vector <int> ans = obj.rearrangeQueue(q);
+    Solution().rearrangeQueue(q);
 
-    for(auto i: ans) {
-        cout << i << " ";
+    queue<int> temp = q;
+    while(!temp.empty()) {
+        cout << temp.front() << " ";
+        temp.pop();
     }
     
     return 0;
