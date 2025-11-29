@@ -21,13 +21,12 @@
 // Output: [1]
 
 // Algorithm:
-
-// 1) Initialize a vector where we will built the answer, and a deque where we will keep a track of
+// 1. Initialize a vector where we will built the answer, and a deque where we will keep a track of
 //    index of largest element of each window in the given array. The index of largest element shall
 //    reside at the front of deque followed by indexes of smaller elements of a window. And yeah
 //    that's obvious that at any given time frame, the deque can contain at max k no.of elements.
 
-// 2) Iterate each element of given array in a loop and follow the 4 step process:
+// 2. Iterate each element of given array in a loop and follow the 4 step process:
 //    i)   Remove the index of element from deque that is out of range for the current window, i.e.,
 //         pop the front index of deque if its corresponding element is not in the window.
 //    ii)  Pop back indexes of deque if its corresponding elements are smaller than element at ith
@@ -42,23 +41,20 @@
 //         'k-1'th index of 'nums', as because we cannot predict the maximum element of 1st window
 //          before reaching 'k-1'th index.
 
-#include <iostream>
-#include <vector>
-#include <deque>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
-    // T.C: O(n*k)
+    // T.C: O(n * k)
     // S.C: O(1)
     vector<int> maxSlidingWindow_bruteForce(vector<int>& nums, int k) {
         int n = nums.size();
-        vector <int> result;
+        vector<int> result;
 
         for(int i = 0; i <= n - k; i++) {
-            int maxInWindow = nums[i];   // first element of window is initially stored in 'maxInWindow'.
-            for (int j = i; j < i + k; j++) {   // Then we compare value inside 'maxInWindow' with
-            // the rest 'k-1' elements of the window. Thus, we want inner loop to run only 'k-1' times.
+            int maxInWindow = nums[i];
+            for(int j = i; j < i + k; j++) {
                 maxInWindow = max(maxInWindow, nums[j]);
             }
             result.push_back(maxInWindow);
@@ -72,23 +68,33 @@ public:
     // S.C: O(k)
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
         int n = nums.size();
-        vector <int> ans;
-        deque <int> q;
+        if(k <= 0 || n == 0 || k > n) return {};        // invalid k or empty input
 
-        for(int i = 0; i < n; i++) {
-            // Step 1: Remove the index from queue that is out of window.
-            if(!q.empty() && q.front() == i-k) q.pop_front();
+        vector<int> ans;
+        deque<int> q;   // will store indexes of elements that are in current window (front
+                       // of queue will have index of largest element of current window)
 
-            // Step 2: Pop out elements from queue that are smaller than ith element.
-            while(!q.empty() && nums[q.back()] < nums[i]) q.pop_back();
+        // Step 1: Find maximum element of first window of size k
+        for(int i = 0; i < k; ++i) {
+            // Remove smaller elements from back (they can't be max while nums[i] exists)
+            while(!q.empty() && nums[q.back()] <= nums[i]) q.pop_back();
+            q.push_back(i);
+        }
+        ans.push_back(nums[q.front()]);   // first window's max
 
-            // Step 3: Push the index of ith element in queue
+        // Step 2: slide window from i = k to n - 1
+        for(int i = k; i < n; i++) {
+            // Remove indexes that are out of this window
+            if(!q.empty() && q.front() == i - k) q.pop_front();
+
+            // Remove smaller elements from back before inserting current index
+            while(!q.empty() && nums[q.back()] <= nums[i]) q.pop_back();
+
+            // Insert current index
             q.push_back(i);
 
-            // Step 4: Push the max element of each window in 'ans'. Note that push elements in 'ans'
-            //         only after we have reached 'k-1'th index of 'nums', as because we cannot predict
-            //         the maximum element of 1st window before checking or reaching 'k-1'th index.
-            if(i >= k - 1) ans.push_back(nums[q.front()]);
+            // Current window's max
+            ans.push_back(nums[q.front()]);
         }
 
         return ans;
@@ -100,10 +106,13 @@ int main() {
     int k = 3;
 
     Solution obj;
-    vector <int> ans = obj.maxSlidingWindow_bruteForce(nums, k);
-    // vector <int> ans = obj.maxSlidingWindow(nums, k);
-
-    for(auto i: ans) {
+    vector<int> ans1 = obj.maxSlidingWindow_bruteForce(nums, k);
+    for(auto i: ans1) {
+        cout << i << " ";
+    }
+    cout << endl;
+    vector<int> ans2 = obj.maxSlidingWindow(nums, k);
+    for(auto i: ans2) {
         cout << i << " ";
     }
 
