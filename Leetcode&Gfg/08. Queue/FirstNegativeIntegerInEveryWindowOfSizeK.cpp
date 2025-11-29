@@ -34,8 +34,6 @@
 // Bruteforce Algorithm:
 // For each window, scan k elements to find the first negative and push the first negative in the 'ans' vector.
 
-// Optimal algorithm:
-
 
 #include <bits/stdc++.h>
 using namespace std;
