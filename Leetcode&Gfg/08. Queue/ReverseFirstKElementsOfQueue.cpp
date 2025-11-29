@@ -27,12 +27,12 @@ using namespace std;
 
 class Solution {
 public:
-    // T.C: O(n)   where n = q.size()
+    // T.C: O(n)
     // S.C: O(n)
     queue<int> reverseFirstK(queue<int> q, int k) {
         int n = q.size();
         if(k <= 0 || k > n) return q;
-        
+
         // Move first k elements of 'q' inside a stack
         stack<int> st;
         while(k--) {
