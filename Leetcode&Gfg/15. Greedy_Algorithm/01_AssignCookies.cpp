@@ -1,22 +1,17 @@
-// GFG: Assign Cookies   --->   Assume you are an awesome parent of some children and want to give your children
-// some cookies. But, you should give each child at most one cookie.
-// Each child i has a greed factor greed[i], which is the minimum size of cookie that the child will be content with
-// and each cookie j has a size cookie[j]. If cookie[j] >= greed[i], we can assign the cookie j to the child ith, and
-// the child i will be content.
-// Find the maximum number of child that can be content.
+// GFG: Assign Cookies   --->   You are given an array greed[], where greed[i] represents the minimum size of cookie
+// required to satisfy the i-th child, and an array cookie[], where cookie[j] represents the size of the j-th cookie.
+// Each child can receive at most one cookie. A child i will be satisfied if they receive a cookie j such that
+// cookie[j] >= greed[i]. Your task is to determine the maximum number of children that can be satisfied.
 
 // Example 1:
-// Input : greed[] = [1, 2, 3], cookie = [1, 1]
-// Output: 1
-// Explanation: You can only assign cookie 0 or 1 to child 0.
+// Input : greed[] = [1, 10, 3], cookie = [1, 2, 3]
+// Output: 2
+// Explanation: We can only assign cookie to the first and third child.
 
 // Example 2:
-// Input : greed[] = [1, 2], cookie = [1, 2, 3]
-// Output: 2
-// Explanation: You can assign cookie 0 to child 0 and cookie 1 to child 1.
-
-// Expected Time Complexity: O(nlogn)
-// Expected Auxiliary Space: O(1)
+// Input : greed[] = [10, 100], cookie = [1, 2]
+// Output: 0
+// Explanation: We can not assign cookies to any child.
 
 // Problem link: https://www.geeksforgeeks.org/problems/assign-cookies/0
 
