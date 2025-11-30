@@ -3,7 +3,7 @@
 // buy one lemonade and pay with either a $5, $10, or $20 bill. You must provide the correct change to each customer so
 // that the net transaction is that the customer pays $5.
 // NOTE: At first, you do not have any bill to provide changes with. You can provide changes from the bills that you get from
-//  the previous customers.
+// the previous customers.
 // Given an integer array bills of size N where bills [ i ] is the bill the ith customer pays, return true if you can
 // provide every customer with the correct change, or false otherwise.
 
