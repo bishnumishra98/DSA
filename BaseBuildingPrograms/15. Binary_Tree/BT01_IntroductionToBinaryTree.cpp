@@ -87,29 +87,29 @@ using namespace std;
 
 // Node for building a Binary tree
 class Node {
-    public:
-        int data;
-        Node* left;
-        Node* right;
+public:
+    int data;
+    Node* left;
+    Node* right;
 
-        // default constructor
-        Node() {
-            this->left = NULL;
-            this->right = NULL;
-        }
+    // default constructor
+    Node() {
+        this->left = NULL;
+        this->right = NULL;
+    }
 
-        // parametarized constructor
-        Node(int data) {
-            this->data = data;
-            this->left = NULL;
-            this->right = NULL;
-        }
+    // Parametarized constructor
+    Node(int data) {
+        this->data = data;
+        this->left = NULL;
+        this->right = NULL;
+    }
 
-        // destructor
-        ~Node() {
-            delete left;
-            delete right;
-        }
+    // Destructor
+    ~Node() {
+        delete left;
+        delete right;
+    }
 };
 
 int main() {
