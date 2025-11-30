@@ -20,20 +20,20 @@ using namespace std;
 
 // Definition for a binary tree node.
 class TreeNode {
-    public:
-        int val;
-        TreeNode* left;
-        TreeNode* right;
+public:
+    int val;
+    TreeNode* left;
+    TreeNode* right;
 
-        TreeNode() : left(NULL), right(NULL) {}
-        TreeNode(int data) : val(data), left(NULL), right(NULL) {}
+    TreeNode() : left(NULL), right(NULL) {}
+    TreeNode(int data) : val(data), left(NULL), right(NULL) {}
 };
 
-// T.C: O(n); n = no.of nodes
-// S.C: O(h); h = height of recursive call. If the tree is balanced, then h = log(n), 
-//                if tree is a skewed tree, then h = n.
+// T.C: O(n);   where n = no.of nodes
+// S.C: O(h);   where h = height of recursive call. If the tree is balanced, then h = log(n), 
+//                        if tree is a skewed tree, then h = n.
 int heightOfTree(TreeNode* root) {
-    // base case
+    // Base case
     if(root == NULL) return 0;
     
     int leftSubTree_height = heightOfTree(root->left);
