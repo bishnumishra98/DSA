@@ -27,7 +27,7 @@
 // Input: prices = [10,1,1,6]
 // Output: [9,0,1,6]
 
-// This problem is story version of 'BaseBuildingPrograms\14. Stack\S8_NextSmallerElement.cpp'.
+// Algorithm: Same as to find the Next Smaller Element. Refer: 'BaseBuildingPrograms\13. Stack\S08_NextSmallerElement.cpp'
 
 #include <iostream>
 #include <vector>
@@ -40,11 +40,11 @@ public:
     // S.C: O(n)
     vector<int> finalPrices(vector<int>& prices) {
         int n = prices.size();
-        vector <int> ans(n);
-        stack <int> st;
+        vector<int> ans(n);
+        stack<int> st;
         st.push(-1);
 
-        for(int i=n-1; i>=0; i--) {
+        for(int i = n - 1; i >= 0; i--) {
             int currElement = prices[i];
 
             while(currElement < st.top()) {   // CHANGE 1: Instead of '<=', use '<' because the
