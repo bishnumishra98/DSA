@@ -23,22 +23,23 @@ Consider the Binary Tree:
 //    Path: {10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150}
 
 #include <iostream>
+#include <vector>
 #include <queue>
 using namespace std;
 
 // Node for building a Binary tree
 class Node {
-    public:
-        int data;
-        Node* left;
-        Node* right;
+public:
+    int data;
+    Node* left;
+    Node* right;
 
-        Node() : left(NULL), right(NULL) {}
-        Node(int data) : data(data), left(NULL), right(NULL) {}
+    Node() : left(NULL), right(NULL) {}
+    Node(int data) : data(data), left(NULL), right(NULL) {}
 };
 
 // Function that returns root node of the constructed binary tree
-Node* buildBinaryTree(int nodes[], int& i) {
+Node* buildBinaryTree(vector<int>& nodes, int& i) {
     if(nodes[i] == -1) return NULL;
 
     Node* newNode = new Node(nodes[i]);
@@ -83,7 +84,7 @@ void postOrderTraversal(Node* root) {
 // T.C: O(n);   where n = no.of nodes
 // S.C: O(width);   width = n for a skew tree
 void levelOrderTraversal(Node* root) {
-    queue <Node*> q;
+    queue<Node*> q;
     // Step 1: Push the parent node in queue
     q.push(root);
 
@@ -98,10 +99,10 @@ void levelOrderTraversal(Node* root) {
     }
 }
 
-// T.C: O(n); where n = no.of nodes
-// S.C: O(width);  width = n for a skew tree
+// T.C: O(n);   where n = no.of nodes
+// S.C: O(width);   width = n for a skew tree
 void levelOrderTraversal_LevelByLevel(Node* root) {
-    queue <Node*> q;
+    queue<Node*> q;
     q.push(root);
     q.push(NULL);   // NULL acts as an indicator to change line
 
@@ -125,7 +126,7 @@ void levelOrderTraversal_LevelByLevel(Node* root) {
 }
 
 int main() {
-    int nodes[] = {10, 20, 30, -1, -1, 40, -1, -1, 50, -1, -1};
+    vector<int> nodes = {10, 20, 30, -1, -1, 40, -1, -1, 50, -1, -1};
     /*
     Building a tree like this:
 
