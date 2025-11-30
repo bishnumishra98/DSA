@@ -23,7 +23,7 @@
 // --------------------------------------------------------------------------------------------------
 // ---------------------------------------- TERNARY TREE --------------------------------------------
 // A k-ary tree with k = 3 is called a ternary Tree. In ternary tree, every internal node has
-// a degree of at most 3, i.e., a binary tree can have atmost 2 children from a node.
+// a degree of at most 3, i.e., a ternary tree can have atmost 3 children from a node.
 
 // --------------------------------------------------------------------------------------------------
 // ------------------------------------ BINARY TREE IN DETAIL ---------------------------------------
