@@ -29,9 +29,7 @@
 
 // Algorithm: Same as to find the Next Smaller Element. Refer: 'BaseBuildingPrograms\13. Stack\S08_NextSmallerElement.cpp'
 
-#include <iostream>
-#include <vector>
-#include <stack>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
@@ -47,8 +45,7 @@ public:
         for(int i = n - 1; i >= 0; i--) {
             int currElement = prices[i];
 
-            while(currElement < st.top()) {   // CHANGE 1: Instead of '<=', use '<' because the
-            // problem expects next smaller or equal element to be taken as discount
+            while(st.top() > currElement) {   // don't use '>=' here as we need next smaller or equal element
                 st.pop();
             }
 
@@ -56,7 +53,7 @@ public:
 
             st.push(currElement);
 
-            // ADDITION 1 (final price = price of item - discount(next smaller or equal element))
+            // Final price = price of item - discount(next smaller or equal element)
             if(ans[i] == -1) {
                 ans[i] = prices[i];
             } else {
