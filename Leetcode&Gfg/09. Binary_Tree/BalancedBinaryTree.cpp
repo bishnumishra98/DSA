@@ -33,31 +33,23 @@ struct TreeNode {
 
 class Solution {
 public:
-    int heightOfBT(TreeNode *root) {
-        if (root == NULL) return 0;
-        int leftHeight = heightOfBT(root->left);
-        int rightHeight = heightOfBT(root->right);
+    int dfsHeight(TreeNode *root) {
+        if(root == NULL) return 0;
+        int leftHeight = dfsHeight(root->left);
+        if(leftHeight == -1) return -1;   // left sub-tree is not balanced
+        int rightHeight = dfsHeight(root->right);
+        if(rightHeight == -1) return -1;   // right sub-tree is not balanced
+
+        if(abs(leftHeight - rightHeight) > 1) return -1;   // current node is not balanced
+
         return max(leftHeight, rightHeight) + 1;
     }
 
     // T.C: O(n);   where n = no.of nodes in BT
     // S.C: O(h);   where h = height of a tree. Hieght is no.of nodes if tree is skew.
     bool isBalanced(TreeNode *root) {
-        if (root == NULL) return true;   // Base case: an empty tree/leaves are balanced
-
-        // Check if left and right sub-trees are balanced
-        bool isLeftTreeBalanced = isBalanced(root->left);
-        bool isRightTreeBalanced = isBalanced(root->right);
-    
-        // Calculate heights of left and right subtrees
-        int leftHeight = heightOfBT(root->left);
-        int rightHeight = heightOfBT(root->right);
-        
-        // If the difference in heights is less than equal to 1, difference is true, else false
-        bool difference = (abs(leftHeight - rightHeight) <= 1);
-
-        if(isLeftTreeBalanced && isRightTreeBalanced && difference) return true;
-        else return false;
+        // If tree is balanced, dfsHeight will return height of tree, else it will return -1.
+        return dfsHeight(root) != -1;
     }
 };
 
@@ -69,7 +61,7 @@ int main() {
     root->right = new TreeNode(20);
     root->right->left = new TreeNode(15);
     root->right->right = new TreeNode(7);
-    cout << sol.isBalanced(root) << endl;
+    cout << sol.isBalanced(root) << endl;   // o/p: 1 (true)
 
     return 0;
 }
