@@ -110,7 +110,7 @@ void levelOrderTraversal_LevelByLevel(Node* root) {
         Node* front = q.front();
         q.pop();
 
-        if(!front) {   // If 'front' is a NULL node
+        if(front == NULL) {   // If 'front' is a NULL node
             cout << endl;   // Line changed.
             // If 'front' of queue is a NULL, it means the last parent node has been printed,
             // popped out of queue, and its children have been pushed in queue already in the last
