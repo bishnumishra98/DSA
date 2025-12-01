@@ -77,8 +77,8 @@ int main() {
     root->right->left = new TreeNode(4);
     root->right->right = new TreeNode(5);
 
-    cout << diameterOfTree_bruteForce(root) << endl;
-    cout << diameterOfTree(root) << endl;
+    cout << diameterOfTree_bruteForce(root) << endl;   // o/p: 3
+    cout << diameterOfTree(root) << endl;   // o/p: 3
 
     return 0;
 }
