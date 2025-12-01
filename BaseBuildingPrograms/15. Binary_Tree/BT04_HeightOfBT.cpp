@@ -49,7 +49,7 @@ int main() {
     root->right->left = new TreeNode(15);
     root->right->right = new TreeNode(7);
 
-    cout << heightOfTree(root);
+    cout << heightOfTree(root);   // o/p: 3
 
     return 0;
 }
