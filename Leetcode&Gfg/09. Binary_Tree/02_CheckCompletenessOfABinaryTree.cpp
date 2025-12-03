@@ -1,6 +1,31 @@
 // Leetcode: 958. Check Completeness of a Binary Tree   --->   Given the root of a binary tree, determine if it is a
 // complete binary tree. In a complete binary tree, every level, except possibly the last, is completely filled, and all
-// nodes in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
+// nodes in the last level are as far left as possible. It can have between 1 and 2^h nodes inclusive at the last level h.
+
+// Example 1:
+// Input: root = [1,2,3,4,5,6]
+//             1
+//           /   \
+//          2     3
+//         / \    /
+//        4   5  6
+// Output: true
+// Explanation: Every level before the last is full (ie. levels with node-values {1} and {2, 3}), and all nodes in the
+// last level ({4, 5, 6}) are as far left as possible.
+
+// Example 2:
+// Input: root = [1,2,3,4,5,null,7]
+//             1
+//           /   \
+//          2     3
+//         / \     \
+//        4   5     7
+// Output: false
+// Explanation: The node with value 7 isn't as far left as possible.
+
+// Algorithm: It is simple.
+// We will do a BFS (level-order) traversal of the tree to find if there are any non-null nodes
+// that occur after a null node.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -17,37 +42,49 @@ struct TreeNode {
 
 class Solution {
 public:
-    // The structure of this code is similar to level-order traversal of Binary Tree.
     // T.C: O(n)
     // S.C: O(n)
     bool isCompleteTree(TreeNode* root) {
-        if(!root) return true;   // If root of BT is itself a NULL, consider it a CBT or not; its your choice.
+        if(!root) return true;   // empty tree is considered complete by definition
         
         queue<TreeNode*> q;
         q.push(root);
-        bool encounteredNull = false;
+        bool encounteredNull = false;   // this flag becomes true when we see the first NULL in level order.
 
         while(!q.empty()) {
             TreeNode* front = q.front();
             q.pop();
 
-            if(!front) {   // If queue contains a null node, it means we are currently at
-                          // a null node. Thus, make the 'encounteredNull' flag as true.
+            if(front == NULL) {   // NULL node occurs
+                // Once we see a NULL, all nodes that come later in level-order
+                // must also be NULL for the tree to be complete.
                 encounteredNull = true;
-            } else {   // If queue contains a valid node
-                // If 'encounteredNULL' is true, it means a null node was found. And now,
-                // as we came here means a non-null node is found. Therefore, it means
-                // that a non-null node is found after a null node, which violates the
-                // condition for a CBT. Thus, straightaway return false.
+            } else {   // NON-NULL node occurs
+                // If we already saw a NULL before and now we see a non-null node,
+                // that means there is a gap -> not a complete binary tree.
                 if(encounteredNull) return false;
 
-                // Push the left and right child of BT into queue
+                // Push left and right children even if they are NULL.
+                // This helps us detect gaps in the tree.
                 q.push(front->left);
                 q.push(front->right); 
             }
         }
         
-        // If all non-null nodes appear before all null nodes, it is a CBT. Return true.
+        // If we never found a non-null node after a null, it's complete.
         return true;
     }
 };
+
+int main() {
+    TreeNode* root = new TreeNode(1);
+    root->left = new TreeNode(2);
+    root->right = new TreeNode(3);
+    root->left->left = new TreeNode(4);
+    root->left->right = new TreeNode(5);
+    root->right->left = new TreeNode(6);
+    
+    cout << Solution().isCompleteTree(root);   // o/p: 1 (true)
+
+    return 0;
+}
