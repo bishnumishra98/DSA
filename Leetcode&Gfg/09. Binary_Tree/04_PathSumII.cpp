@@ -4,7 +4,14 @@
 // A root-to-leaf path is a path starting from the root and ending at any leaf node. A leaf is a node with no children.
 
 // Example 1:
-// Input: root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
+// Input: root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22
+//               5
+//             /   \
+//            4     8
+//           /     / \
+//          11    13  4
+//         /  \      /  \
+//        7    2    5    1 
 // Output: [[5,4,11,2],[5,8,4,5]]
 // Explanation: There are two paths whose sum equals targetSum:
 // 5 + 4 + 11 + 2 = 22
@@ -12,15 +19,15 @@
 
 // Example 2:
 // Input: root = [1,2,3], targetSum = 5
+//     1
+//    / \
+//   2   3
 // Output: []
 
 // Example 3:
 // Input: root = [1,2], targetSum = 0
 // Output: []
 
-// Algorithm: Starting from sum=0 at root node, keep a track of cumulative sum on each node and a temp vector where value
-//            of each node is getting populated as we are moving down. Once, the leaf node is reached, store that temp vector
-//            somewhere probably in an 'ans' vector that we should sent as a reference to solve() function, if sum == targetSum.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -37,44 +44,40 @@ struct TreeNode {
 
 class Solution {
 public: 
-    void solve(TreeNode* root, int targetSum, int sum, vector<vector<int>> &ans, vector<int> temp) {
-        if(root == NULL) return;
+    void dfs(TreeNode* root, int targetSum, vector<int>& path, vector<vector<int>>& result) {
+        if(!root) return;
 
-        // Keep a track of nodes that we are visiting
-        temp.push_back(root->val);
-        sum = sum + root->val;
-        
-        // If leaf node is reached, push pack 'temp' into 'ans' if 'sum == targetSum'
-        if(root->left==NULL && root->right==NULL) {
-            if(sum == targetSum) ans.push_back(temp);
-            return;
+        // Include current node in path
+        path.push_back(root->val);
+
+        // Subtract targetSum
+        targetSum -= root->val;
+
+        // If we reached a leaf node (no children): If the remaining sum is 0, the required path is found. Store it.
+        if(!root->left && !root->right) {
+            if(targetSum == 0) {
+                result.push_back(path);   // store a copy of current path
+            }
         }
 
-        // Recursively check if required path exists in subtrees or not
-        solve(root->left, targetSum, sum, ans, temp);
-        solve(root->right, targetSum, sum, ans, temp);
+        // Otherwise, check in left or right subtree
+        dfs(root->left, targetSum, path, result);
+        dfs(root->right, targetSum, path, result);
+
+        // Backtrack → remove current node before returning
+        path.pop_back();
     }
 
     // T.C: O(n)
     // S.C: O(h)
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
-        vector<vector<int>> ans;
-        vector<int> temp;
-        int sum = 0;
-        solve(root, targetSum, sum, ans, temp);
-        return ans;
+        vector<vector<int>> result;   // will store all valid paths
+        vector<int> path;             // current path from root → current node
+        dfs(root, targetSum, path, result);
+        return result;
     }
 };
 
-void printVector(vector<vector<int>> ans) {
-    for(int i=0; i<ans.size(); i++) {
-        cout << "[ ";
-        for(int j=0; j<ans[i].size(); j++) {
-            cout << ans[i][j] << " ";
-        }
-        cout << "] ";
-    }
-}
 
 int main() {
     Solution sol;
@@ -92,8 +95,12 @@ int main() {
     root->right->right->right = new TreeNode(1);
 
     vector<vector<int>> ans = sol.pathSum(root, targetSum);
-
-    printVector(ans);
+    for(int i = 0; i < ans.size(); i++) {
+        for(int j = 0; j < ans[i].size(); j++) {
+            cout << ans[i][j] << " ";
+        }
+        cout << endl;
+    }
 
     return 0;
 }
