@@ -10,6 +10,8 @@
 //
 // Input: root = [3,9,20,null,null,15,7]
 // Output: 3
+// Explanation: The height of the tree is 3, because the longest path from the root to a leaf node
+//              is either 3->20->15 or 3->20->7, and both paths contain 3 nodes.
 
 // Example 2:
 // Input: root = [1,null,2]
