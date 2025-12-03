@@ -3,19 +3,29 @@
 //                          we mean the number of edges between the two nodes.
 
 // Example 1:
+// Input:
 //          1
 //         / \
 //        2   3 
 //       / \
 //      4   5
 
-// Input: root = [1,2,3,4,5]
 // Output: 3
 // Explanation: 3 is the length of the path [4,2,1,3] or [5,2,1,3]. There are 3 edges in each path.
 
 // Example 2:
-// Input: root = [1,2]
-// Output: 1
+// Input:
+//           1
+//          / \
+//         2   3
+//        / \
+//       4   5
+//      /     \
+//     6       7
+//    /         \
+//   8           9
+// Output: 6
+// Explanation: 6 is the length of the path [8,6,4,2,5,7,9]. There are 6 edges in the path.
 
 #include <iostream>
 using namespace std;
@@ -36,10 +46,10 @@ int dfsHeight(TreeNode* root, int &diameter) {
     int lh = dfsHeight(root->left, diameter);     // left height
     int rh = dfsHeight(root->right, diameter);    // right height
 
-    // Update best diameter found so far
+    // Update best diameter found so far (lh + rh gives the diameter at current node)
     diameter = max(diameter, lh + rh);
 
-    // Return height
+    // Return height of current node
     return 1 + max(lh, rh);
 }
 
@@ -55,10 +65,14 @@ int main() {
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
     root->right = new TreeNode(3);
-    root->right->left = new TreeNode(4);
-    root->right->right = new TreeNode(5);
+    root->left->left = new TreeNode(4);
+    root->left->right = new TreeNode(5);
+    root->left->left->left = new TreeNode(6);
+    root->left->right->right = new TreeNode(7);
+    root->left->left->left->left = new TreeNode(8);
+    root->left->right->right->right = new TreeNode(9);
 
-    cout << diameterOfTree(root) << endl;   // o/p: 3
+    cout << diameterOfTree(root) << endl;   // o/p: 6
 
     return 0;
 }
