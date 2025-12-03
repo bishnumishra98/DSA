@@ -3,11 +3,21 @@
 
 // Example 1:
 // Input: root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22
+//              5
+//             / \
+//            4   8
+//           /   / \
+//          11  13  4
+//         /  \      \
+//        7    2      1 
 // Output: true
-// Explanation: The root-to-leaf path with the target sum is shown.
+// Explanation: The root-to-leaf path with the target sum is shown - [2, 11, 4, 5]
 
 // Example 2:
 // Input: root = [1,2,3], targetSum = 5
+//     1
+//    / \
+//   2   3
 // Output: false
 // Explanation: There two root-to-leaf paths in the tree:
 // (1 --> 2): The sum is 3.
@@ -19,10 +29,9 @@
 // Output: false
 // Explanation: Since the tree is empty, there are no root-to-leaf paths.
 
-// Algorithm: Starting from sum=0 at root node, keep a track of cumulative sum on each node and once
-//            leaf node is reached, return true if sum is equal to targetSum, else return false. Lets
-//            say if true and false is received to a node from its both children, pass true, i.e.,
-//            (left || right) to the above parent node, as targetSum has been already found.
+// Algorithm: It is simple.
+// Do a DFS traversal of the tree. At each node, subtract the node's value from targetSum.
+// If we reach a leaf node (no children), check if the remaining targetSum is 0. If yes, return true; else false.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -39,33 +48,28 @@ struct TreeNode {
 
 class Solution {
 public:
-    bool solve(TreeNode* root, int targetSum, int sum) {
-        if(root == NULL) return false;
-
-        sum = sum + root->val;   // calculating cumulative sum on each node
-        // If leaf node is reached, check if sum is equal to targetSum
-        if(root->left==NULL && root->right==NULL) return (sum==targetSum) ? true : false;
-
-        // Recursively check for a path with the targetSum in the left and right subtrees.
-        bool left = solve(root->left, targetSum, sum);
-        bool right = solve(root->right, targetSum, sum);
-
-        // Return true if either the left or right subtree has a path where sum is equal to targetSum.
-        return (left || right);
-    }
-
     // T.C: O(n)   where n = no.of nodes
     // S.C: O(h)   where h = height of tree
     bool hasPathSum(TreeNode* root, int targetSum) {
-        int sum = 0;
-        bool ans = solve(root, targetSum, sum);
-        return ans;
+        // If tree is empty → no path exists
+        if(root == NULL) return false;
+
+        // Subtract current node's value from targetSum
+        targetSum -= root->val;
+
+        // If we reached a leaf node (no children): If the remaining sum is 0, return true; else false.
+        if(!root->left && !root->right) {
+            return (targetSum == 0);
+        }
+
+        // Otherwise, check in left or right subtree
+        return hasPathSum(root->left, targetSum) || hasPathSum(root->right, targetSum);
     }
 };
 
 int main() {
     Solution sol;
-    // [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22
+
     int targetSum = 22;
     TreeNode* root = new TreeNode(5);
     root->left = new TreeNode(4);
@@ -77,7 +81,7 @@ int main() {
     root->left->left->right = new TreeNode(2);
     root->right->right->right = new TreeNode(1);
 
-    cout << sol.hasPathSum(root, targetSum);
+    cout << sol.hasPathSum(root, targetSum);   // o/p: 1 (true)
 
     return 0;
 }
