@@ -17,6 +17,10 @@
 //          / \
 //         8   9 
 // Output: [1, 2, 4, 8, 9, 6, 7, 3]
+// Left boundary: [1, 2] (excluding leaf nodes 4, 8, 9)
+// Leaf nodes: [4, 8, 9, 6, 7]
+// Right boundary: [3] (in reverse order)
+// Final traversal: [1, 2, 4, 8, 9, 6, 7, 3]
 
 // Example 2:
 // Input: root = [1, N, 2, N, 3, N, 4, N, N]
@@ -63,7 +67,7 @@ private:
     // Step 1: Add the left boundary (excluding leaf nodes)
     void addLeftBoundary(Node* root, vector<int> &res) {
         Node* curr = root->left;
-        while (curr) {
+        while(curr) {
             if(!isLeaf(curr)) res.push_back(curr->data);
             if(curr->left) curr = curr->left;
             else curr = curr->right;
@@ -88,7 +92,7 @@ private:
         Node* curr = root->right;
         vector<int> temp;
 
-        while (curr) {
+        while(curr) {
             if(!isLeaf(curr)) temp.push_back(curr->data);
             if(curr->right) curr = curr->right;
             else curr = curr->left;
