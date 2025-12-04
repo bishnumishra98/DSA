@@ -64,17 +64,17 @@ private:
     void addLeftBoundary(Node* root, vector<int> &res) {
         Node* curr = root->left;
         while (curr) {
-            if (!isLeaf(curr)) res.push_back(curr->data);
-            if (curr->left) curr = curr->left;
+            if(!isLeaf(curr)) res.push_back(curr->data);
+            if(curr->left) curr = curr->left;
             else curr = curr->right;
         }
     }
 
     // Step 2: Add all leaf nodes (left to right)
     void addLeaves(Node* root, vector<int> &res) {
-        if (!root) return;
+        if(!root) return;
 
-        if (isLeaf(root)) {
+        if(isLeaf(root)) {
             res.push_back(root->data);
             return;
         }
@@ -89,23 +89,23 @@ private:
         vector<int> temp;
 
         while (curr) {
-            if (!isLeaf(curr)) temp.push_back(curr->data);
-            if (curr->right) curr = curr->right;
+            if(!isLeaf(curr)) temp.push_back(curr->data);
+            if(curr->right) curr = curr->right;
             else curr = curr->left;
         }
 
         // Add in reverse order
         reverse(temp.begin(), temp.end());
-        for (int val : temp) res.push_back(val);
+        for(int val : temp) res.push_back(val);
     }
     
 public:
     vector<int> boundaryTraversal(Node *root) {
         vector<int> res;
-        if (!root) return res;
+        if(!root) return res;
 
         // Root itself (only if it's not a leaf)
-        if (!isLeaf(root)) res.push_back(root->data);
+        if(!isLeaf(root)) res.push_back(root->data);
 
         addLeftBoundary(root, res);
         addLeaves(root, res);
