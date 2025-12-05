@@ -100,7 +100,7 @@ private:
 
         // Add in reverse order
         reverse(temp.begin(), temp.end());
-        for(int val : temp) res.push_back(val);
+        for(int val: temp) res.push_back(val);
     }
     
 public:
