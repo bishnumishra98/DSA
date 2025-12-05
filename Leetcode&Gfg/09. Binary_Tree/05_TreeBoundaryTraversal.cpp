@@ -76,7 +76,7 @@ private:
 
     // Step 2: Add all leaf nodes (left to right)
     void addLeaves(Node* root, vector<int> &res) {
-        if(!root) return;
+        if(root == NULL) return;
 
         if(isLeaf(root)) {
             res.push_back(root->data);
