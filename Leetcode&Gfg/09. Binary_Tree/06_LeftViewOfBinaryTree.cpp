@@ -1,93 +1,99 @@
-// This problem falls under views pattern of Binary Tree. Follow this sequence:
-// 1. "Leetcode&Gfg\09. Binary_Tree\LeftViewOfBinaryTree.cpp"
-// 2. "Leetcode&Gfg\09. Binary_Tree\BinaryTreeRightSideView.cpp"
-// 3. "Leetcode&Gfg\09. Binary_Tree\TopViewOfBinaryTree.cpp"
-// 4. "Leetcode&Gfg\09. Binary_Tree\BottomViewOfBinaryTree.cpp"
+// GFG: Given the root of a binary tree. Your task is to return the left view of the binary tree. The left view of a binary tree
+// is the set of nodes visible when the tree is viewed from the left side.
+// Note: If the tree is empty, return an empty list.
 
+// Example 1:
+// Input: root = [1, 2, 3, 4, 5, N, N]
+//       1
+//      / \
+//     2   3
+//    / \
+//   4   5
+// Output:[1, 2, 4]
+// Explanation: From the left side of the tree, only the nodes 1, 2, and 4 are visible.
 
-// GFG: Given a Binary Tree, return Left view of it. Left view of a Binary Tree is set of nodes visible when tree
-// is visited from Left side. The task is to complete the function leftView(), which accepts root of the tree as
-// argument. If no left view is possible, return an empty tree.
+// Example 2:
+// Input: root = [1, 2, 3, N, N, 4, N, N, 5, N, N]
+//       1
+//      / \
+//     2   3
+//        /
+//       4
+//        \
+//         5
+// Output: [1, 2, 4, 5]
+// Explanation: From the left side of the tree, only the nodes 1, 2, 4, and 5 are visible.
 
-// Left view of following tree is 1 2 4 8.
-//          _ 1 _ 
-//         /     \
-//        2       3
-//       / \     / \
-//      4   5   6   7
-//       \
-//        8
+// Problem link: https://www.geeksforgeeks.org/problems/left-view-of-binary-tree/1
 
 
 #include <bits/stdc++.h>
 using namespace std;
 
 // A binary tree node
-struct Node
-{
+class Node {
+public:
     int data;
-    struct Node* left;
-    struct Node* right;
-    
-    Node(int x){
-        data = x;
-        left = right = NULL;
+    Node* left;
+    Node* right;
+
+    Node(int val) {
+        data = val;
+        left = nullptr;
+        right = nullptr;
     }
 };
 
-// Simple Algorithm:
-
-// leftView(root):
-//     1. Initialize an empty vector 'leftViewVector' to store the left view of the binary tree.
-//     2. Initialize a variable 'level' to 0.
-//     3. Call solve(root, leftViewVector, level) to traverse the tree and populate the left view.
-//     4. Return leftViewVector.
-
-// solve(root, leftViewVector, level):
-//     1. If root is NULL, return.
-//     2. If the size of leftViewVector is equal to the current level, push the value of root->data into leftViewVector.
-//     3. Recursively call solve for the left subtree with level+1(as left subtree will be present in next level).
-//     4. Recursively call solve for the right subtree with level+1(as right subtree will be present in next level).
-
-void solve(Node* root, vector<int>& leftViewVector, int level) {
-    if(root == NULL) return;
-
-    // If level of tree matches the size of 'leftViewVector' array, push that 'root->data' into 'leftViewVector'.
-    if(leftViewVector.size() == level) leftViewVector.push_back(root->data);
-
-    solve(root->left, leftViewVector, level+1);
-    solve(root->right, leftViewVector, level+1);
-}
 
 // T.C: O(n);   where n is the number of nodes in the binary tree.
 // S.C: O(h);   where h is the height of the binary tree.
-vector<int> leftView(Node *root) {
-    vector<int> leftViewVector;
-    int level = 0;
+class Solution {
+public:
+    vector<int> leftView(Node *root) {
+        vector<int> ans;
+        if(root == NULL) return ans;
 
-    solve(root, leftViewVector, level);
+        queue<Node*> q;
+        q.push(root);
 
-    return leftViewVector;
-}
+        while(!q.empty()) {
+            int size = q.size();   // size means there are 'size' nodes at the current level.
+
+            // The first node in the queue belongs to the leftmost position
+            // of the current level, so this node is visible from the left side.
+            ans.push_back(q.front()->data);
+
+            // Now remove all nodes of this level from the queue,
+            // and add their children (which form the next level).
+            while(size--) {
+                Node* curr = q.front();
+                q.pop();
+
+                // Add left child first, so it appears before right child
+                if(curr->left)  q.push(curr->left);
+                if(curr->right) q.push(curr->right);
+            }
+        }
+
+        return ans;
+    }
+};
 
 int main() {
-//          _ 1 _ 
-//         /     \
-//        2       3
-//       / \     / \
-//      4   5   6   7
-//       \
-//        8
+//       1
+//      / \
+//     2   3
+//        /
+//       4
+//        \
+//         5
     Node* root = new Node(1);
     root->left = new Node(2);
     root->right = new Node(3);
-    root->left->left = new Node(4);
-    root->left->right = new Node(5);
-    root->right->left = new Node(6);
-    root->right->right = new Node(7);
-    root->left->left->right = new Node(8);
+    root->right->left = new Node(4);
+    root->right->left->right = new Node(5);
 
-    vector<int> ans = leftView(root);
+    vector<int> ans = Solution().leftView(root);
     for(int i: ans) {
         cout << i << " ";
     }
