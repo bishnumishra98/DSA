@@ -45,36 +45,24 @@ public:
 };
 
 
-// T.C: O(n);   where n is the number of nodes in the binary tree.
-// S.C: O(h);   where h is the height of the binary tree.
 class Solution {
+private:
+    void storeLeftView(Node* root, int level, vector<int>& ans) {
+        if(root == NULL) return;
+
+        // Store the node's value in 'ans' only if the node is being visited for the first time in this level
+        if(ans.size() == level) ans.push_back(root->data);
+        
+        storeLeftView(root->left, level + 1, ans);
+        storeLeftView(root->right, level + 1, ans);
+    }
+
 public:
+    // T.C: O(n),   where n = number of nodes in the tree
+    // S.C: O(h),   where h = height of the tree (h = n in skew tree)
     vector<int> leftView(Node *root) {
         vector<int> ans;
-        if(root == NULL) return ans;
-
-        queue<Node*> q;
-        q.push(root);
-
-        while(!q.empty()) {
-            int size = q.size();   // size means there are 'size' nodes at the current level.
-
-            // The first node in the queue belongs to the leftmost position
-            // of the current level, so this node is visible from the left side.
-            ans.push_back(q.front()->data);
-
-            // Now remove all nodes of this level from the queue,
-            // and add their children (which form the next level).
-            while(size--) {
-                Node* curr = q.front();
-                q.pop();
-
-                // Add left child first, so it appears before right child
-                if(curr->left)  q.push(curr->left);
-                if(curr->right) q.push(curr->right);
-            }
-        }
-
+        storeLeftView(root, 0, ans);
         return ans;
     }
 };

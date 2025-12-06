@@ -1,13 +1,3 @@
-// This problem falls under views pattern of Binary Tree. Follow this sequence:
-// 1. "Leetcode&Gfg\09. Binary_Tree\LeftViewOfBinaryTree.cpp"
-// 2. "Leetcode&Gfg\09. Binary_Tree\BinaryTreeRightSideView.cpp"
-// 3. "Leetcode&Gfg\09. Binary_Tree\TopViewOfBinaryTree.cpp"
-// 4. "Leetcode&Gfg\09. Binary_Tree\BottomViewOfBinaryTree.cpp"
-
-
-// Exactly same as "Leetcode&Gfg\09. Binary_Tree\LeftViewOfBinaryTree.cpp". The only difference being here is that
-// first call recursion for right subtree, then for left subtree, as we have to store the right view of the binary tree.
-
 // Leetcode: 199. Binary Tree Right Side View ---> Given the root of a binary tree, imagine yourself standing on the
 // right side of it, return the values of the nodes you can see ordered from top to bottom.
 
@@ -42,23 +32,24 @@ struct TreeNode {
 };
 
 class Solution {
-public:
-    void solve(TreeNode* root, vector<int>& rightViewVector, int level) {
+private:
+    void storeRightView(TreeNode* root, int level, vector<int>& ans) {
         if(root == NULL) return;
 
-        if(rightViewVector.size() == level) rightViewVector.push_back(root->val);
-
-        solve(root->right, rightViewVector, level+1);
-        solve(root->left, rightViewVector, level+1);
+        // Store the node's value in 'ans' only if the node is being visited for the first time in this level
+        if(ans.size() == level) ans.push_back(root->val);
+        
+        storeRightView(root->right, level + 1, ans);
+        storeRightView(root->left, level + 1, ans);
     }
 
-    // T.C: O(n)
-    // S.C: O(h)
+public:
+    // T.C: O(n),   where n = number of nodes in the tree
+    // S.C: O(h),   where h = height of the tree (h = n in skew tree)
     vector<int> rightSideView(TreeNode* root) {
-        vector<int> rightViewVector;
-        int level = 0;
-        solve(root, rightViewVector, level);
-        return rightViewVector;
+        vector<int> ans;
+        storeRightView(root, 0, ans);
+        return ans;
     }
 };
 
