@@ -26,6 +26,12 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/left-view-of-binary-tree/1
 
+// Algorithm: It is a simple DFS traversal.
+// We keep track of the current level while traversing the tree.
+// If we reach a level for the first time, we add the node's value to the answer vector.
+// To ensure we add the nodes that comes in left view of tree, we first traverse the left subtree
+// and then the right subtree.
+
 
 #include <bits/stdc++.h>
 using namespace std;

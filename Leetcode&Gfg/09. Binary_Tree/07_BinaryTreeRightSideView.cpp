@@ -18,6 +18,13 @@
 // Input: root = []
 // Output: []
 
+// Algorithm: It is a simple DFS traversal.
+// We keep track of the current level while traversing the tree.
+// If we reach a level for the first time, we add the node's value to the answer vector.
+// To ensure we add the nodes that comes in right view of tree, we first traverse the right subtree
+// and then the left subtree.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
