@@ -9,6 +9,11 @@
 
 // Example 1:
 // Input: root = [3,9,20,null,null,15,7]
+//         3
+//        / \
+//       9   20
+//          /  \
+//         15   7 
 // Output: [[9],[3,15],[20],[7]]
 // Explanation:
 // Column -1: Only node 9 is in this column.
@@ -18,6 +23,11 @@
 
 // Example 2:
 // Input: root = [1,2,3,4,5,6,7]
+//          1
+//        /   \
+//       2     3
+//      / \   / \
+//     4   5 6   7
 // Output: [[4],[2],[1,5,6],[3],[7]]
 // Explanation:
 // Column -2: Only node 4 is in this column.
@@ -30,6 +40,11 @@
 
 // Example 3:
 // Input: root = [1,2,3,4,6,5,7]
+//          1
+//        /   \
+//       2     3
+//      / \   / \
+//     4   6 5   7
 // Output: [[4],[2],[1,5,6],[3],[7]]
 // Explanation:
 // This case is the exact same as example 2, but with nodes 5 and 6 swapped.
@@ -55,11 +70,60 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        
+        map<int, map<int, multiset<int>>> nodes;   // x-coordinate (vertical) -> {y-coordinate (level) -> multiple nodes}
+        queue<pair<TreeNode*, pair<int, int>>> q;   // {TreeNode*, {x-coordinate (vertical), y-coordinate (level)}}
+        q.push({root, {0, 0}});
+
+        while(!q.empty()) {
+            auto p = q.front();
+            q.pop();
+            TreeNode* node = p.first;
+            int x = p.second.first, y = p.second.second;
+            nodes[x][y].insert(node->val);
+
+            // Push the children of current node in the queue along with their coordinates
+            if(node->left) {
+                q.push({node->left, {x - 1, y + 1}});
+            }
+            if(node->right) {
+                q.push({node->right, {x + 1, y + 1}});
+            }
+        }
+
+        vector<vector<int>> ans;
+        for(auto it: nodes) {   // it is of type: map<int, map<int, multiset<int>>>
+            vector<int> col;
+            for(auto q: it.second) {   // q is of type: map<int, multiset<int>>
+                // Append all elements of multiset at the end of 'col'
+                col.insert(col.end(), q.second.begin(), q.second.end());
+            }
+            ans.push_back(col);   // add all nodes that come in current 'col'
+        }
+
+        return ans;
     }
 };
 
 int main() {
+//         3
+//        / \
+//       9   20
+//          /  \
+//         15   7 
+    TreeNode* root = new TreeNode(3);
+    root->left = new TreeNode(9);
+    root->right = new TreeNode(20);
+    root->right->left = new TreeNode(15);
+    root->right->right = new TreeNode(7);
+
+    Solution sol;
+    vector<vector<int>> ans = sol.verticalTraversal(root);
+    for(auto row: ans) {
+        for(auto i: row) {
+            cout << i << " ";
+        }
+        cout << endl;
+    }
 
     return 0;
 }
