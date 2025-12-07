@@ -90,6 +90,7 @@ public:
             }
         }
 
+        // Store nodes as a vector in 'ans' that come in the same vertical, i.e., same column 'x'
         vector<vector<int>> ans;
         for(auto it: nodes) {   // it is of type: map<int, map<int, multiset<int>>>
             vector<int> col;
