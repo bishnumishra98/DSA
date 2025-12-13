@@ -1,86 +1,93 @@
-// This problem falls under views pattern of Binary Tree. Follow this sequence:
-// 1. "Leetcode&Gfg\09. Binary_Tree\LeftViewOfBinaryTree.cpp"
-// 2. "Leetcode&Gfg\09. Binary_Tree\BinaryTreeRightSideView.cpp"
-// 3. "Leetcode&Gfg\09. Binary_Tree\TopViewOfBinaryTree.cpp"
-// 4. "Leetcode&Gfg\09. Binary_Tree\BottomViewOfBinaryTree.cpp"
+// GFG: Bottom View of Binary Tree   --->   You are given the root of a binary tree, and your task is to return its
+// bottom view. The bottom view of a binary tree is the set of nodes visible when the tree is viewed from the bottom.
+// Note: If there are multiple bottom-most nodes for a horizontal distance from the root, then the latter one in the
+// level order traversal is considered.
 
-// GFG: Given a binary tree, print the bottom view from left to right.
-// A node is included in bottom view if it can be seen when we look at the tree from bottom.
+// Example 1:
+// Input: root = [1, 2, 3, 4, 5, N, 6]
+//        1
+//       / \
+//      2   3
+//     / \   \
+//    4   5   6
+// Output: [4, 2, 5, 3, 6]
 
-// This problem has exactly same logic and code as that of "Leetcode&Gfg\09. Binary_Tree\TopViewOfBinaryTree.cpp",
-// the only difference here is that we don't need to use the condition: "if(hdToNodeMap.find(hd) == hdToNodeMap.end())".
-// This is because we want to overwrite the entry of hd in 'hdToNodeMap', i.e., overwrite the values(node->data) for
-// keys(horizontal distance) so that we reach to deeper levels, i.e., till the leaf nodes of the binary tree. As a
-// result, the deepest nodes could be stored for each horizontal distance in the 'hdToNodeMap'.
+// Example 2:
+// Input: root = [20, 8, 22, 5, 3, 4, 25, N, N, 10, 14, N, N, 28, N]
+//        _ 20 _
+//       /      \
+//      8       22
+//     / \     /  \
+//    5   3   4   25
+//       / \      /
+//      10 14    28
+// Output: [5, 10, 4, 28, 25]
+
+// Probem link: https://www.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1
+
+// Algorithm: Exactly same as 'Leetcode&Gfg\09. Binary_Tree\09_TopViewOfBinaryTree.cpp'.
+//            The only difference here is that we have to store the last seen node of every vertical line.
+//            To achieve this, just always update the value of node occurring in every vertical.
 
 #include <bits/stdc++.h>
 using namespace std;
 
-// A binary tree node
-struct Node {
+class Node {
+public:
     int data;
-    struct Node* left;
-    struct Node* right;
-    
-    Node(int x){
+    Node* left;
+    Node* right;
+
+    Node(int x) {
         data = x;
         left = right = NULL;
     }
 };
 
+
 class Solution {
-    public:
+public:
     // T.C: O(n)
     // S.C: O(n)
     vector<int> bottomView(Node *root) {
-        vector <int> bottomView;
-        queue < pair<Node*, int> > q;
-        map <int, int> hdToNodeMap;
+        vector<int> ans;
+        if(root == NULL) return ans;
 
-        // pushing the first element in queue
-        q.push(make_pair(root, 0));
+        map<int, int> mpp;   // {vertical (x-coordinate) -> node's data}
+        queue<pair<Node*, int>> q;   // {node, vertical (x-coordinate)}
+        q.push({root, 0});
 
         while(!q.empty()) {
-            pair <Node*, int> temp = q.front();
-            Node* node = temp.first;
-            int hd = temp.second;
-
-            // ONLY CHANGE
-            // overwrite the values(node->data) for keys(horizontal distance), so that we could go deeper till leaf nodes
-            hdToNodeMap[hd] = node->data;
-
-            // pushing the node's children(if exists) in queue
-            if(node->left) q.push(make_pair(node->left, hd-1));
-            if(node->right) q.push(make_pair(node->right, hd+1));
-
-            // popping the queue
+            auto it = q.front();
             q.pop();
+            Node* node = it.first;
+            int vertical = it.second;
+
+            // For bottom view -> always update the value for this vertical
+            mpp[vertical] = node->data;
+
+            // Push the node's children in queue with vertical line
+            if(node->left) q.push({node->left, vertical - 1});
+            if(node->right) q.push({node->right, vertical + 1});
         }
 
-        // pushing the top view in 'bottomView' vector, and returning it
-        for(auto i: hdToNodeMap) {
-            bottomView.push_back(i.second);
-        }
-        return bottomView;
+        for(auto it: mpp) ans.push_back(it.second);
+        return ans;
     }
 };
 
 int main() {
-//          1 
-//         / \
-//        2   3
+//        1
 //       / \
-//      4   5
-//       \
-//        6
-// Its bottom view will be 4 6 5 3
-
+//      2   3
+//     / \   \
+//    4   5   6
     Node* root = new Node(1);
     root->left = new Node(2);
     root->right = new Node(3);
     root->left->left = new Node(4);
     root->left->right = new Node(5);
-    root->left->left->right = new Node(6);
+    root->right->right = new Node(6);
 
     Solution sol;
     vector<int> ans = sol.bottomView(root);

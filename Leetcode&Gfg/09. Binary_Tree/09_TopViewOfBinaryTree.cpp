@@ -72,7 +72,7 @@ public:
             // first node that is seen on this vertical line. In this way we make sure that we are storing only
             // the top view of every vertical.
 
-            // Push the node's children in queue
+            // Push the node's children in queue with vertical line
             if(node->left) q.push({node->left, vertical - 1});
             if(node->right) q.push({node->right, vertical + 1});
         }
