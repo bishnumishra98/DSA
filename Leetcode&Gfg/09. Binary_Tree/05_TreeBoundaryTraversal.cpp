@@ -104,6 +104,8 @@ private:
     }
     
 public:
+    // T.C: O(h) + O(n) + O(h) = O(n);   where h = height of tree, and n = number of nodes in tree
+    // S.C: O(h);   in worst-case, i.e., in a skew tree: h = n
     vector<int> boundaryTraversal(Node *root) {
         vector<int> res;
         if(!root) return res;
@@ -111,9 +113,9 @@ public:
         // Root itself (only if it's not a leaf)
         if(!isLeaf(root)) res.push_back(root->data);
 
-        addLeftBoundary(root, res);
-        addLeaves(root, res);
-        addRightBoundary(root, res);
+        addLeftBoundary(root, res);   // T.C: O(h)
+        addLeaves(root, res);   // T.C: O(n)
+        addRightBoundary(root, res);   // T.C: O(h)
 
         return res;
     }
