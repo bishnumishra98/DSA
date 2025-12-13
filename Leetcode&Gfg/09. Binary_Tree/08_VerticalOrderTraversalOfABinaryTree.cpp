@@ -130,11 +130,13 @@ public:
 
         // Store nodes as a vector in 'ans' that come in the same vertical, i.e., same column 'x'
         vector<vector<int>> ans;
-        for(auto it: nodes) {   // it is of type: map<int, map<int, multiset<int>>>
+        // Iterate over columns from leftmost to rightmost (ordered by column index)
+        for(auto it1: nodes) {   // it1 is of type: map<int, map<int, multiset<int>>>
             vector<int> col;
-            for(auto q: it.second) {   // q is of type: map<int, multiset<int>>
-                // Append all elements of multiset at the end of 'col'
-                col.insert(col.end(), q.second.begin(), q.second.end());
+            // For the current column, iterate row-wise from top to bottom
+            for(auto it2: it1.second) {   // it2 is of type: map<int, multiset<int>>
+                // Append node values in sorted order (handled by multiset)
+                col.insert(col.end(), it2.second.begin(), it2.second.end());
             }
             ans.push_back(col);   // add all nodes that come in current 'col'
         }
