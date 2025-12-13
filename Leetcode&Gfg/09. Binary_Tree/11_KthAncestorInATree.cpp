@@ -32,57 +32,54 @@
 // Explanation:
 // K=1 and node=3 ,Kth ancestor of node 3 is 1.
 
-// Constraints:
-// 1 <= N <= 10^5
-// 1 <= K <= 100
-// 1 <= Node.data <= N
+// Problem link: https://www.geeksforgeeks.org/problems/kth-ancestor-in-a-tree/1
 
 #include <bits/stdc++.h>
 using namespace std;
 
-// Definition for a binary tree node.
 struct Node {
     int data;
-    Node *left;
-    Node *right;
-    Node() : data(0), left(nullptr), right(nullptr) {}
+    Node *left, *right;
+
     Node(int x) : data(x), left(nullptr), right(nullptr) {}
-    Node(int x, Node *left, Node *right) : data(x), left(left), right(right) {}
 };
 
-int solve(Node *root, int &k, int node) {
-    if(root == NULL) return -1;   // If root is NULL, the node is not found, so return -1.
-    if(root->data == node) return root->data;   // If the root->data matches the node, return a 'non -1' value, that can be root->data.
+class Solution {
+private:
+    int findKthAncestor(Node* root, int &k, int target) {
+        if(root == NULL) return -1;
 
-    // Recursively search for the node in the left and right subtrees.
-    int left = solve(root->left, k, node);
-    int right = solve(root->right, k, node);
+        // If target node is found
+        if(root->data == target) return root->data;
 
-    // If node is not found any of the two subtrees, return not found(-1); else if found then
-    // decrement value of k by 1 and check if its equal to 0, this is only the ancestor node,
-    // so return it. If this is not the ancestor node, return only that node data(left or right) to parent node.
-    if(left != -1) {
-        k--;
-        if(k == 0) return root->data;   // if k is 0, it means this node is only the ancestor
-        return left;   // sending found signal to its parent
-    } else if(right != -1) {
-        k--;
-        if(k == 0) return root->data;   // if k is 0, it means this node is only the ancestor
-        return right;   // sending found signal to its parent
-    } else {
-        return -1;   // sending not found signal to its parent
+        // Search in left and right subtrees
+        int left = findKthAncestor(root->left, k, target);
+        int right = findKthAncestor(root->right, k, target);
+
+        // If target is found in either subtree
+        if(left != -1 || right != -1) {
+            k--;
+            if(k == 0) return root->data;   // if k becomes 0, current node is the answer
+            return (left != -1) ? left : right;   // propagate found signal upward
+        }
+
+        return -1;   // target not found in this subtree
     }
-}
 
-// T.C: O(n)
-// S.C: O(h)
-int kthAncestor(Node *root, int k, int node) {
-    int ans = solve(root, k, node);
-    // It is already given that k>=1. Thus, if node given is the root node itself and k is for sure >= 1,
-    // then ancestor will exist beyond the root of the tree which is an invalid ancestor. Thus return -1 in this case too.
-    if(ans == -1 || ans == node) return -1;
-    else return ans;
-}
+public:
+    // T.C: O(h);   where h = height of tree, h = n for skew tree
+    // S.C: O(h)   recursion stack
+    int kthAncestor(Node *root, int k, int node) {
+        int result = findKthAncestor(root, k, node);
+
+        // If ancestor doesn't exist or node itself returned.
+        // Node itself returned means the target was found but we couldn't move up k levels, because the tree
+        // does not have enough ancestors above it to move up k levels (i.e., kth ancestor doesn't exist).
+        if(result == -1 || result == node) return -1;
+
+        return result;
+    }
+};
 
 int main() {
     Node* root = new Node(1);
@@ -92,8 +89,7 @@ int main() {
     root->right = new Node(3);
 
     int k = 2, node = 4;
-    int ans = kthAncestor(root, k, node);
-    cout << ans;
+    cout << Solution().kthAncestor(root, k, node);
 
     return 0;
 }
