@@ -30,7 +30,7 @@
 //            eventually we get the top view of the entire tree.
 //            To store the top node that comes in every vertical line, we can probably use a map data structure
 //            to map each vertical with its top node.
-//            And traverse the tree in DFS so that we can easily move deeper into the tree and record the topmost
+//            And traverse the tree in BFS so that we can easily move deeper into the tree and record the topmost
 //            node for each vertical line.
 
 #include <bits/stdc++.h>

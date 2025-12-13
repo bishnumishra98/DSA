@@ -53,6 +53,36 @@
 // Problem link: https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/
 
 // Algorithm: Code may look tough, but algorithm is simple.
+//
+// We perform a Level Order Traversal (BFS) while assigning coordinates
+// (row, col) to each node:
+//   - Root is at (0, 0)
+//   - Left child  -> (row + 1, col - 1)
+//   - Right child -> (row + 1, col + 1)
+//
+// We store all nodes that lie on the same vertical line (same column index).
+// For this, we use a nested ordered data structure:
+//
+//   map<col, map<row, multiset<values>>>
+//
+// Why this structure?
+// 1. 'col' (x-coordinate) is used to group nodes belonging to the same
+//    vertical line and ensures left-to-right ordering automatically.
+// 2. 'row' (y-coordinate) ensures nodes are processed from top to bottom
+//    within the same vertical.
+// 3. 'multiset' is used because multiple nodes can exist at the same
+//    (row, col), and the problem requires them to be sorted by value.
+//    Multiset is a powerful data structure which allows duplicates to get
+//    stored in a set, and also keep all elements sorted.
+//
+// BFS (Level Order Traversal) is used instead of DFS because BFS naturally
+// processes nodes level by level (top to bottom), which aligns perfectly
+// with the vertical traversal requirement.
+//
+// After BFS, we iterate through the map from leftmost column to rightmost
+// column, and for each column, we collect nodes row-wise and value-wise
+// to build the final vertical order traversal.
+
 
 #include <bits/stdc++.h>
 using namespace std;
