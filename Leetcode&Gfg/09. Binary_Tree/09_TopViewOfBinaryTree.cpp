@@ -1,110 +1,101 @@
-// This problem falls under views pattern of Binary Tree. Follow this sequence:
-// 1. "Leetcode&Gfg\09. Binary_Tree\LeftViewOfBinaryTree.cpp"
-// 2. "Leetcode&Gfg\09. Binary_Tree\BinaryTreeRightSideView.cpp"
-// 3. "Leetcode&Gfg\09. Binary_Tree\TopViewOfBinaryTree.cpp"
-// 4. "Leetcode&Gfg\09. Binary_Tree\BottomViewOfBinaryTree.cpp"
+// GFG: Top View of Binary Tree   --->   You are given the root of a binary tree, and your task is to return its top view.
+// The top view of a binary tree is the set of nodes visible when the tree is viewed from the top.
 
-// GFG: Given below is a binary tree. The task is to print the top view of binary tree. Top view of a binary tree
-// is the set of nodes visible when the tree is viewed from the top.
+// Note:
+// ● Return the nodes from the leftmost node to the rightmost node.
+// ● If multiple nodes overlap at the same horizontal position, only the topmost (closest to the root) node is included
+//   in the view.
 
-//          1 
-//         / \
-//        2   3
-//       / \ / \
-//      4  5 6  7
-//       \
-//        8
-// Its top view will be 4 2 1 3 7
+// Example 1:
+// Input: root = [1, 2, 3]
+//      1
+//     / \
+//    2   3
+// Output: [2, 1, 3]
+// Explanation: The Green colored nodes represents the top view in the below Binary tree.
 
-// This problem will require 3 data structures to get solved: vector(to store top view), queue(to push nodes in level order) 
-// and map(to keep a track of horizontal distance and its respective top view nodes).
+// Example 2:
+//         10
+//       /    \
+//      20    30
+//     /  \  /  \
+//    40  6090  100
+// Input: root = [10, 20, 30, 40, 60, 90, 100]
+// Output: [40, 20, 10, 30, 100]
+// Explanation: The Green colored nodes represents the top view in the below Binary tree.
 
-// Algorithm:
-// 1. Initialize an empty vector 'topView' to store the top view of the binary tree.
-// 2. Initialize an empty queue 'q' to perform level order traversal of the binary tree.
-// 3. Initialize an empty map 'hdToNodeMap' to keep track of the horizontal distance and its respective top view nodes.
-// 4. Push the root node and its horizontal distance (which is 0) into the queue.
-// 5. While the queue is not empty, do the following:
-//     - Dequeue a pair from the front of the queue. The pair contains a node and its horizontal distance.
-//     - If there is no entry for the horizontal distance in hdToNodeMap, insert a new entry with the horizontal distance
-//       as the key and the node's data as the value.
-//     - If the left child of the node exists, enqueue the left child along with its horizontal distance (hd - 1).
-//     - If the right child of the node exists, enqueue the right child along with its horizontal distance (hd + 1).
-//     - Pop out the front element from the queue.
-// 6. Traverse 'hdToNodeMap' and push the values of 'hdToNodeMap' into the 'topView' vector.
-// 7. Return the 'topView' vector.
+// Problem link: https://www.geeksforgeeks.org/problems/top-view-of-binary-tree/1
+
+// Algorithm: It is simple. For every vertical line of the tree, store the top node of that vertical line, and
+//            eventually we get the top view of the entire tree.
+//            To store the top node that comes in every vertical line, we can probably use a map data structure
+//            to map each vertical with its top node.
+//            And traverse the tree in DFS so that we can easily move deeper into the tree and record the topmost
+//            node for each vertical line.
 
 #include <bits/stdc++.h>
 using namespace std;
 
-// A binary tree node
-struct Node {
+class Node {
+public:
     int data;
-    struct Node* left;
-    struct Node* right;
-    
-    Node(int x) {
-        data = x;
-        left = right = NULL;
+    Node* left;
+    Node* right;
+
+    Node(int val) {
+        data = val;
+        left = nullptr;
+        right = nullptr;
     }
 };
 
 class Solution {
-    public:
-    // T.C: O(n)
+public:
+    // T.C: O(n)   where n = no.of nodes in the tree
     // S.C: O(n)
-    vector<int> topView(Node *root) {   
-        vector <int> topView;
-        queue < pair<Node*, int> > q;
-        map <int, int> hdToNodeMap;
-
-        // pushing the first element in queue
-        q.push(make_pair(root, 0));
+    vector<int> topView(Node *root) {
+        vector<int> ans;
+        if(root == NULL) return ans;
+        map<int, int> mpp;   // {vertical (x-coordinate) -> node's data}
+        queue<pair<Node*, int>> q;   // {node, vertical (x-coordinate)}
+        q.push({root, 0});
 
         while(!q.empty()) {
-            pair <Node*, int> temp = q.front();
-            Node* node = temp.first;
-            int hd = temp.second;
-
-            // if no entry exists for hd in 'hdToNodemap', then push the entry 'hd : node->data' in 'hdToNodemap' map.
-            if(hdToNodeMap.find(hd) == hdToNodeMap.end()) {
-                hdToNodeMap[hd] = node->data;
-            }
-
-            // pushing the node's children(if exists) in queue
-            if(node->left) q.push(make_pair(node->left, hd-1));
-            if(node->right) q.push(make_pair(node->right, hd+1));
-
-            // popping the queue
+            auto it = q.front();
             q.pop();
+            Node* node = it.first;
+            int vertical = it.second;
+
+            // If vertical is not found in map, store the vertical with the node seen on this vertical in the map
+            if(mpp.find(vertical) == mpp.end()) mpp[vertical] = node->data;
+            // If vertical is found in the map, do not update the node, because we are interested in only the
+            // first node that is seen on this vertical line. In this way we make sure that we are storing only
+            // the top view of every vertical.
+
+            // Push the node's children in queue
+            if(node->left) q.push({node->left, vertical - 1});
+            if(node->right) q.push({node->right, vertical + 1});
         }
 
-        // pushing the top view in 'topView' vector, and returning it
-        for(auto i: hdToNodeMap) {
-            topView.push_back(i.second);
-        }
-        return topView;
+        for(auto it: mpp) ans.push_back(it.second);
+        return ans;
     }
 };
 
 int main() {
-//          1 
-//         / \
-//        2   3
-//       / \ / \
-//      4  5 6  7
-//       \
-//        8
-// Its top view will be 4 2 1 3 7
+//         10
+//       /    \
+//      20    30
+//     /  \  /  \
+//    40  6090  100
 
-    Node* root = new Node(1);
-    root->left = new Node(2);
-    root->right = new Node(3);
-    root->left->left = new Node(4);
-    root->left->right = new Node(5);
-    root->right->left = new Node(6);
-    root->right->right = new Node(7);
-    root->left->left->right = new Node(8);
+    Node* root = new Node(10);
+    root->left = new Node(20);
+    root->right = new Node(30);
+    root->left->left = new Node(40);
+    root->left->right = new Node(60);
+    root->right->left = new Node(90);
+    root->right->right = new Node(100);
 
     Solution sol;
     vector<int> ans = sol.topView(root);
