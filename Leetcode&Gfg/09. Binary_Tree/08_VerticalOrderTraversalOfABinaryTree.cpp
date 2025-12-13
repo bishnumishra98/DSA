@@ -69,6 +69,14 @@ struct TreeNode {
 
 class Solution {
 public:
+    // T.C: n * log(n) for inserting into map
+    //      + O(n) for pushing and popping elements in queue
+    //      + O(n) for iterating the map and storing all values in 'ans'
+    //      = O(n * logn);   where n = no.of nodes in tree
+    // S.C: O(n) for map holding n nodes
+    //      + O(n) for queue storing all nodes in skew tree
+    //      + O(n) for vector storing all elements of tree
+    //      = O(n)
     vector<vector<int>> verticalTraversal(TreeNode* root) {
         map<int, map<int, multiset<int>>> nodes;   // x-coordinate (vertical) -> {y-coordinate (level) -> multiple nodes}
         queue<pair<TreeNode*, pair<int, int>>> q;   // {TreeNode*, {x-coordinate (vertical), y-coordinate (level)}}
