@@ -50,7 +50,7 @@ int dfsHeight(TreeNode* root, int &diameter) {
     diameter = max(diameter, lh + rh);
 
     // Return height of current node
-    return 1 + max(lh, rh);
+    return max(lh, rh) + 1;
 }
 
 // T.C: O(n)
