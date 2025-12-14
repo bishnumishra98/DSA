@@ -59,8 +59,8 @@ struct TreeNode {
 
 class Solution {
 public:
-    // T.C: O(n);   where n = no.of nodes
-    // S.C: O(h);   where h = height of tree
+    // T.C: O(n)
+    // S.C: O(h)   due to recursion stack
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         // Base cases
         if(root == NULL || root == p || root == q) return root;
