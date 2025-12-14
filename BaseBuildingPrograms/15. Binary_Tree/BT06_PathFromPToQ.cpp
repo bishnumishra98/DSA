@@ -72,7 +72,7 @@ bool getPath(TreeNode* root, TreeNode* target, vector<int>& path) {
 }
 
 // T.C: O(n);   where n = no.of nodes in tree
-// S.C: O(n)
+// S.C: O(h);   where h = height of tree, h = n for skew tree
 vector<int> pathFromPtoQ(TreeNode* root, TreeNode* p, TreeNode* q) {
     vector<int> pathP, pathQ, result;
 
