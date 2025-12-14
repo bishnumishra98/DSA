@@ -1,6 +1,6 @@
-// Leetcode: 112. Path Sum   --->   Given the root of a binary tree and an integer targetSum, return all
-// root-to-leaf paths where the sum of the node values in the path equals targetSum. Each path should be
-// returned as a list of the node values, not node references.
+// Leetcode: 113. Path Sum II   --->   Given the root of a binary tree and an integer targetSum, return all
+// root-to-leaf paths where the sum of the node values in the path equals targetSum. Each path should be returned
+// as a list of the node values, not node references.
 // A root-to-leaf path is a path starting from the root and ending at any leaf node. A leaf is a node with no children.
 
 // Example 1:
@@ -80,8 +80,13 @@ public:
 
 
 int main() {
-    Solution sol;
-    // [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22
+//               5
+//             /   \
+//            4     8
+//           /     / \
+//          11    13  4
+//         /  \      /  \
+//        7    2    5    1 
     int targetSum = 22;
     TreeNode* root = new TreeNode(5);
     root->left = new TreeNode(4);
@@ -94,7 +99,7 @@ int main() {
     root->right->right->left = new TreeNode(5);
     root->right->right->right = new TreeNode(1);
 
-    vector<vector<int>> ans = sol.pathSum(root, targetSum);
+    vector<vector<int>> ans = Solution().pathSum(root, targetSum);
     for(int i = 0; i < ans.size(); i++) {
         for(int j = 0; j < ans[i].size(); j++) {
             cout << ans[i][j] << " ";
