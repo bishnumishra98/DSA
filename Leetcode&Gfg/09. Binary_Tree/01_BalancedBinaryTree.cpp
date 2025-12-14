@@ -26,10 +26,10 @@
 // Input: root = []
 // Output: true
 
-// Algorithm: A node is balanced only if 3 conditions are met:
-// 1) Left sub-tree is balanced
-// 2) Right sub-tree is balanced
-// 3) Diiference in heights of left and right sub-tree is less than equal to 1.
+// Algorithm: A node is balanced only if all three conditions are met:
+//            1. Left sub-tree is balanced
+//            2. Right sub-tree is balanced
+//            3. Difference in heights of left and right sub-tree is less than equal to 1.
 
 #include <iostream>
 using namespace std;
