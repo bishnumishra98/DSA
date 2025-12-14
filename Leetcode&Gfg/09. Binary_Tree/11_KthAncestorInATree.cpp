@@ -84,7 +84,7 @@ private:
 
 public:
     // T.C: O(n)
-    // S.C: O(h)   due to recursion stack
+    // S.C: O(h)   due to recursion stack, h = n for skew tree
     int kthAncestor(Node *root, int k, int node) {
         int result = findKthAncestor(root, k, node);
 

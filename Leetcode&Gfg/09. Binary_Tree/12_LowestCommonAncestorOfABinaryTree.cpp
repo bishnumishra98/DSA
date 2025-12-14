@@ -60,7 +60,7 @@ struct TreeNode {
 class Solution {
 public:
     // T.C: O(n)
-    // S.C: O(h)   due to recursion stack
+    // S.C: O(h)   due to recursion stack, h = n for skew tree
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         // Base cases
         if(root == NULL || root == p || root == q) return root;
