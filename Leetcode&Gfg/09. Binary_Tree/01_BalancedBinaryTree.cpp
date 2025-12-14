@@ -31,7 +31,7 @@
 //            2. Right sub-tree is balanced
 //            3. Difference in heights of left and right sub-tree is less than equal to 1.
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 // Definition for a binary tree node.
