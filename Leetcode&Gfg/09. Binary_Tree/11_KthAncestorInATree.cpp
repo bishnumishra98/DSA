@@ -34,6 +34,20 @@
 
 // Problem link: https://www.geeksforgeeks.org/problems/kth-ancestor-in-a-tree/1
 
+
+// Algorithm: It is simple. Dry run for best understanding.
+// 1. Perform a DFS traversal of the tree.
+// 2. Base case:
+//    - If the current node is NULL, return -1.
+//    - If the current node is the target, return its value to signal that the target is found.
+// 3. Recursively search the left and right subtrees.
+// 4. If the target is found in either subtree:
+//    - Decrement k.
+//    - If k becomes 0, the current node is the kth ancestor; return its value.
+//    - Otherwise, propagate the found signal upward.
+// 5. If the target is not found in either subtree, return -1.
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -47,10 +61,9 @@ struct Node {
 class Solution {
 private:
     int findKthAncestor(Node* root, int &k, int target) {
+        // Base cases
         if(root == NULL) return -1;
-
-        // If target node is found
-        if(root->data == target) return root->data;
+        if(root->data == target) return target;   // if target node is found, propagate the found signal upward with target
 
         // Search in left and right subtrees
         int left = findKthAncestor(root->left, k, target);
@@ -59,8 +72,11 @@ private:
         // If target is found in either subtree
         if(left != -1 || right != -1) {
             k--;
-            if(k == 0) return root->data;   // if k becomes 0, current node is the answer
-            return (left != -1) ? left : right;   // propagate found signal upward
+            // If k becomes 0, the current node is the kth ancestor of target; thus propagate
+            // the found signal upward, but this time with the value of current node
+            if(k == 0) return root->data;
+            // If k is not yet 0, propagate found signal upward with the value of target itself
+            return (left != -1) ? left : right;
         }
 
         return -1;   // target not found in this subtree
