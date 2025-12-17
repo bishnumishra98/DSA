@@ -47,7 +47,7 @@ Node* createBSTFromInorder(int inorderArray[], int start, int end) {
     if(start > end) return NULL;   // base case
 
     // Creating root from mid element
-    int mid = start + (end - start)/2;   // same as (start + end)/2
+    int mid = start + (end - start) / 2;   // same as (start + end)/2
     int element = inorderArray[mid];
     Node* root = new Node(element);
 
