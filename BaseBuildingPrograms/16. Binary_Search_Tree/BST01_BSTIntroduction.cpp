@@ -54,9 +54,9 @@ void levelOrderTraversal_LevelByLevel(Node* root) {
 // --------------------------------------------------------
 
 Node* insert(Node* &root, int value) {
-    if (root == NULL) return new Node(value);
+    if(root == NULL) return new Node(value);
 
-    if (value < root->data) root->left = insert(root->left, value);
+    if(value < root->data) root->left = insert(root->left, value);
     else root->right = insert(root->right, value);
 
     return root;
@@ -68,7 +68,7 @@ Node* createBST(int values[], int n) {
     Node* root = NULL;   // initializing the root of the BST as NULL.
 
     // Iterate over each value in the array and insert it into the BST using the insert() function.
-    for (int i=0; i<n; i++) {
+    for(int i = 0; i < n; i++) {
         root = insert(root, values[i]);
     }
 
