@@ -43,7 +43,7 @@ void levelOrderTraversal_LevelByLevel(Node* root) {
 
 // T.C: O(N)
 // S.C: O(H)   where H = NlogN on average case, and H = N in the worst case.
-Node* createBSTFromInorder(int inorderArray[], int start, int end) {
+Node* createBSTFromInorder(vector<int>& inorderArray, int start, int end) {
     if(start > end) return NULL;   // base case
 
     // Creating root from mid element
@@ -70,7 +70,7 @@ int main() {
 //       / \   / \
 //      1   3 5   7
 
-    int inorderArray[] = {1, 2, 3, 4, 5, 6, 7};
+    vector<int> inorderArray = {1, 2, 3, 4, 5, 6, 7};
     int size = 7;
     int start = 0;
     int end = size - 1;
