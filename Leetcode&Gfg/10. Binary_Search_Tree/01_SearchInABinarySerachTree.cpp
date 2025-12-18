@@ -29,23 +29,13 @@ struct TreeNode {
 
 class Solution {
 public:
-    // T.C: O(logN) on average case(balanced tree), O(N) in the worst case(skew tree).
-    // S.C: O(N)
+    // T.C: O(h);   where h = height of tree, h = logn for balanced BST, h = n for skew tree
+    // S.C: O(1)
     TreeNode* searchBST(TreeNode* root, int val) {
-        if(!root) return NULL;   // if root is NULL, return NULL
-
-        if(val == root->val) return root;   // if 'val' matches the node's value, return that node
-
-        TreeNode* left = NULL;
-        TreeNode* right = NULL;
-
-        if(val < root->val) left = searchBST(root->left, val);
-        else right = searchBST(root->right, val);
-       
-        // If we got any node from left subtree, then return that node; else return right node.
-        // Anyways, if we get NULL from both left and right, we will be returning NULL from right.
-        if(left) return left;
-        else return right;
+        while(root != NULL && root->val != val) {
+            root = val < root->val ? root->left : root->right;
+        }
+        return root;
     }
 };
 
