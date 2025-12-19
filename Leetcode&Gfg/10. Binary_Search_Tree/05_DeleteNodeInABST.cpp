@@ -79,7 +79,7 @@ public:
         if(root == NULL) return NULL;
         if(root->val == key) return deleteNodeFromBST(root);
 
-        TreeNode* dummy = root;
+        TreeNode* dummy = root;  // preserve the root node
         while(root != NULL) {
             if(root->val > key) {
                 if(root->left != NULL && root->left->val == key) {
