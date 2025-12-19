@@ -55,13 +55,14 @@ void levelOrderTraversal_LevelByLevel(TreeNode* root) {
 
 class Solution {
 private:
-    TreeNode* helper(TreeNode* root) {
+    // It takes the parameter 'root' as the node to be deleted and returns the new root of the modified subtree
+    TreeNode* deleteNodeFromBST(TreeNode* root) {
         if(root->left == NULL) return root->right;
         else if(root->right == NULL) return root->left;
         else {
             TreeNode* rightChild = root->right;
-            TreeNode* lastRightNode = findLastRightNode(root->left);
-            lastRightNode->right = rightChild;
+            TreeNode* rightmostNodeOfLeftChild = findLastRightNode(root->left);
+            rightmostNodeOfLeftChild->right = rightChild;
             return root->left;
         }
     }
@@ -76,20 +77,20 @@ public:
     // S.C: O(1)
     TreeNode* deleteNode(TreeNode* root, int key) {
         if(root == NULL) return NULL;
-        if(root->val == key) return helper(root);
+        if(root->val == key) return deleteNodeFromBST(root);
 
         TreeNode* dummy = root;
         while(root != NULL) {
             if(root->val > key) {
                 if(root->left != NULL && root->left->val == key) {
-                    root->left = helper(root->left);
+                    root->left = deleteNodeFromBST(root->left);
                     break;
                 } else {
                     root = root->left;
                 }
             } else {
                 if(root->right != NULL && root->right->val == key) {
-                    root->right = helper(root->right);
+                    root->right = deleteNodeFromBST(root->right);
                     break;
                 } else {
                     root = root->right;
