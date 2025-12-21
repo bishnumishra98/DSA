@@ -106,7 +106,7 @@ class Heap {
         }
 
         void printHeap() {
-            for(int i=1; i<=size; i++) {
+            for(int i = 1; i <= size; i++) {
                 cout << arr[i] << " ";
             }
             cout << endl;
