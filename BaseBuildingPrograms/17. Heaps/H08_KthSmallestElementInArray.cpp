@@ -17,14 +17,14 @@ using namespace std;
 // S.C: O(logN);   due to the recursive stack space used by the sorting algorithm of sort()
 int findKthSmallest_bruteForce(vector<int>& nums, int k) {
     sort(nums.begin(), nums.end());   // sorts array in ascending order
-    return nums[k-1];
+    return nums[k - 1];
 }
 
 //-----------------------------------------------------------------------------
 
-// T.C: O(N + (k-1)*logN);   Building the heap from N elements of 'nums' takes O(N) time. Each pop operation from
-//                           a heap of size N takes O(logN) time. Therefore, popping k-1 elements will take
-//                           O((k-1)*logN) time. Combining these steps, the total time complexity is O(N + (k-1)*logN).
+// T.C: O(N + (k - 1) * logN);   Building the heap from N elements of 'nums' takes O(N) time. Each pop operation from
+//                               a heap of size N takes O(logN) time. Therefore, popping k-1 elements will take
+//                               O((k-1)*logN) time. Combining these steps, the total time complexity is O(N + (k-1)*logN).
 // S.C: O(N);   The priority queue (min-heap) stores all N elements from the 'nums' vector, which requires O(N) space.
 int findKthSmallest_minHeap(vector<int>& nums, int k) {
     /*
@@ -56,10 +56,10 @@ int findKthSmallest_minHeap(vector<int>& nums, int k) {
 //    max-heap, remove the top element from the heap and insert the current element into the heap.
 // 3. After processing all elements, the top element of the max-heap is the k-th smallest element of the input array.
 
-// T.C: O(k + (N−k)logk);   Building the heap from k elements of 'nums' takes O(k) time. For the remaining 'n−k' elements,
-//                          if the if condition is true, the algorithm performs a two heap operations (pop and push) which
-//                          takes O(logK) time.e. Since this is done for each of 'n−k' elements, the total time complexity
-//                          becomes O((n−k)logk). Combining these steps, the total time complexity is O(k + (N−k)logk).
+// T.C: O(k + (N − k) * logk);   Building the heap from k elements of 'nums' takes O(k) time. For the remaining 'n−k' elements,
+//                               if the if condition is true, the algorithm performs a two heap operations (pop and push) which
+//                               takes O(logK) time.e. Since this is done for each of 'n−k' elements, the total time complexity
+//                               becomes O((n−k)logk). Combining these steps, the total time complexity is O(k + (N−k)logk).
 // S.C: O(K);   The priority queue (max-heap) stores K elements from the 'nums' vector, which requires O(K) space.
 int findKthSmallest_maxHeap(vector<int>& nums, int k) {
     // Step 1: Make a max-heap from the first k elements of the given input array
@@ -75,7 +75,7 @@ int findKthSmallest_maxHeap(vector<int>& nums, int k) {
     priority_queue<int> maxHeap(nums.begin(), nums.begin() + k);
 
     // Step 2: Compare the rest of the elements with the top element of the max-heap
-    for(int i=k; i<nums.size(); i++) {
+    for(int i = k; i < nums.size(); i++) {
         if(nums[i] < maxHeap.top()) {
             maxHeap.pop();
             maxHeap.push(nums[i]);
