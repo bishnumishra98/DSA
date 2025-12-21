@@ -112,33 +112,3 @@ int main() {
 
     return 0;
 }
-
-
-// An easier version of implementation is present, using vectors:
-
-// class Heap {
-// public:
-//     vector<int> arr;   // 0-based heap
-
-//     // Insert into max heap
-//     void insert(int val) {
-//         arr.push_back(val);
-//         int index = arr.size() - 1;
-
-//         // Heapify up
-//         while (index > 0) {
-//             int parent = (index - 1) / 2;
-//             if (arr[index] > arr[parent]) {
-//                 swap(arr[index], arr[parent]);
-//                 index = parent;
-//             } else {
-//                 break;
-//             }
-//         }
-//     }
-
-//     void printHeap() {
-//         for (int x : arr) cout << x << " ";
-//         cout << endl;
-//     }
-// };
