@@ -32,7 +32,7 @@ int main() {
     cout << "Size of max-heap: " << maxHeap.size() << endl;   // o/p: 4
 
     // Checking if the priority queue is empty
-    if (maxHeap.empty()) {   // o/p: The max-heap is not empty.
+    if(maxHeap.empty()) {   // o/p: The max-heap is not empty.
         cout << "The max-heap is empty." << endl;
     } else {
         cout << "The max-heap is not empty." << endl;
@@ -63,7 +63,7 @@ int main() {
     cout << "Size of min-heap: " << minHeap.size() << endl;   // o/p: 4
 
     // Checking if the priority queue is empty
-    if (minHeap.empty()) {   // o/p: The min-heap is not empty.
+    if(minHeap.empty()) {   // o/p: The min-heap is not empty.
         cout << "The min-heap is empty." << endl;
     } else {
         cout << "The min-heap is not empty." << endl;
