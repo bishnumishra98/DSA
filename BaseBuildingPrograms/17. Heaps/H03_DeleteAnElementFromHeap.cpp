@@ -71,13 +71,11 @@ public:
 
             int largestElementIndex = index;
 
-            if(leftChildIndex < size &&
-                arr[leftChildIndex] > arr[largestElementIndex]) {
+            if(leftChildIndex < size && arr[leftChildIndex] > arr[largestElementIndex]) {
                 largestElementIndex = leftChildIndex;
             }
 
-            if(rightChildIndex < size &&
-                arr[rightChildIndex] > arr[largestElementIndex]) {
+            if(rightChildIndex < size && arr[rightChildIndex] > arr[largestElementIndex]) {
                 largestElementIndex = rightChildIndex;
             }
 
@@ -109,10 +107,10 @@ int main() {
     h.insert(20);
     h.insert(40);
 
-    h.printHeap();   // 60 30 50 10 20 40
+    h.printHeap();   // o/p: 60 30 50 10 20 40
 
     h.deleteElementFromHeap();
-    h.printHeap();   // 50 30 40 10 20
+    h.printHeap();   // o/p: 50 30 40 10 20
 
     return 0;
 }
