@@ -2,6 +2,14 @@
 // algorithm works by first building a heap (either max-heap or min-heap) from the given array and then repeatedly
 // extracting the maximum (or minimum) element from the heap and placing it at the end of the array.
 
+// Summary of Heap Sort Variants:
+// | Heap Type              | Sorted Order | In-Place |
+// | ---------------------- | ------------ | -------- |
+// | Max Heap               | Ascending    | ✅       |
+// | Min Heap               | Descending   | ✅       |
+// | Min Heap + extra array | Ascending    | ❌       |
+
+
 #include <iostream>
 #include <vector>
 using namespace std;
