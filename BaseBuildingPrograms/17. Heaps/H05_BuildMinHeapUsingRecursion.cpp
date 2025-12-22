@@ -26,8 +26,8 @@ void heapify(vector<int>& heap, int n, int index) {
 }
 
 // Build Min Heap
-// T.C: O(N)
-// S.C: O(log N)
+// T.C: O(N);   where N = no.of elements in heap
+// S.C: O(log N)   recursive stack
 void buildMinHeap(vector<int>& heap) {
     int n = heap.size();
 
