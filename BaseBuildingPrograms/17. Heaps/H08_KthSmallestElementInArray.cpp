@@ -1,8 +1,16 @@
-// Example:
-// Input: nums = [3,2,1,5,6,4], k = 3
-// Output: 3
+// Kth Smallest Element in an Array   --->   
+// Given an integer array 'nums' and an integer 'k', return the k-th smallest element in the array.
 
-// These type of questions can be solved in 3 mthods:
+// Example 1:
+// Input: nums = [30, 20, 10, 40, 60, 50], k = 3
+// Output: 30
+
+// Example 2:
+// Input: nums = [7,10,4,3,20,15], k = 4
+// Output: 10
+
+// Algorithms:
+// This problem can be solved with any of the following three approaches:
 // 1. Brute force approach (using sort() function)
 // 2. Better approach (using min heap)
 // 3. Optimal approach (using max heap)
@@ -89,7 +97,7 @@ int findKthSmallest_maxHeap(vector<int>& nums, int k) {
 //-----------------------------------------------------------------------------
 
 int main() {
-    vector <int> v = {3,2,1,5,6,4};
+    vector <int> v = {30, 20, 10, 40, 60, 50};
     int k = 3;
 
     cout << "Brute force: " << findKthSmallest_bruteForce(v, k) << endl;
