@@ -19,11 +19,9 @@ void heapify(vector<int>& arr, int n, int index) {
     int left = 2 * index + 1;
     int right = 2 * index + 2;
 
-    if(left < n && arr[left] > arr[largest])
-        largest = left;
+    if(left < n && arr[left] > arr[largest]) largest = left;
 
-    if(right < n && arr[right] > arr[largest])
-        largest = right;
+    if(right < n && arr[right] > arr[largest]) largest = right;
 
     if(largest != index) {
         swap(arr[index], arr[largest]);
@@ -42,8 +40,8 @@ void buildMaxHeap(vector<int>& arr) {
 }
 
 // Heap Sort
-// T.C: O(n log n)
-// S.C: O(log n)  (recursive stack)
+// T.C: O(nlogn);   where n = no.of elements in heap
+// S.C: O(logn)   recursive stack
 void heapSort(vector<int>& arr) {
     int n = arr.size();
 
@@ -52,7 +50,7 @@ void heapSort(vector<int>& arr) {
 
     // Step 2: Extract elements one by one
     for(int i = n - 1; i > 0; i--) {
-        // Move current root to end
+        // Move current root to end so that the largest element is at the end of the array
         swap(arr[0], arr[i]);
 
         // Heapify reduced heap
