@@ -1,57 +1,54 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-void printHeap(int *arr, int size) {
-    for(int i = 0; i < size; i++) {
-        cout << arr[i] << " ";
+void printHeap(vector<int>& heap) {
+    for(int val : heap) {
+        cout << val << " ";
     }
     cout << endl;
 }
 
-// Recursive method to heapify elements
-// Doing for 0 based index:
-void heapify(int *arr, int n, int index) {
-    int leftIndex = (2 * index) + 1;   // Left child index for 0-based index
-    int rightIndex = (2 * index) + 2;   // Right child index for 0-based index
-    int largestIndex = index;
+// Heapify subtree rooted at index (MAX HEAP)
+void heapify(vector<int>& heap, int n, int index) {
+    int largest = index;
+    int left = 2 * index + 1;
+    int right = 2 * index + 2;
 
-    if(leftIndex < n && arr[leftIndex] > arr[largestIndex])
-        largestIndex = leftIndex;
+    if(left < n && heap[left] > heap[largest])
+        largest = left;
 
-    if(rightIndex < n && arr[rightIndex] > arr[largestIndex])
-        largestIndex = rightIndex;
+    if(right < n && heap[right] > heap[largest])
+        largest = right;
 
-    if(largestIndex != index) {
-        swap(arr[index], arr[largestIndex]);
-
-        // Recursively heapify the affected sub-tree
-        heapify(arr, n, largestIndex);
+    if(largest != index) {
+        swap(heap[index], heap[largest]);
+        heapify(heap, n, largest);
     }
 }
 
-// T.C: O(N)
-// S.C: O(h);   where h = logN
-void buildMaxHeap(int *arr, int n) {
-    // Start from the last internal node all the way up to the root node.
-    for (int i = n/2; i >= 0; i--) {
-        heapify(arr, n, i);
+// Build Max Heap
+// T.C: O(N);   where N = no.of elements in heap
+// S.C: O(log N)   recursive stack
+void buildMaxHeap(vector<int>& heap) {
+    int n = heap.size();
+
+    // Start from last non-leaf node
+    for(int i = n / 2 - 1; i >= 0; i--) {
+        heapify(heap, n, i);
     }
 }
 
 int main() {
-    // Lets create a max heap for {10, 20, 30, 40, 50, 60}
-    // The heap for above array will look like this:
-    //      _ 60 _ 
-    //     /      \
-    //    50      30
-    //   /  \     /
-    //  40  20   10
+    vector<int> heap = {30, 20, 10, 40, 60, 50};
 
-    int arr[] = {10, 20, 30, 40, 50, 60}; 
-    int n = 6;    // Size of the heap (number of elements in the heap)
-    printHeap(arr, n);   // Before heapification
-    buildMaxHeap(arr, n);   // Build the max heap
-    printHeap(arr, n);   // After heapification
+    cout << "Before Heapify: ";
+    printHeap(heap);   // o/p: 30 20 10 40 60 50
+
+    buildMaxHeap(heap);
+
+    cout << "After Heapify (Max Heap): ";
+    printHeap(heap);   // o/p: 60 40 50 30 20 10
 
     return 0;
 }

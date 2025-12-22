@@ -1,59 +1,54 @@
-// Exactly same as 'H04_BuildMaxHeapUsingRecursion.cpp', just there will be a change in if condition of heapify().
-
 #include <iostream>
+#include <vector>
 using namespace std;
 
-void printHeap(int *arr, int size) {
-    for(int i = 0; i < size; i++) {
-        cout << arr[i] << " ";
+void printHeap(const vector<int>& heap) {
+    for (int val : heap) {
+        cout << val << " ";
     }
     cout << endl;
 }
 
-// Recursive method to heapify elements
-// Doing for 0 based index:
-void heapify(int *arr, int n, int index) {
-    int leftIndex = (2 * index) + 1;   // Left child index for 0-based index
-    int rightIndex = (2 * index) + 2;   // Right child index for 0-based index
-    int smallestIndex = index;
+// Heapify subtree rooted at index (MIN HEAP)
+void heapify(vector<int>& heap, int n, int index) {
+    int smallest = index;
+    int left = 2 * index + 1;
+    int right = 2 * index + 2;
 
-    if(leftIndex < n && arr[leftIndex] < arr[smallestIndex])
-        smallestIndex = leftIndex;
+    if (left < n && heap[left] < heap[smallest])
+        smallest = left;
 
-    if(rightIndex < n && arr[rightIndex] < arr[smallestIndex])
-        smallestIndex = rightIndex;
+    if (right < n && heap[right] < heap[smallest])
+        smallest = right;
 
-    if(smallestIndex != index) {
-        swap(arr[index], arr[smallestIndex]);
-
-        // Recursively heapify the affected sub-tree
-        heapify(arr, n, smallestIndex);
+    if (smallest != index) {
+        swap(heap[index], heap[smallest]);
+        heapify(heap, n, smallest);
     }
 }
 
+// Build Min Heap
 // T.C: O(N)
-// S.C: O(H);   where H = logN
-void buildMinHeap(int *arr, int n) {
-    // Start from the last internal node all the way up to the root node
-    for (int i = n/2; i >= 0; i--) {
-        heapify(arr, n, i);
+// S.C: O(log N)
+void buildMinHeap(vector<int>& heap) {
+    int n = heap.size();
+
+    // Start from last non-leaf node
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapify(heap, n, i);
     }
 }
 
 int main() {
-    // Lets create a min heap for {60, 50, 40, 30, 20, 10}
-    // The heap for above array will look like this:
-    //      _ 10 _ 
-    //     /      \
-    //    20      30
-    //   /  \     /
-    //  40  50   60
+    vector<int> heap = {30, 20, 10, 40, 60, 50};
 
-    int arr[] = {60, 50, 40, 30, 20, 10}; 
-    int n = 6;    // Size of the heap (number of elements in the heap)
-    printHeap(arr, n);   // Before heapification
-    buildMinHeap(arr, n);   // Build the min heap
-    printHeap(arr, n);   // After heapification
+    cout << "Before Heapify: ";
+    printHeap(heap);   // o/p: 30 20 10 40 60 50
+
+    buildMinHeap(heap);
+
+    cout << "After Heapify (Min Heap): ";
+    printHeap(heap);   // o/p: 10 20 30 40 60 50
 
     return 0;
 }
