@@ -3,7 +3,7 @@
 using namespace std;
 
 void printHeap(const vector<int>& heap) {
-    for (int val : heap) {
+    for(int val : heap) {
         cout << val << " ";
     }
     cout << endl;
@@ -15,13 +15,13 @@ void heapify(vector<int>& heap, int n, int index) {
     int left = 2 * index + 1;
     int right = 2 * index + 2;
 
-    if (left < n && heap[left] < heap[smallest])
+    if(left < n && heap[left] < heap[smallest])
         smallest = left;
 
-    if (right < n && heap[right] < heap[smallest])
+    if(right < n && heap[right] < heap[smallest])
         smallest = right;
 
-    if (smallest != index) {
+    if(smallest != index) {
         swap(heap[index], heap[smallest]);
         heapify(heap, n, smallest);
     }
@@ -34,7 +34,7 @@ void buildMinHeap(vector<int>& heap) {
     int n = heap.size();
 
     // Start from last non-leaf node
-    for (int i = n / 2 - 1; i >= 0; i--) {
+    for(int i = n / 2 - 1; i >= 0; i--) {
         heapify(heap, n, i);
     }
 }
