@@ -15,11 +15,9 @@ void heapify(vector<int>& heap, int n, int index) {
     int left = 2 * index + 1;
     int right = 2 * index + 2;
 
-    if(left < n && heap[left] > heap[largest])
-        largest = left;
+    if(left < n && heap[left] > heap[largest]) largest = left;
 
-    if(right < n && heap[right] > heap[largest])
-        largest = right;
+    if(right < n && heap[right] > heap[largest]) largest = right;
 
     if(largest != index) {
         swap(heap[index], heap[largest]);

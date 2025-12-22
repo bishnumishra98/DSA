@@ -15,11 +15,9 @@ void heapify(vector<int>& heap, int n, int index) {
     int left = 2 * index + 1;
     int right = 2 * index + 2;
 
-    if(left < n && heap[left] < heap[smallest])
-        smallest = left;
+    if(left < n && heap[left] < heap[smallest]) smallest = left;
 
-    if(right < n && heap[right] < heap[smallest])
-        smallest = right;
+    if(right < n && heap[right] < heap[smallest]) smallest = right;
 
     if(smallest != index) {
         swap(heap[index], heap[smallest]);
