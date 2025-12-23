@@ -14,6 +14,26 @@
 //    all elements from the k sorted arrays in sorted order.
 
 
+// ● Guide for good practice of writing a Custom comparator:
+//
+//   ● What do you understand with the term STL comparartor ?
+//     STL comparator is a function-like object that has no internal data and only compares two read-only values
+//     without changing anything.
+//
+//   Comparator must be:
+//      ▪ Read-only on elements
+//      ▪ Read-only on itself
+//      So STL should be: const elements + const comparator
+//   A simple analogy to understand this is:-
+//      Think of comparator as a judge:
+//      ▪ Judge cannot change the contestants
+//      ▪ Judge cannot change himself while judging
+//   That's why we use 'const' for both elements and comparator.
+//
+//   ● Final Rule: All STL comparators should be stateless and declared as const call operators with const parameters.
+//     ▪ Stateless means comparator has no internal data and does not change behavior between calls.
+
+
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -22,10 +42,11 @@ using namespace std;
 
 // Custom comparator for min-heap
 struct Compare {
-    bool operator()(tuple<int, int, int>& a, tuple<int, int, int>& b) {
-        return get<0>(a) > get<0>(b);   // Min-heap based on value
+    bool operator()(const tuple<int, int, int>& a, const tuple<int, int, int>& b) const {
+        return get<0>(a) > get<0>(b);   // min-heap
     }
 };
+
 
 // T.C: O(N log k);   where N is total no.of elements and k is no.of arrays
 // S.C: O(k)   for min-heap storing k elements at max
@@ -41,7 +62,7 @@ vector<int> mergeKSortedArrays(vector<vector<int>>& arr) {
     }
 
     vector<int> result;
-    
+
     while(!minHeap.empty()) {
         auto it = minHeap.top();
         minHeap.pop();
