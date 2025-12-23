@@ -29,7 +29,7 @@ struct Compare {
 
 // T.C: O(N log k);   where N is total no.of elements and k is no.of arrays
 // S.C: O(k)   for min-heap storing k elements at max
-void mergeKSortedArrays(vector<vector<int>>& arr, vector<int>& ans) {
+vector<int> mergeKSortedArrays(vector<vector<int>>& arr) {
     // Min-heap storing (value, rowIndex, colIndex)
     priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, Compare> minHeap;
 
@@ -40,7 +40,8 @@ void mergeKSortedArrays(vector<vector<int>>& arr, vector<int>& ans) {
         }
     }
 
-    // Process the heap
+    vector<int> result;
+    
     while(!minHeap.empty()) {
         auto it = minHeap.top();
         minHeap.pop();
@@ -49,13 +50,15 @@ void mergeKSortedArrays(vector<vector<int>>& arr, vector<int>& ans) {
         int row = get<1>(it);
         int col = get<2>(it);
 
-        ans.push_back(value);
+        result.push_back(value);
 
         // Push next element from the same array (if exists)
         if(col + 1 < arr[row].size()) {
             minHeap.push({arr[row][col + 1], row, col + 1});
         }
     }
+
+    return result;
 }
 
 int main() {
@@ -65,11 +68,10 @@ int main() {
         {2, 4, 6, 8}
     };
 
-    vector<int> ans;
-    mergeKSortedArrays(arr, ans);   // o/p: 2 3 4 5 6 6 8 10 15 20
+    vector<int> ans = mergeKSortedArrays(arr);
 
-    for (int x : ans) {
-        cout << x << " ";
+    for(int x : ans) {
+        cout << x << " ";   // o/p: 2 3 4 5 6 6 8 10 15 20
     }
 
     return 0;
