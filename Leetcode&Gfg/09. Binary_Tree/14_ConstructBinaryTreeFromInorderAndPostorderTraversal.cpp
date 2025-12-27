@@ -62,6 +62,7 @@ private:
 
         root->left = buildBinaryTree(inorder, inStart, inRoot - 1, postorder, postStart, postStart + numsLeft - 1, inorderMap);
         root->right =buildBinaryTree(inorder, inRoot + 1, inEnd, postorder, postStart + numsLeft, postEnd - 1, inorderMap);
+        return root;
     }
 
 public:
