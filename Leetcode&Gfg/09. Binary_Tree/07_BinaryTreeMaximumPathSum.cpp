@@ -36,11 +36,22 @@ struct TreeNode {
 };
 
 class Solution {
+private:
+    int maxPathDown(TreeNode* node, int& maxi) {
+        if(node == NULL) return 0;
+        int left = max(0, maxPathDown(node->left, maxi));
+        int right = max(0, maxPathDown(node->right, maxi));
+        maxi = max(maxi, left + right + node->val);
+        return max(left, right) + node->val;
+    }
+
 public:
-    // T.C:
-    // S.C:
+    // T.C: O(n);   where n is the number of nodes in the binary tree
+    // S.C: O(h);   where h is the height of the binary tree, h = n for skewed tree
     int maxPathSum(TreeNode* root) {
-        
+        int maxi = INT_MIN;
+        maxPathDown(root, maxi);
+        return maxi;
     }
 };
 
@@ -55,6 +66,8 @@ int main() {
     root->right = new TreeNode(20);
     root->right->left = new TreeNode(15);
     root->right->right = new TreeNode(7);
+
+    cout << Solution().maxPathSum(root);
 
     return 0;
 }
