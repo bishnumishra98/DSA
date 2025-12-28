@@ -22,6 +22,38 @@
 // Output: 42
 // Explanation: The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.
 
+
+// Algorithm: It is simple.
+//
+// At every node in the binary tree, we think about two different things:
+// 1. The maximum path sum that PASSES THROUGH this node.
+// 2. The maximum path sum that can be EXTENDED UPWARD to its parent.
+//
+// 1. Path passing through the current node:
+//    This path includes:
+//      - the current node
+//      - the maximum path sum from the left child path
+//      - the maximum path sum from the right child path
+//    So, the path sum is: left_path + node_value + right_path
+//    This value is used to update the global maximum path sum found so far.
+//
+// 2. Path extending upward to the parent:
+//    A path going to the parent can choose ONLY ONE direction (either left or right), because a path
+//    cannot split out in two directions.
+//    So, the value returned to the parent is: node_value + max(left_path, right_path)
+//
+// Important optimization:
+// If a left or right subtree contributes a negative sum, we ignore it by treating it as 0, since including it would
+// reduce the total path sum.
+//
+// Algorithm Summary:
+// We perform a DFS traversal of the tree.
+// At each node:
+//    - compute the best left and right downward paths
+//    - update the global maximum path sum
+//    - return the best single-direction path to the parent
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -38,10 +70,17 @@ struct TreeNode {
 class Solution {
 private:
     int maxPathDown(TreeNode* node, int& maxi) {
+        // Base case: If the node is null, return 0
         if(node == NULL) return 0;
+
+        // Recursively calculate the maximum path sum for the left and right subtrees
         int left = max(0, maxPathDown(node->left, maxi));
         int right = max(0, maxPathDown(node->right, maxi));
-        maxi = max(maxi, left + right + node->val);
+
+        // Update the overall maximum path sum if the current path sum is greater
+        maxi = max(maxi, left + node->val + right);
+
+        // Return the maximum path sum that can be obtained by including the current node
         return max(left, right) + node->val;
     }
 
