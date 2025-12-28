@@ -1,4 +1,4 @@
-// Leetcode: 106. Construct Binary Tree from Preorder and Postorder Traversal   --->   Given two integer arrays
+// Leetcode: 106. Construct Binary Tree from Inorder and Postorder Traversal   --->   Given two integer arrays
 // inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder
 // traversal of the same tree, construct and return the binary tree.
 
@@ -61,7 +61,7 @@ private:
         int numsLeft = inRoot - inStart;
 
         root->left = buildBinaryTree(inorder, inStart, inRoot - 1, postorder, postStart, postStart + numsLeft - 1, inorderMap);
-        root->right =buildBinaryTree(inorder, inRoot + 1, inEnd, postorder, postStart + numsLeft, postEnd - 1, inorderMap);
+        root->right = buildBinaryTree(inorder, inRoot + 1, inEnd, postorder, postStart + numsLeft, postEnd - 1, inorderMap);
         return root;
     }
 
