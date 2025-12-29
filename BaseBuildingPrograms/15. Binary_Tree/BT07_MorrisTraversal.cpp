@@ -22,7 +22,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Definition for a binary tree node.
+// Definition for a binary tree node
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -30,33 +30,35 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+// Inorder: Left -> Root -> Right
 // T.C: O(n);   where n = no.of nodes in tree
 // S.C: O(1)
 vector<int> morrisInorderTraversal(TreeNode* root) {
     vector<int> inorder;
-    TreeNode* current = root;
+    TreeNode* curr = root;
 
-    while(current != NULL) {
-        if(current->left == NULL) {
+    while(curr != NULL) {
+        if(curr->left == NULL) {
             // If there is no left child, visit this node and go to right child
-            inorder.push_back(current->val);
-            current = current->right;
+            inorder.push_back(curr->val);
+            curr = curr->right;
         } else {
-            // Find the inorder predecessor of current
-            TreeNode* predecessor = current->left;
-            while(predecessor->right != NULL && predecessor->right != current) {
+            // Find the inorder predecessor of curr (predecessor is the rightmost node in left subtree which points to curr)
+            TreeNode* predecessor = curr->left;
+            while(predecessor->right != NULL && predecessor->right != curr) {
                 predecessor = predecessor->right;
             }
 
-            // Make current as the right child of its inorder predecessor
+            // Make curr as the right child of its inorder predecessor
             if(predecessor->right == NULL) {
-                predecessor->right = current;
-                current = current->left;
+                predecessor->right = curr;
+                curr = curr->left;   // now start traversing left subtree
             } else {
-                // Revert the changes made in the tree
+                // If the right child of predecessor already points to curr, it means we have finished
+                // traversing the left subtree, so we need to revert the changes and visit curr node
                 predecessor->right = NULL;
-                inorder.push_back(current->val);
-                current = current->right;
+                inorder.push_back(curr->val);   // visit the node after finishing left subtree
+                curr = curr->right;   // now start traversing right subtree
             }
         }
     }
@@ -64,33 +66,35 @@ vector<int> morrisInorderTraversal(TreeNode* root) {
     return inorder;
 }
 
+// Preorder: Root -> Left -> Right
 // T.C: O(n);   where n = no.of nodes in tree
 // S.C: O(1)
 vector<int> morrisPreorderTraversal(TreeNode* root) {
     vector<int> preorder;
-    TreeNode* current = root;
+    TreeNode* curr = root;
 
-    while(current != NULL) {
-        if(current->left == NULL) {
+    while(curr != NULL) {
+        if(curr->left == NULL) {
             // If there is no left child, visit this node and go to right child
-            preorder.push_back(current->val);
-            current = current->right;
+            preorder.push_back(curr->val);
+            curr = curr->right;
         } else {
-            // Find the inorder predecessor of current
-            TreeNode* predecessor = current->left;
-            while(predecessor->right != NULL && predecessor->right != current) {
+            // Find the inorder predecessor of curr (predecessor is the rightmost node in left subtree which points to curr)
+            TreeNode* predecessor = curr->left;
+            while(predecessor->right != NULL && predecessor->right != curr) {
                 predecessor = predecessor->right;
             }
 
-            // Make current as the right child of its inorder predecessor
+            // Make curr as the right child of its inorder predecessor
             if(predecessor->right == NULL) {
-                preorder.push_back(current->val); // Visit the node before going to left subtree
-                predecessor->right = current;
-                current = current->left;
+                predecessor->right = curr;
+                preorder.push_back(curr->val);   // visit the node before going to left subtree
+                curr = curr->left;   // now start traversing left subtree
             } else {
-                // Revert the changes made in the tree
+                // If the right child of predecessor already points to curr, it means we have finished
+                // traversing the left subtree, so we need to revert the changes
                 predecessor->right = NULL;
-                current = current->right;
+                curr = curr->right;   // now start traversing right subtree
             }
         }
     }
