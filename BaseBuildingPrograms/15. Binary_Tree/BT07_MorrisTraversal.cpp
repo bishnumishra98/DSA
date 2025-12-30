@@ -63,7 +63,7 @@ vector<int> morrisInorderTraversal(TreeNode* root) {
             } else {
                 // If the right child of predecessor already points to curr, it means we have finished
                 // traversing the left subtree, so we need to revert the changes and visit curr node
-                predecessor->right = NULL;
+                predecessor->right = NULL;   // break the thread
                 inorder.push_back(curr->val);   // visit the node after finishing left subtree
                 curr = curr->right;   // now start traversing right subtree
             }
@@ -100,7 +100,7 @@ vector<int> morrisPreorderTraversal(TreeNode* root) {
             } else {
                 // If the right child of predecessor already points to curr, it means we have finished
                 // traversing the left subtree, so we need to revert the changes
-                predecessor->right = NULL;
+                predecessor->right = NULL;   // break the thread
                 curr = curr->right;   // now start traversing right subtree
             }
         }
