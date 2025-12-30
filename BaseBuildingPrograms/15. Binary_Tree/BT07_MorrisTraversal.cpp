@@ -24,7 +24,7 @@
 //   the order of visiting nodes. The difference is that in preorder traversal, we visit the current
 //   node before traversing its left subtree.
 
-// ● Video explanation: https://www.youtube.com/watch?v=80Zug6D1_r4
+// ● Video explanation: https://www.youtube.com/watch?v=80Zug6D1_r4, specially from 17:24.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -56,11 +56,11 @@ vector<int> morrisInorderTraversal(TreeNode* root) {
                 predecessor = predecessor->right;
             }
 
-            // Make curr as the right child of its inorder predecessor
+            // Make a thread from predecessor to curr, i.e., make curr as the right child of its inorder predecessor
             if(predecessor->right == NULL) {
                 predecessor->right = curr;
                 curr = curr->left;   // now start traversing left subtree
-            } else {
+            } else {   // if(predecessor->right == curr)
                 // If the right child of predecessor already points to curr, it means we have finished
                 // traversing the left subtree, so we need to revert the changes and visit curr node
                 predecessor->right = NULL;   // break the thread
@@ -92,12 +92,12 @@ vector<int> morrisPreorderTraversal(TreeNode* root) {
                 predecessor = predecessor->right;
             }
 
-            // Make curr as the right child of its inorder predecessor
+            // Make a thread from predecessor to curr, i.e., make curr as the right child of its inorder predecessor
             if(predecessor->right == NULL) {
                 predecessor->right = curr;
                 preorder.push_back(curr->val);   // visit the node before going to left subtree
                 curr = curr->left;   // now start traversing left subtree
-            } else {
+            } else {   // if(predecessor->right == curr)
                 // If the right child of predecessor already points to curr, it means we have finished
                 // traversing the left subtree, so we need to revert the changes
                 predecessor->right = NULL;   // break the thread
