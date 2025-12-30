@@ -5,20 +5,26 @@
 //   of the tree. However, time complexity remains O(n) for Morris Traversal, where n is the number
 //   of nodes in the tree.
 
-// ● How does Morris Traversal work ?
+// ● How does Morris Traversal work for inorder traversal ?
 //   The key idea behind Morris Traversal is to temporarily modify the tree structure to create
 //   "threads" that allow traversal without additional space. The algorithm follows these steps:
 //   1. Initialize the current node as the root.
 //   2. While the current node is not NULL:
 //      a. If the current node has no left child, visit the current node and move to its right child.
 //      b. If the current node has a left child, find the inorder predecessor of the current node
-//         (the rightmost node in the left subtree). Predecessor is the node that comes just before
-//         the current node in inorder traversal, i.e., predecessor points to current node.
+//         (the rightmost node in the left subtree). Predecessor points to current node.
 //         i. If the predecessor's right child is NULL, set it to point to the current node (create
 //            a thread), and move to the left child of the current node.
 //         ii. If the predecessor's right child points to the current node (indicating a thread),
 //             revert the changes (remove the thread), visit the current node, and move to its right child.
 //   3. Repeat until all nodes are visited.
+
+// ● How does Morris Traversal work for preorder traversal ?
+//   The Morris Preorder Traversal is similar to the inorder version, with a 1 line modification in
+//   the order of visiting nodes. The difference is that in preorder traversal, we visit the current
+//   node before traversing its left subtree.
+
+// ● Video explanation: https://www.youtube.com/watch?v=80Zug6D1_r4
 
 #include <bits/stdc++.h>
 using namespace std;
