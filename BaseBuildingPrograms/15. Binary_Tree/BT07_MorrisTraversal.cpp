@@ -12,7 +12,8 @@
 //   2. While the current node is not NULL:
 //      a. If the current node has no left child, visit the current node and move to its right child.
 //      b. If the current node has a left child, find the inorder predecessor of the current node
-//         (the rightmost node in the left subtree).
+//         (the rightmost node in the left subtree). Predecessor is the node that comes just before
+//         the current node in inorder traversal, i.e., predecessor points to current node.
 //         i. If the predecessor's right child is NULL, set it to point to the current node (create
 //            a thread), and move to the left child of the current node.
 //         ii. If the predecessor's right child points to the current node (indicating a thread),
