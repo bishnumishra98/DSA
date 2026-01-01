@@ -9,7 +9,6 @@
 //        2   3 
 //       / \
 //      4   5
-
 // Output: 3
 // Explanation: 3 is the length of the path [4,2,1,3] or [5,2,1,3]. There are 3 edges in each path.
 
@@ -62,6 +61,15 @@ int diameterOfTree(TreeNode* root) {
 }
 
 int main() {
+//           1
+//          / \
+//         2   3
+//        / \
+//       4   5
+//      /     \
+//     6       7
+//    /         \
+//   8           9
     TreeNode* root = new TreeNode(1);
     root->left = new TreeNode(2);
     root->right = new TreeNode(3);
