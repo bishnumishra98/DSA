@@ -53,26 +53,93 @@ struct TreeNode {
 
 class Solution {
 public:
-    // T.C: 
-    // S.C: 
+    // Indexes are not normalized, thus it cannot handle very deep trees
+    // T.C: O(n);   where n = number of nodes in tree
+    // S.C: O(n)
+    int widthOfBinaryTree_bruteforce(TreeNode* root) {
+        if(root == NULL) return 0;
+        long long maxWidth = 0;
+        queue<pair<TreeNode*, long long>> q;   // {node, index_in_complete_binary_tree}
+        q.push({root, 0});
+
+        while(!q.empty()) {
+            int levelSize = q.size();
+            long long firstIndex = q.front().second;
+            long long lastIndex = firstIndex;
+
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode* node = q.front().first;
+                int index = q.front().second;
+                q.pop();
+
+                lastIndex = index;   // will end up storing rightmost index
+
+                if(node->left) q.push({node->left, index * 2 + 1});
+
+                if(node->right) q.push({node->right, index * 2 + 2});
+            }
+
+            maxWidth = max(maxWidth, lastIndex - firstIndex + 1);
+        }
+
+        return (int)maxWidth;
+    }
+
+// ------------------------------------------------------------------------------------------------------------
+
+    // T.C: O(n);   where n = number of nodes in tree
+    // S.C: O(n)
     int widthOfBinaryTree(TreeNode* root) {
-        
+        if(root == NULL) return 0;
+        long long maxWidth = 0;
+
+        queue<pair<TreeNode*, long long>> q;   // {node, index_in_complete_binary_tree}
+        q.push({root, 0});
+
+        while(!q.empty()) {
+            int levelSize = q.size();
+            long long levelMinIndex = q.front().second;   // minimum index at current level (used for normalization)
+            long long firstIndex = 0, lastIndex = 0;
+
+            for(int i = 0; i < levelSize; i++) {
+                TreeNode* currentNode = q.front().first;
+                long long currentIndex = q.front().second;
+                q.pop();
+
+                long long normalizedIndex = currentIndex - levelMinIndex;   // normalize index to avoid overflow
+
+                if(i == 0) firstIndex = normalizedIndex;
+                if(i == levelSize - 1) lastIndex = normalizedIndex;
+
+                // Push children with complete-binary-tree indexing
+                if(currentNode->left) q.push({currentNode->left, normalizedIndex * 2 + 1});
+
+                if(currentNode->right) q.push({currentNode->right, normalizedIndex * 2 + 2});
+            }
+
+            maxWidth = max(maxWidth, lastIndex - firstIndex + 1);
+        }
+
+        return (int)maxWidth;
     }
 };
+
 
 int main() {
 //          1
 //         / \
-//        2   3 
-//       / \
-//      4   5
+//        3   2
+//       / \   \
+//      5   3   9
     TreeNode* root = new TreeNode(1);
-    root->left = new TreeNode(2);
-    root->right = new TreeNode(3);
-    root->left->left = new TreeNode(4);
-    root->left->right = new TreeNode(5);
+    root->left = new TreeNode(3);
+    root->right = new TreeNode(2);
+    root->left->left = new TreeNode(5);
+    root->left->right = new TreeNode(3);
+    root->right->right = new TreeNode(9);
 
-    cout << Solution().widthOfBinaryTree(root);
+    cout << Solution().widthOfBinaryTree_bruteforce(root) << endl;
+    cout << Solution().widthOfBinaryTree(root) << endl;
 
     return 0;
 }
