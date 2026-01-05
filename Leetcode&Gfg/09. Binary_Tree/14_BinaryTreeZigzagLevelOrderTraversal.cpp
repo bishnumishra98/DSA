@@ -48,7 +48,7 @@ public:
             int size = q.size();
             vector<int> row(size);
             for(int i = 0; i < size; i++) {
-                TreeNode* node= q.front();
+                TreeNode* node = q.front();
                 q.pop();
 
                 int index = (leftToRight) ? i : (size - 1 - i);   // find position to fill node's value
@@ -57,8 +57,9 @@ public:
                 if(node->left) q.push(node->left);
                 if(node->right) q.push(node->right);
             }
+
             // After this level
-            leftToRight = !leftToRight;
+            leftToRight = !leftToRight;   // change the direction for next level
             ans.push_back(row);
         }
 
