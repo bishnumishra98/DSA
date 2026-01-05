@@ -47,11 +47,13 @@ public:
         while(!q.empty()) {
             int size = q.size();
             vector<int> row(size);
+
+            // Traverse all nodes of the current level and store their values in 'row' vector acording to the direction
             for(int i = 0; i < size; i++) {
                 TreeNode* node = q.front();
                 q.pop();
 
-                int index = (leftToRight) ? i : (size - 1 - i);   // find position to fill node's value
+                int index = (leftToRight) ? i : (size - i - 1);   // find position to fill node's value
 
                 row[index] = node->val;
                 if(node->left) q.push(node->left);
