@@ -147,7 +147,7 @@ public:
         if(root == NULL) return 0;
         long long maxWidth = 0;
 
-        queue<pair<TreeNode*, long long>> q;   // {node, index_in_complete_binary_tree}
+        queue<pair<TreeNode*, long long>> q;   // {node, index_in_normalized_binary_tree}
         q.push({root, 0});
 
         while(!q.empty()) {
