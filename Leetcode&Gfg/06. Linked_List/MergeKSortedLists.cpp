@@ -79,7 +79,11 @@ public:
 
 // --------------------------------------------------------------------------------------------------------
 
-
+    // T.C: 
+    // S.C: 
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        
+    }
 };
 
 int main() {
@@ -104,6 +108,15 @@ int main() {
     while (temp1 != NULL) {
         cout << temp1->val << " ";
         temp1 = temp1->next;
+    }
+
+    cout << endl;
+
+    ListNode* mergedHead2 = Solution().mergeKLists(lists);
+    ListNode* temp2 = mergedHead1;
+    while (temp2 != NULL) {
+        cout << temp2->val << " ";
+        temp2 = temp2->next;
     }
 
     return 0;

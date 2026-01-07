@@ -18,7 +18,7 @@
 
 // ● Guide for good practice of writing a Custom comparator:
 //
-//   ● What do you understand with the term STL comparartor ?
+//   ● What do you understand with the term STL comparator ?
 //     STL comparator is a function-like object that has no internal data and only compares two read-only values
 //     without changing anything.
 //
