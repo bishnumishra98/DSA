@@ -79,10 +79,45 @@ public:
 
 // --------------------------------------------------------------------------------------------------------
 
-    // T.C: 
-    // S.C: 
+    struct Compare {
+        bool operator()(const ListNode* a, const ListNode* b) const {
+            return a->val > b->val;   // min-heap
+        }
+    };
+
+    // T.C: O(nlogk);   where n is the total number of nodes across all k lists and k is no.of linked lists
+    // S.C: O(k)   for the min-heap
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        
+        int k = lists.size();
+        if(k == 0) return NULL;
+
+        // Min-heap storing ListNode*
+        priority_queue<ListNode*, vector<ListNode*>, Compare> minHeap;
+
+        // Push head of each non-empty list
+        for(int i = 0; i < k; i++) {
+            if(lists[i] != NULL) {
+                minHeap.push(lists[i]);
+            }
+        }
+
+        ListNode* dummy = new ListNode(-1);   // dummy head
+        ListNode* tail = dummy;
+
+        while(!minHeap.empty()) {
+            ListNode* node = minHeap.top();
+            minHeap.pop();
+
+            tail->next = node;
+            tail = tail->next;
+
+            // Push next node from the same list (if exists)
+            if(node->next != NULL) {
+                minHeap.push(node->next);
+            }
+        }
+
+        return dummy->next;
     }
 };
 
@@ -113,7 +148,7 @@ int main() {
     cout << endl;
 
     ListNode* mergedHead2 = Solution().mergeKLists(lists);
-    ListNode* temp2 = mergedHead1;
+    ListNode* temp2 = mergedHead2;
     while (temp2 != NULL) {
         cout << temp2->val << " ";
         temp2 = temp2->next;
