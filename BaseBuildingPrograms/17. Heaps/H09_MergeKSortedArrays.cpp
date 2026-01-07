@@ -1,6 +1,8 @@
 // If we were to merge two or three sorted arrays, we could have used two-pointer or three-pointer approach.
 // But if no.of sorted arrays are many, this approach is not feasible. Thus, we will use concept of min-heap.
 
+// Bruteforce Agorithm: It is a cakewalk. Just insert all elements of all arrays into a single array, sort it and return.
+
 // Algorithm: It is simple.
 // 1. Create a min-heap to store the first element of each sorted array along with the array index and element index,
 //    i.e., (value, rowIndex, colIndex). The min-heap will help us efficiently get the smallest element among the arrays.
