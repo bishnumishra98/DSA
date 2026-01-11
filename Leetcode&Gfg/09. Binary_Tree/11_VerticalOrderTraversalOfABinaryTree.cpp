@@ -52,7 +52,7 @@
 
 // Problem link: https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/
 
-// Algorithm: Code may look tough, but algorithm is simple.
+// Algorithm: Code may look lengthy, but algorithm is simple.
 //
 // We perform a Level Order Traversal (BFS) while assigning coordinates (row, col) to each node:
 //   - Root is at (0, 0)

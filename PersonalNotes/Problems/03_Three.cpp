@@ -1,37 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
-    int findMaxVal(int n, vector<vector<int>>& restrictions, vector<int>& diff) {
-        long long inf = 1e18;
-        vector<long long> a(n, inf);
+    long long countPairs(vector<string>& words) {
+        unordered_map<string, long long> mp;
 
-        a[0] = 0;
-
-        for (int i = 0; i < restrictions.size(); i++) {
-            int x = restrictions[i][0];
-            int y = restrictions[i][1];
-            if (a[x] > y) a[x] = y;
+        for (auto it : words) {
+            string pattern;
+            for (int i = 1; i < it.size(); i++) {
+                int d = it[i] - it[i - 1];
+                if (d < 0) d += 26;
+                pattern.push_back(char('a' + d)); 
+            }
+            mp[pattern]++;
         }
 
-        for (int i = 0; i + 1 < n; i++) {
-            if (a[i + 1] > a[i] + diff[i]) a[i + 1] = a[i] + diff[i];
+        long long res = 0;
+        for (auto it : mp) {
+            long long c = it.second;
+            if (c > 1) {
+                res += c * (c - 1) / 2;
+            }
         }
-
-        for (int i = n - 2; i >= 0; i--) {
-            if (a[i] > a[i + 1] + diff[i]) a[i] = a[i + 1] + diff[i];
-        }
-
-        long long mx = 0;
-        for (int i = 0; i < n; i++) {
-            if (a[i] > mx) mx = a[i];
-        }
-
-        return (int)mx;
+        return res;
     }
 };
-
 
 
 int main() {

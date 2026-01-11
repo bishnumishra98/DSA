@@ -9,54 +9,42 @@ using namespace std;
 
 class Solution {
 public:
-    int countRoutes(vector<string>& grid, int d) {
-        int n = grid.size(), m = grid[0].size();
-        const int MOD = 1e9 + 7;
-
-        vector<long long> up(m, 0), same(m, 0);
-
-        for (int j = 0; j < m; j++)
-            if (grid[n - 1][j] == '.') up[j] = 1;
-
-        int dxSame = d;
-        int dxUp = (d * d >= 1) ? (int)sqrt(1LL * d * d - 1) : -1;
-
-        for (int r = n - 1; r > 0; r--) {
-            vector<long long> nup(m, 0), nsame(m, 0);
-            vector<long long> pUp(m + 1, 0), pAll(m + 1, 0);
-
-            for (int j = 0; j < m; j++) {
-                pUp[j + 1] = (pUp[j] + up[j]) % MOD;
-                pAll[j + 1] = (pAll[j] + up[j] + same[j]) % MOD;
-            }
-
-            // same row (only from up)
-            for (int j = 0; j < m; j++) {
-                if (grid[r][j] == '#') continue;
-                int L = max(0, j - dxSame);
-                int R = min(m - 1, j + dxSame);
-                nsame[j] = (pUp[R + 1] - pUp[L] + MOD) % MOD;
-            }
-
-            // move up (from both)
-            if (dxUp >= 0) {
-                for (int j = 0; j < m; j++) {
-                    if (grid[r - 1][j] == '#') continue;
-                    int L = max(0, j - dxUp);
-                    int R = min(m - 1, j + dxUp);
-                    nup[j] = (pAll[R + 1] - pAll[L] + MOD) % MOD;
+    long long cost(long long x, long long target) {
+        long long cur = x;
+        for (int i = 0; i <= 30; i++) {
+            if ((target >> i) & 1) {
+                if (((cur >> i) & 1) == 0) {
+                    long long step = 1LL << i;
+                    cur = ((cur / step) + 1) * step;
                 }
             }
-
-            up.swap(nup);
-            same.swap(nsame);
         }
+        return cur - x;
+    }
 
+    int maximumAND(vector<int>& nums, int k, int m) {
         long long ans = 0;
-        for (int j = 0; j < m; j++)
-            ans = (ans + up[j] + same[j]) % MOD;
 
-        return ans;
+        for (int b = 30; b >= 0; b--) {
+            long long candidate = ans | (1LL << b);
+            vector<long long> costs;
+
+            for (int x : nums) {
+                costs.push_back(cost(x, candidate));
+            }
+
+            sort(costs.begin(), costs.end());
+
+            long long used = 0;
+            for (int i = 0; i < m; i++) {
+                used += costs[i];
+            }
+
+            if (used <= k) {
+                ans = candidate;
+            }
+        }
+        return (int)ans;
     }
 };
 
