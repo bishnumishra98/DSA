@@ -27,10 +27,9 @@
 using namespace std;
 
 int main() {
-    int n, m;
-    cin >> n >> m;   // n is no.of nodes, while m is no.of edges
+    int n = 5, m = 6;
 
-    cout << "Enter m pairs of edges:\n";
+    cout << "Enter the 6 pairs of edges of 5 vertices graph:\n";
 
     vector<vector<int>> adj_mat(n + 1, vector<int>(n + 1, 0));   // for adjacency matrix, create a matrix of size (n + 1)^2
     vector<int> adj_list[n + 1];   // for adjacency list, create 'n + 1' vectors
