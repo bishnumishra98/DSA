@@ -57,9 +57,9 @@ void dfsTraversal(int node, vector<int> adj[], vector<int>& vis, vector<int>& df
     }
 }
 
-// T.C: O(n) due initialization of the vis + O(2*E) due to for loop which traverses all neighbours of each node,
-//      where E = no.of edges in graph, 2*E = total degrees of graph, i.e., sum of neighbours of all nodes
-//      Overall, T.C: O(n+E)
+// T.C: O(n) due initialization of the vis + O(2 * E) due to for loop which traverses all neighbours of each node,
+//      where E = no.of edges in graph, 2 * E = total degrees of graph, i.e., sum of neighbours of all nodes
+//      Overall, T.C: O(n + E)
 // S.C: O(n) for 'dfs' + O(n) for 'vis' + O(n) for recursive stack space.
 //      Overall, S.C: O(n)
 vector<int> dfsOfGraph(int n, vector<int> adj[]) {

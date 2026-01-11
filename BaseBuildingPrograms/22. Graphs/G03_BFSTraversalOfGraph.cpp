@@ -42,9 +42,9 @@ using namespace std;
 //    into the queue and mark them too visited.
 // 4. Follow the 3rd step until the queue is empty. Return the 'bfs' array.
 
-// T.C: O(n) due initialization of the vis + O(n) due to queue + O(2*E) due to for loop which traverses all neighbours of each node,
-//      where E = no.of edges in graph, 2*E = total degrees of graph, i.e., sum of neighbours of all nodes
-//      Overall T.C will be approx O(n+E).
+// T.C: O(n) due initialization of the vis + O(n) due to queue + O(2 * E) due to for loop which traverses all neighbours of each node,
+//      where E = no.of edges in graph, 2 * E = total degrees of graph, i.e., sum of neighbours of all nodes
+//      Overall T.C will be approx O(n + E).
 // S.C: O(3n) due to 'vis', 'q' and 'bfs'.
 //      Overall S.C will be approx O(n).
 vector<int> bfsOfGraph(int n, vector<int> adj[]) {
