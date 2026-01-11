@@ -32,8 +32,8 @@ int main() {
 
     cout << "Enter m pairs of edges:\n";
 
-    vector<vector<int>> adj_mat(n + 1, vector<int>(n + 1, 0));   // for adjacency matrix, create a matrix of size (n+1)^2
-    vector<int> adj_list[n+1];   // for adjacency list, create 'n+1' vectors
+    vector<vector<int>> adj_mat(n + 1, vector<int>(n + 1, 0));   // for adjacency matrix, create a matrix of size (n + 1)^2
+    vector<int> adj_list[n + 1];   // for adjacency list, create 'n + 1' vectors
 
     for(int i = 0; i < m; i++) {
         int u, v;
