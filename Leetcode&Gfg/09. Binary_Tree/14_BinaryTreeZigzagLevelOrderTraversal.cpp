@@ -19,6 +19,22 @@
 // Input: root = []
 // Output: []
 
+// Algorithm: It is similar to level order traversal of binary tree, with a slight modification that we need to keep track of
+// the direction of traversal for each level using a boolean variable 'leftToRight'. If it is true, we fill the current level
+// from left to right, otherwise from right to left.
+// 1. Initialize a queue to facilitate level order traversal and a boolean variable 'leftToRight' to keep track of the direction.
+// 2. While the queue is not empty, do the following:
+//    a. Determine the number of nodes at the current level.
+//    b. Create a vector 'row' to store the values of nodes at the current level.
+//    c. For each node at the current level, do the following:
+//       i. Dequeue the front node from the queue.
+//       ii. Determine the index to fill in the 'row' vector based on the 'leftToRight' variable.
+//       iii. Store the node's value in the 'row' vector at the determined index
+//       iv. Enqueue the left and right children of the node if they exist.
+//    d. After processing all nodes at the current level, toggle the 'leftToRight' variable to change the direction for the
+//       next level.
+// 3. Return the result vector containing the zigzag level order traversal.
+
 #include <bits/stdc++.h>
 using namespace std;
 
