@@ -18,6 +18,8 @@
 //                {0,0,1,1,0,1,0}}
 // Output: 2
 
+// Problem link: https://www.geeksforgeeks.org/problems/number-of-islands/1
+
 // Understand 'NumberOfProvinces.cpp' before this problem. This problem also has a similar approach.
 // Algorithm:
 // 1. Consider all elements of the grid to be nodes of a graph. For a n*m grid, no.of nodes will also be obviously n*m.
@@ -33,7 +35,6 @@
 //     {row, col-1}                {row, col+1}
 //     {row+1, col-1} {row+1, col} {row+1, col+1}
 
-// Problem link: 
 
 #include <bits/stdc++.h>
 using namespace std;
