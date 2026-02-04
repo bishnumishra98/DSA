@@ -45,8 +45,8 @@
 //                      respectively. The configuration will be: left half = [1, 2, 3], right half = [4, 5, 6].
 //                      To be precise, the detailed configuartion is actually:
 //                      Left half (nl1 = 2, nl2 = 1)     |   Right half (nr1 = 1, nr2 = 2)
-//                      nums1 = [1, 3]                 |   nums1 = [5]
-//                      nums2 = [2]                    |   nums2 = [4, 6]
+//                      nums1 = [1, 3]                   |   nums1 = [5]
+//                      nums2 = [2]                      |   nums2 = [4, 6]
 //                      Now we can observe that median will be average of largest element of left half and smallest
 //                      element of right half, thus median = maxElement(nl1, nl2) + minElement(nr1, nr2) / 2, i.e.,
 //                      (3 + 4) / 2 = 3.5.
