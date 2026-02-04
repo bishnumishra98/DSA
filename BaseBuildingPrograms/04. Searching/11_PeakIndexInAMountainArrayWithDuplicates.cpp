@@ -1,4 +1,11 @@
 // This is an extension of the problem 'Leetcode&Gfg\02. Searching\04_PeakIndexInAMountainArray.cpp'.
+// Example 1:
+// Input: nums = [1,2,3,3,3,3,3,3,7,2,1]
+// Output: 8
+
+// Example 2:
+// Input: nums = [0,10,5,2]
+// Output: 1
 
 #include <iostream>
 #include <vector>
