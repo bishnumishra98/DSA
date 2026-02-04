@@ -43,8 +43,8 @@ int peakElement(vector<int>& nums) {
 int main() {
     vector<int> nums = {1, 2, 3, 3, 3, 3, 3, 3, 7, 2, 1};
 
-    cout << "Peak index: " << peakElement(nums) << endl;
-    cout << "Peak value: " << nums[peakElement(nums)] << endl;
+    cout << "Peak index: " << peakElement(nums) << endl;   // o/p: Peak index: 8
+    cout << "Peak value: " << nums[peakElement(nums)] << endl;   // o/p: Peak value: 7
 
     return 0;
 }
