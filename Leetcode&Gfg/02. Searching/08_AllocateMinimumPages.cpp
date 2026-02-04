@@ -26,6 +26,9 @@
 // Input: arr[] = [22, 23, 67], k = 1
 // Output: 112
 
+// Problem link: https://www.geeksforgeeks.org/problems/allocate-minimum-number-of-pages0937/1
+
+
 // Algorithm: Although it's a hard problem, the algorithm is simple if you try to understand it carefully.
 // --- LINEAR SEARCH ---
 // 1. The minimum no.of maximum pages assigned to any student can range from the no.of pages the thickest book has, i.e.,
