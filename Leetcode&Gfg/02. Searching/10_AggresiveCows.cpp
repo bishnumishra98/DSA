@@ -19,8 +19,9 @@
 // Example 3:
 // Input: stalls[] = [2, 12, 11, 3, 26, 7], k = 5
 // Output: 1
-// Explanation: Each cow can be placed in any of the stalls, as the no. of stalls are exactly equal to the number of cows.
-//              The minimum distance between cows, in this case, is 1, which also is the largest among all possible ways.
+// Explanation: There are 6 stalls and only 5 cows, we try to place the cows such that the minimum distance between any
+//              two cows is as large as possible. The minimum distance between cows in this case is 1, which is the
+//              largest among all possible ways.
 
 // Problem link: https://www.geeksforgeeks.org/problems/aggressive-cows/1
 
