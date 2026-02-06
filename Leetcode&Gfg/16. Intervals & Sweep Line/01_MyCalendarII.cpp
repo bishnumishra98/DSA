@@ -61,7 +61,7 @@ public:
     // S.C: O(n^2)    for storing bookings and overlaps
     bool book(int startTime, int endTime) {
         // STEP 1: Check if new interval causes TRIPLE BOOKING
-        for(auto &overlap : overlapBookings) {
+        for(auto &overlap: overlapBookings) {
             int oStartTime = overlap.first;
             int oEndTime   = overlap.second;
 
@@ -72,7 +72,7 @@ public:
         }
 
         // STEP 2: Compute overlaps with existing bookings
-        for(auto &b : bookings) {
+        for(auto &b: bookings) {
             int bStart = b.first;
             int bEnd   = b.second;
 
@@ -108,21 +108,20 @@ public:
     // S.C: O(n)   for storing the timeline of events. In the worst case, if all events are non-overlapping, we could have
     //             up to 2n entries in the timeline (each event contributes a start and an end entry). Therefore, the space
     //             complexity is O(n).
-    bool book(int start, int end) {
-
+    bool book(int startTime, int endTime) {
         // STEP 1: Apply sweep-line updates
-        timeline[start] += 1;   // event starts
-        timeline[end] -= 1;   // event ends
+        timeline[startTime] += 1;   // event starts
+        timeline[endTime] -= 1;   // event ends
 
         // STEP 2: Check prefix sum to detect triple booking
         int active = 0;
-        for (auto &p : timeline) {
+        for(auto &p: timeline) {
             active += p.second;
             if (active >= 3) {   // triple booking detected
 
                 // Rollback the changes
-                timeline[start] -= 1;
-                timeline[end]   += 1;
+                timeline[startTime] -= 1;
+                timeline[endTime] += 1;
                 return false;
             }
         }
