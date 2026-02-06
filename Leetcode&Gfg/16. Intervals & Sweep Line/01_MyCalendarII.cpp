@@ -35,8 +35,17 @@
 //    overlapBookings list. This way, we keep track of all double-booked intervals.
 // 3. Finally, the new booking is added to the bookings list and return true.
 
-// Algorithm: It is also simple. We will follow line sweep algorithm.
-
+// Optimal Algorithm: It is also simple. We will follow line sweep algorithm. The idea is to maintain a timeline of events
+// (start and end of bookings) and keep track of how many active bookings are at any given time. We can use an ordered map
+// to store the changes in the number of active bookings at each time point. Line sweep requires events to be processed in
+// sorted (time) order, so we cannot use an unordered map as it does not maintain any order.
+// When we try to book a new interval, we will update the timeline with the start and end events of the new booking.
+// Specifically, we will increment the count at startTime by 1 (indicating a new booking starts) and decrement the count
+// at endTime by 1 (indicating a booking ends). This way, we can keep track of how many bookings are active at any point
+// in time by calculating the prefix sum of the timeline.
+// After updating, we will check if at any point in the timeline we have 3 or more active bookings, which would indicate
+// a triple booking. If we detect a triple booking, we will roll back the changes to the timeline and return false.
+// If no triple booking is detected, we will keep the changes and return true.
 
 
 #include <bits/stdc++.h>
@@ -95,14 +104,14 @@ public:
 
 class MyCalendarTwo {
 private:
-    // time -> change in number of active events
-    map<int,int> timeline;   // ordered map
+    // Ordered map: {time -> change in number of active meetings}
+    map<int,int> timeline;   // timeline[t] = how many meetings START or END at time t
 
 public:
     MyCalendarTwo() {}
 
-    // T.C: O(log n) + O(n) ≈ O(n)
-    //      For each booking, we update the timeline with two events (start and end). This takes O(log n) time due to map insertions.
+    // T.C: O(logn) + O(n) ≈ O(n)
+    //      For each booking, we update the timeline with two events (start and end). This takes O(logn) time due to map insertions.
     //      After updating the timeline, we need to check for triple bookings by iterating through the timeline, which takes O(n)
     //      time in the worst case (if there are n events).
     // S.C: O(n)   for storing the timeline of events. In the worst case, if all events are non-overlapping, we could have
@@ -115,10 +124,9 @@ public:
 
         // STEP 2: Check prefix sum to detect triple booking
         int active = 0;
-        for(auto &p: timeline) {
+        for(auto &p: timeline) {   // this must be in sorted order of time, so we can calculate prefix sum correctly; hence we use ordered map
             active += p.second;
-            if (active >= 3) {   // triple booking detected
-
+            if(active >= 3) {   // triple booking detected
                 // Rollback the changes
                 timeline[startTime] -= 1;
                 timeline[endTime] += 1;
