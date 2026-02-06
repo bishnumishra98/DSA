@@ -45,7 +45,7 @@ public:
     //             complexity is O(n).
     bool carPooling(vector<vector<int>>& trips, int capacity) {
         // STEP 1: Apply sweep-line updates for all trips
-        for(auto &t : trips) {
+        for(auto &t: trips) {
             int passengers = t[0];
             int from = t[1];
             int to = t[2];
@@ -57,7 +57,7 @@ public:
         // STEP 2: Check prefix sum to ensure capacity is never exceeded
         int currentPassengers = 0;
 
-        for(auto &p : timeline) {   // map ensures sorted order of locations
+        for(auto &p: timeline) {   // map ensures sorted order of locations
             currentPassengers += p.second;
 
             if(currentPassengers > capacity) {
