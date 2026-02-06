@@ -14,7 +14,7 @@
 // Output: true
 
 
-// Algorithm: We will follow line sweep algorithm. The pattern is same as previous problem.
+// Algorithm: We will follow line sweep algorithm. The problem is almost exactly same as previous problem.
 // The idea is to maintain a timeline of events (passengers getting in and out) and keep track of how many passengers are in
 // the car at any given time. We can use an ordered map to store the changes in the number of passengers at each location.
 // Line sweep requires events to be processed in sorted order of time, so we use an ordered map.
@@ -32,7 +32,7 @@ using namespace std;
 class Solution {
 private:
     // Ordered map: {location -> change in number of passengers}
-    map<int,int> timeline;   // timeline[x] = how many passengers get IN (+) or OUT (-) at location x
+    map<int, int> timeline;   // timeline[x] = how many passengers get IN (+) or OUT (-) at location x
 
 public:
     // T.C: O(n*logn) + O(n) ≈ O(nlogn)
@@ -57,10 +57,10 @@ public:
         // STEP 2: Check prefix sum to ensure capacity is never exceeded
         int currentPassengers = 0;
 
-        for (auto &p : timeline) {   // map ensures sorted order of locations
+        for(auto &p : timeline) {   // map ensures sorted order of locations
             currentPassengers += p.second;
 
-            if (currentPassengers > capacity) {
+            if(currentPassengers > capacity) {
                 return false;   // capacity exceeded
             }
         }
