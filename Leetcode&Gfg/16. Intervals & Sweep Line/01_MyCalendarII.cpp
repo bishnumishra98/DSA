@@ -49,8 +49,12 @@ private:
 public:
     MyCalendarTwo() {}
     
-    // T.C: O(n);   where n = no.of existing bookings
-    // S.C: O(n)    for storing bookings and overlaps
+    // T.C: O(n^2);   where n = no.of existing bookings
+    // bookings → can grow to n
+    // overlapBookings → can also grow to O(n²) small segments
+    // So in later calls, you may scan O(n²) overlaps.
+    // Worst-case total time over n calls = O(n²)
+    // S.C: O(n^2)    for storing bookings and overlaps
     bool book(int startTime, int endTime) {
         // STEP 1: Check if new interval causes TRIPLE BOOKING
         for(auto &overlap : overlapBookings) {
