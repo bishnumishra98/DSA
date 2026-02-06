@@ -33,7 +33,7 @@
 // 2. If it does not cause a triple booking, we then check for overlaps with all existing bookings in the bookings list.
 //    For each existing booking that overlaps with the new interval, we calculate the overlap interval and add it to the
 //    overlapBookings list. This way, we keep track of all double-booked intervals.
-// 3. Finally, if the new booking is valid, we add it to the bookings list and return true.
+// 3. Finally, the new booking is added to the bookings list and return true.
 
 #include <bits/stdc++.h>
 using namespace std;
