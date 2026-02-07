@@ -53,7 +53,7 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-// Inorder Traversal to find path from root -> target
+// Preorder Traversal to find path from root -> target
 bool getPath(TreeNode* root, TreeNode* target, vector<int>& path) {
     if(root == NULL) return false;
 
