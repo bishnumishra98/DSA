@@ -27,10 +27,10 @@
 //    a. Determine the number of nodes at the current level.
 //    b. Create a vector 'row' to store the values of nodes at the current level.
 //    c. For each node at the current level, do the following:
-//       i. Dequeue the front node from the queue.
-//       ii. Determine the index to fill in the 'row' vector based on the 'leftToRight' variable.
+//       i.   Dequeue the front node from the queue.
+//       ii.  Determine the index to fill in the 'row' vector based on the 'leftToRight' variable.
 //       iii. Store the node's value in the 'row' vector at the determined index
-//       iv. Enqueue the left and right children of the node if they exist.
+//       iv.  Enqueue the left and right children of the node if they exist.
 //    d. After processing all nodes at the current level, toggle the 'leftToRight' variable to change the direction for the
 //       next level.
 // 3. Return the result vector containing the zigzag level order traversal.
