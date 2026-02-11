@@ -21,6 +21,10 @@
 //               only one unique binary tree can be formed.
 
 // Algorithm: 
+// 1. The first element in preorder is always the root of the tree.
+// 2. Find the root in inorder array. Elements to the left of root form the left subtree, and elements to the right form
+//    the right subtree.
+// 3. Recursively apply this process to build left and right subtrees.
 
 
 #include <bits/stdc++.h>
