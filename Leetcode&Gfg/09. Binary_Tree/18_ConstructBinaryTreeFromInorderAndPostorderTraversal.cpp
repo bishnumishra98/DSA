@@ -16,6 +16,12 @@
 // Output: [-1]
 
 
+// Algorithm:
+// 1. The last element in postorder is always the root of the tree.
+// 2. Find the root in inorder array. Elements to the left of root form the left subtree, and elements to the right form
+//    the right subtree.
+// 3. Recursively apply this process to build left and right subtrees.
+
 #include <bits/stdc++.h>
 using namespace std;
 
