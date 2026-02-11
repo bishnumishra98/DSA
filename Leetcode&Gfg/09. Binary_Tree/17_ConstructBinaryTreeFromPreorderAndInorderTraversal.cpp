@@ -68,8 +68,8 @@ private:
 
         TreeNode* root = new TreeNode(preorder[preStart]);
 
-        int inRoot = inorderMap[root->val];
-        int numsLeft = inRoot - inStart;
+        int inRoot = inorderMap[root->val];   // position of root in inorder array
+        int numsLeft = inRoot - inStart;   // number of elements in left of root element in inorder array
 
         root->left = buildBinaryTree(preorder, preStart + 1, preStart + numsLeft, inorder, inStart, inRoot - 1, inorderMap);
         root->right= buildBinaryTree(preorder, preStart + numsLeft + 1, preEnd, inorder, inRoot + 1, inEnd, inorderMap);
