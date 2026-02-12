@@ -113,7 +113,7 @@ private:
                 }
 
                 // Parent
-                if(mp[curr] && !visited[mp[curr]]) {
+                if(mp.find(curr) != mp.end() && !visited[mp[curr]]) {
                     visited[mp[curr]] = true;
                     q.push(mp[curr]);
                     spread = true;
