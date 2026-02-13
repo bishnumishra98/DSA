@@ -120,7 +120,7 @@ public:
             int firstIndex = q.front().second;
             int lastIndex = firstIndex;
 
-            for (int i = 0; i < levelSize; i++) {
+            for(int i = 0; i < levelSize; i++) {
                 TreeNode* node = q.front().first;
                 int index = q.front().second;
                 q.pop();
@@ -128,7 +128,6 @@ public:
                 lastIndex = index;   // will end up storing rightmost index
 
                 if(node->left) q.push({node->left, index * 2 + 1});
-
                 if(node->right) q.push({node->right, index * 2 + 2});
             }
 
