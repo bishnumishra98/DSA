@@ -161,9 +161,7 @@ public:
                 q.pop();
 
                 long long normalizedIndex = index - levelMinIndex;   // normalize index to avoid overflow
-
-                if(i == 0) firstIndex = normalizedIndex;
-                if(i == levelSize - 1) lastIndex = normalizedIndex;
+                lastIndex = normalizedIndex;
 
                 // Push children with complete-binary-tree indexing (normalized)
                 if(node->left) q.push({node->left, normalizedIndex * 2 + 1});
