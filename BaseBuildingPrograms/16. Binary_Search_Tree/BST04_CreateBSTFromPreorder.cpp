@@ -13,12 +13,12 @@ struct Node {
     Node(int x) : data(x), left(NULL), right(NULL) {}
 };
 
-void inorderTraversal(Node* root) {
+void preorderTraversal(Node* root) {
     if(root == NULL) return;   // base case
 
-    inorderTraversal(root->left);   // L
     cout << root->data << " ";   // N
-    inorderTraversal(root->right);   // R
+    preorderTraversal(root->left);   // L
+    preorderTraversal(root->right);   // R
 }
 
 void levelorderTraversal_LevelByLevel(Node* root) {
@@ -43,32 +43,28 @@ void levelorderTraversal_LevelByLevel(Node* root) {
 
 // --------------------------------------------------------------------------------
 
-Node* createBSTFromInorder_helper(vector<int>& inorderArray, int start, int end) {
-    if(start > end) return NULL;   // base case
+// T.C: O(N)
+// S.C: O(H)   where H = NlogN on average case, and H = N in the worst case.
+Node* createBSTFromPreorder(vector<int>& preorderArray) {
+    if(preorderArray.empty()) return NULL;
 
-    // Creating root from mid element
-    int mid = start + (end - start) / 2;   // same as (start + end)/2
-    int element = inorderArray[mid];
-    Node* root = new Node(element);
+    Node* root = new Node(preorderArray[0]);
 
-    // Creating left subtree with elements before mid index
-    root->left = createBSTFromInorder_helper(inorderArray, start, mid - 1);
-    
-    // Creating right subtree with elements after mid index
-    root->right = createBSTFromInorder_helper(inorderArray, mid + 1, end);
+    vector<int> left, right;
+    for(int i = 1; i < preorderArray.size(); i++) {
+        if(preorderArray[i] < root->data) left.push_back(preorderArray[i]);
+        else right.push_back(preorderArray[i]);
+    }
+
+    root->left = createBSTFromPreorder(left);
+    root->right = createBSTFromPreorder(right);
 
     return root;
 }
 
-// T.C: O(N)
-// S.C: O(H)   where H = NlogN on average case, and H = N in the worst case.
-Node* createBSTFromInorder(vector<int>& inorderArray) {
-    return createBSTFromInorder_helper(inorderArray, 0, inorderArray.size() - 1);
-}
-
 
 int main() {
-// For the inorder array: {1, 2, 3, 4, 5, 6, 7}, BST would look like this:
+// For the preorder array: {4, 2, 1, 3, 6, 5, 7}, BST would look like this:
 
 //           4 
 //         /   \
@@ -76,11 +72,11 @@ int main() {
 //       / \   / \
 //      1   3 5   7
 
-    vector<int> inorderArray = {1, 2, 3, 4, 5, 6, 7};
-    Node* root = createBSTFromInorder(inorderArray);
+    vector<int> preorderArray = {4, 2, 1, 3, 6, 5, 7};
+    Node* root = createBSTFromPreorder(preorderArray);
 
-    cout << "Inorder traversal:\n";
-    inorderTraversal(root);
+    cout << "Preorder traversal:\n";
+    preorderTraversal(root);
     cout << endl;
     cout << "Level-order traversal:\n";
     levelorderTraversal_LevelByLevel(root);
