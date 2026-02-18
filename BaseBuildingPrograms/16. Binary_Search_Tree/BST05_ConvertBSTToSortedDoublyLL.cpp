@@ -73,8 +73,6 @@ Node* convertBSTtoDLL_bruteForce(Node* root) {
 // Optimal Approach (In-place)
 
 // Reverse inorder traversal: R → N → L
-// T.C: O(N)
-// S.C: O(H)
 void convertBSTtoDLL_Optimal(Node* root, Node*& head) {
     if(!root) return;
 
@@ -90,6 +88,8 @@ void convertBSTtoDLL_Optimal(Node* root, Node*& head) {
     convertBSTtoDLL_Optimal(root->left, head);
 }
 
+// T.C: O(N)
+// S.C: O(H)
 Node* convertBSTtoDLL(Node* root) {
     Node* head = NULL;
     convertBSTtoDLL_Optimal(root, head);
