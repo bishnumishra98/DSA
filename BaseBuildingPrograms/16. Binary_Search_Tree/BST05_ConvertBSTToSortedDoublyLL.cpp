@@ -37,21 +37,21 @@ void printDoublyLinkedList(Node* head) {
 
 // Brute Force Approach
 
-void inorderTraversal(Node* root, vector<int>& v) {
+void inorderTraversal(Node* root, vector<int>& inorderArray) {
     if(!root) return;
-    inorderTraversal(root->left, v);
-    v.push_back(root->data);
-    inorderTraversal(root->right, v);
+    inorderTraversal(root->left, inorderArray);
+    inorderArray.push_back(root->data);
+    inorderTraversal(root->right, inorderArray);
 }
 
-Node* createDLLFromVector(vector<int>& v) {
-    if(v.empty()) return NULL;
+Node* createDLLFromVector(vector<int>& inorderArray) {
+    if(inorderArray.empty()) return NULL;
 
-    Node* head = new Node(v[0]);
+    Node* head = new Node(inorderArray[0]);
     Node* prev = head;
 
-    for (int i = 1; i < v.size(); i++) {
-        Node* curr = new Node(v[i]);
+    for(int i = 1; i < inorderArray.size(); i++) {
+        Node* curr = new Node(inorderArray[i]);
         prev->right = curr;
         curr->left = prev;
         prev = curr;
@@ -63,9 +63,9 @@ Node* createDLLFromVector(vector<int>& v) {
 // T.C: O(N)
 // S.C: O(N)
 Node* convertBSTtoDLL_bruteForce(Node* root) {
-    vector<int> v;
-    inorderTraversal(root, v);
-    return createDLLFromVector(v);
+    vector<int> inorderArray;
+    inorderTraversal(root, inorderArray);
+    return createDLLFromVector(inorderArray);
 }
 
 // ----------------------------------------------------------------------------------------
