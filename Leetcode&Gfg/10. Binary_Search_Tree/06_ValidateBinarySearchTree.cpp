@@ -63,7 +63,12 @@ public:
 
 // ----------------------------------------------------------------------------------------------------------
 
-    // Optimal approach
+    // Optimal approach: It is simple.
+    // For every child node, we will provide them a range (minVal, maxVal) in which their value should lie. Initially,
+    // for the root node, the range will be (-∞, +∞).
+    // For the left child of a node with value 'val', the range will be (minVal, val) and for the right child, the range
+    // will be (val, maxVal). If at any point, a node's value does not lie in the provided range, we can conclude that
+    // the binary tree is not a BST.
 
     bool isValidBST_helper(TreeNode* root, long long minVal, long long maxVal) {
         if(!root) return true;
