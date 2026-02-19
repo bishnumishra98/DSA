@@ -81,7 +81,7 @@ public:
 
         TreeNode* dummy = root;  // preserve the root node
         while(root != NULL) {
-            if(root->val > key) {
+            if(key < root->val) {
                 if(root->left != NULL && root->left->val == key) {
                     root->left = deleteNodeFromBST(root->left);
                     break;
