@@ -55,6 +55,13 @@ void levelOrderTraversal_LevelByLevel(TreeNode* root) {
 
 class Solution {
 private:
+    TreeNode* findLastRightNode(TreeNode* root) {
+        while(root->right != NULL) {
+            root = root->right;
+        }
+        return root;
+    }
+
     // It takes the parameter 'root' as the node to be deleted and returns the new root of the modified subtree
     TreeNode* deleteNodeFromBST(TreeNode* root) {
         if(root->left == NULL) return root->right;
@@ -65,11 +72,6 @@ private:
             rightmostNodeOfLeftChild->right = rightChild;
             return root->left;
         }
-    }
-
-    TreeNode* findLastRightNode(TreeNode* root) {
-        if(root->right == NULL) return root;
-        return findLastRightNode(root->right);
     }
 
 public:
