@@ -46,12 +46,12 @@ public:
         inorderTraversal(root->right, v);
     }
 
-    // T.C: O(n)
-    // S.C: O(h) + O(n)
+    // T.C: O(n);   where n = number of nodes in the BST
+    // S.C: O(h) + O(n);   where h = height of BST
     int kthSmallest_bruteForce(TreeNode* root, int k) {
         vector<int> v;
         inorderTraversal(root, v);
-        return v[k-1];
+        return v[k - 1];
     }
 
 // ------------------------------------------------------------------------------------------------
