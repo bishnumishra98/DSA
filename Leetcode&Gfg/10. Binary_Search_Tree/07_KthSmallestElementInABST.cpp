@@ -56,48 +56,38 @@ public:
 
 // ------------------------------------------------------------------------------------------------
 
-// Optimal Algorithm:
-// In an in-order traversal (left, node, right) of a binary search tree (BST), nodes are visited in ascending order.
-// Therefore, the k-th node visited during this traversal is the k-th smallest element in the BST.
-//
-// Algorithm Steps:
-// 1. Use a helper function to perform the in-order traversal.
-// 2. Pass the root and the value of k by reference to the helper function.
-// 3. Traverse the left subtree first (recursively).
-// 4. Visit the current node:
-//    - Decrement the value of k by 1.
-//    - If k becomes 0, the current node is the k-th smallest element.
-//    - Return the value of the k-th smallest element up the recursive calls.
-// 5. Traverse the right subtree (recursively).
-// 6. If the k-th smallest element is found in the left or right subtree, propagate this value up the recursive calls.
-// 7. If neither the left nor the right subtree contains the k-th smallest element, return -1.
+// Optimal Algorithm: We can do an inorder traversal of the BST and keep track of the count of nodes visited so far.
+// When the count becomes equal to k, we can return the value of the current node as the kth smallest element in the BST.
 
-    int solve(TreeNode* root, int &k) {
-        if (!root) return -1;   // Base case: if the node is null, return -1
-
-        // Traverse the left subtree
-        int left = solve(root->left, k);
-        if (left != -1) return left;   // If the left subtree contains the k-th smallest, return it
-
-        // Visit the current node (while backtracking from the left subtree)
-        k--;  // Decrement k when visiting a node
-        if (k == 0) return root->val;   // If k is zero, we've found the k-th smallest element
-
-        // Traverse the right subtree
-        int right = solve(root->right, k);
-        if (right != -1) return right;   // If the right subtree contains the k-th smallest, return it
-
-        return -1;  // If neither subtree contains the k-th smallest, return -1
-    }
-
-    // T.C: O(n)
-    // S.C: O(h)
+    // T.C: O(h + k);   where h = height of BST
+    // S.C: O(h);   where h = height of BST
     int kthSmallest(TreeNode* root, int k) {
-        int ans = solve(root, k);
-        return ans;
-    }
+        stack<TreeNode*> st;
+        TreeNode* curr = root;
 
+        while(true) {
+            // Traverse the left subtree continuously until we reach the leftmost node
+            while(curr) {
+                st.push(curr);
+                curr = curr->left;
+            }
+
+            // Pop the top node from the stack and decrement k by 1
+            curr = st.top();
+            st.pop();
+            k = k - 1;
+
+            // If k becomes 0, it means we have found the kth smallest element, so we return its value
+            if(k == 0) return curr->val;
+
+            // If k is not yet 0, we move to the right subtree of the current node and repeat the process
+            curr = curr->right;
+        }
+
+        return -1;   // if k > number of nodes in the BST
+    }
 };
+
 
 int main() {
 //         5
@@ -117,7 +107,8 @@ int main() {
     Solution sol;
 
     int k = 3;
-    cout << sol.kthSmallest(root, k);
+    cout << sol.kthSmallest_bruteForce(root, k) << endl;   // o/p: 3
+    cout << sol.kthSmallest(root, k);   // o/p: 3
 
     return 0;
 }
